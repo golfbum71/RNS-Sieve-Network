@@ -24,5 +24,6 @@
 | 18 | [`SophieGermainWheel`](SophieGermainWheel.md) | where Sophie Germain primes can sit | proved in Lean |
 | 19 | [`GapTracks`](GapTracks.md) | which gaps each column allows | proved in Lean |
 | 20 | [`DudekJohnston`](DudekJohnston.md) | a near-prime between every pair of squares | cited from a published paper; not proved in Lean |
+| 21 | [`UniformSubdivision`](UniformSubdivision.md) | equal shares of survivors in equal intervals | planned: new, not yet proved |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

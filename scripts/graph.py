@@ -135,14 +135,14 @@ def topo_order(nodes, edges):
 # ---------------------------------------------------------------- status
 
 def node_kind(n):
-    """One of: verified, conditional_built, cited_built, planned, conditional, cited."""
+    """One of: verified, conditional_built, cited_built, planned, conditional, cited, new."""
     if n["built"]:
         if any(is_cited(c) for c in n["conclusions"]):
             return "cited_built"
         if opens_of(n):
             return "conditional_built"
         return "verified"
-    return {"Conditional": "conditional", "Cited": "cited"}.get(
+    return {"Conditional": "conditional", "Cited": "cited", "New": "new"}.get(
         n["planned"].get("source_status"), "planned")
 
 
@@ -153,6 +153,7 @@ STATUS_WORDS = {
     "planned": "planned: proved in source file",
     "conditional": "planned: conditional",
     "cited": "planned: cited from a paper",
+    "new": "planned: new, not yet proved",
 }
 
 
@@ -182,9 +183,10 @@ CLASSDEFS = """  classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef planned fill:#ffffff,stroke:#1a7f37,color:#57606a,stroke-dasharray: 5 4;
   classDef conditional fill:#ffffff,stroke:#9a6700,color:#57606a,stroke-dasharray: 5 4;
   classDef cited fill:#ffffff,stroke:#0969da,color:#57606a,stroke-dasharray: 5 4;
+  classDef new fill:#ffffff,stroke:#57606a,color:#57606a,stroke-dasharray: 5 4;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;"""
 
-KINDS = ["verified", "conditional_built", "cited_built", "planned", "conditional", "cited"]
+KINDS = ["verified", "conditional_built", "cited_built", "planned", "conditional", "cited", "new"]
 
 
 # ---------------------------------------------------------------- GRAPH.md

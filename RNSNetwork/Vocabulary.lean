@@ -12,6 +12,7 @@ import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise -- `Finset.dvd_prod_o
 import Mathlib.Algebra.BigOperators.GroupWithZero.Finset   -- `Finset.prod_ne_zero_iff`
 import Mathlib.Topology.Algebra.InfiniteSum.Defs           -- infinite products `∏'`
 import Mathlib.Analysis.SpecialFunctions.Log.Basic         -- `Real.log`
+import Mathlib.Order.Interval.Finset.Nat                   -- `Finset.Icc` on `Nat`
 
 /-!
 # Vocabulary: the shared language of the RNS sieve network
@@ -156,5 +157,17 @@ def consecutive_primes (p q : Nat) : Prop :=
 below `n` divides it. -/
 def legendre_blocked (n x : Nat) : Prop :=
   ∃ p, p.Prime ∧ p ≤ n ∧ p ∣ x
+
+/-! ## Survivors up to a bound -/
+
+/-- The numbers from 1 to `N` that survive every wheel in `W`: none of the
+wheel sizes divides them. -/
+def survivors_upto (W : Finset Nat) (N : Nat) : Finset Nat :=
+  (Finset.Icc 1 N).filter (fun k => ∀ q ∈ W, ¬ q ∣ k)
+
+/-- The survivors from 1 to `N` in one column: those leaving remainder `r` on
+division by 6 (5 for the 6n-1 column, 1 for the 6n+1 column). -/
+def column_survivors_upto (W : Finset Nat) (r N : Nat) : Finset Nat :=
+  (survivors_upto W N).filter (fun k => k % 6 = r)
 
 end RNS

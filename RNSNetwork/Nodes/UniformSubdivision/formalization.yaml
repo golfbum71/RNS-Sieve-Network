@@ -1,0 +1,47 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: UniformSubdivision.v1
+  family: UniformSubdivision
+  version: v1
+  order: 21
+  kind: paper
+  status: planned
+  title: "equal shares of survivors in equal intervals"
+  description: >-
+    With one wheel rotating and the rest frozen, the full cycle splits into
+    as many equal intervals as the rotating wheel's size minus one, each
+    holding one frozen cycle's worth of survivors. By column, a rotating
+    wheel on the 6n+1 side keeps every column's share exact; one on the
+    6n-1 side swaps columns, so each interval is off by the two columns'
+    difference in the overhang.
+
+conclusions: []
+
+planned:
+  source_status: New
+  rests_on: []
+  claims:
+    - frozen_wheels_repeat
+    - one_wheel_removed
+    - uniform_subdivision
+    - uniform_subdivision_plus_side
+    - uniform_subdivision_minus_side
+  plan: >-
+    uniform_subdivision is a step from frozen_wheels_repeat and
+    one_wheel_removed plus one floor-division fact: rounding down the end of
+    the K-th interval and dividing by the rotating prime gives the same
+    number as the overhang past K frozen cycles. The two column claims follow
+    the same route with column-restricted counts; the 6n-1 case adds the
+    column swap of the rotating wheel's multiples.
+  evidence: >-
+    All five claims checked numerically on 3,647 cases (frozen wheel sets
+    drawn from the primes up to 17, every rotating prime not in the set,
+    every interval index, every column remainder) with no failures.
+
+sources:
+  - title: "Cycles and Patterns in the Sieve of Eratosthenes (arXiv:1905.03117), Theorems 6-9"
+    authors: ["George F. Grob", "Matthias Schmitt"]
+    type: "paper"
+    relationship: "whole-count form previously proved; column forms new"

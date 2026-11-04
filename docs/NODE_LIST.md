@@ -250,3 +250,22 @@ weakening of Legendre's conjecture, which asks for a prime there.
 - Rests on: the paper
 - Status: Cited. The small cases check out by computation, but they use
   `native_decide`, which relies on the extra axiom `Lean.ofReduceBool`.
+
+---
+
+## New work in this repository
+
+### 21. `UniformSubdivision` — equal shares of survivors in equal intervals
+With one wheel rotating and the rest frozen, the full cycle splits into as
+many equal intervals as the rotating wheel's size minus one, each holding one
+frozen cycle's worth of survivors. By column, a rotating wheel on the 6n+1
+side keeps every column's share exact; one on the 6n-1 side swaps columns,
+so each interval is off by the two columns' difference in the overhang.
+- Prior work: Grob and Schmitt, arXiv:1905.03117 (2019), Theorems 6-9 (the
+  whole-count form). The column forms are new.
+- Lean: `frozen_wheels_repeat`, `one_wheel_removed`, `uniform_subdivision`,
+  `uniform_subdivision_plus_side`, `uniform_subdivision_minus_side`
+  (stated in this repository; no source file)
+- Rests on: Vocabulary only
+- Status: Planned. Claims stated; not yet built or proved. Checked
+  numerically on 3,647 cases with no failures.
