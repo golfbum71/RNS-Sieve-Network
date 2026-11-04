@@ -19,7 +19,8 @@ interval. A wheel on the 6n-1 side swaps columns when it removes its
 multiples, so each interval is off by the difference between the two
 columns' survivor counts in the short overhang past one frozen cycle.
 
-Status: planned. The claims are stated here; no proofs yet.
+Proof: `RNSSolutions/UniformSubdivision.lean`, which rests on no other
+node. All five claims are proved. Metadata: `formalization.yaml`.
 
 Prior work: the whole-count form is a case of D. H. Lehmer, "The
 distribution of totatives", Canad. J. Math. 7 (1955), Theorem 4: a prime

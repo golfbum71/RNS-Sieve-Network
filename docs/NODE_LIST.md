@@ -267,10 +267,11 @@ so each interval is off by the two columns' difference in the overhang.
   the 6n-1-side correction was not found in the literature searched.
 - Lean: `frozen_wheels_repeat`, `one_wheel_removed`, `uniform_subdivision`,
   `uniform_subdivision_plus_side`, `uniform_subdivision_minus_side`
-  (stated in this repository; no source file)
+  (proved in `RNSSolutions/UniformSubdivision.lean`; no source file)
 - Rests on: Vocabulary only
-- Status: Planned. Claims stated; not yet built or proved. Checked
-  numerically on 3,647 cases with no failures.
+- Status: Clean. All five claims proved; `#print axioms` shows only the
+  standard three (Geoffrey Fischer, 2026-11-04). Checked numerically
+  beforehand on 3,647 cases.
 
 ---
 

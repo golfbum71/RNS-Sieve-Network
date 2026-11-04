@@ -7,49 +7,95 @@ node:
   version: v1
   order: 21
   kind: paper
-  status: planned
-  title: "equal shares of survivors in equal intervals"
-  description: >-
-    With one wheel rotating and the rest frozen, the full cycle splits into
-    as many equal intervals as the rotating wheel's size minus one, each
-    holding one frozen cycle's worth of survivors. By column, a rotating
-    wheel on the 6n+1 side keeps every column's share exact; one on the
-    6n-1 side swaps columns, so each interval is off by the two columns'
+  status: active
+  title: equal shares of survivors in equal intervals
+  description: With one wheel rotating and the rest frozen, the full cycle splits into as
+    many equal intervals as the rotating wheel's size minus one, each holding one frozen cycle's
+    worth of survivors. By column, a rotating wheel on the 6n+1 side keeps every column's
+    share exact; one on the 6n-1 side swaps columns, so each interval is off by the two columns'
     difference in the overhang.
-
-conclusions: []
-
-planned:
-  source_status: New
-  rests_on: []
-  claims:
-    - frozen_wheels_repeat
-    - one_wheel_removed
-    - uniform_subdivision
-    - uniform_subdivision_plus_side
-    - uniform_subdivision_minus_side
-  plan: >-
-    uniform_subdivision is a step from frozen_wheels_repeat and
-    one_wheel_removed plus one floor-division fact: rounding down the end of
-    the K-th interval and dividing by the rotating prime gives the same
-    number as the overhang past K frozen cycles. The two column claims follow
-    the same route with column-restricted counts; the 6n-1 case adds the
-    column swap of the rotating wheel's multiples.
-  progress: >-
-    frozen_wheels_repeat, one_wheel_removed and uniform_subdivision are
-    proved in RNSSolutions/UniformSubdivision.lean (standard axioms only,
-    built 2026-11-04). The two column claims are still to prove.
-  evidence: >-
-    All five claims checked numerically on 3,647 cases (frozen wheel sets
-    drawn from the primes up to 17, every rotating prime not in the set,
-    every interval index, every column remainder) with no failures.
-
+conclusions:
+- id: frozen_wheels_repeat
+  declaration: RNS.UniformSubdivision.frozen_wheels_repeat
+  summary: 'Survivors of a set of wheels repeat with the cycle: up to some number of full
+    cycles plus a remainder, the count is that many cycles'' worth plus the count up to the
+    remainder.'
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/UniformSubdivision.lean
+    declaration: RNS.UniformSubdivision.frozen_wheels_repeat_holds
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-04). Recorded as noncompliant only because no Comparator receipt exists yet.
+  designated: lean-proof
+- id: one_wheel_removed
+  declaration: RNS.UniformSubdivision.one_wheel_removed
+  summary: Adding a new prime wheel removes exactly its multiples, which match one-for-one
+    the old survivors up to the bound divided by the new prime (Meissel's identity).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/UniformSubdivision.lean
+    declaration: RNS.UniformSubdivision.one_wheel_removed_holds
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-04). Recorded as noncompliant only because no Comparator receipt exists yet.
+  designated: lean-proof
+- id: uniform_subdivision
+  declaration: RNS.UniformSubdivision.uniform_subdivision
+  summary: With one wheel rotating, the full cycle splits into as many equal intervals as
+    the rotating wheel's size minus one, each holding one frozen cycle's worth of survivors
+    (a case of Lehmer 1955, Theorem 4).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/UniformSubdivision.lean
+    declaration: RNS.UniformSubdivision.uniform_subdivision_holds
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-04). Recorded as noncompliant only because no Comparator receipt exists yet.
+  designated: lean-proof
+- id: uniform_subdivision_plus_side
+  declaration: RNS.UniformSubdivision.uniform_subdivision_plus_side
+  summary: For a rotating wheel on the 6n+1 side, with 2 and 3 frozen, each column gets exactly
+    its share in every interval.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/UniformSubdivision.lean
+    declaration: RNS.UniformSubdivision.uniform_subdivision_plus_side_holds
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-04). Recorded as noncompliant only because no Comparator receipt exists yet.
+  designated: lean-proof
+- id: uniform_subdivision_minus_side
+  declaration: RNS.UniformSubdivision.uniform_subdivision_minus_side
+  summary: For a rotating wheel on the 6n-1 side, with 2 and 3 frozen, each column's count
+    differs from its share by the two columns' difference in the overhang.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/UniformSubdivision.lean
+    declaration: RNS.UniformSubdivision.uniform_subdivision_minus_side_holds
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-04). Recorded as noncompliant only because no Comparator receipt exists yet.
+  designated: lean-proof
 sources:
-  - title: "The distribution of totatives, Canad. J. Math. 7 (1955), 347-357, Theorem 4"
-    authors: ["D. H. Lehmer"]
-    type: "paper"
-    relationship: "whole-count form is a special case"
-  - title: "Cycles and Patterns in the Sieve of Eratosthenes (arXiv:1905.03117), Theorems 6-9"
-    authors: ["George F. Grob", "Matthias Schmitt"]
-    type: "paper"
-    relationship: "restates the whole-count form"
+- title: The distribution of totatives, Canad. J. Math. 7 (1955), 347-357, Theorem 4
+  authors:
+  - D. H. Lehmer
+  type: paper
+  relationship: whole-count form is a special case
+- title: Cycles and Patterns in the Sieve of Eratosthenes (arXiv:1905.03117), Theorems 6-9
+  authors:
+  - George F. Grob
+  - Matthias Schmitt
+  type: paper
+  relationship: restates the whole-count form
