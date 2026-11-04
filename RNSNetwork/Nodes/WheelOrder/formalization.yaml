@@ -1,0 +1,27 @@
+# Stub: this node is planned but not yet built in the network.
+# Its claims are proved in the source files named below; they have not yet
+# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+
+node:
+  id: WheelOrder.v1
+  family: WheelOrder
+  version: v1
+  order: 9
+  kind: paper
+  status: stub
+  title: "what each wheel adds when wheels arrive in order"
+  description: >-
+    Bringing wheels in one at a time, the positions a wheel blocks for the
+    first time equal the open positions left by every earlier wheel times the
+    full size of every later wheel. Separately, from any 6n±1 position, the
+    next number with a chosen last digit is reached in the raw digit distance
+    or at most one further step of 10.
+
+planned:
+  rests_on: ["Wheel6"]
+  open_inputs: []
+  source_status: Clean
+  source_declarations: >-
+    `wheel_marginal_new_formula` (Part F); `wheel_gap_floor` (Part G)
+
+conclusions: []

@@ -5,8 +5,14 @@ node:
   id: TwinConstant.v1
   family: TwinConstant
   version: v1
+  order: 7
   kind: paper
   status: active
+  title: "the classical twin-prime constant is recovered"
+  description: >-
+    For the twin pattern, the constant built from the wheels equals the
+    textbook value: 2 times the product, over odd primes, of one minus one
+    over (the prime minus one) squared.
 
 conclusions:
   - id: twin_prime_constant_eq_classical

@@ -1,0 +1,26 @@
+# Stub: this node is planned but not yet built in the network.
+# Its claims are proved in the source files named below; they have not yet
+# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+
+node:
+  id: LinearForms.v1
+  family: LinearForms
+  version: v1
+  order: 16
+  kind: paper
+  status: stub
+  title: "Dickson's conjecture gives Sophie Germain primes"
+  description: >-
+    The pair "a number and twice it plus one" passes the linear-forms version
+    of admissibility; so Dickson's conjecture would give infinitely many
+    Sophie Germain primes.
+
+planned:
+  rests_on: []
+  open_inputs: ["LinearForms_conjecture"]
+  source_status: Conditional
+  source_declarations: >-
+    `sophieGermainSystem_admissible`,
+    `sophie_germain_conjecture_of_LinearForms_conjecture` (Part K)
+
+conclusions: []

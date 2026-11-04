@@ -1,0 +1,33 @@
+# Stub: this node is planned but not yet built in the network.
+# Its claims are proved in the source files named below; they have not yet
+# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+
+node:
+  id: GapTracks.v1
+  family: GapTracks
+  version: v1
+  order: 19
+  kind: paper
+  status: stub
+  title: "which gaps each column allows"
+  description: >-
+    The smaller of two twin primes above 3 always lies in the 6n-1 column, and
+    the smaller of two cousin primes in the 6n+1 column. In general, a gap
+    starting from the 6n-1 column never leaves remainder 4 on division by 6,
+    and a gap starting from the 6n+1 column never leaves remainder 2; a gap
+    that is a multiple of 6 keeps both primes in the same column. One claim is
+    refuted rather than proved: the number between two primes six apart is not
+    always composite (5, 7, 11 is a counterexample).
+
+planned:
+  rests_on: ["Wheel6"]
+  open_inputs: []
+  source_status: Clean
+  source_declarations: >-
+    `twin_prime_mod_six`, `cousin_prime_mod_six`, `sexy_prime_same_track`,
+    `sexy_middle_not_always_blocked`,
+    `prime_gap_forbidden_four_from_six_minus_one`,
+    `prime_gap_forbidden_two_from_six_plus_one`,
+    `prime_gap_same_track_of_six_dvd`
+
+conclusions: []

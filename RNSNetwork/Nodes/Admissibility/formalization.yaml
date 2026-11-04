@@ -5,8 +5,15 @@ node:
   id: Admissibility.v1
   family: Admissibility
   version: v1
+  order: 4
   kind: paper
   status: active
+  title: "which offset patterns can repeat forever"
+  description: >-
+    An offset pattern only has to be checked at the wheels no larger than the
+    number of offsets; the pattern {0, 2, 4} fails at the wheel of size 3; an
+    evenly spaced run passes exactly when every wheel up to its length divides
+    the spacing (the Lagrange–Waring condition).
 
 conclusions:
   - id: admissible_of_large_primes

@@ -1,0 +1,28 @@
+# Stub: this node is planned but not yet built in the network.
+# Its claims are proved in the source files named below; they have not yet
+# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+
+node:
+  id: ColumnStructure.v1
+  family: ColumnStructure
+  version: v1
+  order: 12
+  kind: paper
+  status: stub
+  title: "how the two columns multiply"
+  description: >-
+    A product of two numbers from the 6n-1 column lands in the 6n+1 column,
+    and so on for all four combinations; each prime above 3 hits the 6n-1
+    column at exactly one position per cycle; every number in the 6n-1 column
+    has a prime factor from that same column.
+
+planned:
+  rests_on: ["Wheel6"]
+  open_inputs: []
+  source_status: Clean
+  source_declarations: >-
+    `col_minus_mul_col_minus` and the three companions,
+    `col_minus_periodicity`, `col_minus_has_minus_prime_factor`,
+    `col_minus_composite_has_proper_minus_factor` (Part C)
+
+conclusions: []

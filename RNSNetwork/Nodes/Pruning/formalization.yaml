@@ -1,0 +1,26 @@
+# Stub: this node is planned but not yet built in the network.
+# Its claims are proved in the source files named below; they have not yet
+# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+
+node:
+  id: Pruning.v1
+  family: Pruning
+  version: v1
+  order: 8
+  kind: paper
+  status: stub
+  title: "which starting positions are worth testing"
+  description: >-
+    Once the Lagrange–Waring condition is met, the number of starting
+    positions left to test for an evenly spaced prime run is an exact product
+    over the wheels: one fewer than the wheel size where the wheel divides the
+    spacing, and the run length fewer elsewhere.
+
+planned:
+  rests_on: ["Admissibility", "SurvivorCount"]
+  open_inputs: []
+  source_status: Clean
+  source_declarations: >-
+    `valid_starting_residues_card_formula` (Part E)
+
+conclusions: []

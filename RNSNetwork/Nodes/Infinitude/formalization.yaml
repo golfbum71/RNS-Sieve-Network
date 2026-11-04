@@ -1,0 +1,26 @@
+# Stub: this node is planned but not yet built in the network.
+# Its claims are proved in the source files named below; they have not yet
+# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+
+node:
+  id: Infinitude.v1
+  family: Infinitude
+  version: v1
+  order: 11
+  kind: paper
+  status: stub
+  title: "two independent proofs that primes never run out"
+  description: >-
+    Euclid's argument using the combined cycle plus one; and a counting
+    argument showing a fixed finite set of wheels cannot build enough
+    square-free parts for every number.
+
+planned:
+  rests_on: []
+  open_inputs: []
+  source_status: Clean
+  source_declarations: >-
+    `rns_primes_unbounded`, `rns_wheel_supply_cannot_be_finite`,
+    `rns_infinitude_via_squarefree_counting`
+
+conclusions: []

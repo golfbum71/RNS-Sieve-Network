@@ -1,0 +1,26 @@
+# Stub: this node is planned but not yet built in the network.
+# Its claims are proved in the source files named below; they have not yet
+# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+
+node:
+  id: HardyLittlewood.v1
+  family: HardyLittlewood
+  version: v1
+  order: 14
+  kind: paper
+  status: stub
+  title: "the conjecture, and what it would give"
+  description: >-
+    The prime-pattern count is stated to grow like the constant times the
+    number divided by its logarithm raised to the number of offsets. Proved:
+    if that holds for the twin pattern, there are infinitely many twin primes.
+
+planned:
+  rests_on: ["SingularSeries"]
+  open_inputs: ["hardy_littlewood_conjecture"]
+  source_status: Conditional
+  source_declarations: >-
+    `hardy_littlewood_conjecture` (stated, open);
+    `twin_prime_conjecture_implies_infinite_twin_primes`
+
+conclusions: []

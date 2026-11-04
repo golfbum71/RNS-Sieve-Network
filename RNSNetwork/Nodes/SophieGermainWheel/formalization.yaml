@@ -1,0 +1,25 @@
+# Stub: this node is planned but not yet built in the network.
+# Its claims are proved in the source files named below; they have not yet
+# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+
+node:
+  id: SophieGermainWheel.v1
+  family: SophieGermainWheel
+  version: v1
+  order: 18
+  kind: paper
+  status: stub
+  title: "where Sophie Germain primes can sit"
+  description: >-
+    Every Sophie Germain prime above 3 lies in the 6n-1 column; none ends in
+    the digit 7; so above 5 its last digit is 1, 3 or 9.
+
+planned:
+  rests_on: ["Wheel6", "WheelOrder"]
+  open_inputs: []
+  source_status: Clean
+  source_declarations: >-
+    `sophie_germain_mod_six`, `sophie_germain_not_ends_in_seven`,
+    `sophie_germain_last_digit`
+
+conclusions: []

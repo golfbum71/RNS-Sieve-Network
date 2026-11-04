@@ -1,0 +1,29 @@
+# Stub: this node is planned but not yet built in the network.
+# Its claims are proved in the source files named below; they have not yet
+# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+
+node:
+  id: DudekJohnston.v1
+  family: DudekJohnston
+  version: v1
+  order: 20
+  kind: paper
+  status: stub
+  title: "a near-prime between every pair of squares"
+  description: >-
+    Between every two consecutive squares there is a number with at most four
+    prime factors, counted with repetition. This is a proven, published
+    weakening of Legendre's conjecture, which asks for a prime there.
+
+planned:
+  rests_on: []
+  open_inputs: []
+  source_status: Cited
+  source_declarations: >-
+    `dudek_johnston_statement` (stated),
+    `dudek_johnston_almost_primes_between_squares` (proof is `sorry`)
+  citation: >-
+    Dudek and Johnston, *Almost primes between all squares*, arXiv:2501.18048
+    (2025), Theorem 1.2
+
+conclusions: []

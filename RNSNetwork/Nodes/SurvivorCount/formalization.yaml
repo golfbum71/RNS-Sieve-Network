@@ -5,8 +5,15 @@ node:
   id: SurvivorCount.v1
   family: SurvivorCount
   version: v1
+  order: 5
   kind: paper
   status: active
+  title: "the exact number of open positions"
+  description: >-
+    The number of positions in the combined cycle that survive every wheel is
+    the product, over the wheels, of the open positions on each one: one at
+    the wheel of size 2 and two fewer than the wheel size elsewhere for twin
+    primes, and the wheel size minus `w` for a general pattern.
 
 conclusions:
   - id: twin_survivor_count

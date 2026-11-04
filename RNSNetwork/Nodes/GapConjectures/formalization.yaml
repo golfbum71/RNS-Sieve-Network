@@ -1,0 +1,29 @@
+# Stub: this node is planned but not yet built in the network.
+# Its claims are proved in the source files named below; they have not yet
+# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+
+node:
+  id: GapConjectures.v1
+  family: GapConjectures
+  version: v1
+  order: 17
+  kind: paper
+  status: stub
+  title: "Legendre, Brocard, Oppermann, Andrica"
+  description: >-
+    Each named survivor bound implies its conjecture; Oppermann's conjecture
+    implies both Andrica's and Legendre's, giving Legendre two independent
+    routes.
+
+planned:
+  rests_on: []
+  open_inputs: ["jacobsthal_bound_holds", "four_survivors_bound_holds", "oppermann_bound_holds", "oppermann_conjecture"]
+  source_status: Conditional
+  source_declarations: >-
+    `legendre_conjecture_of_jacobsthal_bound`,
+    `brocard_conjecture_of_four_survivors_bound`,
+    `oppermann_conjecture_of_oppermann_bound`,
+    `andrica_conjecture_of_oppermann_conjecture`,
+    `legendre_conjecture_of_oppermann_conjecture`
+
+conclusions: []

@@ -5,8 +5,16 @@ node:
   id: SingularSeries.v1
   family: SingularSeries
   version: v1
+  order: 6
   kind: paper
   status: active
+  title: "the correction constant exists and is positive"
+  description: >-
+    Each wheel's correction factor differs from 1 by an amount that shrinks
+    like one over the wheel size squared, so the product over all wheels
+    converges, and for an admissible pattern the result is strictly positive.
+    The exact surviving fraction equals the correction product times the naive
+    independent-blocking guess.
 
 conclusions:
   - id: delta_bound

@@ -1,0 +1,26 @@
+# Stub: this node is planned but not yet built in the network.
+# Its claims are proved in the source files named below; they have not yet
+# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+
+node:
+  id: HensleyRichards.v1
+  family: HensleyRichards
+  version: v1
+  order: 15
+  kind: paper
+  status: stub
+  title: "Hardy and Littlewood's two conjectures clash"
+  description: >-
+    If an admissible pattern packs more offsets into a window than there are
+    primes in a window of that length, Conjecture A (every admissible pattern
+    repeats forever) and Conjecture B (prime counts are subadditive) cannot
+    both hold.
+
+planned:
+  rests_on: ["Admissibility"]
+  open_inputs: ["HL_conjecture_A", "HL_conjecture_B"]
+  source_status: Conditional
+  source_declarations: >-
+    `HL_A_and_B_incompatible` (Part J)
+
+conclusions: []

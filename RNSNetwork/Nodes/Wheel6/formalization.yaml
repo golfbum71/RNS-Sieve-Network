@@ -5,8 +5,12 @@ node:
   id: Wheel6.v1
   family: Wheel6
   version: v1
+  order: 1
   kind: standard        # textbook fact, stated once so other nodes can import it
   status: active
+  title: "the 6n±1 wheel"
+  description: >-
+    Every prime above 3 leaves remainder 1 or 5 on division by 6.
 
 conclusions:
   - id: prime_gt_three_is_candidate

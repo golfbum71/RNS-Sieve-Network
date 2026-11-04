@@ -5,8 +5,13 @@ node:
   id: CRT.v1
   family: CRT
   version: v1
+  order: 2
   kind: standard
   status: active
+  title: "one big cycle is the same as many small wheels"
+  description: >-
+    A position in the combined cycle of all the wheels carries exactly the
+    same information as one position on each individual wheel.
 
 conclusions:
   - id: crt_map_bijective

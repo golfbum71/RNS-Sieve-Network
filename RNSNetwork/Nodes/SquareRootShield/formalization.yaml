@@ -5,8 +5,13 @@ node:
   id: SquareRootShield.v1
   family: SquareRootShield
   version: v1
+  order: 3
   kind: standard
   status: active
+  title: "trial division only needs small wheels"
+  description: >-
+    A number is prime exactly when no prime at or below the square root of the
+    ceiling divides it.
 
 conclusions:
   - id: square_root_shield
