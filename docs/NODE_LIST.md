@@ -391,6 +391,22 @@ up to 24 equal intervals).
   September 2026 (cited in `ErdosProblems/970.lean`); cite it, do not
   redo it.
 
+**From PrimeNumberTheoremAnd (PNT+)**
+- **The overshoot at the ceiling** (Tier 2). With the wheels up to the
+  square root of a bound, the survivor share times the bound, divided by
+  the number of primes up to the bound, tends to twice e to the minus
+  Euler's constant (about 1.1229). A short step from two results PNT+
+  proves with no `sorry`: Mertens' third theorem (`E₃.bound''` in
+  `PrimeNumberTheoremAnd/IEANTN/Mertens.lean`, with error of order one
+  over the logarithm squared) and the prime number theorem
+  (`chebyshev_asymptotic` in `Consequences.lean`). PNT+ builds on Lean
+  v4.35.0 and this repository on v4.33.1, so take the two results as
+  cited hypotheses pointing at PNT+, following the network's pattern,
+  rather than adding PNT+ as a dependency.
+- PNT+ also proves Mertens' first and second theorems, so the elementary
+  share bounds above are not the only route; they remain useful because
+  they hold for every wheel with explicit constants.
+
 **Open question (not a formalization target yet)**
 - How large the column imbalance can get as wheels are added. Computed up
   to the wheel at 23 (maxima 2, 3, 5, 8, 12, 18); the untwisted analogue is
