@@ -345,6 +345,21 @@ up to 24 equal intervals).
   them as cited hypotheses. This puts the paper's unproven assumption on
   the graph as an open input, separate from the exact wheel share.
 
+**Survivor share bounds (Tier 1)**
+- **The survivor share shrinks at least like one over the logarithm.**
+  After the wheels up to a given prime, the share of the cycle that
+  survives is at most one over the logarithm of that prime plus one.
+  Proof: the reciprocal of the share expands into a sum over all numbers
+  built from those primes, which includes every number up to the last
+  wheel, so it is at least the harmonic sum; Mathlib's
+  `log_add_one_le_harmonic` bounds that below by the logarithm. Also
+  forces infinitely many primes (link to `Infinitude`). Checked for
+  wheels up to 200,000.
+- **The twin share shrinks at least like one over the logarithm squared.**
+  The share of the cycle surviving the twin pattern is at most twice the
+  square of the bound above, since each twin factor is at most the square
+  of the plain one. Checked for wheels up to 200,000.
+
 **Open question (not a formalization target yet)**
 - How large the column imbalance can get as wheels are added. Computed up
   to the wheel at 23 (maxima 2, 3, 5, 8, 12, 18); the untwisted analogue is
