@@ -3,6 +3,9 @@ Copyright (c) 2026 Geoffrey Fischer. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Geoffrey Fischer
 -/
+import Mathlib.Data.ZMod.QuotientRing          -- `ZMod.prodEquivPi` (Chinese Remainder)
+import Mathlib.Algebra.Ring.Pi                 -- `Pi.evalRingHom`
+import Mathlib.Data.Nat.Prime.Basic            -- `Nat.coprime_primes`
 import RNSNetwork.Nodes.CRT.Conclusions
 
 /-!

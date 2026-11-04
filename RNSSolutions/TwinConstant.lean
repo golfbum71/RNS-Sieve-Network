@@ -3,6 +3,8 @@ Copyright (c) 2026 Geoffrey Fischer. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Geoffrey Fischer
 -/
+import Mathlib.Topology.Algebra.InfiniteSum.Basic -- `tprod_congr`, `HasProd.tprod_eq`
+import Mathlib.Tactic.FinCases
 import RNSNetwork.Nodes.SingularSeries.Conclusions
 import RNSNetwork.Nodes.TwinConstant.Conclusions
 

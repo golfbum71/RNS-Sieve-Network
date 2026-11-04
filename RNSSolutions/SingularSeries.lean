@@ -3,6 +3,13 @@ Copyright (c) 2026 Geoffrey Fischer. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Geoffrey Fischer
 -/
+import Mathlib.NumberTheory.SumPrimeReciprocals    -- `Nat.Primes.summable_rpow`
+import Mathlib.Analysis.SpecialFunctions.Log.Summable  -- `multipliable_one_add_of_summable`
+import Mathlib.Analysis.SpecialFunctions.Pow.Real      -- `Real.rpow_neg`, `Real.rpow_natCast`
+import Mathlib.Analysis.Normed.Group.InfiniteSum       -- `Summable.of_norm_bounded_eventually`
+import Mathlib.Topology.Order.OrderClosed              -- `ge_of_tendsto`
+import Mathlib.Tactic.Positivity
+import Mathlib.Tactic.Push                             -- `push Not`
 import RNSNetwork.Nodes.SurvivorCount.Conclusions
 import RNSNetwork.Nodes.SingularSeries.Conclusions
 

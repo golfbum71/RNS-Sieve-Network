@@ -3,6 +3,8 @@ Copyright (c) 2026 Geoffrey Fischer. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Geoffrey Fischer
 -/
+import Mathlib.Data.Nat.Prime.Basic   -- `Nat.minFac` facts
+import Mathlib.Tactic.Push                     -- `push Not`
 import RNSNetwork.Nodes.SquareRootShield.Conclusions
 
 /-!

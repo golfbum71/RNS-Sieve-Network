@@ -3,7 +3,15 @@ Copyright (c) 2026 Geoffrey Fischer. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Geoffrey Fischer
 -/
-import Mathlib
+-- Only the parts of Mathlib these definitions need, rather than all of it:
+-- each module below was checked against Mathlib at the pinned commit
+-- (see `lake-manifest.json`).
+import Mathlib.Data.Nat.Prime.Defs                         -- primes, `Nat.Primes`
+import Mathlib.Data.ZMod.Basic                             -- remainders, `ZMod.castHom`
+import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise -- `Finset.dvd_prod_of_mem`
+import Mathlib.Algebra.BigOperators.GroupWithZero.Finset   -- `Finset.prod_ne_zero_iff`
+import Mathlib.Topology.Algebra.InfiniteSum.Defs           -- infinite products `∏'`
+import Mathlib.Analysis.SpecialFunctions.Log.Basic         -- `Real.log`
 
 /-!
 # Vocabulary: the shared language of the RNS sieve network

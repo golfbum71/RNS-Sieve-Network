@@ -3,6 +3,8 @@ Copyright (c) 2026 Geoffrey Fischer. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Geoffrey Fischer
 -/
+import Mathlib.Data.Fintype.BigOperators -- `Fintype.card_piFinset`
+import Mathlib.Tactic.NormNum.Prime            -- `norm_num` proving small numbers prime
 import RNSNetwork.Nodes.CRT.Conclusions
 import RNSNetwork.Nodes.SurvivorCount.Conclusions
 
