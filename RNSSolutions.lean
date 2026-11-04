@@ -17,4 +17,5 @@ import RNSSolutions.LinearForms
 import RNSSolutions.GapConjectures
 import RNSSolutions.SophieGermainWheel
 import RNSSolutions.GapTracks
+import RNSSolutions.UniformSubdivision
 import RNSSolutions.Assemble
