@@ -1,0 +1,33 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Outside source: proved in Lean in another project. See docs/NODE_LIST.md.
+
+node:
+  id: RoughInPrimeGaps.v1
+  family: RoughInPrimeGaps
+  version: v1
+  order: 43
+  kind: external
+  status: planned
+  title: almost every prime gap holds a survivor of the wheels below its length
+  description: 'Almost every gap between consecutive primes contains a number whose smallest
+    prime factor is at least the gap''s length: a survivor of every wheel smaller than the
+    gap. Proved unconditionally by Gafni and Tao, answering Erdős Problem 682; proved in Lean
+    in plby/lean-proofs.'
+conclusions: []
+planned:
+  source_status: External
+  rests_on: []
+  external:
+    project: plby/lean-proofs
+    url: https://github.com/plby/lean-proofs/blob/8822f7ddef30fadbd92e1c6ab4ed897af356af5e/src/latest/ErdosProblems/Erdos682.lean#L5018
+    note: The statement is erdos_682 in DeepMind's formal-conjectures (ErdosProblems/682.lean),
+      which links this proof and marks it solved. The same entry links a Lean proof of a counterexample
+      built on the 30030 cycle (erdos_682.variants.dickson_counterexample). Check toolchain
+      and axioms before citing.
+sources:
+- title: A. Gafni and T. Tao, Rough numbers between consecutive primes, arXiv:2508.06463 (2025)
+  url: https://arxiv.org/abs/2508.06463
+  relationship: the proof
+- title: DeepMind formal-conjectures, Erdős Problem 682
+  url: https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/682.lean
+  relationship: the Lean statement

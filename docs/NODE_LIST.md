@@ -309,6 +309,10 @@ Check here before searching again. Links pinned to a commit were current on
   Hooley's exponential distribution of survivor gaps (Erdős 235) and the
   Montgomery-Vaughan gap moments (Erdős 220), both about survivors of
   primorial cycles. Possible outside sources for future gap nodes.
+- plby/lean-proofs also proves Gafni and Tao's theorem (Erdős 682): almost
+  every prime gap contains a survivor of every wheel smaller than the gap
+  (`src/latest/ErdosProblems/Erdos682.lean`; paper arXiv:2508.06463).
+  Drawn on the graph as the outside source `RoughInPrimeGaps`.
 - [30k30/scholia](https://github.com/30k30/scholia) — Lean glue from
   Jacobsthal's function to Erdős 687 (blocking runs). For: BlockingRuns.
 - [epoch-research/LeanOpenProblems-results](https://github.com/epoch-research/LeanOpenProblems-results)
@@ -322,7 +326,7 @@ Check here before searching again. Links pinned to a commit were current on
 - [DeepMind formal-conjectures](https://github.com/google-deepmind/formal-conjectures)
   — statements with `sorry`, tagged open or solved, often linking outside
   proofs. Relevant files: `OEIS/1223.lean`, `ErdosProblems/854.lean`,
-  `687.lean`, `970.lean`, `235.lean`, `220.lean`,
+  `682.lean`, `687.lean`, `970.lean`, `235.lean`, `220.lean`,
   `GreensOpenProblems/46.lean`, and `Wikipedia/` (Dickson, TwinPrimes,
   Schinzel, Legendre, Oppermann, Andrica, Brocard).
 - [IEANTN](https://github.com/teorth/IEANTN) — the network model this

@@ -42,5 +42,6 @@
 | 40 | [`MertensThird`](MertensThird.md) | Mertens' third theorem | outside source: proved in Lean in another project |
 | 41 | [`PrimeNumberTheorem`](PrimeNumberTheorem.md) | the prime number theorem | outside source: proved in Lean in another project |
 | 42 | [`JacobsthalQuadratic`](JacobsthalQuadratic.md) | the quadratic bound on Jacobsthal's function | outside source: proved in Lean in another project |
+| 43 | [`RoughInPrimeGaps`](RoughInPrimeGaps.md) | almost every prime gap holds a survivor of the wheels below its length | outside source: proved in Lean in another project |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 20 of 38 nodes are built, holding 63 claims: 62 proved in Lean and 1 cited from a published paper. They are joined by 23 arrows, each a Lean-checked step. Of the other 18 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 14 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 20 of 39 nodes are built, holding 63 claims: 62 proved in Lean and 1 cited from a published paper. They are joined by 23 arrows, each a Lean-checked step. Of the other 19 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 14 are new work, stated or scoped but not yet proved; 4 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the diagrams
 
@@ -78,6 +78,7 @@ graph LR
   N_LargestGap["<b>LargestGap</b><br/>the largest gap from the proportional share<br/><i>planned: new, not yet proved</i>"]
   N_LehmerExcess["<b>LehmerExcess</b><br/>Lehmer's closed form for the 6n-1 type<br/><i>planned: new, not yet proved</i>"]
   N_GermainCriterion["<b>GermainCriterion</b><br/>Germain's exact criterion for an even split<br/><i>planned: new, not yet proved</i>"]
+  N_RoughInPrimeGaps["<b>RoughInPrimeGaps</b><br/>almost every prime gap holds a survivor of the wheels below its length<br/><i>outside source: plby/lean-proofs</i>"]
   N_CRT ==>|2| N_SurvivorCount
   N_SurvivorCount ==>|1| N_SingularSeries
   N_SingularSeries ==>|1| N_TwinConstant
@@ -117,7 +118,7 @@ graph LR
   class N_DudekJohnston cited_built;
   class N_BirdseySchay conditional;
   class N_UniformSubdivision,N_LehmerSplit,N_SurvivorSymmetry,N_SpreadBounds,N_ColumnAction,N_ShareBounds,N_TwinShare,N_InadmissibleOccurrences,N_GapCertificate,N_BlockingRuns,N_CeilingOvershoot,N_LargestGap,N_LehmerExcess,N_GermainCriterion new;
-  class N_JacobsthalQuadratic,N_MertensThird,N_PrimeNumberTheorem external;
+  class N_JacobsthalQuadratic,N_MertensThird,N_PrimeNumberTheorem,N_RoughInPrimeGaps external;
   click N_Wheel6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md" _blank
   click N_CRT href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CRT.md" _blank
   click N_SquareRootShield href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SquareRootShield.md" _blank
@@ -156,6 +157,7 @@ graph LR
   click N_LargestGap href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LargestGap.md" _blank
   click N_LehmerExcess href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LehmerExcess.md" _blank
   click N_GermainCriterion href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md" _blank
+  click N_RoughInPrimeGaps href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RoughInPrimeGaps.md" _blank
 ```
 
 ## Every claim
@@ -504,6 +506,7 @@ exactly the following, each recorded as such rather than claimed:
 - [`MertensThird`](docs/nodes/MertensThird.md) — `E₃.bound''` in [PrimeNumberTheoremAnd (PNT+)](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/IEANTN/Mertens.lean#L2419) — cited by [`CeilingOvershoot`](docs/nodes/CeilingOvershoot.md), [`BirdseySchay`](docs/nodes/BirdseySchay.md)
 - [`PrimeNumberTheorem`](docs/nodes/PrimeNumberTheorem.md) — `pi_alt'` in [PrimeNumberTheoremAnd (PNT+)](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/Consequences.lean#L900) — cited by [`CeilingOvershoot`](docs/nodes/CeilingOvershoot.md), [`BirdseySchay`](docs/nodes/BirdseySchay.md)
 - [`JacobsthalQuadratic`](docs/nodes/JacobsthalQuadratic.md) — [openai/math](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/OAI/NumberTheory/Jacobsthal/Conclusions/QuadraticBound.lean#L13) — cited by [`BlockingRuns`](docs/nodes/BlockingRuns.md)
+- [`RoughInPrimeGaps`](docs/nodes/RoughInPrimeGaps.md) — [plby/lean-proofs](https://github.com/plby/lean-proofs/blob/8822f7ddef30fadbd92e1c6ab4ed897af356af5e/src/latest/ErdosProblems/Erdos682.lean#L5018)
 
 **Planned nodes will add:** `birdsey_schay_heuristic`
 
@@ -549,3 +552,4 @@ exactly the following, each recorded as such rather than claimed:
 | 40 | [`MertensThird`](docs/nodes/MertensThird.md) | Mertens' third theorem | outside source: proved in Lean in another project |
 | 41 | [`PrimeNumberTheorem`](docs/nodes/PrimeNumberTheorem.md) | the prime number theorem | outside source: proved in Lean in another project |
 | 42 | [`JacobsthalQuadratic`](docs/nodes/JacobsthalQuadratic.md) | the quadratic bound on Jacobsthal's function | outside source: proved in Lean in another project |
+| 43 | [`RoughInPrimeGaps`](docs/nodes/RoughInPrimeGaps.md) | almost every prime gap holds a survivor of the wheels below its length | outside source: proved in Lean in another project |
