@@ -375,7 +375,7 @@ theorem uniform_subdivision_minus_side_holds : uniform_subdivision_minus_side :=
     have e2 := col_empty W (6 - r) (K * W.prod id / (p - 1)) h2 h3 h6r
     have e3 := col_empty W r (W.prod id) h2 h3 hr15
     have e4 := col_empty W r (K * W.prod id / (p - 1)) h2 h3 hr15
-    simp [e1, e2, e3, e4]
+    rw [e1, e2, e3, e4, Nat.mul_zero]
 
 end RNS.UniformSubdivision
 
