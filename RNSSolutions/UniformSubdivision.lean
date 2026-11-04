@@ -10,12 +10,13 @@ import RNSNetwork.Nodes.UniformSubdivision.Conclusions
 /-!
 # Proofs for UniformSubdivision
 
-Imports claims only, never other nodes' proofs. So far this file proves
-`frozen_wheels_repeat`, `one_wheel_removed` and `uniform_subdivision`; the
-two column claims are still planned.
+Imports claims only, never other nodes' proofs. Proves all five of the
+node's claims: `frozen_wheels_repeat`, `one_wheel_removed`,
+`uniform_subdivision`, and the two column forms.
 
-All three rest on no other node, so each is proved directly as a `_holds`
-theorem; `uniform_subdivision_holds` uses the other two from this file.
+None rests on another node, so each is proved directly as a `_holds`
+theorem; the later ones use the earlier ones and helper lemmas from this
+file.
 -/
 
 namespace RNS.UniformSubdivision
@@ -188,3 +189,195 @@ theorem uniform_subdivision_holds : uniform_subdivision := by
 end RNS.UniformSubdivision
 
 #print axioms RNS.UniformSubdivision.uniform_subdivision_holds
+
+/-! ## The column forms -/
+
+namespace RNS.UniformSubdivision
+
+/-- Splitting off one period, for any test unchanged by a shift of one
+period: the numbers passing it up to one period plus `N` are those in the
+first period plus those up to `N`. -/
+private theorem card_filter_Icc_add (P : Nat → Prop) [DecidablePred P] (Q N : Nat)
+    (hP : ∀ k, P (k + Q) ↔ P k) :
+    ((Finset.Icc 1 (Q + N)).filter P).card
+      = ((Finset.Icc 1 Q).filter P).card + ((Finset.Icc 1 N).filter P).card := by
+  have hsplit : Finset.Icc 1 (Q + N)
+      = Finset.Icc 1 Q ∪ (Finset.Icc 1 N).map (addRightEmbedding Q) := by
+    rw [Finset.map_add_right_Icc]
+    ext k
+    simp only [Finset.mem_union, Finset.mem_Icc]
+    omega
+  have hdisj : Disjoint (Finset.Icc 1 Q) ((Finset.Icc 1 N).map (addRightEmbedding Q)) := by
+    rw [Finset.map_add_right_Icc, Finset.disjoint_left]
+    intro k hk hk'
+    simp only [Finset.mem_Icc] at hk hk'
+    omega
+  rw [hsplit, Finset.filter_union,
+    Finset.card_union_of_disjoint (Finset.disjoint_filter_filter hdisj),
+    Finset.filter_map, Finset.card_map]
+  congr 1
+  congr 1
+  exact Finset.filter_congr (fun k _ => by
+    simp only [Function.comp_apply, addRightEmbedding_apply]
+    exact hP k)
+
+/-- Splitting off one cycle, within one column. With wheels 2 and 3 frozen,
+the cycle is a multiple of 6, so a shift by one cycle keeps every number in
+its column. -/
+private theorem card_col_prod_add (W : Finset Nat) (r N : Nat) (h2 : 2 ∈ W) (h3 : 3 ∈ W) :
+    (column_survivors_upto W r (W.prod id + N)).card
+      = (column_survivors_upto W r (W.prod id)).card + (column_survivors_upto W r N).card := by
+  have h2' : 2 ∣ W.prod id := Finset.dvd_prod_of_mem id h2
+  have h3' : 3 ∣ W.prod id := Finset.dvd_prod_of_mem id h3
+  unfold column_survivors_upto survivors_upto
+  simp only [Finset.filter_filter]
+  apply card_filter_Icc_add
+  intro k
+  try dsimp only
+  have hmod : (k + W.prod id) % 6 = k % 6 := by omega
+  rw [hmod, survives_add_prod]
+
+/-- **Frozen wheels repeat, within one column.** -/
+private theorem col_frozen_repeat (W : Finset Nat) (r K N : Nat) (h2 : 2 ∈ W) (h3 : 3 ∈ W) :
+    (column_survivors_upto W r (K * W.prod id + N)).card
+      = K * (column_survivors_upto W r (W.prod id)).card
+        + (column_survivors_upto W r N).card := by
+  induction K with
+  | zero => simp
+  | succ K ih =>
+    have h : (K + 1) * W.prod id + N = W.prod id + (K * W.prod id + N) := by ring
+    rw [h, card_col_prod_add W r _ h2 h3, ih]
+    ring
+
+/-- **One wheel removed, within one column.** The multiples of the new prime
+`p` in column `r` are `p` times the old survivors up to `N / p` in column `r'`,
+where multiplying by `p` carries column `r'` to column `r`. Written added up,
+to avoid truncated subtraction. -/
+private theorem col_one_wheel_removed (W : Finset Nat) (p N r r' : Nat) (hp : p.Prime)
+    (hW : ∀ q ∈ W, q.Prime) (hpW : p ∉ W) (hr : ∀ j, p * j % 6 = r ↔ j % 6 = r') :
+    (column_survivors_upto (insert p W) r N).card + (column_survivors_upto W r' (N / p)).card
+      = (column_survivors_upto W r N).card := by
+  have hins : column_survivors_upto (insert p W) r N
+      = (column_survivors_upto W r N).filter (fun k => ¬ p ∣ k) := by
+    ext k
+    simp only [column_survivors_upto, survivors_upto, Finset.mem_filter,
+      Finset.forall_mem_insert]
+    tauto
+  have himg : (column_survivors_upto W r N).filter (fun k => p ∣ k)
+      = (column_survivors_upto W r' (N / p)).image (fun j => p * j) := by
+    ext k
+    simp only [column_survivors_upto, survivors_upto, Finset.mem_filter, Finset.mem_image,
+      Finset.mem_Icc]
+    constructor
+    · rintro ⟨⟨⟨⟨hk1, hkN⟩, hsurv⟩, hkr⟩, hpk⟩
+      have hcancel : p * (k / p) = k := Nat.mul_div_cancel' hpk
+      refine ⟨k / p, ⟨⟨⟨?_, Nat.div_le_div_right hkN⟩, ?_⟩, ?_⟩, hcancel⟩
+      · rcases Nat.eq_zero_or_pos (k / p) with h0 | h0
+        · rw [h0, Nat.mul_zero] at hcancel
+          omega
+        · omega
+      · intro q hq hqj
+        have hqk : q ∣ p * (k / p) := Nat.dvd_mul_left_of_dvd hqj p
+        rw [hcancel] at hqk
+        exact hsurv q hq hqk
+      · apply (hr (k / p)).mp
+        rw [hcancel]
+        exact hkr
+    · rintro ⟨j, ⟨⟨⟨hj1, hjN⟩, hsurv⟩, hjr⟩, rfl⟩
+      refine ⟨⟨⟨⟨?_, ?_⟩, ?_⟩, (hr j).mpr hjr⟩, Nat.dvd_mul_right p j⟩
+      · have hpos : 0 < p * j := Nat.mul_pos hp.pos (by omega)
+        omega
+      · calc p * j ≤ p * (N / p) := Nat.mul_le_mul (Nat.le_refl p) hjN
+          _ ≤ N := Nat.mul_div_le N p
+      · intro q hq hqd
+        rcases (hW q hq).dvd_mul.mp hqd with h | h
+        · have hqp : q = p := (Nat.prime_dvd_prime_iff_eq (hW q hq) hp).mp h
+          exact hpW (by rw [← hqp]; exact hq)
+        · exact hsurv q hq h
+  have hsplit : ((column_survivors_upto W r N).filter (fun k => p ∣ k)).card
+      + ((column_survivors_upto W r N).filter (fun k => ¬ p ∣ k)).card
+      = (column_survivors_upto W r N).card :=
+    Finset.card_filter_add_card_filter_not _
+  have hinj : Function.Injective (fun j : Nat => p * j) :=
+    fun a b hab => Nat.eq_of_mul_eq_mul_left hp.pos hab
+  have hmult : ((column_survivors_upto W r N).filter (fun k => p ∣ k)).card
+      = (column_survivors_upto W r' (N / p)).card := by
+    rw [himg, Finset.card_image_of_injective _ hinj]
+  rw [hins]
+  omega
+
+/-- With wheels 2 and 3 frozen, every survivor leaves remainder 1 or 5 on
+division by 6, so any other column is empty. -/
+private theorem col_empty (W : Finset Nat) (r N : Nat) (h2 : 2 ∈ W) (h3 : 3 ∈ W)
+    (hr : ¬ (r = 1 ∨ r = 5)) : (column_survivors_upto W r N).card = 0 := by
+  rw [Finset.card_eq_zero]
+  unfold column_survivors_upto
+  rw [Finset.filter_eq_empty_iff]
+  intro k hk hkr
+  simp only [survivors_upto, Finset.mem_filter] at hk
+  have h2k := hk.2 2 h2
+  have h3k := hk.2 3 h3
+  omega
+
+/-- **Uniform subdivision, rotating wheel on the 6n+1 side**, proved. -/
+theorem uniform_subdivision_plus_side_holds : uniform_subdivision_plus_side := by
+  intro W p K r hp hW hpW h2 h3 hp6
+  have hd : 0 < p - 1 := by
+    have := hp.two_le
+    omega
+  have hp1 : p - 1 + 1 = p := by
+    have := hp.two_le
+    omega
+  obtain ⟨hN, hNp⟩ := floor_facts (K * W.prod id) (p - 1) (K * W.prod id / (p - 1))
+    (K * W.prod id % (p - 1)) (Nat.div_add_mod _ _) (Nat.mod_lt _ hd)
+  rw [hp1] at hN hNp
+  have hend : K * (W.prod id * p) / (p - 1) = K * W.prod id + K * W.prod id / (p - 1) := by
+    rw [← hN, Nat.mul_assoc]
+  -- Multiplying by a prime on the 6n+1 side keeps every column in place.
+  have hr : ∀ j, p * j % 6 = r ↔ j % 6 = r := by
+    intro j
+    rw [Nat.mul_mod, hp6]
+    omega
+  have hA := col_one_wheel_removed W p (K * (W.prod id * p) / (p - 1)) r r hp hW hpW hr
+  rw [hend, hNp, col_frozen_repeat W r K _ h2 h3] at hA
+  rw [hend]
+  omega
+
+/-- **Uniform subdivision, rotating wheel on the 6n-1 side**, proved. -/
+theorem uniform_subdivision_minus_side_holds : uniform_subdivision_minus_side := by
+  intro W p K r hp hW hpW h2 h3 hp6
+  have hd : 0 < p - 1 := by
+    have := hp.two_le
+    omega
+  have hp1 : p - 1 + 1 = p := by
+    have := hp.two_le
+    omega
+  obtain ⟨hN, hNp⟩ := floor_facts (K * W.prod id) (p - 1) (K * W.prod id / (p - 1))
+    (K * W.prod id % (p - 1)) (Nat.div_add_mod _ _) (Nat.mod_lt _ hd)
+  rw [hp1] at hN hNp
+  have hend : K * (W.prod id * p) / (p - 1) = K * W.prod id + K * W.prod id / (p - 1) := by
+    rw [← hN, Nat.mul_assoc]
+  rw [hend]
+  by_cases hr15 : r = 1 ∨ r = 5
+  · -- Multiplying by a prime on the 6n-1 side swaps the two columns.
+    have hr : ∀ j, p * j % 6 = r ↔ j % 6 = 6 - r := by
+      intro j
+      rw [Nat.mul_mod, hp6]
+      omega
+    have hA := col_one_wheel_removed W p (K * (W.prod id * p) / (p - 1)) r (6 - r)
+      hp hW hpW hr
+    rw [hend, hNp, col_frozen_repeat W r K _ h2 h3] at hA
+    omega
+  · -- Every other column is empty, so both sides are zero.
+    have h6r : ¬ (6 - r = 1 ∨ 6 - r = 5) := by omega
+    have e1 := col_empty (insert p W) r (K * W.prod id + K * W.prod id / (p - 1))
+      (Finset.mem_insert_of_mem h2) (Finset.mem_insert_of_mem h3) hr15
+    have e2 := col_empty W (6 - r) (K * W.prod id / (p - 1)) h2 h3 h6r
+    have e3 := col_empty W r (W.prod id) h2 h3 hr15
+    have e4 := col_empty W r (K * W.prod id / (p - 1)) h2 h3 hr15
+    simp [e1, e2, e3, e4]
+
+end RNS.UniformSubdivision
+
+#print axioms RNS.UniformSubdivision.uniform_subdivision_plus_side_holds
+#print axioms RNS.UniformSubdivision.uniform_subdivision_minus_side_holds
