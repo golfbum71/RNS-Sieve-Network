@@ -11,11 +11,11 @@ import RNSNetwork.Nodes.UniformSubdivision.Conclusions
 # Proofs for UniformSubdivision
 
 Imports claims only, never other nodes' proofs. So far this file proves
-`frozen_wheels_repeat` and `one_wheel_removed`; the node's other claims are
-still planned.
+`frozen_wheels_repeat`, `one_wheel_removed` and `uniform_subdivision`; the
+two column claims are still planned.
 
-Both rest on no other node, so each is proved directly as a `_holds`
-theorem.
+All three rest on no other node, so each is proved directly as a `_holds`
+theorem; `uniform_subdivision_holds` uses the other two from this file.
 -/
 
 namespace RNS.UniformSubdivision
@@ -136,3 +136,55 @@ theorem one_wheel_removed_holds : one_wheel_removed := by
 end RNS.UniformSubdivision
 
 #print axioms RNS.UniformSubdivision.one_wheel_removed_holds
+
+/-! ## Uniform subdivision -/
+
+namespace RNS.UniformSubdivision
+
+/-- The arithmetic behind the subdivision. If `M` is `d` times a quotient
+plus a remainder below `d`, then `M` times `d + 1`, divided by `d`, rounds
+down to `M` plus the quotient, and that, divided by `d + 1`, rounds down to
+the quotient. -/
+private theorem floor_facts (M d a b : Nat) (hab : d * a + b = M) (hb : b < d) :
+    M * (d + 1) / d = M + a ∧ (M + a) / (d + 1) = a := by
+  subst hab
+  constructor
+  · apply Nat.div_eq_of_lt_le
+    · have e1 : (d * a + b + a) * d = d * (d * a) + b * d + a * d := by ring
+      have e2 : (d * a + b) * (d + 1) = d * (d * a) + b * d + a * d + b := by ring
+      rw [e1, e2]
+      omega
+    · have e2 : (d * a + b) * (d + 1) = d * (d * a) + b * d + a * d + b := by ring
+      have e3 : (d * a + b + a + 1) * d = d * (d * a) + b * d + a * d + d := by ring
+      rw [e2, e3]
+      omega
+  · apply Nat.div_eq_of_lt_le
+    · have e4 : a * (d + 1) = d * a + a := by ring
+      rw [e4]
+      omega
+    · have e5 : (a + 1) * (d + 1) = d * a + a + d + 1 := by ring
+      rw [e5]
+      omega
+
+/-- **Uniform subdivision**, proved from `frozen_wheels_repeat` and
+`one_wheel_removed`. -/
+theorem uniform_subdivision_holds : uniform_subdivision := by
+  intro W p K hp hW hpW
+  have hd : 0 < p - 1 := by
+    have := hp.two_le
+    omega
+  have hp1 : p - 1 + 1 = p := by
+    have := hp.two_le
+    omega
+  obtain ⟨hN, hNp⟩ := floor_facts (K * W.prod id) (p - 1) (K * W.prod id / (p - 1))
+    (K * W.prod id % (p - 1)) (Nat.div_add_mod _ _) (Nat.mod_lt _ hd)
+  rw [hp1] at hN hNp
+  -- The end of the `K`-th interval is `K` frozen cycles plus the overhang.
+  have hend : K * (W.prod id * p) / (p - 1) = K * W.prod id + K * W.prod id / (p - 1) := by
+    rw [← hN, Nat.mul_assoc]
+  rw [hend, one_wheel_removed_holds W p _ hp hW hpW, hNp, frozen_wheels_repeat_holds W K]
+  omega
+
+end RNS.UniformSubdivision
+
+#print axioms RNS.UniformSubdivision.uniform_subdivision_holds
