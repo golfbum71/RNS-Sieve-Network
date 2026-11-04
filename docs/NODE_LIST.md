@@ -261,11 +261,76 @@ many equal intervals as the rotating wheel's size minus one, each holding one
 frozen cycle's worth of survivors. By column, a rotating wheel on the 6n+1
 side keeps every column's share exact; one on the 6n-1 side swaps columns,
 so each interval is off by the two columns' difference in the overhang.
-- Prior work: Grob and Schmitt, arXiv:1905.03117 (2019), Theorems 6-9 (the
-  whole-count form). The column forms are new.
+- Prior work: Lehmer, Canad. J. Math. 7 (1955), Theorem 4 (the whole-count
+  form is a special case); restated by Grob and Schmitt, arXiv:1905.03117
+  (2019), Theorems 6-9. The 6n+1-side column form uses Lehmer's mechanism;
+  the 6n-1-side correction was not found in the literature searched.
 - Lean: `frozen_wheels_repeat`, `one_wheel_removed`, `uniform_subdivision`,
   `uniform_subdivision_plus_side`, `uniform_subdivision_minus_side`
   (stated in this repository; no source file)
 - Rests on: Vocabulary only
 - Status: Planned. Claims stated; not yet built or proved. Checked
   numerically on 3,647 cases with no failures.
+
+---
+
+## Candidate formalizations (not yet started)
+
+Results from the literature on how survivors spread out, each stated in
+wheel terms. All are finite counting statements about the combined cycle,
+so they fit the RNS vocabulary directly. Statements marked "checked" held
+in a numerical test (4,761 cases: wheel sets drawn from the primes up to 19,
+up to 24 equal intervals).
+
+**Tier 1: elementary, and they strengthen existing nodes**
+- **Lehmer's even split, general form** (Lehmer 1955, Thm 4). If one wheel
+  leaves remainder 1 on division by a chosen number of intervals, the
+  survivors of the cycle split evenly across that many equal intervals
+  (endpoints rounded down). `uniform_subdivision` becomes the special case
+  of the rotating prime minus one intervals. Checked.
+- **Column form of Lehmer's split.** With wheels 2 and 3 frozen, if some
+  wheel leaves remainder 1 on division by the least common multiple of 6
+  and the number of intervals, each column splits evenly too. Checked.
+- **Mirror symmetry** (Lehmer 1955, Thm 1; Grob and Schmitt 2019, Thm 2).
+  A position survives exactly when its reflection in the cycle survives.
+  (The interval-by-interval form needs exact endpoints; with rounded-down
+  endpoints it fails, as the test showed.)
+- **Spread bound** (Lehmer 1955, Thms 9-10). Any two equal intervals'
+  survivor counts differ by at most two to the number of wheels. Checked.
+- **Column-imbalance bound.** With wheels 2 and 3 frozen, the two columns'
+  survivor counts up to any point differ by at most two to the number of
+  remaining wheels. Proof by inclusion-exclusion with the column sign.
+  Checked.
+- **Column action of a wheel.** Multiplying by a prime keeps the 6n-1 and
+  6n+1 columns in place if it leaves remainder 1 on division by 6, and
+  swaps them if it leaves remainder 5. (The lemma behind both column forms;
+  check overlap with `ColumnStructure` first.)
+
+**Tier 2: elementary but longer**
+- **Divisibility case of the even split** (Lehmer 1955, Thm 2): if the
+  square of the number of intervals divides the modulus, the split is even.
+  Only applies to moduli with repeated factors, so outside pure wheel
+  cycles; low priority.
+- **Lehmer's closed form for 6n-1-type wheels** (Lehmer 1955, Thm 8): when
+  every wheel leaves remainder one less than the number of intervals, the
+  excess in the first intervals has an exact formula. The 6n-1 side of
+  Lehmer's picture, and the natural partner to `uniform_subdivision_minus_side`.
+- **Adding one wheel at most doubles the largest gap** (Codecà and Nair
+  1998, Thm 1(i)): the largest gap between the survivor count and its
+  proportional share, after adding a wheel, is at most twice the old one
+  minus one over the new prime. Needs rational numbers.
+- **Mean-square identity** (Codecà and Nair 1998, Thm 3(i)): an exact
+  formula for the average squared gap over the survivor positions.
+
+**Tier 3: needs heavier Mathlib**
+- **Germain's exact criterion** (Germain 2005, Thm 1.1): the survivors
+  split evenly across a given number of equal intervals exactly when every
+  odd Dirichlet character for that number takes the value 1 at some wheel.
+  The proof uses the nonvanishing of Dirichlet L-functions at 1; check
+  what Mathlib provides before scoping.
+
+**Open question (not a formalization target yet)**
+- How large the column imbalance can get as wheels are added. Computed up
+  to the wheel at 23 (maxima 2, 3, 5, 8, 12, 18); the untwisted analogue is
+  studied by Codecà and Nair 1998 and grows at a similar rate. No paper on
+  the column version found so far.

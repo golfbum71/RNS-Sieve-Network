@@ -41,7 +41,11 @@ planned:
     every interval index, every column remainder) with no failures.
 
 sources:
+  - title: "The distribution of totatives, Canad. J. Math. 7 (1955), 347-357, Theorem 4"
+    authors: ["D. H. Lehmer"]
+    type: "paper"
+    relationship: "whole-count form is a special case"
   - title: "Cycles and Patterns in the Sieve of Eratosthenes (arXiv:1905.03117), Theorems 6-9"
     authors: ["George F. Grob", "Matthias Schmitt"]
     type: "paper"
-    relationship: "whole-count form previously proved; column forms new"
+    relationship: "restates the whole-count form"

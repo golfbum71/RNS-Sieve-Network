@@ -21,9 +21,13 @@ columns' survivor counts in the short overhang past one frozen cycle.
 
 Status: planned. The claims are stated here; no proofs yet.
 
-Prior work: G. F. Grob and M. Schmitt, "Cycles and Patterns in the Sieve of
-Eratosthenes", arXiv:1905.03117 (2019), Theorems 6-9, prove the whole-count
-form. The column forms are new to this network.
+Prior work: the whole-count form is a case of D. H. Lehmer, "The
+distribution of totatives", Canad. J. Math. 7 (1955), Theorem 4: a prime
+factor leaving remainder 1 on division by the number of intervals forces an
+even split. Here the number of intervals is the rotating prime minus one.
+G. F. Grob and M. Schmitt, arXiv:1905.03117 (2019), Theorems 6-9, restate
+it. The 6n+1-side column form runs on the same mechanism; the 6n-1-side
+correction term was not found in the literature searched so far.
 -/
 
 namespace RNS.UniformSubdivision
