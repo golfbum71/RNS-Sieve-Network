@@ -10,139 +10,69 @@ without opening a single proof.
 
 **Where things stand:** 20 of 20 nodes are built, holding 63 claims: 62 proved in Lean and 1 cited from a published paper. They are joined by 23 arrows, each a Lean-checked step.
 
-## How to read the diagrams
+## How to read the graph
 
+- **Each panel is a node** — a group of related results, numbered and named.
+  **Each box inside it is one claim.** Click a box to open that claim: its
+  exact Lean statement, what it rests on, and where its proof lives.
 - **Green box:** proved in Lean. Every proof uses only the standard axioms
   `propext`, `Classical.choice` and `Quot.sound`.
-- **Green box with an amber border:** proved in Lean, but its claims are
-  implications whose hypotheses include an open conjecture ("assumes … open
-  conjectures"). What is proved is "if the conjecture holds, then …" —
-  never the conjecture.
+- **Green box with an amber border:** proved in Lean, but the claim is an
+  implication whose hypotheses include an open conjecture. What is proved is
+  "if the conjecture holds, then …" — never the conjecture.
 - **Blue box:** cited from a published paper; stated precisely in Lean but
   not proved there.
-- **Yellow hexagon** (claim diagram only): an open conjecture. It is never
-  claimed, only assumed as a hypothesis; the thin arrow shows which claim
-  assumes it.
-- **Every box is a link:** click a node or claim to open its page, with the
-  exact Lean statement, what it rests on, and where its proof lives.
-- **Thick arrow `A ==> B`:** B's claim assumes A's claim, and Lean checks the
-  step. The number on it is how many claims cross it. Each proof file imports
-  only claims, never another node's proof; each arrow is proved as a
-  separate `…_step` theorem with the upstream claim as a named hypothesis,
-  and `RNSSolutions/Assemble.lean` joins the steps up.
-- **Dashed box or dotted arrow:** planned, not yet built.
+- **Yellow hexagon:** an open conjecture. It is never claimed; the dotted
+  arrow shows which claim assumes it as a hypothesis.
+- **Thick arrow `A ==> B`:** claim B assumes claim A, and Lean checks the
+  step. Each proof file imports only claims, never another node's proof;
+  each arrow is proved as a separate `…_step` theorem with the upstream claim
+  as a named hypothesis, and `RNSSolutions/Assemble.lean` joins the steps up.
+- **A panel with no arrows in or out** rests on nothing but Mathlib and the
+  shared Vocabulary.
 
-## The network at a glance
+## The network
 
 ```mermaid
 graph LR
-  N_Wheel6["<b>Wheel6</b><br/>the 6n±1 wheel<br/><i>1 claim</i>"]
-  N_CRT["<b>CRT</b><br/>one big cycle is the same as many small wheels<br/><i>1 claim</i>"]
-  N_SquareRootShield["<b>SquareRootShield</b><br/>trial division only needs small wheels<br/><i>1 claim</i>"]
-  N_Admissibility["<b>Admissibility</b><br/>which offset patterns can repeat forever<br/><i>4 claims</i>"]
-  N_SurvivorCount["<b>SurvivorCount</b><br/>the exact number of open positions<br/><i>3 claims</i>"]
-  N_SingularSeries["<b>SingularSeries</b><br/>the correction constant exists and is positive<br/><i>4 claims</i>"]
-  N_TwinConstant["<b>TwinConstant</b><br/>the classical twin-prime constant is recovered<br/><i>1 claim</i>"]
-  N_Pruning["<b>Pruning</b><br/>which starting positions are worth testing<br/><i>1 claim</i>"]
-  N_WheelOrder["<b>WheelOrder</b><br/>what each wheel adds when wheels arrive in order<br/><i>3 claims</i>"]
-  N_ShieldCertificates["<b>ShieldCertificates</b><br/>certifying primes, and why prime runs stop<br/><i>14 claims</i>"]
-  N_Infinitude["<b>Infinitude</b><br/>two independent proofs that primes never run out<br/><i>2 claims</i>"]
-  N_ColumnStructure["<b>ColumnStructure</b><br/>how the two columns multiply<br/><i>4 claims</i>"]
-  N_DirichletColumns["<b>DirichletColumns</b><br/>both columns hold infinitely many primes<br/><i>4 claims</i>"]
-  N_HardyLittlewood["<b>HardyLittlewood</b><br/>the conjecture, and what it would give<br/><i>1 claim, assumes 1 open conjecture</i>"]
-  N_HensleyRichards["<b>HensleyRichards</b><br/>Hardy and Littlewood's two conjectures clash<br/><i>1 claim, assumes 2 open conjectures</i>"]
-  N_LinearForms["<b>LinearForms</b><br/>Dickson's conjecture gives Sophie Germain primes<br/><i>2 claims, assumes 1 open conjecture</i>"]
-  N_GapConjectures["<b>GapConjectures</b><br/>Legendre, Brocard, Oppermann, Andrica<br/><i>5 claims, assumes 4 open conjectures</i>"]
-  N_SophieGermainWheel["<b>SophieGermainWheel</b><br/>where Sophie Germain primes can sit<br/><i>3 claims</i>"]
-  N_GapTracks["<b>GapTracks</b><br/>which gaps each column allows<br/><i>7 claims</i>"]
-  N_DudekJohnston["<b>DudekJohnston</b><br/>a near-prime between every pair of squares<br/><i>1 claim, cited</i>"]
-  N_CRT ==>|2| N_SurvivorCount
-  N_SurvivorCount ==>|1| N_SingularSeries
-  N_SingularSeries ==>|1| N_TwinConstant
-  N_SurvivorCount ==>|1| N_Pruning
-  N_SquareRootShield ==>|7| N_ShieldCertificates
-  N_Wheel6 ==>|2| N_ColumnStructure
-  N_Admissibility ==>|1| N_HardyLittlewood
-  N_SingularSeries ==>|1| N_HardyLittlewood
-  N_Wheel6 ==>|1| N_SophieGermainWheel
-  N_WheelOrder ==>|1| N_SophieGermainWheel
-  N_Wheel6 ==>|5| N_GapTracks
-  classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
-  classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
-  classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
-  classDef planned fill:#ffffff,stroke:#1a7f37,color:#57606a,stroke-dasharray: 5 4;
-  classDef conditional fill:#ffffff,stroke:#9a6700,color:#57606a,stroke-dasharray: 5 4;
-  classDef cited fill:#ffffff,stroke:#0969da,color:#57606a,stroke-dasharray: 5 4;
-  classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
-  class N_Wheel6,N_CRT,N_SquareRootShield,N_Admissibility,N_SurvivorCount,N_SingularSeries,N_TwinConstant,N_Pruning,N_WheelOrder,N_ShieldCertificates,N_Infinitude,N_ColumnStructure,N_DirichletColumns,N_SophieGermainWheel,N_GapTracks verified;
-  class N_HardyLittlewood,N_HensleyRichards,N_LinearForms,N_GapConjectures conditional_built;
-  class N_DudekJohnston cited_built;
-  click N_Wheel6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md" _blank
-  click N_CRT href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CRT.md" _blank
-  click N_SquareRootShield href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SquareRootShield.md" _blank
-  click N_Admissibility href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Admissibility.md" _blank
-  click N_SurvivorCount href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md" _blank
-  click N_SingularSeries href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md" _blank
-  click N_TwinConstant href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinConstant.md" _blank
-  click N_Pruning href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Pruning.md" _blank
-  click N_WheelOrder href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/WheelOrder.md" _blank
-  click N_ShieldCertificates href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShieldCertificates.md" _blank
-  click N_Infinitude href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Infinitude.md" _blank
-  click N_ColumnStructure href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ColumnStructure.md" _blank
-  click N_DirichletColumns href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/DirichletColumns.md" _blank
-  click N_HardyLittlewood href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HardyLittlewood.md" _blank
-  click N_HensleyRichards href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HensleyRichards.md" _blank
-  click N_LinearForms href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LinearForms.md" _blank
-  click N_GapConjectures href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConjectures.md" _blank
-  click N_SophieGermainWheel href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainWheel.md" _blank
-  click N_GapTracks href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md" _blank
-  click N_DudekJohnston href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/DudekJohnston.md" _blank
-```
-
-## Every claim
-
-One box per claim, grouped by node. Click a claim to open it.
-
-```mermaid
-graph LR
-  subgraph S_Wheel6["Wheel6"]
+  subgraph S_Wheel6["<b>1. Wheel6 — the 6n±1 wheel</b>"]
     C_Wheel6_prime_gt_three_is_candidate["prime_gt_three_is_candidate"]
   end
-  subgraph S_CRT["CRT"]
+  subgraph S_CRT["<b>2. CRT — one big cycle is the same as many small wheels</b>"]
     C_CRT_crt_map_bijective["crt_map_bijective"]
   end
-  subgraph S_SquareRootShield["SquareRootShield"]
+  subgraph S_SquareRootShield["<b>3. SquareRootShield — trial division only needs small wheels</b>"]
     C_SquareRootShield_square_root_shield["square_root_shield"]
   end
-  subgraph S_Admissibility["Admissibility"]
+  subgraph S_Admissibility["<b>4. Admissibility — which offset patterns can repeat forever</b>"]
     C_Admissibility_admissible_of_large_primes["admissible_of_large_primes"]
     C_Admissibility_zero_two_admissible["zero_two_admissible"]
     C_Admissibility_zero_two_four_not_admissible["zero_two_four_not_admissible"]
     C_Admissibility_ap_offsets_admissible_iff["ap_offsets_admissible_iff"]
   end
-  subgraph S_SurvivorCount["SurvivorCount"]
+  subgraph S_SurvivorCount["<b>5. SurvivorCount — the exact number of open positions</b>"]
     C_SurvivorCount_twin_survivor_count["twin_survivor_count"]
     C_SurvivorCount_local_survivor_count["local_survivor_count"]
     C_SurvivorCount_general_survivor_count["general_survivor_count"]
   end
-  subgraph S_SingularSeries["SingularSeries"]
+  subgraph S_SingularSeries["<b>6. SingularSeries — the correction constant exists and is positive</b>"]
     C_SingularSeries_delta_bound["delta_bound"]
     C_SingularSeries_factor_multipliable["factor_multipliable"]
     C_SingularSeries_hardy_littlewood_constant_pos["hardy_littlewood_constant_pos"]
     C_SingularSeries_local_density_factorization["local_density_factorization"]
   end
-  subgraph S_TwinConstant["TwinConstant"]
+  subgraph S_TwinConstant["<b>7. TwinConstant — the classical twin-prime constant is recovered</b>"]
     C_TwinConstant_twin_prime_constant_eq_classical["twin_prime_constant_eq_classical"]
   end
-  subgraph S_Pruning["Pruning"]
+  subgraph S_Pruning["<b>8. Pruning — which starting positions are worth testing</b>"]
     C_Pruning_valid_starting_residues_card_formula["valid_starting_residues_card_formula"]
   end
-  subgraph S_WheelOrder["WheelOrder"]
+  subgraph S_WheelOrder["<b>9. WheelOrder — what each wheel adds when wheels arrive in order</b>"]
     C_WheelOrder_wheel_marginal_new_formula["wheel_marginal_new_formula"]
     C_WheelOrder_prime_gt_five_digit_ok["prime_gt_five_digit_ok"]
     C_WheelOrder_wheel_gap_floor["wheel_gap_floor"]
   end
-  subgraph S_ShieldCertificates["ShieldCertificates"]
+  subgraph S_ShieldCertificates["<b>10. ShieldCertificates — certifying primes, and why prime runs stop</b>"]
     C_ShieldCertificates_prime_of_shield_cover["prime_of_shield_cover"]
     C_ShieldCertificates_active_primes_cover["active_primes_cover"]
     C_ShieldCertificates_family_prime_of_shield_cover["family_prime_of_shield_cover"]
@@ -158,45 +88,45 @@ graph LR
     C_ShieldCertificates_backward_ap_prime_run_length_lt_of_above["backward_ap_prime_run_length_lt_of_above"]
     C_ShieldCertificates_backward_ap_prime_run_forces_divisibility["backward_ap_prime_run_forces_divisibility"]
   end
-  subgraph S_Infinitude["Infinitude"]
+  subgraph S_Infinitude["<b>11. Infinitude — two independent proofs that primes never run out</b>"]
     C_Infinitude_euclid_primes_unbounded["euclid_primes_unbounded"]
     C_Infinitude_squarefree_counting_no_finite_supply["squarefree_counting_no_finite_supply"]
   end
-  subgraph S_ColumnStructure["ColumnStructure"]
+  subgraph S_ColumnStructure["<b>12. ColumnStructure — how the two columns multiply</b>"]
     C_ColumnStructure_columns_multiply["columns_multiply"]
     C_ColumnStructure_col_minus_periodicity["col_minus_periodicity"]
     C_ColumnStructure_col_minus_has_minus_prime_factor["col_minus_has_minus_prime_factor"]
     C_ColumnStructure_col_minus_composite_has_proper_minus_factor["col_minus_composite_has_proper_minus_factor"]
   end
-  subgraph S_DirichletColumns["DirichletColumns"]
+  subgraph S_DirichletColumns["<b>13. DirichletColumns — both columns hold infinitely many primes</b>"]
     C_DirichletColumns_col_minus_primes_infinite["col_minus_primes_infinite"]
     C_DirichletColumns_col_plus_primes_infinite["col_plus_primes_infinite"]
     C_DirichletColumns_col_minus_primes_unbounded["col_minus_primes_unbounded"]
     C_DirichletColumns_col_plus_primes_unbounded["col_plus_primes_unbounded"]
   end
-  subgraph S_HardyLittlewood["HardyLittlewood"]
+  subgraph S_HardyLittlewood["<b>14. HardyLittlewood — the conjecture, and what it would give</b>"]
     C_HardyLittlewood_twin_prime_conjecture_implies_infinite_twin_primes["twin_prime_conjecture_implies_infinite_twin_primes"]
   end
-  subgraph S_HensleyRichards["HensleyRichards"]
+  subgraph S_HensleyRichards["<b>15. HensleyRichards — Hardy and Littlewood's two conjectures clash</b>"]
     C_HensleyRichards_HL_A_and_B_incompatible["HL_A_and_B_incompatible"]
   end
-  subgraph S_LinearForms["LinearForms"]
+  subgraph S_LinearForms["<b>16. LinearForms — Dickson's conjecture gives Sophie Germain primes</b>"]
     C_LinearForms_sophieGermainSystem_admissible["sophieGermainSystem_admissible"]
     C_LinearForms_sophie_germain_of_LinearForms_conjecture["sophie_germain_of_LinearForms_conjecture"]
   end
-  subgraph S_GapConjectures["GapConjectures"]
+  subgraph S_GapConjectures["<b>17. GapConjectures — Legendre, Brocard, Oppermann, Andrica</b>"]
     C_GapConjectures_legendre_of_jacobsthal["legendre_of_jacobsthal"]
     C_GapConjectures_brocard_of_four_survivors["brocard_of_four_survivors"]
     C_GapConjectures_oppermann_of_bound["oppermann_of_bound"]
     C_GapConjectures_andrica_of_oppermann["andrica_of_oppermann"]
     C_GapConjectures_legendre_of_oppermann["legendre_of_oppermann"]
   end
-  subgraph S_SophieGermainWheel["SophieGermainWheel"]
+  subgraph S_SophieGermainWheel["<b>18. SophieGermainWheel — where Sophie Germain primes can sit</b>"]
     C_SophieGermainWheel_sophie_germain_mod_six["sophie_germain_mod_six"]
     C_SophieGermainWheel_sophie_germain_not_ends_in_seven["sophie_germain_not_ends_in_seven"]
     C_SophieGermainWheel_sophie_germain_last_digit["sophie_germain_last_digit"]
   end
-  subgraph S_GapTracks["GapTracks"]
+  subgraph S_GapTracks["<b>19. GapTracks — which gaps each column allows</b>"]
     C_GapTracks_twin_prime_mod_six["twin_prime_mod_six"]
     C_GapTracks_cousin_prime_mod_six["cousin_prime_mod_six"]
     C_GapTracks_sexy_prime_same_track["sexy_prime_same_track"]
@@ -205,17 +135,17 @@ graph LR
     C_GapTracks_prime_gap_forbidden_two_from_six_plus_one["prime_gap_forbidden_two_from_six_plus_one"]
     C_GapTracks_prime_gap_same_track_of_six_dvd["prime_gap_same_track_of_six_dvd"]
   end
-  subgraph S_DudekJohnston["DudekJohnston"]
+  subgraph S_DudekJohnston["<b>20. DudekJohnston — a near-prime between every pair of squares</b>"]
     C_DudekJohnston_dudek_johnston_statement["dudek_johnston_statement"]
   end
-  O_hardy_littlewood_conjecture{{"<i>open</i><br/>hardy_littlewood_conjecture"}}
-  O_HL_conjecture_A{{"<i>open</i><br/>HL_conjecture_A"}}
-  O_HL_conjecture_B{{"<i>open</i><br/>HL_conjecture_B"}}
-  O_LinearForms_conjecture{{"<i>open</i><br/>LinearForms_conjecture"}}
-  O_jacobsthal_bound_holds{{"<i>open</i><br/>jacobsthal_bound_holds"}}
-  O_four_survivors_bound_holds{{"<i>open</i><br/>four_survivors_bound_holds"}}
-  O_oppermann_bound_holds{{"<i>open</i><br/>oppermann_bound_holds"}}
-  O_oppermann_conjecture{{"<i>open</i><br/>oppermann_conjecture"}}
+  O_hardy_littlewood_conjecture{{"<i>open conjecture</i><br/>hardy_littlewood_conjecture"}}
+  O_HL_conjecture_A{{"<i>open conjecture</i><br/>HL_conjecture_A"}}
+  O_HL_conjecture_B{{"<i>open conjecture</i><br/>HL_conjecture_B"}}
+  O_LinearForms_conjecture{{"<i>open conjecture</i><br/>LinearForms_conjecture"}}
+  O_jacobsthal_bound_holds{{"<i>open conjecture</i><br/>jacobsthal_bound_holds"}}
+  O_four_survivors_bound_holds{{"<i>open conjecture</i><br/>four_survivors_bound_holds"}}
+  O_oppermann_bound_holds{{"<i>open conjecture</i><br/>oppermann_bound_holds"}}
+  O_oppermann_conjecture{{"<i>open conjecture</i><br/>oppermann_conjecture"}}
   C_CRT_crt_map_bijective ==> C_SurvivorCount_twin_survivor_count
   C_CRT_crt_map_bijective ==> C_SurvivorCount_general_survivor_count
   C_SurvivorCount_general_survivor_count ==> C_SingularSeries_local_density_factorization
@@ -232,15 +162,15 @@ graph LR
   C_Wheel6_prime_gt_three_is_candidate ==> C_ColumnStructure_col_minus_composite_has_proper_minus_factor
   C_SingularSeries_hardy_littlewood_constant_pos ==> C_HardyLittlewood_twin_prime_conjecture_implies_infinite_twin_primes
   C_Admissibility_zero_two_admissible ==> C_HardyLittlewood_twin_prime_conjecture_implies_infinite_twin_primes
-  O_hardy_littlewood_conjecture --> C_HardyLittlewood_twin_prime_conjecture_implies_infinite_twin_primes
-  O_HL_conjecture_A --> C_HensleyRichards_HL_A_and_B_incompatible
-  O_HL_conjecture_B --> C_HensleyRichards_HL_A_and_B_incompatible
-  O_LinearForms_conjecture --> C_LinearForms_sophie_germain_of_LinearForms_conjecture
-  O_jacobsthal_bound_holds --> C_GapConjectures_legendre_of_jacobsthal
-  O_four_survivors_bound_holds --> C_GapConjectures_brocard_of_four_survivors
-  O_oppermann_bound_holds --> C_GapConjectures_oppermann_of_bound
-  O_oppermann_conjecture --> C_GapConjectures_andrica_of_oppermann
-  O_oppermann_conjecture --> C_GapConjectures_legendre_of_oppermann
+  O_hardy_littlewood_conjecture -.-> C_HardyLittlewood_twin_prime_conjecture_implies_infinite_twin_primes
+  O_HL_conjecture_A -.-> C_HensleyRichards_HL_A_and_B_incompatible
+  O_HL_conjecture_B -.-> C_HensleyRichards_HL_A_and_B_incompatible
+  O_LinearForms_conjecture -.-> C_LinearForms_sophie_germain_of_LinearForms_conjecture
+  O_jacobsthal_bound_holds -.-> C_GapConjectures_legendre_of_jacobsthal
+  O_four_survivors_bound_holds -.-> C_GapConjectures_brocard_of_four_survivors
+  O_oppermann_bound_holds -.-> C_GapConjectures_oppermann_of_bound
+  O_oppermann_conjecture -.-> C_GapConjectures_andrica_of_oppermann
+  O_oppermann_conjecture -.-> C_GapConjectures_legendre_of_oppermann
   C_Wheel6_prime_gt_three_is_candidate ==> C_SophieGermainWheel_sophie_germain_mod_six
   C_WheelOrder_prime_gt_five_digit_ok ==> C_SophieGermainWheel_sophie_germain_last_digit
   C_Wheel6_prime_gt_three_is_candidate ==> C_GapTracks_twin_prime_mod_six
