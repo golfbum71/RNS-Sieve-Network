@@ -44,6 +44,16 @@ every prime below `limit` (the primorial). -/
 def primorial_modulus (limit : Nat) : Nat :=
   (active_primes limit).prod id
 
+/-- Reading one position of the combined cycle as one position on each
+individual wheel: a remainder modulo the primorial is sent to its remainder
+modulo each active prime. (The `show … from …` term only records that each
+wheel size divides the cycle length, which reducing a remainder needs.) -/
+def crt_map (limit : Nat) (n : ZMod (primorial_modulus limit)) :
+    ∀ q : active_primes limit, ZMod (q : Nat) :=
+  fun q => ZMod.castHom
+    (show (q : Nat) ∣ primorial_modulus limit from Finset.dvd_prod_of_mem id q.2)
+    (ZMod q) n
+
 /-! ## Offset patterns and admissibility -/
 
 /-- How many distinct positions on the wheel of size `p` the offset pattern

@@ -1,0 +1,31 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: SquareRootShield.v1
+  family: SquareRootShield
+  version: v1
+  kind: standard
+  status: active
+
+conclusions:
+  - id: square_root_shield
+    declaration: RNS.SquareRootShield.square_root_shield
+    summary: "Below a ceiling, a number is prime exactly when no smaller prime at or below the square root of the ceiling divides it."
+    imports: []           # rests on no other node
+    imports_status: none  # basis: Mathlib's Nat.prime_def_le_sqrt
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/SquareRootShield.lean
+        declaration: RNS.SquareRootShield.square_root_shield_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded
+          as noncompliant only because no Comparator receipt exists yet.
+    designated: lean-proof
+
+sources:
+  - title: "rns_sieve_6.lean, Part A, Step 5"
+    authors: ["Geoffrey Fischer"]
+    type: "lean-file"
+    relationship: formalizes

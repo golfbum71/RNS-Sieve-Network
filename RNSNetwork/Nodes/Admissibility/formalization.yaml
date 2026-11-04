@@ -1,0 +1,73 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: Admissibility.v1
+  family: Admissibility
+  version: v1
+  kind: paper
+  status: active
+
+conclusions:
+  - id: admissible_of_large_primes
+    declaration: RNS.Admissibility.admissible_of_large_primes
+    summary: "Admissibility only needs checking at wheels no larger than the number of offsets."
+    imports: []           # rests on no other node
+    imports_status: none  # basis: Mathlib only
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/Admissibility.lean
+        declaration: RNS.Admissibility.admissible_of_large_primes_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded
+          as noncompliant only because no Comparator receipt exists yet.
+    designated: lean-proof
+  - id: zero_two_admissible
+    declaration: RNS.Admissibility.zero_two_admissible
+    summary: "The twin pattern {0, 2} is admissible."
+    imports: []           # rests on no other node
+    imports_status: none  # basis: Mathlib only
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/Admissibility.lean
+        declaration: RNS.Admissibility.zero_two_admissible_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded
+          as noncompliant only because no Comparator receipt exists yet.
+    designated: lean-proof
+  - id: zero_two_four_not_admissible
+    declaration: RNS.Admissibility.zero_two_four_not_admissible
+    summary: "The pattern {0, 2, 4} covers every position of the wheel of size 3."
+    imports: []           # rests on no other node
+    imports_status: none  # basis: Mathlib only
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/Admissibility.lean
+        declaration: RNS.Admissibility.zero_two_four_not_admissible_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded
+          as noncompliant only because no Comparator receipt exists yet.
+    designated: lean-proof
+  - id: ap_offsets_admissible_iff
+    declaration: RNS.Admissibility.ap_offsets_admissible_iff
+    summary: "An evenly spaced run is admissible exactly when every prime up to its length divides the spacing (Lagrange-Waring)."
+    imports: []           # rests on no other node
+    imports_status: none  # basis: Mathlib only
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/Admissibility.lean
+        declaration: RNS.Admissibility.ap_offsets_admissible_iff_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded
+          as noncompliant only because no Comparator receipt exists yet.
+    designated: lean-proof
+
+sources:
+  - title: "rns_sieve_6.lean, Part B Step 1 and Part D"
+    authors: ["Geoffrey Fischer"]
+    type: "lean-file"
+    relationship: formalizes

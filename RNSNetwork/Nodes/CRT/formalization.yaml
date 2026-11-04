@@ -1,0 +1,31 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: CRT.v1
+  family: CRT
+  version: v1
+  kind: standard
+  status: active
+
+conclusions:
+  - id: crt_map_bijective
+    declaration: RNS.CRT.crt_map_bijective
+    summary: "A position in the combined cycle of the wheels matches exactly one position on each individual wheel."
+    imports: []           # rests on no other node
+    imports_status: none  # basis: Mathlib's Chinese Remainder isomorphism ZMod.prodEquivPi
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/CRT.lean
+        declaration: RNS.CRT.crt_map_bijective_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded
+          as noncompliant only because no Comparator receipt exists yet.
+    designated: lean-proof
+
+sources:
+  - title: "rns_sieve_6.lean, Part A, Step 3"
+    authors: ["Geoffrey Fischer"]
+    type: "lean-file"
+    relationship: formalizes
