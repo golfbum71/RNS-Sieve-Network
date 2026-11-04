@@ -360,6 +360,37 @@ up to 24 equal intervals).
   square of the bound above, since each twin factor is at most the square
   of the plain one. Checked for wheels up to 200,000.
 
+**From DeepMind's formal-conjectures (statements there, proofs not in it)**
+- **Inadmissible patterns sit next to their blocking wheel** (Tier 1). If
+  an offset pattern covers every position on some wheel, then every
+  starting point where all members are prime has that wheel's prime as a
+  member, so the pattern occurs only finitely often. Corollary: the
+  prime-gap block 2, 4, 2, 4, 2 occurs only once, at 5, 7, 11, 13, 17, 19
+  (offsets 0, 2, 6, 8, 12, 14 cover every position on the wheel of size
+  5). This is `OeisA1223.conjecture` in formal-conjectures, listed as
+  solved with the proof hosted elsewhere. Builds on `Admissibility`.
+- **The Lacampagne-Selfridge counterexample** (Tier 2; Erdos Problem 854).
+  For the wheels up to 13 (cycle 30030), the gaps between consecutive
+  survivors take every even value up to the largest gap, 22, except 20.
+  Erdos had expected every even value up to the largest gap to appear.
+  Checked numerically; the smaller cycles 30, 210 and 2310 and the next
+  one, 510510, miss no even value. Needs a certificate-style proof as in
+  `ShieldCertificates`, since `native_decide` would add an extra axiom and
+  plain `decide` is likely too slow at 5,760 survivors. Also includes the
+  easy fact that every gap is even.
+- **Blocking runs and the largest survivor gap** (Tier 2; Erdos Problem
+  687, Green's Open Problem 46). Choosing one blocked position on each
+  wheel up to a prime is the same as covering a run of consecutive
+  numbers by one residue class per prime. The longest run that can be
+  covered is one less than the largest gap between survivors of the
+  cycle. Proof: a setting of the wheels is a shift of the cycle (Chinese
+  Remainder Theorem). formal-conjectures already proves the easy bound
+  that a covered run is shorter than the cycle
+  (`Erdos687.lt_primorial_of_isCoveredByResidues`). The quadratic bound on
+  Jacobsthal's function itself was proved, with Lean, by OpenAI in
+  September 2026 (cited in `ErdosProblems/970.lean`); cite it, do not
+  redo it.
+
 **Open question (not a formalization target yet)**
 - How large the column imbalance can get as wheels are added. Computed up
   to the wheel at 23 (maxima 2, 3, 5, 8, 12, 18); the untwisted analogue is
