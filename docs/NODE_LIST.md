@@ -374,12 +374,12 @@ Check here before searching again. Links pinned to a commit were current on
   references document on claude.ai.
 
 **Tier 1: elementary, and they strengthen existing nodes**
-- **Lehmer's even split, general form** (Lehmer 1955, Thm 4). If one wheel
+- **Done (node `LehmerSplit`, 2026-11-04).** **Lehmer's even split, general form** (Lehmer 1955, Thm 4). If one wheel
   leaves remainder 1 on division by a chosen number of intervals, the
   survivors of the cycle split evenly across that many equal intervals
   (endpoints rounded down). `uniform_subdivision` becomes the special case
   of the rotating prime minus one intervals. Checked.
-- **Column form of Lehmer's split.** With wheels 2 and 3 frozen, if some
+- **Done (node `LehmerSplit`).** **Column form of Lehmer's split.** With wheels 2 and 3 frozen, if some
   wheel leaves remainder 1 on division by the least common multiple of 6
   and the number of intervals, each column splits evenly too. Checked.
 - **Mirror symmetry** (Lehmer 1955, Thm 1; Grob and Schmitt 2019, Thm 2).
