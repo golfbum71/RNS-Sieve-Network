@@ -194,68 +194,48 @@ KINDS = ["verified", "conditional_built", "cited_built", "planned", "conditional
 
 # ---------------------------------------------------------------- GRAPH.md
 
-def overview_mermaid(nodes, order, edges):
-    """One box per node, like IEANTN's "network at a glance". Open conjectures
-    are noted inside the box that assumes them; the claim diagram below draws
-    them as separate hexagons."""
+def network_mermaid(nodes, order):
+    """The whole network as one diagram: one panel per node, one clickable
+    box per claim inside it, arrows from claim to claim, and open conjectures
+    as hexagons pointing at the claims that assume them."""
     lines = ["```mermaid", "graph LR"]
+    opens = []
     for name in order:
         n = nodes[name]
-        claims = len(n["conclusions"])
+        title = label(f"{n['order']}. {name} — {n['title']}")
+        lines.append(f'  subgraph S_{name}["<b>{title}</b>"]')
         if n["built"]:
-            sub = f"{claims} claim{'s' if claims != 1 else ''}"
-            kind = node_kind(n)
-            if kind == "cited_built":
-                sub += ", cited"
-            elif kind == "conditional_built":
-                k = len(opens_of(n))
-                sub += f", assumes {k} open conjecture{'s' if k != 1 else ''}"
+            for c in n["conclusions"]:
+                lines.append(f'    C_{name}_{c["id"]}["{c["id"]}"]')
+                for o in c.get("open_inputs") or []:
+                    if o not in opens:
+                        opens.append(o)
         elif node_kind(n) == "external":
-            sub = f"outside source: {n['planned'].get('external', {}).get('project', 'another project')}"
+            project = n["planned"].get("external", {}).get("project", "another project")
+            lines.append(f'    P_{name}["<i>outside source: {label(project)}</i>"]')
         else:
-            sub = status_word(n)
-        lines.append(f'  {mid(name)}["<b>{name}</b><br/>{label(n["title"])}<br/><i>{sub}</i>"]')
-    for (src, dst), pairs in sorted(edges.items(), key=lambda e: (nodes[e[0][1]]["order"], nodes[e[0][0]]["order"])):
-        lines.append(f"  {mid(src)} ==>|{len(pairs)}| {mid(dst)}")
-    for name in order:
-        for src in nodes[name]["planned"].get("rests_on") or []:
-            lines.append(f"  {mid(src)} -.-> {mid(name)}")
-    lines.append(CLASSDEFS)
-    for cls in KINDS:
-        members = [mid(nm) for nm in order if node_kind(nodes[nm]) == cls]
-        if members:
-            lines.append(f"  class {','.join(members)} {cls};")
-    for name in order:
-        lines.append(f'  click {mid(name)} href "{page_url(name)}" _blank')
-    lines.append("```")
-    return "\n".join(lines)
-
-
-def claims_mermaid(nodes, order):
-    lines = ["```mermaid", "graph LR"]
-    built = [nm for nm in order if nodes[nm]["built"]]
-    opens = []
-    for name in built:
-        lines.append(f'  subgraph S_{name}["{name}"]')
-        for c in nodes[name]["conclusions"]:
-            lines.append(f'    C_{name}_{c["id"]}["{c["id"]}"]')
-            for o in c.get("open_inputs") or []:
-                if o not in opens:
-                    opens.append(o)
+            lines.append(f'    P_{name}["<i>{status_word(n)}</i>"]')
         lines.append("  end")
     for o in opens:
-        lines.append(f'  O_{o}{{{{"<i>open</i><br/>{o}"}}}}')
-    for name in built:
-        for c in nodes[name]["conclusions"]:
+        lines.append(f'  O_{o}{{{{"<i>open conjecture</i><br/>{o}"}}}}')
+    for name in order:
+        n = nodes[name]
+        for c in n["conclusions"]:
             for ref in c.get("imports") or []:
                 src, claim = node_of(ref)
                 lines.append(f"  C_{src}_{claim} ==> C_{name}_{c['id']}")
             for o in c.get("open_inputs") or []:
-                lines.append(f"  O_{o} --> C_{name}_{c['id']}")
+                lines.append(f"  O_{o} -.-> C_{name}_{c['id']}")
+        for src in n["planned"].get("rests_on") or []:
+            lines.append(f"  S_{src} -.-> S_{name}")
     lines.append(CLASSDEFS)
-    groups = {"verified": [], "conditional_built": [], "cited_built": []}
-    for nm in built:
-        for c in nodes[nm]["conclusions"]:
+    groups = {k: [] for k in KINDS}
+    for nm in order:
+        n = nodes[nm]
+        if not n["built"]:
+            groups[node_kind(n)].append(f"P_{nm}")
+            continue
+        for c in n["conclusions"]:
             key = ("cited_built" if is_cited(c) else
                    "conditional_built" if c.get("open_inputs") else "verified")
             groups[key].append(f"C_{nm}_{c['id']}")
@@ -264,9 +244,13 @@ def claims_mermaid(nodes, order):
             lines.append(f"  class {','.join(ids)} {cls};")
     if opens:
         lines.append(f"  class {','.join('O_' + o for o in opens)} openconj;")
-    for name in built:
-        for c in nodes[name]["conclusions"]:
-            lines.append(f'  click C_{name}_{c["id"]} href "{page_url(name, c["id"])}" _blank')
+    for nm in order:
+        n = nodes[nm]
+        if n["built"]:
+            for c in n["conclusions"]:
+                lines.append(f'  click C_{nm}_{c["id"]} href "{page_url(nm, c["id"])}" _blank')
+        else:
+            lines.append(f'  click P_{nm} href "{page_url(nm)}" _blank')
     lines.append("```")
     return "\n".join(lines)
 
@@ -346,41 +330,35 @@ without opening a single proof.
 
 {standing}
 
-## How to read the diagrams
+## How to read the graph
 
+- **Each panel is a node** — a group of related results, numbered and named.
+  **Each box inside it is one claim.** Click a box to open that claim: its
+  exact Lean statement, what it rests on, and where its proof lives.
 - **Green box:** proved in Lean. Every proof uses only the standard axioms
   `propext`, `Classical.choice` and `Quot.sound`.
-- **Green box with an amber border:** proved in Lean, but its claims are
-  implications whose hypotheses include an open conjecture ("assumes … open
-  conjectures"). What is proved is "if the conjecture holds, then …" —
-  never the conjecture.
+- **Green box with an amber border:** proved in Lean, but the claim is an
+  implication whose hypotheses include an open conjecture. What is proved is
+  "if the conjecture holds, then …" — never the conjecture.
 - **Blue box:** cited from a published paper; stated precisely in Lean but
   not proved there.
-- **Yellow hexagon** (claim diagram only): an open conjecture. It is never
-  claimed, only assumed as a hypothesis; the thin arrow shows which claim
-  assumes it.
-- **Every box is a link:** click a node or claim to open its page, with the
-  exact Lean statement, what it rests on, and where its proof lives.
-- **Thick arrow `A ==> B`:** B's claim assumes A's claim, and Lean checks the
-  step. The number on it is how many claims cross it. Each proof file imports
-  only claims, never another node's proof; each arrow is proved as a
-  separate `…_step` theorem with the upstream claim as a named hypothesis,
-  and `RNSSolutions/Assemble.lean` joins the steps up.
-- **Dashed box or dotted arrow:** planned, not yet built. A grey dashed
-  box is new work begun in this repository.
+- **Yellow hexagon:** an open conjecture. It is never claimed; the dotted
+  arrow shows which claim assumes it as a hypothesis.
+- **Thick arrow `A ==> B`:** claim B assumes claim A, and Lean checks the
+  step. Each proof file imports only claims, never another node's proof;
+  each arrow is proved as a separate `…_step` theorem with the upstream claim
+  as a named hypothesis, and `RNSSolutions/Assemble.lean` joins the steps up.
+- **A panel with no arrows in or out** rests on nothing but Mathlib and the
+  shared Vocabulary.
+- **Dashed box or dotted arrow between panels:** planned, not yet built. A
+  grey dashed box is new work begun in this repository.
 - **Purple box:** an outside source — a result proved in Lean in another
   project, linked from its page. Nodes here cite it as a named hypothesis
   rather than re-proving it or importing that project.
 
-## The network at a glance
+## The network
 
-{overview_mermaid(nodes, order, edges)}
-
-## Every claim
-
-One box per claim, grouped by node. Click a claim to open it.
-
-{claims_mermaid(nodes, order)}
+{network_mermaid(nodes, order)}
 
 ## What each result rests on
 
