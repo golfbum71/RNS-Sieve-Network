@@ -36,10 +36,9 @@ planned:
     the same route with column-restricted counts; the 6n-1 case adds the
     column swap of the rotating wheel's multiples.
   progress: >-
-    frozen_wheels_repeat and one_wheel_removed are proved in
-    RNSSolutions/UniformSubdivision.lean (frozen_wheels_repeat_holds,
-    one_wheel_removed_holds; standard axioms only, built 2026-11-04). The
-    other three claims are still to prove.
+    frozen_wheels_repeat, one_wheel_removed and uniform_subdivision are
+    proved in RNSSolutions/UniformSubdivision.lean (standard axioms only,
+    built 2026-11-04). The two column claims are still to prove.
   evidence: >-
     All five claims checked numerically on 3,647 cases (frozen wheel sets
     drawn from the primes up to 17, every rotating prime not in the set,
