@@ -483,7 +483,8 @@ def write_node_page(n, nodes, edges):
                 md += f"{' '.join(str(e['note']).split())}\n\n"
         if p.get("claims"):
             md += "**Planned claims:** " + ", ".join(f"`{c}`" for c in p["claims"]) + "\n\n"
-        for key, title in [("plan", "Plan"), ("evidence", "Evidence so far"), ("tier", "Scope")]:
+        for key, title in [("progress", "Progress"), ("plan", "Plan"), ("evidence", "Evidence so far"),
+                           ("tier", "Scope")]:
             if p.get(key):
                 md += f"**{title}:** {' '.join(str(p[key]).split())}\n\n"
         users = [m["name"] for m in nodes.values() if name in (m["planned"].get("rests_on") or [])]

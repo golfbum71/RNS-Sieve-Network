@@ -12,6 +12,8 @@ With one wheel rotating and the rest frozen, the full cycle splits into as many 
 
 **Planned claims:** `frozen_wheels_repeat`, `one_wheel_removed`, `uniform_subdivision`, `uniform_subdivision_plus_side`, `uniform_subdivision_minus_side`
 
+**Progress:** frozen_wheels_repeat is proved in RNSSolutions/UniformSubdivision.lean (frozen_wheels_repeat_holds; standard axioms only, built 2026-11-04). The other four claims are still to prove.
+
 **Plan:** uniform_subdivision is a step from frozen_wheels_repeat and one_wheel_removed plus one floor-division fact: rounding down the end of the K-th interval and dividing by the rotating prime gives the same number as the overhang past K frozen cycles. The two column claims follow the same route with column-restricted counts; the 6n-1 case adds the column swap of the rotating wheel's multiples.
 
 **Evidence so far:** All five claims checked numerically on 3,647 cases (frozen wheel sets drawn from the primes up to 17, every rotating prime not in the set, every interval index, every column remainder) with no failures.

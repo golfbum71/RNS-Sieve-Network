@@ -35,6 +35,10 @@ planned:
     number as the overhang past K frozen cycles. The two column claims follow
     the same route with column-restricted counts; the 6n-1 case adds the
     column swap of the rotating wheel's multiples.
+  progress: >-
+    frozen_wheels_repeat is proved in RNSSolutions/UniformSubdivision.lean
+    (frozen_wheels_repeat_holds; standard axioms only, built 2026-11-04).
+    The other four claims are still to prove.
   evidence: >-
     All five claims checked numerically on 3,647 cases (frozen wheel sets
     drawn from the primes up to 17, every rotating prime not in the set,
