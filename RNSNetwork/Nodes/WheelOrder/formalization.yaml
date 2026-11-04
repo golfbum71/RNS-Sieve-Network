@@ -1,6 +1,5 @@
-# Stub: this node is planned but not yet built in the network.
-# Its claims are proved in the source files named below; they have not yet
-# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: WheelOrder.v1
@@ -8,7 +7,7 @@ node:
   version: v1
   order: 9
   kind: paper
-  status: stub
+  status: active
   title: "what each wheel adds when wheels arrive in order"
   description: >-
     Bringing wheels in one at a time, the positions a wheel blocks for the
@@ -17,11 +16,52 @@ node:
     next number with a chosen last digit is reached in the raw digit distance
     or at most one further step of 10.
 
-planned:
-  rests_on: ["Wheel6"]
-  open_inputs: []
-  source_status: Clean
-  source_declarations: >-
-    `wheel_marginal_new_formula` (Part F); `wheel_gap_floor` (Part G)
+conclusions:
+  - id: wheel_marginal_new_formula
+    declaration: RNS.WheelOrder.wheel_marginal_new_formula
+    summary: "The positions a wheel blocks first equal the open positions of the earlier wheels times the sizes of the later ones."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/WheelOrder.lean
+        declaration: RNS.WheelOrder.wheel_marginal_new_formula_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+  - id: prime_gt_five_digit_ok
+    declaration: RNS.WheelOrder.prime_gt_five_digit_ok
+    summary: "Every prime above 5 ends in 1, 3, 7 or 9."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/WheelOrder.lean
+        declaration: RNS.WheelOrder.prime_gt_five_digit_ok_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+  - id: wheel_gap_floor
+    declaration: RNS.WheelOrder.wheel_gap_floor
+    summary: "From any 6n+-1 position, the next number with a chosen last digit is the raw digit distance away, or 10 more."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/WheelOrder.lean
+        declaration: RNS.WheelOrder.wheel_gap_floor_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
 
-conclusions: []
+sources:
+  - title: "rns_sieve_6.lean, Parts F and G"
+    authors: ["Geoffrey Fischer"]
+    type: "lean-file"
+    relationship: formalizes

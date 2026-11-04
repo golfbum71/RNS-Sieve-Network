@@ -1,6 +1,5 @@
-# Stub: this node is planned but not yet built in the network.
-# Its claims are proved in the source files named below; they have not yet
-# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: GapConjectures.v1
@@ -8,22 +7,92 @@ node:
   version: v1
   order: 17
   kind: paper
-  status: stub
+  status: active
   title: "Legendre, Brocard, Oppermann, Andrica"
   description: >-
     Each named survivor bound implies its conjecture; Oppermann's conjecture
     implies both Andrica's and Legendre's, giving Legendre two independent
     routes.
 
-planned:
-  rests_on: []
-  open_inputs: ["jacobsthal_bound_holds", "four_survivors_bound_holds", "oppermann_bound_holds", "oppermann_conjecture"]
-  source_status: Conditional
-  source_declarations: >-
-    `legendre_conjecture_of_jacobsthal_bound`,
-    `brocard_conjecture_of_four_survivors_bound`,
-    `oppermann_conjecture_of_oppermann_bound`,
-    `andrica_conjecture_of_oppermann_conjecture`,
-    `legendre_conjecture_of_oppermann_conjecture`
+conclusions:
+  - id: legendre_of_jacobsthal
+    declaration: RNS.GapConjectures.legendre_of_jacobsthal
+    summary: "The survivor bound gives Legendre's conjecture."
+    imports: []
+    imports_status: none
+    open_inputs: ["jacobsthal_bound_holds"]  # open conjectures: hypotheses of the claim, never claimed
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/GapConjectures.lean
+        declaration: RNS.GapConjectures.legendre_of_jacobsthal_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+  - id: brocard_of_four_survivors
+    declaration: RNS.GapConjectures.brocard_of_four_survivors
+    summary: "The four-survivor bound gives Brocard's conjecture."
+    imports: []
+    imports_status: none
+    open_inputs: ["four_survivors_bound_holds"]  # open conjectures: hypotheses of the claim, never claimed
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/GapConjectures.lean
+        declaration: RNS.GapConjectures.brocard_of_four_survivors_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+  - id: oppermann_of_bound
+    declaration: RNS.GapConjectures.oppermann_of_bound
+    summary: "The two-sided survivor bound gives Oppermann's conjecture."
+    imports: []
+    imports_status: none
+    open_inputs: ["oppermann_bound_holds"]  # open conjectures: hypotheses of the claim, never claimed
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/GapConjectures.lean
+        declaration: RNS.GapConjectures.oppermann_of_bound_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+  - id: andrica_of_oppermann
+    declaration: RNS.GapConjectures.andrica_of_oppermann
+    summary: "Oppermann's conjecture gives Andrica's."
+    imports: []
+    imports_status: none
+    open_inputs: ["oppermann_conjecture"]  # open conjectures: hypotheses of the claim, never claimed
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/GapConjectures.lean
+        declaration: RNS.GapConjectures.andrica_of_oppermann_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+  - id: legendre_of_oppermann
+    declaration: RNS.GapConjectures.legendre_of_oppermann
+    summary: "Oppermann's conjecture gives Legendre's."
+    imports: []
+    imports_status: none
+    open_inputs: ["oppermann_conjecture"]  # open conjectures: hypotheses of the claim, never claimed
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/GapConjectures.lean
+        declaration: RNS.GapConjectures.legendre_of_oppermann_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
 
-conclusions: []
+sources:
+  - title: "rns_open_conjectures.lean, Parts 1-5"
+    authors: ["Geoffrey Fischer"]
+    type: "lean-file"
+    relationship: formalizes

@@ -91,4 +91,4 @@ def local_density_factorization : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/SingularSeries/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/SingularSeries/formalization.yaml)
-- Source of record: rns_sieve_6.lean, Part B Steps 3 and 4
+- Source: rns_sieve_6.lean, Part B Steps 3 and 4

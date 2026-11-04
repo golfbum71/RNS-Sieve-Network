@@ -1,6 +1,5 @@
-# Stub: this node is planned but not yet built in the network.
-# Its claims are proved in the source files named below; they have not yet
-# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: HardyLittlewood.v1
@@ -8,19 +7,36 @@ node:
   version: v1
   order: 14
   kind: paper
-  status: stub
+  status: active
   title: "the conjecture, and what it would give"
   description: >-
     The prime-pattern count is stated to grow like the constant times the
     number divided by its logarithm raised to the number of offsets. Proved:
     if that holds for the twin pattern, there are infinitely many twin primes.
 
-planned:
-  rests_on: ["SingularSeries"]
-  open_inputs: ["hardy_littlewood_conjecture"]
-  source_status: Conditional
-  source_declarations: >-
-    `hardy_littlewood_conjecture` (stated, open);
-    `twin_prime_conjecture_implies_infinite_twin_primes`
+conclusions:
+  - id: twin_prime_conjecture_implies_infinite_twin_primes
+    declaration: RNS.HardyLittlewood.twin_prime_conjecture_implies_infinite_twin_primes
+    summary: "If the Hardy-Littlewood conjecture holds for the twin pattern, there are infinitely many twin primes."
+    imports: 
+      - SingularSeries.v1.hardy_littlewood_constant_pos
+      - Admissibility.v1.zero_two_admissible
+    imports_status: identified
+    open_inputs: ["hardy_littlewood_conjecture"]  # open conjectures: hypotheses of the claim, never claimed
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/HardyLittlewood.lean
+        declaration: RNS.HardyLittlewood.twin_prime_conjecture_implies_infinite_twin_primes_step
+        assembled: RNSSolutions/Assemble.lean (RNS.HardyLittlewood.twin_prime_conjecture_implies_infinite_twin_primes_holds)
+        note: >-
+          Lean proof of the step from the imported claims, taken as named
+          hypotheses; the proof file imports claims only, never proofs. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
 
-conclusions: []
+sources:
+  - title: "rns_sieve_6.lean, Part B Step 5 and Lemma 3"
+    authors: ["Geoffrey Fischer"]
+    type: "lean-file"
+    relationship: formalizes

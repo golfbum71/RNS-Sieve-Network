@@ -35,4 +35,4 @@ def crt_map_bijective : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/CRT/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/CRT/formalization.yaml)
-- Source of record: rns_sieve_6.lean, Part A, Step 3
+- Source: rns_sieve_6.lean, Part A, Step 3

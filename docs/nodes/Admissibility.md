@@ -79,12 +79,10 @@ def ap_offsets_admissible_iff : Prop :=
 
 ## Used by
 
-- [`HensleyRichards`](HensleyRichards.md)
-- [`Pruning`](Pruning.md)
-- [`ShieldCertificates`](ShieldCertificates.md)
+- [`HardyLittlewood`](HardyLittlewood.md)
 
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/Admissibility/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/Admissibility/formalization.yaml)
-- Source of record: rns_sieve_6.lean, Part B Step 1 and Part D
+- Source: rns_sieve_6.lean, Part B Step 1 and Part D

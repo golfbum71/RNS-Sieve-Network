@@ -1,5 +1,8 @@
 # Node list
 
+The plain-language list the network was built from. The built network's
+own record is each node's `formalization.yaml`, rendered in `GRAPH.md`.
+
 Each node is one group of related claims. For each: what it says in plain
 words, the Lean names in `rns_sieve_6.lean` (or the companion file named),
 what it rests on, and its verification status.
@@ -94,7 +97,8 @@ left to test for an evenly spaced prime run is an exact product over the
 wheels: one fewer than the wheel size where the wheel divides the spacing,
 and the run length fewer elsewhere.
 - Lean: `valid_starting_residues_card_formula` (Part E)
-- Rests on: `Admissibility`, `SurvivorCount`
+- Rests on: `SurvivorCount` (with no admissibility hypothesis on the survivor
+  count, `Admissibility` is not needed)
 - Status: Clean
 
 ### 9. `WheelOrder` — what each wheel adds when wheels arrive in order
@@ -104,7 +108,8 @@ full size of every later wheel. Separately, from any 6n±1 position, the next
 number with a chosen last digit is reached in the raw digit distance or at
 most one further step of 10.
 - Lean: `wheel_marginal_new_formula` (Part F); `wheel_gap_floor` (Part G)
-- Rests on: Vocabulary; `Wheel6` for Part G
+- Rests on: no other node (Part G uses the `is_candidate` definition, not
+  the `Wheel6` claim)
 - Status: Clean
 
 ---
@@ -124,7 +129,7 @@ divides it."
   `tuple_prime_of_active_shield`, `ap_hits_wheel`,
   `ap_prime_run_length_lt_of_lt_start`, `ap_prime_run_forces_divisibility`,
   `window_prime_iff`, `window_twin_iff`, and the backward versions
-- Rests on: `SquareRootShield`, `Admissibility`
+- Rests on: `SquareRootShield` (no proof here uses `Admissibility`)
 - Status: Clean
 
 ---
@@ -154,7 +159,8 @@ has a prime factor from that same column.
 ### 13. `DirichletColumns` — both columns hold infinitely many primes
 - Lean: `col_minus_primes_infinite`, `col_plus_primes_infinite`,
   `col_minus_primes_unbounded`, `col_plus_primes_unbounded` (Part I)
-- Rests on: Mathlib's Dirichlet theorem, `ColumnStructure`
+- Rests on: no other node; only Mathlib's Dirichlet theorem and the column
+  definitions
 - Status: Clean
 
 ---
@@ -167,7 +173,8 @@ number divided by its logarithm raised to the number of offsets. Proved: if
 that holds for the twin pattern, there are infinitely many twin primes.
 - Lean: `hardy_littlewood_conjecture` (stated, open);
   `twin_prime_conjecture_implies_infinite_twin_primes`
-- Rests on: `SingularSeries`; open input `hardy_littlewood_conjecture`
+- Rests on: `SingularSeries` and `Admissibility` (positivity of the constant,
+  and admissibility of {0, 2}); open input `hardy_littlewood_conjecture`
 - Status: Conditional, Clean
 
 ### 15. `HensleyRichards` — Hardy and Littlewood's two conjectures clash
@@ -176,7 +183,7 @@ primes in a window of that length, Conjecture A (every admissible pattern
 repeats forever) and Conjecture B (prime counts are subadditive) cannot both
 hold.
 - Lean: `HL_A_and_B_incompatible` (Part J)
-- Rests on: `Admissibility`; open inputs `HL_conjecture_A`, `HL_conjecture_B`
+- Rests on: no other node; open inputs `HL_conjecture_A`, `HL_conjecture_B`
 - Status: Conditional, Clean
 
 ### 16. `LinearForms` — Dickson's conjecture gives Sophie Germain primes
@@ -198,7 +205,7 @@ routes.
   `oppermann_conjecture_of_oppermann_bound`,
   `andrica_conjecture_of_oppermann_conjecture`,
   `legendre_conjecture_of_oppermann_conjecture`
-- Rests on: `SquareRootShield` in spirit, Vocabulary in fact; open inputs
+- Rests on: no other node; open inputs
   `jacobsthal_bound_holds`, `four_survivors_bound_holds`,
   `oppermann_bound_holds`, `oppermann_conjecture`
 - Status: Conditional, Clean

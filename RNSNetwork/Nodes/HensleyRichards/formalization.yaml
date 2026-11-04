@@ -1,6 +1,5 @@
-# Stub: this node is planned but not yet built in the network.
-# Its claims are proved in the source files named below; they have not yet
-# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: HensleyRichards.v1
@@ -8,7 +7,7 @@ node:
   version: v1
   order: 15
   kind: paper
-  status: stub
+  status: active
   title: "Hardy and Littlewood's two conjectures clash"
   description: >-
     If an admissible pattern packs more offsets into a window than there are
@@ -16,11 +15,25 @@ node:
     repeats forever) and Conjecture B (prime counts are subadditive) cannot
     both hold.
 
-planned:
-  rests_on: ["Admissibility"]
-  open_inputs: ["HL_conjecture_A", "HL_conjecture_B"]
-  source_status: Conditional
-  source_declarations: >-
-    `HL_A_and_B_incompatible` (Part J)
+conclusions:
+  - id: HL_A_and_B_incompatible
+    declaration: RNS.HensleyRichards.HL_A_and_B_incompatible
+    summary: "Given a dense enough admissible pattern, Hardy-Littlewood Conjectures A and B cannot both hold."
+    imports: []
+    imports_status: none
+    open_inputs: ["HL_conjecture_A", "HL_conjecture_B"]  # open conjectures: hypotheses of the claim, never claimed
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/HensleyRichards.lean
+        declaration: RNS.HensleyRichards.HL_A_and_B_incompatible_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
 
-conclusions: []
+sources:
+  - title: "rns_sieve_6_parts_J_K.lean, Part J"
+    authors: ["Geoffrey Fischer"]
+    type: "lean-file"
+    relationship: formalizes

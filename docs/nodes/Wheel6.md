@@ -28,12 +28,11 @@ def prime_gt_three_is_candidate : Prop :=
 ## Used by
 
 - [`ColumnStructure`](ColumnStructure.md)
-- [`GapTracks`](GapTracks.md)
 - [`SophieGermainWheel`](SophieGermainWheel.md)
-- [`WheelOrder`](WheelOrder.md)
+- [`GapTracks`](GapTracks.md)
 
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/Wheel6/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/Wheel6/formalization.yaml)
-- Source of record: rns_sieve_6.lean, Part A, Step 1
+- Source: rns_sieve_6.lean, Part A, Step 1

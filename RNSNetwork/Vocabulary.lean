@@ -41,6 +41,14 @@ def col_minus (n : Nat) : Nat := 6 * n + 5
 /-- The "6n+1" column, counted from position 0: 1, 7, 13, 19, ... -/
 def col_plus (n : Nat) : Nat := 6 * n + 1
 
+/-- A number passes the last-digit wheel when its last decimal digit is 1, 3,
+7 or 9. Every prime above 5 passes it. -/
+def digit_ok (n : Nat) : Bool :=
+  (n % 10 == 1) || (n % 10 == 3) || (n % 10 == 7) || (n % 10 == 9)
+
+/-- A Sophie Germain prime: a prime whose double plus one is also prime. -/
+def sophie_germain (p : Nat) : Prop := p.Prime ∧ (2 * p + 1).Prime
+
 /-! ## Wheels and their combined cycle -/
 
 /-- The wheels in use: every prime below `limit`. -/

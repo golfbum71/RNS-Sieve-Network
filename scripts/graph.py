@@ -65,6 +65,27 @@ def node_of(ref):
     return parts[0], parts[-1]
 
 
+def designated(c):
+    return next((j for j in c.get("justifications") or [] if j["id"] == c.get("designated")), {})
+
+
+def is_cited(c):
+    return designated(c).get("kind") == "literature"
+
+
+def opens_of(n):
+    """Open conjectures a node takes as hypotheses (built or planned)."""
+    out = []
+    for c in n["conclusions"]:
+        for o in c.get("open_inputs") or []:
+            if o not in out:
+                out.append(o)
+    for o in n["planned"].get("open_inputs") or []:
+        if o not in out:
+            out.append(o)
+    return out
+
+
 def edges_built(nodes):
     """(source node, target node) -> list of (source claim, target claim)."""
     edges = {}
@@ -74,6 +95,10 @@ def edges_built(nodes):
                 src, claim = node_of(ref)
                 edges.setdefault((src, n["name"]), []).append((claim, c["id"]))
     return edges
+
+
+def by_order(nodes):
+    return sorted(nodes, key=lambda nm: nodes[nm]["order"])
 
 
 def topo_order(nodes, edges):
@@ -94,12 +119,46 @@ def topo_order(nodes, edges):
                 visit(d)
         order.append(name)
 
-    for name in sorted(nodes, key=lambda nm: nodes[nm]["order"]):
+    for name in by_order(nodes):
         visit(name)
     return order
 
 
-# ---------------------------------------------------------------- helpers
+# ---------------------------------------------------------------- status
+
+def node_kind(n):
+    """One of: verified, conditional_built, cited_built, planned, conditional, cited."""
+    if n["built"]:
+        if any(is_cited(c) for c in n["conclusions"]):
+            return "cited_built"
+        if opens_of(n):
+            return "conditional_built"
+        return "verified"
+    return {"Conditional": "conditional", "Cited": "cited"}.get(
+        n["planned"].get("source_status"), "planned")
+
+
+STATUS_WORDS = {
+    "verified": "proved in Lean",
+    "conditional_built": "proved in Lean; rests on open conjectures as hypotheses",
+    "cited_built": "cited from a published paper; not proved in Lean",
+    "planned": "planned: proved in source file",
+    "conditional": "planned: conditional",
+    "cited": "planned: cited from a paper",
+}
+
+
+def status_word(n):
+    return STATUS_WORDS[node_kind(n)]
+
+
+def claim_word(c):
+    if is_cited(c):
+        return "cited"
+    if c.get("open_inputs"):
+        return "proved in Lean, assuming open conjecture(s)"
+    return "proved in Lean"
+
 
 def mid(name):
     return "N_" + name
@@ -109,27 +168,15 @@ def label(text):
     return text.replace('"', "'")
 
 
-def status_word(n):
-    if n["built"]:
-        return "proved in Lean"
-    kind = n["planned"].get("source_status", "")
-    return {"Clean": "planned: proved in source file",
-            "Conditional": "planned: conditional",
-            "Cited": "planned: cited from a paper"}.get(kind, "planned")
-
-
 CLASSDEFS = """  classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
+  classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
+  classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
   classDef planned fill:#ffffff,stroke:#1a7f37,color:#57606a,stroke-dasharray: 5 4;
   classDef conditional fill:#ffffff,stroke:#9a6700,color:#57606a,stroke-dasharray: 5 4;
   classDef cited fill:#ffffff,stroke:#0969da,color:#57606a,stroke-dasharray: 5 4;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;"""
 
-
-def node_class(n):
-    if n["built"]:
-        return "verified"
-    return {"Conditional": "conditional", "Cited": "cited"}.get(
-        n["planned"].get("source_status"), "planned")
+KINDS = ["verified", "conditional_built", "cited_built", "planned", "conditional", "cited"]
 
 
 # ---------------------------------------------------------------- GRAPH.md
@@ -139,26 +186,32 @@ def overview_mermaid(nodes, order, edges):
     for name in order:
         n = nodes[name]
         claims = len(n["conclusions"])
-        sub = f"{claims} claim{'s' if claims != 1 else ''}" if n["built"] else status_word(n)
+        if n["built"]:
+            sub = f"{claims} claim{'s' if claims != 1 else ''}"
+            if node_kind(n) == "cited_built":
+                sub += ", cited"
+        else:
+            sub = status_word(n)
         lines.append(f'  {mid(name)}["<b>{name}</b><br/>{label(n["title"])}<br/><i>{sub}</i>"]')
     opens = []
     for name in order:
-        for o in nodes[name]["planned"].get("open_inputs") or []:
+        for o in opens_of(nodes[name]):
             if o not in opens:
                 opens.append(o)
     for o in opens:
         lines.append(f'  O_{o}{{{{"<i>open</i><br/>{o}"}}}}')
-    for (src, dst), pairs in sorted(edges.items()):
+    for (src, dst), pairs in sorted(edges.items(), key=lambda e: (nodes[e[0][1]]["order"], nodes[e[0][0]]["order"])):
         lines.append(f"  {mid(src)} ==>|{len(pairs)}| {mid(dst)}")
     for name in order:
         n = nodes[name]
         for src in n["planned"].get("rests_on") or []:
             lines.append(f"  {mid(src)} -.-> {mid(name)}")
-        for o in n["planned"].get("open_inputs") or []:
-            lines.append(f"  O_{o} -.-> {mid(name)}")
+        for o in opens_of(n):
+            arrow = "-->" if n["built"] else "-.->"
+            lines.append(f"  O_{o} {arrow} {mid(name)}")
     lines.append(CLASSDEFS)
-    for cls in ["verified", "planned", "conditional", "cited"]:
-        members = [mid(nm) for nm in order if node_class(nodes[nm]) == cls]
+    for cls in KINDS:
+        members = [mid(nm) for nm in order if node_kind(nodes[nm]) == cls]
         if members:
             lines.append(f"  class {','.join(members)} {cls};")
     if opens:
@@ -170,19 +223,36 @@ def overview_mermaid(nodes, order, edges):
 def claims_mermaid(nodes, order):
     lines = ["```mermaid", "graph LR"]
     built = [nm for nm in order if nodes[nm]["built"]]
+    opens = []
     for name in built:
         lines.append(f'  subgraph S_{name}["{name}"]')
         for c in nodes[name]["conclusions"]:
-            lines.append(f'    C_{name}_{c["id"]}["<b>{c["id"]}</b>"]')
+            lines.append(f'    C_{name}_{c["id"]}["{c["id"]}"]')
+            for o in c.get("open_inputs") or []:
+                if o not in opens:
+                    opens.append(o)
         lines.append("  end")
+    for o in opens:
+        lines.append(f'  O_{o}{{{{"<i>open</i><br/>{o}"}}}}')
     for name in built:
         for c in nodes[name]["conclusions"]:
             for ref in c.get("imports") or []:
                 src, claim = node_of(ref)
                 lines.append(f"  C_{src}_{claim} ==> C_{name}_{c['id']}")
+            for o in c.get("open_inputs") or []:
+                lines.append(f"  O_{o} --> C_{name}_{c['id']}")
     lines.append(CLASSDEFS)
-    ids = [f"C_{nm}_{c['id']}" for nm in built for c in nodes[nm]["conclusions"]]
-    lines.append(f"  class {','.join(ids)} verified;")
+    groups = {"verified": [], "conditional_built": [], "cited_built": []}
+    for nm in built:
+        for c in nodes[nm]["conclusions"]:
+            key = ("cited_built" if is_cited(c) else
+                   "conditional_built" if c.get("open_inputs") else "verified")
+            groups[key].append(f"C_{nm}_{c['id']}")
+    for cls, ids in groups.items():
+        if ids:
+            lines.append(f"  class {','.join(ids)} {cls};")
+    if opens:
+        lines.append(f"  class {','.join('O_' + o for o in opens)} openconj;")
     lines.append("```")
     return "\n".join(lines)
 
@@ -198,13 +268,14 @@ def rests_on_tree(nodes):
     def walk(name, claim, depth):
         c = next(x for x in nodes[name]["conclusions"] if x["id"] == claim)
         link = f"[`{name}.{claim}`](docs/nodes/{name}.md#{claim})"
-        out.append("  " * depth + f"- {link} — proved in Lean")
+        out.append("  " * depth + f"- {link} — {claim_word(c)}")
+        for o in c.get("open_inputs") or []:
+            out.append("  " * (depth + 1) + f"- `{o}` — open conjecture, taken as a hypothesis")
         for ref in c.get("imports") or []:
             walk(*node_of(ref), depth + 1)
 
-    for name in sorted(nodes, key=lambda nm: nodes[nm]["order"]):
-        n = nodes[name]
-        for c in n["conclusions"]:
+    for name in by_order(nodes):
+        for c in nodes[name]["conclusions"]:
             if (name, c["id"]) not in imported:
                 walk(name, c["id"], 0)
     return "\n".join(out)
@@ -213,10 +284,23 @@ def rests_on_tree(nodes):
 def write_graph(nodes, order, edges):
     built = [nm for nm in order if nodes[nm]["built"]]
     planned = [nm for nm in order if not nodes[nm]["built"]]
-    n_claims = sum(len(nodes[nm]["conclusions"]) for nm in built)
+    all_claims = [(nm, c) for nm in built for c in nodes[nm]["conclusions"]]
+    n_lean = sum(1 for _, c in all_claims if not is_cited(c))
+    n_cited = sum(1 for _, c in all_claims if is_cited(c))
     n_arrows = sum(len(p) for p in edges.values())
-    opens = sorted({o for nm in planned for o in nodes[nm]["planned"].get("open_inputs") or []})
-    cited = [nm for nm in planned if nodes[nm]["planned"].get("source_status") == "Cited"]
+    built_opens = []
+    for nm in built:
+        for o in opens_of(nodes[nm]):
+            if o not in built_opens:
+                built_opens.append(o)
+
+    standing = (f"**Where things stand:** {len(built)} of {len(nodes)} nodes are built, holding "
+                f"{len(all_claims)} claims: {n_lean} proved in Lean"
+                + (f" and {n_cited} cited from a published paper" if n_cited else "")
+                + f". They are joined by {n_arrows} arrows, each a Lean-checked step.")
+    if planned:
+        standing += (f" The other {len(planned)} nodes are drawn as planned: their claims are "
+                     "proved in the original source files but not yet restated here.")
 
     md = f"""# The network
 
@@ -228,34 +312,33 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** {len(built)} of {len(nodes)} nodes are built, holding
-{n_claims} claims, all proved in Lean, joined by {n_arrows} checked arrows.
-The other {len(planned)} nodes are drawn as planned: their claims are already
-proved in the original source files, but not yet restated in this network.
+{standing}
 
 ## How to read the diagrams
 
-- **Solid green box:** built and proved in Lean. Every proof uses only the
-  standard axioms `propext`, `Classical.choice` and `Quot.sound`.
-- **Dashed box:** planned, not yet built. A green border means its claims are
-  proved in the source file; amber means its results are conditional on an
-  open conjecture; blue means it is cited from a published paper.
-- **Yellow hexagon:** an open conjecture, held as a named hypothesis rather
-  than claimed as true.
+- **Green box:** proved in Lean. Every proof uses only the standard axioms
+  `propext`, `Classical.choice` and `Quot.sound`.
+- **Green box with an amber border:** proved in Lean, but its claims are
+  implications whose hypotheses include an open conjecture. What is proved is
+  "if the conjecture holds, then …" — never the conjecture.
+- **Blue box:** cited from a published paper; stated precisely in Lean but
+  not proved there.
+- **Yellow hexagon:** an open conjecture. It is never claimed, only assumed
+  as a hypothesis, and the thin arrow shows which claim assumes it.
 - **Thick arrow `A ==> B`:** B's claim assumes A's claim, and Lean checks the
   step. The number on it is how many claims cross it. Each proof file imports
   only claims, never another node's proof; each arrow is proved as a
   separate `…_step` theorem with the upstream claim as a named hypothesis,
   and `RNSSolutions/Assemble.lean` joins the steps up.
-- **Dotted arrow:** a planned dependency, not yet checked.
+- **Dashed box or dotted arrow:** planned, not yet built.
 
 ## The network at a glance
 
 {overview_mermaid(nodes, order, edges)}
 
-## Every claim in the built part
+## Every claim
 
-One box per claim, grouped by node. Each thick arrow is a Lean-checked step.
+One box per claim, grouped by node.
 
 {claims_mermaid(nodes, order)}
 
@@ -267,21 +350,35 @@ The results nothing else builds on, each with everything beneath it.
 
 ## What the network takes on trust
 
-**Built part: nothing.** Every built claim is proved in Lean from Mathlib,
-using only the three standard axioms, and every arrow between built claims
-is itself a Lean-checked step.
-
-**Planned part.** When the planned nodes are built, these will enter the
-network as named hypotheses or citations, never as claimed truths:
+Every claim proved in Lean uses only the three standard axioms, and every
+thick arrow is itself a Lean-checked step. Beyond that, the network relies on
+exactly the following, each recorded as such rather than claimed:
 
 """
-    md += "\n".join(f"- `{o}` — open conjecture" for o in opens) + "\n"
-    for nm in cited:
-        cit = " ".join(str(nodes[nm]["planned"].get("citation", "")).split())
-        md += f"- `{nm}` — published theorem, cited: {cit}\n"
+    if built_opens:
+        md += "**Open conjectures, assumed only as hypotheses of claims:**\n\n"
+        for o in built_opens:
+            users = [f"[`{nm}.{c['id']}`](docs/nodes/{nm}.md#{c['id']})"
+                     for nm in built for c in nodes[nm]["conclusions"]
+                     if o in (c.get("open_inputs") or [])]
+            md += f"- `{o}` — assumed by " + ", ".join(users) + "\n"
+        md += "\n"
+    cited = [(nm, c) for nm, c in all_claims if is_cited(c)]
+    if cited:
+        md += "**Published results, cited rather than proved in Lean:**\n\n"
+        for nm, c in cited:
+            j = designated(c)
+            md += (f"- [`{nm}.{c['id']}`](docs/nodes/{nm}.md#{c['id']}) — "
+                   f"{j.get('source', '')}, {j.get('locator', '')}\n")
+        md += "\n"
+    if not built_opens and not cited:
+        md += "Nothing.\n\n"
+    planned_opens = [o for nm in planned for o in opens_of(nodes[nm]) if o not in built_opens]
+    if planned_opens:
+        md += "**Planned nodes will add:** " + ", ".join(f"`{o}`" for o in planned_opens) + "\n\n"
 
-    md += "\n## Node index\n\n| # | Node | What it says | Status |\n|---|---|---|---|\n"
-    for nm in sorted(nodes, key=lambda x: nodes[x]["order"]):
+    md += "## Node index\n\n| # | Node | What it says | Status |\n|---|---|---|---|\n"
+    for nm in by_order(nodes):
         n = nodes[nm]
         md += f"| {n['order']} | [`{nm}`](docs/nodes/{nm}.md) | {n['title']} | {status_word(n)} |\n"
     open(os.path.join(ROOT, "GRAPH.md"), "w", encoding="utf-8").write(md)
@@ -306,16 +403,22 @@ def write_node_page(n, nodes, edges):
                     f"[`{s}.{cl}`]({s}.md#{cl})" for s, cl in map(node_of, imports)) + "\n\n"
             else:
                 md += "**Rests on:** no other node (Mathlib and the Vocabulary only)\n\n"
-            j = next((x for x in c.get("justifications") or []
-                      if x["id"] == c.get("designated")), None)
-            if j:
+            if c.get("open_inputs"):
+                md += ("**Open conjectures in its hypotheses (assumed, never claimed):** "
+                       + ", ".join(f"`{o}`" for o in c["open_inputs"]) + "\n\n")
+            j = designated(c)
+            if j.get("kind") == "literature":
+                md += (f"**Justification:** cited — {j.get('source', '')}, "
+                       f"{j.get('locator', '')}. Not proved in Lean.\n\n")
+            elif j:
                 md += (f"**Proof:** `{j.get('declaration')}` in "
                        f"[`{j.get('solution')}`](../../{j.get('solution')})")
                 if j.get("assembled"):
                     md += ("; joined to its inputs in "
                            "[`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)")
                 md += "\n\n"
-        users = sorted({dst for (src, dst) in edges if src == name})
+        users = sorted({dst for (src, dst) in edges if src == name},
+                       key=lambda u: nodes[u]["order"])
         users += [m["name"] for m in nodes.values()
                   if name in (m["planned"].get("rests_on") or [])]
         if users:
@@ -323,7 +426,8 @@ def write_node_page(n, nodes, edges):
         md += (f"## Files\n\n- Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/{name}/Conclusions.lean)\n"
                f"- Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/{name}/formalization.yaml)\n")
         for s in n["sources"]:
-            md += f"- Source of record: {s.get('title')}\n"
+            rel = " (cited)" if s.get("relationship") == "cites" else ""
+            md += f"- Source{rel}: {s.get('title')}\n"
     else:
         p = n["planned"]
         rests = p.get("rests_on") or []
@@ -339,9 +443,9 @@ def write_node_page(n, nodes, edges):
     open(os.path.join(ROOT, "docs", "nodes", f"{name}.md"), "w", encoding="utf-8").write(md)
 
 
-def write_index(nodes, order):
+def write_index(nodes):
     md = f"# Node pages\n\n{GENERATED}\n\n| # | Node | What it says | Status |\n|---|---|---|---|\n"
-    for nm in sorted(nodes, key=lambda x: nodes[x]["order"]):
+    for nm in by_order(nodes):
         n = nodes[nm]
         md += f"| {n['order']} | [`{nm}`]({nm}.md) | {n['title']} | {status_word(n)} |\n"
     md += "\nSee [`GRAPH.md`](../../GRAPH.md) for the diagrams.\n"
@@ -354,12 +458,20 @@ def main():
     for (src, dst) in edges:
         if src not in nodes or not nodes[src]["built"]:
             sys.exit(f"error: {dst} imports from {src}, which is not a built node")
+    for n in nodes.values():
+        for c in n["conclusions"]:
+            for ref in c.get("imports") or []:
+                src, claim = node_of(ref)
+                if claim not in {x["id"] for x in nodes[src]["conclusions"]}:
+                    sys.exit(f"error: {n['name']}.{c['id']} imports {ref}, which does not exist")
+            if n["built"] and c["id"] not in n["statements"]:
+                sys.exit(f"error: {n['name']}.{c['id']} has no matching def in Conclusions.lean")
     order = topo_order(nodes, edges)
     os.makedirs(os.path.join(ROOT, "docs", "nodes"), exist_ok=True)
     write_graph(nodes, order, edges)
     for n in nodes.values():
         write_node_page(n, nodes, edges)
-    write_index(nodes, order)
+    write_index(nodes)
     print(f"wrote GRAPH.md and {len(nodes)} node pages")
 
 

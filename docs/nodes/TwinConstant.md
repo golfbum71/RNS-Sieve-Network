@@ -29,4 +29,4 @@ def twin_prime_constant_eq_classical : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/TwinConstant/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/TwinConstant/formalization.yaml)
-- Source of record: rns_sieve_6.lean, Bonus section
+- Source: rns_sieve_6.lean, Bonus section

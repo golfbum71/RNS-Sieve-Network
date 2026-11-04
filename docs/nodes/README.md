@@ -11,18 +11,18 @@
 | 5 | [`SurvivorCount`](SurvivorCount.md) | the exact number of open positions | proved in Lean |
 | 6 | [`SingularSeries`](SingularSeries.md) | the correction constant exists and is positive | proved in Lean |
 | 7 | [`TwinConstant`](TwinConstant.md) | the classical twin-prime constant is recovered | proved in Lean |
-| 8 | [`Pruning`](Pruning.md) | which starting positions are worth testing | planned: proved in source file |
-| 9 | [`WheelOrder`](WheelOrder.md) | what each wheel adds when wheels arrive in order | planned: proved in source file |
-| 10 | [`ShieldCertificates`](ShieldCertificates.md) | certifying primes, and why prime runs stop | planned: proved in source file |
-| 11 | [`Infinitude`](Infinitude.md) | two independent proofs that primes never run out | planned: proved in source file |
-| 12 | [`ColumnStructure`](ColumnStructure.md) | how the two columns multiply | planned: proved in source file |
-| 13 | [`DirichletColumns`](DirichletColumns.md) | both columns hold infinitely many primes | planned: proved in source file |
-| 14 | [`HardyLittlewood`](HardyLittlewood.md) | the conjecture, and what it would give | planned: conditional |
-| 15 | [`HensleyRichards`](HensleyRichards.md) | Hardy and Littlewood's two conjectures clash | planned: conditional |
-| 16 | [`LinearForms`](LinearForms.md) | Dickson's conjecture gives Sophie Germain primes | planned: conditional |
-| 17 | [`GapConjectures`](GapConjectures.md) | Legendre, Brocard, Oppermann, Andrica | planned: conditional |
-| 18 | [`SophieGermainWheel`](SophieGermainWheel.md) | where Sophie Germain primes can sit | planned: proved in source file |
-| 19 | [`GapTracks`](GapTracks.md) | which gaps each column allows | planned: proved in source file |
-| 20 | [`DudekJohnston`](DudekJohnston.md) | a near-prime between every pair of squares | planned: cited from a paper |
+| 8 | [`Pruning`](Pruning.md) | which starting positions are worth testing | proved in Lean |
+| 9 | [`WheelOrder`](WheelOrder.md) | what each wheel adds when wheels arrive in order | proved in Lean |
+| 10 | [`ShieldCertificates`](ShieldCertificates.md) | certifying primes, and why prime runs stop | proved in Lean |
+| 11 | [`Infinitude`](Infinitude.md) | two independent proofs that primes never run out | proved in Lean |
+| 12 | [`ColumnStructure`](ColumnStructure.md) | how the two columns multiply | proved in Lean |
+| 13 | [`DirichletColumns`](DirichletColumns.md) | both columns hold infinitely many primes | proved in Lean |
+| 14 | [`HardyLittlewood`](HardyLittlewood.md) | the conjecture, and what it would give | proved in Lean; rests on open conjectures as hypotheses |
+| 15 | [`HensleyRichards`](HensleyRichards.md) | Hardy and Littlewood's two conjectures clash | proved in Lean; rests on open conjectures as hypotheses |
+| 16 | [`LinearForms`](LinearForms.md) | Dickson's conjecture gives Sophie Germain primes | proved in Lean; rests on open conjectures as hypotheses |
+| 17 | [`GapConjectures`](GapConjectures.md) | Legendre, Brocard, Oppermann, Andrica | proved in Lean; rests on open conjectures as hypotheses |
+| 18 | [`SophieGermainWheel`](SophieGermainWheel.md) | where Sophie Germain primes can sit | proved in Lean |
+| 19 | [`GapTracks`](GapTracks.md) | which gaps each column allows | proved in Lean |
+| 20 | [`DudekJohnston`](DudekJohnston.md) | a near-prime between every pair of squares | cited from a published paper; not proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

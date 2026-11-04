@@ -1,6 +1,5 @@
-# Stub: this node is planned but not yet built in the network.
-# Its claims are proved in the source files named below; they have not yet
-# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: LinearForms.v1
@@ -8,19 +7,46 @@ node:
   version: v1
   order: 16
   kind: paper
-  status: stub
+  status: active
   title: "Dickson's conjecture gives Sophie Germain primes"
   description: >-
     The pair "a number and twice it plus one" passes the linear-forms version
     of admissibility; so Dickson's conjecture would give infinitely many
     Sophie Germain primes.
 
-planned:
-  rests_on: []
-  open_inputs: ["LinearForms_conjecture"]
-  source_status: Conditional
-  source_declarations: >-
-    `sophieGermainSystem_admissible`,
-    `sophie_germain_conjecture_of_LinearForms_conjecture` (Part K)
+conclusions:
+  - id: sophieGermainSystem_admissible
+    declaration: RNS.LinearForms.sophieGermainSystem_admissible
+    summary: "The pair 'a number and twice it plus one' passes linear-forms admissibility."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/LinearForms.lean
+        declaration: RNS.LinearForms.sophieGermainSystem_admissible_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+  - id: sophie_germain_of_LinearForms_conjecture
+    declaration: RNS.LinearForms.sophie_germain_of_LinearForms_conjecture
+    summary: "Dickson's conjecture would give infinitely many Sophie Germain primes."
+    imports: []
+    imports_status: none
+    open_inputs: ["LinearForms_conjecture"]  # open conjectures: hypotheses of the claim, never claimed
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/LinearForms.lean
+        declaration: RNS.LinearForms.sophie_germain_of_LinearForms_conjecture_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
 
-conclusions: []
+sources:
+  - title: "rns_sieve_6_parts_J_K.lean, Part K"
+    authors: ["Geoffrey Fischer"]
+    type: "lean-file"
+    relationship: formalizes

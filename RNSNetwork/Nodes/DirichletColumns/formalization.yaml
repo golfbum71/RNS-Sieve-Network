@@ -1,24 +1,77 @@
-# Stub: this node is planned but not yet built in the network.
-# Its claims are proved in the source files named below; they have not yet
-# been restated here as Conclusions.lean with a proof in RNSSolutions/.
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: DirichletColumns.v1
   family: DirichletColumns
   version: v1
   order: 13
-  kind: paper
-  status: stub
+  kind: standard
+  status: active
   title: "both columns hold infinitely many primes"
   description: >-
     
 
-planned:
-  rests_on: ["ColumnStructure"]
-  open_inputs: []
-  source_status: Clean
-  source_declarations: >-
-    `col_minus_primes_infinite`, `col_plus_primes_infinite`,
-    `col_minus_primes_unbounded`, `col_plus_primes_unbounded` (Part I)
+conclusions:
+  - id: col_minus_primes_infinite
+    declaration: RNS.DirichletColumns.col_minus_primes_infinite
+    summary: "Infinitely many 6n-1 entries are prime."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/DirichletColumns.lean
+        declaration: RNS.DirichletColumns.col_minus_primes_infinite_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+  - id: col_plus_primes_infinite
+    declaration: RNS.DirichletColumns.col_plus_primes_infinite
+    summary: "Infinitely many 6n+1 entries are prime."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/DirichletColumns.lean
+        declaration: RNS.DirichletColumns.col_plus_primes_infinite_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+  - id: col_minus_primes_unbounded
+    declaration: RNS.DirichletColumns.col_minus_primes_unbounded
+    summary: "Past any position, a later 6n-1 entry is prime."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/DirichletColumns.lean
+        declaration: RNS.DirichletColumns.col_minus_primes_unbounded_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+  - id: col_plus_primes_unbounded
+    declaration: RNS.DirichletColumns.col_plus_primes_unbounded
+    summary: "Past any position, a later 6n+1 entry is prime."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/DirichletColumns.lean
+        declaration: RNS.DirichletColumns.col_plus_primes_unbounded_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
 
-conclusions: []
+sources:
+  - title: "rns_sieve_6.lean, Part I"
+    authors: ["Geoffrey Fischer"]
+    type: "lean-file"
+    relationship: formalizes
