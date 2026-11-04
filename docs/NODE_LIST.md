@@ -329,6 +329,22 @@ up to 24 equal intervals).
   The proof uses the nonvanishing of Dirichlet L-functions at 1; check
   what Mathlib provides before scoping.
 
+**From Birdsey and Schay (arXiv:1906.09220, 2019)**
+- **Twin share of the cycle** (Tier 1). Among all survivors of a cycle, the
+  twin survivors make up exactly the product, over the wheels from 3 up, of
+  the wheel size minus 2 over the wheel size minus 1. Follows from the two
+  existing counts in `SurvivorCount`. A companion finite identity splits
+  that product into the partial twin-prime constant times the share of
+  numbers coprime to the wheels.
+- **Their heuristic as a named hypothesis** (Tier 3). Stated as a `Prop`:
+  below the next prime's square, the twin primes number the wheel share
+  of twins times the count of primes there, times one Mertens correction
+  (half of e to the Euler constant), asymptotically. The step from it to
+  the twin-prime asymptotic needs the prime number theorem and Mertens'
+  product theorem as further inputs; check what Mathlib provides, or take
+  them as cited hypotheses. This puts the paper's unproven assumption on
+  the graph as an open input, separate from the exact wheel share.
+
 **Open question (not a formalization target yet)**
 - How large the column imbalance can get as wheels are added. Computed up
   to the wheel at 23 (maxima 2, 3, 5, 8, 12, 18); the untwisted analogue is
