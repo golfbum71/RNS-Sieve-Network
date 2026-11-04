@@ -8,7 +8,7 @@ The pair "a number and twice it plus one" passes the linear-forms version of adm
 
 ## Claims
 
-<a id="sophieGermainSystem_admissible"></a>
+<a id="sophiegermainsystem_admissible"></a>
 ### `sophieGermainSystem_admissible`
 
 The pair 'a number and twice it plus one' passes linear-forms admissibility.
@@ -23,7 +23,7 @@ def sophieGermainSystem_admissible : Prop :=
 
 **Proof:** `RNS.LinearForms.sophieGermainSystem_admissible_holds` in [`RNSSolutions/LinearForms.lean`](../../RNSSolutions/LinearForms.lean)
 
-<a id="sophie_germain_of_LinearForms_conjecture"></a>
+<a id="sophie_germain_of_linearforms_conjecture"></a>
 ### `sophie_germain_of_LinearForms_conjecture`
 
 Dickson's conjecture would give infinitely many Sophie Germain primes.

@@ -15,12 +15,16 @@ without opening a single proof.
 - **Green box:** proved in Lean. Every proof uses only the standard axioms
   `propext`, `Classical.choice` and `Quot.sound`.
 - **Green box with an amber border:** proved in Lean, but its claims are
-  implications whose hypotheses include an open conjecture. What is proved is
-  "if the conjecture holds, then …" — never the conjecture.
+  implications whose hypotheses include an open conjecture ("assumes … open
+  conjectures"). What is proved is "if the conjecture holds, then …" —
+  never the conjecture.
 - **Blue box:** cited from a published paper; stated precisely in Lean but
   not proved there.
-- **Yellow hexagon:** an open conjecture. It is never claimed, only assumed
-  as a hypothesis, and the thin arrow shows which claim assumes it.
+- **Yellow hexagon** (claim diagram only): an open conjecture. It is never
+  claimed, only assumed as a hypothesis; the thin arrow shows which claim
+  assumes it.
+- **Every box is a link:** click a node or claim to open its page, with the
+  exact Lean statement, what it rests on, and where its proof lives.
 - **Thick arrow `A ==> B`:** B's claim assumes A's claim, and Lean checks the
   step. The number on it is how many claims cross it. Each proof file imports
   only claims, never another node's proof; each arrow is proved as a
@@ -31,7 +35,7 @@ without opening a single proof.
 ## The network at a glance
 
 ```mermaid
-graph TD
+graph LR
   N_Wheel6["<b>Wheel6</b><br/>the 6n±1 wheel<br/><i>1 claim</i>"]
   N_CRT["<b>CRT</b><br/>one big cycle is the same as many small wheels<br/><i>1 claim</i>"]
   N_SquareRootShield["<b>SquareRootShield</b><br/>trial division only needs small wheels<br/><i>1 claim</i>"]
@@ -45,21 +49,13 @@ graph TD
   N_Infinitude["<b>Infinitude</b><br/>two independent proofs that primes never run out<br/><i>2 claims</i>"]
   N_ColumnStructure["<b>ColumnStructure</b><br/>how the two columns multiply<br/><i>4 claims</i>"]
   N_DirichletColumns["<b>DirichletColumns</b><br/>both columns hold infinitely many primes<br/><i>4 claims</i>"]
-  N_HardyLittlewood["<b>HardyLittlewood</b><br/>the conjecture, and what it would give<br/><i>1 claim</i>"]
-  N_HensleyRichards["<b>HensleyRichards</b><br/>Hardy and Littlewood's two conjectures clash<br/><i>1 claim</i>"]
-  N_LinearForms["<b>LinearForms</b><br/>Dickson's conjecture gives Sophie Germain primes<br/><i>2 claims</i>"]
-  N_GapConjectures["<b>GapConjectures</b><br/>Legendre, Brocard, Oppermann, Andrica<br/><i>5 claims</i>"]
+  N_HardyLittlewood["<b>HardyLittlewood</b><br/>the conjecture, and what it would give<br/><i>1 claim, assumes 1 open conjecture</i>"]
+  N_HensleyRichards["<b>HensleyRichards</b><br/>Hardy and Littlewood's two conjectures clash<br/><i>1 claim, assumes 2 open conjectures</i>"]
+  N_LinearForms["<b>LinearForms</b><br/>Dickson's conjecture gives Sophie Germain primes<br/><i>2 claims, assumes 1 open conjecture</i>"]
+  N_GapConjectures["<b>GapConjectures</b><br/>Legendre, Brocard, Oppermann, Andrica<br/><i>5 claims, assumes 4 open conjectures</i>"]
   N_SophieGermainWheel["<b>SophieGermainWheel</b><br/>where Sophie Germain primes can sit<br/><i>3 claims</i>"]
   N_GapTracks["<b>GapTracks</b><br/>which gaps each column allows<br/><i>7 claims</i>"]
   N_DudekJohnston["<b>DudekJohnston</b><br/>a near-prime between every pair of squares<br/><i>1 claim, cited</i>"]
-  O_hardy_littlewood_conjecture{{"<i>open</i><br/>hardy_littlewood_conjecture"}}
-  O_HL_conjecture_A{{"<i>open</i><br/>HL_conjecture_A"}}
-  O_HL_conjecture_B{{"<i>open</i><br/>HL_conjecture_B"}}
-  O_LinearForms_conjecture{{"<i>open</i><br/>LinearForms_conjecture"}}
-  O_jacobsthal_bound_holds{{"<i>open</i><br/>jacobsthal_bound_holds"}}
-  O_four_survivors_bound_holds{{"<i>open</i><br/>four_survivors_bound_holds"}}
-  O_oppermann_bound_holds{{"<i>open</i><br/>oppermann_bound_holds"}}
-  O_oppermann_conjecture{{"<i>open</i><br/>oppermann_conjecture"}}
   N_CRT ==>|2| N_SurvivorCount
   N_SurvivorCount ==>|1| N_SingularSeries
   N_SingularSeries ==>|1| N_TwinConstant
@@ -71,14 +67,6 @@ graph TD
   N_Wheel6 ==>|1| N_SophieGermainWheel
   N_WheelOrder ==>|1| N_SophieGermainWheel
   N_Wheel6 ==>|5| N_GapTracks
-  O_hardy_littlewood_conjecture --> N_HardyLittlewood
-  O_HL_conjecture_A --> N_HensleyRichards
-  O_HL_conjecture_B --> N_HensleyRichards
-  O_LinearForms_conjecture --> N_LinearForms
-  O_jacobsthal_bound_holds --> N_GapConjectures
-  O_four_survivors_bound_holds --> N_GapConjectures
-  O_oppermann_bound_holds --> N_GapConjectures
-  O_oppermann_conjecture --> N_GapConjectures
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
   classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
@@ -89,12 +77,31 @@ graph TD
   class N_Wheel6,N_CRT,N_SquareRootShield,N_Admissibility,N_SurvivorCount,N_SingularSeries,N_TwinConstant,N_Pruning,N_WheelOrder,N_ShieldCertificates,N_Infinitude,N_ColumnStructure,N_DirichletColumns,N_SophieGermainWheel,N_GapTracks verified;
   class N_HardyLittlewood,N_HensleyRichards,N_LinearForms,N_GapConjectures conditional_built;
   class N_DudekJohnston cited_built;
-  class O_hardy_littlewood_conjecture,O_HL_conjecture_A,O_HL_conjecture_B,O_LinearForms_conjecture,O_jacobsthal_bound_holds,O_four_survivors_bound_holds,O_oppermann_bound_holds,O_oppermann_conjecture openconj;
+  click N_Wheel6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md" _blank
+  click N_CRT href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CRT.md" _blank
+  click N_SquareRootShield href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SquareRootShield.md" _blank
+  click N_Admissibility href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Admissibility.md" _blank
+  click N_SurvivorCount href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md" _blank
+  click N_SingularSeries href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md" _blank
+  click N_TwinConstant href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinConstant.md" _blank
+  click N_Pruning href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Pruning.md" _blank
+  click N_WheelOrder href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/WheelOrder.md" _blank
+  click N_ShieldCertificates href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShieldCertificates.md" _blank
+  click N_Infinitude href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Infinitude.md" _blank
+  click N_ColumnStructure href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ColumnStructure.md" _blank
+  click N_DirichletColumns href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/DirichletColumns.md" _blank
+  click N_HardyLittlewood href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HardyLittlewood.md" _blank
+  click N_HensleyRichards href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HensleyRichards.md" _blank
+  click N_LinearForms href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LinearForms.md" _blank
+  click N_GapConjectures href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConjectures.md" _blank
+  click N_SophieGermainWheel href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainWheel.md" _blank
+  click N_GapTracks href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md" _blank
+  click N_DudekJohnston href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/DudekJohnston.md" _blank
 ```
 
 ## Every claim
 
-One box per claim, grouped by node.
+One box per claim, grouped by node. Click a claim to open it.
 
 ```mermaid
 graph LR
@@ -252,6 +259,69 @@ graph LR
   class C_HardyLittlewood_twin_prime_conjecture_implies_infinite_twin_primes,C_HensleyRichards_HL_A_and_B_incompatible,C_LinearForms_sophie_germain_of_LinearForms_conjecture,C_GapConjectures_legendre_of_jacobsthal,C_GapConjectures_brocard_of_four_survivors,C_GapConjectures_oppermann_of_bound,C_GapConjectures_andrica_of_oppermann,C_GapConjectures_legendre_of_oppermann conditional_built;
   class C_DudekJohnston_dudek_johnston_statement cited_built;
   class O_hardy_littlewood_conjecture,O_HL_conjecture_A,O_HL_conjecture_B,O_LinearForms_conjecture,O_jacobsthal_bound_holds,O_four_survivors_bound_holds,O_oppermann_bound_holds,O_oppermann_conjecture openconj;
+  click C_Wheel6_prime_gt_three_is_candidate href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md#prime_gt_three_is_candidate" _blank
+  click C_CRT_crt_map_bijective href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CRT.md#crt_map_bijective" _blank
+  click C_SquareRootShield_square_root_shield href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SquareRootShield.md#square_root_shield" _blank
+  click C_Admissibility_admissible_of_large_primes href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Admissibility.md#admissible_of_large_primes" _blank
+  click C_Admissibility_zero_two_admissible href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Admissibility.md#zero_two_admissible" _blank
+  click C_Admissibility_zero_two_four_not_admissible href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Admissibility.md#zero_two_four_not_admissible" _blank
+  click C_Admissibility_ap_offsets_admissible_iff href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Admissibility.md#ap_offsets_admissible_iff" _blank
+  click C_SurvivorCount_twin_survivor_count href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
+  click C_SurvivorCount_local_survivor_count href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#local_survivor_count" _blank
+  click C_SurvivorCount_general_survivor_count href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#general_survivor_count" _blank
+  click C_SingularSeries_delta_bound href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#delta_bound" _blank
+  click C_SingularSeries_factor_multipliable href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#factor_multipliable" _blank
+  click C_SingularSeries_hardy_littlewood_constant_pos href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#hardy_littlewood_constant_pos" _blank
+  click C_SingularSeries_local_density_factorization href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#local_density_factorization" _blank
+  click C_TwinConstant_twin_prime_constant_eq_classical href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinConstant.md#twin_prime_constant_eq_classical" _blank
+  click C_Pruning_valid_starting_residues_card_formula href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Pruning.md#valid_starting_residues_card_formula" _blank
+  click C_WheelOrder_wheel_marginal_new_formula href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/WheelOrder.md#wheel_marginal_new_formula" _blank
+  click C_WheelOrder_prime_gt_five_digit_ok href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/WheelOrder.md#prime_gt_five_digit_ok" _blank
+  click C_WheelOrder_wheel_gap_floor href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/WheelOrder.md#wheel_gap_floor" _blank
+  click C_ShieldCertificates_prime_of_shield_cover href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShieldCertificates.md#prime_of_shield_cover" _blank
+  click C_ShieldCertificates_active_primes_cover href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShieldCertificates.md#active_primes_cover" _blank
+  click C_ShieldCertificates_family_prime_of_shield_cover href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShieldCertificates.md#family_prime_of_shield_cover" _blank
+  click C_ShieldCertificates_forward_ap_prime_of_active_shield href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShieldCertificates.md#forward_ap_prime_of_active_shield" _blank
+  click C_ShieldCertificates_backward_ap_prime_of_active_shield href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShieldCertificates.md#backward_ap_prime_of_active_shield" _blank
+  click C_ShieldCertificates_tuple_prime_of_active_shield href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShieldCertificates.md#tuple_prime_of_active_shield" _blank
+  click C_ShieldCertificates_ap_hits_wheel href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShieldCertificates.md#ap_hits_wheel" _blank
+  click C_ShieldCertificates_ap_prime_run_length_lt_of_lt_start href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShieldCertificates.md#ap_prime_run_length_lt_of_lt_start" _blank
+  click C_ShieldCertificates_ap_prime_run_forces_divisibility href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShieldCertificates.md#ap_prime_run_forces_divisibility" _blank
+  click C_ShieldCertificates_window_prime_iff href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShieldCertificates.md#window_prime_iff" _blank
+  click C_ShieldCertificates_window_twin_iff href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShieldCertificates.md#window_twin_iff" _blank
+  click C_ShieldCertificates_backward_ap_hits_wheel href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShieldCertificates.md#backward_ap_hits_wheel" _blank
+  click C_ShieldCertificates_backward_ap_prime_run_length_lt_of_above href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShieldCertificates.md#backward_ap_prime_run_length_lt_of_above" _blank
+  click C_ShieldCertificates_backward_ap_prime_run_forces_divisibility href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShieldCertificates.md#backward_ap_prime_run_forces_divisibility" _blank
+  click C_Infinitude_euclid_primes_unbounded href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Infinitude.md#euclid_primes_unbounded" _blank
+  click C_Infinitude_squarefree_counting_no_finite_supply href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Infinitude.md#squarefree_counting_no_finite_supply" _blank
+  click C_ColumnStructure_columns_multiply href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ColumnStructure.md#columns_multiply" _blank
+  click C_ColumnStructure_col_minus_periodicity href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ColumnStructure.md#col_minus_periodicity" _blank
+  click C_ColumnStructure_col_minus_has_minus_prime_factor href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ColumnStructure.md#col_minus_has_minus_prime_factor" _blank
+  click C_ColumnStructure_col_minus_composite_has_proper_minus_factor href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ColumnStructure.md#col_minus_composite_has_proper_minus_factor" _blank
+  click C_DirichletColumns_col_minus_primes_infinite href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/DirichletColumns.md#col_minus_primes_infinite" _blank
+  click C_DirichletColumns_col_plus_primes_infinite href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/DirichletColumns.md#col_plus_primes_infinite" _blank
+  click C_DirichletColumns_col_minus_primes_unbounded href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/DirichletColumns.md#col_minus_primes_unbounded" _blank
+  click C_DirichletColumns_col_plus_primes_unbounded href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/DirichletColumns.md#col_plus_primes_unbounded" _blank
+  click C_HardyLittlewood_twin_prime_conjecture_implies_infinite_twin_primes href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HardyLittlewood.md#twin_prime_conjecture_implies_infinite_twin_primes" _blank
+  click C_HensleyRichards_HL_A_and_B_incompatible href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HensleyRichards.md#hl_a_and_b_incompatible" _blank
+  click C_LinearForms_sophieGermainSystem_admissible href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LinearForms.md#sophiegermainsystem_admissible" _blank
+  click C_LinearForms_sophie_germain_of_LinearForms_conjecture href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LinearForms.md#sophie_germain_of_linearforms_conjecture" _blank
+  click C_GapConjectures_legendre_of_jacobsthal href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConjectures.md#legendre_of_jacobsthal" _blank
+  click C_GapConjectures_brocard_of_four_survivors href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConjectures.md#brocard_of_four_survivors" _blank
+  click C_GapConjectures_oppermann_of_bound href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConjectures.md#oppermann_of_bound" _blank
+  click C_GapConjectures_andrica_of_oppermann href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConjectures.md#andrica_of_oppermann" _blank
+  click C_GapConjectures_legendre_of_oppermann href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConjectures.md#legendre_of_oppermann" _blank
+  click C_SophieGermainWheel_sophie_germain_mod_six href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainWheel.md#sophie_germain_mod_six" _blank
+  click C_SophieGermainWheel_sophie_germain_not_ends_in_seven href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainWheel.md#sophie_germain_not_ends_in_seven" _blank
+  click C_SophieGermainWheel_sophie_germain_last_digit href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainWheel.md#sophie_germain_last_digit" _blank
+  click C_GapTracks_twin_prime_mod_six href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#twin_prime_mod_six" _blank
+  click C_GapTracks_cousin_prime_mod_six href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#cousin_prime_mod_six" _blank
+  click C_GapTracks_sexy_prime_same_track href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#sexy_prime_same_track" _blank
+  click C_GapTracks_sexy_middle_not_always_blocked href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#sexy_middle_not_always_blocked" _blank
+  click C_GapTracks_prime_gap_forbidden_four_from_six_minus_one href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#prime_gap_forbidden_four_from_six_minus_one" _blank
+  click C_GapTracks_prime_gap_forbidden_two_from_six_plus_one href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#prime_gap_forbidden_two_from_six_plus_one" _blank
+  click C_GapTracks_prime_gap_same_track_of_six_dvd href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#prime_gap_same_track_of_six_dvd" _blank
+  click C_DudekJohnston_dudek_johnston_statement href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/DudekJohnston.md#dudek_johnston_statement" _blank
 ```
 
 ## What each result rests on
@@ -312,11 +382,11 @@ The results nothing else builds on, each with everything beneath it.
   - `hardy_littlewood_conjecture` — open conjecture, taken as a hypothesis
   - [`SingularSeries.hardy_littlewood_constant_pos`](docs/nodes/SingularSeries.md#hardy_littlewood_constant_pos) — proved in Lean
   - [`Admissibility.zero_two_admissible`](docs/nodes/Admissibility.md#zero_two_admissible) — proved in Lean
-- [`HensleyRichards.HL_A_and_B_incompatible`](docs/nodes/HensleyRichards.md#HL_A_and_B_incompatible) — proved in Lean, assuming open conjecture(s)
+- [`HensleyRichards.HL_A_and_B_incompatible`](docs/nodes/HensleyRichards.md#hl_a_and_b_incompatible) — proved in Lean, assuming open conjecture(s)
   - `HL_conjecture_A` — open conjecture, taken as a hypothesis
   - `HL_conjecture_B` — open conjecture, taken as a hypothesis
-- [`LinearForms.sophieGermainSystem_admissible`](docs/nodes/LinearForms.md#sophieGermainSystem_admissible) — proved in Lean
-- [`LinearForms.sophie_germain_of_LinearForms_conjecture`](docs/nodes/LinearForms.md#sophie_germain_of_LinearForms_conjecture) — proved in Lean, assuming open conjecture(s)
+- [`LinearForms.sophieGermainSystem_admissible`](docs/nodes/LinearForms.md#sophiegermainsystem_admissible) — proved in Lean
+- [`LinearForms.sophie_germain_of_LinearForms_conjecture`](docs/nodes/LinearForms.md#sophie_germain_of_linearforms_conjecture) — proved in Lean, assuming open conjecture(s)
   - `LinearForms_conjecture` — open conjecture, taken as a hypothesis
 - [`GapConjectures.legendre_of_jacobsthal`](docs/nodes/GapConjectures.md#legendre_of_jacobsthal) — proved in Lean, assuming open conjecture(s)
   - `jacobsthal_bound_holds` — open conjecture, taken as a hypothesis
@@ -356,9 +426,9 @@ exactly the following, each recorded as such rather than claimed:
 **Open conjectures, assumed only as hypotheses of claims:**
 
 - `hardy_littlewood_conjecture` — assumed by [`HardyLittlewood.twin_prime_conjecture_implies_infinite_twin_primes`](docs/nodes/HardyLittlewood.md#twin_prime_conjecture_implies_infinite_twin_primes)
-- `HL_conjecture_A` — assumed by [`HensleyRichards.HL_A_and_B_incompatible`](docs/nodes/HensleyRichards.md#HL_A_and_B_incompatible)
-- `HL_conjecture_B` — assumed by [`HensleyRichards.HL_A_and_B_incompatible`](docs/nodes/HensleyRichards.md#HL_A_and_B_incompatible)
-- `LinearForms_conjecture` — assumed by [`LinearForms.sophie_germain_of_LinearForms_conjecture`](docs/nodes/LinearForms.md#sophie_germain_of_LinearForms_conjecture)
+- `HL_conjecture_A` — assumed by [`HensleyRichards.HL_A_and_B_incompatible`](docs/nodes/HensleyRichards.md#hl_a_and_b_incompatible)
+- `HL_conjecture_B` — assumed by [`HensleyRichards.HL_A_and_B_incompatible`](docs/nodes/HensleyRichards.md#hl_a_and_b_incompatible)
+- `LinearForms_conjecture` — assumed by [`LinearForms.sophie_germain_of_LinearForms_conjecture`](docs/nodes/LinearForms.md#sophie_germain_of_linearforms_conjecture)
 - `jacobsthal_bound_holds` — assumed by [`GapConjectures.legendre_of_jacobsthal`](docs/nodes/GapConjectures.md#legendre_of_jacobsthal)
 - `four_survivors_bound_holds` — assumed by [`GapConjectures.brocard_of_four_survivors`](docs/nodes/GapConjectures.md#brocard_of_four_survivors)
 - `oppermann_bound_holds` — assumed by [`GapConjectures.oppermann_of_bound`](docs/nodes/GapConjectures.md#oppermann_of_bound)

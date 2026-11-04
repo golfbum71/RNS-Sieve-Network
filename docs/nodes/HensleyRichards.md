@@ -8,7 +8,7 @@ If an admissible pattern packs more offsets into a window than there are primes 
 
 ## Claims
 
-<a id="HL_A_and_B_incompatible"></a>
+<a id="hl_a_and_b_incompatible"></a>
 ### `HL_A_and_B_incompatible`
 
 Given a dense enough admissible pattern, Hardy-Littlewood Conjectures A and B cannot both hold.
