@@ -287,6 +287,87 @@ so they fit the RNS vocabulary directly. Statements marked "checked" held
 in a numerical test (4,761 cases: wheel sets drawn from the primes up to 19,
 up to 24 equal intervals).
 
+### Where to look first
+
+Places already found to hold results, statements or tools these items need.
+Check here before searching again. Links pinned to a commit were current on
+2026-11-04.
+
+**Lean projects with proofs to cite (as purple outside-source nodes)**
+- [PrimeNumberTheoremAnd (PNT+)](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd)
+  — Mertens' three theorems (`PrimeNumberTheoremAnd/IEANTN/Mertens.lean`;
+  third theorem `E₃.bound''`), the prime number theorem (`pi_alt'`,
+  `chebyshev_asymptotic` in `Consequences.lean`), Dirichlet's theorem in
+  prime-number-theorem form (`WeakPNT_AP` in `Wiener.lean`), the Selberg
+  sieve (`Mathlib/NumberTheory/Sieve/`) and Brun-Titchmarsh
+  (`BrunTitchmarsh.lean`). Builds on Lean v4.35.0. For: CeilingOvershoot,
+  BirdseySchay, any future Brun's-theorem work.
+- [openai/math](https://github.com/openai/math) — the quadratic bound on
+  Jacobsthal's function, with Lean proof and preprint (September 2026). For:
+  BlockingRuns; replaces Jacobsthal as a target of our own.
+- [plby/lean-proofs](https://github.com/plby/lean-proofs) — Lean proofs of
+  Hooley's exponential distribution of survivor gaps (Erdős 235) and the
+  Montgomery-Vaughan gap moments (Erdős 220), both about survivors of
+  primorial cycles. Possible outside sources for future gap nodes.
+- [30k30/scholia](https://github.com/30k30/scholia) — Lean glue from
+  Jacobsthal's function to Erdős 687 (blocking runs). For: BlockingRuns.
+- [epoch-research/LeanOpenProblems-results](https://github.com/epoch-research/LeanOpenProblems-results)
+  — the outside proof of the 2, 4, 2, 4, 2 gap-block statement. For:
+  InadmissibleOccurrences (our proof should come from Admissibility).
+- [Selberg sieve package](https://reservoir.lean-lang.org/@amellendijk/selbergSieve)
+  (Arend Mellendijk) — now folded into PNT+; the natural base for Brun's
+  theorem.
+
+**Statement collections (to align statements and avoid duplicate work)**
+- [DeepMind formal-conjectures](https://github.com/google-deepmind/formal-conjectures)
+  — statements with `sorry`, tagged open or solved, often linking outside
+  proofs. Relevant files: `OEIS/1223.lean`, `ErdosProblems/854.lean`,
+  `687.lean`, `970.lean`, `235.lean`, `220.lean`,
+  `GreensOpenProblems/46.lean`, and `Wikipedia/` (Dickson, TwinPrimes,
+  Schinzel, Legendre, Oppermann, Andrica, Brocard).
+- [IEANTN](https://github.com/teorth/IEANTN) — the network model this
+  repository follows; its nodes are explicit analytic bounds (Dusart's
+  prime gaps, Rosser-Schoenfeld, Chebyshev constants). Dusart2018 and
+  PrimeInterval are possible cited inputs for gap-conjecture nodes.
+- [Lean evaluation leaderboard](https://lean-lang.org/eval/problems/brun_constant_converges/)
+  — poses Brun's theorem as a problem; status not yet checked.
+
+**Mathlib at the pinned commit (`0df444a`, v4.33.1), confirmed present**
+- `log_add_one_le_harmonic`, `harmonic_le_one_add_log`
+  (`NumberTheory/Harmonic/Bounds.lean`) — for ShareBounds.
+- `eulerMascheroniConstant` and `tendsto_harmonic_sub_log`
+  (`NumberTheory/Harmonic/EulerMascheroni.lean`).
+- Chebyshev bounds: `Chebyshev.theta_le_log4_mul_x`, `Chebyshev.theta_ge`,
+  `Chebyshev.pi_le_log4_mul_div`, `Chebyshev.pi_ge`
+  (`NumberTheory/Chebyshev.lean`).
+- Abel summation (`NumberTheory/AbelSummation.lean`).
+- `not_summable_one_div_on_primes` (`NumberTheory/SumPrimeReciprocals.lean`).
+- Dirichlet's theorem: `Nat.forall_exists_prime_gt_and_modEq`
+  (`NumberTheory/LSeries/PrimesInAP.lean`).
+- `DirichletCharacter.LFunction_apply_one_ne_zero`
+  (`NumberTheory/LSeries/Nonvanishing.lean`) — for GermainCriterion.
+- Not in Mathlib: Mertens' theorems, the prime number theorem (use PNT+).
+
+**Papers**
+- Lehmer, *The distribution of totatives*, Canad. J. Math. 7 (1955) —
+  even splits, symmetry, spread bounds, closed forms. For: LehmerSplit,
+  SurvivorSymmetry, SpreadBounds, LehmerExcess, UniformSubdivision.
+- Germain, *The distribution of totatives*, Canad. Math. Bull. 48 (2005) —
+  exact criterion via odd characters. For: GermainCriterion.
+- Codecà and Nair, *Extremal values of Δ(x, N)*, Canad. Math. Bull. 41
+  (1998) — largest gap from the proportional share; cites Vijayaraghavan
+  (1951), Erdős (1958, 1960), Suryanarayana. For: LargestGap and the
+  column-imbalance question. Its primorial conjecture must be read from
+  the original.
+- Grob and Schmitt, arXiv:1905.03117 (2019); Grob, arXiv:2107.06950 (2021)
+  — residue-vector presentation, twin survivor counts.
+- Birdsey and Schay, arXiv:1906.09220 (2019) — twin share and the
+  one-correction heuristic. For: TwinShare, BirdseySchay.
+- Pritchard (1981, 1982) — the wheel sieve and the next-prime-square
+  ceiling.
+- The full verified list, with links, is in the project's prior-work
+  references document on claude.ai.
+
 **Tier 1: elementary, and they strengthen existing nodes**
 - **Lehmer's even split, general form** (Lehmer 1955, Thm 4). If one wheel
   leaves remainder 1 on division by a chosen number of intervals, the
