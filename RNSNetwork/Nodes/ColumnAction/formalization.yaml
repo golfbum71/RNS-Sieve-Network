@@ -1,0 +1,25 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: ColumnAction.v1
+  family: ColumnAction
+  version: v1
+  order: 25
+  kind: paper
+  status: planned
+  title: how a wheel moves the columns
+  description: Multiplying by a prime keeps the 6n-1 and 6n+1 columns in place if the prime
+    leaves remainder 1 on division by 6, and swaps them if it leaves remainder 5. The lemma
+    behind every column form in the network.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - ColumnStructure
+  claims:
+  - column_action
+  plan: Check first whether ColumnStructure's multiplicative closure identities already give
+    it.
+  tier: 'Tier 1: modular arithmetic.'
+sources: []

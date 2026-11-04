@@ -1,0 +1,28 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: TwinShare.v1
+  family: TwinShare
+  version: v1
+  order: 27
+  kind: paper
+  status: planned
+  title: the twin share of the cycle
+  description: Among all survivors of a cycle, the twin survivors make up exactly the product
+    over the wheels from 3 up of the wheel size minus 2 over the wheel size minus 1. That
+    product splits into the partial twin-prime constant times the coprime share.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - SurvivorCount
+  - TwinConstant
+  claims:
+  - twin_share_eq_prod
+  - twin_share_split
+  tier: 'Tier 1: from the two existing counts.'
+sources:
+- title: J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220
+  url: https://arxiv.org/abs/1906.09220
+  relationship: the exact share their second method uses

@@ -25,6 +25,10 @@ def twin_prime_constant_eq_classical : Prop :=
 
 **Proof:** `RNS.TwinConstant.twin_prime_constant_eq_classical_step` in [`RNSSolutions/TwinConstant.lean`](../../RNSSolutions/TwinConstant.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
+## Used by
+
+- [`TwinShare`](TwinShare.md)
+
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/TwinConstant/Conclusions.lean)

@@ -276,6 +276,11 @@ so each interval is off by the two columns' difference in the overhang.
 
 ## Candidate formalizations (not yet started)
 
+The scoped items below now appear on [`GRAPH.md`](../GRAPH.md) as planned
+nodes (grey dashed boxes), with the outside Lean results they cite drawn as
+purple outside-source nodes. Each node's page under `docs/nodes/` records
+its planned claims, scope and evidence.
+
 Results from the literature on how survivors spread out, each stated in
 wheel terms. All are finite counting statements about the combined cycle,
 so they fit the RNS vocabulary directly. Statements marked "checked" held

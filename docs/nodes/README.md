@@ -25,5 +25,22 @@
 | 19 | [`GapTracks`](GapTracks.md) | which gaps each column allows | proved in Lean |
 | 20 | [`DudekJohnston`](DudekJohnston.md) | a near-prime between every pair of squares | cited from a published paper; not proved in Lean |
 | 21 | [`UniformSubdivision`](UniformSubdivision.md) | equal shares of survivors in equal intervals | planned: new, not yet proved |
+| 22 | [`LehmerSplit`](LehmerSplit.md) | Lehmer's even split | planned: new, not yet proved |
+| 23 | [`SurvivorSymmetry`](SurvivorSymmetry.md) | survivors are mirror-symmetric | planned: new, not yet proved |
+| 24 | [`SpreadBounds`](SpreadBounds.md) | how unevenly survivors can spread | planned: new, not yet proved |
+| 25 | [`ColumnAction`](ColumnAction.md) | how a wheel moves the columns | planned: new, not yet proved |
+| 26 | [`ShareBounds`](ShareBounds.md) | the survivor share falls like one over the logarithm | planned: new, not yet proved |
+| 27 | [`TwinShare`](TwinShare.md) | the twin share of the cycle | planned: new, not yet proved |
+| 28 | [`InadmissibleOccurrences`](InadmissibleOccurrences.md) | inadmissible patterns sit next to their blocking wheel | planned: new, not yet proved |
+| 29 | [`GapCertificate`](GapCertificate.md) | the Lacampagne-Selfridge counterexample | planned: new, not yet proved |
+| 30 | [`BlockingRuns`](BlockingRuns.md) | blocking runs and the largest survivor gap | planned: new, not yet proved |
+| 31 | [`CeilingOvershoot`](CeilingOvershoot.md) | the overshoot at the ceiling | planned: new, not yet proved |
+| 32 | [`BirdseySchay`](BirdseySchay.md) | Birdsey and Schay's heuristic, as a hypothesis | planned: conditional |
+| 33 | [`LargestGap`](LargestGap.md) | the largest gap from the proportional share | planned: new, not yet proved |
+| 34 | [`LehmerExcess`](LehmerExcess.md) | Lehmer's closed form for the 6n-1 type | planned: new, not yet proved |
+| 35 | [`GermainCriterion`](GermainCriterion.md) | Germain's exact criterion for an even split | planned: new, not yet proved |
+| 40 | [`MertensThird`](MertensThird.md) | Mertens' third theorem | outside source: proved in Lean in another project |
+| 41 | [`PrimeNumberTheorem`](PrimeNumberTheorem.md) | the prime number theorem | outside source: proved in Lean in another project |
+| 42 | [`JacobsthalQuadratic`](JacobsthalQuadratic.md) | the quadratic bound on Jacobsthal's function | outside source: proved in Lean in another project |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

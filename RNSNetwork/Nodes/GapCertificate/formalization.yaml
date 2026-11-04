@@ -1,0 +1,28 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: GapCertificate.v1
+  family: GapCertificate
+  version: v1
+  order: 29
+  kind: paper
+  status: planned
+  title: the Lacampagne-Selfridge counterexample
+  description: For the wheels up to 13 (cycle 30030), the gaps between consecutive survivors
+    take every even value up to the largest gap, 22, except 20. Erdős had expected every even
+    value to appear.
+conclusions: []
+planned:
+  source_status: New
+  rests_on: []
+  claims:
+  - survivor_gaps_30030_miss_20
+  - survivor_gaps_even
+  evidence: Checked numerically; the cycles 30, 210, 2310 and 510510 miss no even value.
+  tier: 'Tier 2: a certificate-style proof as in ShieldCertificates, since native_decide would
+    add an axiom.'
+sources:
+- title: DeepMind formal-conjectures, Erdős Problem 854
+  url: https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/854.lean
+  relationship: states the problem

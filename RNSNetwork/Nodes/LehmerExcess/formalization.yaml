@@ -1,0 +1,25 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: LehmerExcess.v1
+  family: LehmerExcess
+  version: v1
+  order: 34
+  kind: paper
+  status: planned
+  title: Lehmer's closed form for the 6n-1 type
+  description: When every wheel leaves remainder one less than the number of intervals, the
+    excess in the first intervals has an exact formula. The 6n-1 side of Lehmer's picture,
+    and the natural partner to UniformSubdivision's 6n-1-side claim.
+conclusions: []
+planned:
+  source_status: New
+  rests_on: []
+  claims:
+  - lehmer_excess_closed_form
+  tier: Tier 2.
+sources:
+- title: D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357
+  url: https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf
+  relationship: Theorem 8

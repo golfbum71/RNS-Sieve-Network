@@ -1,0 +1,27 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: LargestGap.v1
+  family: LargestGap
+  version: v1
+  order: 33
+  kind: paper
+  status: planned
+  title: the largest gap from the proportional share
+  description: Adding one wheel at most doubles the largest gap between the survivor count
+    and its proportional share, minus one over the new prime; and the average squared gap
+    over the survivor positions has an exact formula.
+conclusions: []
+planned:
+  source_status: New
+  rests_on: []
+  claims:
+  - largest_gap_add_wheel
+  - mean_square_gap
+  tier: 'Tier 2: needs rational numbers.'
+sources:
+- title: P. Codecà and M. Nair, Extremal values of Delta(x,N), Canad. Math. Bull. 41 (1998),
+    335-347
+  url: https://doi.org/10.4153/CMB-1998-046-3
+  relationship: Theorems 1(i) and 3(i)

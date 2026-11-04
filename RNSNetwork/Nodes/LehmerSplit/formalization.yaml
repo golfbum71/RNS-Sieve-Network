@@ -1,0 +1,30 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: LehmerSplit.v1
+  family: LehmerSplit
+  version: v1
+  order: 22
+  kind: paper
+  status: planned
+  title: Lehmer's even split
+  description: If one wheel leaves remainder 1 on division by a chosen number of intervals,
+    the survivors of the cycle split evenly across that many equal intervals (endpoints rounded
+    down). With wheels 2 and 3 frozen, each column splits evenly when a wheel leaves remainder
+    1 on division by the least common multiple of 6 and the number of intervals. UniformSubdivision's
+    whole-count claim is the case of the rotating prime minus one intervals.
+conclusions: []
+planned:
+  source_status: New
+  rests_on: []
+  claims:
+  - lehmer_even_split
+  - lehmer_even_split_column
+  evidence: Both checked numerically on 4,761 cases (wheel sets from the primes up to 19,
+    up to 24 intervals).
+  tier: 'Tier 1: elementary.'
+sources:
+- title: D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357
+  url: https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf
+  relationship: Theorem 4 is the whole-count form

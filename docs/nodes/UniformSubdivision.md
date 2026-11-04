@@ -10,5 +10,12 @@ With one wheel rotating and the rest frozen, the full cycle splits into as many 
 
 **Will rest on:** no other node
 
-**In the source files:** 
+**Planned claims:** `frozen_wheels_repeat`, `one_wheel_removed`, `uniform_subdivision`, `uniform_subdivision_plus_side`, `uniform_subdivision_minus_side`
+
+**Plan:** uniform_subdivision is a step from frozen_wheels_repeat and one_wheel_removed plus one floor-division fact: rounding down the end of the K-th interval and dividing by the rotating prime gives the same number as the overhang past K frozen cycles. The two column claims follow the same route with column-restricted counts; the 6n-1 case adds the column swap of the rotating wheel's multiples.
+
+**Evidence so far:** All five claims checked numerically on 3,647 cases (frozen wheel sets drawn from the primes up to 17, every rotating prime not in the set, every interval index, every column remainder) with no failures.
+
+- Source: The distribution of totatives, Canad. J. Math. 7 (1955), 347-357, Theorem 4 — whole-count form is a special case
+- Source: Cycles and Patterns in the Sieve of Eratosthenes (arXiv:1905.03117), Theorems 6-9 — restates the whole-count form
 

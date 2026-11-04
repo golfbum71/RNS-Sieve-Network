@@ -135,15 +135,15 @@ def topo_order(nodes, edges):
 # ---------------------------------------------------------------- status
 
 def node_kind(n):
-    """One of: verified, conditional_built, cited_built, planned, conditional, cited, new."""
+    """One of: verified, conditional_built, cited_built, planned, conditional, cited, new, external."""
     if n["built"]:
         if any(is_cited(c) for c in n["conclusions"]):
             return "cited_built"
         if opens_of(n):
             return "conditional_built"
         return "verified"
-    return {"Conditional": "conditional", "Cited": "cited", "New": "new"}.get(
-        n["planned"].get("source_status"), "planned")
+    return {"Conditional": "conditional", "Cited": "cited", "New": "new",
+            "External": "external"}.get(n["planned"].get("source_status"), "planned")
 
 
 STATUS_WORDS = {
@@ -154,6 +154,7 @@ STATUS_WORDS = {
     "conditional": "planned: conditional",
     "cited": "planned: cited from a paper",
     "new": "planned: new, not yet proved",
+    "external": "outside source: proved in Lean in another project",
 }
 
 
@@ -184,9 +185,11 @@ CLASSDEFS = """  classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional fill:#ffffff,stroke:#9a6700,color:#57606a,stroke-dasharray: 5 4;
   classDef cited fill:#ffffff,stroke:#0969da,color:#57606a,stroke-dasharray: 5 4;
   classDef new fill:#ffffff,stroke:#57606a,color:#57606a,stroke-dasharray: 5 4;
+  classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;"""
 
-KINDS = ["verified", "conditional_built", "cited_built", "planned", "conditional", "cited", "new"]
+KINDS = ["verified", "conditional_built", "cited_built", "planned", "conditional", "cited", "new",
+         "external"]
 
 
 # ---------------------------------------------------------------- GRAPH.md
@@ -207,6 +210,8 @@ def overview_mermaid(nodes, order, edges):
             elif kind == "conditional_built":
                 k = len(opens_of(n))
                 sub += f", assumes {k} open conjecture{'s' if k != 1 else ''}"
+        elif node_kind(n) == "external":
+            sub = f"outside source: {n['planned'].get('external', {}).get('project', 'another project')}"
         else:
             sub = status_word(n)
         lines.append(f'  {mid(name)}["<b>{name}</b><br/>{label(n["title"])}<br/><i>{sub}</i>"]')
@@ -308,8 +313,26 @@ def write_graph(nodes, order, edges):
                 + (f" and {n_cited} cited from a published paper" if n_cited else "")
                 + f". They are joined by {n_arrows} arrows, each a Lean-checked step.")
     if planned:
-        standing += (f" The other {len(planned)} nodes are drawn as planned: their claims are "
-                     "proved in the original source files but not yet restated here.")
+        counts = {}
+        for nm in planned:
+            counts[node_kind(nodes[nm])] = counts.get(node_kind(nodes[nm]), 0) + 1
+        parts = []
+        for kind, one, many in [
+                ("planned", "is proved in the original source files but not yet restated here",
+                 "are proved in the original source files but not yet restated here"),
+                ("conditional", "is a planned step that will assume an open conjecture",
+                 "are planned steps that will assume open conjectures"),
+                ("cited", "is a planned citation of a published result",
+                 "are planned citations of published results"),
+                ("new", "is new work, stated or scoped but not yet proved",
+                 "are new work, stated or scoped but not yet proved"),
+                ("external", "is an outside source, proved in Lean in another project and cited here",
+                 "are outside sources, proved in Lean in other projects and cited here")]:
+            k = counts.get(kind, 0)
+            if k:
+                parts.append(f"{k} {one if k == 1 else many}")
+        standing += (f" Of the other {len(planned)} nodes, drawn dashed or purple, "
+                     + "; ".join(parts) + ".")
 
     md = f"""# The network
 
@@ -343,7 +366,11 @@ without opening a single proof.
   only claims, never another node's proof; each arrow is proved as a
   separate `…_step` theorem with the upstream claim as a named hypothesis,
   and `RNSSolutions/Assemble.lean` joins the steps up.
-- **Dashed box or dotted arrow:** planned, not yet built.
+- **Dashed box or dotted arrow:** planned, not yet built. A grey dashed
+  box is new work begun in this repository.
+- **Purple box:** an outside source — a result proved in Lean in another
+  project, linked from its page. Nodes here cite it as a named hypothesis
+  rather than re-proving it or importing that project.
 
 ## The network at a glance
 
@@ -386,6 +413,18 @@ exactly the following, each recorded as such rather than claimed:
         md += "\n"
     if not built_opens and not cited:
         md += "Nothing.\n\n"
+    externals = [nm for nm in by_order(nodes) if node_kind(nodes[nm]) == "external"]
+    if externals:
+        md += "**Outside sources, proved in Lean elsewhere and cited here:**\n\n"
+        for nm in externals:
+            e = nodes[nm]["planned"].get("external", {})
+            users = [m for m in by_order(nodes) if nm in (nodes[m]["planned"].get("rests_on") or [])]
+            decl = f"`{e['declaration']}` in " if e.get("declaration") else ""
+            md += f"- [`{nm}`](docs/nodes/{nm}.md) — {decl}[{e.get('project', '')}]({e.get('url', '')})"
+            if users:
+                md += " — cited by " + ", ".join(f"[`{u}`](docs/nodes/{u}.md)" for u in users)
+            md += "\n"
+        md += "\n"
     planned_opens = [o for nm in planned for o in opens_of(nodes[nm]) if o not in built_opens]
     if planned_opens:
         md += "**Planned nodes will add:** " + ", ".join(f"`{o}`" for o in planned_opens) + "\n\n"
@@ -444,13 +483,40 @@ def write_node_page(n, nodes, edges):
     else:
         p = n["planned"]
         rests = p.get("rests_on") or []
-        md += "## Planned\n\n"
-        md += "**Will rest on:** " + (", ".join(f"[`{r}`]({r}.md)" for r in rests)
-                                      or "no other node") + "\n\n"
+        if node_kind(n) == "external":
+            md += "## Outside source\n\n"
+        else:
+            md += "## Planned\n\n"
+            md += "**Will rest on:** " + (", ".join(f"[`{r}`]({r}.md)" for r in rests)
+                                          or "no other node") + "\n\n"
         if p.get("open_inputs"):
             md += "**Open conjectures it will take as named hypotheses:** " + ", ".join(
                 f"`{o}`" for o in p["open_inputs"]) + "\n\n"
-        md += f"**In the source files:** {' '.join(str(p.get('source_declarations', '')).split())}\n\n"
+        if p.get("source_declarations"):
+            md += f"**In the source files:** {' '.join(str(p['source_declarations']).split())}\n\n"
+        if p.get("external"):
+            e = p["external"]
+            decl = f"`{e['declaration']}` in " if e.get("declaration") else ""
+            md += f"**Outside source:** {decl}[{e.get('project', '')}]({e.get('url', '')})"
+            if e.get("toolchain"):
+                md += f" (built on {e['toolchain']})"
+            md += ".\n\n"
+            if e.get("note"):
+                md += f"{' '.join(str(e['note']).split())}\n\n"
+        if p.get("claims"):
+            md += "**Planned claims:** " + ", ".join(f"`{c}`" for c in p["claims"]) + "\n\n"
+        for key, title in [("plan", "Plan"), ("evidence", "Evidence so far"), ("tier", "Scope")]:
+            if p.get(key):
+                md += f"**{title}:** {' '.join(str(p[key]).split())}\n\n"
+        users = [m["name"] for m in nodes.values() if name in (m["planned"].get("rests_on") or [])]
+        if users:
+            md += "**Cited by:** " + ", ".join(f"[`{u}`]({u}.md)" for u in sorted(
+                users, key=lambda u: nodes[u]["order"])) + "\n\n"
+        for src in n["sources"]:
+            link = f"[{src.get('title')}]({src['url']})" if src.get("url") else src.get("title")
+            md += f"- Source: {link}" + (f" — {src['relationship']}" if src.get("relationship") else "") + "\n"
+        if n["sources"]:
+            md += "\n"
         if p.get("citation"):
             md += f"**Citation:** {' '.join(str(p['citation']).split())}\n\n"
     open(os.path.join(ROOT, "docs", "nodes", f"{name}.md"), "w", encoding="utf-8").write(md)

@@ -1,0 +1,26 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: GermainCriterion.v1
+  family: GermainCriterion
+  version: v1
+  order: 35
+  kind: paper
+  status: planned
+  title: Germain's exact criterion for an even split
+  description: The survivors split evenly across a given number of equal intervals exactly
+    when every odd Dirichlet character for that number takes the value 1 at some wheel.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - LehmerSplit
+  claims:
+  - germain_criterion
+  tier: 'Tier 3: uses the nonvanishing of Dirichlet L-functions at 1, which Mathlib provides
+    (DirichletCharacter.LFunction_apply_one_ne_zero).'
+sources:
+- title: J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220
+  url: https://doi.org/10.4153/CMB-2005-019-9
+  relationship: Theorem 1.1

@@ -80,6 +80,7 @@ def ap_offsets_admissible_iff : Prop :=
 ## Used by
 
 - [`HardyLittlewood`](HardyLittlewood.md)
+- [`InadmissibleOccurrences`](InadmissibleOccurrences.md)
 
 ## Files
 

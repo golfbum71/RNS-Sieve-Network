@@ -1,0 +1,28 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: SpreadBounds.v1
+  family: SpreadBounds
+  version: v1
+  order: 24
+  kind: paper
+  status: planned
+  title: how unevenly survivors can spread
+  description: Any two equal intervals of the cycle hold survivor counts differing by at most
+    two to the number of wheels. With wheels 2 and 3 frozen, the two columns' survivor counts
+    up to any point differ by at most two to the number of remaining wheels.
+conclusions: []
+planned:
+  source_status: New
+  rests_on: []
+  claims:
+  - interval_spread_bound
+  - column_imbalance_bound
+  evidence: Both checked numerically (4,761 cases). The column imbalance reaches 18 at the
+    wheels up to 23, against a bound of 128.
+  tier: 'Tier 1: inclusion-exclusion.'
+sources:
+- title: D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357
+  url: https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf
+  relationship: Theorems 9 and 10, the interval form

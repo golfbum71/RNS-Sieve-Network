@@ -43,6 +43,13 @@ an open problem (the Hardy–Littlewood conjecture, Dickson's conjecture,
 Oppermann's conjecture, …), the problem is stated precisely as a `Prop` and
 taken as a named hypothesis. The graph draws it as such.
 
+**Outside Lean results are cited, never imported.** Where a result is
+already proved in Lean in another project (Mertens' third theorem and the
+prime number theorem in PrimeNumberTheoremAnd, the Jacobsthal bound in
+OpenAI's repository), it appears on the graph as a purple outside-source
+node with a link to the proof, and nodes here take it as a named hypothesis.
+This keeps the toolchain pinned and the dependency visible.
+
 ## Building
 
 Needs [Lean 4](https://lean-lang.org) (via `elan`); the toolchain and Mathlib

@@ -1,0 +1,30 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: BirdseySchay.v1
+  family: BirdseySchay
+  version: v1
+  order: 32
+  kind: paper
+  status: planned
+  title: Birdsey and Schay's heuristic, as a hypothesis
+  description: Their assumption that the wheel share of twins carries into the range below
+    the next prime's square, with one Mertens correction, stated as a named hypothesis, together
+    with the step showing it implies the twin-prime asymptotic.
+conclusions: []
+planned:
+  source_status: Conditional
+  rests_on:
+  - TwinShare
+  - MertensThird
+  - PrimeNumberTheorem
+  claims:
+  - birdsey_schay_implies_twin_asymptotic
+  tier: 'Tier 3: needs the two outside sources as hypotheses.'
+  open_inputs:
+  - birdsey_schay_heuristic
+sources:
+- title: J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220
+  url: https://arxiv.org/abs/1906.09220
+  relationship: the heuristic

@@ -1,0 +1,24 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: JacobsthalQuadratic.v1
+  family: JacobsthalQuadratic
+  version: v1
+  order: 42
+  kind: external
+  status: planned
+  title: the quadratic bound on Jacobsthal's function
+  description: Every run of consecutive integers longer than a constant times the square of
+    k contains a number coprime to any given number with at most k prime factors. Proved in
+    Lean by OpenAI (September 2026); solves Erdős Problem 970.
+conclusions: []
+planned:
+  source_status: External
+  rests_on: []
+  external:
+    project: openai/math
+    url: https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/OAI/NumberTheory/Jacobsthal/Conclusions/QuadraticBound.lean#L13
+    note: Listed as solved in DeepMind's formal-conjectures (ErdosProblems/970.lean), which
+      links this proof. Check its toolchain and axioms before citing.
+sources: []

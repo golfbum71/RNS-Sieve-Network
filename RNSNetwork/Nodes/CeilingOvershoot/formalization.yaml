@@ -1,0 +1,25 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: CeilingOvershoot.v1
+  family: CeilingOvershoot
+  version: v1
+  order: 31
+  kind: paper
+  status: planned
+  title: the overshoot at the ceiling
+  description: With the wheels up to the square root of a bound, the survivor share times
+    the bound, divided by the number of primes up to the bound, tends to twice e to the minus
+    Euler's constant, about 1.1229.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - SurvivorCount
+  - MertensThird
+  - PrimeNumberTheorem
+  claims:
+  - ceiling_overshoot
+  tier: 'Tier 2: a short step from the two outside sources.'
+sources: []

@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 20 of 21 nodes are built, holding 63 claims: 62 proved in Lean and 1 cited from a published paper. They are joined by 23 arrows, each a Lean-checked step. The other 1 nodes are drawn as planned: their claims are proved in the original source files but not yet restated here.
+**Where things stand:** 20 of 38 nodes are built, holding 63 claims: 62 proved in Lean and 1 cited from a published paper. They are joined by 23 arrows, each a Lean-checked step. Of the other 18 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 14 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the diagrams
 
@@ -30,7 +30,11 @@ without opening a single proof.
   only claims, never another node's proof; each arrow is proved as a
   separate `…_step` theorem with the upstream claim as a named hypothesis,
   and `RNSSolutions/Assemble.lean` joins the steps up.
-- **Dashed box or dotted arrow:** planned, not yet built.
+- **Dashed box or dotted arrow:** planned, not yet built. A grey dashed
+  box is new work begun in this repository.
+- **Purple box:** an outside source — a result proved in Lean in another
+  project, linked from its page. Nodes here cite it as a named hypothesis
+  rather than re-proving it or importing that project.
 
 ## The network at a glance
 
@@ -57,6 +61,23 @@ graph LR
   N_GapTracks["<b>GapTracks</b><br/>which gaps each column allows<br/><i>7 claims</i>"]
   N_DudekJohnston["<b>DudekJohnston</b><br/>a near-prime between every pair of squares<br/><i>1 claim, cited</i>"]
   N_UniformSubdivision["<b>UniformSubdivision</b><br/>equal shares of survivors in equal intervals<br/><i>planned: new, not yet proved</i>"]
+  N_LehmerSplit["<b>LehmerSplit</b><br/>Lehmer's even split<br/><i>planned: new, not yet proved</i>"]
+  N_SurvivorSymmetry["<b>SurvivorSymmetry</b><br/>survivors are mirror-symmetric<br/><i>planned: new, not yet proved</i>"]
+  N_SpreadBounds["<b>SpreadBounds</b><br/>how unevenly survivors can spread<br/><i>planned: new, not yet proved</i>"]
+  N_ColumnAction["<b>ColumnAction</b><br/>how a wheel moves the columns<br/><i>planned: new, not yet proved</i>"]
+  N_ShareBounds["<b>ShareBounds</b><br/>the survivor share falls like one over the logarithm<br/><i>planned: new, not yet proved</i>"]
+  N_TwinShare["<b>TwinShare</b><br/>the twin share of the cycle<br/><i>planned: new, not yet proved</i>"]
+  N_InadmissibleOccurrences["<b>InadmissibleOccurrences</b><br/>inadmissible patterns sit next to their blocking wheel<br/><i>planned: new, not yet proved</i>"]
+  N_GapCertificate["<b>GapCertificate</b><br/>the Lacampagne-Selfridge counterexample<br/><i>planned: new, not yet proved</i>"]
+  N_JacobsthalQuadratic["<b>JacobsthalQuadratic</b><br/>the quadratic bound on Jacobsthal's function<br/><i>outside source: openai/math</i>"]
+  N_BlockingRuns["<b>BlockingRuns</b><br/>blocking runs and the largest survivor gap<br/><i>planned: new, not yet proved</i>"]
+  N_MertensThird["<b>MertensThird</b><br/>Mertens' third theorem<br/><i>outside source: PrimeNumberTheoremAnd (PNT+)</i>"]
+  N_PrimeNumberTheorem["<b>PrimeNumberTheorem</b><br/>the prime number theorem<br/><i>outside source: PrimeNumberTheoremAnd (PNT+)</i>"]
+  N_CeilingOvershoot["<b>CeilingOvershoot</b><br/>the overshoot at the ceiling<br/><i>planned: new, not yet proved</i>"]
+  N_BirdseySchay["<b>BirdseySchay</b><br/>Birdsey and Schay's heuristic, as a hypothesis<br/><i>planned: conditional</i>"]
+  N_LargestGap["<b>LargestGap</b><br/>the largest gap from the proportional share<br/><i>planned: new, not yet proved</i>"]
+  N_LehmerExcess["<b>LehmerExcess</b><br/>Lehmer's closed form for the 6n-1 type<br/><i>planned: new, not yet proved</i>"]
+  N_GermainCriterion["<b>GermainCriterion</b><br/>Germain's exact criterion for an even split<br/><i>planned: new, not yet proved</i>"]
   N_CRT ==>|2| N_SurvivorCount
   N_SurvivorCount ==>|1| N_SingularSeries
   N_SingularSeries ==>|1| N_TwinConstant
@@ -68,6 +89,20 @@ graph LR
   N_Wheel6 ==>|1| N_SophieGermainWheel
   N_WheelOrder ==>|1| N_SophieGermainWheel
   N_Wheel6 ==>|5| N_GapTracks
+  N_ColumnStructure -.-> N_ColumnAction
+  N_SurvivorCount -.-> N_ShareBounds
+  N_SurvivorCount -.-> N_TwinShare
+  N_TwinConstant -.-> N_TwinShare
+  N_Admissibility -.-> N_InadmissibleOccurrences
+  N_CRT -.-> N_BlockingRuns
+  N_JacobsthalQuadratic -.-> N_BlockingRuns
+  N_SurvivorCount -.-> N_CeilingOvershoot
+  N_MertensThird -.-> N_CeilingOvershoot
+  N_PrimeNumberTheorem -.-> N_CeilingOvershoot
+  N_TwinShare -.-> N_BirdseySchay
+  N_MertensThird -.-> N_BirdseySchay
+  N_PrimeNumberTheorem -.-> N_BirdseySchay
+  N_LehmerSplit -.-> N_GermainCriterion
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
   classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
@@ -75,11 +110,14 @@ graph LR
   classDef conditional fill:#ffffff,stroke:#9a6700,color:#57606a,stroke-dasharray: 5 4;
   classDef cited fill:#ffffff,stroke:#0969da,color:#57606a,stroke-dasharray: 5 4;
   classDef new fill:#ffffff,stroke:#57606a,color:#57606a,stroke-dasharray: 5 4;
+  classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   class N_Wheel6,N_CRT,N_SquareRootShield,N_Admissibility,N_SurvivorCount,N_SingularSeries,N_TwinConstant,N_Pruning,N_WheelOrder,N_ShieldCertificates,N_Infinitude,N_ColumnStructure,N_DirichletColumns,N_SophieGermainWheel,N_GapTracks verified;
   class N_HardyLittlewood,N_HensleyRichards,N_LinearForms,N_GapConjectures conditional_built;
   class N_DudekJohnston cited_built;
-  class N_UniformSubdivision new;
+  class N_BirdseySchay conditional;
+  class N_UniformSubdivision,N_LehmerSplit,N_SurvivorSymmetry,N_SpreadBounds,N_ColumnAction,N_ShareBounds,N_TwinShare,N_InadmissibleOccurrences,N_GapCertificate,N_BlockingRuns,N_CeilingOvershoot,N_LargestGap,N_LehmerExcess,N_GermainCriterion new;
+  class N_JacobsthalQuadratic,N_MertensThird,N_PrimeNumberTheorem external;
   click N_Wheel6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md" _blank
   click N_CRT href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CRT.md" _blank
   click N_SquareRootShield href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SquareRootShield.md" _blank
@@ -101,6 +139,23 @@ graph LR
   click N_GapTracks href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md" _blank
   click N_DudekJohnston href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/DudekJohnston.md" _blank
   click N_UniformSubdivision href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/UniformSubdivision.md" _blank
+  click N_LehmerSplit href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LehmerSplit.md" _blank
+  click N_SurvivorSymmetry href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorSymmetry.md" _blank
+  click N_SpreadBounds href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SpreadBounds.md" _blank
+  click N_ColumnAction href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ColumnAction.md" _blank
+  click N_ShareBounds href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md" _blank
+  click N_TwinShare href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinShare.md" _blank
+  click N_InadmissibleOccurrences href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/InadmissibleOccurrences.md" _blank
+  click N_GapCertificate href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapCertificate.md" _blank
+  click N_JacobsthalQuadratic href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/JacobsthalQuadratic.md" _blank
+  click N_BlockingRuns href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BlockingRuns.md" _blank
+  click N_MertensThird href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensThird.md" _blank
+  click N_PrimeNumberTheorem href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeNumberTheorem.md" _blank
+  click N_CeilingOvershoot href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CeilingOvershoot.md" _blank
+  click N_BirdseySchay href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirdseySchay.md" _blank
+  click N_LargestGap href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LargestGap.md" _blank
+  click N_LehmerExcess href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LehmerExcess.md" _blank
+  click N_GermainCriterion href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md" _blank
 ```
 
 ## Every claim
@@ -259,6 +314,7 @@ graph LR
   classDef conditional fill:#ffffff,stroke:#9a6700,color:#57606a,stroke-dasharray: 5 4;
   classDef cited fill:#ffffff,stroke:#0969da,color:#57606a,stroke-dasharray: 5 4;
   classDef new fill:#ffffff,stroke:#57606a,color:#57606a,stroke-dasharray: 5 4;
+  classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   class C_Wheel6_prime_gt_three_is_candidate,C_CRT_crt_map_bijective,C_SquareRootShield_square_root_shield,C_Admissibility_admissible_of_large_primes,C_Admissibility_zero_two_admissible,C_Admissibility_zero_two_four_not_admissible,C_Admissibility_ap_offsets_admissible_iff,C_SurvivorCount_twin_survivor_count,C_SurvivorCount_local_survivor_count,C_SurvivorCount_general_survivor_count,C_SingularSeries_delta_bound,C_SingularSeries_factor_multipliable,C_SingularSeries_hardy_littlewood_constant_pos,C_SingularSeries_local_density_factorization,C_TwinConstant_twin_prime_constant_eq_classical,C_Pruning_valid_starting_residues_card_formula,C_WheelOrder_wheel_marginal_new_formula,C_WheelOrder_prime_gt_five_digit_ok,C_WheelOrder_wheel_gap_floor,C_ShieldCertificates_prime_of_shield_cover,C_ShieldCertificates_active_primes_cover,C_ShieldCertificates_family_prime_of_shield_cover,C_ShieldCertificates_forward_ap_prime_of_active_shield,C_ShieldCertificates_backward_ap_prime_of_active_shield,C_ShieldCertificates_tuple_prime_of_active_shield,C_ShieldCertificates_ap_hits_wheel,C_ShieldCertificates_ap_prime_run_length_lt_of_lt_start,C_ShieldCertificates_ap_prime_run_forces_divisibility,C_ShieldCertificates_window_prime_iff,C_ShieldCertificates_window_twin_iff,C_ShieldCertificates_backward_ap_hits_wheel,C_ShieldCertificates_backward_ap_prime_run_length_lt_of_above,C_ShieldCertificates_backward_ap_prime_run_forces_divisibility,C_Infinitude_euclid_primes_unbounded,C_Infinitude_squarefree_counting_no_finite_supply,C_ColumnStructure_columns_multiply,C_ColumnStructure_col_minus_periodicity,C_ColumnStructure_col_minus_has_minus_prime_factor,C_ColumnStructure_col_minus_composite_has_proper_minus_factor,C_DirichletColumns_col_minus_primes_infinite,C_DirichletColumns_col_plus_primes_infinite,C_DirichletColumns_col_minus_primes_unbounded,C_DirichletColumns_col_plus_primes_unbounded,C_LinearForms_sophieGermainSystem_admissible,C_SophieGermainWheel_sophie_germain_mod_six,C_SophieGermainWheel_sophie_germain_not_ends_in_seven,C_SophieGermainWheel_sophie_germain_last_digit,C_GapTracks_twin_prime_mod_six,C_GapTracks_cousin_prime_mod_six,C_GapTracks_sexy_prime_same_track,C_GapTracks_sexy_middle_not_always_blocked,C_GapTracks_prime_gap_forbidden_four_from_six_minus_one,C_GapTracks_prime_gap_forbidden_two_from_six_plus_one,C_GapTracks_prime_gap_same_track_of_six_dvd verified;
   class C_HardyLittlewood_twin_prime_conjecture_implies_infinite_twin_primes,C_HensleyRichards_HL_A_and_B_incompatible,C_LinearForms_sophie_germain_of_LinearForms_conjecture,C_GapConjectures_legendre_of_jacobsthal,C_GapConjectures_brocard_of_four_survivors,C_GapConjectures_oppermann_of_bound,C_GapConjectures_andrica_of_oppermann,C_GapConjectures_legendre_of_oppermann conditional_built;
@@ -443,6 +499,14 @@ exactly the following, each recorded as such rather than claimed:
 
 - [`DudekJohnston.dudek_johnston_statement`](docs/nodes/DudekJohnston.md#dudek_johnston_statement) — Dudek and Johnston, Almost primes between all squares, arXiv:2501.18048 (2025), Theorem 1.2
 
+**Outside sources, proved in Lean elsewhere and cited here:**
+
+- [`MertensThird`](docs/nodes/MertensThird.md) — `E₃.bound''` in [PrimeNumberTheoremAnd (PNT+)](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/IEANTN/Mertens.lean#L2419) — cited by [`CeilingOvershoot`](docs/nodes/CeilingOvershoot.md), [`BirdseySchay`](docs/nodes/BirdseySchay.md)
+- [`PrimeNumberTheorem`](docs/nodes/PrimeNumberTheorem.md) — `pi_alt'` in [PrimeNumberTheoremAnd (PNT+)](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/Consequences.lean#L900) — cited by [`CeilingOvershoot`](docs/nodes/CeilingOvershoot.md), [`BirdseySchay`](docs/nodes/BirdseySchay.md)
+- [`JacobsthalQuadratic`](docs/nodes/JacobsthalQuadratic.md) — [openai/math](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/OAI/NumberTheory/Jacobsthal/Conclusions/QuadraticBound.lean#L13) — cited by [`BlockingRuns`](docs/nodes/BlockingRuns.md)
+
+**Planned nodes will add:** `birdsey_schay_heuristic`
+
 ## Node index
 
 | # | Node | What it says | Status |
@@ -468,3 +532,20 @@ exactly the following, each recorded as such rather than claimed:
 | 19 | [`GapTracks`](docs/nodes/GapTracks.md) | which gaps each column allows | proved in Lean |
 | 20 | [`DudekJohnston`](docs/nodes/DudekJohnston.md) | a near-prime between every pair of squares | cited from a published paper; not proved in Lean |
 | 21 | [`UniformSubdivision`](docs/nodes/UniformSubdivision.md) | equal shares of survivors in equal intervals | planned: new, not yet proved |
+| 22 | [`LehmerSplit`](docs/nodes/LehmerSplit.md) | Lehmer's even split | planned: new, not yet proved |
+| 23 | [`SurvivorSymmetry`](docs/nodes/SurvivorSymmetry.md) | survivors are mirror-symmetric | planned: new, not yet proved |
+| 24 | [`SpreadBounds`](docs/nodes/SpreadBounds.md) | how unevenly survivors can spread | planned: new, not yet proved |
+| 25 | [`ColumnAction`](docs/nodes/ColumnAction.md) | how a wheel moves the columns | planned: new, not yet proved |
+| 26 | [`ShareBounds`](docs/nodes/ShareBounds.md) | the survivor share falls like one over the logarithm | planned: new, not yet proved |
+| 27 | [`TwinShare`](docs/nodes/TwinShare.md) | the twin share of the cycle | planned: new, not yet proved |
+| 28 | [`InadmissibleOccurrences`](docs/nodes/InadmissibleOccurrences.md) | inadmissible patterns sit next to their blocking wheel | planned: new, not yet proved |
+| 29 | [`GapCertificate`](docs/nodes/GapCertificate.md) | the Lacampagne-Selfridge counterexample | planned: new, not yet proved |
+| 30 | [`BlockingRuns`](docs/nodes/BlockingRuns.md) | blocking runs and the largest survivor gap | planned: new, not yet proved |
+| 31 | [`CeilingOvershoot`](docs/nodes/CeilingOvershoot.md) | the overshoot at the ceiling | planned: new, not yet proved |
+| 32 | [`BirdseySchay`](docs/nodes/BirdseySchay.md) | Birdsey and Schay's heuristic, as a hypothesis | planned: conditional |
+| 33 | [`LargestGap`](docs/nodes/LargestGap.md) | the largest gap from the proportional share | planned: new, not yet proved |
+| 34 | [`LehmerExcess`](docs/nodes/LehmerExcess.md) | Lehmer's closed form for the 6n-1 type | planned: new, not yet proved |
+| 35 | [`GermainCriterion`](docs/nodes/GermainCriterion.md) | Germain's exact criterion for an even split | planned: new, not yet proved |
+| 40 | [`MertensThird`](docs/nodes/MertensThird.md) | Mertens' third theorem | outside source: proved in Lean in another project |
+| 41 | [`PrimeNumberTheorem`](docs/nodes/PrimeNumberTheorem.md) | the prime number theorem | outside source: proved in Lean in another project |
+| 42 | [`JacobsthalQuadratic`](docs/nodes/JacobsthalQuadratic.md) | the quadratic bound on Jacobsthal's function | outside source: proved in Lean in another project |

@@ -1,0 +1,25 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: PrimeNumberTheorem.v1
+  family: PrimeNumberTheorem
+  version: v1
+  order: 41
+  kind: external
+  status: planned
+  title: the prime number theorem
+  description: The number of primes up to x is asymptotic to x over log x. Proved in Lean
+    in PrimeNumberTheoremAnd.
+conclusions: []
+planned:
+  source_status: External
+  rests_on: []
+  external:
+    project: PrimeNumberTheoremAnd (PNT+)
+    declaration: pi_alt'
+    url: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/Consequences.lean#L900
+    toolchain: Lean v4.35.0
+    note: 'No sorry in the file; confirm transitively with #print axioms in PNT+. Taken here
+      as a named hypothesis, as for MertensThird.'
+sources: []
