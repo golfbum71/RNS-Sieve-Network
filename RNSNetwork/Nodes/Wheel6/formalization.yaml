@@ -1,0 +1,33 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: Wheel6.v1
+  family: Wheel6
+  version: v1
+  kind: standard        # textbook fact, stated once so other nodes can import it
+  status: active
+
+conclusions:
+  - id: prime_gt_three_is_candidate
+    declaration: RNS.Wheel6.prime_gt_three_is_candidate
+    summary: "Every prime above 3 leaves remainder 1 or 5 on division by 6."
+    imports: []           # rests on no other node
+    imports_status: none  # no inputs: Mathlib's definition of a prime suffices
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/Wheel6.lean
+        declaration: RNS.Wheel6.prime_gt_three_is_candidate_holds
+        note: >-
+          Complete Lean proof; `#print axioms` lists only propext,
+          Classical.choice and Quot.sound. Recorded as noncompliant only
+          because no Comparator receipt has been produced yet, not because
+          anything in the proof is missing.
+    designated: lean-proof
+
+sources:
+  - title: "rns_sieve_6.lean, Part A, Step 1"
+    authors: ["Geoffrey Fischer"]
+    type: "lean-file"
+    relationship: formalizes

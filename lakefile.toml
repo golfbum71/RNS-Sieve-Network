@@ -14,3 +14,6 @@ rev = "v4.33.1"
 
 [[lean_lib]]
 name = "RNSNetwork"
+
+[[lean_lib]]
+name = "RNSSolutions"
