@@ -22,6 +22,8 @@ import RNSSolutions.LinearForms
 import RNSSolutions.GapConjectures
 import RNSSolutions.SophieGermainWheel
 import RNSSolutions.GapTracks
+import RNSSolutions.UniformSubdivision
+import RNSSolutions.LehmerSplit
 
 /-!
 # Assembling the network
@@ -151,3 +153,18 @@ theorem RNS.GapTracks.prime_gap_same_track_of_six_dvd_holds : RNS.GapTracks.prim
 #print axioms RNS.GapTracks.prime_gap_forbidden_four_from_six_minus_one_holds
 #print axioms RNS.GapTracks.prime_gap_forbidden_two_from_six_plus_one_holds
 #print axioms RNS.GapTracks.prime_gap_same_track_of_six_dvd_holds
+
+/-- `UniformSubdivision` → `LehmerSplit` (whole count). -/
+theorem RNS.LehmerSplit.lehmer_even_split_holds : RNS.LehmerSplit.lehmer_even_split :=
+  RNS.LehmerSplit.lehmer_even_split_step RNS.UniformSubdivision.frozen_wheels_repeat_holds
+    RNS.UniformSubdivision.one_wheel_removed_holds
+
+/-- `UniformSubdivision` → `LehmerSplit` (each column). -/
+theorem RNS.LehmerSplit.lehmer_even_split_column_holds :
+    RNS.LehmerSplit.lehmer_even_split_column :=
+  RNS.LehmerSplit.lehmer_even_split_column_step
+    RNS.UniformSubdivision.column_frozen_repeat_holds
+    RNS.UniformSubdivision.column_one_wheel_removed_holds
+
+#print axioms RNS.LehmerSplit.lehmer_even_split_holds
+#print axioms RNS.LehmerSplit.lehmer_even_split_column_holds

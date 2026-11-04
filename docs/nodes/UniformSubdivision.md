@@ -113,6 +113,51 @@ def uniform_subdivision_minus_side : Prop :=
 
 **Proof:** `RNS.UniformSubdivision.uniform_subdivision_minus_side_holds` in [`RNSSolutions/UniformSubdivision.lean`](../../RNSSolutions/UniformSubdivision.lean)
 
+<a id="column_frozen_repeat"></a>
+### `column_frozen_repeat`
+
+With wheels 2 and 3 frozen, survivors in each column repeat with the cycle.
+
+```lean
+/-- **Frozen wheels repeat, within one column.** With wheels 2 and 3 frozen,
+survivors in each column repeat with the cycle, exactly as the whole count
+does. -/
+def column_frozen_repeat : Prop :=
+  ∀ (W : Finset Nat) (r K N : Nat), 2 ∈ W → 3 ∈ W →
+    (column_survivors_upto W r (K * W.prod id + N)).card
+      = K * (column_survivors_upto W r (W.prod id)).card
+        + (column_survivors_upto W r N).card
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.UniformSubdivision.column_frozen_repeat_holds` in [`RNSSolutions/UniformSubdivision.lean`](../../RNSSolutions/UniformSubdivision.lean)
+
+<a id="column_one_wheel_removed"></a>
+### `column_one_wheel_removed`
+
+Meissel's identity within one column: the new prime's multiples in a column match the old survivors in the column it is carried from.
+
+```lean
+/-- **One wheel removed, within one column.** If multiplying by the new prime
+carries column `r'` to column `r`, then the survivors in column `r` after
+adding the new wheel, plus the old survivors in column `r'` up to the bound
+divided by the new prime, make up the old survivors in column `r`. -/
+def column_one_wheel_removed : Prop :=
+  ∀ (W : Finset Nat) (p N r r' : Nat), p.Prime → (∀ q ∈ W, q.Prime) → p ∉ W →
+    (∀ j, p * j % 6 = r ↔ j % 6 = r') →
+    (column_survivors_upto (insert p W) r N).card + (column_survivors_upto W r' (N / p)).card
+      = (column_survivors_upto W r N).card
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.UniformSubdivision.column_one_wheel_removed_holds` in [`RNSSolutions/UniformSubdivision.lean`](../../RNSSolutions/UniformSubdivision.lean)
+
+## Used by
+
+- [`LehmerSplit`](LehmerSplit.md)
+
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/UniformSubdivision/Conclusions.lean)

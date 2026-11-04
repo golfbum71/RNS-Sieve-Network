@@ -20,3 +20,4 @@ import RNSNetwork.Nodes.SophieGermainWheel.Conclusions
 import RNSNetwork.Nodes.GapTracks.Conclusions
 import RNSNetwork.Nodes.DudekJohnston.Conclusions
 import RNSNetwork.Nodes.UniformSubdivision.Conclusions
+import RNSNetwork.Nodes.LehmerSplit.Conclusions

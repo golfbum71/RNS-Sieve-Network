@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: LehmerSplit.v1
@@ -7,23 +7,50 @@ node:
   version: v1
   order: 22
   kind: paper
-  status: planned
+  status: active
   title: Lehmer's even split
   description: If one wheel leaves remainder 1 on division by a chosen number of intervals,
     the survivors of the cycle split evenly across that many equal intervals (endpoints rounded
     down). With wheels 2 and 3 frozen, each column splits evenly when a wheel leaves remainder
     1 on division by the least common multiple of 6 and the number of intervals. UniformSubdivision's
     whole-count claim is the case of the rotating prime minus one intervals.
-conclusions: []
-planned:
-  source_status: New
-  rests_on: []
-  claims:
-  - lehmer_even_split
-  - lehmer_even_split_column
-  evidence: Both checked numerically on 4,761 cases (wheel sets from the primes up to 19,
-    up to 24 intervals).
-  tier: 'Tier 1: elementary.'
+conclusions:
+- id: lehmer_even_split
+  declaration: RNS.LehmerSplit.lehmer_even_split
+  summary: If one wheel leaves remainder 1 on division by k, the survivors split evenly across
+    k equal intervals.
+  imports:
+  - UniformSubdivision.v1.frozen_wheels_repeat
+  - UniformSubdivision.v1.one_wheel_removed
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/LehmerSplit.lean
+    declaration: RNS.LehmerSplit.lehmer_even_split_step
+    assembled: RNSSolutions/Assemble.lean (RNS.LehmerSplit.lehmer_even_split_holds)
+    note: Lean proof of the step from the imported claims, taken as named hypotheses; the
+      proof file imports claims only, never proofs. Recorded as noncompliant only because
+      no Comparator receipt exists yet.
+  designated: lean-proof
+- id: lehmer_even_split_column
+  declaration: RNS.LehmerSplit.lehmer_even_split_column
+  summary: With 2 and 3 frozen, if that wheel also leaves remainder 1 on division by 6, each
+    column splits evenly.
+  imports:
+  - UniformSubdivision.v1.column_frozen_repeat
+  - UniformSubdivision.v1.column_one_wheel_removed
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/LehmerSplit.lean
+    declaration: RNS.LehmerSplit.lehmer_even_split_column_step
+    assembled: RNSSolutions/Assemble.lean (RNS.LehmerSplit.lehmer_even_split_column_holds)
+    note: Lean proof of the step from the imported claims, taken as named hypotheses; the
+      proof file imports claims only, never proofs. Recorded as noncompliant only because
+      no Comparator receipt exists yet.
+  designated: lean-proof
 sources:
 - title: D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357
   url: https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf

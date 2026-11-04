@@ -87,6 +87,33 @@ conclusions:
     note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
       2026-11-04). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
+- id: column_frozen_repeat
+  declaration: RNS.UniformSubdivision.column_frozen_repeat
+  summary: With wheels 2 and 3 frozen, survivors in each column repeat with the cycle.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/UniformSubdivision.lean
+    declaration: RNS.UniformSubdivision.column_frozen_repeat_holds
+    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant
+      only because no Comparator receipt exists yet.
+  designated: lean-proof
+- id: column_one_wheel_removed
+  declaration: RNS.UniformSubdivision.column_one_wheel_removed
+  summary: 'Meissel''s identity within one column: the new prime''s multiples in a column
+    match the old survivors in the column it is carried from.'
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/UniformSubdivision.lean
+    declaration: RNS.UniformSubdivision.column_one_wheel_removed_holds
+    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant
+      only because no Comparator receipt exists yet.
+  designated: lean-proof
 sources:
 - title: The distribution of totatives, Canad. J. Math. 7 (1955), 347-357, Theorem 4
   authors:

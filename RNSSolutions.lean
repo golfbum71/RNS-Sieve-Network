@@ -18,4 +18,5 @@ import RNSSolutions.GapConjectures
 import RNSSolutions.SophieGermainWheel
 import RNSSolutions.GapTracks
 import RNSSolutions.UniformSubdivision
+import RNSSolutions.LehmerSplit
 import RNSSolutions.Assemble

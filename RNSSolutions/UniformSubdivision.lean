@@ -381,3 +381,20 @@ end RNS.UniformSubdivision
 
 #print axioms RNS.UniformSubdivision.uniform_subdivision_plus_side_holds
 #print axioms RNS.UniformSubdivision.uniform_subdivision_minus_side_holds
+
+/-! ## The column helpers, as stated claims -/
+
+namespace RNS.UniformSubdivision
+
+/-- **Frozen wheels repeat, within one column**, proved. -/
+theorem column_frozen_repeat_holds : column_frozen_repeat :=
+  fun W r K N h2 h3 => col_frozen_repeat W r K N h2 h3
+
+/-- **One wheel removed, within one column**, proved. -/
+theorem column_one_wheel_removed_holds : column_one_wheel_removed :=
+  fun W p N r r' hp hW hpW hr => col_one_wheel_removed W p N r r' hp hW hpW hr
+
+end RNS.UniformSubdivision
+
+#print axioms RNS.UniformSubdivision.column_frozen_repeat_holds
+#print axioms RNS.UniformSubdivision.column_one_wheel_removed_holds

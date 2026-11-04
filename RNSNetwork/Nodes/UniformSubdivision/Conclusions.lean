@@ -83,4 +83,23 @@ def uniform_subdivision_minus_side : Prop :=
       = K * (column_survivors_upto W r (W.prod id)).card
         + (column_survivors_upto W r (K * W.prod id / (p - 1))).card
 
+/-- **Frozen wheels repeat, within one column.** With wheels 2 and 3 frozen,
+survivors in each column repeat with the cycle, exactly as the whole count
+does. -/
+def column_frozen_repeat : Prop :=
+  ∀ (W : Finset Nat) (r K N : Nat), 2 ∈ W → 3 ∈ W →
+    (column_survivors_upto W r (K * W.prod id + N)).card
+      = K * (column_survivors_upto W r (W.prod id)).card
+        + (column_survivors_upto W r N).card
+
+/-- **One wheel removed, within one column.** If multiplying by the new prime
+carries column `r'` to column `r`, then the survivors in column `r` after
+adding the new wheel, plus the old survivors in column `r'` up to the bound
+divided by the new prime, make up the old survivors in column `r`. -/
+def column_one_wheel_removed : Prop :=
+  ∀ (W : Finset Nat) (p N r r' : Nat), p.Prime → (∀ q ∈ W, q.Prime) → p ∉ W →
+    (∀ j, p * j % 6 = r ↔ j % 6 = r') →
+    (column_survivors_upto (insert p W) r N).card + (column_survivors_upto W r' (N / p)).card
+      = (column_survivors_upto W r N).card
+
 end RNS.UniformSubdivision
