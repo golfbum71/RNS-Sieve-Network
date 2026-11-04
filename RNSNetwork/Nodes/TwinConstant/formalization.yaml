@@ -1,0 +1,34 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: TwinConstant.v1
+  family: TwinConstant
+  version: v1
+  kind: paper
+  status: active
+
+conclusions:
+  - id: twin_prime_constant_eq_classical
+    declaration: RNS.TwinConstant.twin_prime_constant_eq_classical
+    summary: "The wheel-built constant of the twin pattern equals the classical twin-prime constant."
+    imports: 
+      - SingularSeries.v1.factor_multipliable
+    imports_status: identified  # every input is drawn as an edge
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/TwinConstant.lean
+        declaration: RNS.TwinConstant.twin_prime_constant_eq_classical_step
+        assembled: RNSSolutions/Assemble.lean (RNS.TwinConstant.twin_prime_constant_eq_classical_holds)
+        note: >-
+          Lean proof of the step from the imported claims, taken as named
+          hypotheses; the proof file imports claims only, never proofs. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+
+sources:
+  - title: "rns_sieve_6.lean, Bonus section"
+    authors: ["Geoffrey Fischer"]
+    type: "lean-file"
+    relationship: formalizes

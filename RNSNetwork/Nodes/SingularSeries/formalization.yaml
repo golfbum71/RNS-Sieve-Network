@@ -1,0 +1,76 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: SingularSeries.v1
+  family: SingularSeries
+  version: v1
+  kind: paper
+  status: active
+
+conclusions:
+  - id: delta_bound
+    declaration: RNS.SingularSeries.delta_bound
+    summary: "Each correction factor differs from 1 by at most a constant over the wheel size squared."
+    imports: []
+    imports_status: none  # no inputs beyond Mathlib and the Vocabulary
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/SingularSeries.lean
+        declaration: RNS.SingularSeries.delta_bound_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+  - id: factor_multipliable
+    declaration: RNS.SingularSeries.factor_multipliable
+    summary: "The product of the correction factors over all primes converges."
+    imports: []
+    imports_status: none  # no inputs beyond Mathlib and the Vocabulary
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/SingularSeries.lean
+        declaration: RNS.SingularSeries.factor_multipliable_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+  - id: hardy_littlewood_constant_pos
+    declaration: RNS.SingularSeries.hardy_littlewood_constant_pos
+    summary: "For an admissible pattern the Hardy-Littlewood constant is strictly positive."
+    imports: []
+    imports_status: none  # no inputs beyond Mathlib and the Vocabulary
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/SingularSeries.lean
+        declaration: RNS.SingularSeries.hardy_littlewood_constant_pos_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+  - id: local_density_factorization
+    declaration: RNS.SingularSeries.local_density_factorization
+    summary: "The surviving fraction of the cycle equals the correction product times the naive independent-blocking guess."
+    imports: 
+      - SurvivorCount.v1.general_survivor_count
+    imports_status: identified  # every input is drawn as an edge
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/SingularSeries.lean
+        declaration: RNS.SingularSeries.local_density_factorization_step
+        assembled: RNSSolutions/Assemble.lean (RNS.SingularSeries.local_density_factorization_holds)
+        note: >-
+          Lean proof of the step from the imported claims, taken as named
+          hypotheses; the proof file imports claims only, never proofs. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+
+sources:
+  - title: "rns_sieve_6.lean, Part B Steps 3 and 4"
+    authors: ["Geoffrey Fischer"]
+    type: "lean-file"
+    relationship: formalizes

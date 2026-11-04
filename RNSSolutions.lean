@@ -2,3 +2,7 @@ import RNSSolutions.Wheel6
 import RNSSolutions.CRT
 import RNSSolutions.SquareRootShield
 import RNSSolutions.Admissibility
+import RNSSolutions.SurvivorCount
+import RNSSolutions.SingularSeries
+import RNSSolutions.TwinConstant
+import RNSSolutions.Assemble

@@ -54,6 +54,40 @@ def crt_map (limit : Nat) (n : ZMod (primorial_modulus limit)) :
     (show (q : Nat) ∣ primorial_modulus limit from Finset.dvd_prod_of_mem id q.2)
     (ZMod q) n
 
+/-! ## Survivors of the wheels -/
+
+/-- The positions on the wheel of size `p` left open by the twin pattern:
+neither the position nor the position two further on is blocked. -/
+def local_survivors (p : Nat) (hp : p.Prime) : Finset (ZMod p) :=
+  have : NeZero p := ⟨hp.pos.ne'⟩
+  Finset.univ.filter (fun n => n ≠ 0 ∧ n ≠ (-2 : ZMod p))
+
+/-- The positions of the combined cycle left open by the twin pattern on
+every active wheel. (The `NeZero` line only records that the cycle length is
+not zero, which listing its positions needs.) -/
+def wheel_survivors (limit : Nat) : Finset (ZMod (primorial_modulus limit)) :=
+  have : NeZero (primorial_modulus limit) := ⟨by
+    unfold primorial_modulus
+    exact Finset.prod_ne_zero_iff.mpr fun q hq => (Finset.mem_filter.mp hq).2.ne_zero⟩
+  Finset.univ.filter (fun n => ∀ q : active_primes limit,
+    crt_map limit n q ≠ 0 ∧ crt_map limit n q ≠ (-2 : ZMod (q : ℕ)))
+
+/-- The positions on the wheel of size `p` left open by a general offset
+pattern `T`: no offset lands on the blocked position. -/
+def local_survivors_gen (T : Finset Nat) (p : Nat) (hp : p.Prime) : Finset (ZMod p) :=
+  have : NeZero p := ⟨hp.pos.ne'⟩
+  Finset.univ.filter (fun n => ∀ t ∈ T, n + (t : ZMod p) ≠ 0)
+
+/-- The positions of the combined cycle left open by the offset pattern `T`
+on every active wheel. -/
+def wheel_survivors_gen (T : Finset Nat) (limit : Nat) :
+    Finset (ZMod (primorial_modulus limit)) :=
+  have : NeZero (primorial_modulus limit) := ⟨by
+    unfold primorial_modulus
+    exact Finset.prod_ne_zero_iff.mpr fun q hq => (Finset.mem_filter.mp hq).2.ne_zero⟩
+  Finset.univ.filter (fun n => ∀ q : active_primes limit,
+    ∀ t ∈ T, crt_map limit n q + (t : ZMod (q : ℕ)) ≠ 0)
+
 /-! ## Offset patterns and admissibility -/
 
 /-- How many distinct positions on the wheel of size `p` the offset pattern

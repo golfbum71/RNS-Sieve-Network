@@ -1,0 +1,65 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: SurvivorCount.v1
+  family: SurvivorCount
+  version: v1
+  kind: paper
+  status: active
+
+conclusions:
+  - id: twin_survivor_count
+    declaration: RNS.SurvivorCount.twin_survivor_count
+    summary: "Twin-pattern survivors of the combined cycle: 1 at the wheel of size 2, two fewer than the wheel size elsewhere, multiplied."
+    imports: 
+      - CRT.v1.crt_map_bijective
+    imports_status: identified  # every input is drawn as an edge
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/SurvivorCount.lean
+        declaration: RNS.SurvivorCount.twin_survivor_count_step
+        assembled: RNSSolutions/Assemble.lean (RNS.SurvivorCount.twin_survivor_count_holds)
+        note: >-
+          Lean proof of the step from the imported claims, taken as named
+          hypotheses; the proof file imports claims only, never proofs. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+  - id: local_survivor_count
+    declaration: RNS.SurvivorCount.local_survivor_count
+    summary: "On one wheel, the wheel size minus w positions survive an offset pattern."
+    imports: []
+    imports_status: none  # no inputs beyond Mathlib and the Vocabulary
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/SurvivorCount.lean
+        declaration: RNS.SurvivorCount.local_survivor_count_holds
+        note: >-
+          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+  - id: general_survivor_count
+    declaration: RNS.SurvivorCount.general_survivor_count
+    summary: "Survivors of the whole cycle: the product over the active wheels of the wheel size minus w."
+    imports: 
+      - CRT.v1.crt_map_bijective
+    imports_status: identified  # every input is drawn as an edge
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/SurvivorCount.lean
+        declaration: RNS.SurvivorCount.general_survivor_count_step
+        assembled: RNSSolutions/Assemble.lean (RNS.SurvivorCount.general_survivor_count_holds)
+        note: >-
+          Lean proof of the step from the imported claims, taken as named
+          hypotheses; the proof file imports claims only, never proofs. Recorded as noncompliant only because no Comparator
+          receipt exists yet.
+    designated: lean-proof
+
+sources:
+  - title: "rns_sieve_6.lean, Part A Step 4 and Part B Step 4"
+    authors: ["Geoffrey Fischer"]
+    type: "lean-file"
+    relationship: formalizes
