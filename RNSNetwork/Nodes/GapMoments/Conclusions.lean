@@ -41,7 +41,7 @@ def gap_moment_bound : Prop :=
   ∀ e : ℝ, 0 < e → ∃ C : ℝ, 0 < C ∧ ∀ W : Finset Nat, (∀ q ∈ W, q.Prime) →
     let L := (survivors_upto W (W.prod id)).sort (· ≤ ·)
     ∑ i ∈ Finset.range (L.length - 1), ((L.getD (i + 1) 0 - L.getD i 0 : Nat) : ℝ) ^ e
-      ≤ C * (W.prod id : ℝ)
-          * (((survivors_upto W (W.prod id)).card : ℝ) / (W.prod id : ℝ)) ^ (1 - e)
+      ≤ C * ((W.prod id : Nat) : ℝ)
+          * (((survivors_upto W (W.prod id)).card : ℝ) / ((W.prod id : Nat) : ℝ)) ^ (1 - e)
 
 end RNS.GapMoments
