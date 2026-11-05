@@ -76,20 +76,20 @@ theorem two_wheel_split_of_remainders_step
   · -- `p` leaves remainder 1
     have hA : a * p % k = a % k := by
       have := Nat.ModEq.mul_left a h1
-      simpa using this
+      simpa [Nat.ModEq] using this
     have hB : a * (p * q) % k = a * q % k := by
       have := Nat.ModEq.mul_left (a * q) h1
       have e : a * (p * q) = a * q * p := by ring
-      rw [e]; simpa using this
+      rw [e]; simpa [Nat.ModEq] using this
     rw [hA, hB]; ring
   · -- `q` leaves remainder 1
     have hA : a * q % k = a % k := by
       have := Nat.ModEq.mul_left a h1
-      simpa using this
+      simpa [Nat.ModEq] using this
     have hB : a * (p * q) % k = a * p % k := by
       have := Nat.ModEq.mul_left (a * p) h1
       have e : a * (p * q) = a * p * q := by ring
-      rw [e]; simpa using this
+      rw [e]; simpa [Nat.ModEq] using this
     rw [hA, hB]; ring
   · -- `p * p` leaves remainder 1 and `p + q` is a multiple of `k`
     -- the four remainders
@@ -130,7 +130,7 @@ theorem two_wheel_split_of_remainders_step
         have h3 : a * p * p % k = a % k := by
           have := Nat.ModEq.mul_left a hsq
           have e : a * (p * p) = a * p * p := by ring
-          rw [← e]; simpa using this
+          rw [← e]; simpa [Nat.ModEq] using this
         rw [hWdef, ← h3, h2]
     rcases pair_mod_cases hX hWk hXW with h1 | h1 <;>
       rcases pair_mod_cases hY hZ hYZ with h2 | h2
