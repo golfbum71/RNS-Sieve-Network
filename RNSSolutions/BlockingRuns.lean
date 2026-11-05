@@ -47,7 +47,7 @@ from the Chinese Remainder Theorem. -/
 theorem blocked_run_is_shift_step (hC : crt_map_bijective) : blocked_run_is_shift := by
   intro limit s L b hrun
   have hP := primorial_ne_zero limit
-  haveI : NeZero (primorial_modulus limit) := ⟨hP⟩
+  have : NeZero (primorial_modulus limit) := ⟨hP⟩
   obtain ⟨x, hx⟩ := (hC limit).2 (fun q => - b q)
   have hc : ∀ q : active_primes limit, ((x.val : Nat) : ZMod (q : Nat)) = - b q := by
     intro q
