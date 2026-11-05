@@ -329,6 +329,29 @@ of wheels. Kanold's explicit bound on Jacobsthal's function.
 - Status: Cited (2026-11-05). Checked numerically for every set of up to six
   wheels from the primes up to 23. A Lean proof is future work.
 
+### 47. `MenonIdentity` — a gcd sum over the survivors of one cycle
+For prime wheels, the gcds of (survivor minus one) with the cycle length, added
+over the survivors of one cycle, total the survivor count times two to the
+number of wheels.
+- Prior work: Menon, J. Indian Math. Soc. 29 (1965).
+- Lean: `menon_wheel_sum` (cited, not proved)
+- Rests on: Vocabulary only
+- Status: Cited (2026-11-05). Checked numerically for every set of wheels from
+  the primes up to 13.
+
+### 48. `GallagherAverage` — the wheel correction is 1 on average
+Averaged over all patterns of k distinct offsets from 1 to h, the
+Hardy-Littlewood constant tends to 1 as h grows.
+- Prior work: Gallagher, Mathematika 23 (1976); Kowalski (2008); Pintz (2010).
+- Lean: `singular_series_average_one` (cited, not proved). A proof would rest on
+  `SingularSeries`.
+- Rests on: Vocabulary only
+- Status: Cited (2026-11-05).
+
+### 49. `LongGaps` — blocked runs become long prime gaps (outside source)
+OpenAI's Lean proof of an improved Rankin-type lower bound for the largest
+prime gap. Planned as an outside-source node cited from `BlockingRuns`.
+
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence
 are `UniformSubdivision.frozen_wheels_repeat` and `one_wheel_removed`; the

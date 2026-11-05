@@ -1,0 +1,38 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: MenonIdentity.v1
+  family: MenonIdentity
+  version: v1
+  order: 47
+  kind: paper
+  status: active
+  title: a gcd sum over the survivors of one cycle
+  description: For prime wheels, add up over the survivors of one cycle the greatest common divisor of
+    (the survivor minus one) with the cycle length; the total is the number of survivors times two to
+    the number of wheels. Menon's identity for a squarefree modulus, cited.
+conclusions:
+- id: menon_wheel_sum
+  declaration: RNS.MenonIdentity.menon_wheel_sum
+  summary: Over the survivors of one cycle, the gcds of (survivor minus one) with the cycle length add up
+    to the survivor count times two to the number of wheels (cited).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: paper
+    kind: literature
+    source: P. K. Menon, On the sum gcd(a-1, n) [(a, n) = 1], J. Indian Math. Soc. (N.S.) 29 (1965),
+      155-163
+    locator: the identity, specialised to a squarefree modulus
+    note: Published theorem, cited. Not reproduced in Lean. Checked numerically for every set of wheels
+      from the primes up to 13 (2026-11-05).
+  designated: paper
+sources:
+- title: L. Tóth, Menon's identity and arithmetical sums representing functions of several variables
+    (arXiv:1103.5861)
+  url: https://arxiv.org/abs/1103.5861
+  relationship: states Menon's identity and its generalisations, citing Menon (1965)
+- title: OEIS A062355, d(n) times phi(n)
+  url: https://oeis.org/A062355
+  relationship: the values, noted there as Menon's identity

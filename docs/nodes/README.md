@@ -47,5 +47,8 @@
 | 44 | [`BonseCeiling`](BonseCeiling.md) | from four wheels on, the ceiling sits inside one cycle | proof drafted, not yet built |
 | 45 | [`PillaiBrauer`](PillaiBrauer.md) | runs where no member is coprime to all the others | proof drafted, not yet built |
 | 46 | [`KanoldBound`](KanoldBound.md) | every stretch of 2^k numbers holds a survivor of k wheels | cited from a published paper; not proved in Lean |
+| 47 | [`MenonIdentity`](MenonIdentity.md) | a gcd sum over the survivors of one cycle | cited from a published paper; not proved in Lean |
+| 48 | [`GallagherAverage`](GallagherAverage.md) | the wheel correction is 1 on average | cited from a published paper; not proved in Lean |
+| 49 | [`LongGaps`](LongGaps.md) | blocked runs become long prime gaps | outside source: proved in Lean in another project |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

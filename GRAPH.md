@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 34 of 43 nodes are built, holding 94 claims: 88 proved in Lean, 3 with a proof drafted but not yet built and 3 cited from a published paper. They are joined by 37 arrows, each a Lean-checked step. Of the other 9 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 4 are new work, stated or scoped but not yet proved; 4 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 36 of 46 nodes are built, holding 96 claims: 88 proved in Lean, 3 with a proof drafted but not yet built and 5 cited from a published paper. They are joined by 37 arrows, each a Lean-checked step. Of the other 10 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 4 are new work, stated or scoped but not yet proved; 5 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -231,6 +231,15 @@ graph LR
   subgraph S_KanoldBound["<b>46. KanoldBound — every stretch of 2^k numbers holds a survivor of k wheels</b>"]
     C_KanoldBound_stretch_holds_survivor["stretch_holds_survivor"]
   end
+  subgraph S_MenonIdentity["<b>47. MenonIdentity — a gcd sum over the survivors of one cycle</b>"]
+    C_MenonIdentity_menon_wheel_sum["menon_wheel_sum"]
+  end
+  subgraph S_GallagherAverage["<b>48. GallagherAverage — the wheel correction is 1 on average</b>"]
+    C_GallagherAverage_singular_series_average_one["singular_series_average_one"]
+  end
+  subgraph S_LongGaps["<b>49. LongGaps — blocked runs become long prime gaps</b>"]
+    P_LongGaps["<i>outside source: openai/LongGapsBetweenPrimes</i>"]
+  end
   O_hardy_littlewood_conjecture{{"<i>open conjecture</i><br/>hardy_littlewood_conjecture"}}
   O_HL_conjecture_A{{"<i>open conjecture</i><br/>HL_conjecture_A"}}
   O_HL_conjecture_B{{"<i>open conjecture</i><br/>HL_conjecture_B"}}
@@ -308,11 +317,11 @@ graph LR
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   class C_Wheel6_prime_gt_three_is_candidate,C_CRT_crt_map_bijective,C_SquareRootShield_square_root_shield,C_Admissibility_admissible_of_large_primes,C_Admissibility_zero_two_admissible,C_Admissibility_zero_two_four_not_admissible,C_Admissibility_ap_offsets_admissible_iff,C_SurvivorCount_twin_survivor_count,C_SurvivorCount_local_survivor_count,C_SurvivorCount_general_survivor_count,C_SingularSeries_delta_bound,C_SingularSeries_factor_multipliable,C_SingularSeries_hardy_littlewood_constant_pos,C_SingularSeries_local_density_factorization,C_TwinConstant_twin_prime_constant_eq_classical,C_Pruning_valid_starting_residues_card_formula,C_WheelOrder_wheel_marginal_new_formula,C_WheelOrder_prime_gt_five_digit_ok,C_WheelOrder_wheel_gap_floor,C_ShieldCertificates_prime_of_shield_cover,C_ShieldCertificates_active_primes_cover,C_ShieldCertificates_family_prime_of_shield_cover,C_ShieldCertificates_forward_ap_prime_of_active_shield,C_ShieldCertificates_backward_ap_prime_of_active_shield,C_ShieldCertificates_tuple_prime_of_active_shield,C_ShieldCertificates_ap_hits_wheel,C_ShieldCertificates_ap_prime_run_length_lt_of_lt_start,C_ShieldCertificates_ap_prime_run_forces_divisibility,C_ShieldCertificates_window_prime_iff,C_ShieldCertificates_window_twin_iff,C_ShieldCertificates_backward_ap_hits_wheel,C_ShieldCertificates_backward_ap_prime_run_length_lt_of_above,C_ShieldCertificates_backward_ap_prime_run_forces_divisibility,C_Infinitude_euclid_primes_unbounded,C_Infinitude_squarefree_counting_no_finite_supply,C_ColumnStructure_columns_multiply,C_ColumnStructure_col_minus_periodicity,C_ColumnStructure_col_minus_has_minus_prime_factor,C_ColumnStructure_col_minus_composite_has_proper_minus_factor,C_DirichletColumns_col_minus_primes_infinite,C_DirichletColumns_col_plus_primes_infinite,C_DirichletColumns_col_minus_primes_unbounded,C_DirichletColumns_col_plus_primes_unbounded,C_LinearForms_sophieGermainSystem_admissible,C_SophieGermainWheel_sophie_germain_mod_six,C_SophieGermainWheel_sophie_germain_not_ends_in_seven,C_SophieGermainWheel_sophie_germain_last_digit,C_GapTracks_twin_prime_mod_six,C_GapTracks_cousin_prime_mod_six,C_GapTracks_sexy_prime_same_track,C_GapTracks_sexy_middle_not_always_blocked,C_GapTracks_prime_gap_forbidden_four_from_six_minus_one,C_GapTracks_prime_gap_forbidden_two_from_six_plus_one,C_GapTracks_prime_gap_same_track_of_six_dvd,C_UniformSubdivision_frozen_wheels_repeat,C_UniformSubdivision_one_wheel_removed,C_UniformSubdivision_uniform_subdivision,C_UniformSubdivision_uniform_subdivision_plus_side,C_UniformSubdivision_uniform_subdivision_minus_side,C_UniformSubdivision_column_frozen_repeat,C_UniformSubdivision_column_one_wheel_removed,C_LehmerSplit_lehmer_even_split,C_LehmerSplit_lehmer_even_split_column,C_SurvivorSymmetry_survivor_reflection,C_Sawtooth_legendre_count,C_Sawtooth_sawtooth_identity,C_Sawtooth_even_split_iff_remainders_cancel,C_Sawtooth_column_legendre_count,C_SpreadBounds_interval_spread_bound,C_SpreadBounds_column_imbalance_bound,C_ColumnAction_column_action,C_ShareBounds_survivor_share_le_inv_log,C_ShareBounds_twin_share_le_two_inv_log_sq,C_TwinShare_twin_share_eq_prod,C_TwinShare_twin_share_split,C_InadmissibleOccurrences_inadmissible_occurrence_contains_prime,C_InadmissibleOccurrences_gap_block_24242_unique,C_BlockingRuns_blocked_run_is_shift,C_BlockingRuns_longest_blocked_run_eq_max_gap_sub_one,C_LehmerExcess_lehmer_excess_closed_form verified;
   class C_HardyLittlewood_twin_prime_conjecture_implies_infinite_twin_primes,C_HensleyRichards_HL_A_and_B_incompatible,C_LinearForms_sophie_germain_of_LinearForms_conjecture,C_GapConjectures_legendre_of_jacobsthal,C_GapConjectures_brocard_of_four_survivors,C_GapConjectures_oppermann_of_bound,C_GapConjectures_andrica_of_oppermann,C_GapConjectures_legendre_of_oppermann conditional_built;
-  class C_DudekJohnston_dudek_johnston_statement,C_PillaiBrauer_pillai_sixteen,C_KanoldBound_stretch_holds_survivor cited_built;
+  class C_DudekJohnston_dudek_johnston_statement,C_PillaiBrauer_pillai_sixteen,C_KanoldBound_stretch_holds_survivor,C_MenonIdentity_menon_wheel_sum,C_GallagherAverage_singular_series_average_one cited_built;
   class C_BonseCeiling_ceiling_inside_cycle,C_PillaiBrauer_pillai_witness_17,C_PillaiBrauer_pillai_witness_17_repeats draft;
   class P_BirdseySchay conditional;
   class P_GapCertificate,P_CeilingOvershoot,P_LargestGap,P_GermainCriterion new;
-  class P_JacobsthalQuadratic,P_MertensThird,P_PrimeNumberTheorem,P_RoughInPrimeGaps external;
+  class P_JacobsthalQuadratic,P_MertensThird,P_PrimeNumberTheorem,P_RoughInPrimeGaps,P_LongGaps external;
   class O_hardy_littlewood_conjecture,O_HL_conjecture_A,O_HL_conjecture_B,O_LinearForms_conjecture,O_jacobsthal_bound_holds,O_four_survivors_bound_holds,O_oppermann_bound_holds,O_oppermann_conjecture openconj;
   click C_Wheel6_prime_gt_three_is_candidate href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md#prime_gt_three_is_candidate" _blank
   click C_CRT_crt_map_bijective href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CRT.md#crt_map_bijective" _blank
@@ -417,6 +426,9 @@ graph LR
   click C_PillaiBrauer_pillai_witness_17 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PillaiBrauer.md#pillai_witness_17" _blank
   click C_PillaiBrauer_pillai_witness_17_repeats href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PillaiBrauer.md#pillai_witness_17_repeats" _blank
   click C_KanoldBound_stretch_holds_survivor href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/KanoldBound.md#stretch_holds_survivor" _blank
+  click C_MenonIdentity_menon_wheel_sum href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MenonIdentity.md#menon_wheel_sum" _blank
+  click C_GallagherAverage_singular_series_average_one href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GallagherAverage.md#singular_series_average_one" _blank
+  click P_LongGaps href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LongGaps.md" _blank
 ```
 
 ## What each result rests on
@@ -551,6 +563,8 @@ The results nothing else builds on, each with everything beneath it.
 - [`PillaiBrauer.pillai_witness_17`](docs/nodes/PillaiBrauer.md#pillai_witness_17) — proof drafted, not yet built
 - [`PillaiBrauer.pillai_witness_17_repeats`](docs/nodes/PillaiBrauer.md#pillai_witness_17_repeats) — proof drafted, not yet built
 - [`KanoldBound.stretch_holds_survivor`](docs/nodes/KanoldBound.md#stretch_holds_survivor) — cited
+- [`MenonIdentity.menon_wheel_sum`](docs/nodes/MenonIdentity.md#menon_wheel_sum) — cited
+- [`GallagherAverage.singular_series_average_one`](docs/nodes/GallagherAverage.md#singular_series_average_one) — cited
 
 ## What the network takes on trust
 
@@ -574,6 +588,8 @@ exactly the following, each recorded as such rather than claimed:
 - [`DudekJohnston.dudek_johnston_statement`](docs/nodes/DudekJohnston.md#dudek_johnston_statement) — Dudek and Johnston, Almost primes between all squares, arXiv:2501.18048 (2025), Theorem 1.2
 - [`PillaiBrauer.pillai_sixteen`](docs/nodes/PillaiBrauer.md#pillai_sixteen) — S. S. Pillai (1940), as stated in M. Waldschmidt's notes on Pillai's work (exact paper reference to be checked), main theorem
 - [`KanoldBound.stretch_holds_survivor`](docs/nodes/KanoldBound.md#stretch_holds_survivor) — H.-J. Kanold, Über eine zahlentheoretische Funktion von Jacobsthal, Math. Ann. 170 (1967), 314-326, the bound g(n) at most 2 to the number of prime factors of n, as quoted by Costello and Watts
+- [`MenonIdentity.menon_wheel_sum`](docs/nodes/MenonIdentity.md#menon_wheel_sum) — P. K. Menon, On the sum gcd(a-1, n) [(a, n) = 1], J. Indian Math. Soc. (N.S.) 29 (1965), 155-163, the identity, specialised to a squarefree modulus
+- [`GallagherAverage.singular_series_average_one`](docs/nodes/GallagherAverage.md#singular_series_average_one) — P. X. Gallagher, On the distribution of primes in short intervals, Mathematika 23 (1976), 4-9, the singular-series average, as restated by Kowalski, equation (1.5)
 
 **Outside sources, proved in Lean elsewhere and cited here:**
 
@@ -581,6 +597,7 @@ exactly the following, each recorded as such rather than claimed:
 - [`PrimeNumberTheorem`](docs/nodes/PrimeNumberTheorem.md) — `pi_alt'` in [PrimeNumberTheoremAnd (PNT+)](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/Consequences.lean#L900) — cited by [`CeilingOvershoot`](docs/nodes/CeilingOvershoot.md), [`BirdseySchay`](docs/nodes/BirdseySchay.md)
 - [`JacobsthalQuadratic`](docs/nodes/JacobsthalQuadratic.md) — [openai/math](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/OAI/NumberTheory/Jacobsthal/Conclusions/QuadraticBound.lean#L13) — cited by [`BlockingRuns`](docs/nodes/BlockingRuns.md)
 - [`RoughInPrimeGaps`](docs/nodes/RoughInPrimeGaps.md) — [plby/lean-proofs](https://github.com/plby/lean-proofs/blob/8822f7ddef30fadbd92e1c6ab4ed897af356af5e/src/latest/ErdosProblems/Erdos682.lean#L5018)
+- [`LongGaps`](docs/nodes/LongGaps.md) — [openai/LongGapsBetweenPrimes](https://github.com/openai/LongGapsBetweenPrimes/blob/main/LongGapsBetweenPrimes.lean)
 
 **Planned nodes will add:** `birdsey_schay_heuristic`
 
@@ -655,6 +672,15 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 - [`KanoldBound`](docs/nodes/KanoldBound.md)
   - [H.-J. Kanold, Über eine zahlentheoretische Funktion von Jacobsthal, Math. Ann. 170 (1967), 314-326](https://doi.org/10.1007/BF01350607) — the bound, cited
   - [F. Costello and P. Watts, A short note on Jacobsthal's function (arXiv:1306.1064)](https://arxiv.org/abs/1306.1064) — quotes Kanold's bound and compares it with Stevens' and Iwaniec's
+- [`MenonIdentity`](docs/nodes/MenonIdentity.md)
+  - [L. Tóth, Menon's identity and arithmetical sums representing functions of several variables (arXiv:1103.5861)](https://arxiv.org/abs/1103.5861) — states Menon's identity and its generalisations, citing Menon (1965)
+  - [OEIS A062355, d(n) times phi(n)](https://oeis.org/A062355) — the values, noted there as Menon's identity
+- [`GallagherAverage`](docs/nodes/GallagherAverage.md)
+  - [E. Kowalski, Averages of Euler products, distribution of singular series and the ubiquity of Poisson distribution (arXiv:0805.4682)](https://arxiv.org/abs/0805.4682) — restates Gallagher's theorem as equation (1.5) and reproves it by averaging Euler products
+  - [J. Pintz, On the singular series in the prime k-tuple conjecture (arXiv:1004.1084)](https://arxiv.org/abs/1004.1084) — a simpler proof, uniform in the number of offsets
+- [`LongGaps`](docs/nodes/LongGaps.md)
+  - [OpenAI, Improved long gaps between primes (2026)](https://cdn.openai.com/pdf/51126fac-1b68-4128-9666-c908bcc16033/long_gaps.pdf) — the theorem and its Lean proof
+  - [T. F. Bloom, Erdős Problem 4 (erdosproblems.com)](https://www.erdosproblems.com/4) — explains how covering a run with one class per wheel gives long prime gaps
 
 ## Node index
 
@@ -703,3 +729,6 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 44 | [`BonseCeiling`](docs/nodes/BonseCeiling.md) | from four wheels on, the ceiling sits inside one cycle | proof drafted, not yet built |
 | 45 | [`PillaiBrauer`](docs/nodes/PillaiBrauer.md) | runs where no member is coprime to all the others | proof drafted, not yet built |
 | 46 | [`KanoldBound`](docs/nodes/KanoldBound.md) | every stretch of 2^k numbers holds a survivor of k wheels | cited from a published paper; not proved in Lean |
+| 47 | [`MenonIdentity`](docs/nodes/MenonIdentity.md) | a gcd sum over the survivors of one cycle | cited from a published paper; not proved in Lean |
+| 48 | [`GallagherAverage`](docs/nodes/GallagherAverage.md) | the wheel correction is 1 on average | cited from a published paper; not proved in Lean |
+| 49 | [`LongGaps`](docs/nodes/LongGaps.md) | blocked runs become long prime gaps | outside source: proved in Lean in another project |

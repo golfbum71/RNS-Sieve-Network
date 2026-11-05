@@ -1,0 +1,32 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: LongGaps.v1
+  family: LongGaps
+  version: v1
+  order: 49
+  kind: external
+  status: planned
+  title: blocked runs become long prime gaps
+  description: Blocking a run with one residue class per wheel and shifting it by the Chinese Remainder
+    Theorem to a start where every member is composite gives long gaps between primes. OpenAI proved in
+    Lean that the largest prime gap below X is at least a constant times log X (log log X)^2 log log log
+    log X / (log log log X)^2, improving Rankin. The bounds of Westzynthius, Erdős and Rankin would follow
+    as short corollaries.
+conclusions: []
+planned:
+  source_status: External
+  rests_on: []
+  external:
+    project: openai/LongGapsBetweenPrimes
+    url: https://github.com/openai/LongGapsBetweenPrimes/blob/main/LongGapsBetweenPrimes.lean
+    note: Unreviewed AI-attributed preprint with a complete Lean proof; check its toolchain and axioms
+      before citing. The natural link here is from BlockingRuns.
+sources:
+- title: OpenAI, Improved long gaps between primes (2026)
+  url: https://cdn.openai.com/pdf/51126fac-1b68-4128-9666-c908bcc16033/long_gaps.pdf
+  relationship: the theorem and its Lean proof
+- title: T. F. Bloom, Erdős Problem 4 (erdosproblems.com)
+  url: https://www.erdosproblems.com/4
+  relationship: explains how covering a run with one class per wheel gives long prime gaps

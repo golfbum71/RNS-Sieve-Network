@@ -1,0 +1,37 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: GallagherAverage.v1
+  family: GallagherAverage
+  version: v1
+  order: 48
+  kind: paper
+  status: active
+  title: the wheel correction is 1 on average
+  description: Averaged over all patterns of k distinct offsets from 1 to h, the Hardy-Littlewood constant
+    (the product of every wheel's correction factor) tends to 1 as h grows, so on average the wheels block
+    as if independently. Gallagher's theorem, cited.
+conclusions:
+- id: singular_series_average_one
+  declaration: RNS.GallagherAverage.singular_series_average_one
+  summary: For each number of offsets, the average Hardy-Littlewood constant over offset sets from 1 to h
+    tends to 1 as h grows (cited).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: paper
+    kind: literature
+    source: P. X. Gallagher, On the distribution of primes in short intervals, Mathematika 23 (1976), 4-9
+    locator: the singular-series average, as restated by Kowalski, equation (1.5)
+    note: Published theorem, cited. Not reproduced in Lean. Gallagher averages over ordered tuples;
+      the set form here has the same limit. Statement typechecked only once `lake build` runs.
+  designated: paper
+sources:
+- title: E. Kowalski, Averages of Euler products, distribution of singular series and the ubiquity of
+    Poisson distribution (arXiv:0805.4682)
+  url: https://arxiv.org/abs/0805.4682
+  relationship: restates Gallagher's theorem as equation (1.5) and reproves it by averaging Euler products
+- title: J. Pintz, On the singular series in the prime k-tuple conjecture (arXiv:1004.1084)
+  url: https://arxiv.org/abs/1004.1084
+  relationship: a simpler proof, uniform in the number of offsets
