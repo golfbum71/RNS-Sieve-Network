@@ -6,6 +6,12 @@
 
 If a set of wheels covers every prime up to the square root of the ceiling, surviving them proves primality, for single numbers, evenly spaced runs in either direction, and offset patterns. Conversely, a wheel that does not divide the spacing must block one of any run as long as the wheel itself, which caps the run length and forces the Lagrange–Waring condition on real prime runs. Between a cutoff and its square, prime means exactly "no wheel divides it."
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Divisibility of Common Difference of Arithmetic Sequence of Primes (ProofWiki)](https://www.proofwiki.org/wiki/Divisibility_of_Common_Difference_of_Arithmetic_Sequence_of_Primes) — the condition the run-length claims force, classical
+
 ## Claims
 
 <a id="prime_of_shield_cover"></a>
@@ -254,4 +260,4 @@ def backward_ap_prime_run_forces_divisibility : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/ShieldCertificates/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/ShieldCertificates/formalization.yaml)
-- Source: rns_sieve_6.lean, Shield Certificates sections
+- Original source file: rns_sieve_6.lean, Shield Certificates sections

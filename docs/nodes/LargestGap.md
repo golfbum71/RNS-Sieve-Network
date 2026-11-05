@@ -6,6 +6,12 @@
 
 Adding one wheel at most doubles the largest gap between the survivor count and its proportional share, minus one over the new prime; and the average squared gap over the survivor positions has an exact formula.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [P. Codecà and M. Nair, Extremal values of Delta(x,N), Canad. Math. Bull. 41 (1998), 335-347](https://doi.org/10.4153/CMB-1998-046-3) — Theorem 1(i); Theorem 3(i) for the mean square (read from the paper)
+
 ## Planned
 
 **Will rest on:** [`Sawtooth`](Sawtooth.md), [`UniformSubdivision`](UniformSubdivision.md)
@@ -15,6 +21,4 @@ Adding one wheel at most doubles the largest gap between the survivor count and 
 **Plan:** largest_gap_add_wheel (Codecà-Nair Theorem 1(i)): their gap counts the endpoint, matching survivors_upto, and their identity (I) is UniformSubdivision.one_wheel_removed written as a gap. Session 1: define the largest gap as a maximum over survivor positions and prove it equals their supremum over real fractions (their preliminary discussion: the gap is piecewise linear, its maximum is reached at survivor positions, and its infimum is one minus the maximum by mirror symmetry). Session 2: the inequalities (7) and (8) of their proof, by the neighbouring-survivor argument. Session 3: the case split on r that gives Theorem 1(i).
 
 **Scope:** largest_gap_add_wheel: Tier 2, multi-session. mean_square_gap: Tier 3 (moved up 2026-11-04): its proof integrates the squared gap over the cycle (Theorem 4(v), via Franel's formula) and needs real integration.
-
-- Source: [P. Codecà and M. Nair, Extremal values of Delta(x,N), Canad. Math. Bull. 41 (1998), 335-347](https://doi.org/10.4153/CMB-1998-046-3) — Theorem 1(i); Theorem 3(i) for the mean square (read from the paper)
 

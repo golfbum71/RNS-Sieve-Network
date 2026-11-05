@@ -6,6 +6,13 @@
 
 When every wheel leaves remainder one less than the number of intervals (for six intervals, every wheel on the 6n-1 side), the survivor count's excess over its proportional share at the end of each interval has an exact closed form, of size two to the number of wheels times the distance of the fraction from one half. The 6n-1 side of Lehmer's picture, and the natural partner to UniformSubdivision's 6n-1-side claim. Checked numerically beforehand on 1,479 cases.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [P. Codecà and M. Nair, Extremal values of Delta(x,N), Canad. Math. Bull. 41 (1998), 335-347](https://doi.org/10.4153/CMB-1998-046-3) — Theorem 2 and the identity in its proof (read from the paper)
+- [D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf) — Theorem 8, as recorded in the node list; not yet checked against the paper
+
 ## Claims
 
 <a id="lehmer_excess_closed_form"></a>
@@ -36,5 +43,3 @@ def lehmer_excess_closed_form : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/LehmerExcess/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/LehmerExcess/formalization.yaml)
-- Source: P. Codecà and M. Nair, Extremal values of Delta(x,N), Canad. Math. Bull. 41 (1998), 335-347
-- Source: D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357

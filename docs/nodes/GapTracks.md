@@ -119,4 +119,4 @@ def prime_gap_same_track_of_six_dvd : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/GapTracks/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/GapTracks/formalization.yaml)
-- Source: twin_cousin_sexy_tracks.lean and prime_gap_track_constraint.lean
+- Original source file: twin_cousin_sexy_tracks.lean and prime_gap_track_constraint.lean

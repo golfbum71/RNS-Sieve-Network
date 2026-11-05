@@ -119,10 +119,12 @@ sources:
   authors:
   - D. H. Lehmer
   type: paper
+  url: https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf
   relationship: whole-count form is a special case
 - title: Cycles and Patterns in the Sieve of Eratosthenes (arXiv:1905.03117), Theorems 6-9
   authors:
   - George F. Grob
   - Matthias Schmitt
   type: paper
+  url: https://arxiv.org/abs/1905.03117
   relationship: restates the whole-count form

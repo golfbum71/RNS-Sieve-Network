@@ -6,6 +6,12 @@
 
 The survivors split evenly across a given number of equal intervals exactly when every odd Dirichlet character for that number takes the value 1 at some wheel.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220](https://doi.org/10.4153/CMB-2005-019-9) — Theorem 1.1
+
 ## Planned
 
 **Will rest on:** [`LehmerSplit`](LehmerSplit.md), [`Sawtooth`](Sawtooth.md)
@@ -13,6 +19,4 @@ The survivors split evenly across a given number of equal intervals exactly when
 **Planned claims:** `germain_criterion`
 
 **Scope:** Tier 3: uses the nonvanishing of Dirichlet L-functions at 1, which Mathlib provides (DirichletCharacter.LFunction_apply_one_ne_zero).
-
-- Source: [J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220](https://doi.org/10.4153/CMB-2005-019-9) — Theorem 1.1
 

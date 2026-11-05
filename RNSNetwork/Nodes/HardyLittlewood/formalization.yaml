@@ -40,3 +40,8 @@ sources:
     authors: ["Geoffrey Fischer"]
     type: "lean-file"
     relationship: formalizes
+  - title: "Some problems of 'Partitio numerorum'; III: On the expression of a number as a sum of primes, Acta Math. 44 (1923), 1-70"
+    authors: ["G. H. Hardy", "J. E. Littlewood"]
+    type: "paper"
+    url: "https://archive.ymsc.tsinghua.edu.cn/pacm_paperurl/20170108203038474495327"
+    relationship: "the prime k-tuple conjecture and its constant, stated here"

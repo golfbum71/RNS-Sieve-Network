@@ -6,6 +6,12 @@
 
 The survivors up to any point are a signed count over choices of wheels (Legendre). At a fraction of the cycle, the survivors minus their proportional share, times the fraction's denominator, are minus a signed sum of remainders, one for each choice of wheels; so an even split is exactly the vanishing of that sum. The identity behind Germain's criterion.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220](https://doi.org/10.4153/CMB-2005-019-9) — The identity behind Theorem 1.1, stated over choices of wheels rather than divisors and remainders rather than fractional parts
+
 ## Claims
 
 <a id="legendre_count"></a>
@@ -106,4 +112,3 @@ def column_legendre_count : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/Sawtooth/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/Sawtooth/formalization.yaml)
-- Source: J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220

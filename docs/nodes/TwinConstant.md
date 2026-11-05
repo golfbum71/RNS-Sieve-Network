@@ -6,6 +6,13 @@
 
 For the twin pattern, the constant built from the wheels equals the textbook value: 2 times the product, over odd primes, of one minus one over (the prime minus one) squared.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- G. H. Hardy, J. E. Littlewood, [Some problems of 'Partitio numerorum'; III: On the expression of a number as a sum of primes, Acta Math. 44 (1923), 1-70](https://archive.ymsc.tsinghua.edu.cn/pacm_paperurl/20170108203038474495327) — the twin-prime constant in its classical form
+- [OEIS A005597, decimal expansion of the twin prime constant](https://oeis.org/A005597) — the constant's value, 0.66016...
+
 ## Claims
 
 <a id="twin_prime_constant_eq_classical"></a>
@@ -29,4 +36,4 @@ def twin_prime_constant_eq_classical : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/TwinConstant/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/TwinConstant/formalization.yaml)
-- Source: rns_sieve_6.lean, Bonus section
+- Original source file: rns_sieve_6.lean, Bonus section

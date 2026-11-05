@@ -6,6 +6,12 @@
 
 The pair "a number and twice it plus one" passes the linear-forms version of admissibility; so Dickson's conjecture would give infinitely many Sophie Germain primes.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Dickson's conjecture (Wikipedia), after L. E. Dickson, Messenger of Math. 33 (1904)](https://en.wikipedia.org/wiki/Dickson%27s_conjecture) — the open conjecture taken as a named hypothesis
+
 ## Claims
 
 <a id="sophiegermainsystem_admissible"></a>
@@ -45,4 +51,4 @@ def sophie_germain_of_LinearForms_conjecture : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/LinearForms/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/LinearForms/formalization.yaml)
-- Source: rns_sieve_6_parts_J_K.lean, Part K
+- Original source file: rns_sieve_6_parts_J_K.lean, Part K

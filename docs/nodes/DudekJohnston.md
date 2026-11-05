@@ -6,6 +6,12 @@
 
 Between every two consecutive squares there is a number with at most four prime factors, counted with repetition. This is a proven, published weakening of Legendre's conjecture, which asks for a prime there.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- Adrian W. Dudek, Daniel R. Johnston, [Almost primes between all squares](https://arxiv.org/abs/2501.18048) — Theorem 1.2, cited (not proved in Lean)
+
 ## Claims
 
 <a id="dudek_johnston_statement"></a>
@@ -29,5 +35,4 @@ def dudek_johnston_statement : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/DudekJohnston/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/DudekJohnston/formalization.yaml)
-- Source: dudek_johnston_rns.lean
-- Source (cited): Almost primes between all squares
+- Original source file: dudek_johnston_rns.lean

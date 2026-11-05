@@ -35,4 +35,4 @@ def prime_gt_three_is_candidate : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/Wheel6/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/Wheel6/formalization.yaml)
-- Source: rns_sieve_6.lean, Part A, Step 1
+- Original source file: rns_sieve_6.lean, Part A, Step 1

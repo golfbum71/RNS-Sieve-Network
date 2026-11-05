@@ -557,6 +557,69 @@ exactly the following, each recorded as such rather than claimed:
 
 **Planned nodes will add:** `birdsey_schay_heuristic`
 
+## Published sources
+
+Nodes that apply the RNS to published work: proven results, cited theorems, or stated conjectures, with links to the papers and pages. Each node's page lists the same sources at the top.
+
+- [`Admissibility`](docs/nodes/Admissibility.md)
+  - [Divisibility of Common Difference of Arithmetic Sequence of Primes (ProofWiki)](https://www.proofwiki.org/wiki/Divisibility_of_Common_Difference_of_Arithmetic_Sequence_of_Primes) — the evenly spaced case (the Lagrange-Waring condition), classical
+- [`SingularSeries`](docs/nodes/SingularSeries.md)
+  - G. H. Hardy, J. E. Littlewood, [Some problems of 'Partitio numerorum'; III: On the expression of a number as a sum of primes, Acta Math. 44 (1923), 1-70](https://archive.ymsc.tsinghua.edu.cn/pacm_paperurl/20170108203038474495327) — defines the singular series whose convergence and positivity this node proves
+- [`TwinConstant`](docs/nodes/TwinConstant.md)
+  - G. H. Hardy, J. E. Littlewood, [Some problems of 'Partitio numerorum'; III: On the expression of a number as a sum of primes, Acta Math. 44 (1923), 1-70](https://archive.ymsc.tsinghua.edu.cn/pacm_paperurl/20170108203038474495327) — the twin-prime constant in its classical form
+  - [OEIS A005597, decimal expansion of the twin prime constant](https://oeis.org/A005597) — the constant's value, 0.66016...
+- [`Pruning`](docs/nodes/Pruning.md)
+  - [Divisibility of Common Difference of Arithmetic Sequence of Primes (ProofWiki)](https://www.proofwiki.org/wiki/Divisibility_of_Common_Difference_of_Arithmetic_Sequence_of_Primes) — the condition this node starts from, classical
+- [`ShieldCertificates`](docs/nodes/ShieldCertificates.md)
+  - [Divisibility of Common Difference of Arithmetic Sequence of Primes (ProofWiki)](https://www.proofwiki.org/wiki/Divisibility_of_Common_Difference_of_Arithmetic_Sequence_of_Primes) — the condition the run-length claims force, classical
+- [`Infinitude`](docs/nodes/Infinitude.md)
+  - [Euclid, Elements, Book IX, Proposition 20 (D. E. Joyce's edition)](https://mathcs.clarku.edu/~djoyce/elements/bookIX/propIX20.html) — the classical argument behind the first proof
+  - [Number of Primes is Infinite, Proof 6 (ProofWiki)](https://www.proofwiki.org/wiki/Number_of_Primes_is_Infinite/Proof_6) — the square-times-squarefree counting argument behind the second proof
+- [`DirichletColumns`](docs/nodes/DirichletColumns.md)
+  - [Mathlib, Mathlib.NumberTheory.LSeries.PrimesInAP (Nat.infinite_setOfPred_prime_and_modEq)](https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/LSeries/PrimesInAP.html) — Dirichlet's theorem, imported from Mathlib
+  - D. Loeffler, M. Stoll, [Formalizing zeta and L-functions in Lean, Annals of Formalized Mathematics 1 (2025)](https://arxiv.org/abs/2503.00959) — the formalization of Dirichlet's theorem used
+- [`HardyLittlewood`](docs/nodes/HardyLittlewood.md)
+  - G. H. Hardy, J. E. Littlewood, [Some problems of 'Partitio numerorum'; III: On the expression of a number as a sum of primes, Acta Math. 44 (1923), 1-70](https://archive.ymsc.tsinghua.edu.cn/pacm_paperurl/20170108203038474495327) — the prime k-tuple conjecture and its constant, stated here
+- [`HensleyRichards`](docs/nodes/HensleyRichards.md)
+  - D. Hensley, I. Richards, [Primes in intervals, Acta Arith. 25 (1974), 375-391](https://eudml.org/doc/205282) — the incompatibility theorem this node proves
+  - I. Richards, [On the incompatibility of two conjectures concerning primes, Bull. Amer. Math. Soc. 80 (1974), 419-438](https://www.ams.org/journals/bull/1974-80-03/S0002-9904-1974-13434-8) — survey of the same result
+- [`LinearForms`](docs/nodes/LinearForms.md)
+  - [Dickson's conjecture (Wikipedia), after L. E. Dickson, Messenger of Math. 33 (1904)](https://en.wikipedia.org/wiki/Dickson%27s_conjecture) — the open conjecture taken as a named hypothesis
+- [`DudekJohnston`](docs/nodes/DudekJohnston.md)
+  - Adrian W. Dudek, Daniel R. Johnston, [Almost primes between all squares](https://arxiv.org/abs/2501.18048) — Theorem 1.2, cited (not proved in Lean)
+- [`UniformSubdivision`](docs/nodes/UniformSubdivision.md)
+  - D. H. Lehmer, [The distribution of totatives, Canad. J. Math. 7 (1955), 347-357, Theorem 4](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf) — whole-count form is a special case
+  - George F. Grob, Matthias Schmitt, [Cycles and Patterns in the Sieve of Eratosthenes (arXiv:1905.03117), Theorems 6-9](https://arxiv.org/abs/1905.03117) — restates the whole-count form
+- [`LehmerSplit`](docs/nodes/LehmerSplit.md)
+  - [D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf) — Theorem 4 is the whole-count form
+- [`SurvivorSymmetry`](docs/nodes/SurvivorSymmetry.md)
+  - [D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf) — Theorem 1
+  - [G. F. Grob and M. Schmitt, Cycles and Patterns in the Sieve of Eratosthenes, arXiv:1905.03117, Theorem 2](https://arxiv.org/abs/1905.03117) — restates it
+- [`SpreadBounds`](docs/nodes/SpreadBounds.md)
+  - [D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf) — Theorems 9 and 10, the interval form
+- [`TwinShare`](docs/nodes/TwinShare.md)
+  - [J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220](https://arxiv.org/abs/1906.09220) — the exact share their second method uses
+- [`InadmissibleOccurrences`](docs/nodes/InadmissibleOccurrences.md)
+  - [DeepMind formal-conjectures, OeisA1223.conjecture (statement; proof hosted by Epoch AI)](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/OEIS/1223.lean) — statement this settles
+- [`GapCertificate`](docs/nodes/GapCertificate.md)
+  - [DeepMind formal-conjectures, Erdős Problem 854](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/854.lean) — states the problem
+- [`BlockingRuns`](docs/nodes/BlockingRuns.md)
+  - [DeepMind formal-conjectures, Erdős Problem 687 / Green's Open Problem 46](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/687.lean) — states the problem
+- [`BirdseySchay`](docs/nodes/BirdseySchay.md)
+  - [J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220](https://arxiv.org/abs/1906.09220) — the heuristic
+- [`LargestGap`](docs/nodes/LargestGap.md)
+  - [P. Codecà and M. Nair, Extremal values of Delta(x,N), Canad. Math. Bull. 41 (1998), 335-347](https://doi.org/10.4153/CMB-1998-046-3) — Theorem 1(i); Theorem 3(i) for the mean square (read from the paper)
+- [`LehmerExcess`](docs/nodes/LehmerExcess.md)
+  - [P. Codecà and M. Nair, Extremal values of Delta(x,N), Canad. Math. Bull. 41 (1998), 335-347](https://doi.org/10.4153/CMB-1998-046-3) — Theorem 2 and the identity in its proof (read from the paper)
+  - [D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf) — Theorem 8, as recorded in the node list; not yet checked against the paper
+- [`GermainCriterion`](docs/nodes/GermainCriterion.md)
+  - [J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220](https://doi.org/10.4153/CMB-2005-019-9) — Theorem 1.1
+- [`Sawtooth`](docs/nodes/Sawtooth.md)
+  - [J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220](https://doi.org/10.4153/CMB-2005-019-9) — The identity behind Theorem 1.1, stated over choices of wheels rather than divisors and remainders rather than fractional parts
+- [`RoughInPrimeGaps`](docs/nodes/RoughInPrimeGaps.md)
+  - [A. Gafni and T. Tao, Rough numbers between consecutive primes, arXiv:2508.06463 (2025)](https://arxiv.org/abs/2508.06463) — the proof
+  - [DeepMind formal-conjectures, Erdős Problem 682](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/682.lean) — the Lean statement
+
 ## Node index
 
 | # | Node | What it says | Status |

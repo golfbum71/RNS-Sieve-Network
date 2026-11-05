@@ -73,4 +73,4 @@ def general_survivor_count : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/SurvivorCount/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/SurvivorCount/formalization.yaml)
-- Source: rns_sieve_6.lean, Part A Step 4 and Part B Step 4
+- Original source file: rns_sieve_6.lean, Part A Step 4 and Part B Step 4

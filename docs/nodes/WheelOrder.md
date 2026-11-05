@@ -73,4 +73,4 @@ def wheel_gap_floor : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/WheelOrder/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/WheelOrder/formalization.yaml)
-- Source: rns_sieve_6.lean, Parts F and G
+- Original source file: rns_sieve_6.lean, Parts F and G

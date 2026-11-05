@@ -6,6 +6,13 @@
 
 With one wheel rotating and the rest frozen, the full cycle splits into as many equal intervals as the rotating wheel's size minus one, each holding one frozen cycle's worth of survivors. By column, a rotating wheel on the 6n+1 side keeps every column's share exact; one on the 6n-1 side swaps columns, so each interval is off by the two columns' difference in the overhang.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- D. H. Lehmer, [The distribution of totatives, Canad. J. Math. 7 (1955), 347-357, Theorem 4](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf) — whole-count form is a special case
+- George F. Grob, Matthias Schmitt, [Cycles and Patterns in the Sieve of Eratosthenes (arXiv:1905.03117), Theorems 6-9](https://arxiv.org/abs/1905.03117) — restates the whole-count form
+
 ## Claims
 
 <a id="frozen_wheels_repeat"></a>
@@ -163,5 +170,3 @@ def column_one_wheel_removed : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/UniformSubdivision/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/UniformSubdivision/formalization.yaml)
-- Source: The distribution of totatives, Canad. J. Math. 7 (1955), 347-357, Theorem 4
-- Source: Cycles and Patterns in the Sieve of Eratosthenes (arXiv:1905.03117), Theorems 6-9

@@ -6,6 +6,12 @@
 
 Among all survivors of a cycle, the twin survivors make up exactly the product over the wheels from 3 up of the wheel size minus 2 over the wheel size minus 1. That product splits into the partial twin-prime constant times the coprime share.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220](https://arxiv.org/abs/1906.09220) — the exact share their second method uses
+
 ## Claims
 
 <a id="twin_share_eq_prod"></a>
@@ -57,4 +63,3 @@ def twin_share_split : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/TwinShare/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/TwinShare/formalization.yaml)
-- Source: J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220

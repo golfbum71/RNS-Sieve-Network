@@ -6,6 +6,12 @@
 
 For the wheels up to 13 (cycle 30030), the gaps between consecutive survivors take every even value up to the largest gap, 22, except 20. Erdős had expected every even value to appear.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [DeepMind formal-conjectures, Erdős Problem 854](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/854.lean) — states the problem
+
 ## Planned
 
 **Will rest on:** no other node
@@ -15,6 +21,4 @@ For the wheels up to 13 (cycle 30030), the gaps between consecutive survivors ta
 **Evidence so far:** Checked numerically; the cycles 30, 210, 2310 and 510510 miss no even value.
 
 **Scope:** Tier 2: a certificate-style proof as in ShieldCertificates, since native_decide would add an axiom.
-
-- Source: [DeepMind formal-conjectures, Erdős Problem 854](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/854.lean) — states the problem
 

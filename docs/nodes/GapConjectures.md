@@ -97,4 +97,4 @@ def legendre_of_oppermann : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/GapConjectures/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/GapConjectures/formalization.yaml)
-- Source: rns_open_conjectures.lean, Parts 1-5
+- Original source file: rns_open_conjectures.lean, Parts 1-5

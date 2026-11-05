@@ -50,3 +50,7 @@ sources:
     authors: ["Geoffrey Fischer"]
     type: "lean-file"
     relationship: formalizes
+  - title: "Dickson's conjecture (Wikipedia), after L. E. Dickson, Messenger of Math. 33 (1904)"
+    type: "paper"
+    url: "https://en.wikipedia.org/wiki/Dickson%27s_conjecture"
+    relationship: "the open conjecture taken as a named hypothesis"

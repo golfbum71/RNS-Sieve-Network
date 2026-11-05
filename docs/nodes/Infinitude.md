@@ -6,6 +6,13 @@
 
 Euclid's argument using the combined cycle plus one; and a counting argument showing a fixed finite set of wheels cannot build enough square-free parts for every number.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Euclid, Elements, Book IX, Proposition 20 (D. E. Joyce's edition)](https://mathcs.clarku.edu/~djoyce/elements/bookIX/propIX20.html) — the classical argument behind the first proof
+- [Number of Primes is Infinite, Proof 6 (ProofWiki)](https://www.proofwiki.org/wiki/Number_of_Primes_is_Infinite/Proof_6) — the square-times-squarefree counting argument behind the second proof
+
 ## Claims
 
 <a id="euclid_primes_unbounded"></a>
@@ -47,4 +54,4 @@ def squarefree_counting_no_finite_supply : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/Infinitude/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/Infinitude/formalization.yaml)
-- Source: rns_sieve_6.lean, infinitude sections
+- Original source file: rns_sieve_6.lean, infinitude sections

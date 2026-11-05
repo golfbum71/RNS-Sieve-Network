@@ -75,3 +75,12 @@ sources:
     authors: ["Geoffrey Fischer"]
     type: "lean-file"
     relationship: formalizes
+  - title: "Mathlib, Mathlib.NumberTheory.LSeries.PrimesInAP (Nat.infinite_setOfPred_prime_and_modEq)"
+    type: "paper"
+    url: "https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/LSeries/PrimesInAP.html"
+    relationship: "Dirichlet's theorem, imported from Mathlib"
+  - title: "Formalizing zeta and L-functions in Lean, Annals of Formalized Mathematics 1 (2025)"
+    authors: ["D. Loeffler", "M. Stoll"]
+    type: "paper"
+    url: "https://arxiv.org/abs/2503.00959"
+    relationship: "the formalization of Dirichlet's theorem used"

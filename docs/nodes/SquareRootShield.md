@@ -35,4 +35,4 @@ def square_root_shield : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/SquareRootShield/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/SquareRootShield/formalization.yaml)
-- Source: rns_sieve_6.lean, Part A, Step 5
+- Original source file: rns_sieve_6.lean, Part A, Step 5

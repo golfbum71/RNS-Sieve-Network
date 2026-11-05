@@ -6,6 +6,12 @@
 
 An offset pattern only has to be checked at the wheels no larger than the number of offsets; the pattern {0, 2, 4} fails at the wheel of size 3; an evenly spaced run passes exactly when every wheel up to its length divides the spacing (the Lagrange–Waring condition).
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Divisibility of Common Difference of Arithmetic Sequence of Primes (ProofWiki)](https://www.proofwiki.org/wiki/Divisibility_of_Common_Difference_of_Arithmetic_Sequence_of_Primes) — the evenly spaced case (the Lagrange-Waring condition), classical
+
 ## Claims
 
 <a id="admissible_of_large_primes"></a>
@@ -85,4 +91,4 @@ def ap_offsets_admissible_iff : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/Admissibility/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/Admissibility/formalization.yaml)
-- Source: rns_sieve_6.lean, Part B Step 1 and Part D
+- Original source file: rns_sieve_6.lean, Part B Step 1 and Part D

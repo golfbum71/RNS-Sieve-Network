@@ -59,4 +59,4 @@ def sophie_germain_last_digit : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/SophieGermainWheel/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/SophieGermainWheel/formalization.yaml)
-- Source: sophie_germain_wheel.lean
+- Original source file: sophie_germain_wheel.lean

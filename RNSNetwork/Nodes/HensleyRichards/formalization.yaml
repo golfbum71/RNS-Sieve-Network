@@ -37,3 +37,13 @@ sources:
     authors: ["Geoffrey Fischer"]
     type: "lean-file"
     relationship: formalizes
+  - title: "Primes in intervals, Acta Arith. 25 (1974), 375-391"
+    authors: ["D. Hensley", "I. Richards"]
+    type: "paper"
+    url: "https://eudml.org/doc/205282"
+    relationship: "the incompatibility theorem this node proves"
+  - title: "On the incompatibility of two conjectures concerning primes, Bull. Amer. Math. Soc. 80 (1974), 419-438"
+    authors: ["I. Richards"]
+    type: "paper"
+    url: "https://www.ams.org/journals/bull/1974-80-03/S0002-9904-1974-13434-8"
+    relationship: "survey of the same result"

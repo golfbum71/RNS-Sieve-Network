@@ -6,6 +6,12 @@
 
 If one wheel leaves remainder 1 on division by a chosen number of intervals, the survivors of the cycle split evenly across that many equal intervals (endpoints rounded down). With wheels 2 and 3 frozen, each column splits evenly when a wheel leaves remainder 1 on division by the least common multiple of 6 and the number of intervals. UniformSubdivision's whole-count claim is the case of the rotating prime minus one intervals.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf) — Theorem 4 is the whole-count form
+
 ## Claims
 
 <a id="lehmer_even_split"></a>
@@ -56,4 +62,3 @@ def lehmer_even_split_column : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/LehmerSplit/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/LehmerSplit/formalization.yaml)
-- Source: D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357

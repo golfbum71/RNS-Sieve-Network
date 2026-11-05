@@ -6,6 +6,12 @@
 
 Once the Lagrange–Waring condition is met, the number of starting positions left to test for an evenly spaced prime run is an exact product over the wheels: one fewer than the wheel size where the wheel divides the spacing, and the run length fewer elsewhere.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Divisibility of Common Difference of Arithmetic Sequence of Primes (ProofWiki)](https://www.proofwiki.org/wiki/Divisibility_of_Common_Difference_of_Arithmetic_Sequence_of_Primes) — the condition this node starts from, classical
+
 ## Claims
 
 <a id="valid_starting_residues_card_formula"></a>
@@ -33,4 +39,4 @@ def valid_starting_residues_card_formula : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/Pruning/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/Pruning/formalization.yaml)
-- Source: rns_sieve_6.lean, Part E
+- Original source file: rns_sieve_6.lean, Part E

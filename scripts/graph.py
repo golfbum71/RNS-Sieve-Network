@@ -81,6 +81,38 @@ def is_cited(c):
     return designated(c).get("kind") == "literature"
 
 
+def is_project_file(s):
+    """A `sources` entry naming one of the project's own Lean files, not a publication."""
+    return s.get("relationship") == "formalizes"
+
+
+def published_sources(n):
+    return [s for s in n["sources"] if not is_project_file(s)]
+
+
+def source_link(s):
+    """Markdown for one published source: authors, linked title, and how the node uses it."""
+    authors = s.get("authors") or []
+    title = s.get("title", "")
+    text = f"[{title}]({s['url']})" if s.get("url") else title
+    if authors:
+        text = ", ".join(authors) + ", " + text
+    if s.get("relationship"):
+        text += f" — {s['relationship']}"
+    return text
+
+
+def sources_section(n):
+    """The 'Published sources' block shown near the top of every node page."""
+    pubs = published_sources(n)
+    if not pubs:
+        return ""
+    md = ("## Published sources\n\n"
+          "Published work this node rests on or relates to; each entry says how.\n\n")
+    md += "".join(f"- {source_link(s)}\n" for s in pubs)
+    return md + "\n"
+
+
 def opens_of(n):
     """Open conjectures a node takes as hypotheses (built or planned)."""
     out = []
@@ -407,6 +439,17 @@ exactly the following, each recorded as such rather than claimed:
     if planned_opens:
         md += "**Planned nodes will add:** " + ", ".join(f"`{o}`" for o in planned_opens) + "\n\n"
 
+    with_pubs = [nm for nm in by_order(nodes) if published_sources(nodes[nm])]
+    if with_pubs:
+        md += ("## Published sources\n\n"
+               "Nodes that apply the RNS to published work: proven results, cited "
+               "theorems, or stated conjectures, with links to the papers and pages. "
+               "Each node's page lists the same sources at the top.\n\n")
+        for nm in with_pubs:
+            md += f"- [`{nm}`](docs/nodes/{nm}.md)\n"
+            md += "".join(f"  - {source_link(s)}\n" for s in published_sources(nodes[nm]))
+        md += "\n"
+
     md += "## Node index\n\n| # | Node | What it says | Status |\n|---|---|---|---|\n"
     for nm in by_order(nodes):
         n = nodes[nm]
@@ -420,6 +463,7 @@ def write_node_page(n, nodes, edges):
     name = n["name"]
     md = f"# {name} — {n['title']}\n\n{GENERATED}\n\n"
     md += f"**Status:** {status_word(n)}\n\n{n['description']}\n\n"
+    md += sources_section(n)
     if n["built"]:
         md += "## Claims\n\n"
         for c in n["conclusions"]:
@@ -456,8 +500,8 @@ def write_node_page(n, nodes, edges):
         md += (f"## Files\n\n- Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/{name}/Conclusions.lean)\n"
                f"- Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/{name}/formalization.yaml)\n")
         for s in n["sources"]:
-            rel = " (cited)" if s.get("relationship") == "cites" else ""
-            md += f"- Source{rel}: {s.get('title')}\n"
+            if is_project_file(s):
+                md += f"- Original source file: {s.get('title')}\n"
     else:
         p = n["planned"]
         rests = p.get("rests_on") or []
@@ -491,11 +535,6 @@ def write_node_page(n, nodes, edges):
         if users:
             md += "**Cited by:** " + ", ".join(f"[`{u}`]({u}.md)" for u in sorted(
                 users, key=lambda u: nodes[u]["order"])) + "\n\n"
-        for src in n["sources"]:
-            link = f"[{src.get('title')}]({src['url']})" if src.get("url") else src.get("title")
-            md += f"- Source: {link}" + (f" — {src['relationship']}" if src.get("relationship") else "") + "\n"
-        if n["sources"]:
-            md += "\n"
         if p.get("citation"):
             md += f"**Citation:** {' '.join(str(p['citation']).split())}\n\n"
     open(os.path.join(ROOT, "docs", "nodes", f"{name}.md"), "w", encoding="utf-8").write(md)

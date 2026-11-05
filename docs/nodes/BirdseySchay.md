@@ -6,6 +6,12 @@
 
 Their assumption that the wheel share of twins carries into the range below the next prime's square, with one Mertens correction, stated as a named hypothesis, together with the step showing it implies the twin-prime asymptotic.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220](https://arxiv.org/abs/1906.09220) — the heuristic
+
 ## Planned
 
 **Will rest on:** [`TwinShare`](TwinShare.md), [`MertensThird`](MertensThird.md), [`PrimeNumberTheorem`](PrimeNumberTheorem.md)
@@ -15,6 +21,4 @@ Their assumption that the wheel share of twins carries into the range below the 
 **Planned claims:** `birdsey_schay_implies_twin_asymptotic`
 
 **Scope:** Tier 3: needs the two outside sources as hypotheses.
-
-- Source: [J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220](https://arxiv.org/abs/1906.09220) — the heuristic
 

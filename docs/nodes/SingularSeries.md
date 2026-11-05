@@ -6,6 +6,12 @@
 
 Each wheel's correction factor differs from 1 by an amount that shrinks like one over the wheel size squared, so the product over all wheels converges, and for an admissible pattern the result is strictly positive. The exact surviving fraction equals the correction product times the naive independent-blocking guess.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- G. H. Hardy, J. E. Littlewood, [Some problems of 'Partitio numerorum'; III: On the expression of a number as a sum of primes, Acta Math. 44 (1923), 1-70](https://archive.ymsc.tsinghua.edu.cn/pacm_paperurl/20170108203038474495327) — defines the singular series whose convergence and positivity this node proves
+
 ## Claims
 
 <a id="delta_bound"></a>
@@ -91,4 +97,4 @@ def local_density_factorization : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/SingularSeries/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/SingularSeries/formalization.yaml)
-- Source: rns_sieve_6.lean, Part B Steps 3 and 4
+- Original source file: rns_sieve_6.lean, Part B Steps 3 and 4

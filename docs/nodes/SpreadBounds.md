@@ -6,6 +6,12 @@
 
 Any two stretches of the same length hold survivor counts differing by at most two to the number of wheels. With wheels 2 and 3 frozen, the two columns' survivor counts up to any point differ by at most two to the number of remaining wheels. Both checked numerically beforehand (4,761 cases; the column imbalance reaches 18 at the wheels up to 23, against a bound of 128).
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf) — Theorems 9 and 10, the interval form
+
 ## Claims
 
 <a id="interval_spread_bound"></a>
@@ -55,4 +61,3 @@ def column_imbalance_bound : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/SpreadBounds/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/SpreadBounds/formalization.yaml)
-- Source: D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357

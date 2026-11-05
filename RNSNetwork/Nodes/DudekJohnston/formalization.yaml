@@ -39,4 +39,5 @@ sources:
     authors: ["Adrian W. Dudek", "Daniel R. Johnston"]
     type: "paper"
     id: "arXiv:2501.18048"
-    relationship: cites
+    url: "https://arxiv.org/abs/2501.18048"
+    relationship: "Theorem 1.2, cited (not proved in Lean)"

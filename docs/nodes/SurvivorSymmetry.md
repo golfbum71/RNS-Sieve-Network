@@ -6,6 +6,13 @@
 
 A position survives the wheels exactly when its reflection in the combined cycle survives.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf) — Theorem 1
+- [G. F. Grob and M. Schmitt, Cycles and Patterns in the Sieve of Eratosthenes, arXiv:1905.03117, Theorem 2](https://arxiv.org/abs/1905.03117) — restates it
+
 ## Claims
 
 <a id="survivor_reflection"></a>
@@ -30,5 +37,3 @@ def survivor_reflection : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/SurvivorSymmetry/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/SurvivorSymmetry/formalization.yaml)
-- Source: D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357
-- Source: G. F. Grob and M. Schmitt, Cycles and Patterns in the Sieve of Eratosthenes, arXiv:1905.03117, Theorem 2

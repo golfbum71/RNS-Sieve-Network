@@ -49,3 +49,11 @@ sources:
     authors: ["Geoffrey Fischer"]
     type: "lean-file"
     relationship: formalizes
+  - title: "Euclid, Elements, Book IX, Proposition 20 (D. E. Joyce's edition)"
+    type: "paper"
+    url: "https://mathcs.clarku.edu/~djoyce/elements/bookIX/propIX20.html"
+    relationship: "the classical argument behind the first proof"
+  - title: "Number of Primes is Infinite, Proof 6 (ProofWiki)"
+    type: "paper"
+    url: "https://www.proofwiki.org/wiki/Number_of_Primes_is_Infinite/Proof_6"
+    relationship: "the square-times-squarefree counting argument behind the second proof"

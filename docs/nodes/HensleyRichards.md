@@ -6,6 +6,13 @@
 
 If an admissible pattern packs more offsets into a window than there are primes in a window of that length, Conjecture A (every admissible pattern repeats forever) and Conjecture B (prime counts are subadditive) cannot both hold.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- D. Hensley, I. Richards, [Primes in intervals, Acta Arith. 25 (1974), 375-391](https://eudml.org/doc/205282) — the incompatibility theorem this node proves
+- I. Richards, [On the incompatibility of two conjectures concerning primes, Bull. Amer. Math. Soc. 80 (1974), 419-438](https://www.ams.org/journals/bull/1974-80-03/S0002-9904-1974-13434-8) — survey of the same result
+
 ## Claims
 
 <a id="hl_a_and_b_incompatible"></a>
@@ -33,4 +40,4 @@ def HL_A_and_B_incompatible : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/HensleyRichards/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/HensleyRichards/formalization.yaml)
-- Source: rns_sieve_6_parts_J_K.lean, Part J
+- Original source file: rns_sieve_6_parts_J_K.lean, Part J

@@ -6,6 +6,12 @@
 
 A setting of the wheels (one blocked position per wheel) is a shift of the ordinary sieve, by the Chinese Remainder Theorem; so a run of consecutive numbers can be blocked by some setting exactly when some gap between consecutive survivors is at least one longer. The longest blocked run is one less than the largest survivor gap (Jacobsthal's function of the cycle length). With JacobsthalQuadratic, such runs are at most a constant times the square of the number of wheels. Checked numerically beforehand for the wheels below 14 over every setting.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [DeepMind formal-conjectures, Erdős Problem 687 / Green's Open Problem 46](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/687.lean) — states the problem
+
 ## Claims
 
 <a id="blocked_run_is_shift"></a>
@@ -60,4 +66,3 @@ def longest_blocked_run_eq_max_gap_sub_one : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/BlockingRuns/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/BlockingRuns/formalization.yaml)
-- Source: DeepMind formal-conjectures, Erdős Problem 687 / Green's Open Problem 46

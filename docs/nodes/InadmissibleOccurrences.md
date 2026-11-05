@@ -6,6 +6,12 @@
 
 If an offset pattern covers every position on some wheel, every prime occurrence of it contains that wheel's prime, so it occurs only finitely often. Corollary: the prime-gap block 2, 4, 2, 4, 2 occurs only at 5, 7, 11, 13, 17, 19. Proved directly from the definition of w; Admissibility's claims are not needed.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [DeepMind formal-conjectures, OeisA1223.conjecture (statement; proof hosted by Epoch AI)](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/OEIS/1223.lean) — statement this settles
+
 ## Claims
 
 <a id="inadmissible_occurrence_contains_prime"></a>
@@ -49,4 +55,3 @@ def gap_block_24242_unique : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/InadmissibleOccurrences/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/InadmissibleOccurrences/formalization.yaml)
-- Source: DeepMind formal-conjectures, OeisA1223.conjecture (statement; proof hosted by Epoch AI)

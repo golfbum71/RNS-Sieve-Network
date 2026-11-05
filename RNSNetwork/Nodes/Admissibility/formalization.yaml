@@ -78,3 +78,7 @@ sources:
     authors: ["Geoffrey Fischer"]
     type: "lean-file"
     relationship: formalizes
+  - title: "Divisibility of Common Difference of Arithmetic Sequence of Primes (ProofWiki)"
+    type: "paper"
+    url: "https://www.proofwiki.org/wiki/Divisibility_of_Common_Difference_of_Arithmetic_Sequence_of_Primes"
+    relationship: "the evenly spaced case (the Lagrange-Waring condition), classical"

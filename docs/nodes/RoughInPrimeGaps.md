@@ -6,12 +6,16 @@
 
 Almost every gap between consecutive primes contains a number whose smallest prime factor is at least the gap's length: a survivor of every wheel smaller than the gap. Proved unconditionally by Gafni and Tao, answering Erdős Problem 682; proved in Lean in plby/lean-proofs.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [A. Gafni and T. Tao, Rough numbers between consecutive primes, arXiv:2508.06463 (2025)](https://arxiv.org/abs/2508.06463) — the proof
+- [DeepMind formal-conjectures, Erdős Problem 682](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/682.lean) — the Lean statement
+
 ## Outside source
 
 **Outside source:** [plby/lean-proofs](https://github.com/plby/lean-proofs/blob/8822f7ddef30fadbd92e1c6ab4ed897af356af5e/src/latest/ErdosProblems/Erdos682.lean#L5018).
 
 The statement is erdos_682 in DeepMind's formal-conjectures (ErdosProblems/682.lean), which links this proof and marks it solved. The same entry links a Lean proof of a counterexample built on the 30030 cycle (erdos_682.variants.dickson_counterexample). Check toolchain and axioms before citing.
-
-- Source: [A. Gafni and T. Tao, Rough numbers between consecutive primes, arXiv:2508.06463 (2025)](https://arxiv.org/abs/2508.06463) — the proof
-- Source: [DeepMind formal-conjectures, Erdős Problem 682](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/682.lean) — the Lean statement
 

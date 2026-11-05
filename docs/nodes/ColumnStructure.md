@@ -82,4 +82,4 @@ def col_minus_composite_has_proper_minus_factor : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/ColumnStructure/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/ColumnStructure/formalization.yaml)
-- Source: rns_sieve_6.lean, Part C and column lemmas
+- Original source file: rns_sieve_6.lean, Part C and column lemmas

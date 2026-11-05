@@ -6,6 +6,13 @@
 
 
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Mathlib, Mathlib.NumberTheory.LSeries.PrimesInAP (Nat.infinite_setOfPred_prime_and_modEq)](https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/LSeries/PrimesInAP.html) — Dirichlet's theorem, imported from Mathlib
+- D. Loeffler, M. Stoll, [Formalizing zeta and L-functions in Lean, Annals of Formalized Mathematics 1 (2025)](https://arxiv.org/abs/2503.00959) — the formalization of Dirichlet's theorem used
+
 ## Claims
 
 <a id="col_minus_primes_infinite"></a>
@@ -72,4 +79,4 @@ def col_plus_primes_unbounded : Prop :=
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/DirichletColumns/Conclusions.lean)
 - Metadata: [`formalization.yaml`](../../RNSNetwork/Nodes/DirichletColumns/formalization.yaml)
-- Source: rns_sieve_6.lean, Part I
+- Original source file: rns_sieve_6.lean, Part I
