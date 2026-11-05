@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Geoffrey Fischer
 -/
 import RNSNetwork.Vocabulary
+import Mathlib.NumberTheory.LSeries.DirichletContinuation
 
 /-!
 # GermainCriterion — when the survivors of two wheels split evenly
@@ -38,5 +39,20 @@ def two_wheel_split_of_remainders : Prop :=
     (p % k = 1 % k ∨ q % k = 1 % k ∨ ((p * p) % k = 1 % k ∧ (p + q) % k = 0)) →
     k * (survivors_upto {p, q} (a * ({p, q} : Finset Nat).prod id / k)).card
       = a * (survivors_upto {p, q} (({p, q} : Finset Nat).prod id)).card
+
+/-- **An odd primitive character's L-function does not vanish at 0.** For a
+modulus `N` and an odd primitive Dirichlet character `χ` modulo `N`,
+`L(χ, 0) ≠ 0`. From Mathlib: the functional equation, the nonvanishing of
+`L(χ⁻¹, 1)`, and the root number and gamma factors being nonzero. -/
+def odd_primitive_LFunction_zero_ne_zero : Prop :=
+  ∀ (N : Nat) [NeZero N] (χ : DirichletCharacter ℂ N), χ.IsPrimitive → χ.Odd →
+    DirichletCharacter.LFunction χ 0 ≠ 0
+
+/-- **The weighted residue sum of an odd primitive character is not zero.**
+Adding up each residue of the cycle `N`, weighted by an odd primitive character
+`χ`, never gives 0. This is the quantity Germain's criterion is built from. -/
+def odd_primitive_weighted_sum_ne_zero : Prop :=
+  ∀ (N : Nat) [NeZero N] (χ : DirichletCharacter ℂ N), χ.IsPrimitive → χ.Odd →
+    ∑ j : ZMod N, χ j * (j.val : ℂ) ≠ 0
 
 end RNS.GermainCriterion

@@ -12,7 +12,8 @@ node:
   description: Cut the cycle of two prime wheels into a given number of equal parts. The survivors split
     evenly exactly when one wheel leaves remainder 1 on division by the number of parts, or the first
     wheel's square leaves remainder 1 and the second wheel is the negative of the first (Germain 2005,
-    Corollary 1.4). Built so far, the "if" half, by remainder arithmetic alone. Next stage, the "only if"
+    Corollary 1.4). Built so far, the "if" half, by remainder arithmetic alone, and the analytic input: an odd
+    primitive character's weighted residue sum is never zero. Next stage, the "only if"
     half, which is Erdős's conjecture on Lehmer's even split, through odd Dirichlet characters and
     the nonvanishing of their L-functions at 1 (Mathlib's LFunction_apply_one_ne_zero).
   improves: LehmerSplit gives an even split when one wheel leaves remainder 1, for any number of
@@ -36,6 +37,34 @@ conclusions:
     note: Lean proof of the step from the imported claim, taken as a named hypothesis; the proof
       file imports claims only, never proofs. Built clean 2026-11-05 (standard axioms only). Recorded
       as noncompliant only because no Comparator receipt exists yet.
+  designated: lean-proof
+- id: odd_primitive_LFunction_zero_ne_zero
+  declaration: RNS.GermainCriterion.odd_primitive_LFunction_zero_ne_zero
+  summary: For an odd primitive Dirichlet character, the L-function does not vanish at 0 (from
+    Mathlib's functional equation and the nonvanishing at 1).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainCriterion.lean
+    declaration: RNS.GermainCriterion.odd_primitive_LFunction_zero_ne_zero_holds
+    note: Lean proof drafted 2026-11-05 from Mathlib alone; awaiting its first `lake build RNSSolutions`.
+  designated: lean-proof
+- id: odd_primitive_weighted_sum_ne_zero
+  declaration: RNS.GermainCriterion.odd_primitive_weighted_sum_ne_zero
+  summary: For an odd primitive Dirichlet character, the sum of each residue of the cycle weighted by
+    the character is not zero.
+  imports:
+  - HurwitzZetaZero.v1.hurwitz_zeta_at_zero
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainCriterion.lean
+    declaration: RNS.GermainCriterion.odd_primitive_weighted_sum_ne_zero_step
+    note: Lean proof of the step from the cited Hurwitz zeta value, taken as a named hypothesis, and
+      the previous claim; drafted 2026-11-05, awaiting its first `lake build RNSSolutions`.
   designated: lean-proof
 sources:
 - title: J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220

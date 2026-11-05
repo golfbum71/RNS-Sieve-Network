@@ -5,6 +5,8 @@ Authors: Geoffrey Fischer
 -/
 import RNSNetwork.Nodes.GermainCriterion.Conclusions
 import RNSNetwork.Nodes.Sawtooth.Conclusions
+import RNSNetwork.Nodes.HurwitzZetaZero.Conclusions
+import Mathlib.NumberTheory.LSeries.Nonvanishing   -- `LFunction_apply_one_ne_zero`, `rootNumber_ne_zero`
 import Mathlib.Algebra.BigOperators.Group.Finset.Powerset   -- `Finset.sum_powerset_insert`
 import Mathlib.Data.Nat.ModEq                  -- `Nat.ModEq.mul_left`
 import Mathlib.Tactic.IntervalCases
@@ -17,8 +19,8 @@ import Mathlib.Tactic.Ring
 Imports claims only, never other nodes' proofs. The sufficient direction rests
 on `Sawtooth.even_split_iff_remainders_cancel`, taken as a named hypothesis.
 
-Built clean by `lake build RNSSolutions` on 2026-11-05; `#print axioms` shows only
-the standard three.
+Built clean by `lake build RNSSolutions` on 2026-11-05 (two-wheel sufficient direction);
+the analytic claims were added the same day and await their first build.
 
 Idea. For the wheels `p`, `q`, the signed sum of `Sawtooth` has four terms:
 the remainders of `a p q`, `a q`, `a p` and `a` on division by `k`, with signs
@@ -150,6 +152,85 @@ theorem two_wheel_split_of_remainders_step
       omega
     · omega
 
+/-! ## The analytic input: odd primitive characters -/
+
+/-- An odd character does not live modulo 1, and is not the trivial character. -/
+private theorem odd_facts {N : Nat} [NeZero N] {χ : DirichletCharacter ℂ N}
+    (hprim : χ.IsPrimitive) (hodd : χ.Odd) : N ≠ 1 ∧ χ ≠ 1 := by
+  have hN1 : N ≠ 1 := by
+    rintro rfl
+    have h1 : (-1 : ZMod 1) = 1 := Subsingleton.elim _ _
+    have h := hodd
+    unfold DirichletCharacter.Odd at h
+    rw [h1, map_one] at h
+    norm_num at h
+  refine ⟨hN1, fun h => ?_⟩
+  have hc := hprim
+  rw [DirichletCharacter.IsPrimitive, h, DirichletCharacter.conductor_one] at hc
+  exact hN1 hc.symm
+
+theorem odd_primitive_LFunction_zero_ne_zero_holds : odd_primitive_LFunction_zero_ne_zero := by
+  intro N _ χ hprim hodd
+  obtain ⟨hN1, hχ1⟩ := odd_facts hprim hodd
+  have hinv : χ⁻¹ ≠ 1 := inv_ne_one.mpr hχ1
+  have hN0 : (N : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr (NeZero.ne N)
+  have hg0 : DirichletCharacter.gammaFactor χ 0 ≠ 0 := by
+    rw [hodd.gammaFactor_def]
+    exact Complex.Gammaℝ_ne_zero_of_re_pos (by simp)
+  have hg1 : DirichletCharacter.gammaFactor χ⁻¹ 1 ≠ 0 := by
+    unfold DirichletCharacter.gammaFactor
+    split_ifs
+    · exact Complex.Gammaℝ_ne_zero_of_re_pos (by simp)
+    · exact Complex.Gammaℝ_ne_zero_of_re_pos (by norm_num)
+  have hC1 : DirichletCharacter.completedLFunction χ⁻¹ 1 ≠ 0 := by
+    have h := DirichletCharacter.LFunction_eq_completed_div_gammaFactor χ⁻¹ 1 (Or.inl one_ne_zero)
+    have hL := DirichletCharacter.LFunction_apply_one_ne_zero hinv
+    intro hc
+    rw [hc, zero_div] at h
+    exact hL h
+  have hFE := hprim.completedLFunction_one_sub 1
+  rw [sub_self] at hFE
+  have hC0 : DirichletCharacter.completedLFunction χ 0 ≠ 0 := by
+    rw [hFE]
+    refine mul_ne_zero (mul_ne_zero ?_ (DirichletCharacter.rootNumber_ne_zero hprim)) hC1
+    intro h
+    exact hN0 ((Complex.cpow_eq_zero_iff _ _).mp h).1
+  rw [DirichletCharacter.LFunction_eq_completed_div_gammaFactor χ 0 (Or.inr hN1)]
+  exact div_ne_zero hC0 hg0
+
+theorem odd_primitive_weighted_sum_ne_zero_step
+    (h_hz : RNS.HurwitzZetaZero.hurwitz_zeta_at_zero) :
+    odd_primitive_weighted_sum_ne_zero := by
+  intro N _ χ hprim hodd hsum
+  obtain ⟨hN1, hχ1⟩ := odd_facts hprim hodd
+  apply odd_primitive_LFunction_zero_ne_zero_holds N χ hprim hodd
+  have hNpos : (0 : ℝ) < N := by exact_mod_cast Nat.pos_of_ne_zero (NeZero.ne N)
+  have key : ∀ j : ZMod N, χ j * hurwitzZeta (ZMod.toAddCircle j) 0
+      = χ j * (1 / 2 - (j.val : ℂ) / N) := by
+    intro j
+    by_cases hj : j = 0
+    · subst hj
+      rw [χ.map_zero' hN1, zero_mul, zero_mul]
+    · have hv : 0 < j.val := Nat.pos_of_ne_zero ((ZMod.val_ne_zero j).mpr hj)
+      have hx0 : (0 : ℝ) < (j.val : ℝ) / N := div_pos (by exact_mod_cast hv) hNpos
+      have hle : (j.val : ℝ) ≤ N := by exact_mod_cast (ZMod.val_lt j).le
+      have hx1 : (j.val : ℝ) / N ≤ 1 := by
+        calc (j.val : ℝ) / N ≤ (N : ℝ) / N := by gcongr
+          _ = 1 := div_self (ne_of_gt hNpos)
+      rw [ZMod.toAddCircle_apply, h_hz _ hx0 hx1]
+      push_cast
+      ring
+  have hs0 : ∑ j : ZMod N, χ j = 0 := MulChar.sum_eq_zero_of_ne_one hχ1
+  rw [DirichletCharacter.LFunction, ZMod.LFunction, neg_zero, Complex.cpow_zero, one_mul,
+    Finset.sum_congr rfl (fun j _ => key j)]
+  calc ∑ j : ZMod N, χ j * (1 / 2 - (j.val : ℂ) / N)
+      = (∑ j : ZMod N, χ j) * (1 / 2) - (∑ j : ZMod N, χ j * (j.val : ℂ)) / N := by
+        rw [Finset.sum_mul, Finset.sum_div, ← Finset.sum_sub_distrib]
+        exact Finset.sum_congr rfl (fun j _ => by ring)
+    _ = 0 := by rw [hs0, hsum]; simp
+
 end RNS.GermainCriterion
 
 #print axioms RNS.GermainCriterion.two_wheel_split_of_remainders_step
+#print axioms RNS.GermainCriterion.odd_primitive_LFunction_zero_ne_zero_holds
+#print axioms RNS.GermainCriterion.odd_primitive_weighted_sum_ne_zero_step
