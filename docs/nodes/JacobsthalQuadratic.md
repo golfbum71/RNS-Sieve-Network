@@ -6,6 +6,13 @@
 
 Every run of consecutive integers longer than a constant times the square of k contains a number coprime to any given number with at most k prime factors. Proved in Lean by OpenAI (September 2026); solves Erdős Problem 970.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [OpenAI math, Jacobsthal quadratic bound (Lean)](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/OAI/NumberTheory/Jacobsthal/Conclusions/QuadraticBound.lean#L13) — the outside Lean proof this node cites
+- [T. F. Bloom, Erdős Problem 970](https://www.erdosproblems.com/970) — the problem the quadratic bound solves
+
 ## Outside source
 
 **Outside source:** [openai/math](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/OAI/NumberTheory/Jacobsthal/Conclusions/QuadraticBound.lean#L13).

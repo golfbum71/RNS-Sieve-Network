@@ -8,6 +8,8 @@ node:
   order: 57
   kind: paper
   status: active
+  improves: BonseCeiling shows the ceiling sits inside one cycle from four wheels on; this node turns
+    that into a classification, using the ceiling to force the wheels and Bonse to cap the number.
   title: 30 is the largest number whose survivors are all prime
   description: Treat a number as a cycle; its survivors are the numbers below it sharing no factor
     with it. For 30 every survivor other than 1 is prime, and no larger number has this property

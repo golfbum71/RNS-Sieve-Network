@@ -6,6 +6,12 @@
 
 Every Sophie Germain prime above 3 lies in the 6n-1 column; none ends in the digit 7; so above 5 its last digit is 1, 3 or 9.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Safe and Sophie Germain primes (Wikipedia)](https://en.wikipedia.org/wiki/Safe_and_Sophie_Germain_primes) — states that a Sophie Germain prime above 3 leaves remainder 2 on division by 3, and remainder 3, 9 or 11 on division by 20; this node's column and last-digit claims follow from those
+
 ## Claims
 
 <a id="sophie_germain_mod_six"></a>

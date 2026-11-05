@@ -12,6 +12,12 @@ Published work this node rests on or relates to; each entry says how.
 
 - [DeepMind formal-conjectures, OeisA1223.conjecture (statement; proof hosted by Epoch AI)](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/OEIS/1223.lean) — statement this settles
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`Admissibility`](Admissibility.md) — the other side of the same definition: there the patterns that pass every wheel, here the ones that fail one; proved directly from w, so Admissibility's claims are not needed
+
 ## Claims
 
 <a id="inadmissible_occurrence_contains_prime"></a>

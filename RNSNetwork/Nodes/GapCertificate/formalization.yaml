@@ -91,3 +91,10 @@ sources:
 - title: DeepMind formal-conjectures, Erdős Problem 854
   url: https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/854.lean
   relationship: states the problem
+related:
+- node: BlockingRuns
+  note: "the largest survivor gap (22 for the wheels up to 13) is one more than the longest blocked run"
+- node: KanoldBound
+  note: "bounds the largest survivor gap by two to the number of wheels; for the wheels up to 13 that is 64, against the actual 22"
+- node: GapMoments
+  note: "how the survivor gaps are spread on average; this node records which gap sizes occur at all"

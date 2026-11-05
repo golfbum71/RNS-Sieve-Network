@@ -35,3 +35,8 @@ sources:
 - title: Ramanujan's sum (Wikipedia), with Kluyver's 1906 formula and von Sterneck's function
   url: https://en.wikipedia.org/wiki/Ramanujan%27s_sum
   relationship: the classical evaluation; this node proves its squarefree case
+related:
+- node: CRT
+  note: "the wheel-by-wheel product is the Chinese Remainder Theorem acting on frequencies"
+- node: MenonIdentity
+  note: "another sum over the survivors of one cycle that splits wheel by wheel"

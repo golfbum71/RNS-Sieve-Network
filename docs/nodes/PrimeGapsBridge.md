@@ -13,6 +13,13 @@ Published work this node rests on or relates to; each entry says how.
 - [Axiom Math, PrimeGapsLib, Finset.Admissible (PrimeGapsTheory/NumberTheory/Admissible.lean, line 40)](https://github.com/AxiomMath/PrimeGapsLib/blob/1faa7b1/PrimeGapsTheory/NumberTheory/Admissible.lean#L40) — the definition, copied word for word and shown equal to is_admissible
 - [Lean formalization of bounded gaps between primes (Chen, Hariharan, Lau, Mehta, Swaminathan, Thorner, Xie; blueprint)](https://primegaps.axiommath.ai/blueprint.pdf) — the results this bridge makes available to the network
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`Admissibility`](Admissibility.md) — the network's admissibility, here shown equal to PrimeGapsLib's
+- [`HardyLittlewood`](HardyLittlewood.md) — the conjecture whose admissible patterns PrimeGapsLib's conditional gap results address
+
 ## Claims
 
 <a id="admissible_iff_primegaps"></a>

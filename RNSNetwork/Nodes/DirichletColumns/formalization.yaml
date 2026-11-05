@@ -10,7 +10,10 @@ node:
   status: active
   title: "both columns hold infinitely many primes"
   description: >-
-    
+    Each of the two columns 6n-1 and 6n+1 holds infinitely many primes, and
+    past any position there is a later prime in each column. This is
+    Dirichlet's theorem on primes in arithmetic progressions, which Mathlib
+    proves, applied to the two columns.
 
 conclusions:
   - id: col_minus_primes_infinite
@@ -84,3 +87,8 @@ sources:
     type: "paper"
     url: "https://arxiv.org/abs/2503.00959"
     relationship: "the formalization of Dirichlet's theorem used"
+related:
+- node: Wheel6
+  note: "defines the two columns 6n-1 and 6n+1 that this node fills with infinitely many primes"
+- node: Infinitude
+  note: "the weaker statement that primes never run out, without saying which column"

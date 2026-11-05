@@ -16,10 +16,14 @@ below is met by filling in the metadata, never by editing a generated page.
 - Do not re-prove another node's result inside a proof file to avoid the
   arrow. If a node re-derives something another node already proves, either
   switch to importing it or say in the node's notes why it stands alone.
-- A node that is conceptually a sequel to another (same objects, a sharper or
-  more special statement) but does not use its result should still say so in
-  its description, naming the earlier node, so the relation is visible even
-  without an arrow.
+- A node that is related to another in content (same objects, a sharper or
+  more special statement, the other side of the same definition) but does not
+  take its result as a hypothesis lists it under `related:` in its
+  `formalization.yaml`, each entry with a `node:` and a `note:` saying how.
+  These show on the node page as "Related nodes", never as arrows: an arrow
+  always means a hypothesis Lean checked. A node with no arrows in or out must
+  have at least one `related:` entry or say in its description why it stands
+  alone.
 - For planned nodes, `planned: rests_on:` lists the nodes it will rest on, so
   the dashed arrows are right before any Lean exists.
 
@@ -32,8 +36,9 @@ below is met by filling in the metadata, never by editing a generated page.
 - Each claim's `summary:` — one sentence saying what that claim states, so the
   reader knows what the Lean `def` beside it means before reading it.
 - **What is new over the node it builds on.** When a node rests on, sharpens
-  or specializes an earlier node, its description (or a separate
-  `improves:` line once `graph.py` supports it) says what it adds: a stronger
+  or specializes an earlier node, an `improves:` line under `node:` in its
+  `formalization.yaml` says what it adds (shown on the page as "What it
+  adds"): a stronger
   bound, a general case of a special one, a new direction (backward runs, the
   other column), a certificate where there was only a statement. Skip this
   only when the description already makes it obvious.
@@ -70,31 +75,35 @@ the node's files. Keep the metadata complete enough that this page answers
 - [ ] Every claim has a one-sentence `summary:`.
 - [ ] What it adds over the node it builds on is stated, if not obvious.
 - [ ] Every input from another node is an `imports:` entry and a line in
-      `Assemble.lean` (so the arrow is drawn).
+      `Assemble.lean` (so the arrow is drawn); content links without a
+      hypothesis are `related:` entries.
 - [ ] Sources with links for anything not original; original work says so.
 - [ ] `python scripts/graph.py` rerun; the node page reads correctly.
 - [ ] Built clean on GitHub with only the standard three axioms.
 
-## Where the network stands (audit of 2026-11-05)
+## Where the network stands
 
-Checked across all 54 nodes. No proof file uses another node's claims without
-an arrow, so no drawn arrow is missing outright. Still to fix:
+**Audit of 2026-11-05, after fixes:** all 54 nodes have a description, at
+least one published source, and either an arrow or a `related:` entry. No
+proof uses another node's claims without an arrow.
 
-- **No arrows in or out (19 nodes).** Some genuinely stand alone; each should
-  either gain the arrow it deserves or say why it stands alone:
-  `BrunTwinSum`, `ColumnAction`, `DirichletColumns`, `DudekJohnston`,
-  `GallagherAverage`, `GapCertificate`, `GapConjectures` (rests only on open
-  conjectures), `GapMoments`, `HensleyRichards`, `InadmissibleOccurrences`
-  (the node list says it builds on `Admissibility`), `Infinitude`,
-  `KanoldBound`, `LinearForms`, `LongGaps` (should rest on `BlockingRuns`),
-  `MenonIdentity`, `PillaiBrauer`, `PrimeGapsBridge` (relates to
-  `Admissibility`), `RamanujanSums`, `RoughInPrimeGaps`.
-- **No published source (15 nodes).** Standard facts need a textbook or
-  reference link; outside-source nodes need their project link in
-  `sources:`: `CRT`, `CeilingOvershoot`, `ColumnAction`, `ColumnStructure`,
-  `GapConjectures`, `GapTracks`, `JacobsthalQuadratic`, `MertensThird`,
-  `PrimeNumberTheorem`, `ShareBounds`, `SophieGermainWheel`,
-  `SquareRootShield`, `SurvivorCount`, `Wheel6`, `WheelOrder`.
-- **No description (1 node):** `DirichletColumns`.
-- **No "what is new" field yet.** Add an optional `improves:` line to
-  `formalization.yaml` and have `graph.py` print it under the description.
+What was fixed that day:
+
+- **19 nodes had no arrows in or out.** None of them takes another node's
+  result as a hypothesis, so no arrow was added; each now lists its related
+  nodes with a note on how (for example `KanoldBound` → `BlockingRuns`,
+  `LongGaps` → `BlockingRuns`, `InadmissibleOccurrences` → `Admissibility`).
+  `ColumnAction` and `ColumnStructure` state the same column fact in two
+  forms, each proved in three lines; they are cross-referenced rather than
+  joined. `LongGaps` should gain a real arrow from `BlockingRuns` once the
+  outside result is cited.
+- **15 nodes had no published source.** Standard facts now cite a reference
+  (Wikipedia or the classical paper); the three outside-source nodes now list
+  their Lean project. `SophieGermainWheel`'s source states the facts modulo 3
+  and modulo 20, and its entry says so.
+- **`DirichletColumns` had no description;** it has one.
+- **`graph.py`** now prints `improves:` as "What it adds" and `related:` as a
+  "Related nodes" section on each node page.
+
+Re-run the audit after adding a node: every node needs a description, a
+source unless original, and an arrow or a related entry.

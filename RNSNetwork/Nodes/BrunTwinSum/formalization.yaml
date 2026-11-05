@@ -34,3 +34,8 @@ sources:
 - title: Brun's theorem (Wikipedia)
   url: https://en.wikipedia.org/wiki/Brun%27s_theorem
   relationship: the theorem, the twin-prime count bound behind it, and Brun's constant
+related:
+- node: ShareBounds
+  note: "its wheel-level twin share is the sieve heart of Brun's argument; the cited proof does not use the Lean claim"
+- node: TwinConstant
+  note: "the twin-prime constant that sets the size of the twin count Brun's sum adds up"

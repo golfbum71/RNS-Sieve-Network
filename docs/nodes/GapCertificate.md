@@ -14,6 +14,14 @@ Published work this node rests on or relates to; each entry says how.
 - [T. F. Bloom, Erdős Problem 854](https://www.erdosproblems.com/854) — Erdős's guess and the Lacampagne-Selfridge computation at 2·3·5·7·11·13
 - [DeepMind formal-conjectures, Erdős Problem 854](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/854.lean) — states the problem
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`BlockingRuns`](BlockingRuns.md) — the largest survivor gap (22 for the wheels up to 13) is one more than the longest blocked run
+- [`KanoldBound`](KanoldBound.md) — bounds the largest survivor gap by two to the number of wheels; for the wheels up to 13 that is 64, against the actual 22
+- [`GapMoments`](GapMoments.md) — how the survivor gaps are spread on average; this node records which gap sizes occur at all
+
 ## Claims
 
 <a id="survivor_gaps_even"></a>

@@ -92,7 +92,26 @@ conclusions:
     designated: lean-proof
 
 sources:
+  - title: "Legendre's conjecture (Wikipedia)"
+    url: "https://en.wikipedia.org/wiki/Legendre%27s_conjecture"
+    relationship: "states the conjecture this node derives from a survivor bound and from Oppermann's"
+  - title: "Brocard's conjecture (Wikipedia)"
+    url: "https://en.wikipedia.org/wiki/Brocard%27s_conjecture"
+    relationship: "states the conjecture this node derives from a survivor bound"
+  - title: "Oppermann's conjecture (Wikipedia)"
+    url: "https://en.wikipedia.org/wiki/Oppermann%27s_conjecture"
+    relationship: "states the conjecture this node derives from a survivor bound"
+  - title: "Andrica's conjecture (Wikipedia)"
+    url: "https://en.wikipedia.org/wiki/Andrica%27s_conjecture"
+    relationship: "states the conjecture this node derives from Oppermann's"
   - title: "rns_open_conjectures.lean, Parts 1-5"
     authors: ["Geoffrey Fischer"]
     type: "lean-file"
     relationship: formalizes
+related:
+- node: DudekJohnston
+  note: "the proven near-prime version of Legendre's conjecture"
+- node: KanoldBound
+  note: "a proven survivor-gap bound of the kind these conjectures need, though far too weak to give them"
+- node: BlockingRuns
+  note: "the largest survivor gap, the quantity the named survivor bounds control"

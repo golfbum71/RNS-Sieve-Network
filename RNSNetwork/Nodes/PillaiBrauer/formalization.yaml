@@ -63,3 +63,8 @@ sources:
 - title: Arithmetic Progressions in a Unique Factorization Domain (arXiv:1108.1267)
   url: https://ar5iv.labs.arxiv.org/html/1108.1267
   relationship: history of Pillai's and Brauer's results and the arithmetic-progression form
+related:
+- node: CRT
+  note: "shifting the run 2184-2200 by multiples of 30030 keeps every wheel position, which is what makes the runs repeat"
+- node: GapCertificate
+  note: "works on the same cycle, the wheels up to 13"

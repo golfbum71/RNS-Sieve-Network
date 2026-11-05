@@ -36,3 +36,8 @@ sources:
 - title: OEIS A062355, d(n) times phi(n)
   url: https://oeis.org/A062355
   relationship: the values, noted there as Menon's identity
+related:
+- node: SurvivorCount
+  note: "counts the survivors of one cycle, the factor in front of Menon's total"
+- node: RamanujanSums
+  note: "another sum over the survivors of one cycle that splits wheel by wheel"

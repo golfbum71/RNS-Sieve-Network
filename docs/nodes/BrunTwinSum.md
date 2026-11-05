@@ -13,6 +13,13 @@ Published work this node rests on or relates to; each entry says how.
 - [Brun's theorem (lean-lang.org problem list, brun_constant_converges)](https://lean-lang.org/eval/problems/brun_constant_converges/) — the same statement in Lean, still open there as a formalization target
 - [Brun's theorem (Wikipedia)](https://en.wikipedia.org/wiki/Brun%27s_theorem) — the theorem, the twin-prime count bound behind it, and Brun's constant
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`ShareBounds`](ShareBounds.md) — its wheel-level twin share is the sieve heart of Brun's argument; the cited proof does not use the Lean claim
+- [`TwinConstant`](TwinConstant.md) — the twin-prime constant that sets the size of the twin count Brun's sum adds up
+
 ## Claims
 
 <a id="brun_sum_finite"></a>

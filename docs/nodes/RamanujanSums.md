@@ -12,6 +12,13 @@ Published work this node rests on or relates to; each entry says how.
 
 - [Ramanujan's sum (Wikipedia), with Kluyver's 1906 formula and von Sterneck's function](https://en.wikipedia.org/wiki/Ramanujan%27s_sum) — the classical evaluation; this node proves its squarefree case
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`CRT`](CRT.md) — the wheel-by-wheel product is the Chinese Remainder Theorem acting on frequencies
+- [`MenonIdentity`](MenonIdentity.md) — another sum over the survivors of one cycle that splits wheel by wheel
+
 ## Claims
 
 <a id="ramanujan_wheel_product"></a>

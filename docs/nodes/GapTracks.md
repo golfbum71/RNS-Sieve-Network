@@ -6,6 +6,14 @@
 
 The smaller of two twin primes above 3 always lies in the 6n-1 column, and the smaller of two cousin primes in the 6n+1 column. In general, a gap starting from the 6n-1 column never leaves remainder 4 on division by 6, and a gap starting from the 6n+1 column never leaves remainder 2; a gap that is a multiple of 6 keeps both primes in the same column. One claim is refuted rather than proved: the number between two primes six apart is not always composite (5, 7, 11 is a counterexample).
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Twin prime (Wikipedia)](https://en.wikipedia.org/wiki/Twin_prime) — every twin pair above (3, 5) has the form (6n-1, 6n+1)
+- [Cousin prime (Wikipedia)](https://en.wikipedia.org/wiki/Cousin_prime) — cousin primes, the gap-4 case
+- [Sexy prime (Wikipedia)](https://en.wikipedia.org/wiki/Sexy_prime) — sexy primes, the gap-6 case
+
 ## Claims
 
 <a id="twin_prime_mod_six"></a>

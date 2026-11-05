@@ -37,3 +37,10 @@ sources:
 - title: F. Costello and P. Watts, A short note on Jacobsthal's function (arXiv:1306.1064)
   url: https://arxiv.org/abs/1306.1064
   relationship: quotes Kanold's bound and compares it with Stevens' and Iwaniec's
+related:
+- node: BlockingRuns
+  note: "the largest survivor gap that this node bounds by two to the number of wheels"
+- node: JacobsthalQuadratic
+  note: "a much sharper bound for many wheels, but with a constant that cannot be evaluated"
+- node: GapCertificate
+  note: "the exact gaps for the wheels up to 13 (largest 22, against Kanold's 64)"

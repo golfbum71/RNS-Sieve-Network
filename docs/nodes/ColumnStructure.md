@@ -6,6 +6,13 @@
 
 A product of two numbers from the 6n-1 column lands in the 6n+1 column, and so on for all four combinations; each prime above 3 hits the 6n-1 column at exactly one position per cycle; every number in the 6n-1 column has a prime factor from that same column.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Modular arithmetic (Wikipedia)](https://en.wikipedia.org/wiki/Modular_arithmetic) — remainders multiply, which gives the four column products; the column form and the per-cycle hit position are the network's own
+- [Primality test (Wikipedia), simple methods](https://en.wikipedia.org/wiki/Primality_test) — the 6n-1 and 6n+1 columns as the only places primes above 3 can sit
+
 ## Claims
 
 <a id="columns_multiply"></a>

@@ -30,6 +30,9 @@ conclusions:
     designated: lean-proof
 
 sources:
+  - title: "Chinese remainder theorem (Wikipedia)"
+    url: "https://en.wikipedia.org/wiki/Chinese_remainder_theorem"
+    relationship: "the classical theorem this node restates for the wheels: one position in the combined cycle is the same as one position on each wheel"
   - title: "rns_sieve_6.lean, Part A, Step 3"
     authors: ["Geoffrey Fischer"]
     type: "lean-file"

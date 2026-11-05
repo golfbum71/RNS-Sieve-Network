@@ -45,3 +45,6 @@ sources:
 - title: DeepMind formal-conjectures, OeisA1223.conjecture (statement; proof hosted by Epoch AI)
   url: https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/OEIS/1223.lean
   relationship: statement this settles
+related:
+- node: Admissibility
+  note: "the other side of the same definition: there the patterns that pass every wheel, here the ones that fail one; proved directly from w, so Admissibility's claims are not needed"

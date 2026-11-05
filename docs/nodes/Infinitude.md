@@ -13,6 +13,12 @@ Published work this node rests on or relates to; each entry says how.
 - [Euclid, Elements, Book IX, Proposition 20 (D. E. Joyce's edition)](https://mathcs.clarku.edu/~djoyce/elements/bookIX/propIX20.html) — the classical argument behind the first proof
 - [Number of Primes is Infinite, Proof 6 (ProofWiki)](https://www.proofwiki.org/wiki/Number_of_Primes_is_Infinite/Proof_6) — the square-times-squarefree counting argument behind the second proof
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`DirichletColumns`](DirichletColumns.md) — the stronger statement that each column 6n-1 and 6n+1 holds infinitely many primes
+
 ## Claims
 
 <a id="euclid_primes_unbounded"></a>

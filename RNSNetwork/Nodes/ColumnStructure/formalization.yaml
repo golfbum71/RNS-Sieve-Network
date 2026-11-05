@@ -80,6 +80,12 @@ conclusions:
     designated: lean-proof
 
 sources:
+  - title: "Modular arithmetic (Wikipedia)"
+    url: "https://en.wikipedia.org/wiki/Modular_arithmetic"
+    relationship: "remainders multiply, which gives the four column products; the column form and the per-cycle hit position are the network's own"
+  - title: "Primality test (Wikipedia), simple methods"
+    url: "https://en.wikipedia.org/wiki/Primality_test"
+    relationship: "the 6n-1 and 6n+1 columns as the only places primes above 3 can sit"
   - title: "rns_sieve_6.lean, Part C and column lemmas"
     authors: ["Geoffrey Fischer"]
     type: "lean-file"

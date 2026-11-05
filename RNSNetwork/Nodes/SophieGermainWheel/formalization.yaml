@@ -64,6 +64,9 @@ conclusions:
     designated: lean-proof
 
 sources:
+  - title: "Safe and Sophie Germain primes (Wikipedia)"
+    url: "https://en.wikipedia.org/wiki/Safe_and_Sophie_Germain_primes"
+    relationship: "states that a Sophie Germain prime above 3 leaves remainder 2 on division by 3, and remainder 3, 9 or 11 on division by 20; this node's column and last-digit claims follow from those"
   - title: "sophie_germain_wheel.lean"
     authors: ["Geoffrey Fischer"]
     type: "lean-file"

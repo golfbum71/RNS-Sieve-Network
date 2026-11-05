@@ -6,6 +6,8 @@
 
 Treat a number as a cycle; its survivors are the numbers below it sharing no factor with it. For 30 every survivor other than 1 is prime, and no larger number has this property (Schatunowsky, 1893). The ceiling forces the wheels; Bonse's inequality then caps the number.
 
+**What it adds:** BonseCeiling shows the ceiling sits inside one cycle from four wheels on; this node turns that into a classification, using the ceiling to force the wheels and Bonse to cap the number.
+
 ## Published sources
 
 Published work this node rests on or relates to; each entry says how.

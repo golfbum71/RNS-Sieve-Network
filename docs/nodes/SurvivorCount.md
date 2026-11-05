@@ -6,6 +6,13 @@
 
 The number of positions in the combined cycle that survive every wheel is the product, over the wheels, of the open positions on each one: one at the wheel of size 2 and two fewer than the wheel size elsewhere for twin primes, and the wheel size minus `w` for a general pattern.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Euler's totient function (Wikipedia)](https://en.wikipedia.org/wiki/Euler%27s_totient_function) — the product formula over the primes, the single-number case of this node's counts
+- [First Hardy-Littlewood conjecture (Wikipedia)](https://en.wikipedia.org/wiki/First_Hardy%E2%80%93Littlewood_conjecture) — the local factors of the singular series, which are this node's per-wheel open-position counts divided by the wheel size
+
 ## Claims
 
 <a id="twin_survivor_count"></a>

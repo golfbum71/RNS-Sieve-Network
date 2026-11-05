@@ -22,4 +22,10 @@ planned:
     toolchain: Lean v4.35.0
     note: 'No sorry in the file; confirm transitively with #print axioms in PNT+. Taken here
       as a named hypothesis, as for MertensThird.'
-sources: []
+sources:
+- title: "PrimeNumberTheoremAnd, the prime number theorem (Lean)"
+  url: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/Consequences.lean#L900"
+  relationship: "the outside Lean proof this node cites"
+- title: "Prime number theorem (Wikipedia)"
+  url: "https://en.wikipedia.org/wiki/Prime_number_theorem"
+  relationship: "the classical statement"

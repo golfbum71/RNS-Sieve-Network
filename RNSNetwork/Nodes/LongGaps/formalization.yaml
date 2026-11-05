@@ -30,3 +30,6 @@ sources:
 - title: T. F. Bloom, Erdős Problem 4 (erdosproblems.com)
   url: https://www.erdosproblems.com/4
   relationship: explains how covering a run with one class per wheel gives long prime gaps
+related:
+- node: BlockingRuns
+  note: "supplies the blocked runs that the CRT shift turns into long prime gaps; once this outside result is cited, an arrow from BlockingRuns belongs here"

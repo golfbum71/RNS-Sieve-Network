@@ -13,6 +13,14 @@ Published work this node rests on or relates to; each entry says how.
 - [H.-J. Kanold, Über eine zahlentheoretische Funktion von Jacobsthal, Math. Ann. 170 (1967), 314-326](https://doi.org/10.1007/BF01350607) — the bound, cited
 - [F. Costello and P. Watts, A short note on Jacobsthal's function (arXiv:1306.1064)](https://arxiv.org/abs/1306.1064) — quotes Kanold's bound and compares it with Stevens' and Iwaniec's
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`BlockingRuns`](BlockingRuns.md) — the largest survivor gap that this node bounds by two to the number of wheels
+- [`JacobsthalQuadratic`](JacobsthalQuadratic.md) — a much sharper bound for many wheels, but with a constant that cannot be evaluated
+- [`GapCertificate`](GapCertificate.md) — the exact gaps for the wheels up to 13 (largest 22, against Kanold's 64)
+
 ## Claims
 
 <a id="stretch_holds_survivor"></a>

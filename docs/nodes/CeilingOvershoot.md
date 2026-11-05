@@ -6,6 +6,13 @@
 
 With the wheels up to the square root of a bound, the survivor share times the bound, divided by the number of primes up to the bound, tends to twice e to the minus Euler's constant, about 1.1229.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Mertens' theorems (Wikipedia)](https://en.wikipedia.org/wiki/Mertens%27_theorems) — Mertens' third theorem, one of the two limits this node will combine
+- [Prime number theorem (Wikipedia)](https://en.wikipedia.org/wiki/Prime_number_theorem) — the other limit; with the wheels up to the square root, their ratio gives twice e to the minus Euler's constant
+
 ## Planned
 
 **Will rest on:** [`SurvivorCount`](SurvivorCount.md), [`MertensThird`](MertensThird.md), [`PrimeNumberTheorem`](PrimeNumberTheorem.md)

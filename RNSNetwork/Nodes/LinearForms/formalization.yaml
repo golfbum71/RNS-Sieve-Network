@@ -54,3 +54,8 @@ sources:
     type: "paper"
     url: "https://en.wikipedia.org/wiki/Dickson%27s_conjecture"
     relationship: "the open conjecture taken as a named hypothesis"
+related:
+- node: SophieGermainWheel
+  note: "the wheel-by-wheel narrowing of Sophie Germain candidates; this node gives the conditional infinitude"
+- node: Admissibility
+  note: "the single-pattern admissibility that the linear-forms version extends"

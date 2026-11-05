@@ -6,6 +6,12 @@
 
 Bringing wheels in one at a time, the positions a wheel blocks for the first time equal the open positions left by every earlier wheel times the full size of every later wheel. Separately, from any 6n±1 position, the next number with a chosen last digit is reached in the raw digit distance or at most one further step of 10.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Wheel factorization (Wikipedia)](https://en.wikipedia.org/wiki/Wheel_factorization) — the computing method of skipping blocked positions; this node's first-blocking count is the network's own form of it, and the digit-distance claims are original here
+
 ## Claims
 
 <a id="wheel_marginal_new_formula"></a>

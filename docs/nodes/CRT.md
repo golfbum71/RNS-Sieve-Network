@@ -6,6 +6,12 @@
 
 A position in the combined cycle of all the wheels carries exactly the same information as one position on each individual wheel.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Chinese remainder theorem (Wikipedia)](https://en.wikipedia.org/wiki/Chinese_remainder_theorem) — the classical theorem this node restates for the wheels: one position in the combined cycle is the same as one position on each wheel
+
 ## Claims
 
 <a id="crt_map_bijective"></a>

@@ -30,6 +30,12 @@ conclusions:
     designated: lean-proof
 
 sources:
+  - title: "Primality test (Wikipedia), simple methods"
+    url: "https://en.wikipedia.org/wiki/Primality_test"
+    relationship: "trial division up to the square root suffices, the fact this node proves"
+  - title: "Trial division (Wikipedia)"
+    url: "https://en.wikipedia.org/wiki/Trial_division"
+    relationship: "the method, classical"
   - title: "rns_sieve_6.lean, Part A, Step 5"
     authors: ["Geoffrey Fischer"]
     type: "lean-file"

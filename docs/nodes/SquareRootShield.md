@@ -6,6 +6,13 @@
 
 A number is prime exactly when no prime at or below the square root of the ceiling divides it.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Primality test (Wikipedia), simple methods](https://en.wikipedia.org/wiki/Primality_test) — trial division up to the square root suffices, the fact this node proves
+- [Trial division (Wikipedia)](https://en.wikipedia.org/wiki/Trial_division) — the method, classical
+
 ## Claims
 
 <a id="square_root_shield"></a>

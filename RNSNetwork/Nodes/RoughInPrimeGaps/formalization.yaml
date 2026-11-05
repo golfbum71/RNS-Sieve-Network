@@ -31,3 +31,8 @@ sources:
 - title: DeepMind formal-conjectures, Erdős Problem 682
   url: https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/682.lean
   relationship: the Lean statement
+related:
+- node: GapCertificate
+  note: "what gaps between survivors look like for fixed wheels; this node is about survivors inside real prime gaps"
+- node: SquareRootShield
+  note: "why surviving every wheel below the square root means prime"

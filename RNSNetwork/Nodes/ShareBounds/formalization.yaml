@@ -48,4 +48,10 @@ conclusions:
       imports claims only, never proofs. Recorded as noncompliant only because no Comparator receipt
       exists yet.
   designated: lean-proof
-sources: []
+sources:
+- title: "Mertens' theorems (Wikipedia)"
+  url: "https://en.wikipedia.org/wiki/Mertens%27_theorems"
+  relationship: "Mertens' third theorem gives the limit 0.5615 that the survivor share times the logarithm approaches"
+- title: "J. B. Rosser and L. Schoenfeld, Approximate formulas for some functions of prime numbers, Illinois J. Math. 6 (1962), 64-94"
+  url: "https://projecteuclid.org/download/pdf_1/euclid.ijm/1255631807"
+  relationship: "a sharper explicit bound of the same kind, proved analytically; this node's bound is weaker and proved directly"

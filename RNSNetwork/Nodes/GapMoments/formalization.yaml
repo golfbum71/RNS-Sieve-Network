@@ -36,3 +36,8 @@ sources:
 - title: T. F. Bloom and V. Kuperberg, Odd moments and adding fractions (arXiv:2312.09021)
   url: https://arxiv.org/abs/2312.09021
   relationship: the related moments of survivor counts in short intervals, recent progress
+related:
+- node: BlockingRuns
+  note: "the largest survivor gap, the extreme case of the gaps whose powers this node sums"
+- node: GapCertificate
+  note: "which gap sizes occur at all for the wheels up to 13"

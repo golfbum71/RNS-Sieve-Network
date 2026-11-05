@@ -24,4 +24,10 @@ planned:
     note: 'No sorry in the file. Before relying on it, confirm with #print axioms in PNT+
       that nothing it imports uses sorry. PNT+ builds on a newer toolchain than this repository,
       so nodes here take the statement as a named hypothesis instead of importing PNT+.'
-sources: []
+sources:
+- title: "PrimeNumberTheoremAnd, Mertens' third theorem (Lean)"
+  url: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/IEANTN/Mertens.lean#L2419"
+  relationship: "the outside Lean proof this node cites"
+- title: "Mertens' theorems (Wikipedia)"
+  url: "https://en.wikipedia.org/wiki/Mertens%27_theorems"
+  relationship: "the classical statement"

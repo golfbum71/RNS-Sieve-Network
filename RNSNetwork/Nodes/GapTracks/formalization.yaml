@@ -134,6 +134,15 @@ conclusions:
     designated: lean-proof
 
 sources:
+  - title: "Twin prime (Wikipedia)"
+    url: "https://en.wikipedia.org/wiki/Twin_prime"
+    relationship: "every twin pair above (3, 5) has the form (6n-1, 6n+1)"
+  - title: "Cousin prime (Wikipedia)"
+    url: "https://en.wikipedia.org/wiki/Cousin_prime"
+    relationship: "cousin primes, the gap-4 case"
+  - title: "Sexy prime (Wikipedia)"
+    url: "https://en.wikipedia.org/wiki/Sexy_prime"
+    relationship: "sexy primes, the gap-6 case"
   - title: "twin_cousin_sexy_tracks.lean and prime_gap_track_constraint.lean"
     authors: ["Geoffrey Fischer"]
     type: "lean-file"

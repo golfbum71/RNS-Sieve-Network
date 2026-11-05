@@ -61,6 +61,9 @@ conclusions:
     designated: lean-proof
 
 sources:
+  - title: "Wheel factorization (Wikipedia)"
+    url: "https://en.wikipedia.org/wiki/Wheel_factorization"
+    relationship: "the computing method of skipping blocked positions; this node's first-blocking count is the network's own form of it, and the digit-distance claims are original here"
   - title: "rns_sieve_6.lean, Parts F and G"
     authors: ["Geoffrey Fischer"]
     type: "lean-file"

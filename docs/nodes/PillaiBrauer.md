@@ -13,6 +13,13 @@ Published work this node rests on or relates to; each entry says how.
 - [M. Waldschmidt, S. S. Pillai's work on consecutive integers (lecture notes, 2006)](https://webusers.imj-prg.fr/%7Emichel.waldschmidt/articles/pdf/Kumbakonam21122006.pdf) — states both halves and the run from 2184 with shifts by multiples of 30030
 - [Arithmetic Progressions in a Unique Factorization Domain (arXiv:1108.1267)](https://ar5iv.labs.arxiv.org/html/1108.1267) — history of Pillai's and Brauer's results and the arithmetic-progression form
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`CRT`](CRT.md) — shifting the run 2184-2200 by multiples of 30030 keeps every wheel position, which is what makes the runs repeat
+- [`GapCertificate`](GapCertificate.md) — works on the same cycle, the wheels up to 13
+
 ## Claims
 
 <a id="pillai_sixteen"></a>

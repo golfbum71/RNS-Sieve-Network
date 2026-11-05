@@ -57,3 +57,6 @@ sources:
     type: "paper"
     url: "https://www.proofwiki.org/wiki/Number_of_Primes_is_Infinite/Proof_6"
     relationship: "the square-times-squarefree counting argument behind the second proof"
+related:
+- node: DirichletColumns
+  note: "the stronger statement that each column 6n-1 and 6n+1 holds infinitely many primes"

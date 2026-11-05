@@ -13,6 +13,12 @@ Published work this node rests on or relates to; each entry says how.
 - [OpenAI, Improved long gaps between primes (2026)](https://cdn.openai.com/pdf/51126fac-1b68-4128-9666-c908bcc16033/long_gaps.pdf) — the theorem and its Lean proof
 - [T. F. Bloom, Erdős Problem 4 (erdosproblems.com)](https://www.erdosproblems.com/4) — explains how covering a run with one class per wheel gives long prime gaps
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`BlockingRuns`](BlockingRuns.md) — supplies the blocked runs that the CRT shift turns into long prime gaps; once this outside result is cited, an arrow from BlockingRuns belongs here
+
 ## Outside source
 
 **Outside source:** [openai/LongGapsBetweenPrimes](https://github.com/openai/LongGapsBetweenPrimes/blob/main/LongGapsBetweenPrimes.lean).

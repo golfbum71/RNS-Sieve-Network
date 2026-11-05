@@ -12,6 +12,13 @@ Published work this node rests on or relates to; each entry says how.
 
 - [Dickson's conjecture (Wikipedia), after L. E. Dickson, Messenger of Math. 33 (1904)](https://en.wikipedia.org/wiki/Dickson%27s_conjecture) — the open conjecture taken as a named hypothesis
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`SophieGermainWheel`](SophieGermainWheel.md) — the wheel-by-wheel narrowing of Sophie Germain candidates; this node gives the conditional infinitude
+- [`Admissibility`](Admissibility.md) — the single-pattern admissibility that the linear-forms version extends
+
 ## Claims
 
 <a id="sophiegermainsystem_admissible"></a>

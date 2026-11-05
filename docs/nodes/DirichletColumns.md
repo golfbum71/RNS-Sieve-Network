@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean
 
-
+Each of the two columns 6n-1 and 6n+1 holds infinitely many primes, and past any position there is a later prime in each column. This is Dirichlet's theorem on primes in arithmetic progressions, which Mathlib proves, applied to the two columns.
 
 ## Published sources
 
@@ -12,6 +12,13 @@ Published work this node rests on or relates to; each entry says how.
 
 - [Mathlib, Mathlib.NumberTheory.LSeries.PrimesInAP (Nat.infinite_setOfPred_prime_and_modEq)](https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/LSeries/PrimesInAP.html) — Dirichlet's theorem, imported from Mathlib
 - D. Loeffler, M. Stoll, [Formalizing zeta and L-functions in Lean, Annals of Formalized Mathematics 1 (2025)](https://arxiv.org/abs/2503.00959) — the formalization of Dirichlet's theorem used
+
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`Wheel6`](Wheel6.md) — defines the two columns 6n-1 and 6n+1 that this node fills with infinitely many primes
+- [`Infinitude`](Infinitude.md) — the weaker statement that primes never run out, without saying which column
 
 ## Claims
 

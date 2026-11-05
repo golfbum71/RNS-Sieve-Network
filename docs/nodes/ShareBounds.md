@@ -6,6 +6,13 @@
 
 With the wheels below a bound, the surviving share of the cycle is at most one over the logarithm of the bound, and the twin share is at most twice the square of that. Checked numerically beforehand for wheels up to 200,000; the share times the logarithm approaches 0.5615, the constant in MertensThird.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Mertens' theorems (Wikipedia)](https://en.wikipedia.org/wiki/Mertens%27_theorems) — Mertens' third theorem gives the limit 0.5615 that the survivor share times the logarithm approaches
+- [J. B. Rosser and L. Schoenfeld, Approximate formulas for some functions of prime numbers, Illinois J. Math. 6 (1962), 64-94](https://projecteuclid.org/download/pdf_1/euclid.ijm/1255631807) — a sharper explicit bound of the same kind, proved analytically; this node's bound is weaker and proved directly
+
 ## Claims
 
 <a id="survivor_share_le_inv_log"></a>

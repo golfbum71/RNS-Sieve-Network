@@ -41,3 +41,6 @@ sources:
     id: "arXiv:2501.18048"
     url: "https://arxiv.org/abs/2501.18048"
     relationship: "Theorem 1.2, cited (not proved in Lean)"
+related:
+- node: GapConjectures
+  note: "states Legendre's conjecture (a prime between consecutive squares); this node is its proven near-prime weakening"

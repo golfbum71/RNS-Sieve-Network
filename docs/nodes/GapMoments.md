@@ -13,6 +13,13 @@ Published work this node rests on or relates to; each entry says how.
 - [Distribution of squares modulo a composite number (arXiv:1502.05062), introduction](https://arxiv.org/abs/1502.05062) — states Erdős's conjecture (1.2), Hooley's partial result and Montgomery and Vaughan's proof
 - [T. F. Bloom and V. Kuperberg, Odd moments and adding fractions (arXiv:2312.09021)](https://arxiv.org/abs/2312.09021) — the related moments of survivor counts in short intervals, recent progress
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`BlockingRuns`](BlockingRuns.md) — the largest survivor gap, the extreme case of the gaps whose powers this node sums
+- [`GapCertificate`](GapCertificate.md) — which gap sizes occur at all for the wheels up to 13
+
 ## Claims
 
 <a id="gap_moment_bound"></a>

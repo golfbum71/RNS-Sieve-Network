@@ -49,6 +49,10 @@ def load_nodes():
             "conclusions": data.get("conclusions") or [],
             "planned": data.get("planned") or {},
             "sources": data.get("sources") or [],
+            # What the node adds over the nodes it builds on (optional).
+            "improves": " ".join(str(meta.get("improves", "") or "").split()),
+            # Nodes it is related to without resting on them: [{node, note}] (optional).
+            "related": data.get("related") or [],
         }
         node["statements"] = read_statements(name) if node["built"] else {}
         nodes[name] = node
@@ -475,11 +479,27 @@ exactly the following, each recorded as such rather than claimed:
 
 # ---------------------------------------------------------------- node pages
 
+def related_section(n, nodes):
+    """Nodes this one is related to without an arrow, each with a note on how."""
+    if not n["related"]:
+        return ""
+    md = ("## Related nodes\n\nConnected in content but not by an arrow (no claim here "
+          "takes theirs as a hypothesis); each entry says how.\n\n")
+    for r in n["related"]:
+        other = r.get("node", "")
+        link = f"[`{other}`]({other}.md)" if other in nodes else f"`{other}`"
+        md += f"- {link} — {' '.join(str(r.get('note', '')).split())}\n"
+    return md + "\n"
+
+
 def write_node_page(n, nodes, edges):
     name = n["name"]
     md = f"# {name} — {n['title']}\n\n{GENERATED}\n\n"
     md += f"**Status:** {status_word(n)}\n\n{n['description']}\n\n"
+    if n["improves"]:
+        md += f"**What it adds:** {n['improves']}\n\n"
     md += sources_section(n)
+    md += related_section(n, nodes)
     if n["built"]:
         md += "## Claims\n\n"
         for c in n["conclusions"]:

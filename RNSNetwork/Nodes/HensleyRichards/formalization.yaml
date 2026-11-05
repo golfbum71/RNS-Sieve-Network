@@ -47,3 +47,8 @@ sources:
     type: "paper"
     url: "https://www.ams.org/journals/bull/1974-80-03/S0002-9904-1974-13434-8"
     relationship: "survey of the same result"
+related:
+- node: HardyLittlewood
+  note: "states Conjecture A for one pattern at a time; this node shows the full Conjecture A clashes with Conjecture B"
+- node: Admissibility
+  note: "defines the admissible patterns whose dense packing causes the clash"

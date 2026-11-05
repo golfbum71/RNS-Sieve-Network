@@ -22,4 +22,10 @@ planned:
   claims:
   - ceiling_overshoot
   tier: 'Tier 2: a short step from the two outside sources.'
-sources: []
+sources:
+- title: "Mertens' theorems (Wikipedia)"
+  url: "https://en.wikipedia.org/wiki/Mertens%27_theorems"
+  relationship: "Mertens' third theorem, one of the two limits this node will combine"
+- title: "Prime number theorem (Wikipedia)"
+  url: "https://en.wikipedia.org/wiki/Prime_number_theorem"
+  relationship: "the other limit; with the wheels up to the square root, their ratio gives twice e to the minus Euler's constant"

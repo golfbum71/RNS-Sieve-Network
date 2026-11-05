@@ -701,8 +701,18 @@ exactly the following, each recorded as such rather than claimed:
 
 Nodes that apply the RNS to published work: proven results, cited theorems, or stated conjectures, with links to the papers and pages. Each node's page lists the same sources at the top.
 
+- [`Wheel6`](docs/nodes/Wheel6.md)
+  - [Primality test (Wikipedia), simple methods](https://en.wikipedia.org/wiki/Primality_test) — states that a prime above 3 leaves remainder 1 or 5 on division by 6, the fact this node proves
+- [`CRT`](docs/nodes/CRT.md)
+  - [Chinese remainder theorem (Wikipedia)](https://en.wikipedia.org/wiki/Chinese_remainder_theorem) — the classical theorem this node restates for the wheels: one position in the combined cycle is the same as one position on each wheel
+- [`SquareRootShield`](docs/nodes/SquareRootShield.md)
+  - [Primality test (Wikipedia), simple methods](https://en.wikipedia.org/wiki/Primality_test) — trial division up to the square root suffices, the fact this node proves
+  - [Trial division (Wikipedia)](https://en.wikipedia.org/wiki/Trial_division) — the method, classical
 - [`Admissibility`](docs/nodes/Admissibility.md)
   - [Divisibility of Common Difference of Arithmetic Sequence of Primes (ProofWiki)](https://www.proofwiki.org/wiki/Divisibility_of_Common_Difference_of_Arithmetic_Sequence_of_Primes) — the evenly spaced case (the Lagrange-Waring condition), classical
+- [`SurvivorCount`](docs/nodes/SurvivorCount.md)
+  - [Euler's totient function (Wikipedia)](https://en.wikipedia.org/wiki/Euler%27s_totient_function) — the product formula over the primes, the single-number case of this node's counts
+  - [First Hardy-Littlewood conjecture (Wikipedia)](https://en.wikipedia.org/wiki/First_Hardy%E2%80%93Littlewood_conjecture) — the local factors of the singular series, which are this node's per-wheel open-position counts divided by the wheel size
 - [`SingularSeries`](docs/nodes/SingularSeries.md)
   - G. H. Hardy, J. E. Littlewood, [Some problems of 'Partitio numerorum'; III: On the expression of a number as a sum of primes, Acta Math. 44 (1923), 1-70](https://archive.ymsc.tsinghua.edu.cn/pacm_paperurl/20170108203038474495327) — defines the singular series whose convergence and positivity this node proves
 - [`TwinConstant`](docs/nodes/TwinConstant.md)
@@ -710,11 +720,16 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
   - [OEIS A005597, decimal expansion of the twin prime constant](https://oeis.org/A005597) — the constant's value, 0.66016...
 - [`Pruning`](docs/nodes/Pruning.md)
   - [Divisibility of Common Difference of Arithmetic Sequence of Primes (ProofWiki)](https://www.proofwiki.org/wiki/Divisibility_of_Common_Difference_of_Arithmetic_Sequence_of_Primes) — the condition this node starts from, classical
+- [`WheelOrder`](docs/nodes/WheelOrder.md)
+  - [Wheel factorization (Wikipedia)](https://en.wikipedia.org/wiki/Wheel_factorization) — the computing method of skipping blocked positions; this node's first-blocking count is the network's own form of it, and the digit-distance claims are original here
 - [`ShieldCertificates`](docs/nodes/ShieldCertificates.md)
   - [Divisibility of Common Difference of Arithmetic Sequence of Primes (ProofWiki)](https://www.proofwiki.org/wiki/Divisibility_of_Common_Difference_of_Arithmetic_Sequence_of_Primes) — the condition the run-length claims force, classical
 - [`Infinitude`](docs/nodes/Infinitude.md)
   - [Euclid, Elements, Book IX, Proposition 20 (D. E. Joyce's edition)](https://mathcs.clarku.edu/~djoyce/elements/bookIX/propIX20.html) — the classical argument behind the first proof
   - [Number of Primes is Infinite, Proof 6 (ProofWiki)](https://www.proofwiki.org/wiki/Number_of_Primes_is_Infinite/Proof_6) — the square-times-squarefree counting argument behind the second proof
+- [`ColumnStructure`](docs/nodes/ColumnStructure.md)
+  - [Modular arithmetic (Wikipedia)](https://en.wikipedia.org/wiki/Modular_arithmetic) — remainders multiply, which gives the four column products; the column form and the per-cycle hit position are the network's own
+  - [Primality test (Wikipedia), simple methods](https://en.wikipedia.org/wiki/Primality_test) — the 6n-1 and 6n+1 columns as the only places primes above 3 can sit
 - [`DirichletColumns`](docs/nodes/DirichletColumns.md)
   - [Mathlib, Mathlib.NumberTheory.LSeries.PrimesInAP (Nat.infinite_setOfPred_prime_and_modEq)](https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/LSeries/PrimesInAP.html) — Dirichlet's theorem, imported from Mathlib
   - D. Loeffler, M. Stoll, [Formalizing zeta and L-functions in Lean, Annals of Formalized Mathematics 1 (2025)](https://arxiv.org/abs/2503.00959) — the formalization of Dirichlet's theorem used
@@ -725,6 +740,17 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
   - I. Richards, [On the incompatibility of two conjectures concerning primes, Bull. Amer. Math. Soc. 80 (1974), 419-438](https://www.ams.org/journals/bull/1974-80-03/S0002-9904-1974-13434-8) — survey of the same result
 - [`LinearForms`](docs/nodes/LinearForms.md)
   - [Dickson's conjecture (Wikipedia), after L. E. Dickson, Messenger of Math. 33 (1904)](https://en.wikipedia.org/wiki/Dickson%27s_conjecture) — the open conjecture taken as a named hypothesis
+- [`GapConjectures`](docs/nodes/GapConjectures.md)
+  - [Legendre's conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Legendre%27s_conjecture) — states the conjecture this node derives from a survivor bound and from Oppermann's
+  - [Brocard's conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Brocard%27s_conjecture) — states the conjecture this node derives from a survivor bound
+  - [Oppermann's conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Oppermann%27s_conjecture) — states the conjecture this node derives from a survivor bound
+  - [Andrica's conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Andrica%27s_conjecture) — states the conjecture this node derives from Oppermann's
+- [`SophieGermainWheel`](docs/nodes/SophieGermainWheel.md)
+  - [Safe and Sophie Germain primes (Wikipedia)](https://en.wikipedia.org/wiki/Safe_and_Sophie_Germain_primes) — states that a Sophie Germain prime above 3 leaves remainder 2 on division by 3, and remainder 3, 9 or 11 on division by 20; this node's column and last-digit claims follow from those
+- [`GapTracks`](docs/nodes/GapTracks.md)
+  - [Twin prime (Wikipedia)](https://en.wikipedia.org/wiki/Twin_prime) — every twin pair above (3, 5) has the form (6n-1, 6n+1)
+  - [Cousin prime (Wikipedia)](https://en.wikipedia.org/wiki/Cousin_prime) — cousin primes, the gap-4 case
+  - [Sexy prime (Wikipedia)](https://en.wikipedia.org/wiki/Sexy_prime) — sexy primes, the gap-6 case
 - [`DudekJohnston`](docs/nodes/DudekJohnston.md)
   - Adrian W. Dudek, Daniel R. Johnston, [Almost primes between all squares](https://arxiv.org/abs/2501.18048) — Theorem 1.2, cited (not proved in Lean)
 - [`UniformSubdivision`](docs/nodes/UniformSubdivision.md)
@@ -738,6 +764,11 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
   - [G. F. Grob and M. Schmitt, Cycles and Patterns in the Sieve of Eratosthenes, arXiv:1905.03117, Theorem 2](https://arxiv.org/abs/1905.03117) — restates it
 - [`SpreadBounds`](docs/nodes/SpreadBounds.md)
   - [D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf) — Theorems 9 and 10, the interval form
+- [`ColumnAction`](docs/nodes/ColumnAction.md)
+  - [Modular arithmetic (Wikipedia)](https://en.wikipedia.org/wiki/Modular_arithmetic) — remainders multiply, the standard fact behind how a wheel moves the columns; the column form is the network's own
+- [`ShareBounds`](docs/nodes/ShareBounds.md)
+  - [Mertens' theorems (Wikipedia)](https://en.wikipedia.org/wiki/Mertens%27_theorems) — Mertens' third theorem gives the limit 0.5615 that the survivor share times the logarithm approaches
+  - [J. B. Rosser and L. Schoenfeld, Approximate formulas for some functions of prime numbers, Illinois J. Math. 6 (1962), 64-94](https://projecteuclid.org/download/pdf_1/euclid.ijm/1255631807) — a sharper explicit bound of the same kind, proved analytically; this node's bound is weaker and proved directly
 - [`TwinShare`](docs/nodes/TwinShare.md)
   - [J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220](https://arxiv.org/abs/1906.09220) — the exact share their second method uses
 - [`InadmissibleOccurrences`](docs/nodes/InadmissibleOccurrences.md)
@@ -748,6 +779,9 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
   - [DeepMind formal-conjectures, Erdős Problem 854](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/854.lean) — states the problem
 - [`BlockingRuns`](docs/nodes/BlockingRuns.md)
   - [DeepMind formal-conjectures, Erdős Problem 687 / Green's Open Problem 46](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/687.lean) — states the problem
+- [`CeilingOvershoot`](docs/nodes/CeilingOvershoot.md)
+  - [Mertens' theorems (Wikipedia)](https://en.wikipedia.org/wiki/Mertens%27_theorems) — Mertens' third theorem, one of the two limits this node will combine
+  - [Prime number theorem (Wikipedia)](https://en.wikipedia.org/wiki/Prime_number_theorem) — the other limit; with the wheels up to the square root, their ratio gives twice e to the minus Euler's constant
 - [`BirdseySchay`](docs/nodes/BirdseySchay.md)
   - [J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220](https://arxiv.org/abs/1906.09220) — the heuristic
 - [`LargestGap`](docs/nodes/LargestGap.md)
@@ -759,6 +793,15 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
   - [J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220](https://doi.org/10.4153/CMB-2005-019-9) — Theorem 1.1
 - [`Sawtooth`](docs/nodes/Sawtooth.md)
   - [J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220](https://doi.org/10.4153/CMB-2005-019-9) — The identity behind Theorem 1.1, stated over choices of wheels rather than divisors and remainders rather than fractional parts
+- [`MertensThird`](docs/nodes/MertensThird.md)
+  - [PrimeNumberTheoremAnd, Mertens' third theorem (Lean)](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/IEANTN/Mertens.lean#L2419) — the outside Lean proof this node cites
+  - [Mertens' theorems (Wikipedia)](https://en.wikipedia.org/wiki/Mertens%27_theorems) — the classical statement
+- [`PrimeNumberTheorem`](docs/nodes/PrimeNumberTheorem.md)
+  - [PrimeNumberTheoremAnd, the prime number theorem (Lean)](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/Consequences.lean#L900) — the outside Lean proof this node cites
+  - [Prime number theorem (Wikipedia)](https://en.wikipedia.org/wiki/Prime_number_theorem) — the classical statement
+- [`JacobsthalQuadratic`](docs/nodes/JacobsthalQuadratic.md)
+  - [OpenAI math, Jacobsthal quadratic bound (Lean)](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/OAI/NumberTheory/Jacobsthal/Conclusions/QuadraticBound.lean#L13) — the outside Lean proof this node cites
+  - [T. F. Bloom, Erdős Problem 970](https://www.erdosproblems.com/970) — the problem the quadratic bound solves
 - [`RoughInPrimeGaps`](docs/nodes/RoughInPrimeGaps.md)
   - [A. Gafni and T. Tao, Rough numbers between consecutive primes, arXiv:2508.06463 (2025)](https://arxiv.org/abs/2508.06463) — the proof
   - [DeepMind formal-conjectures, Erdős Problem 682](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/682.lean) — the Lean statement

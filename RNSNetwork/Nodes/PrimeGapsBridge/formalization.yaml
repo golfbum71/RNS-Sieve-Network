@@ -38,3 +38,8 @@ sources:
     Thorner, Xie; blueprint)
   url: https://primegaps.axiommath.ai/blueprint.pdf
   relationship: the results this bridge makes available to the network
+related:
+- node: Admissibility
+  note: "the network's admissibility, here shown equal to PrimeGapsLib's"
+- node: HardyLittlewood
+  note: "the conjecture whose admissible patterns PrimeGapsLib's conditional gap results address"

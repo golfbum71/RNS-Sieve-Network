@@ -6,6 +6,12 @@
 
 Every prime above 3 leaves remainder 1 or 5 on division by 6.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Primality test (Wikipedia), simple methods](https://en.wikipedia.org/wiki/Primality_test) — states that a prime above 3 leaves remainder 1 or 5 on division by 6, the fact this node proves
+
 ## Claims
 
 <a id="prime_gt_three_is_candidate"></a>

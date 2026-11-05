@@ -6,6 +6,18 @@
 
 Multiplying by a prime keeps the 6n-1 and 6n+1 columns in place if the prime leaves remainder 1 on division by 6, and swaps them if it leaves remainder 5. The lemma behind every column form in the network. Proved directly from remainders; ColumnStructure's columns_multiply says the same for column entries.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Modular arithmetic (Wikipedia)](https://en.wikipedia.org/wiki/Modular_arithmetic) — remainders multiply, the standard fact behind how a wheel moves the columns; the column form is the network's own
+
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`ColumnStructure`](ColumnStructure.md) — columns_multiply states the same fact for explicit column entries (6n-1, 6n+1) rather than remainders; each is proved directly, in three lines
+
 ## Claims
 
 <a id="column_action"></a>

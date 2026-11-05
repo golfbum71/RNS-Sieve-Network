@@ -12,6 +12,12 @@ Published work this node rests on or relates to; each entry says how.
 
 - Adrian W. Dudek, Daniel R. Johnston, [Almost primes between all squares](https://arxiv.org/abs/2501.18048) — Theorem 1.2, cited (not proved in Lean)
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`GapConjectures`](GapConjectures.md) — states Legendre's conjecture (a prime between consecutive squares); this node is its proven near-prime weakening
+
 ## Claims
 
 <a id="dudek_johnston_statement"></a>

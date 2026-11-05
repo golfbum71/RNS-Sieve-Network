@@ -66,6 +66,12 @@ conclusions:
     designated: lean-proof
 
 sources:
+  - title: "Euler's totient function (Wikipedia)"
+    url: "https://en.wikipedia.org/wiki/Euler%27s_totient_function"
+    relationship: "the product formula over the primes, the single-number case of this node's counts"
+  - title: "First Hardy-Littlewood conjecture (Wikipedia)"
+    url: "https://en.wikipedia.org/wiki/First_Hardy%E2%80%93Littlewood_conjecture"
+    relationship: "the local factors of the singular series, which are this node's per-wheel open-position counts divided by the wheel size"
   - title: "rns_sieve_6.lean, Part A Step 4 and Part B Step 4"
     authors: ["Geoffrey Fischer"]
     type: "lean-file"

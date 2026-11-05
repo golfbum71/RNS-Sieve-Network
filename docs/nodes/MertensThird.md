@@ -6,6 +6,13 @@
 
 The survivor share after the wheels up to x, times log x, tends to e to the minus Euler's constant. Proved in Lean in PrimeNumberTheoremAnd, with error of order one over log x squared.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [PrimeNumberTheoremAnd, Mertens' third theorem (Lean)](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/IEANTN/Mertens.lean#L2419) — the outside Lean proof this node cites
+- [Mertens' theorems (Wikipedia)](https://en.wikipedia.org/wiki/Mertens%27_theorems) — the classical statement
+
 ## Outside source
 
 **Outside source:** `E₃.bound''` in [PrimeNumberTheoremAnd (PNT+)](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/IEANTN/Mertens.lean#L2419) (built on Lean v4.35.0).

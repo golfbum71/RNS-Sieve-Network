@@ -6,6 +6,23 @@
 
 Each named survivor bound implies its conjecture; Oppermann's conjecture implies both Andrica's and Legendre's, giving Legendre two independent routes.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [Legendre's conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Legendre%27s_conjecture) — states the conjecture this node derives from a survivor bound and from Oppermann's
+- [Brocard's conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Brocard%27s_conjecture) — states the conjecture this node derives from a survivor bound
+- [Oppermann's conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Oppermann%27s_conjecture) — states the conjecture this node derives from a survivor bound
+- [Andrica's conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Andrica%27s_conjecture) — states the conjecture this node derives from Oppermann's
+
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`DudekJohnston`](DudekJohnston.md) — the proven near-prime version of Legendre's conjecture
+- [`KanoldBound`](KanoldBound.md) — a proven survivor-gap bound of the kind these conjectures need, though far too weak to give them
+- [`BlockingRuns`](BlockingRuns.md) — the largest survivor gap, the quantity the named survivor bounds control
+
 ## Claims
 
 <a id="legendre_of_jacobsthal"></a>

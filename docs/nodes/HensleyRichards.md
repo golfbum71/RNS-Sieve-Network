@@ -13,6 +13,13 @@ Published work this node rests on or relates to; each entry says how.
 - D. Hensley, I. Richards, [Primes in intervals, Acta Arith. 25 (1974), 375-391](https://eudml.org/doc/205282) — the incompatibility theorem this node proves
 - I. Richards, [On the incompatibility of two conjectures concerning primes, Bull. Amer. Math. Soc. 80 (1974), 419-438](https://www.ams.org/journals/bull/1974-80-03/S0002-9904-1974-13434-8) — survey of the same result
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`HardyLittlewood`](HardyLittlewood.md) — states Conjecture A for one pattern at a time; this node shows the full Conjecture A clashes with Conjecture B
+- [`Admissibility`](Admissibility.md) — defines the admissible patterns whose dense packing causes the clash
+
 ## Claims
 
 <a id="hl_a_and_b_incompatible"></a>

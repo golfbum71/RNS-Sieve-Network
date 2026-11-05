@@ -35,3 +35,6 @@ sources:
 - title: J. Pintz, On the singular series in the prime k-tuple conjecture (arXiv:1004.1084)
   url: https://arxiv.org/abs/1004.1084
   relationship: a simpler proof, uniform in the number of offsets
+related:
+- node: SingularSeries
+  note: "defines the Hardy-Littlewood constant whose average over patterns this node says is 1"

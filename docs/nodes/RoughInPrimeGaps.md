@@ -13,6 +13,13 @@ Published work this node rests on or relates to; each entry says how.
 - [A. Gafni and T. Tao, Rough numbers between consecutive primes, arXiv:2508.06463 (2025)](https://arxiv.org/abs/2508.06463) — the proof
 - [DeepMind formal-conjectures, Erdős Problem 682](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/682.lean) — the Lean statement
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`GapCertificate`](GapCertificate.md) — what gaps between survivors look like for fixed wheels; this node is about survivors inside real prime gaps
+- [`SquareRootShield`](SquareRootShield.md) — why surviving every wheel below the square root means prime
+
 ## Outside source
 
 **Outside source:** [plby/lean-proofs](https://github.com/plby/lean-proofs/blob/8822f7ddef30fadbd92e1c6ab4ed897af356af5e/src/latest/ErdosProblems/Erdos682.lean#L5018).

@@ -6,6 +6,13 @@
 
 The number of primes up to x is asymptotic to x over log x. Proved in Lean in PrimeNumberTheoremAnd.
 
+## Published sources
+
+Published work this node rests on or relates to; each entry says how.
+
+- [PrimeNumberTheoremAnd, the prime number theorem (Lean)](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/Consequences.lean#L900) — the outside Lean proof this node cites
+- [Prime number theorem (Wikipedia)](https://en.wikipedia.org/wiki/Prime_number_theorem) — the classical statement
+
 ## Outside source
 
 **Outside source:** `pi_alt'` in [PrimeNumberTheoremAnd (PNT+)](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/Consequences.lean#L900) (built on Lean v4.35.0).

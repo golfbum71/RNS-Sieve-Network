@@ -21,4 +21,10 @@ planned:
     url: https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/OAI/NumberTheory/Jacobsthal/Conclusions/QuadraticBound.lean#L13
     note: Listed as solved in DeepMind's formal-conjectures (ErdosProblems/970.lean), which
       links this proof. Check its toolchain and axioms before citing.
-sources: []
+sources:
+- title: "OpenAI math, Jacobsthal quadratic bound (Lean)"
+  url: "https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/OAI/NumberTheory/Jacobsthal/Conclusions/QuadraticBound.lean#L13"
+  relationship: "the outside Lean proof this node cites"
+- title: "T. F. Bloom, Erdős Problem 970"
+  url: "https://www.erdosproblems.com/970"
+  relationship: "the problem the quadratic bound solves"

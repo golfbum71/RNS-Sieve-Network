@@ -13,6 +13,13 @@ Published work this node rests on or relates to; each entry says how.
 - [L. Tóth, Menon's identity and arithmetical sums representing functions of several variables (arXiv:1103.5861)](https://arxiv.org/abs/1103.5861) — states Menon's identity and its generalisations, citing Menon (1965)
 - [OEIS A062355, d(n) times phi(n)](https://oeis.org/A062355) — the values, noted there as Menon's identity
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`SurvivorCount`](SurvivorCount.md) — counts the survivors of one cycle, the factor in front of Menon's total
+- [`RamanujanSums`](RamanujanSums.md) — another sum over the survivors of one cycle that splits wheel by wheel
+
 ## Claims
 
 <a id="menon_wheel_sum"></a>

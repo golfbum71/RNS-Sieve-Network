@@ -13,6 +13,12 @@ Published work this node rests on or relates to; each entry says how.
 - [E. Kowalski, Averages of Euler products, distribution of singular series and the ubiquity of Poisson distribution (arXiv:0805.4682)](https://arxiv.org/abs/0805.4682) — restates Gallagher's theorem as equation (1.5) and reproves it by averaging Euler products
 - [J. Pintz, On the singular series in the prime k-tuple conjecture (arXiv:1004.1084)](https://arxiv.org/abs/1004.1084) — a simpler proof, uniform in the number of offsets
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`SingularSeries`](SingularSeries.md) — defines the Hardy-Littlewood constant whose average over patterns this node says is 1
+
 ## Claims
 
 <a id="singular_series_average_one"></a>
