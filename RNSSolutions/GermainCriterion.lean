@@ -7,6 +7,7 @@ import RNSNetwork.Nodes.GermainCriterion.Conclusions
 import RNSNetwork.Nodes.Sawtooth.Conclusions
 import RNSNetwork.Nodes.HurwitzZetaZero.Conclusions
 import Mathlib.NumberTheory.LSeries.Nonvanishing   -- `LFunction_apply_one_ne_zero`, `rootNumber_ne_zero`
+import Mathlib.NumberTheory.LSeries.PrimesInAP     -- character orthogonality over ℂ, with its instances
 import Mathlib.Algebra.BigOperators.Group.Finset.Powerset   -- `Finset.sum_powerset_insert`
 import Mathlib.Data.Nat.ModEq                  -- `Nat.ModEq.mul_left`
 import Mathlib.Data.Nat.GCD.BigOperators      -- `Nat.coprime_prod_left_iff`
@@ -376,6 +377,135 @@ theorem odd_weighted_sum_ne_zero_iff_step
     refine mul_ne_zero (neg_ne_zero.mpr hk0) (mul_ne_zero hLσ ?_)
     exact Finset.prod_ne_zero_iff.mpr (fun p hp => sub_ne_zero.mpr (Ne.symm (h p hp)))
 
+/-! ## Inversion over characters and Germain's Proposition 3.1 -/
+
+/-- `Sawtooth`'s signed remainder sum at the residue `j`. -/
+private def remSum (k : Nat) (W : Finset Nat) (j : ZMod k) : Int :=
+  ∑ S ∈ W.powerset, (-1 : Int) ^ S.card * ((j.val * (W \ S).prod id % k : Nat) : Int)
+
+/-- The inverse of an odd character is odd. -/
+private theorem inv_odd {k : Nat} {χ : DirichletCharacter ℂ k} (h : χ.Odd) : χ⁻¹.Odd := by
+  unfold DirichletCharacter.Odd at *
+  rw [MulChar.inv_apply_eq_inv', h]
+  norm_num
+
+/-- The inverse of an even character is even. -/
+private theorem inv_even {k : Nat} {χ : DirichletCharacter ℂ k} (h : χ.Even) : χ⁻¹.Even := by
+  unfold DirichletCharacter.Even at *
+  rw [MulChar.inv_apply_eq_inv', h]
+  norm_num
+
+/-- For an even nontrivial character the weighted residue sum is 0: pairing each
+residue with its negative turns the sum into the modulus times the plain sum,
+minus itself. -/
+private theorem weightedSum_even_eq_zero {k : Nat} [NeZero k] (ψ : DirichletCharacter ℂ k)
+    (heven : ψ.Even) (hψ : ψ ≠ 1) : ∑ j : ZMod k, ψ j * (j.val : ℂ) = 0 := by
+  have hk1 : k ≠ 1 := fun h => hψ (DirichletCharacter.level_one' ψ h)
+  have hs0 : ∑ j : ZMod k, ψ j = 0 := MulChar.sum_eq_zero_of_ne_one hψ
+  have hneg : ∑ j : ZMod k, ψ j * (j.val : ℂ) = ∑ j : ZMod k, ψ j * ((k : ℂ) - j.val) := by
+    rw [← Equiv.sum_comp (Equiv.neg (ZMod k)) (fun j : ZMod k => ψ j * (j.val : ℂ))]
+    refine Finset.sum_congr rfl (fun j _ => ?_)
+    simp only [Equiv.neg_apply]
+    rw [heven.eval_neg j]
+    by_cases hj : j = 0
+    · subst hj
+      rw [ψ.map_zero' hk1, zero_mul, zero_mul]
+    · rw [ZMod.neg_val, if_neg hj, Nat.cast_sub (ZMod.val_lt j).le]
+  have hsum : ∑ j : ZMod k, ψ j * ((k : ℂ) - j.val)
+      = (∑ j : ZMod k, ψ j) * k - ∑ j : ZMod k, ψ j * (j.val : ℂ) := by
+    rw [Finset.sum_mul, ← Finset.sum_sub_distrib]
+    exact Finset.sum_congr rfl (fun j _ => by ring)
+  rw [hsum, hs0, zero_mul, zero_sub] at hneg
+  have h2 : (2 : ℂ) * ∑ j : ZMod k, ψ j * (j.val : ℂ) = 0 := by linear_combination hneg
+  rcases mul_eq_zero.mp h2 with h | h
+  · norm_num at h
+  · exact h
+
+/-- At a unit, the inverse character is the character at the inverse residue. -/
+private theorem inv_apply_unit {k : Nat} (χ : DirichletCharacter ℂ k) {j : ZMod k}
+    (hj : IsUnit j) : χ⁻¹ j = χ j⁻¹ := by
+  obtain ⟨u, rfl⟩ := hj
+  rw [MulChar.inv_apply, Ring.inverse_unit, ZMod.inv_coe_unit]
+
+/-- The orthogonality kernel: summing `χ⁻¹ j * χ a` over all characters gives
+`φ(k)` when `j = a` and 0 otherwise, for a unit `a`. -/
+private theorem char_sum_kernel {k : Nat} [NeZero k] {a : ZMod k} (ha : IsUnit a) (j : ZMod k) :
+    ∑ χ : DirichletCharacter ℂ k, χ⁻¹ j * χ a = if j = a then (k.totient : ℂ) else 0 := by
+  by_cases hj : IsUnit j
+  · have h : ∀ χ : DirichletCharacter ℂ k, χ⁻¹ j * χ a = χ j⁻¹ * χ a := fun χ => by
+      rw [inv_apply_unit χ hj]
+    simp only [h]
+    exact DirichletCharacter.sum_char_inv_mul_char_eq ℂ hj a
+  · have hne : j ≠ a := fun h => hj (h ▸ ha)
+    rw [if_neg hne]
+    exact Finset.sum_eq_zero (fun χ _ => by rw [MulChar.map_nonunit _ hj, zero_mul])
+
+theorem coprime_split_iff_characters_step
+    (h_hz : RNS.HurwitzZetaZero.hurwitz_zeta_at_zero) :
+    coprime_split_iff_characters := by
+  intro k _ W hWne hW hWk
+  have hT : ∀ χ : DirichletCharacter ℂ k,
+      ∑ j : ZMod k, χ⁻¹ j * ((remSum k W j : Int) : ℂ)
+        = (∏ p ∈ W, (χ (p : ZMod k) - 1)) * ∑ i : ZMod k, χ⁻¹ i * (i.val : ℂ) :=
+    fun χ => character_transform_holds k W χ hW hWk
+  have hiff := odd_weighted_sum_ne_zero_iff_step h_hz k
+  change (∀ j : ZMod k, IsUnit j → remSum k W j = 0) ↔ _
+  constructor
+  · -- vanishing at every unit forces the character condition
+    intro hF χ hodd
+    by_contra hcon
+    obtain ⟨h1, h2⟩ := not_or.mp hcon
+    have hprod : ∏ p ∈ W, (χ (p : ZMod k) - 1) ≠ 0 :=
+      Finset.prod_ne_zero_iff.mpr (fun p hp => sub_ne_zero.mpr (fun he => h1 ⟨p, hp, he⟩))
+    have hS : ∑ i : ZMod k, χ⁻¹ i * (i.val : ℂ) ≠ 0 :=
+      (hiff χ⁻¹ (inv_odd hodd)).mpr (fun p hp he => h2 ⟨p, hp, he⟩)
+    have hT0 : ∑ j : ZMod k, χ⁻¹ j * ((remSum k W j : Int) : ℂ) = 0 := by
+      refine Finset.sum_eq_zero (fun j _ => ?_)
+      by_cases hj : IsUnit j
+      · rw [hF j hj, Int.cast_zero, mul_zero]
+      · rw [MulChar.map_nonunit _ hj, zero_mul]
+    rw [hT χ] at hT0
+    exact mul_ne_zero hprod hS hT0
+  · -- the character condition makes every transform vanish; invert
+    intro hχ a ha
+    have hall : ∀ χ : DirichletCharacter ℂ k,
+        ∑ j : ZMod k, χ⁻¹ j * ((remSum k W j : Int) : ℂ) = 0 := by
+      intro χ
+      rw [hT χ]
+      rcases χ.even_or_odd with heven | hodd
+      · by_cases h1 : χ = 1
+        · obtain ⟨p, hp⟩ := hWne
+          have hcop : Nat.Coprime p k := (Nat.Prime.coprime_iff_not_dvd (hW p hp)).mpr (hWk p hp)
+          have hunit : IsUnit (p : ZMod k) := by
+            rw [← ZMod.coe_unitOfCoprime p hcop]
+            exact Units.isUnit _
+          rw [Finset.prod_eq_zero hp (by rw [h1, MulChar.one_apply hunit, sub_self]), zero_mul]
+        · rw [weightedSum_even_eq_zero χ⁻¹ (inv_even heven) (inv_ne_one.mpr h1), mul_zero]
+      · rcases hχ χ hodd with ⟨p, hp, hp1⟩ | ⟨p, hp, hp1⟩
+        · rw [Finset.prod_eq_zero hp (by rw [hp1, sub_self]), zero_mul]
+        · have hz : ∑ i : ZMod k, χ⁻¹ i * (i.val : ℂ) = 0 := by
+            by_contra hne
+            exact (hiff χ⁻¹ (inv_odd hodd)).mp hne p hp hp1
+          rw [hz, mul_zero]
+    have key : (k.totient : ℂ) * ((remSum k W a : Int) : ℂ) = 0 := by
+      have h0 : ∑ χ : DirichletCharacter ℂ k,
+          χ a * ∑ j : ZMod k, χ⁻¹ j * ((remSum k W j : Int) : ℂ) = 0 :=
+        Finset.sum_eq_zero (fun χ _ => by rw [hall χ, mul_zero])
+      rw [← h0]
+      simp only [Finset.mul_sum]
+      rw [Finset.sum_comm]
+      have hj : ∀ j : ZMod k, ∑ χ : DirichletCharacter ℂ k,
+          χ a * (χ⁻¹ j * ((remSum k W j : Int) : ℂ))
+            = (if j = a then (k.totient : ℂ) else 0) * ((remSum k W j : Int) : ℂ) := by
+        intro j
+        rw [← char_sum_kernel ha j, Finset.sum_mul]
+        exact Finset.sum_congr rfl (fun χ _ => by ring)
+      rw [Finset.sum_congr rfl (fun j _ => hj j)]
+      simp
+    have hφ : (k.totient : ℂ) ≠ 0 :=
+      Nat.cast_ne_zero.mpr (Nat.totient_pos.mpr (Nat.pos_of_ne_zero (NeZero.ne k))).ne'
+    exact_mod_cast (mul_eq_zero.mp key).resolve_left hφ
+
 end RNS.GermainCriterion
 
 #print axioms RNS.GermainCriterion.two_wheel_split_of_remainders_step
@@ -384,3 +514,4 @@ end RNS.GermainCriterion
 #print axioms RNS.GermainCriterion.character_transform_holds
 #print axioms RNS.GermainCriterion.weighted_sum_eq_LFunction_zero_step
 #print axioms RNS.GermainCriterion.odd_weighted_sum_ne_zero_iff_step
+#print axioms RNS.GermainCriterion.coprime_split_iff_characters_step

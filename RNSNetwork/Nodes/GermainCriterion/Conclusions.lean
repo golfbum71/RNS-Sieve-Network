@@ -85,4 +85,19 @@ def odd_weighted_sum_ne_zero_iff : Prop :=
     (∑ j : ZMod k, ψ j * (j.val : ℂ) ≠ 0 ↔
       ∀ p ∈ k.primeFactors, ψ.primitiveCharacter (p : ZMod ψ.conductor) ≠ 1)
 
+/-- **Germain's Proposition 3.1, in remainder form.** For a nonempty set of
+prime wheels `W`, none dividing the number of parts `k`: `Sawtooth`'s signed
+remainder sum vanishes at every residue coprime to `k` (equivalently, by
+`Sawtooth`, the survivors split evenly there) exactly when every odd Dirichlet
+character `χ` modulo `k` either equals 1 at some wheel, or has the primitive
+character behind `χ⁻¹` equal to 1 at some prime dividing `k`. -/
+def coprime_split_iff_characters : Prop :=
+  ∀ (k : Nat) [NeZero k] (W : Finset Nat), W.Nonempty → (∀ p ∈ W, p.Prime) →
+    (∀ p ∈ W, ¬ p ∣ k) →
+    ((∀ j : ZMod k, IsUnit j →
+        ∑ S ∈ W.powerset, (-1 : Int) ^ S.card * ((j.val * (W \ S).prod id % k : Nat) : Int) = 0) ↔
+      ∀ χ : DirichletCharacter ℂ k, χ.Odd →
+        (∃ p ∈ W, χ (p : ZMod k) = 1) ∨
+        (∃ p ∈ k.primeFactors, χ⁻¹.primitiveCharacter (p : ZMod χ⁻¹.conductor) = 1))
+
 end RNS.GermainCriterion

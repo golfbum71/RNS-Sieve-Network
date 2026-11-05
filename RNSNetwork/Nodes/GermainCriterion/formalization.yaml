@@ -117,6 +117,23 @@ conclusions:
       (standard axioms only); a step until HurwitzZetaZero is proved in Lean. The underlying
       identity was checked numerically for 76 odd characters across 17 moduli.
   designated: lean-proof
+- id: coprime_split_iff_characters
+  declaration: RNS.GermainCriterion.coprime_split_iff_characters
+  summary: For prime wheels not dividing k, Sawtooth's signed remainder sum vanishes at every residue
+    coprime to k exactly when every odd character mod k equals 1 at a wheel, or has its inverse's
+    primitive character equal to 1 at a prime of k (Germain's Proposition 3.1).
+  imports:
+  - HurwitzZetaZero.v1.hurwitz_zeta_at_zero
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainCriterion.lean
+    declaration: RNS.GermainCriterion.coprime_split_iff_characters_step
+    note: Lean proof drafted 2026-11-05 (character orthogonality from Mathlib); awaiting its first
+      `lake build RNSSolutions`. Checked numerically first in 1,827 cases (moduli 2 to 30, up to
+      three wheels), 500 of them even splits.
+  designated: lean-proof
 sources:
 - title: J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220
   url: https://doi.org/10.4153/CMB-2005-019-9
