@@ -321,6 +321,11 @@ def network_mermaid(nodes, order):
         else:
             lines.append(f'  click {P(nm)} href "{page_url(nm)}" _blank')
     lines.append("```")
+    size = sum(len(line) + 1 for line in lines[1:-1])
+    if size > 45000:
+        print(f"WARNING: the network diagram is {size} characters; GitHub's Mermaid "
+              "refuses anything over 50,000 and shows 'Maximum text size in diagram "
+              "exceeded'. Shorten labels or split the diagram.")
     return "\n".join(lines)
 
 
