@@ -23,11 +23,13 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/SophieGermainTheorem.lean
     declaration: RNS.SophieGermainTheorem.sophie_germain_theorem_step
     assembled: RNSSolutions/Assemble.lean (RNS.SophieGermainTheorem.sophie_germain_theorem_holds)
-    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+    note: Complete Lean proof checked by the GitHub Actions build (lake build RNSSolutions, standard
+      axioms only, 2026-11-05, run 42039707999). Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 - id: fermat_first_case
   declaration: RNS.SophieGermainTheorem.fermat_first_case
@@ -38,11 +40,13 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/SophieGermainTheorem.lean
     declaration: RNS.SophieGermainTheorem.fermat_first_case_step
     assembled: RNSSolutions/Assemble.lean (RNS.SophieGermainTheorem.fermat_first_case_holds)
-    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+    note: Complete Lean proof checked by the GitHub Actions build (lake build RNSSolutions, standard
+      axioms only, 2026-11-05, run 42039707999). Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 sources:
 - title: B. Ballenghien, Sophie Germain's Theorem (Isabelle Archive of Formal Proofs, 2025)

@@ -401,7 +401,8 @@ the wheel of size 2p+1 (Fermat's little theorem); so if that wheel blocks a
 sum of three p-th powers, it blocks one of the three numbers.
 - Lean: `pth_power_positions`, `three_powers_blocked`
 - Rests on: Vocabulary only
-- Status: DRAFT (2026-11-05), awaiting the GitHub Actions build.
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-05).
 
 ### 55. `SophieGermainTheorem` — Fermat's first case for Sophie Germain primes
 For a prime p with 2p+1 prime, x^p + y^p + z^p = 0 forces p to divide x y z;
@@ -412,7 +413,8 @@ of the pairwise sums y+z, z+x, x+y.
   Ballenghien (2025). No Lean formalization found.
 - Lean: `sophie_germain_theorem`, `fermat_first_case`
 - Rests on: `SophieGermainPowers` (both claims)
-- Status: DRAFT (2026-11-05), awaiting the GitHub Actions build.
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-05).
 
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence

@@ -11,6 +11,7 @@ import Mathlib.Tactic.LinearCombination
 # Proofs for SophieGermainPowers
 
 Imports claims only, never other nodes' proofs. Rests on no other node.
+Built clean by the GitHub Actions build on 2026-11-05.
 `three_powers_blocked` uses `pth_power_positions` from this same node.
 -/
 
@@ -37,8 +38,8 @@ theorem pth_power_positions_holds : pth_power_positions := by
   · right
     exact pow_cases _ ht
 
-/-- The wheel of size `2p + 1` blocks neither 1 nor 3. -/
-private theorem one_three_ne_zero {p : Nat} (hp : p.Prime) [Fact (2 * p + 1).Prime] :
+/-- The wheel of size `2p + 1` does not block 3. -/
+private theorem three_ne_zero_on_wheel {p : Nat} (hp : p.Prime) [Fact (2 * p + 1).Prime] :
     (3 : ZMod (2 * p + 1)) ≠ 0 := by
   intro h
   have h' : ((3 : Nat) : ZMod (2 * p + 1)) = 0 := by exact_mod_cast h
@@ -64,7 +65,7 @@ theorem three_powers_blocked_holds : three_powers_blocked := by
   have hs : ((x ^ p + y ^ p + z ^ p : Int) : ZMod (2 * p + 1)) = 0 :=
     (ZMod.intCast_zmod_eq_zero_iff_dvd _ (2 * p + 1)).mpr hsum
   push_cast at hs
-  have h3 := one_three_ne_zero hp
+  have h3 := three_ne_zero_on_wheel hp
   rcases unblocked x hx with ex | ex <;> rcases unblocked y hy with ey | ey <;>
     rcases unblocked z hz with ez | ez <;> rw [ex, ey, ez] at hs <;>
     first

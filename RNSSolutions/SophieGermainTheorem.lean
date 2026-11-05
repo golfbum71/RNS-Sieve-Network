@@ -16,6 +16,8 @@ import Mathlib.Tactic.LinearCombination
 /-!
 # Proofs for SophieGermainTheorem
 
+Built clean by the GitHub Actions build on 2026-11-05.
+
 Imports claims only, never other nodes' proofs. Rests on `SophieGermainPowers`
 (both claims) through `sophie_germain_theorem_step`; `fermat_first_case`
 rests on `sophie_germain_theorem` through `fermat_first_case_step`. The steps
