@@ -36,6 +36,7 @@ import RNSSolutions.SophieGermainTheorem
 import RNSSolutions.GermainAuxiliary
 import RNSSolutions.BonseCeiling
 import RNSSolutions.Schatunowsky
+import RNSSolutions.GermainCriterion
 
 /-!
 # Assembling the network
@@ -285,3 +286,11 @@ theorem RNS.Schatunowsky.schatunowsky_bound_holds : RNS.Schatunowsky.schatunowsk
   RNS.Schatunowsky.schatunowsky_bound_step RNS.BonseCeiling.ceiling_inside_cycle_holds
 
 #print axioms RNS.Schatunowsky.schatunowsky_bound_holds
+
+/-- `Sawtooth` → `GermainCriterion`: the two-wheel even split, sufficient direction. -/
+theorem RNS.GermainCriterion.two_wheel_split_of_remainders_holds :
+    RNS.GermainCriterion.two_wheel_split_of_remainders :=
+  RNS.GermainCriterion.two_wheel_split_of_remainders_step
+    RNS.Sawtooth.even_split_iff_remainders_cancel_holds
+
+#print axioms RNS.GermainCriterion.two_wheel_split_of_remainders_holds

@@ -54,10 +54,6 @@ def lehmer_even_split_column : Prop :=
 
 **Proof:** `RNS.LehmerSplit.lehmer_even_split_column_step` in [`RNSSolutions/LehmerSplit.lean`](../../RNSSolutions/LehmerSplit.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
-## Used by
-
-- [`GermainCriterion`](GermainCriterion.md)
-
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/LehmerSplit/Conclusions.lean)

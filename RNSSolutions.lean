@@ -37,4 +37,5 @@ import RNSSolutions.SophieGermainTheorem
 import RNSSolutions.GermainAuxiliary
 import RNSSolutions.GapCertificate
 import RNSSolutions.Schatunowsky
+import RNSSolutions.GermainCriterion
 import RNSSolutions.Assemble

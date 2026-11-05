@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: GermainCriterion.v1
@@ -7,21 +7,46 @@ node:
   version: v1
   order: 35
   kind: paper
-  status: planned
+  status: active
   title: Germain's exact criterion for an even split
-  description: The survivors split evenly across a given number of equal intervals exactly
-    when every odd Dirichlet character for that number takes the value 1 at some wheel.
-conclusions: []
-planned:
-  source_status: New
-  rests_on:
-  - LehmerSplit
-  - Sawtooth
-  claims:
-  - germain_criterion
-  tier: 'Tier 3: uses the nonvanishing of Dirichlet L-functions at 1, which Mathlib provides
-    (DirichletCharacter.LFunction_apply_one_ne_zero).'
+  description: Cut the cycle of two prime wheels into a given number of equal parts. The survivors split
+    evenly exactly when one wheel leaves remainder 1 on division by the number of parts, or the first
+    wheel's square leaves remainder 1 and the second wheel is the negative of the first (Germain 2005,
+    Corollary 1.4). Built so far, the "if" half, by remainder arithmetic alone. Next stage, the "only if"
+    half, which is Erdős's conjecture on Lehmer's even split, through odd Dirichlet characters and
+    the nonvanishing of their L-functions at 1 (Mathlib's LFunction_apply_one_ne_zero).
+  improves: LehmerSplit gives an even split when one wheel leaves remainder 1, for any number of
+    wheels. For two wheels this node adds the second sufficient case (the second wheel the negative of
+    the first, with the first wheel's square leaving remainder 1), which LehmerSplit does not cover.
+conclusions:
+- id: two_wheel_split_of_remainders
+  declaration: RNS.GermainCriterion.two_wheel_split_of_remainders
+  summary: For two prime wheels, the survivors split evenly into k equal parts when one wheel leaves
+    remainder 1 on division by k, or the first wheel's square leaves remainder 1 and the two wheels
+    add up to a multiple of k.
+  imports:
+  - Sawtooth.v1.even_split_iff_remainders_cancel
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainCriterion.lean
+    declaration: RNS.GermainCriterion.two_wheel_split_of_remainders_step
+    assembled: RNSSolutions/Assemble.lean (RNS.GermainCriterion.two_wheel_split_of_remainders_holds)
+    note: Lean proof of the step from the imported claim, drafted 2026-11-05; awaiting its first
+      `lake build RNSSolutions`.
+  designated: lean-proof
 sources:
 - title: J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220
   url: https://doi.org/10.4153/CMB-2005-019-9
-  relationship: Theorem 1.1
+  relationship: Theorem 1.1 and Corollary 1.4; this node proves the "if" half of Corollary 1.4
+- title: R. R. Hall and P. Shiu, The distribution of totatives, Canad. Math. Bull. 45 (2002), 109-114
+  url: https://doi.org/10.4153/CMB-2002-012-1
+  relationship: proves Erdős's conjecture (the "only if" half of Corollary 1.4); its ordering-of-residues
+    theorem is false as stated for composite moduli (smallest case 8 parts with residues 1, 3, 5), though
+    the triples its reduction produces were all fine in 8,012 checked cases
+related:
+- node: LehmerSplit
+  note: "the case where one wheel leaves remainder 1, for any number of wheels; this node's first case is its two-wheel instance, reproved here from Sawtooth"
+- node: SurvivorSymmetry
+  note: "the mirror symmetry of the survivors; the second sufficient case is a mirror-type cancellation in the remainders"
