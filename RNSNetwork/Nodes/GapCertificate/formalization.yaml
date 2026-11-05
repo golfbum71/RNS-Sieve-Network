@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: GapCertificate.v1
@@ -7,22 +7,87 @@ node:
   version: v1
   order: 29
   kind: paper
-  status: planned
+  status: active
   title: the Lacampagne-Selfridge counterexample
-  description: For the wheels up to 13 (cycle 30030), the gaps between consecutive survivors
-    take every even value up to the largest gap, 22, except 20. Erdős had expected every even
-    value to appear.
-conclusions: []
-planned:
-  source_status: New
-  rests_on: []
-  claims:
-  - survivor_gaps_30030_miss_20
-  - survivor_gaps_even
-  evidence: Checked numerically; the cycles 30, 210, 2310 and 510510 miss no even value.
-  tier: 'Tier 2: a certificate-style proof as in ShieldCertificates, since native_decide would
-    add an axiom.'
+  description: For the wheels up to 13 (cycle 30030), the gaps between consecutive survivors take every
+    even value up to the largest gap, 22, except 20. This refutes de Polignac's 1849 guess (every even
+    gap up to twice the second-largest wheel occurs) and Erdős's first guess for this cycle (every even
+    value up to the largest gap occurs; Erdős Problem 854). Erdős asked for large enough cycles, so that
+    eventual form stays open. Every survivor gap is even.
+conclusions:
+- id: survivor_gaps_even
+  declaration: RNS.GapCertificate.survivor_gaps_even
+  summary: Once the wheel 2 is in, every gap between consecutive survivors is even.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GapCertificate.lean
+    declaration: RNS.GapCertificate.survivor_gaps_even_holds
+    note: Lean proof drafted 2026-11-05; awaiting its first `lake build RNSSolutions`.
+  designated: lean-proof
+- id: survivor_gaps_30030_miss_20
+  declaration: RNS.GapCertificate.survivor_gaps_30030_miss_20
+  summary: For the wheels up to 13 (cycle 30030), the gap 20 never occurs.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GapCertificate.lean
+    declaration: RNS.GapCertificate.survivor_gaps_30030_miss_20_holds
+    note: Lean proof drafted 2026-11-05; awaiting its first `lake build RNSSolutions`. Reduces every
+      occurrence to the first cycle, then checks the first cycle with `decide +kernel` in 30 blocks
+      of 1001 (no `native_decide`).
+  designated: lean-proof
+- id: survivor_gaps_30030_present
+  declaration: RNS.GapCertificate.survivor_gaps_30030_present
+  summary: For the wheels up to 13, every other even gap up to 22 occurs, each with an explicit
+    starting survivor.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GapCertificate.lean
+    declaration: RNS.GapCertificate.survivor_gaps_30030_present_holds
+    note: Lean proof drafted 2026-11-05; awaiting its first `lake build RNSSolutions`.
+  designated: lean-proof
+- id: de_polignac_gap_guess_false
+  declaration: RNS.GapCertificate.de_polignac_gap_guess_false
+  summary: de Polignac's 1849 guess (every even gap up to twice the second-largest wheel occurs) is
+    false; it fails for the neighbouring wheels 11 and 13.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GapCertificate.lean
+    declaration: RNS.GapCertificate.de_polignac_gap_guess_false_holds
+    note: Lean proof drafted 2026-11-05; awaiting its first `lake build RNSSolutions`.
+  designated: lean-proof
+- id: erdos_first_guess_fails_at_13
+  declaration: RNS.GapCertificate.erdos_first_guess_fails_at_13
+  summary: For the wheels up to 13 the gap 22 occurs but the smaller even number 20 does not.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GapCertificate.lean
+    declaration: RNS.GapCertificate.erdos_first_guess_fails_at_13_holds
+    note: Lean proof drafted 2026-11-05; awaiting its first `lake build RNSSolutions`.
+  designated: lean-proof
 sources:
+- title: M. Ziller, On differences between consecutive numbers coprime to primorials, arXiv:2007.01808
+    (2020)
+  url: https://arxiv.org/abs/2007.01808
+  relationship: records de Polignac's guess and tabulates the missing gaps (Table 1); this node proves
+    the wheels-up-to-13 row
+- title: T. F. Bloom, Erdős Problem 854
+  url: https://www.erdosproblems.com/854
+  relationship: Erdős's guess and the Lacampagne-Selfridge computation at 2·3·5·7·11·13
 - title: DeepMind formal-conjectures, Erdős Problem 854
   url: https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/854.lean
   relationship: states the problem

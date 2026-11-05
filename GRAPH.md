@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 43 of 53 nodes are built, holding 111 claims: 104 proved in Lean and 7 cited from a published paper. They are joined by 46 arrows, each a Lean-checked step. Of the other 10 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 4 are new work, stated or scoped but not yet proved; 5 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 44 of 53 nodes are built, holding 116 claims: 104 proved in Lean, 5 with a proof drafted but not yet built and 7 cited from a published paper. They are joined by 46 arrows, each a Lean-checked step. Of the other 9 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 3 are new work, stated or scoped but not yet proved; 5 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -188,7 +188,11 @@ graph LR
     C_InadmissibleOccurrences_gap_block_24242_unique["gap_block_24242_unique"]
   end
   subgraph S_GapCertificate["<b>29. GapCertificate — the Lacampagne-Selfridge counterexample</b>"]
-    P_GapCertificate["<i>planned: new, not yet proved</i>"]
+    C_GapCertificate_survivor_gaps_even["survivor_gaps_even"]
+    C_GapCertificate_survivor_gaps_30030_miss_20["survivor_gaps_30030_miss_20"]
+    C_GapCertificate_survivor_gaps_30030_present["survivor_gaps_30030_present"]
+    C_GapCertificate_de_polignac_gap_guess_false["de_polignac_gap_guess_false"]
+    C_GapCertificate_erdos_first_guess_fails_at_13["erdos_first_guess_fails_at_13"]
   end
   subgraph S_JacobsthalQuadratic["<b>42. JacobsthalQuadratic — the quadratic bound on Jacobsthal's function</b>"]
     P_JacobsthalQuadratic["<i>outside source: openai/math</i>"]
@@ -356,8 +360,9 @@ graph LR
   class C_Wheel6_prime_gt_three_is_candidate,C_CRT_crt_map_bijective,C_SquareRootShield_square_root_shield,C_Admissibility_admissible_of_large_primes,C_Admissibility_zero_two_admissible,C_Admissibility_zero_two_four_not_admissible,C_Admissibility_ap_offsets_admissible_iff,C_SurvivorCount_twin_survivor_count,C_SurvivorCount_local_survivor_count,C_SurvivorCount_general_survivor_count,C_SingularSeries_delta_bound,C_SingularSeries_factor_multipliable,C_SingularSeries_hardy_littlewood_constant_pos,C_SingularSeries_local_density_factorization,C_TwinConstant_twin_prime_constant_eq_classical,C_Pruning_valid_starting_residues_card_formula,C_WheelOrder_wheel_marginal_new_formula,C_WheelOrder_prime_gt_five_digit_ok,C_WheelOrder_wheel_gap_floor,C_ShieldCertificates_prime_of_shield_cover,C_ShieldCertificates_active_primes_cover,C_ShieldCertificates_family_prime_of_shield_cover,C_ShieldCertificates_forward_ap_prime_of_active_shield,C_ShieldCertificates_backward_ap_prime_of_active_shield,C_ShieldCertificates_tuple_prime_of_active_shield,C_ShieldCertificates_ap_hits_wheel,C_ShieldCertificates_ap_prime_run_length_lt_of_lt_start,C_ShieldCertificates_ap_prime_run_forces_divisibility,C_ShieldCertificates_window_prime_iff,C_ShieldCertificates_window_twin_iff,C_ShieldCertificates_backward_ap_hits_wheel,C_ShieldCertificates_backward_ap_prime_run_length_lt_of_above,C_ShieldCertificates_backward_ap_prime_run_forces_divisibility,C_Infinitude_euclid_primes_unbounded,C_Infinitude_squarefree_counting_no_finite_supply,C_ColumnStructure_columns_multiply,C_ColumnStructure_col_minus_periodicity,C_ColumnStructure_col_minus_has_minus_prime_factor,C_ColumnStructure_col_minus_composite_has_proper_minus_factor,C_DirichletColumns_col_minus_primes_infinite,C_DirichletColumns_col_plus_primes_infinite,C_DirichletColumns_col_minus_primes_unbounded,C_DirichletColumns_col_plus_primes_unbounded,C_LinearForms_sophieGermainSystem_admissible,C_SophieGermainWheel_sophie_germain_mod_six,C_SophieGermainWheel_sophie_germain_not_ends_in_seven,C_SophieGermainWheel_sophie_germain_last_digit,C_GapTracks_twin_prime_mod_six,C_GapTracks_cousin_prime_mod_six,C_GapTracks_sexy_prime_same_track,C_GapTracks_sexy_middle_not_always_blocked,C_GapTracks_prime_gap_forbidden_four_from_six_minus_one,C_GapTracks_prime_gap_forbidden_two_from_six_plus_one,C_GapTracks_prime_gap_same_track_of_six_dvd,C_UniformSubdivision_frozen_wheels_repeat,C_UniformSubdivision_one_wheel_removed,C_UniformSubdivision_uniform_subdivision,C_UniformSubdivision_uniform_subdivision_plus_side,C_UniformSubdivision_uniform_subdivision_minus_side,C_UniformSubdivision_column_frozen_repeat,C_UniformSubdivision_column_one_wheel_removed,C_LehmerSplit_lehmer_even_split,C_LehmerSplit_lehmer_even_split_column,C_SurvivorSymmetry_survivor_reflection,C_SurvivorSymmetry_survivor_count_reflection,C_Sawtooth_legendre_count,C_Sawtooth_sawtooth_identity,C_Sawtooth_even_split_iff_remainders_cancel,C_Sawtooth_column_legendre_count,C_SpreadBounds_interval_spread_bound,C_SpreadBounds_column_imbalance_bound,C_ColumnAction_column_action,C_ShareBounds_survivor_share_le_inv_log,C_ShareBounds_twin_share_le_two_inv_log_sq,C_TwinShare_twin_share_eq_prod,C_TwinShare_twin_share_split,C_InadmissibleOccurrences_inadmissible_occurrence_contains_prime,C_InadmissibleOccurrences_gap_block_24242_unique,C_BlockingRuns_blocked_run_is_shift,C_BlockingRuns_longest_blocked_run_eq_max_gap_sub_one,C_LehmerExcess_lehmer_excess_closed_form,C_BonseCeiling_ceiling_inside_cycle,C_PillaiBrauer_pillai_witness_17,C_PillaiBrauer_pillai_witness_17_repeats,C_PrimeGapsBridge_admissible_iff_primegaps,C_RamanujanSums_ramanujan_wheel_product,C_SophieGermainPowers_pth_power_positions,C_SophieGermainPowers_three_powers_blocked,C_SophieGermainTheorem_sophie_germain_theorem,C_SophieGermainTheorem_fermat_first_case,C_GermainAuxiliary_auxiliary_prime_theorem,C_GermainAuxiliary_sophie_germain_wheel_auxiliary,C_GermainAuxiliary_auxiliary_seven,C_GermainAuxiliary_auxiliary_thirteen,C_GermainAuxiliary_fermat_first_case_seven,C_GermainAuxiliary_fermat_first_case_thirteen verified;
   class C_HardyLittlewood_twin_prime_conjecture_implies_infinite_twin_primes,C_HensleyRichards_HL_A_and_B_incompatible,C_LinearForms_sophie_germain_of_LinearForms_conjecture,C_GapConjectures_legendre_of_jacobsthal,C_GapConjectures_brocard_of_four_survivors,C_GapConjectures_oppermann_of_bound,C_GapConjectures_andrica_of_oppermann,C_GapConjectures_legendre_of_oppermann conditional_built;
   class C_DudekJohnston_dudek_johnston_statement,C_PillaiBrauer_pillai_sixteen,C_KanoldBound_stretch_holds_survivor,C_MenonIdentity_menon_wheel_sum,C_GallagherAverage_singular_series_average_one,C_BrunTwinSum_brun_sum_finite,C_GapMoments_gap_moment_bound cited_built;
+  class C_GapCertificate_survivor_gaps_even,C_GapCertificate_survivor_gaps_30030_miss_20,C_GapCertificate_survivor_gaps_30030_present,C_GapCertificate_de_polignac_gap_guess_false,C_GapCertificate_erdos_first_guess_fails_at_13 draft;
   class P_BirdseySchay conditional;
-  class P_GapCertificate,P_CeilingOvershoot,P_LargestGap,P_GermainCriterion new;
+  class P_CeilingOvershoot,P_LargestGap,P_GermainCriterion new;
   class P_JacobsthalQuadratic,P_MertensThird,P_PrimeNumberTheorem,P_RoughInPrimeGaps,P_LongGaps external;
   class O_hardy_littlewood_conjecture,O_HL_conjecture_A,O_HL_conjecture_B,O_LinearForms_conjecture,O_jacobsthal_bound_holds,O_four_survivors_bound_holds,O_oppermann_bound_holds,O_oppermann_conjecture openconj;
   click C_Wheel6_prime_gt_three_is_candidate href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md#prime_gt_three_is_candidate" _blank
@@ -447,7 +452,11 @@ graph LR
   click C_TwinShare_twin_share_split href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinShare.md#twin_share_split" _blank
   click C_InadmissibleOccurrences_inadmissible_occurrence_contains_prime href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/InadmissibleOccurrences.md#inadmissible_occurrence_contains_prime" _blank
   click C_InadmissibleOccurrences_gap_block_24242_unique href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/InadmissibleOccurrences.md#gap_block_24242_unique" _blank
-  click P_GapCertificate href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapCertificate.md" _blank
+  click C_GapCertificate_survivor_gaps_even href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapCertificate.md#survivor_gaps_even" _blank
+  click C_GapCertificate_survivor_gaps_30030_miss_20 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapCertificate.md#survivor_gaps_30030_miss_20" _blank
+  click C_GapCertificate_survivor_gaps_30030_present href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapCertificate.md#survivor_gaps_30030_present" _blank
+  click C_GapCertificate_de_polignac_gap_guess_false href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapCertificate.md#de_polignac_gap_guess_false" _blank
+  click C_GapCertificate_erdos_first_guess_fails_at_13 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapCertificate.md#erdos_first_guess_fails_at_13" _blank
   click P_JacobsthalQuadratic href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/JacobsthalQuadratic.md" _blank
   click C_BlockingRuns_blocked_run_is_shift href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BlockingRuns.md#blocked_run_is_shift" _blank
   click C_BlockingRuns_longest_blocked_run_eq_max_gap_sub_one href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BlockingRuns.md#longest_blocked_run_eq_max_gap_sub_one" _blank
@@ -605,6 +614,11 @@ The results nothing else builds on, each with everything beneath it.
 - [`TwinShare.twin_share_split`](docs/nodes/TwinShare.md#twin_share_split) — proved in Lean
 - [`InadmissibleOccurrences.inadmissible_occurrence_contains_prime`](docs/nodes/InadmissibleOccurrences.md#inadmissible_occurrence_contains_prime) — proved in Lean
 - [`InadmissibleOccurrences.gap_block_24242_unique`](docs/nodes/InadmissibleOccurrences.md#gap_block_24242_unique) — proved in Lean
+- [`GapCertificate.survivor_gaps_even`](docs/nodes/GapCertificate.md#survivor_gaps_even) — proof drafted, not yet built
+- [`GapCertificate.survivor_gaps_30030_miss_20`](docs/nodes/GapCertificate.md#survivor_gaps_30030_miss_20) — proof drafted, not yet built
+- [`GapCertificate.survivor_gaps_30030_present`](docs/nodes/GapCertificate.md#survivor_gaps_30030_present) — proof drafted, not yet built
+- [`GapCertificate.de_polignac_gap_guess_false`](docs/nodes/GapCertificate.md#de_polignac_gap_guess_false) — proof drafted, not yet built
+- [`GapCertificate.erdos_first_guess_fails_at_13`](docs/nodes/GapCertificate.md#erdos_first_guess_fails_at_13) — proof drafted, not yet built
 - [`BlockingRuns.longest_blocked_run_eq_max_gap_sub_one`](docs/nodes/BlockingRuns.md#longest_blocked_run_eq_max_gap_sub_one) — proved in Lean
   - [`BlockingRuns.blocked_run_is_shift`](docs/nodes/BlockingRuns.md#blocked_run_is_shift) — proved in Lean
     - [`CRT.crt_map_bijective`](docs/nodes/CRT.md#crt_map_bijective) — proved in Lean
@@ -718,6 +732,8 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 - [`InadmissibleOccurrences`](docs/nodes/InadmissibleOccurrences.md)
   - [DeepMind formal-conjectures, OeisA1223.conjecture (statement; proof hosted by Epoch AI)](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/OEIS/1223.lean) — statement this settles
 - [`GapCertificate`](docs/nodes/GapCertificate.md)
+  - [M. Ziller, On differences between consecutive numbers coprime to primorials, arXiv:2007.01808 (2020)](https://arxiv.org/abs/2007.01808) — records de Polignac's guess and tabulates the missing gaps (Table 1); this node proves the wheels-up-to-13 row
+  - [T. F. Bloom, Erdős Problem 854](https://www.erdosproblems.com/854) — Erdős's guess and the Lacampagne-Selfridge computation at 2·3·5·7·11·13
   - [DeepMind formal-conjectures, Erdős Problem 854](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/854.lean) — states the problem
 - [`BlockingRuns`](docs/nodes/BlockingRuns.md)
   - [DeepMind formal-conjectures, Erdős Problem 687 / Green's Open Problem 46](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/687.lean) — states the problem
@@ -806,7 +822,7 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 26 | [`ShareBounds`](docs/nodes/ShareBounds.md) | the survivor share falls like one over the logarithm | proved in Lean |
 | 27 | [`TwinShare`](docs/nodes/TwinShare.md) | the twin share of the cycle | proved in Lean |
 | 28 | [`InadmissibleOccurrences`](docs/nodes/InadmissibleOccurrences.md) | inadmissible patterns sit next to their blocking wheel | proved in Lean |
-| 29 | [`GapCertificate`](docs/nodes/GapCertificate.md) | the Lacampagne-Selfridge counterexample | planned: new, not yet proved |
+| 29 | [`GapCertificate`](docs/nodes/GapCertificate.md) | the Lacampagne-Selfridge counterexample | proof drafted, not yet built |
 | 30 | [`BlockingRuns`](docs/nodes/BlockingRuns.md) | blocking runs and the largest survivor gap | proved in Lean |
 | 31 | [`CeilingOvershoot`](docs/nodes/CeilingOvershoot.md) | the overshoot at the ceiling | planned: new, not yet proved |
 | 32 | [`BirdseySchay`](docs/nodes/BirdseySchay.md) | Birdsey and Schay's heuristic, as a hypothesis | planned: conditional |

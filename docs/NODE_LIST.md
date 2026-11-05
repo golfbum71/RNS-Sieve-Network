@@ -639,7 +639,7 @@ Check here before searching again. Links pinned to a commit were current on
   (offsets 0, 2, 6, 8, 12, 14 cover every position on the wheel of size
   5). This is `OeisA1223.conjecture` in formal-conjectures, listed as
   solved with the proof hosted elsewhere. Builds on `Admissibility`.
-- **The Lacampagne-Selfridge counterexample** (Tier 2; Erdos Problem 854).
+- **Drafted (node `GapCertificate`, 2026-11-05; awaiting first build): also refutes de Polignac's 1849 guess.** **The Lacampagne-Selfridge counterexample** (Tier 2; Erdos Problem 854).
   For the wheels up to 13 (cycle 30030), the gaps between consecutive
   survivors take every even value up to the largest gap, 22, except 20.
   Erdos had expected every even value up to the largest gap to appear.
