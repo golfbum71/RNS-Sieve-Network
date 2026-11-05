@@ -43,7 +43,7 @@ theorem ceiling_forces_wheels_holds : ceiling_forces_wheels := by
 
 theorem thirty_survivors_all_prime_holds : thirty_survivors_all_prime := by
   intro m h1 h2 hc
-  interval_cases m <;> first | norm_num | exact absurd hc (by decide)
+  interval_cases m <;> first | exact absurd hc (by decide) | norm_num
 
 theorem schatunowsky_bound_step (h_bonse : RNS.BonseCeiling.ceiling_inside_cycle) :
     schatunowsky_bound := by
