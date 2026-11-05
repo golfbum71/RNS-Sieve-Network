@@ -1,0 +1,65 @@
+# Builds the claims and the proofs on every push, and checks that every
+# `#print axioms` line shows only the standard three. Errors are posted as
+# annotations on the run so they can be read without logging in.
+name: lake build
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Get prebuilt Mathlib
+        run: lake exe cache get
+
+      - name: Build claims (lake build)
+        run: |
+          set -o pipefail
+          lake build 2>&1 | tee claims.log
+
+      - name: Build proofs (lake build RNSSolutions)
+        run: |
+          set -o pipefail
+          lake build RNSSolutions 2>&1 | tee solutions.log
+
+      - name: Check axioms
+        shell: python3 {0}
+        run: |
+          import re, sys
+          text = open("solutions.log", encoding="utf-8").read()
+          ok = {"propext", "Classical.choice", "Quot.sound"}
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text, re.S)
+          bad = [(n, a) for n, a in found
+                 if not {x.strip() for x in a.split(",") if x.strip()} <= ok]
+          print(f"Theorems checked: {len(found)}")
+          for n, a in bad:
+              print(f"::error title=Nonstandard axioms::{n}: [{' '.join(a.split())}]")
+          if "declaration uses 'sorry'" in text:
+              print("::error title=sorry::a proof file uses sorry")
+              bad.append(("sorry", ""))
+          sys.exit(1 if bad else 0)
+
+      - name: Report errors as annotations
+        if: failure()
+        run: |
+          for f in claims.log solutions.log; do
+            [ -f "$f" ] || continue
+            grep -n "error" "$f" | head -40 | while IFS= read -r line; do
+              msg=$(printf '%s' "$line" | sed 's/%/%25/g')
+              echo "::error title=$f::$msg"
+            done
+            body=$(grep -A12 "error:" "$f" | head -200 | sed 's/%/%25/g' | sed ':a;N;$!ba;s/\n/%0A/g')
+            [ -n "$body" ] && echo "::error title=$f context::$body"
+          done
+          true
