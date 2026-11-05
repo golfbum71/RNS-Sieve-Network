@@ -406,7 +406,7 @@ private theorem weightedSum_even_eq_zero {k : Nat} [NeZero k] (ψ : DirichletCha
     rw [← Equiv.sum_comp (Equiv.neg (ZMod k)) (fun j : ZMod k => ψ j * (j.val : ℂ))]
     refine Finset.sum_congr rfl (fun j _ => ?_)
     simp only [Equiv.neg_apply]
-    rw [heven.eval_neg j]
+    rw [DirichletCharacter.Even.eval_neg j heven]
     by_cases hj : j = 0
     · subst hj
       rw [ψ.map_zero' hk1, zero_mul, zero_mul]
