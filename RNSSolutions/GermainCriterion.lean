@@ -679,7 +679,7 @@ private theorem sum_mod_shift (p m c : Nat) (hp : 0 < p) (hm : Nat.Coprime m p) 
     · exact (Finset.card_image_of_injOn hinj).ge
   calc ∑ i ∈ Finset.range p, (c + i * m) % p
       = ∑ h ∈ (Finset.range p).image (fun i => (c + i * m) % p), h :=
-        (Finset.sum_image hinj).symm
+        (Finset.sum_image (f := fun h => h) hinj).symm
     _ = ∑ h ∈ Finset.range p, h := by rw [himg]
 
 /-- Averaging over the residues `a, a + k₁, …, a + (p-1)·k₁` modulo `p·k₁`:
