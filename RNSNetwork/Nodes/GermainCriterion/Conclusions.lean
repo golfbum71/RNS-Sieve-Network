@@ -20,8 +20,10 @@ Hall and Shiu, 2002) is the "only if" half of this rule.
 This file states the "if" half (`two_wheel_split_of_remainders`), which needs
 no characters: it is remainder arithmetic in the signed sum of
 `Sawtooth.even_split_iff_remainders_cancel`. The "only if" half needs odd
-Dirichlet characters and the nonvanishing of their L-functions at 1, and is
-the next stage of this node.
+Dirichlet characters and the nonvanishing of their L-functions at 1. Built so
+far on that side: the character transform, Germain's Proposition 3.1 and
+Corollary 3.2, his Proposition 2.1 (c)-(e), and his Theorem 1.1 for distinct
+prime wheels with a wheel not dividing the number of parts (`germain_theorem`).
 
 Proof: `RNSSolutions/GermainCriterion.lean`. Rests on `Sawtooth`.
 Metadata: `formalization.yaml`.

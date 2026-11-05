@@ -14,8 +14,9 @@ node:
     wheel's square leaves remainder 1 and the second wheel is the negative of the first (Germain 2005,
     Corollary 1.4). Built so far, the "if" half, by remainder arithmetic alone; the analytic input, that an odd
     primitive character's weighted residue sum is never zero; and the character transform of the
-    remainder sum (Germain's (3.1)). Next stage, the "only if"
-    half, which is Erdős's conjecture on Lehmer's even split, through odd Dirichlet characters and
+    remainder sum (Germain's (3.1)), through to Germain's Theorem 1.1 for distinct prime wheels with a
+    wheel not dividing the number of parts. Next stage, the "only if"
+    half for two wheels, which is Erdős's conjecture on Lehmer's even split, through odd Dirichlet characters and
     the nonvanishing of their L-functions at 1 (Mathlib's LFunction_apply_one_ne_zero).
   improves: LehmerSplit gives an even split when one wheel leaves remainder 1, for any number of
     wheels. For two wheels this node adds the second sufficient case (the second wheel the negative of
@@ -207,10 +208,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.split_iff_nondividing_wheels_holds
-    note: Lean proof drafted, not yet built. Induction on the wheels dividing k. Checked numerically first in 1,625 cases (wheels up to 13, up to four wheels, 1 to 30 parts), no failure.
+    note: Lean proof built clean 2026-11-05 (standard axioms only). Induction on the wheels dividing k. Checked numerically first in 1,625 cases (wheels up to 13, up to four wheels, 1 to 30 parts), no failure.
   designated: lean-proof
 - id: germain_theorem
   declaration: RNS.GermainCriterion.germain_theorem
@@ -221,10 +222,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.germain_theorem_step
-    note: Lean proof drafted, not yet built. Survivors to remainders by Sawtooth, the dividing wheels dropped, then Corollary 3.2; a character is 0, never 1, at a wheel dividing k. A step until HurwitzZetaZero is proved in Lean. Checked numerically first in 1,834 cases, no mismatch.
+    note: Lean proof built clean 2026-11-05 (standard axioms only). Survivors to remainders by Sawtooth, the dividing wheels dropped, then Corollary 3.2; a character is 0, never 1, at a wheel dividing k. A step until HurwitzZetaZero is proved in Lean. Checked numerically first in 1,834 cases, no mismatch.
   designated: lean-proof
 sources:
 - title: J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220

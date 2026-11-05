@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean
 
-Cut the cycle of two prime wheels into a given number of equal parts. The survivors split evenly exactly when one wheel leaves remainder 1 on division by the number of parts, or the first wheel's square leaves remainder 1 and the second wheel is the negative of the first (Germain 2005, Corollary 1.4). Built so far, the "if" half, by remainder arithmetic alone; the analytic input, that an odd primitive character's weighted residue sum is never zero; and the character transform of the remainder sum (Germain's (3.1)). Next stage, the "only if" half, which is Erdős's conjecture on Lehmer's even split, through odd Dirichlet characters and the nonvanishing of their L-functions at 1 (Mathlib's LFunction_apply_one_ne_zero).
+Cut the cycle of two prime wheels into a given number of equal parts. The survivors split evenly exactly when one wheel leaves remainder 1 on division by the number of parts, or the first wheel's square leaves remainder 1 and the second wheel is the negative of the first (Germain 2005, Corollary 1.4). Built so far, the "if" half, by remainder arithmetic alone; the analytic input, that an odd primitive character's weighted residue sum is never zero; and the character transform of the remainder sum (Germain's (3.1)), through to Germain's Theorem 1.1 for distinct prime wheels with a wheel not dividing the number of parts. Next stage, the "only if" half for two wheels, which is Erdős's conjecture on Lehmer's even split, through odd Dirichlet characters and the nonvanishing of their L-functions at 1 (Mathlib's LFunction_apply_one_ne_zero).
 
 **What it adds:** LehmerSplit gives an even split when one wheel leaves remainder 1, for any number of wheels. For two wheels this node adds the second sufficient case (the second wheel the negative of the first, with the first wheel's square leaving remainder 1), which LehmerSplit does not cover.
 
@@ -266,6 +266,49 @@ def two_parts_exception : Prop :=
 **Rests on:** no other node (Mathlib and the Vocabulary only)
 
 **Proof:** `RNS.GermainCriterion.two_parts_exception_holds` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean)
+
+<a id="split_iff_nondividing_wheels"></a>
+### `split_iff_nondividing_wheels`
+
+For prime wheels with at least one not dividing k, the survivors split evenly into k parts exactly when the survivors of the wheels not dividing k do (Proposition 2.1 (c) and (e) applied one wheel at a time), in remainder form.
+
+```lean
+/-- **Only the wheels not dividing the number of parts matter.** For prime
+wheels `W`, at least one of them not dividing `k`: the survivors of `W` split
+evenly into `k` parts exactly when the survivors of the wheels of `W` that do
+not divide `k` do. (Remove the dividing wheels one at a time with
+Proposition 2.1 (e); put them back with (c).) -/
+def split_iff_nondividing_wheels : Prop :=
+  ∀ (W : Finset Nat) (k : Nat), 0 < k → (∀ p ∈ W, p.Prime) → (∃ p ∈ W, ¬ p ∣ k) →
+    (remainders_cancel W k ↔ remainders_cancel (W.filter (fun p => ¬ p ∣ k)) k)
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.GermainCriterion.split_iff_nondividing_wheels_holds` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean)
+
+<a id="germain_theorem"></a>
+### `germain_theorem`
+
+Germain's Theorem 1.1 for distinct prime wheels with at least one not dividing k. The survivors split evenly into k parts exactly when every odd Dirichlet character mod k equals 1 at some wheel.
+
+```lean
+/-- **Germain's Theorem 1.1, for distinct prime wheels.** For prime wheels `W`,
+at least one of them not dividing the number of parts `k`: for every `a`, the
+survivors up to `a` `k`-ths of the cycle are exactly `a` shares of the cycle's
+survivors (the survivors split evenly into `k` parts) exactly when every odd
+Dirichlet character modulo `k` equals 1 at some wheel. Without a wheel not
+dividing `k` this can fail: see `two_parts_exception`. -/
+def germain_theorem : Prop :=
+  ∀ (k : Nat) [NeZero k] (W : Finset Nat), (∀ p ∈ W, p.Prime) → (∃ p ∈ W, ¬ p ∣ k) →
+    ((∀ a : Nat, k * (survivors_upto W (a * W.prod id / k)).card
+        = a * (survivors_upto W (W.prod id)).card) ↔
+      ∀ χ : DirichletCharacter ℂ k, χ.Odd → ∃ p ∈ W, χ (p : ZMod k) = 1)
+```
+
+**Rests on:** [`Sawtooth.even_split_iff_remainders_cancel`](Sawtooth.md#even_split_iff_remainders_cancel), [`HurwitzZetaZero.hurwitz_zeta_at_zero`](HurwitzZetaZero.md#hurwitz_zeta_at_zero)
+
+**Proof:** `RNS.GermainCriterion.germain_theorem_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean)
 
 ## Files
 
