@@ -247,58 +247,79 @@ def network_mermaid(nodes, order):
     as hexagons pointing at the claims that assume them."""
     lines = ["```mermaid", "graph LR"]
     opens = []
+    # Mermaid on GitHub refuses diagrams over 50,000 characters, so every box
+    # gets a short ID (s1, c1, p1, o1, ...) instead of one spelled from its
+    # node and claim names. The labels and links are unchanged.
+    short = {}
+
+    def sid(prefix, key):
+        if (prefix, key) not in short:
+            short[(prefix, key)] = f"{prefix}{sum(1 for k in short if k[0] == prefix) + 1}"
+        return short[(prefix, key)]
+
+    def C(nm, cl):
+        return sid("c", (nm, cl))
+
+    def S(nm):
+        return sid("s", nm)
+
+    def P(nm):
+        return sid("p", nm)
+
+    def O(o):
+        return sid("o", o)
     for name in order:
         n = nodes[name]
         title = label(f"{n['order']}. {name} — {n['title']}")
-        lines.append(f'  subgraph S_{name}["<b>{title}</b>"]')
+        lines.append(f'  subgraph {S(name)}["<b>{title}</b>"]')
         if n["built"]:
             for c in n["conclusions"]:
-                lines.append(f'    C_{name}_{c["id"]}["{c["id"]}"]')
+                lines.append(f'    {C(name, c["id"])}["{c["id"]}"]')
                 for o in c.get("open_inputs") or []:
                     if o not in opens:
                         opens.append(o)
         elif node_kind(n) == "external":
             project = n["planned"].get("external", {}).get("project", "another project")
-            lines.append(f'    P_{name}["<i>outside source: {label(project)}</i>"]')
+            lines.append(f'    {P(name)}["<i>outside source: {label(project)}</i>"]')
         else:
-            lines.append(f'    P_{name}["<i>{status_word(n)}</i>"]')
+            lines.append(f'    {P(name)}["<i>{status_word(n)}</i>"]')
         lines.append("  end")
     for o in opens:
-        lines.append(f'  O_{o}{{{{"<i>open conjecture</i><br/>{o}"}}}}')
+        lines.append(f'  {O(o)}{{{{"<i>open conjecture</i><br/>{o}"}}}}')
     for name in order:
         n = nodes[name]
         for c in n["conclusions"]:
             for ref in c.get("imports") or []:
                 src, claim = node_of(ref)
-                lines.append(f"  C_{src}_{claim} ==> C_{name}_{c['id']}")
+                lines.append(f"  {C(src, claim)} ==> {C(name, c['id'])}")
             for o in c.get("open_inputs") or []:
-                lines.append(f"  O_{o} -.-> C_{name}_{c['id']}")
+                lines.append(f"  {O(o)} -.-> {C(name, c['id'])}")
         for src in n["planned"].get("rests_on") or []:
-            lines.append(f"  S_{src} -.-> S_{name}")
+            lines.append(f"  {S(src)} -.-> {S(name)}")
     lines.append(CLASSDEFS)
     groups = {k: [] for k in KINDS}
     for nm in order:
         n = nodes[nm]
         if not n["built"]:
-            groups[node_kind(n)].append(f"P_{nm}")
+            groups[node_kind(n)].append(P(nm))
             continue
         for c in n["conclusions"]:
             key = ("cited_built" if is_cited(c) else
                    "draft" if is_draft(c) else
                    "conditional_built" if c.get("open_inputs") else "verified")
-            groups[key].append(f"C_{nm}_{c['id']}")
+            groups[key].append(C(nm, c['id']))
     for cls, ids in groups.items():
         if ids:
             lines.append(f"  class {','.join(ids)} {cls};")
     if opens:
-        lines.append(f"  class {','.join('O_' + o for o in opens)} openconj;")
+        lines.append(f"  class {','.join(O(o) for o in opens)} openconj;")
     for nm in order:
         n = nodes[nm]
         if n["built"]:
             for c in n["conclusions"]:
-                lines.append(f'  click C_{nm}_{c["id"]} href "{page_url(nm, c["id"])}" _blank')
+                lines.append(f'  click {C(nm, c["id"])} href "{page_url(nm, c["id"])}" _blank')
         else:
-            lines.append(f'  click P_{nm} href "{page_url(nm)}" _blank')
+            lines.append(f'  click {P(nm)} href "{page_url(nm)}" _blank')
     lines.append("```")
     return "\n".join(lines)
 
