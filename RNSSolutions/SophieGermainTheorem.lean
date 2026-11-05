@@ -102,7 +102,7 @@ private theorem cof_coprime {p : Nat} (hp : p.Prime) {y z : Int} (hyz : IsCoprim
       have hrz : r ∣ z := by
         have := dvd_sub h1 hry
         simpa using this
-      exact hr.not_unit (hyz.isUnit_of_dvd' hry hrz)
+      exact hr.not_isUnit (hyz.isUnit_of_dvd' hry hrz)
 
 /-- For coprime `y, z` with `y^p + z^p = w^p` and `p` not dividing `w`, both
 `y + z` and the cofactor are `p`-th powers. -/
@@ -131,18 +131,21 @@ private theorem core {p : Nat} (hp : p.Prime) (hodd : Odd p) (hq : (2 * p + 1).P
     (h : x ^ p + y ^ p + z ^ p = 0) (hxy : IsCoprime x y) (hyz : IsCoprime y z)
     (hzx : IsCoprime z x) (hnp : ¬ (p : Int) ∣ x * y * z)
     (hqx : ((2 * p + 1 : Nat) : Int) ∣ x) : False := by
-  haveI := Fact.mk hq
+  have : Fact (2 * p + 1).Prime := ⟨hq⟩
   have hpx : ¬ (p : Int) ∣ x := fun hd => hnp (dvd_mul_of_dvd_left (dvd_mul_of_dvd_left hd y) z)
   have hpy : ¬ (p : Int) ∣ y := fun hd => hnp (dvd_mul_of_dvd_left (dvd_mul_of_dvd_right hd x) z)
   have hpz : ¬ (p : Int) ∣ z := fun hd => hnp (dvd_mul_of_dvd_right hd (x * y))
   have hQ := wheel_not_unit hp
   -- Each pairwise sum is a `p`-th power.
   obtain ⟨⟨a, ha⟩, ⟨α, hα⟩⟩ := pair_powers hp hodd hyz
-    (show y ^ p + z ^ p = (-x) ^ p by rw [hodd.neg_pow]; linear_combination h) hpx
+    (show y ^ p + z ^ p = (-x) ^ p by rw [hodd.neg_pow]; linear_combination h)
+    (fun hd => hpx (dvd_neg.mp hd))
   obtain ⟨⟨b, hb⟩, -⟩ := pair_powers hp hodd hzx
-    (show z ^ p + x ^ p = (-y) ^ p by rw [hodd.neg_pow]; linear_combination h) hpy
+    (show z ^ p + x ^ p = (-y) ^ p by rw [hodd.neg_pow]; linear_combination h)
+    (fun hd => hpy (dvd_neg.mp hd))
   obtain ⟨⟨c, hc⟩, -⟩ := pair_powers hp hodd hxy
-    (show x ^ p + y ^ p = (-z) ^ p by rw [hodd.neg_pow]; linear_combination h) hpz
+    (show x ^ p + y ^ p = (-z) ^ p by rw [hodd.neg_pow]; linear_combination h)
+    (fun hd => hpz (dvd_neg.mp hd))
   -- The wheel blocks `a`.
   have hsum2 : c ^ p + b ^ p + (-a) ^ p = 2 * x := by
     rw [hodd.neg_pow, ← hc, ← hb, ← ha]
@@ -257,7 +260,7 @@ theorem sophie_germain_theorem_step (hpos : pth_power_positions)
   rw [mul_pow, mul_pow] at h
   have hgz : (g : Int) ∣ z := by
     have : (g : Int) ^ p ∣ z ^ p := ⟨-(x' ^ p + y' ^ p), by linear_combination h⟩
-    exact (pow_dvd_pow_iff_dvd hp.ne_zero).mp this
+    exact (UniqueFactorizationMonoid.pow_dvd_pow_iff_dvd hp.ne_zero).mp this
   obtain ⟨z', rfl⟩ := hgz
   rw [mul_pow] at h
   have h' : x' ^ p + y' ^ p + z' ^ p = 0 := by
@@ -280,7 +283,7 @@ theorem sophie_germain_theorem_step (hpos : pth_power_positions)
       have : x' ^ p = -(y' ^ p + z' ^ p) := by linear_combination h'
       rw [this]
       exact dvd_neg.mpr (dvd_add (dvd_pow h1 hp.ne_zero) (dvd_pow h2 hp.ne_zero))
-    exact hr.not_unit (hxy.isUnit_of_dvd' (hr.dvd_of_dvd_pow hrx) h1)
+    exact hr.not_isUnit (hxy.isUnit_of_dvd' (hr.dvd_of_dvd_pow hrx) h1)
   have hzx : IsCoprime z' x' := by
     apply isCoprime_of_prime_dvd (fun hh => hx0' hh.2)
     intro r hr h1 h2
@@ -288,7 +291,7 @@ theorem sophie_germain_theorem_step (hpos : pth_power_positions)
       have : y' ^ p = -(x' ^ p + z' ^ p) := by linear_combination h'
       rw [this]
       exact dvd_neg.mpr (dvd_add (dvd_pow h2 hp.ne_zero) (dvd_pow h1 hp.ne_zero))
-    exact hr.not_unit (hxy.isUnit_of_dvd' h2 (hr.dvd_of_dvd_pow hry))
+    exact hr.not_isUnit (hxy.isUnit_of_dvd' h2 (hr.dvd_of_dvd_pow hry))
   have hnp' : ¬ (p : Int) ∣ x' * y' * z' := by
     intro hd
     apply hnp

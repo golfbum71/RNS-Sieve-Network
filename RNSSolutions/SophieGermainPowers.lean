@@ -29,7 +29,7 @@ private theorem pow_cases {p : Nat} [Fact (2 * p + 1).Prime] (a : ZMod (2 * p + 
 /-- **Three positions for p-th powers**, proved. -/
 theorem pth_power_positions_holds : pth_power_positions := by
   intro p hp hq t
-  haveI := Fact.mk hq
+  have : Fact (2 * p + 1).Prime := ⟨hq⟩
   push_cast
   by_cases ht : (t : ZMod (2 * p + 1)) = 0
   · left
@@ -50,7 +50,7 @@ private theorem one_three_ne_zero {p : Nat} (hp : p.Prime) [Fact (2 * p + 1).Pri
 /-- **Three p-th powers: the wheel blocks one**, proved. -/
 theorem three_powers_blocked_holds : three_powers_blocked := by
   intro p hp hq x y z hsum
-  haveI := Fact.mk hq
+  have : Fact (2 * p + 1).Prime := ⟨hq⟩
   by_contra hnone
   have hx : ¬ ((2 * p + 1 : Nat) : Int) ∣ x := fun h => hnone (Or.inl h)
   have hy : ¬ ((2 * p + 1 : Nat) : Int) ∣ y := fun h => hnone (Or.inr (Or.inl h))
