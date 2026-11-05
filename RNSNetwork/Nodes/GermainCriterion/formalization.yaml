@@ -68,6 +68,21 @@ conclusions:
       the previous claim. Built clean 2026-11-05 (standard axioms only); it stays a step, not assembled,
       until HurwitzZetaZero is proved in Lean.
   designated: lean-proof
+- id: character_transform
+  declaration: RNS.GermainCriterion.character_transform
+  summary: Weighting Sawtooth's signed remainder sum by a conjugate Dirichlet character and adding over
+    all residues gives the product over the wheels of (character at the wheel minus 1), times the
+    character-weighted residue sum (Germain's (3.1), in remainder form).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainCriterion.lean
+    declaration: RNS.GermainCriterion.character_transform_holds
+    note: Lean proof drafted 2026-11-05; awaiting its first `lake build RNSSolutions`. Checked
+      numerically first for every character of 7, 8, 9, 12, 15, 16, 20 and 21 parts.
+  designated: lean-proof
 sources:
 - title: J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220
   url: https://doi.org/10.4153/CMB-2005-019-9

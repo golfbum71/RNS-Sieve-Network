@@ -9,6 +9,8 @@ import RNSNetwork.Nodes.HurwitzZetaZero.Conclusions
 import Mathlib.NumberTheory.LSeries.Nonvanishing   -- `LFunction_apply_one_ne_zero`, `rootNumber_ne_zero`
 import Mathlib.Algebra.BigOperators.Group.Finset.Powerset   -- `Finset.sum_powerset_insert`
 import Mathlib.Data.Nat.ModEq                  -- `Nat.ModEq.mul_left`
+import Mathlib.Data.Nat.GCD.BigOperators      -- `Nat.coprime_prod_left_iff`
+import Mathlib.Tactic.DefEqTransformations     -- `beta_reduce`
 import Mathlib.Tactic.IntervalCases
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.Ring
@@ -20,7 +22,8 @@ Imports claims only, never other nodes' proofs. The sufficient direction rests
 on `Sawtooth.even_split_iff_remainders_cancel`, taken as a named hypothesis.
 
 Built clean by `lake build RNSSolutions` on 2026-11-05; `#print axioms` shows only
-the standard three for every theorem here.
+the standard three for every theorem here. The character transform was added
+the same day and awaits its first build.
 
 Idea. For the wheels `p`, `q`, the signed sum of `Sawtooth` has four terms:
 the remainders of `a p q`, `a q`, `a p` and `a` on division by `k`, with signs
@@ -229,8 +232,74 @@ theorem odd_primitive_weighted_sum_ne_zero_step
         exact Finset.sum_congr rfl (fun j _ => by ring)
     _ = 0 := by rw [hs0, hsum]; simp
 
+/-! ## The character transform -/
+
+/-- One wheel term of the transform: multiplying every residue by a unit `m`
+permutes the residues, so the weighted remainder sum picks up the factor `χ m`. -/
+private theorem transform_one_term {k : Nat} [NeZero k] (χ : DirichletCharacter ℂ k) (m : Nat)
+    (hm : Nat.Coprime m k) :
+    ∑ j : ZMod k, χ⁻¹ j * ((j.val * m % k : Nat) : ℂ)
+      = χ (m : ZMod k) * ∑ i : ZMod k, χ⁻¹ i * (i.val : ℂ) := by
+  obtain ⟨u, hu⟩ : ∃ u : (ZMod k)ˣ, (u : ZMod k) = m :=
+    ⟨ZMod.unitOfCoprime m hm, ZMod.coe_unitOfCoprime m hm⟩
+  have hval : ∀ j : ZMod k, j.val * m % k = (j * (u : ZMod k)).val := by
+    intro j
+    rw [hu, ZMod.val_mul, ZMod.val_natCast, Nat.mul_mod, Nat.mul_mod j.val (m % k), Nat.mod_mod]
+  have hχu : χ⁻¹ (u : ZMod k) * χ (u : ZMod k) = 1 := by
+    rw [← MulChar.mul_apply, MulChar.inv_mul, MulChar.one_apply_coe]
+  have hT : ∑ i : ZMod k, χ⁻¹ i * (i.val : ℂ)
+      = χ⁻¹ (u : ZMod k) * ∑ j : ZMod k, χ⁻¹ j * ((j * (u : ZMod k)).val : ℂ) := by
+    rw [← Equiv.sum_comp (Units.mulRight u) (fun i : ZMod k => χ⁻¹ i * (i.val : ℂ)),
+      Finset.mul_sum]
+    refine Finset.sum_congr rfl (fun j _ => ?_)
+    simp only [Units.mulRight_apply, map_mul]
+    ring
+  calc ∑ j : ZMod k, χ⁻¹ j * ((j.val * m % k : Nat) : ℂ)
+      = ∑ j : ZMod k, χ⁻¹ j * ((j * (u : ZMod k)).val : ℂ) := by
+        refine Finset.sum_congr rfl (fun j _ => ?_)
+        rw [hval j]
+    _ = χ (u : ZMod k) * ∑ i : ZMod k, χ⁻¹ i * (i.val : ℂ) := by
+        rw [hT, ← mul_assoc, mul_comm (χ (u : ZMod k)), hχu, one_mul]
+    _ = χ (m : ZMod k) * ∑ i : ZMod k, χ⁻¹ i * (i.val : ℂ) := by
+        rw [hu]
+
+/-- The product over the wheels of `χ(wheel) - 1`, expanded over the choices
+of wheels, in the same signed form as `Sawtooth`. -/
+private theorem wheel_product_expand {k : Nat} (χ : DirichletCharacter ℂ k) (W : Finset Nat) :
+    ∏ p ∈ W, (χ (p : ZMod k) - 1)
+      = ∑ S ∈ W.powerset, (-1 : ℂ) ^ S.card * χ (((W \ S).prod id : Nat) : ZMod k) := by
+  have h := Finset.prod_add (fun _ : Nat => (-1 : ℂ)) (fun p => χ (p : ZMod k)) W
+  beta_reduce at h
+  rw [show (∏ p ∈ W, (χ (p : ZMod k) - 1)) = ∏ p ∈ W, ((-1 : ℂ) + χ (p : ZMod k)) from
+    Finset.prod_congr rfl (fun p _ => by ring), h]
+  refine Finset.sum_congr rfl (fun S _ => ?_)
+  rw [Finset.prod_const, Nat.cast_prod, map_prod]
+  rfl
+
+theorem character_transform_holds : character_transform := by
+  intro k _ W χ hW hWk
+  have hcop : ∀ S ∈ W.powerset, Nat.Coprime ((W \ S).prod id) k := by
+    intro S _
+    apply Nat.coprime_prod_left_iff.mpr
+    intro p hp
+    have hpW := (Finset.mem_sdiff.mp hp).1
+    exact (Nat.Prime.coprime_iff_not_dvd (hW p hpW)).mpr (hWk p hpW)
+  have hL : ∀ j : ZMod k, χ⁻¹ j * (((∑ S ∈ W.powerset,
+        (-1 : Int) ^ S.card * ((j.val * (W \ S).prod id % k : Nat) : Int) : Int)) : ℂ)
+      = ∑ S ∈ W.powerset, (-1 : ℂ) ^ S.card * (χ⁻¹ j * ((j.val * (W \ S).prod id % k : Nat) : ℂ)) := by
+    intro j
+    push_cast
+    rw [Finset.mul_sum]
+    exact Finset.sum_congr rfl (fun S _ => by ring)
+  rw [wheel_product_expand χ W, Finset.sum_mul, Finset.sum_congr rfl (fun j _ => hL j),
+    Finset.sum_comm]
+  refine Finset.sum_congr rfl (fun S hS => ?_)
+  rw [← Finset.mul_sum, transform_one_term χ _ (hcop S hS)]
+  ring
+
 end RNS.GermainCriterion
 
 #print axioms RNS.GermainCriterion.two_wheel_split_of_remainders_step
 #print axioms RNS.GermainCriterion.odd_primitive_LFunction_zero_ne_zero_holds
 #print axioms RNS.GermainCriterion.odd_primitive_weighted_sum_ne_zero_step
+#print axioms RNS.GermainCriterion.character_transform_holds

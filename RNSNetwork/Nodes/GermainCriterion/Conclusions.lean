@@ -55,4 +55,18 @@ def odd_primitive_weighted_sum_ne_zero : Prop :=
   ∀ (N : Nat) [NeZero N] (χ : DirichletCharacter ℂ N), χ.IsPrimitive → χ.Odd →
     ∑ j : ZMod N, χ j * (j.val : ℂ) ≠ 0
 
+/-- **The character transform of the remainder sum.** Take prime wheels `W`,
+none dividing the number of parts `k`, and any Dirichlet character `χ` for
+`k`. Weight `Sawtooth`'s signed remainder sum (with `a` the residue `j`) by the
+conjugate character `χ⁻¹ j` and add over all residues `j`. The result is the
+product over the wheels of `χ(wheel) - 1`, times the residue sum weighted by
+`χ⁻¹`. This is Germain's (3.1) in remainder form; the sawtooth's `-1/2` is not
+needed. -/
+def character_transform : Prop :=
+  ∀ (k : Nat) [NeZero k] (W : Finset Nat) (χ : DirichletCharacter ℂ k),
+    (∀ p ∈ W, p.Prime) → (∀ p ∈ W, ¬ p ∣ k) →
+    ∑ j : ZMod k, χ⁻¹ j * (((∑ S ∈ W.powerset,
+        (-1 : Int) ^ S.card * ((j.val * (W \ S).prod id % k : Nat) : Int) : Int)) : ℂ)
+      = (∏ p ∈ W, (χ (p : ZMod k) - 1)) * ∑ i : ZMod k, χ⁻¹ i * (i.val : ℂ)
+
 end RNS.GermainCriterion
