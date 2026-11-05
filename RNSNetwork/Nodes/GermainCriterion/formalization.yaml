@@ -134,6 +134,23 @@ conclusions:
       only); a step until HurwitzZetaZero is proved in Lean. Checked numerically first in 1,827 cases (moduli 2 to 30, up to
       three wheels), 500 of them even splits.
   designated: lean-proof
+- id: all_residues_split_iff_wheels
+  declaration: RNS.GermainCriterion.all_residues_split_iff_wheels
+  summary: For prime wheels not dividing k, Sawtooth's signed remainder sum vanishes at every starting
+    residue exactly when every odd character mod k equals 1 at some wheel (Germain's Corollary 3.2).
+  imports:
+  - HurwitzZetaZero.v1.hurwitz_zeta_at_zero
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainCriterion.lean
+    declaration: RNS.GermainCriterion.all_residues_split_iff_wheels_step
+    note: Lean proof drafted 2026-11-05 from Proposition 3.1 by dividing out the common factor of the
+      residue and k, and by passing to the conductor; awaiting its first build. Checked numerically
+      first in 1,827 cases (moduli 2 to 30, up to three wheels), 479 of them even splits at every
+      residue.
+  designated: lean-proof
 sources:
 - title: J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220
   url: https://doi.org/10.4153/CMB-2005-019-9

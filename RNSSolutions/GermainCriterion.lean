@@ -506,6 +506,138 @@ theorem coprime_split_iff_characters_step
       Nat.cast_ne_zero.mpr (Nat.totient_pos.mpr (Nat.pos_of_ne_zero (NeZero.ne k))).ne'
     exact_mod_cast (mul_eq_zero.mp key).resolve_left hφ
 
+/-! ## Germain's Corollary 3.2: every residue, wheels only -/
+
+/-- The signed remainder sum at a natural-number residue `a`. -/
+private def remSumN (k : Nat) (W : Finset Nat) (a : Nat) : Int :=
+  ∑ S ∈ W.powerset, (-1 : Int) ^ S.card * ((a * (W \ S).prod id % k : Nat) : Int)
+
+/-- Multiplying the residue and the number of parts by the same factor
+multiplies every remainder, and so the whole sum, by that factor. -/
+private theorem remSumN_scale (d k' b : Nat) (W : Finset Nat) :
+    remSumN (d * k') W (d * b) = (d : Int) * remSumN k' W b := by
+  unfold remSumN
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl (fun S _ => ?_)
+  rw [Nat.mul_assoc, Nat.mul_mod_mul_left, Nat.cast_mul]
+  ring
+
+/-- Only the residue's remainder matters. -/
+private theorem remSumN_mod (k b : Nat) (W : Finset Nat) :
+    remSumN k W (b % k) = remSumN k W b := by
+  unfold remSumN
+  refine Finset.sum_congr rfl (fun S _ => ?_)
+  rw [Nat.mul_mod, Nat.mod_mod, ← Nat.mul_mod]
+
+/-- A primitive character is 0, so not 1, at a prime dividing its level. -/
+private theorem primitive_ne_one_at_prime_dvd {N : Nat} (ψ : DirichletCharacter ℂ N)
+    (hψ : ψ.IsPrimitive) {q : Nat} (hq : q.Prime) (hqN : q ∣ N) :
+    ψ.primitiveCharacter (q : ZMod ψ.conductor) ≠ 1 := by
+  have hc : ψ.conductor = N := hψ
+  have hnu : ¬ IsUnit (q : ZMod ψ.conductor) := by
+    rw [ZMod.isUnit_iff_coprime, hc]
+    exact fun h => (Nat.Prime.coprime_iff_not_dvd hq).mp h hqN
+  rw [MulChar.map_nonunit _ hnu]
+  exact zero_ne_one
+
+/-- The primitive character behind an odd character is odd. -/
+private theorem primitive_odd {N : Nat} {ψ : DirichletCharacter ℂ N} (hodd : ψ.Odd) :
+    ψ.primitiveCharacter.Odd := by
+  have h := ψ.primitiveCharacter_apply_of_isCoprime (a := -1) isCoprime_one_left.neg_left
+  unfold DirichletCharacter.Odd
+  push_cast at h
+  rw [h]
+  exact hodd
+
+/-- Lifting an odd character to a multiple of its level keeps it odd. -/
+private theorem changeLevel_odd {n m : Nat} (hm : n ∣ m) {χ : DirichletCharacter ℂ n}
+    (hodd : χ.Odd) : (DirichletCharacter.changeLevel hm χ).Odd := by
+  have h := DirichletCharacter.changeLevel_eq_cast_of_dvd' χ hm
+    (a := -1) isCoprime_one_left.neg_left
+  unfold DirichletCharacter.Odd
+  push_cast at h
+  rw [h]
+  exact hodd
+
+theorem all_residues_split_iff_wheels_step
+    (h_hz : RNS.HurwitzZetaZero.hurwitz_zeta_at_zero) :
+    all_residues_split_iff_wheels := by
+  intro k _ W hWne hW hWk
+  have h31 := coprime_split_iff_characters_step h_hz
+  change (∀ a : Nat, remSumN k W a = 0) ↔ _
+  have hk0 : k ≠ 0 := NeZero.ne k
+  have hpZ : ∀ p ∈ W, IsCoprime (p : ℤ) (k : ℤ) := fun p hp =>
+    Nat.isCoprime_iff_coprime.mpr ((Nat.Prime.coprime_iff_not_dvd (hW p hp)).mpr (hWk p hp))
+  constructor
+  · -- every residue splits evenly: pass to the conductor of `χ⁻¹`
+    intro hF χ hodd
+    haveI : NeZero χ⁻¹.conductor := ⟨χ⁻¹.conductor_ne_zero⟩
+    have hψodd : (χ⁻¹.primitiveCharacter).Odd := primitive_odd (inv_odd hodd)
+    obtain ⟨d, hd⟩ := χ⁻¹.conductor_dvd_level
+    have hk' : d * χ⁻¹.conductor = k := by
+      rw [Nat.mul_comm]
+      exact hd.symm
+    have hd0 : (d : Int) ≠ 0 := by
+      have : d ≠ 0 := by
+        rintro rfl
+        exact hk0 (hd.trans (Nat.mul_zero _))
+      exact_mod_cast this
+    have hWf : ∀ p ∈ W, ¬ p ∣ χ⁻¹.conductor := fun p hp h =>
+      hWk p hp (h.trans χ⁻¹.conductor_dvd_level)
+    have hsplit : ∀ j : ZMod χ⁻¹.conductor, IsUnit j →
+        ∑ S ∈ W.powerset, (-1 : Int) ^ S.card *
+          ((j.val * (W \ S).prod id % χ⁻¹.conductor : Nat) : Int) = 0 := by
+      intro j _
+      have hs := remSumN_scale d χ⁻¹.conductor j.val W
+      rw [hk', hF] at hs
+      exact (mul_eq_zero.mp hs.symm).resolve_left hd0
+    rcases (h31 χ⁻¹.conductor W hWne hW hWf).mp hsplit ((χ⁻¹.primitiveCharacter)⁻¹)
+        (inv_odd hψodd) with ⟨p, hp, hp1⟩ | ⟨q, hq, hq1⟩
+    · refine ⟨p, hp, ?_⟩
+      rw [MulChar.inv_apply_eq_inv', inv_eq_one] at hp1
+      have h2 := χ⁻¹.primitiveCharacter_apply_of_isCoprime (hpZ p hp)
+      simp only [Int.cast_natCast] at h2
+      rw [hp1, MulChar.inv_apply_eq_inv', eq_comm, inv_eq_one] at h2
+      exact h2
+    · exfalso
+      have hprim : ((χ⁻¹.primitiveCharacter)⁻¹)⁻¹.IsPrimitive := by
+        rw [inv_inv]
+        exact χ⁻¹.primitiveCharacter_isPrimitive
+      exact primitive_ne_one_at_prime_dvd _ hprim (Nat.prime_of_mem_primeFactors hq)
+        (Nat.dvd_of_mem_primeFactors hq) hq1
+  · -- the wheel condition: divide out the common factor of the residue and `k`
+    intro hχ a
+    have hg0 : 0 < Nat.gcd a k := Nat.gcd_pos_of_pos_right a (Nat.pos_of_ne_zero hk0)
+    have ha : Nat.gcd a k * (a / Nat.gcd a k) = a := Nat.mul_div_cancel' (Nat.gcd_dvd_left a k)
+    have hk : Nat.gcd a k * (k / Nat.gcd a k) = k := Nat.mul_div_cancel' (Nat.gcd_dvd_right a k)
+    have hcop : Nat.Coprime (a / Nat.gcd a k) (k / Nat.gcd a k) :=
+      Nat.coprime_div_gcd_div_gcd hg0
+    generalize a / Nat.gcd a k = b at ha hcop
+    generalize k / Nat.gcd a k = k' at hk hcop
+    generalize Nat.gcd a k = g at ha hk hg0
+    have hk'0 : k' ≠ 0 := by
+      rintro rfl
+      exact hk0 (hk.symm.trans (Nat.mul_zero g))
+    haveI : NeZero k' := ⟨hk'0⟩
+    have hdvd : k' ∣ k := ⟨g, by rw [← hk, Nat.mul_comm]⟩
+    have hWk' : ∀ p ∈ W, ¬ p ∣ k' := fun p hp h => hWk p hp (h.trans hdvd)
+    have hcond : ∀ χ : DirichletCharacter ℂ k', χ.Odd →
+        (∃ p ∈ W, χ (p : ZMod k') = 1) ∨
+        (∃ p ∈ k'.primeFactors, χ⁻¹.primitiveCharacter (p : ZMod χ⁻¹.conductor) = 1) := by
+      intro χ hodd
+      left
+      obtain ⟨p, hp, hp1⟩ := hχ (DirichletCharacter.changeLevel hdvd χ) (changeLevel_odd hdvd hodd)
+      refine ⟨p, hp, ?_⟩
+      have h2 := DirichletCharacter.changeLevel_eq_cast_of_dvd' χ hdvd (hpZ p hp)
+      simp only [Int.cast_natCast] at h2
+      rw [← h2]
+      exact hp1
+    have hunit : IsUnit (b : ZMod k') := (ZMod.isUnit_iff_coprime b k').mpr hcop
+    have h0 : remSumN k' W ((b : ZMod k').val) = 0 :=
+      (h31 k' W hWne hW hWk').mpr hcond (b : ZMod k') hunit
+    rw [ZMod.val_natCast, remSumN_mod] at h0
+    rw [← ha, ← hk, remSumN_scale, h0, mul_zero]
+
 end RNS.GermainCriterion
 
 #print axioms RNS.GermainCriterion.two_wheel_split_of_remainders_step
@@ -515,3 +647,4 @@ end RNS.GermainCriterion
 #print axioms RNS.GermainCriterion.weighted_sum_eq_LFunction_zero_step
 #print axioms RNS.GermainCriterion.odd_weighted_sum_ne_zero_iff_step
 #print axioms RNS.GermainCriterion.coprime_split_iff_characters_step
+#print axioms RNS.GermainCriterion.all_residues_split_iff_wheels_step

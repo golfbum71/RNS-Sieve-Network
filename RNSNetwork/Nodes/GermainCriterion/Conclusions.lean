@@ -100,4 +100,16 @@ def coprime_split_iff_characters : Prop :=
         (∃ p ∈ W, χ (p : ZMod k) = 1) ∨
         (∃ p ∈ k.primeFactors, χ⁻¹.primitiveCharacter (p : ZMod χ⁻¹.conductor) = 1))
 
+/-- **Germain's Corollary 3.2, in remainder form: every residue, wheels only.**
+For a nonempty set of prime wheels `W`, none dividing the number of parts `k`:
+`Sawtooth`'s signed remainder sum vanishes at every starting residue (so, by
+`Sawtooth`, the survivors split evenly whatever the residue) exactly when every
+odd Dirichlet character modulo `k` equals 1 at some wheel. -/
+def all_residues_split_iff_wheels : Prop :=
+  ∀ (k : Nat) [NeZero k] (W : Finset Nat), W.Nonempty → (∀ p ∈ W, p.Prime) →
+    (∀ p ∈ W, ¬ p ∣ k) →
+    ((∀ a : Nat,
+        ∑ S ∈ W.powerset, (-1 : Int) ^ S.card * ((a * (W \ S).prod id % k : Nat) : Int) = 0) ↔
+      ∀ χ : DirichletCharacter ℂ k, χ.Odd → ∃ p ∈ W, χ (p : ZMod k) = 1)
+
 end RNS.GermainCriterion
