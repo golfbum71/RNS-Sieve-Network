@@ -31,7 +31,7 @@ finite geometric sum, at most the prime over the prime minus 1.
 
 namespace RNS.ShareBounds
 
-open RNS.SurvivorCount ArithmeticFunction
+open RNS.SurvivorCount
 
 /-- The active wheels below `limit` are primes below `limit`. -/
 private theorem mem_active {limit q : Nat} (hq : q ∈ active_primes limit) :
@@ -76,9 +76,9 @@ private theorem harmonic_le_prod (N : Nat) :
       exact Finset.mem_filter.mpr ⟨Finset.mem_range.mpr (by omega), hpp⟩
   -- the reciprocal sum over the divisors is the divisor sum over the number
   have hrecip : ∑ d ∈ (∏ q ∈ active_primes (N + 1), q ^ N).divisors, (1 / (d : Real))
-      = ((σ 1 (∏ q ∈ active_primes (N + 1), q ^ N) : Nat) : Real)
+      = ((ArithmeticFunction.sigma 1 (∏ q ∈ active_primes (N + 1), q ^ N) : Nat) : Real)
           / ((∏ q ∈ active_primes (N + 1), q ^ N : Nat) : Real) := by
-    rw [← Nat.sum_div_divisors, sigma_one_apply, Nat.cast_sum, Finset.sum_div]
+    rw [← Nat.sum_div_divisors, ArithmeticFunction.sigma_one_apply, Nat.cast_sum, Finset.sum_div]
     refine Finset.sum_congr rfl (fun d hd => ?_)
     have hdM := Nat.dvd_of_mem_divisors hd
     have hd0 : (d : Real) ≠ 0 := by
@@ -87,12 +87,13 @@ private theorem harmonic_le_prod (N : Nat) :
     rw [Nat.cast_div hdM hd0]
     field_simp
   -- the divisor sum is multiplicative over the prime powers
-  have hsigma : σ 1 (∏ q ∈ active_primes (N + 1), q ^ N)
+  have hsigma : ArithmeticFunction.sigma 1 (∏ q ∈ active_primes (N + 1), q ^ N)
       = ∏ q ∈ active_primes (N + 1), ∑ i ∈ Finset.range (N + 1), q ^ i := by
-    rw [IsMultiplicative.map_prod (fun q => q ^ N) isMultiplicative_sigma _
+    rw [ArithmeticFunction.IsMultiplicative.map_prod (fun q => q ^ N)
+      ArithmeticFunction.isMultiplicative_sigma _
       (fun x hx y hy hxy => ((Nat.coprime_primes (hS x hx) (hS y hy)).mpr hxy).pow N N)]
     refine Finset.prod_congr rfl (fun q hq => ?_)
-    rw [sigma_one_apply, Nat.sum_divisors_prime_pow (hS q hq)]
+    rw [ArithmeticFunction.sigma_one_apply, Nat.sum_divisors_prime_pow (hS q hq)]
   calc ∑ n ∈ Finset.Icc 1 N, (1 / (n : Real))
       ≤ ∑ d ∈ (∏ q ∈ active_primes (N + 1), q ^ N).divisors, (1 / (d : Real)) :=
         Finset.sum_le_sum_of_subset_of_nonneg hsub (fun d _ _ => by positivity)
@@ -128,6 +129,7 @@ private theorem log_le_prod (limit : Nat) (hl : 2 ≤ limit) :
   push_cast at h1
   have h2 := harmonic_le_prod N
   simp only [one_div] at h2
+  push_cast
   linarith
 
 /-- **The survivor share is at most one over the logarithm**, as a step from
