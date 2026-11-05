@@ -127,11 +127,11 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.coprime_split_iff_characters_step
-    note: Lean proof drafted 2026-11-05 (character orthogonality from Mathlib); awaiting its first
-      `lake build RNSSolutions`. Checked numerically first in 1,827 cases (moduli 2 to 30, up to
+    note: Lean proof by Mathlib's character orthogonality, built clean 2026-11-05 (standard axioms
+      only); a step until HurwitzZetaZero is proved in Lean. Checked numerically first in 1,827 cases (moduli 2 to 30, up to
       three wheels), 500 of them even splits.
   designated: lean-proof
 sources:
