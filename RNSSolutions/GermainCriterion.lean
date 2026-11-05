@@ -297,9 +297,90 @@ theorem character_transform_holds : character_transform := by
   rw [← Finset.mul_sum, transform_one_term χ _ (hcop S hS)]
   ring
 
+/-! ## Characters that are not primitive (Germain's (3.2)) -/
+
+/-- An odd character does not live modulo 1, and is not the trivial character
+(no primitivity needed). -/
+private theorem odd_level_and_nontrivial {N : Nat} [NeZero N] {ψ : DirichletCharacter ℂ N}
+    (hodd : ψ.Odd) : N ≠ 1 ∧ ψ ≠ 1 := by
+  have hN1 : N ≠ 1 := by
+    rintro rfl
+    have h1 : (-1 : ZMod 1) = 1 := Subsingleton.elim _ _
+    have h := hodd
+    unfold DirichletCharacter.Odd at h
+    rw [h1, map_one] at h
+    norm_num at h
+  refine ⟨hN1, fun h => ?_⟩
+  have h2 := hodd
+  unfold DirichletCharacter.Odd at h2
+  rw [h, MulChar.one_apply (isUnit_one.neg)] at h2
+  norm_num at h2
+
+theorem weighted_sum_eq_LFunction_zero_step
+    (h_hz : RNS.HurwitzZetaZero.hurwitz_zeta_at_zero) :
+    weighted_sum_eq_LFunction_zero := by
+  intro N _ ψ hN1 hψ
+  have hNpos : (0 : ℝ) < N := by exact_mod_cast Nat.pos_of_ne_zero (NeZero.ne N)
+  have hN0 : (N : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr (NeZero.ne N)
+  have key : ∀ j : ZMod N, ψ j * HurwitzZeta.hurwitzZeta (ZMod.toAddCircle j) 0
+      = ψ j * (1 / 2 - (j.val : ℂ) / N) := by
+    intro j
+    by_cases hj : j = 0
+    · subst hj
+      rw [ψ.map_zero' hN1, zero_mul, zero_mul]
+    · have hv : 0 < j.val := Nat.pos_of_ne_zero ((ZMod.val_ne_zero j).mpr hj)
+      have hx0 : (0 : ℝ) < (j.val : ℝ) / N := div_pos (by exact_mod_cast hv) hNpos
+      have hle : (j.val : ℝ) ≤ N := by exact_mod_cast (ZMod.val_lt j).le
+      have hx1 : (j.val : ℝ) / N ≤ 1 := by
+        calc (j.val : ℝ) / N ≤ (N : ℝ) / N := by gcongr
+          _ = 1 := div_self (ne_of_gt hNpos)
+      rw [ZMod.toAddCircle_apply, h_hz _ hx0 hx1]
+      push_cast
+      ring
+  have hs0 : ∑ j : ZMod N, ψ j = 0 := MulChar.sum_eq_zero_of_ne_one hψ
+  have hsplit : ∑ j : ZMod N, ψ j * (1 / 2 - (j.val : ℂ) / N)
+      = (∑ j : ZMod N, ψ j) * (1 / 2) - (∑ j : ZMod N, ψ j * (j.val : ℂ)) / N := by
+    rw [Finset.sum_mul, Finset.sum_div, ← Finset.sum_sub_distrib]
+    exact Finset.sum_congr rfl (fun j _ => by ring)
+  rw [DirichletCharacter.LFunction, ZMod.LFunction, neg_zero, Complex.cpow_zero, one_mul,
+    Finset.sum_congr rfl (fun j _ => key j), hsplit, hs0, zero_mul, zero_sub]
+  field_simp
+
+theorem odd_weighted_sum_ne_zero_iff_step
+    (h_hz : RNS.HurwitzZetaZero.hurwitz_zeta_at_zero) :
+    odd_weighted_sum_ne_zero_iff := by
+  intro k _ ψ hodd
+  obtain ⟨hk1, hψ1⟩ := odd_level_and_nontrivial hodd
+  have hk0 : (k : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr (NeZero.ne k)
+  haveI : NeZero ψ.conductor := ⟨ψ.conductor_ne_zero⟩
+  -- the primitive character behind `ψ` is odd and primitive
+  have hσodd : ψ.primitiveCharacter.Odd := by
+    have h := ψ.primitiveCharacter_apply_of_isCoprime (a := -1) isCoprime_one_left.neg_left
+    unfold DirichletCharacter.Odd
+    push_cast at h
+    rw [h]
+    exact hodd
+  have hLσ := odd_primitive_LFunction_zero_ne_zero_holds ψ.conductor ψ.primitiveCharacter
+    ψ.primitiveCharacter_isPrimitive hσodd
+  -- move L(ψ, 0) to the primitive character
+  have hL := DirichletCharacter.LFunction_changeLevel ψ.conductor_dvd_level ψ.primitiveCharacter
+    (s := 0) (Or.inr zero_ne_one)
+  rw [ψ.changeLevel_primitiveCharacter] at hL
+  simp only [neg_zero, Complex.cpow_zero, mul_one] at hL
+  rw [weighted_sum_eq_LFunction_zero_step h_hz k ψ hk1 hψ1, hL]
+  constructor
+  · intro h p hp hσp
+    apply h
+    rw [Finset.prod_eq_zero hp (by rw [hσp, sub_self]), mul_zero, mul_zero]
+  · intro h
+    refine mul_ne_zero (neg_ne_zero.mpr hk0) (mul_ne_zero hLσ ?_)
+    exact Finset.prod_ne_zero_iff.mpr (fun p hp => sub_ne_zero.mpr (Ne.symm (h p hp)))
+
 end RNS.GermainCriterion
 
 #print axioms RNS.GermainCriterion.two_wheel_split_of_remainders_step
 #print axioms RNS.GermainCriterion.odd_primitive_LFunction_zero_ne_zero_holds
 #print axioms RNS.GermainCriterion.odd_primitive_weighted_sum_ne_zero_step
 #print axioms RNS.GermainCriterion.character_transform_holds
+#print axioms RNS.GermainCriterion.weighted_sum_eq_LFunction_zero_step
+#print axioms RNS.GermainCriterion.odd_weighted_sum_ne_zero_iff_step

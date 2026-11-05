@@ -69,4 +69,20 @@ def character_transform : Prop :=
         (-1 : Int) ^ S.card * ((j.val * (W \ S).prod id % k : Nat) : Int) : Int)) : ℂ)
       = (∏ p ∈ W, (χ (p : ZMod k) - 1)) * ∑ i : ZMod k, χ⁻¹ i * (i.val : ℂ)
 
+/-- **The weighted residue sum is a value of the L-function.** For a modulus
+`N` other than 1 and a nontrivial Dirichlet character `ψ` modulo `N`, the sum
+of each residue weighted by `ψ` equals `-N` times `L(ψ, 0)`. -/
+def weighted_sum_eq_LFunction_zero : Prop :=
+  ∀ (N : Nat) [NeZero N] (ψ : DirichletCharacter ℂ N), N ≠ 1 → ψ ≠ 1 →
+    ∑ j : ZMod N, ψ j * (j.val : ℂ) = -(N : ℂ) * DirichletCharacter.LFunction ψ 0
+
+/-- **When the weighted residue sum of an odd character vanishes** (Germain's
+(3.2)). For any odd Dirichlet character `ψ` modulo `k`, primitive or not, the
+sum of each residue weighted by `ψ` is nonzero exactly when the primitive
+character behind `ψ` differs from 1 at every prime dividing `k`. -/
+def odd_weighted_sum_ne_zero_iff : Prop :=
+  ∀ (k : Nat) [NeZero k] (ψ : DirichletCharacter ℂ k), ψ.Odd →
+    (∑ j : ZMod k, ψ j * (j.val : ℂ) ≠ 0 ↔
+      ∀ p ∈ k.primeFactors, ψ.primitiveCharacter (p : ZMod ψ.conductor) ≠ 1)
+
 end RNS.GermainCriterion
