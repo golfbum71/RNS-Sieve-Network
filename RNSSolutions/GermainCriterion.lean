@@ -205,7 +205,7 @@ theorem odd_primitive_weighted_sum_ne_zero_step
   obtain ⟨hN1, hχ1⟩ := odd_facts hprim hodd
   apply odd_primitive_LFunction_zero_ne_zero_holds N χ hprim hodd
   have hNpos : (0 : ℝ) < N := by exact_mod_cast Nat.pos_of_ne_zero (NeZero.ne N)
-  have key : ∀ j : ZMod N, χ j * hurwitzZeta (ZMod.toAddCircle j) 0
+  have key : ∀ j : ZMod N, χ j * HurwitzZeta.hurwitzZeta (ZMod.toAddCircle j) 0
       = χ j * (1 / 2 - (j.val : ℂ) / N) := by
     intro j
     by_cases hj : j = 0

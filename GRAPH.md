@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 46 of 54 nodes are built, holding 120 claims: 113 proved in Lean and 7 cited from a published paper. They are joined by 48 arrows, each a Lean-checked step. Of the other 8 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 2 are new work, stated or scoped but not yet proved; 5 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 47 of 55 nodes are built, holding 123 claims: 113 proved in Lean, 2 with a proof drafted but not yet built and 8 cited from a published paper. They are joined by 49 arrows, each a Lean-checked step. Of the other 8 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 2 are new work, stated or scoped but not yet proved; 5 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -219,8 +219,13 @@ graph LR
   subgraph S_LehmerExcess["<b>34. LehmerExcess — Lehmer's closed form for the 6n-1 type</b>"]
     C_LehmerExcess_lehmer_excess_closed_form["lehmer_excess_closed_form"]
   end
+  subgraph S_HurwitzZetaZero["<b>58. HurwitzZetaZero — the Hurwitz zeta function at 0</b>"]
+    C_HurwitzZetaZero_hurwitz_zeta_at_zero["hurwitz_zeta_at_zero"]
+  end
   subgraph S_GermainCriterion["<b>35. GermainCriterion — Germain's exact criterion for an even split</b>"]
     C_GermainCriterion_two_wheel_split_of_remainders["two_wheel_split_of_remainders"]
+    C_GermainCriterion_odd_primitive_LFunction_zero_ne_zero["odd_primitive_LFunction_zero_ne_zero"]
+    C_GermainCriterion_odd_primitive_weighted_sum_ne_zero["odd_primitive_weighted_sum_ne_zero"]
   end
   subgraph S_RoughInPrimeGaps["<b>43. RoughInPrimeGaps — almost every prime gap holds a survivor of the wheels below its length</b>"]
     P_RoughInPrimeGaps["<i>outside source: plby/lean-proofs</i>"]
@@ -343,6 +348,7 @@ graph LR
   S_UniformSubdivision -.-> S_LargestGap
   C_Sawtooth_sawtooth_identity ==> C_LehmerExcess_lehmer_excess_closed_form
   C_Sawtooth_even_split_iff_remainders_cancel ==> C_GermainCriterion_two_wheel_split_of_remainders
+  C_HurwitzZetaZero_hurwitz_zeta_at_zero ==> C_GermainCriterion_odd_primitive_weighted_sum_ne_zero
   C_SophieGermainPowers_pth_power_positions ==> C_SophieGermainTheorem_sophie_germain_theorem
   C_SophieGermainPowers_three_powers_blocked ==> C_SophieGermainTheorem_sophie_germain_theorem
   C_SophieGermainTheorem_sophie_germain_theorem ==> C_SophieGermainTheorem_fermat_first_case
@@ -364,7 +370,8 @@ graph LR
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   class C_Wheel6_prime_gt_three_is_candidate,C_CRT_crt_map_bijective,C_SquareRootShield_square_root_shield,C_Admissibility_admissible_of_large_primes,C_Admissibility_zero_two_admissible,C_Admissibility_zero_two_four_not_admissible,C_Admissibility_ap_offsets_admissible_iff,C_SurvivorCount_twin_survivor_count,C_SurvivorCount_local_survivor_count,C_SurvivorCount_general_survivor_count,C_SingularSeries_delta_bound,C_SingularSeries_factor_multipliable,C_SingularSeries_hardy_littlewood_constant_pos,C_SingularSeries_local_density_factorization,C_TwinConstant_twin_prime_constant_eq_classical,C_Pruning_valid_starting_residues_card_formula,C_WheelOrder_wheel_marginal_new_formula,C_WheelOrder_prime_gt_five_digit_ok,C_WheelOrder_wheel_gap_floor,C_ShieldCertificates_prime_of_shield_cover,C_ShieldCertificates_active_primes_cover,C_ShieldCertificates_family_prime_of_shield_cover,C_ShieldCertificates_forward_ap_prime_of_active_shield,C_ShieldCertificates_backward_ap_prime_of_active_shield,C_ShieldCertificates_tuple_prime_of_active_shield,C_ShieldCertificates_ap_hits_wheel,C_ShieldCertificates_ap_prime_run_length_lt_of_lt_start,C_ShieldCertificates_ap_prime_run_forces_divisibility,C_ShieldCertificates_window_prime_iff,C_ShieldCertificates_window_twin_iff,C_ShieldCertificates_backward_ap_hits_wheel,C_ShieldCertificates_backward_ap_prime_run_length_lt_of_above,C_ShieldCertificates_backward_ap_prime_run_forces_divisibility,C_Infinitude_euclid_primes_unbounded,C_Infinitude_squarefree_counting_no_finite_supply,C_ColumnStructure_columns_multiply,C_ColumnStructure_col_minus_periodicity,C_ColumnStructure_col_minus_has_minus_prime_factor,C_ColumnStructure_col_minus_composite_has_proper_minus_factor,C_DirichletColumns_col_minus_primes_infinite,C_DirichletColumns_col_plus_primes_infinite,C_DirichletColumns_col_minus_primes_unbounded,C_DirichletColumns_col_plus_primes_unbounded,C_LinearForms_sophieGermainSystem_admissible,C_SophieGermainWheel_sophie_germain_mod_six,C_SophieGermainWheel_sophie_germain_not_ends_in_seven,C_SophieGermainWheel_sophie_germain_last_digit,C_GapTracks_twin_prime_mod_six,C_GapTracks_cousin_prime_mod_six,C_GapTracks_sexy_prime_same_track,C_GapTracks_sexy_middle_not_always_blocked,C_GapTracks_prime_gap_forbidden_four_from_six_minus_one,C_GapTracks_prime_gap_forbidden_two_from_six_plus_one,C_GapTracks_prime_gap_same_track_of_six_dvd,C_UniformSubdivision_frozen_wheels_repeat,C_UniformSubdivision_one_wheel_removed,C_UniformSubdivision_uniform_subdivision,C_UniformSubdivision_uniform_subdivision_plus_side,C_UniformSubdivision_uniform_subdivision_minus_side,C_UniformSubdivision_column_frozen_repeat,C_UniformSubdivision_column_one_wheel_removed,C_LehmerSplit_lehmer_even_split,C_LehmerSplit_lehmer_even_split_column,C_SurvivorSymmetry_survivor_reflection,C_SurvivorSymmetry_survivor_count_reflection,C_Sawtooth_legendre_count,C_Sawtooth_sawtooth_identity,C_Sawtooth_even_split_iff_remainders_cancel,C_Sawtooth_column_legendre_count,C_SpreadBounds_interval_spread_bound,C_SpreadBounds_column_imbalance_bound,C_ColumnAction_column_action,C_ShareBounds_survivor_share_le_inv_log,C_ShareBounds_twin_share_le_two_inv_log_sq,C_TwinShare_twin_share_eq_prod,C_TwinShare_twin_share_split,C_InadmissibleOccurrences_inadmissible_occurrence_contains_prime,C_InadmissibleOccurrences_gap_block_24242_unique,C_GapCertificate_survivor_gaps_even,C_GapCertificate_survivor_gaps_30030_miss_20,C_GapCertificate_survivor_gaps_30030_present,C_GapCertificate_de_polignac_gap_guess_false,C_GapCertificate_erdos_first_guess_fails_at_13,C_BlockingRuns_blocked_run_is_shift,C_BlockingRuns_longest_blocked_run_eq_max_gap_sub_one,C_LehmerExcess_lehmer_excess_closed_form,C_GermainCriterion_two_wheel_split_of_remainders,C_BonseCeiling_ceiling_inside_cycle,C_PillaiBrauer_pillai_witness_17,C_PillaiBrauer_pillai_witness_17_repeats,C_PrimeGapsBridge_admissible_iff_primegaps,C_RamanujanSums_ramanujan_wheel_product,C_SophieGermainPowers_pth_power_positions,C_SophieGermainPowers_three_powers_blocked,C_SophieGermainTheorem_sophie_germain_theorem,C_SophieGermainTheorem_fermat_first_case,C_GermainAuxiliary_auxiliary_prime_theorem,C_GermainAuxiliary_sophie_germain_wheel_auxiliary,C_GermainAuxiliary_auxiliary_seven,C_GermainAuxiliary_auxiliary_thirteen,C_GermainAuxiliary_fermat_first_case_seven,C_GermainAuxiliary_fermat_first_case_thirteen,C_Schatunowsky_ceiling_forces_wheels,C_Schatunowsky_thirty_survivors_all_prime,C_Schatunowsky_schatunowsky_bound verified;
   class C_HardyLittlewood_twin_prime_conjecture_implies_infinite_twin_primes,C_HensleyRichards_HL_A_and_B_incompatible,C_LinearForms_sophie_germain_of_LinearForms_conjecture,C_GapConjectures_legendre_of_jacobsthal,C_GapConjectures_brocard_of_four_survivors,C_GapConjectures_oppermann_of_bound,C_GapConjectures_andrica_of_oppermann,C_GapConjectures_legendre_of_oppermann conditional_built;
-  class C_DudekJohnston_dudek_johnston_statement,C_PillaiBrauer_pillai_sixteen,C_KanoldBound_stretch_holds_survivor,C_MenonIdentity_menon_wheel_sum,C_GallagherAverage_singular_series_average_one,C_BrunTwinSum_brun_sum_finite,C_GapMoments_gap_moment_bound cited_built;
+  class C_DudekJohnston_dudek_johnston_statement,C_HurwitzZetaZero_hurwitz_zeta_at_zero,C_PillaiBrauer_pillai_sixteen,C_KanoldBound_stretch_holds_survivor,C_MenonIdentity_menon_wheel_sum,C_GallagherAverage_singular_series_average_one,C_BrunTwinSum_brun_sum_finite,C_GapMoments_gap_moment_bound cited_built;
+  class C_GermainCriterion_odd_primitive_LFunction_zero_ne_zero,C_GermainCriterion_odd_primitive_weighted_sum_ne_zero draft;
   class P_BirdseySchay conditional;
   class P_CeilingOvershoot,P_LargestGap new;
   class P_JacobsthalQuadratic,P_MertensThird,P_PrimeNumberTheorem,P_RoughInPrimeGaps,P_LongGaps external;
@@ -470,7 +477,10 @@ graph LR
   click P_BirdseySchay href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirdseySchay.md" _blank
   click P_LargestGap href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LargestGap.md" _blank
   click C_LehmerExcess_lehmer_excess_closed_form href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LehmerExcess.md#lehmer_excess_closed_form" _blank
+  click C_HurwitzZetaZero_hurwitz_zeta_at_zero href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HurwitzZetaZero.md#hurwitz_zeta_at_zero" _blank
   click C_GermainCriterion_two_wheel_split_of_remainders href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#two_wheel_split_of_remainders" _blank
+  click C_GermainCriterion_odd_primitive_LFunction_zero_ne_zero href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#odd_primitive_lfunction_zero_ne_zero" _blank
+  click C_GermainCriterion_odd_primitive_weighted_sum_ne_zero href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#odd_primitive_weighted_sum_ne_zero" _blank
   click P_RoughInPrimeGaps href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RoughInPrimeGaps.md" _blank
   click C_BonseCeiling_ceiling_inside_cycle href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BonseCeiling.md#ceiling_inside_cycle" _blank
   click C_PillaiBrauer_pillai_sixteen href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PillaiBrauer.md#pillai_sixteen" _blank
@@ -633,6 +643,9 @@ The results nothing else builds on, each with everything beneath it.
   - [`Sawtooth.sawtooth_identity`](docs/nodes/Sawtooth.md#sawtooth_identity) — proved in Lean
 - [`GermainCriterion.two_wheel_split_of_remainders`](docs/nodes/GermainCriterion.md#two_wheel_split_of_remainders) — proved in Lean
   - [`Sawtooth.even_split_iff_remainders_cancel`](docs/nodes/Sawtooth.md#even_split_iff_remainders_cancel) — proved in Lean
+- [`GermainCriterion.odd_primitive_LFunction_zero_ne_zero`](docs/nodes/GermainCriterion.md#odd_primitive_lfunction_zero_ne_zero) — proof drafted, not yet built
+- [`GermainCriterion.odd_primitive_weighted_sum_ne_zero`](docs/nodes/GermainCriterion.md#odd_primitive_weighted_sum_ne_zero) — proof drafted, not yet built
+  - [`HurwitzZetaZero.hurwitz_zeta_at_zero`](docs/nodes/HurwitzZetaZero.md#hurwitz_zeta_at_zero) — cited
 - [`PillaiBrauer.pillai_sixteen`](docs/nodes/PillaiBrauer.md#pillai_sixteen) — cited
 - [`PillaiBrauer.pillai_witness_17`](docs/nodes/PillaiBrauer.md#pillai_witness_17) — proved in Lean
 - [`PillaiBrauer.pillai_witness_17_repeats`](docs/nodes/PillaiBrauer.md#pillai_witness_17_repeats) — proved in Lean
@@ -680,6 +693,7 @@ exactly the following, each recorded as such rather than claimed:
 **Published results, cited rather than proved in Lean:**
 
 - [`DudekJohnston.dudek_johnston_statement`](docs/nodes/DudekJohnston.md#dudek_johnston_statement) — Dudek and Johnston, Almost primes between all squares, arXiv:2501.18048 (2025), Theorem 1.2
+- [`HurwitzZetaZero.hurwitz_zeta_at_zero`](docs/nodes/HurwitzZetaZero.md#hurwitz_zeta_at_zero) — T. M. Apostol, Introduction to Analytic Number Theory, Springer (1976), Chapter 12, Theorem 12.13 (the Hurwitz zeta function at the nonpositive integers), case n = 0
 - [`PillaiBrauer.pillai_sixteen`](docs/nodes/PillaiBrauer.md#pillai_sixteen) — S. S. Pillai (1940), as stated in M. Waldschmidt's notes on Pillai's work (exact paper reference to be checked), main theorem
 - [`KanoldBound.stretch_holds_survivor`](docs/nodes/KanoldBound.md#stretch_holds_survivor) — H.-J. Kanold, Über eine zahlentheoretische Funktion von Jacobsthal, Math. Ann. 170 (1967), 314-326, the bound g(n) at most 2 to the number of prime factors of n, as quoted by Costello and Watts
 - [`MenonIdentity.menon_wheel_sum`](docs/nodes/MenonIdentity.md#menon_wheel_sum) — P. K. Menon, On the sum gcd(a-1, n) [(a, n) = 1], J. Indian Math. Soc. (N.S.) 29 (1965), 155-163, the identity, specialised to a squarefree modulus
@@ -848,6 +862,9 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
   - [Schatunowsky's Theorem (ProofWiki), after S. O. Shatunovsky (1893)](https://proofwiki.org/wiki/Schatunowsky's_Theorem) — the theorem this node proves; the classical proof uses the same ceiling argument
   - [V. Pambuccian, Schatunowsky's theorem, Bonse's inequality, and Chebyshev's theorem in weak fragments of Peano arithmetic, Math. Log. Quart. 61 (2015)](https://doi.org/10.1002/malq.201400064) — shows Schatunowsky follows from Bonse's inequality, the route taken here
   - [H. King and V. Pambuccian, Generalized Schatunowsky theorem in a weak arithmetic (2025)](https://arxiv.org/abs/2506.08256) — the generalization (Kaneko–Nakai) for survivors of the wheels above a fixed prime
+- [`HurwitzZetaZero`](docs/nodes/HurwitzZetaZero.md)
+  - [Hurwitz zeta function (Wikipedia), values at nonpositive integers](https://en.wikipedia.org/wiki/Hurwitz_zeta_function) — states the value at 0 through the Bernoulli polynomial B1
+  - [Mathlib, Hurwitz zeta values (hurwitzZeta_neg_nat)](https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/LSeries/HurwitzZetaValues.html) — the Lean result for the negative integers, which this node extends to 0
 
 ## Node index
 
@@ -887,7 +904,7 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 32 | [`BirdseySchay`](docs/nodes/BirdseySchay.md) | Birdsey and Schay's heuristic, as a hypothesis | planned: conditional |
 | 33 | [`LargestGap`](docs/nodes/LargestGap.md) | the largest gap from the proportional share | planned: new, not yet proved |
 | 34 | [`LehmerExcess`](docs/nodes/LehmerExcess.md) | Lehmer's closed form for the 6n-1 type | proved in Lean |
-| 35 | [`GermainCriterion`](docs/nodes/GermainCriterion.md) | Germain's exact criterion for an even split | proved in Lean |
+| 35 | [`GermainCriterion`](docs/nodes/GermainCriterion.md) | Germain's exact criterion for an even split | proof drafted, not yet built |
 | 36 | [`Sawtooth`](docs/nodes/Sawtooth.md) | the survivor count minus its proportional share | proved in Lean |
 | 40 | [`MertensThird`](docs/nodes/MertensThird.md) | Mertens' third theorem | outside source: proved in Lean in another project |
 | 41 | [`PrimeNumberTheorem`](docs/nodes/PrimeNumberTheorem.md) | the prime number theorem | outside source: proved in Lean in another project |
@@ -907,3 +924,4 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 55 | [`SophieGermainTheorem`](docs/nodes/SophieGermainTheorem.md) | the first case of Fermat's Last Theorem for Sophie Germain primes | proved in Lean |
 | 56 | [`GermainAuxiliary`](docs/nodes/GermainAuxiliary.md) | Sophie Germain's theorem with any suitable wheel | proved in Lean |
 | 57 | [`Schatunowsky`](docs/nodes/Schatunowsky.md) | 30 is the largest number whose survivors are all prime | proved in Lean |
+| 58 | [`HurwitzZetaZero`](docs/nodes/HurwitzZetaZero.md) | the Hurwitz zeta function at 0 | cited from a published paper; not proved in Lean |

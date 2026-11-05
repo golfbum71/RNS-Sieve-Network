@@ -38,7 +38,7 @@
 | 32 | [`BirdseySchay`](BirdseySchay.md) | Birdsey and Schay's heuristic, as a hypothesis | planned: conditional |
 | 33 | [`LargestGap`](LargestGap.md) | the largest gap from the proportional share | planned: new, not yet proved |
 | 34 | [`LehmerExcess`](LehmerExcess.md) | Lehmer's closed form for the 6n-1 type | proved in Lean |
-| 35 | [`GermainCriterion`](GermainCriterion.md) | Germain's exact criterion for an even split | proved in Lean |
+| 35 | [`GermainCriterion`](GermainCriterion.md) | Germain's exact criterion for an even split | proof drafted, not yet built |
 | 36 | [`Sawtooth`](Sawtooth.md) | the survivor count minus its proportional share | proved in Lean |
 | 40 | [`MertensThird`](MertensThird.md) | Mertens' third theorem | outside source: proved in Lean in another project |
 | 41 | [`PrimeNumberTheorem`](PrimeNumberTheorem.md) | the prime number theorem | outside source: proved in Lean in another project |
@@ -58,5 +58,6 @@
 | 55 | [`SophieGermainTheorem`](SophieGermainTheorem.md) | the first case of Fermat's Last Theorem for Sophie Germain primes | proved in Lean |
 | 56 | [`GermainAuxiliary`](GermainAuxiliary.md) | Sophie Germain's theorem with any suitable wheel | proved in Lean |
 | 57 | [`Schatunowsky`](Schatunowsky.md) | 30 is the largest number whose survivors are all prime | proved in Lean |
+| 58 | [`HurwitzZetaZero`](HurwitzZetaZero.md) | the Hurwitz zeta function at 0 | cited from a published paper; not proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

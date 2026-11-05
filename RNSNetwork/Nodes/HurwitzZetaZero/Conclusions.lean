@@ -25,6 +25,6 @@ namespace RNS.HurwitzZetaZero
 /-- **The Hurwitz zeta function at 0.** For `0 < x ≤ 1`, Mathlib's
 `hurwitzZeta x 0` equals `1/2 - x`. -/
 def hurwitz_zeta_at_zero : Prop :=
-  ∀ x : ℝ, 0 < x → x ≤ 1 → hurwitzZeta (x : UnitAddCircle) 0 = 1 / 2 - (x : ℂ)
+  ∀ x : ℝ, 0 < x → x ≤ 1 → HurwitzZeta.hurwitzZeta (x : UnitAddCircle) 0 = 1 / 2 - (x : ℂ)
 
 end RNS.HurwitzZetaZero
