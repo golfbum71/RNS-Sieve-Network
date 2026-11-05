@@ -353,6 +353,16 @@ Hardy-Littlewood constant tends to 1 as h grows.
 OpenAI's Lean proof of an improved Rankin-type lower bound for the largest
 prime gap. Planned as an outside-source node cited from `BlockingRuns`.
 
+### 50. `PrimeGapsBridge` — the network's admissibility is PrimeGapsLib's
+The network's admissibility (fewer occupied positions than the wheel size)
+equals Axiom Math's PrimeGapsLib definition (some residue class missed at
+every prime), copied word for word. So PrimeGapsLib's results on admissible
+sets, including gaps of at most 246 infinitely often under Bombieri-Vinogradov,
+apply to the network's patterns unchanged.
+- Lean: `admissible_iff_primegaps` (proved in `RNSSolutions/PrimeGapsBridge.lean`)
+- Rests on: Vocabulary only
+- Status: DRAFT (2026-11-05), awaiting the GitHub Actions build.
+
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence
 are `UniformSubdivision.frozen_wheels_repeat` and `one_wheel_removed`; the

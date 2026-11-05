@@ -35,3 +35,4 @@ import RNSNetwork.Nodes.PillaiBrauer.Conclusions
 import RNSNetwork.Nodes.KanoldBound.Conclusions
 import RNSNetwork.Nodes.MenonIdentity.Conclusions
 import RNSNetwork.Nodes.GallagherAverage.Conclusions
+import RNSNetwork.Nodes.PrimeGapsBridge.Conclusions

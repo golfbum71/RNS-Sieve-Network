@@ -30,4 +30,5 @@ import RNSSolutions.ShareBounds
 import RNSSolutions.BlockingRuns
 import RNSSolutions.BonseCeiling
 import RNSSolutions.PillaiBrauer
+import RNSSolutions.PrimeGapsBridge
 import RNSSolutions.Assemble

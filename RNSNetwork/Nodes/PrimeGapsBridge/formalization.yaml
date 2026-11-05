@@ -1,0 +1,38 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: PrimeGapsBridge.v1
+  family: PrimeGapsBridge
+  version: v1
+  order: 50
+  kind: paper
+  status: active
+  title: the network's admissibility is PrimeGapsLib's
+  description: The network's admissibility (fewer occupied positions than the wheel size, at every wheel)
+    is the same as PrimeGapsLib's (some residue class missed, at every prime). So PrimeGapsLib's Lean
+    results on admissible sets, including infinitely many prime gaps of at most 246 assuming
+    Bombieri-Vinogradov, apply to the network's admissible patterns unchanged.
+conclusions:
+- id: admissible_iff_primegaps
+  declaration: RNS.PrimeGapsBridge.admissible_iff_primegaps
+  summary: An offset pattern is admissible in the network's sense exactly when it is admissible in
+    PrimeGapsLib's sense.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/PrimeGapsBridge.lean
+    declaration: RNS.PrimeGapsBridge.admissible_iff_primegaps_holds
+    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+  designated: lean-proof
+sources:
+- title: Axiom Math, PrimeGapsLib, Finset.Admissible (PrimeGapsTheory/NumberTheory/Admissible.lean,
+    line 40)
+  url: https://github.com/AxiomMath/PrimeGapsLib/blob/1faa7b1/PrimeGapsTheory/NumberTheory/Admissible.lean#L40
+  relationship: the definition, copied word for word and shown equal to is_admissible
+- title: Lean formalization of bounded gaps between primes (Chen, Hariharan, Lau, Mehta, Swaminathan,
+    Thorner, Xie; blueprint)
+  url: https://primegaps.axiommath.ai/blueprint.pdf
+  relationship: the results this bridge makes available to the network
