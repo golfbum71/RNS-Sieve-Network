@@ -48,12 +48,23 @@ already proved in Lean in another project (Mertens' third theorem and the
 prime number theorem in PrimeNumberTheoremAnd, the Jacobsthal bound in
 OpenAI's repository), it appears on the graph as a purple outside-source
 node with a link to the proof, and nodes here take it as a named hypothesis.
-This keeps the toolchain pinned and the dependency visible.
+This keeps the network free of other projects' toolchains and keeps each
+dependency visible.
 
 ## Building
 
-Needs [Lean 4](https://lean-lang.org) (via `elan`); the toolchain and Mathlib
-version are pinned in `lean-toolchain` and `lake-manifest.json`.
+Needs [Lean 4](https://lean-lang.org) (via `elan`). The project follows the
+latest Mathlib (`rev = "master"` in `lakefile.toml`). A daily GitHub job
+(`.github/workflows/update-mathlib.yml`) moves `lean-toolchain` and
+`lake-manifest.json` to the newest Mathlib and commits the move only if every
+claim and proof still builds with the standard axioms; if the newest Mathlib
+breaks something, the job fails and the last working version stays in place.
+
+After pulling, or to move to the newest Mathlib yourself:
+
+```
+lake update               # newest Mathlib and its dependencies
+```
 
 ```
 lake exe cache get        # download prebuilt Mathlib (first time only)

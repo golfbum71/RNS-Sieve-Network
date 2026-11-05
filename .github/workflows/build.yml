@@ -5,6 +5,7 @@ name: lake build
 
 on:
   push:
+    branches-ignore: [mathlib-latest]
   workflow_dispatch:
 
 jobs:

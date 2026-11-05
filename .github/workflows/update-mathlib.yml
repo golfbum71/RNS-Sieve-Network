@@ -1,0 +1,95 @@
+# Moves the project to the newest Mathlib, builds everything, and commits the
+# move only if every claim and proof still builds with the standard axioms.
+# Runs daily on main, and on every push to the `mathlib-latest` branch (where
+# fixes for a new Mathlib are made). If the newest Mathlib breaks something,
+# the run fails, errors are posted as annotations, and nothing is committed.
+name: update Mathlib
+
+on:
+  schedule:
+    - cron: "17 9 * * *"
+  push:
+    branches: [mathlib-latest]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use the newest Mathlib's Lean version
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover-community/mathlib4/master/lean-toolchain \
+            -o lean-toolchain
+          cat lean-toolchain
+
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Update Mathlib (lake update)
+        run: lake update
+
+      - name: Get prebuilt Mathlib
+        run: lake exe cache get
+
+      - name: Build claims (lake build)
+        run: |
+          set -o pipefail
+          lake build 2>&1 | tee claims.log
+
+      - name: Build proofs (lake build RNSSolutions)
+        run: |
+          set -o pipefail
+          lake build RNSSolutions 2>&1 | tee solutions.log
+
+      - name: Check axioms
+        shell: python3 {0}
+        run: |
+          import re, sys
+          text = open("solutions.log", encoding="utf-8").read()
+          ok = {"propext", "Classical.choice", "Quot.sound"}
+          found = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text, re.S)
+          bad = [(n, a) for n, a in found
+                 if not {x.strip() for x in a.split(",") if x.strip()} <= ok]
+          print(f"Theorems checked: {len(found)}")
+          for n, a in bad:
+              print(f"::error title=Nonstandard axioms::{n}: [{' '.join(a.split())}]")
+          if "declaration uses 'sorry'" in text:
+              print("::error title=sorry::a proof file uses sorry")
+              bad.append(("sorry", ""))
+          sys.exit(1 if bad else 0)
+
+      - name: Commit the new Mathlib version
+        run: |
+          if git diff --quiet -- lean-toolchain lake-manifest.json; then
+            echo "Already on the newest Mathlib."
+            exit 0
+          fi
+          rev=$(python3 -c "import json;m=json.load(open('lake-manifest.json'));print(next(p['rev'][:12] for p in m['packages'] if p['name']=='mathlib'))")
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lean-toolchain lake-manifest.json
+          git commit -m "Update Mathlib to $rev ($(cat lean-toolchain | sed 's/.*://'))"
+          git push
+
+      - name: Report errors as annotations
+        if: failure()
+        run: |
+          for f in claims.log solutions.log; do
+            [ -f "$f" ] || continue
+            grep -n "error" "$f" | head -40 | while IFS= read -r line; do
+              msg=$(printf '%s' "$line" | sed 's/%/%25/g')
+              echo "::error title=$f::$msg"
+            done
+            body=$(grep -B2 -A40 "error:" "$f" | grep -v "depends on axioms\|^ Classical.choice\|^ Quot.sound" | head -400 | sed 's/%/%25/g' | sed ':a;N;$!ba;s/\n/%0A/g')
+            [ -n "$body" ] && echo "::error title=$f context::$body"
+          done
+          true

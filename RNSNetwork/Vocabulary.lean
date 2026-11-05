@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Geoffrey Fischer
 -/
 -- Only the parts of Mathlib these definitions need, rather than all of it:
--- each module below was checked against Mathlib at the pinned commit
--- (see `lake-manifest.json`).
+-- each module below was checked against the Mathlib recorded in
+-- `lake-manifest.json`.
 import Mathlib.Data.Nat.Prime.Defs                         -- primes, `Nat.Primes`
 import Mathlib.Data.ZMod.Basic                             -- remainders, `ZMod.castHom`
 import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise -- `Finset.dvd_prod_of_mem`
