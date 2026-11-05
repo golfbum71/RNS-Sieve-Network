@@ -200,6 +200,32 @@ conclusions:
     declaration: RNS.GermainCriterion.two_parts_exception_holds
     note: Lean proof built clean 2026-11-05 (standard axioms only). Found by the numerical check of Theorem 1.1 (1,834 cases with a wheel not dividing k, no mismatch; the only mismatches are the empty cycle and the wheel 2, each with 2 parts).
   designated: lean-proof
+- id: split_iff_nondividing_wheels
+  declaration: RNS.GermainCriterion.split_iff_nondividing_wheels
+  summary: For prime wheels with at least one not dividing k, the survivors split evenly into k parts exactly when the survivors of the wheels not dividing k do (Proposition 2.1 (c) and (e) applied one wheel at a time), in remainder form.
+  imports: []
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainCriterion.lean
+    declaration: RNS.GermainCriterion.split_iff_nondividing_wheels_holds
+    note: Lean proof drafted, not yet built. Induction on the wheels dividing k. Checked numerically first in 1,625 cases (wheels up to 13, up to four wheels, 1 to 30 parts), no failure.
+  designated: lean-proof
+- id: germain_theorem
+  declaration: RNS.GermainCriterion.germain_theorem
+  summary: Germain's Theorem 1.1 for distinct prime wheels with at least one not dividing k. The survivors split evenly into k parts exactly when every odd Dirichlet character mod k equals 1 at some wheel.
+  imports:
+  - Sawtooth.v1.even_split_iff_remainders_cancel
+  - HurwitzZetaZero.v1.hurwitz_zeta_at_zero
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainCriterion.lean
+    declaration: RNS.GermainCriterion.germain_theorem_step
+    note: Lean proof drafted, not yet built. Survivors to remainders by Sawtooth, the dividing wheels dropped, then Corollary 3.2; a character is 0, never 1, at a wheel dividing k. A step until HurwitzZetaZero is proved in Lean. Checked numerically first in 1,834 cases, no mismatch.
+  designated: lean-proof
 sources:
 - title: J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220
   url: https://doi.org/10.4153/CMB-2005-019-9

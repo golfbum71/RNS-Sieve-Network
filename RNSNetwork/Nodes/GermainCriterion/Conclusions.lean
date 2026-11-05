@@ -152,4 +152,27 @@ of parts. -/
 def two_parts_exception : Prop :=
   ¬ remainders_cancel {2} 2 ∧ ∀ χ : DirichletCharacter ℂ 2, ¬ χ.Odd
 
+/-! ## Germain's Theorem 1.1 -/
+
+/-- **Only the wheels not dividing the number of parts matter.** For prime
+wheels `W`, at least one of them not dividing `k`: the survivors of `W` split
+evenly into `k` parts exactly when the survivors of the wheels of `W` that do
+not divide `k` do. (Remove the dividing wheels one at a time with
+Proposition 2.1 (e); put them back with (c).) -/
+def split_iff_nondividing_wheels : Prop :=
+  ∀ (W : Finset Nat) (k : Nat), 0 < k → (∀ p ∈ W, p.Prime) → (∃ p ∈ W, ¬ p ∣ k) →
+    (remainders_cancel W k ↔ remainders_cancel (W.filter (fun p => ¬ p ∣ k)) k)
+
+/-- **Germain's Theorem 1.1, for distinct prime wheels.** For prime wheels `W`,
+at least one of them not dividing the number of parts `k`: for every `a`, the
+survivors up to `a` `k`-ths of the cycle are exactly `a` shares of the cycle's
+survivors (the survivors split evenly into `k` parts) exactly when every odd
+Dirichlet character modulo `k` equals 1 at some wheel. Without a wheel not
+dividing `k` this can fail: see `two_parts_exception`. -/
+def germain_theorem : Prop :=
+  ∀ (k : Nat) [NeZero k] (W : Finset Nat), (∀ p ∈ W, p.Prime) → (∃ p ∈ W, ¬ p ∣ k) →
+    ((∀ a : Nat, k * (survivors_upto W (a * W.prod id / k)).card
+        = a * (survivors_upto W (W.prod id)).card) ↔
+      ∀ χ : DirichletCharacter ℂ k, χ.Odd → ∃ p ∈ W, χ (p : ZMod k) = 1)
+
 end RNS.GermainCriterion

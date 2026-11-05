@@ -795,6 +795,88 @@ theorem two_parts_exception_holds : two_parts_exception := by
     rw [hm, MulChar.map_one] at hodd
     norm_num at hodd
 
+/-! ## Germain's Theorem 1.1 -/
+
+theorem split_iff_nondividing_wheels_holds : split_iff_nondividing_wheels := by
+  intro W k hk hW hex
+  obtain ⟨p0, hp0W, hp0k⟩ := hex
+  have hW'ne : (W.filter (fun p => ¬ p ∣ k)).Nonempty :=
+    ⟨p0, Finset.mem_filter.mpr ⟨hp0W, hp0k⟩⟩
+  have hW'p : ∀ q ∈ W.filter (fun p => ¬ p ∣ k), q.Prime :=
+    fun q hq => hW q (Finset.mem_filter.mp hq).1
+  -- put back the dividing wheels `D` one at a time
+  have key : ∀ D : Finset Nat, (∀ q ∈ D, q.Prime) → (∀ q ∈ D, q ∣ k) →
+      Disjoint (W.filter (fun p => ¬ p ∣ k)) D →
+      (remainders_cancel (W.filter (fun p => ¬ p ∣ k) ∪ D) k ↔
+        remainders_cancel (W.filter (fun p => ¬ p ∣ k)) k) := by
+    intro D
+    induction D using Finset.induction_on with
+    | empty =>
+      intro _ _ _
+      rw [Finset.union_empty]
+    | insert p D hpD ih =>
+      intro hD hDk hdisj
+      have hD' : ∀ q ∈ D, q.Prime := fun q hq => hD q (Finset.mem_insert_of_mem hq)
+      have hDk' : ∀ q ∈ D, q ∣ k := fun q hq => hDk q (Finset.mem_insert_of_mem hq)
+      have hdisj' := Finset.disjoint_of_subset_right (Finset.subset_insert p D) hdisj
+      have hpU : p ∉ W.filter (fun p => ¬ p ∣ k) ∪ D := by
+        rw [Finset.mem_union]
+        rintro (h | h)
+        · exact Finset.disjoint_left.mp hdisj h (Finset.mem_insert_self p D)
+        · exact hpD h
+      have hUp : ∀ q ∈ W.filter (fun p => ¬ p ∣ k) ∪ D, q.Prime := by
+        intro q hq
+        rcases Finset.mem_union.mp hq with h | h
+        · exact hW'p q h
+        · exact hD' q h
+      rw [Finset.union_insert, ← ih hD' hDk' hdisj']
+      constructor
+      · intro h
+        exact split_remove_dividing_wheel_holds _ k p hUp (hD p (Finset.mem_insert_self p D)) hpU
+          (hW'ne.mono Finset.subset_union_left) hk (hDk p (Finset.mem_insert_self p D)) h
+      · intro h
+        exact split_add_wheel_holds _ k p hpU h
+  have hU : W.filter (fun p => ¬ p ∣ k) ∪ W.filter (fun p => p ∣ k) = W := by
+    rw [Finset.union_comm]
+    exact Finset.filter_union_filter_not_eq _ W
+  have h := key (W.filter (fun p => p ∣ k))
+    (fun q hq => hW q (Finset.mem_filter.mp hq).1) (fun q hq => (Finset.mem_filter.mp hq).2)
+    (Finset.disjoint_filter_filter_not W W (fun p => p ∣ k)).symm
+  rw [hU] at h
+  exact h
+
+theorem germain_theorem_step
+    (h_saw : RNS.Sawtooth.even_split_iff_remainders_cancel)
+    (h_hz : RNS.HurwitzZetaZero.hurwitz_zeta_at_zero) :
+    germain_theorem := by
+  intro k _ W hW hex
+  have hk : 0 < k := Nat.pos_of_ne_zero (NeZero.ne k)
+  have hW'ne : (W.filter (fun p => ¬ p ∣ k)).Nonempty := by
+    obtain ⟨p0, hp0W, hp0k⟩ := hex
+    exact ⟨p0, Finset.mem_filter.mpr ⟨hp0W, hp0k⟩⟩
+  have hW'p : ∀ q ∈ W.filter (fun p => ¬ p ∣ k), q.Prime :=
+    fun q hq => hW q (Finset.mem_filter.mp hq).1
+  have hW'k : ∀ q ∈ W.filter (fun p => ¬ p ∣ k), ¬ q ∣ k :=
+    fun q hq => (Finset.mem_filter.mp hq).2
+  -- survivors to remainders (`Sawtooth`), drop the dividing wheels, then Corollary 3.2
+  have e1 : (∀ a : Nat, k * (survivors_upto W (a * W.prod id / k)).card
+      = a * (survivors_upto W (W.prod id)).card) ↔ remainders_cancel W k :=
+    forall_congr' (fun a => h_saw W k a hW)
+  refine e1.trans ((split_iff_nondividing_wheels_holds W k hk hW hex).trans
+    ((all_residues_split_iff_wheels_step h_hz k _ hW'ne hW'p hW'k).trans ?_))
+  -- a character is 0, never 1, at a wheel dividing `k`
+  refine forall_congr' (fun χ => imp_congr_right (fun _ => ?_))
+  constructor
+  · rintro ⟨p, hp, h1⟩
+    exact ⟨p, (Finset.mem_filter.mp hp).1, h1⟩
+  · rintro ⟨p, hp, h1⟩
+    refine ⟨p, Finset.mem_filter.mpr ⟨hp, fun hpk => ?_⟩, h1⟩
+    have hnu : ¬ IsUnit (p : ZMod k) := by
+      rw [ZMod.isUnit_iff_coprime]
+      exact fun h => (Nat.Prime.coprime_iff_not_dvd (hW p hp)).mp h hpk
+    rw [MulChar.map_nonunit _ hnu] at h1
+    exact zero_ne_one h1
+
 end RNS.GermainCriterion
 
 #print axioms RNS.GermainCriterion.two_wheel_split_of_remainders_step
@@ -809,3 +891,5 @@ end RNS.GermainCriterion
 #print axioms RNS.GermainCriterion.split_fewer_parts_holds
 #print axioms RNS.GermainCriterion.split_remove_dividing_wheel_holds
 #print axioms RNS.GermainCriterion.two_parts_exception_holds
+#print axioms RNS.GermainCriterion.split_iff_nondividing_wheels_holds
+#print axioms RNS.GermainCriterion.germain_theorem_step
