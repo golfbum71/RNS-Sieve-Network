@@ -604,7 +604,7 @@ Check here before searching again. Links pinned to a commit were current on
   plus one sixth. The proof integrates the squared gap over the cycle (their
   Thm 4(v), via Franel's formula for integrals of products of sawtooth
   functions), so it needs real integration.
-- **Germain's exact criterion** (Germain 2005, Thm 1.1): the survivors
+- **Done in part (node `GermainCriterion`, 2026-11-05; standard axioms only): the "if" half for two wheels, `two_wheel_split_of_remainders`, rests on `Sawtooth`. Next: the "only if" half (Erdős's conjecture, Hall-Shiu), via odd characters. Note: Hall-Shiu's ordering-of-residues theorem is false as stated for composite moduli (8 parts, residues 1, 3, 5); Germain's Cor 1.4 checked against 120,660 direct cases.** **Germain's exact criterion** (Germain 2005, Thm 1.1): the survivors
   split evenly across a given number of equal intervals exactly when every
   odd Dirichlet character for that number takes the value 1 at some wheel.
   The proof uses the nonvanishing of Dirichlet L-functions at 1; check
