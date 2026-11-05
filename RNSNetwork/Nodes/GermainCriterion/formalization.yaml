@@ -94,11 +94,11 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.weighted_sum_eq_LFunction_zero_step
-    note: Lean proof of the step from the cited Hurwitz zeta value, drafted 2026-11-05; awaiting its
-      first `lake build RNSSolutions`.
+    note: Lean proof of the step from the cited Hurwitz zeta value, taken as a named hypothesis. Built
+      clean 2026-11-05 (standard axioms only); a step until HurwitzZetaZero is proved in Lean.
   designated: lean-proof
 - id: odd_weighted_sum_ne_zero_iff
   declaration: RNS.GermainCriterion.odd_weighted_sum_ne_zero_iff
@@ -110,12 +110,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.odd_weighted_sum_ne_zero_iff_step
-    note: Lean proof drafted 2026-11-05, through Mathlib's LFunction_changeLevel at s = 0; awaiting
-      its first `lake build RNSSolutions`. The underlying identity was checked numerically for 76
-      odd characters across 17 moduli.
+    note: Lean proof through Mathlib's LFunction_changeLevel at s = 0, built clean 2026-11-05
+      (standard axioms only); a step until HurwitzZetaZero is proved in Lean. The underlying
+      identity was checked numerically for 76 odd characters across 17 moduli.
   designated: lean-proof
 sources:
 - title: J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220
