@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: BlockingRuns.v1
@@ -7,20 +7,54 @@ node:
   version: v1
   order: 30
   kind: paper
-  status: planned
+  status: active
   title: blocking runs and the largest survivor gap
-  description: Choosing one blocked position on each wheel up to a prime covers a run of consecutive
-    numbers; the longest run that can be covered is one less than the largest gap between
-    survivors of the cycle. With JacobsthalQuadratic, such runs are at most a constant times
-    the square of the number of wheels.
-conclusions: []
+  description: A setting of the wheels (one blocked position per wheel) is a shift of the ordinary
+    sieve, by the Chinese Remainder Theorem; so a run of consecutive numbers can be blocked by some
+    setting exactly when some gap between consecutive survivors is at least one longer. The longest
+    blocked run is one less than the largest survivor gap (Jacobsthal's function of the cycle length).
+    With JacobsthalQuadratic, such runs are at most a constant times the square of the number of
+    wheels. Checked numerically beforehand for the wheels below 14 over every setting.
+conclusions:
+- id: blocked_run_is_shift
+  declaration: RNS.BlockingRuns.blocked_run_is_shift
+  summary: A run blocked by any setting of the wheels reappears, shifted, as a run of numbers each
+    divisible by some wheel.
+  imports:
+  - CRT.v1.crt_map_bijective
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/BlockingRuns.lean
+    declaration: RNS.BlockingRuns.blocked_run_is_shift_step
+    assembled: RNSSolutions/Assemble.lean (RNS.BlockingRuns.blocked_run_is_shift_holds)
+    note: Lean proof of the step from the imported claim, taken as a named hypothesis; the proof
+      file imports claims only, never proofs. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
+  designated: lean-proof
+- id: longest_blocked_run_eq_max_gap_sub_one
+  declaration: RNS.BlockingRuns.longest_blocked_run_eq_max_gap_sub_one
+  summary: Some setting blocks a run of a given length exactly when some gap between consecutive
+    survivors is at least one longer.
+  imports:
+  - BlockingRuns.v1.blocked_run_is_shift
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/BlockingRuns.lean
+    declaration: RNS.BlockingRuns.longest_blocked_run_eq_max_gap_sub_one_step
+    assembled: RNSSolutions/Assemble.lean (RNS.BlockingRuns.longest_blocked_run_eq_max_gap_sub_one_holds)
+    note: Lean proof of the step from the imported claim, taken as a named hypothesis; the proof
+      file imports claims only, never proofs. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
+  designated: lean-proof
 planned:
   source_status: New
   rests_on:
-  - CRT
   - JacobsthalQuadratic
   claims:
-  - longest_blocked_run_eq_max_gap_sub_one
   - blocked_run_quadratic
   tier: Tier 2.
 sources:

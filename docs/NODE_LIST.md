@@ -503,7 +503,7 @@ Check here before searching again. Links pinned to a commit were current on
   `ShieldCertificates`, since `native_decide` would add an extra axiom and
   plain `decide` is likely too slow at 5,760 survivors. Also includes the
   easy fact that every gap is even.
-- **Blocking runs and the largest survivor gap** (Tier 2; Erdos Problem
+- **Done in part (node `BlockingRuns`, pending build): the first claim, longest blocked run = largest survivor gap − 1, rests on `CRT`.** **Blocking runs and the largest survivor gap** (Tier 2; Erdos Problem
   687, Green's Open Problem 46). Choosing one blocked position on each
   wheel up to a prime is the same as covering a run of consecutive
   numbers by one residue class per prime. The longest run that can be

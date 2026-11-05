@@ -29,6 +29,7 @@ import RNSSolutions.SpreadBounds
 import RNSSolutions.TwinShare
 import RNSSolutions.LehmerExcess
 import RNSSolutions.ShareBounds
+import RNSSolutions.BlockingRuns
 
 /-!
 # Assembling the network
@@ -213,3 +214,16 @@ theorem RNS.ShareBounds.twin_share_le_two_inv_log_sq_holds :
 
 #print axioms RNS.ShareBounds.survivor_share_le_inv_log_holds
 #print axioms RNS.ShareBounds.twin_share_le_two_inv_log_sq_holds
+
+/-- `CRT` → `BlockingRuns` (settings are shifts). -/
+theorem RNS.BlockingRuns.blocked_run_is_shift_holds : RNS.BlockingRuns.blocked_run_is_shift :=
+  RNS.BlockingRuns.blocked_run_is_shift_step RNS.CRT.crt_map_bijective_holds
+
+/-- `BlockingRuns`: the longest blocked run, from settings being shifts. -/
+theorem RNS.BlockingRuns.longest_blocked_run_eq_max_gap_sub_one_holds :
+    RNS.BlockingRuns.longest_blocked_run_eq_max_gap_sub_one :=
+  RNS.BlockingRuns.longest_blocked_run_eq_max_gap_sub_one_step
+    RNS.BlockingRuns.blocked_run_is_shift_holds
+
+#print axioms RNS.BlockingRuns.blocked_run_is_shift_holds
+#print axioms RNS.BlockingRuns.longest_blocked_run_eq_max_gap_sub_one_holds

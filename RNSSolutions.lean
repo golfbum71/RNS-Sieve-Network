@@ -27,4 +27,5 @@ import RNSSolutions.TwinShare
 import RNSSolutions.LehmerExcess
 import RNSSolutions.InadmissibleOccurrences
 import RNSSolutions.ShareBounds
+import RNSSolutions.BlockingRuns
 import RNSSolutions.Assemble

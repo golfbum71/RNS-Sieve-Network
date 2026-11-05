@@ -33,7 +33,7 @@
 | 27 | [`TwinShare`](TwinShare.md) | the twin share of the cycle | proved in Lean |
 | 28 | [`InadmissibleOccurrences`](InadmissibleOccurrences.md) | inadmissible patterns sit next to their blocking wheel | proved in Lean |
 | 29 | [`GapCertificate`](GapCertificate.md) | the Lacampagne-Selfridge counterexample | planned: new, not yet proved |
-| 30 | [`BlockingRuns`](BlockingRuns.md) | blocking runs and the largest survivor gap | planned: new, not yet proved |
+| 30 | [`BlockingRuns`](BlockingRuns.md) | blocking runs and the largest survivor gap | proved in Lean |
 | 31 | [`CeilingOvershoot`](CeilingOvershoot.md) | the overshoot at the ceiling | planned: new, not yet proved |
 | 32 | [`BirdseySchay`](BirdseySchay.md) | Birdsey and Schay's heuristic, as a hypothesis | planned: conditional |
 | 33 | [`LargestGap`](LargestGap.md) | the largest gap from the proportional share | planned: new, not yet proved |
