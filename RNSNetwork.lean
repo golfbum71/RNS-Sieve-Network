@@ -41,3 +41,4 @@ import RNSNetwork.Nodes.BrunTwinSum.Conclusions
 import RNSNetwork.Nodes.GapMoments.Conclusions
 import RNSNetwork.Nodes.SophieGermainPowers.Conclusions
 import RNSNetwork.Nodes.SophieGermainTheorem.Conclusions
+import RNSNetwork.Nodes.GermainAuxiliary.Conclusions

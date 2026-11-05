@@ -32,6 +32,7 @@ import RNSSolutions.ShareBounds
 import RNSSolutions.BlockingRuns
 import RNSSolutions.SophieGermainPowers
 import RNSSolutions.SophieGermainTheorem
+import RNSSolutions.GermainAuxiliary
 
 /-!
 # Assembling the network
@@ -245,3 +246,25 @@ theorem RNS.SophieGermainTheorem.fermat_first_case_holds :
 
 #print axioms RNS.SophieGermainTheorem.sophie_germain_theorem_holds
 #print axioms RNS.SophieGermainTheorem.fermat_first_case_holds
+
+/-- `SophieGermainPowers` → `GermainAuxiliary` (Sophie Germain wheels are auxiliary). -/
+theorem RNS.GermainAuxiliary.sophie_germain_wheel_auxiliary_holds :
+    RNS.GermainAuxiliary.sophie_germain_wheel_auxiliary :=
+  RNS.GermainAuxiliary.sophie_germain_wheel_auxiliary_step
+    RNS.SophieGermainPowers.pth_power_positions_holds
+
+/-- `GermainAuxiliary`: Fermat's first case for 7, from the wheel of size 29. -/
+theorem RNS.GermainAuxiliary.fermat_first_case_seven_holds :
+    RNS.GermainAuxiliary.fermat_first_case_seven :=
+  RNS.GermainAuxiliary.fermat_first_case_seven_step
+    RNS.GermainAuxiliary.auxiliary_prime_theorem_holds RNS.GermainAuxiliary.auxiliary_seven_holds
+
+/-- `GermainAuxiliary`: Fermat's first case for 13, from the wheel of size 53. -/
+theorem RNS.GermainAuxiliary.fermat_first_case_thirteen_holds :
+    RNS.GermainAuxiliary.fermat_first_case_thirteen :=
+  RNS.GermainAuxiliary.fermat_first_case_thirteen_step
+    RNS.GermainAuxiliary.auxiliary_prime_theorem_holds RNS.GermainAuxiliary.auxiliary_thirteen_holds
+
+#print axioms RNS.GermainAuxiliary.sophie_germain_wheel_auxiliary_holds
+#print axioms RNS.GermainAuxiliary.fermat_first_case_seven_holds
+#print axioms RNS.GermainAuxiliary.fermat_first_case_thirteen_holds

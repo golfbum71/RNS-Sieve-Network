@@ -416,6 +416,21 @@ of the pairwise sums y+z, z+x, x+y.
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
   Actions build, 2026-11-05).
 
+### 56. `GermainAuxiliary` — Sophie Germain's theorem with any suitable wheel
+A prime wheel q is auxiliary for an odd prime p when no two p-th power
+positions sit next to each other and p is not at a p-th power position. If one
+exists, x^p + y^p + z^p = 0 forces p to divide x y z. The wheel 2p+1 is
+auxiliary for Sophie Germain primes; the wheels 29 and 53, checked position by
+position by Lean's kernel, are auxiliary for 7 and 13, which are not Sophie
+Germain primes, giving the first case of Fermat's Last Theorem for 7 and 13.
+- Prior work: Sophie Germain (Legendre, 1823); formalized in Isabelle by
+  Ballenghien (2025).
+- Lean: `auxiliary_prime_theorem`, `sophie_germain_wheel_auxiliary`,
+  `auxiliary_seven`, `auxiliary_thirteen`, `fermat_first_case_seven`,
+  `fermat_first_case_thirteen`
+- Rests on: `SophieGermainPowers` (for the Sophie Germain link)
+- Status: DRAFT (2026-11-05), awaiting the GitHub Actions build.
+
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence
 are `UniformSubdivision.frozen_wheels_repeat` and `one_wheel_removed`; the

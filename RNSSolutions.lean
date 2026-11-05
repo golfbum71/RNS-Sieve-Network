@@ -34,4 +34,5 @@ import RNSSolutions.PrimeGapsBridge
 import RNSSolutions.RamanujanSums
 import RNSSolutions.SophieGermainPowers
 import RNSSolutions.SophieGermainTheorem
+import RNSSolutions.GermainAuxiliary
 import RNSSolutions.Assemble

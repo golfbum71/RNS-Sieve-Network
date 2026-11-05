@@ -1,0 +1,106 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: GermainAuxiliary.v1
+  family: GermainAuxiliary
+  version: v1
+  order: 56
+  kind: paper
+  status: active
+  title: Sophie Germain's theorem with any suitable wheel
+  description: If some prime wheel q has no two p-th power positions next to each other and does not
+    have p at a p-th power position (an auxiliary prime), then x^p + y^p + z^p = 0 forces p to divide
+    x y z. The wheel 2p+1 is auxiliary for Sophie Germain primes; the wheels 29 and 53, checked
+    position by position, are auxiliary for 7 and 13, giving the first case of Fermat's Last Theorem
+    for those exponents, which are not Sophie Germain primes.
+conclusions:
+- id: auxiliary_prime_theorem
+  declaration: RNS.GermainAuxiliary.auxiliary_prime_theorem
+  summary: For an odd prime p with an auxiliary prime, any integer solution of x^p + y^p + z^p = 0 has p dividing x y z.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainAuxiliary.lean
+    declaration: RNS.GermainAuxiliary.auxiliary_prime_theorem_holds
+    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+  designated: lean-proof
+- id: sophie_germain_wheel_auxiliary
+  declaration: RNS.GermainAuxiliary.sophie_germain_wheel_auxiliary
+  summary: For an odd Sophie Germain prime p, the wheel of size 2p+1 is auxiliary for p.
+  imports:
+  - SophieGermainPowers.v1.pth_power_positions
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainAuxiliary.lean
+    declaration: RNS.GermainAuxiliary.sophie_germain_wheel_auxiliary_step
+    assembled: RNSSolutions/Assemble.lean (RNS.GermainAuxiliary.sophie_germain_wheel_auxiliary_holds)
+    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+  designated: lean-proof
+- id: auxiliary_seven
+  declaration: RNS.GermainAuxiliary.auxiliary_seven
+  summary: The wheel of size 29 is auxiliary for 7 (checked position by position).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainAuxiliary.lean
+    declaration: RNS.GermainAuxiliary.auxiliary_seven_holds
+    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+  designated: lean-proof
+- id: auxiliary_thirteen
+  declaration: RNS.GermainAuxiliary.auxiliary_thirteen
+  summary: The wheel of size 53 is auxiliary for 13 (checked position by position).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainAuxiliary.lean
+    declaration: RNS.GermainAuxiliary.auxiliary_thirteen_holds
+    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+  designated: lean-proof
+- id: fermat_first_case_seven
+  declaration: RNS.GermainAuxiliary.fermat_first_case_seven
+  summary: Any integer solution of x^7 + y^7 = z^7 has 7 dividing x y z.
+  imports:
+  - GermainAuxiliary.v1.auxiliary_prime_theorem
+  - GermainAuxiliary.v1.auxiliary_seven
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainAuxiliary.lean
+    declaration: RNS.GermainAuxiliary.fermat_first_case_seven_step
+    assembled: RNSSolutions/Assemble.lean (RNS.GermainAuxiliary.fermat_first_case_seven_holds)
+    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+  designated: lean-proof
+- id: fermat_first_case_thirteen
+  declaration: RNS.GermainAuxiliary.fermat_first_case_thirteen
+  summary: Any integer solution of x^13 + y^13 = z^13 has 13 dividing x y z.
+  imports:
+  - GermainAuxiliary.v1.auxiliary_prime_theorem
+  - GermainAuxiliary.v1.auxiliary_thirteen
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainAuxiliary.lean
+    declaration: RNS.GermainAuxiliary.fermat_first_case_thirteen_step
+    assembled: RNSSolutions/Assemble.lean (RNS.GermainAuxiliary.fermat_first_case_thirteen_holds)
+    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+  designated: lean-proof
+sources:
+- title: B. Ballenghien, Sophie Germain's Theorem (Isabelle Archive of Formal Proofs, 2025), section 5,
+    auxiliary primes
+  url: https://www.isa-afp.org/browser_info/current/AFP/Sophie_Germain/document.pdf
+  relationship: the definitions (NC, PPP, aux-prime) and the generalized theorem, formalized in Isabelle
+- title: R. Laubenbacher and D. Pengelley, "Voici ce que j'ai trouvé" Sophie Germain's grand plan to prove
+    Fermat's Last Theorem (arXiv:0801.1809)
+  url: https://arxiv.org/abs/0801.1809
+  relationship: history of Germain's auxiliary primes and her result for every odd prime below 100

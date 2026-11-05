@@ -57,6 +57,7 @@ def three_powers_blocked : Prop :=
 ## Used by
 
 - [`SophieGermainTheorem`](SophieGermainTheorem.md)
+- [`GermainAuxiliary`](GermainAuxiliary.md)
 
 ## Files
 
