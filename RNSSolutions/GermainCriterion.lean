@@ -638,6 +638,163 @@ theorem all_residues_split_iff_wheels_step
     rw [ZMod.val_natCast, remSumN_mod] at h0
     rw [← ha, ← hk, remSumN_scale, h0, mul_zero]
 
+/-! ## Germain's Proposition 2.1 (c), (d), (e) -/
+
+/-- Adding a wheel `q`: the sum at `a` becomes the sum at `a·q` minus the sum
+at `a`. -/
+private theorem remSumN_insert (k : Nat) (W : Finset Nat) (q a : Nat) (hq : q ∉ W) :
+    remSumN k (insert q W) a = remSumN k W (a * q) - remSumN k W a := by
+  unfold remSumN
+  rw [Finset.sum_powerset_insert hq, sub_eq_add_neg, ← Finset.sum_neg_distrib]
+  congr 1
+  · refine Finset.sum_congr rfl (fun S hS => ?_)
+    have hqS : q ∉ S := fun h => hq (Finset.mem_powerset.mp hS h)
+    have hqWS : q ∉ W \ S := fun h => hq (Finset.mem_sdiff.mp h).1
+    rw [Finset.insert_sdiff_of_notMem _ hqS, Finset.prod_insert hqWS, ← Nat.mul_assoc]
+    rfl
+  · refine Finset.sum_congr rfl (fun S hS => ?_)
+    have hqS : q ∉ S := fun h => hq (Finset.mem_powerset.mp hS h)
+    rw [Finset.card_insert_of_notMem hqS, Finset.insert_sdiff_insert,
+      Finset.sdiff_insert_of_notMem hq, pow_succ]
+    ring
+
+/-- Shifting by multiples of `m` permutes the remainders on division by `p`,
+when `m` shares no factor with `p`. -/
+private theorem sum_mod_shift (p m c : Nat) (hp : 0 < p) (hm : Nat.Coprime m p) :
+    ∑ i ∈ Finset.range p, (c + i * m) % p = ∑ h ∈ Finset.range p, h := by
+  have hinj : Set.InjOn (fun i => (c + i * m) % p) (Finset.range p : Set Nat) := by
+    intro x hx y hy hxy
+    have h1 : c + x * m ≡ c + y * m [MOD p] := hxy
+    have h2 : x * m ≡ y * m [MOD p] := Nat.ModEq.add_left_cancel' c h1
+    have h3 : x ≡ y [MOD p] := Nat.ModEq.cancel_right_of_coprime hm.symm h2
+    have hx' := Finset.mem_range.mp (Finset.mem_coe.mp hx)
+    have hy' := Finset.mem_range.mp (Finset.mem_coe.mp hy)
+    unfold Nat.ModEq at h3
+    rwa [Nat.mod_eq_of_lt hx', Nat.mod_eq_of_lt hy'] at h3
+  have himg : (Finset.range p).image (fun i => (c + i * m) % p) = Finset.range p := by
+    apply Finset.eq_of_subset_of_card_le
+    · intro x hx
+      obtain ⟨i, _, rfl⟩ := Finset.mem_image.mp hx
+      exact Finset.mem_range.mpr (Nat.mod_lt _ hp)
+    · exact (Finset.card_image_of_injOn hinj).ge
+  calc ∑ i ∈ Finset.range p, (c + i * m) % p
+      = ∑ h ∈ (Finset.range p).image (fun i => (c + i * m) % p), h :=
+        (Finset.sum_image hinj).symm
+    _ = ∑ h ∈ Finset.range p, h := by rw [himg]
+
+/-- Averaging over the residues `a, a + k₁, …, a + (p-1)·k₁` modulo `p·k₁`:
+twice the sum of the remainders of `(a + i·k₁)·m` is fixed. -/
+private theorem sum_shift_mod_mul (p k1 a m : Nat) (hp : 0 < p) (hk1 : 0 < k1)
+    (hm : Nat.Coprime m p) :
+    2 * ∑ i ∈ Finset.range p, (a + i * k1) * m % (p * k1)
+      = 2 * p * (a * m % k1) + k1 * (p * (p - 1)) := by
+  have hterm : ∀ i, (a + i * k1) * m % (p * k1)
+      = a * m % k1 + k1 * ((a * m / k1 + i * m) % p) := by
+    intro i
+    have hx : (a + i * k1) * m = a * m + i * m * k1 := by ring
+    have e1 := Nat.mod_add_div ((a * m + i * m * k1) % (k1 * p)) k1
+    rw [Nat.mod_mod_of_dvd _ (Nat.dvd_mul_right k1 p), Nat.mod_mul_right_div_self,
+      Nat.add_mul_mod_self_right, Nat.add_mul_div_right _ _ hk1] at e1
+    rw [hx, Nat.mul_comm p k1]
+    exact e1.symm
+  rw [Finset.sum_congr rfl (fun i _ => hterm i), Finset.sum_add_distrib, Finset.sum_const,
+    Finset.card_range, smul_eq_mul, ← Finset.mul_sum, sum_mod_shift p m _ hp hm]
+  have h2 := Finset.sum_range_id_mul_two p
+  rw [show 2 * (p * (a * m % k1) + k1 * ∑ h ∈ Finset.range p, h)
+      = 2 * p * (a * m % k1) + k1 * ((∑ h ∈ Finset.range p, h) * 2) by ring, h2]
+
+theorem split_add_wheel_holds : split_add_wheel := by
+  intro W k q hq hsplit a
+  change remSumN k (insert q W) a = 0
+  rw [remSumN_insert k W q a hq, show remSumN k W (a * q) = 0 from hsplit (a * q),
+    show remSumN k W a = 0 from hsplit a, sub_zero]
+
+theorem split_fewer_parts_holds : split_fewer_parts := by
+  intro W k h hk hdvd hsplit a
+  obtain ⟨c, hc⟩ := hdvd
+  change remSumN h W a = 0
+  have hs := remSumN_scale c h a W
+  rw [Nat.mul_comm c h, ← hc, show remSumN k W (c * a) = 0 from hsplit (c * a)] at hs
+  have hc0 : (c : Int) ≠ 0 := by
+    have : c ≠ 0 := by
+      rintro rfl
+      rw [Nat.mul_zero] at hc
+      omega
+    exact_mod_cast this
+  exact (mul_eq_zero.mp hs.symm).resolve_left hc0
+
+theorem split_remove_dividing_wheel_holds : split_remove_dividing_wheel := by
+  intro W k p hW hp hpW hWne hk hpk hsplit a
+  obtain ⟨k1, rfl⟩ := hpk
+  have hk1 : 0 < k1 := Nat.pos_of_ne_zero (by rintro rfl; simp at hk)
+  -- with `p` dividing the parts, the even split for `W` and `p` says the sum
+  -- for `p·k₁` parts is `p` times the sum for `k₁` parts
+  have hH : ∀ b, remSumN (p * k1) W b = (p : Int) * remSumN k1 W b := by
+    intro b
+    have h : remSumN (p * k1) (insert p W) b = 0 := hsplit b
+    rw [remSumN_insert _ _ _ _ hpW, Nat.mul_comm b p, remSumN_scale] at h
+    linarith
+  have hper : ∀ b i, remSumN k1 W (b + i * k1) = remSumN k1 W b := by
+    intro b i
+    rw [← remSumN_mod k1 (b + i * k1) W, Nat.add_mul_mod_self_right, remSumN_mod]
+  have hsumA : ∑ i ∈ Finset.range p, remSumN (p * k1) W (a + i * k1)
+      = (p : Int) * p * remSumN k1 W a := by
+    have h : ∀ i ∈ Finset.range p, remSumN (p * k1) W (a + i * k1) = (p : Int) * remSumN k1 W a :=
+      fun i _ => by rw [hH, hper]
+    rw [Finset.sum_congr rfl h, Finset.sum_const, Finset.card_range, nsmul_eq_mul]
+    ring
+  have hS : ∀ S ∈ W.powerset,
+      2 * ∑ i ∈ Finset.range p, (-1 : Int) ^ S.card *
+          (((a + i * k1) * (W \ S).prod id % (p * k1) : Nat) : Int)
+        = 2 * p * ((-1 : Int) ^ S.card * ((a * (W \ S).prod id % k1 : Nat) : Int))
+          + (-1 : Int) ^ S.card * ((k1 * (p * (p - 1)) : Nat) : Int) := by
+    intro S _
+    have hcop : Nat.Coprime ((W \ S).prod id) p := by
+      refine Nat.coprime_prod_left_iff.mpr (fun q hq => ?_)
+      have hqW := (Finset.mem_sdiff.mp hq).1
+      exact (Nat.coprime_primes (hW q hqW) hp).mpr (fun h => hpW (h ▸ hqW))
+    have hC := sum_shift_mod_mul p k1 a ((W \ S).prod id) hp.pos hk1 hcop
+    have hC' : (2 : Int) * ∑ i ∈ Finset.range p,
+        (((a + i * k1) * (W \ S).prod id % (p * k1) : Nat) : Int)
+          = 2 * p * ((a * (W \ S).prod id % k1 : Nat) : Int)
+            + ((k1 * (p * (p - 1)) : Nat) : Int) := by
+      exact_mod_cast hC
+    rw [← Finset.mul_sum]
+    linear_combination (-1 : Int) ^ S.card * hC'
+  have hsumB : 2 * ∑ i ∈ Finset.range p, remSumN (p * k1) W (a + i * k1)
+      = 2 * (p : Int) * remSumN k1 W a := by
+    calc 2 * ∑ i ∈ Finset.range p, remSumN (p * k1) W (a + i * k1)
+        = ∑ S ∈ W.powerset, 2 * ∑ i ∈ Finset.range p, (-1 : Int) ^ S.card *
+            (((a + i * k1) * (W \ S).prod id % (p * k1) : Nat) : Int) := by
+          unfold remSumN
+          rw [Finset.sum_comm, Finset.mul_sum]
+      _ = ∑ S ∈ W.powerset, (2 * p * ((-1 : Int) ^ S.card * ((a * (W \ S).prod id % k1 : Nat) : Int))
+            + (-1 : Int) ^ S.card * ((k1 * (p * (p - 1)) : Nat) : Int)) :=
+          Finset.sum_congr rfl hS
+      _ = 2 * (p : Int) * remSumN k1 W a := by
+          unfold remSumN
+          rw [Finset.sum_add_distrib, ← Finset.sum_mul,
+            Finset.sum_powerset_neg_one_pow_card_of_nonempty hWne, zero_mul, add_zero,
+            Finset.mul_sum]
+  have hG : remSumN k1 W a = 0 := by
+    have e : (2 * (p : Int) * ((p : Int) - 1)) * remSumN k1 W a = 0 := by
+      linear_combination (-2 : Int) * hsumA + hsumB
+    have hp2 : (2 : Int) ≤ p := by exact_mod_cast hp.two_le
+    have hpos : (0 : Int) < 2 * (p : Int) * ((p : Int) - 1) := by nlinarith
+    exact (mul_eq_zero.mp e).resolve_left hpos.ne'
+  change remSumN (p * k1) W a = 0
+  rw [hH, hG, mul_zero]
+
+theorem two_parts_exception_holds : two_parts_exception := by
+  refine ⟨fun h => ?_, fun χ hodd => ?_⟩
+  · have h1 : remSumN 2 (insert 2 ∅) 1 = 0 := h 1
+    rw [remSumN_insert 2 ∅ 2 1 (Finset.notMem_empty 2)] at h1
+    simp [remSumN] at h1
+  · unfold DirichletCharacter.Odd at hodd
+    have hm : (-1 : ZMod 2) = 1 := by decide
+    rw [hm, MulChar.map_one] at hodd
+    norm_num at hodd
+
 end RNS.GermainCriterion
 
 #print axioms RNS.GermainCriterion.two_wheel_split_of_remainders_step
@@ -648,3 +805,7 @@ end RNS.GermainCriterion
 #print axioms RNS.GermainCriterion.odd_weighted_sum_ne_zero_iff_step
 #print axioms RNS.GermainCriterion.coprime_split_iff_characters_step
 #print axioms RNS.GermainCriterion.all_residues_split_iff_wheels_step
+#print axioms RNS.GermainCriterion.split_add_wheel_holds
+#print axioms RNS.GermainCriterion.split_fewer_parts_holds
+#print axioms RNS.GermainCriterion.split_remove_dividing_wheel_holds
+#print axioms RNS.GermainCriterion.two_parts_exception_holds

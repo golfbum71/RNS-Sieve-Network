@@ -112,4 +112,44 @@ def all_residues_split_iff_wheels : Prop :=
         ∑ S ∈ W.powerset, (-1 : Int) ^ S.card * ((a * (W \ S).prod id % k : Nat) : Int) = 0) ↔
       ∀ χ : DirichletCharacter ℂ k, χ.Odd → ∃ p ∈ W, χ (p : ZMod k) = 1)
 
+/-! ## Germain's Proposition 2.1: adding and removing wheels
+
+Germain's parts (a) and (b) concern a cycle with a repeated prime; the
+network's cycle is always a product of distinct wheels, so they do not arise.
+Parts (c), (d) and (e) are stated below in remainder form. -/
+
+/-- **The survivors of the wheels `W` split evenly into `k` parts, in remainder
+form**: `Sawtooth`'s signed remainder sum vanishes at every starting residue
+`a`. By `Sawtooth.even_split_iff_remainders_cancel` this is the even split. -/
+def remainders_cancel (W : Finset Nat) (k : Nat) : Prop :=
+  ∀ a : Nat, ∑ S ∈ W.powerset, (-1 : Int) ^ S.card * ((a * (W \ S).prod id % k : Nat) : Int) = 0
+
+/-- **Adding a wheel keeps an even split** (Germain's Proposition 2.1 (c)). If
+the survivors of `W` split evenly into `k` parts, so do the survivors of `W`
+with one more wheel `q`. No primality is needed. -/
+def split_add_wheel : Prop :=
+  ∀ (W : Finset Nat) (k q : Nat), q ∉ W → remainders_cancel W k → remainders_cancel (insert q W) k
+
+/-- **Fewer parts** (Germain's Proposition 2.1 (d)). An even split into `k`
+parts gives an even split into `h` parts for every `h` dividing `k`. -/
+def split_fewer_parts : Prop :=
+  ∀ (W : Finset Nat) (k h : Nat), 0 < k → h ∣ k → remainders_cancel W k → remainders_cancel W h
+
+/-- **Removing a wheel that divides the number of parts keeps an even split**
+(Germain's Proposition 2.1 (e)). For prime wheels `W`, a prime `p` not among
+them dividing the number of parts `k`, and `W` not empty: if the survivors of
+`W` with `p` added split evenly into `k` parts, so do the survivors of `W`. -/
+def split_remove_dividing_wheel : Prop :=
+  ∀ (W : Finset Nat) (k p : Nat), (∀ q ∈ W, q.Prime) → p.Prime → p ∉ W → W.Nonempty → 0 < k →
+    p ∣ k → remainders_cancel (insert p W) k → remainders_cancel W k
+
+/-- **The exception to Germain's Theorem 1.1.** The single wheel 2 does not
+split evenly into 2 parts, yet there is no odd character modulo 2, so
+Germain's criterion ("every odd character equals 1 at some wheel") holds
+vacuously. His Theorem 1.1 as printed fails here (and for the empty cycle);
+the network's form of it asks for at least one wheel not dividing the number
+of parts. -/
+def two_parts_exception : Prop :=
+  ¬ remainders_cancel {2} 2 ∧ ∀ χ : DirichletCharacter ℂ 2, ¬ χ.Odd
+
 end RNS.GermainCriterion
