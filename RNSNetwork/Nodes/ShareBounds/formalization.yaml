@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: ShareBounds.v1
@@ -7,22 +7,45 @@ node:
   version: v1
   order: 26
   kind: paper
-  status: planned
+  status: active
   title: the survivor share falls like one over the logarithm
-  description: After the wheels up to a given prime, the surviving share of the cycle is at
-    most one over the logarithm of that prime plus one, and the twin share is at most twice
-    the square of that. The first also forces infinitely many primes.
-conclusions: []
-planned:
-  source_status: New
-  rests_on:
-  - SurvivorCount
-  claims:
-  - survivor_share_le_inv_log
-  - twin_share_le_two_inv_log_sq
-  plan: The reciprocal of the share expands into a sum over numbers built from the wheel primes,
-    which includes every number up to the last wheel, so it is at least the harmonic sum.
-  evidence: Both checked for wheels up to 200,000; the share times the logarithm approaches
-    0.5615, the constant in MertensThird.
-  tier: 'Tier 1: elementary, using Mathlib''s log_add_one_le_harmonic.'
+  description: With the wheels below a bound, the surviving share of the cycle is at most one over
+    the logarithm of the bound, and the twin share is at most twice the square of that. Checked numerically
+    beforehand for wheels up to 200,000; the share times the logarithm approaches 0.5615, the constant
+    in MertensThird.
+conclusions:
+- id: survivor_share_le_inv_log
+  declaration: RNS.ShareBounds.survivor_share_le_inv_log
+  summary: With the wheels below a bound, the surviving share is at most one over the logarithm of
+    the bound.
+  imports:
+  - SurvivorCount.v1.general_survivor_count
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/ShareBounds.lean
+    declaration: RNS.ShareBounds.survivor_share_le_inv_log_step
+    assembled: RNSSolutions/Assemble.lean (RNS.ShareBounds.survivor_share_le_inv_log_holds)
+    note: Lean proof of the step from the imported claims, taken as named hypotheses; the proof file
+      imports claims only, never proofs. Recorded as noncompliant only because no Comparator receipt
+      exists yet.
+  designated: lean-proof
+- id: twin_share_le_two_inv_log_sq
+  declaration: RNS.ShareBounds.twin_share_le_two_inv_log_sq
+  summary: The twin share is at most twice the square of one over the logarithm of the bound.
+  imports:
+  - SurvivorCount.v1.twin_survivor_count
+  - SurvivorCount.v1.general_survivor_count
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/ShareBounds.lean
+    declaration: RNS.ShareBounds.twin_share_le_two_inv_log_sq_step
+    assembled: RNSSolutions/Assemble.lean (RNS.ShareBounds.twin_share_le_two_inv_log_sq_holds)
+    note: Lean proof of the step from the imported claims, taken as named hypotheses; the proof file
+      imports claims only, never proofs. Recorded as noncompliant only because no Comparator receipt
+      exists yet.
+  designated: lean-proof
 sources: []

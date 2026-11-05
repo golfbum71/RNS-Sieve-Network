@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: LehmerExcess.v1
@@ -7,19 +7,36 @@ node:
   version: v1
   order: 34
   kind: paper
-  status: planned
+  status: active
   title: Lehmer's closed form for the 6n-1 type
-  description: When every wheel leaves remainder one less than the number of intervals, the
-    excess in the first intervals has an exact formula. The 6n-1 side of Lehmer's picture,
-    and the natural partner to UniformSubdivision's 6n-1-side claim.
-conclusions: []
-planned:
-  source_status: New
-  rests_on: []
-  claims:
-  - lehmer_excess_closed_form
-  tier: Tier 2.
+  description: When every wheel leaves remainder one less than the number of intervals (for six intervals,
+    every wheel on the 6n-1 side), the survivor count's excess over its proportional share at the
+    end of each interval has an exact closed form, of size two to the number of wheels times the
+    distance of the fraction from one half. The 6n-1 side of Lehmer's picture, and the natural partner
+    to UniformSubdivision's 6n-1-side claim. Checked numerically beforehand on 1,479 cases.
+conclusions:
+- id: lehmer_excess_closed_form
+  declaration: RNS.LehmerExcess.lehmer_excess_closed_form
+  summary: With every wheel one short of the number of intervals, twice the number of intervals times
+    the excess at the end of each interval is minus (minus one to the number of wheels) times two
+    to the number of wheels times (twice the count of intervals minus their number).
+  imports:
+  - Sawtooth.v1.sawtooth_identity
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/LehmerExcess.lean
+    declaration: RNS.LehmerExcess.lehmer_excess_closed_form_step
+    assembled: RNSSolutions/Assemble.lean (RNS.LehmerExcess.lehmer_excess_closed_form_holds)
+    note: Lean proof of the step from the imported claim, taken as a named hypothesis; the proof
+      file imports claims only, never proofs. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
+  designated: lean-proof
 sources:
+- title: P. Codecà and M. Nair, Extremal values of Delta(x,N), Canad. Math. Bull. 41 (1998), 335-347
+  url: https://doi.org/10.4153/CMB-1998-046-3
+  relationship: Theorem 2 and the identity in its proof (read from the paper)
 - title: D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357
   url: https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf
-  relationship: Theorem 8
+  relationship: Theorem 8, as recorded in the node list; not yet checked against the paper

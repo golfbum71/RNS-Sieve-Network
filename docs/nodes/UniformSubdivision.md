@@ -157,6 +157,7 @@ def column_one_wheel_removed : Prop :=
 ## Used by
 
 - [`LehmerSplit`](LehmerSplit.md)
+- [`LargestGap`](LargestGap.md)
 
 ## Files
 

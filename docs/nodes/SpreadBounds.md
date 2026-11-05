@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean
 
-Any two equal intervals of the cycle hold survivor counts differing by at most two to the number of wheels. With wheels 2 and 3 frozen, the two columns' survivor counts up to any point differ by at most two to the number of remaining wheels.
+Any two stretches of the same length hold survivor counts differing by at most two to the number of wheels. With wheels 2 and 3 frozen, the two columns' survivor counts up to any point differ by at most two to the number of remaining wheels. Both checked numerically beforehand (4,761 cases; the column imbalance reaches 18 at the wheels up to 23, against a bound of 128).
 
 ## Claims
 
@@ -28,6 +28,28 @@ def interval_spread_bound : Prop :=
 **Rests on:** [`Sawtooth.legendre_count`](Sawtooth.md#legendre_count)
 
 **Proof:** `RNS.SpreadBounds.interval_spread_bound_step` in [`RNSSolutions/SpreadBounds.lean`](../../RNSSolutions/SpreadBounds.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
+
+<a id="column_imbalance_bound"></a>
+### `column_imbalance_bound`
+
+With wheels 2 and 3 frozen, the two columns' survivor counts up to any point differ by at most two to the number of remaining wheels.
+
+```lean
+/-- **The column-imbalance bound.** For prime wheels `W` including 2 and 3 and
+any bound `x`, the survivors up to `x` in the 6n-1 column and in the 6n+1
+column differ by at most two to the number of wheels other than 2 and 3, in
+either direction. -/
+def column_imbalance_bound : Prop :=
+  ∀ (W : Finset Nat) (x : Nat), (∀ q ∈ W, q.Prime) → 2 ∈ W → 3 ∈ W →
+    ((column_survivors_upto W 5 x).card : Int)
+        ≤ (column_survivors_upto W 1 x).card + 2 ^ (W.card - 2) ∧
+      ((column_survivors_upto W 1 x).card : Int)
+        ≤ (column_survivors_upto W 5 x).card + 2 ^ (W.card - 2)
+```
+
+**Rests on:** [`Sawtooth.column_legendre_count`](Sawtooth.md#column_legendre_count)
+
+**Proof:** `RNS.SpreadBounds.column_imbalance_bound_step` in [`RNSSolutions/SpreadBounds.lean`](../../RNSSolutions/SpreadBounds.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
 ## Files
 

@@ -27,6 +27,8 @@ import RNSSolutions.LehmerSplit
 import RNSSolutions.Sawtooth
 import RNSSolutions.SpreadBounds
 import RNSSolutions.TwinShare
+import RNSSolutions.LehmerExcess
+import RNSSolutions.ShareBounds
 
 /-!
 # Assembling the network
@@ -184,3 +186,30 @@ theorem RNS.TwinShare.twin_share_eq_prod_holds : RNS.TwinShare.twin_share_eq_pro
     RNS.SurvivorCount.general_survivor_count_holds
 
 #print axioms RNS.TwinShare.twin_share_eq_prod_holds
+
+/-- `Sawtooth` → `SpreadBounds` (columns). -/
+theorem RNS.SpreadBounds.column_imbalance_bound_holds :
+    RNS.SpreadBounds.column_imbalance_bound :=
+  RNS.SpreadBounds.column_imbalance_bound_step RNS.Sawtooth.column_legendre_count_holds
+
+#print axioms RNS.SpreadBounds.column_imbalance_bound_holds
+
+/-- `Sawtooth` → `LehmerExcess`. -/
+theorem RNS.LehmerExcess.lehmer_excess_closed_form_holds :
+    RNS.LehmerExcess.lehmer_excess_closed_form :=
+  RNS.LehmerExcess.lehmer_excess_closed_form_step RNS.Sawtooth.sawtooth_identity_holds
+
+#print axioms RNS.LehmerExcess.lehmer_excess_closed_form_holds
+
+/-- `SurvivorCount` → `ShareBounds` (plain share). -/
+theorem RNS.ShareBounds.survivor_share_le_inv_log_holds : RNS.ShareBounds.survivor_share_le_inv_log :=
+  RNS.ShareBounds.survivor_share_le_inv_log_step RNS.SurvivorCount.general_survivor_count_holds
+
+/-- `SurvivorCount` → `ShareBounds` (twin share). -/
+theorem RNS.ShareBounds.twin_share_le_two_inv_log_sq_holds :
+    RNS.ShareBounds.twin_share_le_two_inv_log_sq :=
+  RNS.ShareBounds.twin_share_le_two_inv_log_sq_step RNS.SurvivorCount.twin_survivor_count_holds
+    RNS.SurvivorCount.general_survivor_count_holds
+
+#print axioms RNS.ShareBounds.survivor_share_le_inv_log_holds
+#print axioms RNS.ShareBounds.twin_share_le_two_inv_log_sq_holds

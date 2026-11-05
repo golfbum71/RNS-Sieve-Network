@@ -92,14 +92,15 @@ private theorem floor_step (W S : Finset Nat) (hW : ∀ q ∈ W, q.Prime) (hS : 
 theorem legendre_count_holds : legendre_count := by
   intro W x hW
   unfold survivors_upto
-  rw [Finset.card_filter]
-  push_cast
+  rw [Finset.card_filter, Nat.cast_sum]
+  simp only [Nat.cast_ite, Nat.cast_one, Nat.cast_zero]
   simp_rw [survives_expand W hW]
   rw [Finset.sum_comm]
   refine Finset.sum_congr rfl (fun S _ => ?_)
-  rw [← Finset.mul_sum, ← multiples_card x (S.prod id), Finset.card_filter]
-  push_cast
-  rfl
+  rw [← Finset.mul_sum]
+  congr 1
+  rw [← multiples_card x (S.prod id), Finset.card_filter, Nat.cast_sum]
+  simp only [Nat.cast_ite, Nat.cast_one, Nat.cast_zero]
 
 /-- **The sawtooth identity**, proved. -/
 theorem sawtooth_identity_holds : sawtooth_identity := by
@@ -136,3 +137,85 @@ end RNS.Sawtooth
 #print axioms RNS.Sawtooth.legendre_count_holds
 #print axioms RNS.Sawtooth.sawtooth_identity_holds
 #print axioms RNS.Sawtooth.even_split_iff_remainders_cancel_holds
+
+/-! ## Within one column -/
+
+namespace RNS.Sawtooth
+
+/-- The multiples of a positive number `d` from 1 to `x` that land in column
+`r` match one-for-one the multipliers from 1 to `x / d` that put `d`'s
+multiple in column `r`. -/
+private theorem column_multiples_card (x d r : Nat) (hd : 0 < d) :
+    ((Finset.Icc 1 x).filter (fun n => d ∣ n ∧ n % 6 = r)).card
+      = ((Finset.Icc 1 (x / d)).filter (fun m => (d * m) % 6 = r)).card := by
+  have himg : (Finset.Icc 1 x).filter (fun n => d ∣ n ∧ n % 6 = r)
+      = ((Finset.Icc 1 (x / d)).filter (fun m => (d * m) % 6 = r)).image (fun m => d * m) := by
+    ext n
+    simp only [Finset.mem_filter, Finset.mem_Icc, Finset.mem_image]
+    constructor
+    · rintro ⟨⟨h1, h2⟩, ⟨m, rfl⟩, h3⟩
+      refine ⟨m, ⟨⟨?_, ?_⟩, h3⟩, rfl⟩
+      · rcases Nat.eq_zero_or_pos m with h | h
+        · subst h
+          simp at h1
+        · exact h
+      · rw [Nat.le_div_iff_mul_le hd, Nat.mul_comm]
+        exact h2
+    · rintro ⟨m, ⟨⟨h1, h2⟩, h3⟩, rfl⟩
+      refine ⟨⟨Nat.mul_pos hd h1, ?_⟩, ⟨m, rfl⟩, h3⟩
+      rw [Nat.le_div_iff_mul_le hd, Nat.mul_comm] at h2
+      exact h2
+  rw [himg, Finset.card_image_of_injective _ (fun a b hab => Nat.eq_of_mul_eq_mul_left hd hab)]
+
+/-- **Legendre's count, within one column**, proved. In a column, the wheels
+2 and 3 never divide, so only the other wheels need choosing. -/
+theorem column_legendre_count_holds : column_legendre_count := by
+  intro W r x hW h2 h3 hr
+  have hW' : ∀ q ∈ (W.erase 2).erase 3, q.Prime :=
+    fun q hq => hW q (Finset.mem_of_mem_erase (Finset.mem_of_mem_erase hq))
+  have hcol : ∀ n, n % 6 = r → ((∀ q ∈ W, ¬ q ∣ n) ↔ (∀ q ∈ (W.erase 2).erase 3, ¬ q ∣ n)) := by
+    intro n hn
+    constructor
+    · intro h q hq
+      exact h q (Finset.mem_of_mem_erase (Finset.mem_of_mem_erase hq))
+    · intro h q hq hd
+      by_cases q2 : q = 2
+      · subst q2
+        omega
+      · by_cases q3 : q = 3
+        · subst q3
+          omega
+        · exact h q (Finset.mem_erase.mpr ⟨q3, Finset.mem_erase.mpr ⟨q2, hq⟩⟩) hd
+  have hset : column_survivors_upto W r x
+      = (Finset.Icc 1 x).filter (fun n => n % 6 = r ∧ ∀ q ∈ (W.erase 2).erase 3, ¬ q ∣ n) := by
+    ext n
+    simp only [column_survivors_upto, survivors_upto, Finset.mem_filter]
+    constructor
+    · rintro ⟨⟨hn, hs⟩, hr'⟩
+      exact ⟨hn, hr', (hcol n hr').mp hs⟩
+    · rintro ⟨hn, hr', hs⟩
+      exact ⟨⟨hn, (hcol n hr').mpr hs⟩, hr'⟩
+  have hexp : ∀ n, (if n % 6 = r ∧ ∀ q ∈ (W.erase 2).erase 3, ¬ q ∣ n then (1 : Int) else 0)
+      = ∑ S ∈ ((W.erase 2).erase 3).powerset,
+          (-1 : Int) ^ S.card * (if S.prod id ∣ n ∧ n % 6 = r then 1 else 0) := by
+    intro n
+    by_cases hn : n % 6 = r
+    · simp only [hn, true_and, and_true]
+      exact survives_expand _ hW' n
+    · simp [hn]
+  rw [hset, Finset.card_filter, Nat.cast_sum]
+  simp only [Nat.cast_ite, Nat.cast_one, Nat.cast_zero]
+  simp_rw [hexp]
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl (fun S hS => ?_)
+  have hpos : 0 < S.prod id :=
+    Nat.pos_of_ne_zero (Finset.prod_ne_zero_iff.mpr fun q hq =>
+      (hW' q (Finset.mem_powerset.mp hS hq)).ne_zero)
+  rw [← Finset.mul_sum]
+  congr 1
+  rw [← column_multiples_card x (S.prod id) r hpos, Finset.card_filter, Nat.cast_sum]
+  simp only [Nat.cast_ite, Nat.cast_one, Nat.cast_zero]
+
+end RNS.Sawtooth
+
+#print axioms RNS.Sawtooth.column_legendre_count_holds

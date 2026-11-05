@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: InadmissibleOccurrences.v1
@@ -7,22 +7,41 @@ node:
   version: v1
   order: 28
   kind: paper
-  status: planned
+  status: active
   title: inadmissible patterns sit next to their blocking wheel
   description: 'If an offset pattern covers every position on some wheel, every prime occurrence
     of it contains that wheel''s prime, so it occurs only finitely often. Corollary: the prime-gap
-    block 2, 4, 2, 4, 2 occurs only at 5, 7, 11, 13, 17, 19.'
-conclusions: []
-planned:
-  source_status: New
-  rests_on:
-  - Admissibility
-  claims:
-  - inadmissible_occurrence_contains_prime
-  - gap_block_24242_unique
-  tier: Tier 1.
+    block 2, 4, 2, 4, 2 occurs only at 5, 7, 11, 13, 17, 19. Proved directly from the definition
+    of w; Admissibility''s claims are not needed.'
+conclusions:
+- id: inadmissible_occurrence_contains_prime
+  declaration: RNS.InadmissibleOccurrences.inadmissible_occurrence_contains_prime
+  summary: If a pattern covers every position on a prime's wheel, every all-prime occurrence has
+    that prime as a member.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/InadmissibleOccurrences.lean
+    declaration: RNS.InadmissibleOccurrences.inadmissible_occurrence_contains_prime_holds
+    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only
+      because no Comparator receipt exists yet.
+  designated: lean-proof
+- id: gap_block_24242_unique
+  declaration: RNS.InadmissibleOccurrences.gap_block_24242_unique
+  summary: The numbers at offsets 0, 2, 6, 8, 12, 14 are all prime only from the start 5.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/InadmissibleOccurrences.lean
+    declaration: RNS.InadmissibleOccurrences.gap_block_24242_unique_holds
+    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only
+      because no Comparator receipt exists yet.
+  designated: lean-proof
 sources:
-- title: DeepMind formal-conjectures, OeisA1223.conjecture (statement; proof hosted by Epoch
-    AI)
+- title: DeepMind formal-conjectures, OeisA1223.conjecture (statement; proof hosted by Epoch AI)
   url: https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/OEIS/1223.lean
   relationship: statement this settles

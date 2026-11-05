@@ -65,9 +65,9 @@ def general_survivor_count : Prop :=
 
 - [`SingularSeries`](SingularSeries.md)
 - [`Pruning`](Pruning.md)
+- [`ShareBounds`](ShareBounds.md)
 - [`TwinShare`](TwinShare.md)
 - [`CeilingOvershoot`](CeilingOvershoot.md)
-- [`ShareBounds`](ShareBounds.md)
 
 ## Files
 

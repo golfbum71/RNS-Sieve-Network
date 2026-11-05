@@ -64,4 +64,16 @@ def even_split_iff_remainders_cancel : Prop :=
         = a * (survivors_upto W (W.prod id)).card
       ↔ ∑ S ∈ W.powerset, (-1 : Int) ^ S.card * ((a * (W \ S).prod id % k : Nat) : Int) = 0)
 
+/-- **Legendre's count, within one column.** For prime wheels `W` including 2
+and 3, a column `r` (1 for 6n+1, 5 for 6n-1) and a bound `x`: the column's
+survivors from 1 to `x` number the signed sum, over every choice `S` of some
+of the wheels other than 2 and 3, of how many multipliers from 1 to `x`
+divided by the product of the chosen wheels put that product's multiple in
+column `r`. -/
+def column_legendre_count : Prop :=
+  ∀ (W : Finset Nat) (r x : Nat), (∀ q ∈ W, q.Prime) → 2 ∈ W → 3 ∈ W → (r = 1 ∨ r = 5) →
+    ((column_survivors_upto W r x).card : Int)
+      = ∑ S ∈ ((W.erase 2).erase 3).powerset, (-1 : Int) ^ S.card *
+          (((Finset.Icc 1 (x / S.prod id)).filter (fun m => (S.prod id * m) % 6 = r)).card : Int)
+
 end RNS.Sawtooth

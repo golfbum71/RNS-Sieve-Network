@@ -9,9 +9,10 @@ node:
   kind: paper
   status: active
   title: how unevenly survivors can spread
-  description: Any two equal intervals of the cycle hold survivor counts differing by at most two
+  description: Any two stretches of the same length hold survivor counts differing by at most two
     to the number of wheels. With wheels 2 and 3 frozen, the two columns' survivor counts up to any
-    point differ by at most two to the number of remaining wheels.
+    point differ by at most two to the number of remaining wheels. Both checked numerically beforehand
+    (4,761 cases; the column imbalance reaches 18 at the wheels up to 23, against a bound of 128).
 conclusions:
 - id: interval_spread_bound
   declaration: RNS.SpreadBounds.interval_spread_bound
@@ -30,16 +31,23 @@ conclusions:
       file imports claims only, never proofs. Recorded as noncompliant only because no Comparator
       receipt exists yet.
   designated: lean-proof
-planned:
-  source_status: New
-  rests_on: []
-  claims:
-  - column_imbalance_bound
-  evidence: Both checked numerically (4,761 cases). The column imbalance reaches 18 at the wheels
-    up to 23, against a bound of 128.
-  tier: 'Tier 1: inclusion-exclusion.'
-  plan: Column form of Legendre's count (inclusion-exclusion over the wheels other than 2 and 3,
-    with ColumnAction's swap deciding each term's column), then the same term-by-term bound.
+- id: column_imbalance_bound
+  declaration: RNS.SpreadBounds.column_imbalance_bound
+  summary: With wheels 2 and 3 frozen, the two columns' survivor counts up to any point differ by
+    at most two to the number of remaining wheels.
+  imports:
+  - Sawtooth.v1.column_legendre_count
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/SpreadBounds.lean
+    declaration: RNS.SpreadBounds.column_imbalance_bound_step
+    assembled: RNSSolutions/Assemble.lean (RNS.SpreadBounds.column_imbalance_bound_holds)
+    note: Lean proof of the step from the imported claim, taken as a named hypothesis; the proof
+      file imports claims only, never proofs. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
+  designated: lean-proof
 sources:
 - title: D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357
   url: https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf

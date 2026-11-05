@@ -9,16 +9,15 @@ node:
   kind: paper
   status: active
   title: the survivor count minus its proportional share
-  description: The survivors up to any point are a signed count over choices of wheels
-    (Legendre). At a fraction of the cycle, the survivors minus their proportional share,
-    times the fraction's denominator, are minus a signed sum of remainders, one for each
-    choice of wheels; so an even split is exactly the vanishing of that sum. The identity
-    behind Germain's criterion.
+  description: The survivors up to any point are a signed count over choices of wheels (Legendre).
+    At a fraction of the cycle, the survivors minus their proportional share, times the fraction's
+    denominator, are minus a signed sum of remainders, one for each choice of wheels; so an even
+    split is exactly the vanishing of that sum. The identity behind Germain's criterion.
 conclusions:
 - id: legendre_count
   declaration: RNS.Sawtooth.legendre_count
-  summary: The survivors up to a bound are the signed sum, over choices of wheels, of the
-    bound divided by the product of the chosen wheels (rounded down).
+  summary: The survivors up to a bound are the signed sum, over choices of wheels, of the bound divided
+    by the product of the chosen wheels (rounded down).
   imports: []
   imports_status: none
   justifications:
@@ -26,14 +25,14 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/Sawtooth.lean
     declaration: RNS.Sawtooth.legendre_count_holds
-    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant
-      only because no Comparator receipt exists yet.
+    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only
+      because no Comparator receipt exists yet.
   designated: lean-proof
 - id: sawtooth_identity
   declaration: RNS.Sawtooth.sawtooth_identity
-  summary: At a fraction of the cycle, the survivors minus their proportional share, times
-    the fraction's denominator, are minus the signed sum of remainders of the numerator times
-    the product of the wheels not chosen.
+  summary: At a fraction of the cycle, the survivors minus their proportional share, times the fraction's
+    denominator, are minus the signed sum of remainders of the numerator times the product of the
+    wheels not chosen.
   imports: []
   imports_status: none
   justifications:
@@ -41,13 +40,13 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/Sawtooth.lean
     declaration: RNS.Sawtooth.sawtooth_identity_holds
-    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant
-      only because no Comparator receipt exists yet.
+    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only
+      because no Comparator receipt exists yet.
   designated: lean-proof
 - id: even_split_iff_remainders_cancel
   declaration: RNS.Sawtooth.even_split_iff_remainders_cancel
-  summary: The split at a given fraction of the cycle is even exactly when the signed sum
-    of remainders is zero.
+  summary: The split at a given fraction of the cycle is even exactly when the signed sum of remainders
+    is zero.
   imports: []
   imports_status: none
   justifications:
@@ -55,11 +54,26 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/Sawtooth.lean
     declaration: RNS.Sawtooth.even_split_iff_remainders_cancel_holds
-    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant
-      only because no Comparator receipt exists yet.
+    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only
+      because no Comparator receipt exists yet.
+  designated: lean-proof
+- id: column_legendre_count
+  declaration: RNS.Sawtooth.column_legendre_count
+  summary: With wheels 2 and 3 in use, a column's survivors up to a bound are the signed sum, over
+    choices of the other wheels, of the multipliers up to the bound over their product that put the
+    product's multiple in that column.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/Sawtooth.lean
+    declaration: RNS.Sawtooth.column_legendre_count_holds
+    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only
+      because no Comparator receipt exists yet.
   designated: lean-proof
 sources:
 - title: J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220
   url: https://doi.org/10.4153/CMB-2005-019-9
-  relationship: The identity behind Theorem 1.1, stated over choices of wheels rather than
-    divisors and remainders rather than fractional parts
+  relationship: The identity behind Theorem 1.1, stated over choices of wheels rather than divisors
+    and remainders rather than fractional parts

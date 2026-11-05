@@ -407,7 +407,7 @@ Check here before searching again. Links pinned to a commit were current on
   endpoints it fails, as the test showed.)
 - **Done (node `SpreadBounds`, pending build; rests on `Sawtooth`).** **Spread bound** (Lehmer 1955, Thms 9-10). Any two equal intervals'
   survivor counts differ by at most two to the number of wheels. Checked.
-- **Next (planned claim in `SpreadBounds`).** **Column-imbalance bound.** With wheels 2 and 3 frozen, the two columns'
+- **Done (node `SpreadBounds`, pending build; rests on `Sawtooth`'s column count).** **Column-imbalance bound.** With wheels 2 and 3 frozen, the two columns'
   survivor counts up to any point differ by at most two to the number of
   remaining wheels. Proof by inclusion-exclusion with the column sign.
   Checked.
@@ -421,18 +421,28 @@ Check here before searching again. Links pinned to a commit were current on
   square of the number of intervals divides the modulus, the split is even.
   Only applies to moduli with repeated factors, so outside pure wheel
   cycles; low priority.
-- **Lehmer's closed form for 6n-1-type wheels** (Lehmer 1955, Thm 8): when
+- **Done (node `LehmerExcess`, pending build; rests on `Sawtooth`).** Proved in the form of Codecà and Nair 1998, Thm 2 (read from the paper). **Lehmer's closed form for 6n-1-type wheels** (Lehmer 1955, Thm 8; not yet checked against Lehmer): when
   every wheel leaves remainder one less than the number of intervals, the
   excess in the first intervals has an exact formula. The 6n-1 side of
   Lehmer's picture, and the natural partner to `uniform_subdivision_minus_side`.
 - **Adding one wheel at most doubles the largest gap** (Codecà and Nair
-  1998, Thm 1(i)): the largest gap between the survivor count and its
-  proportional share, after adding a wheel, is at most twice the old one
-  minus one over the new prime. Needs rational numbers.
-- **Mean-square identity** (Codecà and Nair 1998, Thm 3(i)): an exact
-  formula for the average squared gap over the survivor positions.
+  1998, Thm 1(i), read from the paper): for a squarefree cycle length above
+  1 and a new prime not dividing it, the largest gap between the survivor
+  count and its proportional share, after adding the prime, is at most twice
+  the old one minus one over the new prime. Needs rational numbers. Planned
+  in node `LargestGap` over three sessions: (1) the largest gap as a maximum
+  over survivor positions, proved equal to their supremum over real
+  fractions; (2) their inequalities (7) and (8) by the neighbouring-survivor
+  argument; (3) the case split that gives Thm 1(i). Their identity (I) is
+  `UniformSubdivision.one_wheel_removed` written as a gap.
 
 **Tier 3: needs heavier Mathlib**
+- **Mean-square identity** (Codecà and Nair 1998, Thm 3(i); moved up from
+  Tier 2 on 2026-11-04): the average squared gap over the survivor positions
+  is one twelfth of two to the number of wheels times the coprime share,
+  plus one sixth. The proof integrates the squared gap over the cycle (their
+  Thm 4(v), via Franel's formula for integrals of products of sawtooth
+  functions), so it needs real integration.
 - **Germain's exact criterion** (Germain 2005, Thm 1.1): the survivors
   split evenly across a given number of equal intervals exactly when every
   odd Dirichlet character for that number takes the value 1 at some wheel.
@@ -459,7 +469,7 @@ Check here before searching again. Links pinned to a commit were current on
   them as cited hypotheses. This puts the paper's unproven assumption on
   the graph as an open input, separate from the exact wheel share.
 
-**Survivor share bounds (Tier 1)**
+**Survivor share bounds (Tier 1)** — done (node `ShareBounds`, pending build; rests on `SurvivorCount`).
 - **The survivor share shrinks at least like one over the logarithm.**
   After the wheels up to a given prime, the share of the cycle that
   survives is at most one over the logarithm of that prime plus one.
@@ -475,7 +485,7 @@ Check here before searching again. Links pinned to a commit were current on
   of the plain one. Checked for wheels up to 200,000.
 
 **From DeepMind's formal-conjectures (statements there, proofs not in it)**
-- **Inadmissible patterns sit next to their blocking wheel** (Tier 1). If
+- **Done (node `InadmissibleOccurrences`, pending build).** **Inadmissible patterns sit next to their blocking wheel** (Tier 1). If
   an offset pattern covers every position on some wheel, then every
   starting point where all members are prime has that wheel's prime as a
   member, so the pattern occurs only finitely often. Corollary: the

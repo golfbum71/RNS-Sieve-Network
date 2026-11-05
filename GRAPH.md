@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 27 of 40 nodes are built, holding 80 claims: 79 proved in Lean and 1 cited from a published paper. They are joined by 30 arrows, each a Lean-checked step. Of the other 13 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 8 are new work, stated or scoped but not yet proved; 4 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 30 of 40 nodes are built, holding 87 claims: 86 proved in Lean and 1 cited from a published paper. They are joined by 35 arrows, each a Lean-checked step. Of the other 10 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 5 are new work, stated or scoped but not yet proved; 4 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -163,22 +163,26 @@ graph LR
     C_Sawtooth_legendre_count["legendre_count"]
     C_Sawtooth_sawtooth_identity["sawtooth_identity"]
     C_Sawtooth_even_split_iff_remainders_cancel["even_split_iff_remainders_cancel"]
+    C_Sawtooth_column_legendre_count["column_legendre_count"]
   end
   subgraph S_SpreadBounds["<b>24. SpreadBounds — how unevenly survivors can spread</b>"]
     C_SpreadBounds_interval_spread_bound["interval_spread_bound"]
+    C_SpreadBounds_column_imbalance_bound["column_imbalance_bound"]
   end
   subgraph S_ColumnAction["<b>25. ColumnAction — how a wheel moves the columns</b>"]
     C_ColumnAction_column_action["column_action"]
   end
   subgraph S_ShareBounds["<b>26. ShareBounds — the survivor share falls like one over the logarithm</b>"]
-    P_ShareBounds["<i>planned: new, not yet proved</i>"]
+    C_ShareBounds_survivor_share_le_inv_log["survivor_share_le_inv_log"]
+    C_ShareBounds_twin_share_le_two_inv_log_sq["twin_share_le_two_inv_log_sq"]
   end
   subgraph S_TwinShare["<b>27. TwinShare — the twin share of the cycle</b>"]
     C_TwinShare_twin_share_eq_prod["twin_share_eq_prod"]
     C_TwinShare_twin_share_split["twin_share_split"]
   end
   subgraph S_InadmissibleOccurrences["<b>28. InadmissibleOccurrences — inadmissible patterns sit next to their blocking wheel</b>"]
-    P_InadmissibleOccurrences["<i>planned: new, not yet proved</i>"]
+    C_InadmissibleOccurrences_inadmissible_occurrence_contains_prime["inadmissible_occurrence_contains_prime"]
+    C_InadmissibleOccurrences_gap_block_24242_unique["gap_block_24242_unique"]
   end
   subgraph S_GapCertificate["<b>29. GapCertificate — the Lacampagne-Selfridge counterexample</b>"]
     P_GapCertificate["<i>planned: new, not yet proved</i>"]
@@ -205,7 +209,7 @@ graph LR
     P_LargestGap["<i>planned: new, not yet proved</i>"]
   end
   subgraph S_LehmerExcess["<b>34. LehmerExcess — Lehmer's closed form for the 6n-1 type</b>"]
-    P_LehmerExcess["<i>planned: new, not yet proved</i>"]
+    C_LehmerExcess_lehmer_excess_closed_form["lehmer_excess_closed_form"]
   end
   subgraph S_GermainCriterion["<b>35. GermainCriterion — Germain's exact criterion for an even split</b>"]
     P_GermainCriterion["<i>planned: new, not yet proved</i>"]
@@ -258,10 +262,12 @@ graph LR
   C_UniformSubdivision_column_frozen_repeat ==> C_LehmerSplit_lehmer_even_split_column
   C_UniformSubdivision_column_one_wheel_removed ==> C_LehmerSplit_lehmer_even_split_column
   C_Sawtooth_legendre_count ==> C_SpreadBounds_interval_spread_bound
-  S_SurvivorCount -.-> S_ShareBounds
+  C_Sawtooth_column_legendre_count ==> C_SpreadBounds_column_imbalance_bound
+  C_SurvivorCount_general_survivor_count ==> C_ShareBounds_survivor_share_le_inv_log
+  C_SurvivorCount_twin_survivor_count ==> C_ShareBounds_twin_share_le_two_inv_log_sq
+  C_SurvivorCount_general_survivor_count ==> C_ShareBounds_twin_share_le_two_inv_log_sq
   C_SurvivorCount_twin_survivor_count ==> C_TwinShare_twin_share_eq_prod
   C_SurvivorCount_general_survivor_count ==> C_TwinShare_twin_share_eq_prod
-  S_Admissibility -.-> S_InadmissibleOccurrences
   S_CRT -.-> S_BlockingRuns
   S_JacobsthalQuadratic -.-> S_BlockingRuns
   S_SurvivorCount -.-> S_CeilingOvershoot
@@ -270,6 +276,9 @@ graph LR
   S_TwinShare -.-> S_BirdseySchay
   S_MertensThird -.-> S_BirdseySchay
   S_PrimeNumberTheorem -.-> S_BirdseySchay
+  S_Sawtooth -.-> S_LargestGap
+  S_UniformSubdivision -.-> S_LargestGap
+  C_Sawtooth_sawtooth_identity ==> C_LehmerExcess_lehmer_excess_closed_form
   S_LehmerSplit -.-> S_GermainCriterion
   S_Sawtooth -.-> S_GermainCriterion
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
@@ -281,11 +290,11 @@ graph LR
   classDef new fill:#ffffff,stroke:#57606a,color:#57606a,stroke-dasharray: 5 4;
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
-  class C_Wheel6_prime_gt_three_is_candidate,C_CRT_crt_map_bijective,C_SquareRootShield_square_root_shield,C_Admissibility_admissible_of_large_primes,C_Admissibility_zero_two_admissible,C_Admissibility_zero_two_four_not_admissible,C_Admissibility_ap_offsets_admissible_iff,C_SurvivorCount_twin_survivor_count,C_SurvivorCount_local_survivor_count,C_SurvivorCount_general_survivor_count,C_SingularSeries_delta_bound,C_SingularSeries_factor_multipliable,C_SingularSeries_hardy_littlewood_constant_pos,C_SingularSeries_local_density_factorization,C_TwinConstant_twin_prime_constant_eq_classical,C_Pruning_valid_starting_residues_card_formula,C_WheelOrder_wheel_marginal_new_formula,C_WheelOrder_prime_gt_five_digit_ok,C_WheelOrder_wheel_gap_floor,C_ShieldCertificates_prime_of_shield_cover,C_ShieldCertificates_active_primes_cover,C_ShieldCertificates_family_prime_of_shield_cover,C_ShieldCertificates_forward_ap_prime_of_active_shield,C_ShieldCertificates_backward_ap_prime_of_active_shield,C_ShieldCertificates_tuple_prime_of_active_shield,C_ShieldCertificates_ap_hits_wheel,C_ShieldCertificates_ap_prime_run_length_lt_of_lt_start,C_ShieldCertificates_ap_prime_run_forces_divisibility,C_ShieldCertificates_window_prime_iff,C_ShieldCertificates_window_twin_iff,C_ShieldCertificates_backward_ap_hits_wheel,C_ShieldCertificates_backward_ap_prime_run_length_lt_of_above,C_ShieldCertificates_backward_ap_prime_run_forces_divisibility,C_Infinitude_euclid_primes_unbounded,C_Infinitude_squarefree_counting_no_finite_supply,C_ColumnStructure_columns_multiply,C_ColumnStructure_col_minus_periodicity,C_ColumnStructure_col_minus_has_minus_prime_factor,C_ColumnStructure_col_minus_composite_has_proper_minus_factor,C_DirichletColumns_col_minus_primes_infinite,C_DirichletColumns_col_plus_primes_infinite,C_DirichletColumns_col_minus_primes_unbounded,C_DirichletColumns_col_plus_primes_unbounded,C_LinearForms_sophieGermainSystem_admissible,C_SophieGermainWheel_sophie_germain_mod_six,C_SophieGermainWheel_sophie_germain_not_ends_in_seven,C_SophieGermainWheel_sophie_germain_last_digit,C_GapTracks_twin_prime_mod_six,C_GapTracks_cousin_prime_mod_six,C_GapTracks_sexy_prime_same_track,C_GapTracks_sexy_middle_not_always_blocked,C_GapTracks_prime_gap_forbidden_four_from_six_minus_one,C_GapTracks_prime_gap_forbidden_two_from_six_plus_one,C_GapTracks_prime_gap_same_track_of_six_dvd,C_UniformSubdivision_frozen_wheels_repeat,C_UniformSubdivision_one_wheel_removed,C_UniformSubdivision_uniform_subdivision,C_UniformSubdivision_uniform_subdivision_plus_side,C_UniformSubdivision_uniform_subdivision_minus_side,C_UniformSubdivision_column_frozen_repeat,C_UniformSubdivision_column_one_wheel_removed,C_LehmerSplit_lehmer_even_split,C_LehmerSplit_lehmer_even_split_column,C_SurvivorSymmetry_survivor_reflection,C_Sawtooth_legendre_count,C_Sawtooth_sawtooth_identity,C_Sawtooth_even_split_iff_remainders_cancel,C_SpreadBounds_interval_spread_bound,C_ColumnAction_column_action,C_TwinShare_twin_share_eq_prod,C_TwinShare_twin_share_split verified;
+  class C_Wheel6_prime_gt_three_is_candidate,C_CRT_crt_map_bijective,C_SquareRootShield_square_root_shield,C_Admissibility_admissible_of_large_primes,C_Admissibility_zero_two_admissible,C_Admissibility_zero_two_four_not_admissible,C_Admissibility_ap_offsets_admissible_iff,C_SurvivorCount_twin_survivor_count,C_SurvivorCount_local_survivor_count,C_SurvivorCount_general_survivor_count,C_SingularSeries_delta_bound,C_SingularSeries_factor_multipliable,C_SingularSeries_hardy_littlewood_constant_pos,C_SingularSeries_local_density_factorization,C_TwinConstant_twin_prime_constant_eq_classical,C_Pruning_valid_starting_residues_card_formula,C_WheelOrder_wheel_marginal_new_formula,C_WheelOrder_prime_gt_five_digit_ok,C_WheelOrder_wheel_gap_floor,C_ShieldCertificates_prime_of_shield_cover,C_ShieldCertificates_active_primes_cover,C_ShieldCertificates_family_prime_of_shield_cover,C_ShieldCertificates_forward_ap_prime_of_active_shield,C_ShieldCertificates_backward_ap_prime_of_active_shield,C_ShieldCertificates_tuple_prime_of_active_shield,C_ShieldCertificates_ap_hits_wheel,C_ShieldCertificates_ap_prime_run_length_lt_of_lt_start,C_ShieldCertificates_ap_prime_run_forces_divisibility,C_ShieldCertificates_window_prime_iff,C_ShieldCertificates_window_twin_iff,C_ShieldCertificates_backward_ap_hits_wheel,C_ShieldCertificates_backward_ap_prime_run_length_lt_of_above,C_ShieldCertificates_backward_ap_prime_run_forces_divisibility,C_Infinitude_euclid_primes_unbounded,C_Infinitude_squarefree_counting_no_finite_supply,C_ColumnStructure_columns_multiply,C_ColumnStructure_col_minus_periodicity,C_ColumnStructure_col_minus_has_minus_prime_factor,C_ColumnStructure_col_minus_composite_has_proper_minus_factor,C_DirichletColumns_col_minus_primes_infinite,C_DirichletColumns_col_plus_primes_infinite,C_DirichletColumns_col_minus_primes_unbounded,C_DirichletColumns_col_plus_primes_unbounded,C_LinearForms_sophieGermainSystem_admissible,C_SophieGermainWheel_sophie_germain_mod_six,C_SophieGermainWheel_sophie_germain_not_ends_in_seven,C_SophieGermainWheel_sophie_germain_last_digit,C_GapTracks_twin_prime_mod_six,C_GapTracks_cousin_prime_mod_six,C_GapTracks_sexy_prime_same_track,C_GapTracks_sexy_middle_not_always_blocked,C_GapTracks_prime_gap_forbidden_four_from_six_minus_one,C_GapTracks_prime_gap_forbidden_two_from_six_plus_one,C_GapTracks_prime_gap_same_track_of_six_dvd,C_UniformSubdivision_frozen_wheels_repeat,C_UniformSubdivision_one_wheel_removed,C_UniformSubdivision_uniform_subdivision,C_UniformSubdivision_uniform_subdivision_plus_side,C_UniformSubdivision_uniform_subdivision_minus_side,C_UniformSubdivision_column_frozen_repeat,C_UniformSubdivision_column_one_wheel_removed,C_LehmerSplit_lehmer_even_split,C_LehmerSplit_lehmer_even_split_column,C_SurvivorSymmetry_survivor_reflection,C_Sawtooth_legendre_count,C_Sawtooth_sawtooth_identity,C_Sawtooth_even_split_iff_remainders_cancel,C_Sawtooth_column_legendre_count,C_SpreadBounds_interval_spread_bound,C_SpreadBounds_column_imbalance_bound,C_ColumnAction_column_action,C_ShareBounds_survivor_share_le_inv_log,C_ShareBounds_twin_share_le_two_inv_log_sq,C_TwinShare_twin_share_eq_prod,C_TwinShare_twin_share_split,C_InadmissibleOccurrences_inadmissible_occurrence_contains_prime,C_InadmissibleOccurrences_gap_block_24242_unique,C_LehmerExcess_lehmer_excess_closed_form verified;
   class C_HardyLittlewood_twin_prime_conjecture_implies_infinite_twin_primes,C_HensleyRichards_HL_A_and_B_incompatible,C_LinearForms_sophie_germain_of_LinearForms_conjecture,C_GapConjectures_legendre_of_jacobsthal,C_GapConjectures_brocard_of_four_survivors,C_GapConjectures_oppermann_of_bound,C_GapConjectures_andrica_of_oppermann,C_GapConjectures_legendre_of_oppermann conditional_built;
   class C_DudekJohnston_dudek_johnston_statement cited_built;
   class P_BirdseySchay conditional;
-  class P_ShareBounds,P_InadmissibleOccurrences,P_GapCertificate,P_BlockingRuns,P_CeilingOvershoot,P_LargestGap,P_LehmerExcess,P_GermainCriterion new;
+  class P_GapCertificate,P_BlockingRuns,P_CeilingOvershoot,P_LargestGap,P_GermainCriterion new;
   class P_JacobsthalQuadratic,P_MertensThird,P_PrimeNumberTheorem,P_RoughInPrimeGaps external;
   class O_hardy_littlewood_conjecture,O_HL_conjecture_A,O_HL_conjecture_B,O_LinearForms_conjecture,O_jacobsthal_bound_holds,O_four_survivors_bound_holds,O_oppermann_bound_holds,O_oppermann_conjecture openconj;
   click C_Wheel6_prime_gt_three_is_candidate href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md#prime_gt_three_is_candidate" _blank
@@ -364,12 +373,16 @@ graph LR
   click C_Sawtooth_legendre_count href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Sawtooth.md#legendre_count" _blank
   click C_Sawtooth_sawtooth_identity href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Sawtooth.md#sawtooth_identity" _blank
   click C_Sawtooth_even_split_iff_remainders_cancel href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Sawtooth.md#even_split_iff_remainders_cancel" _blank
+  click C_Sawtooth_column_legendre_count href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Sawtooth.md#column_legendre_count" _blank
   click C_SpreadBounds_interval_spread_bound href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SpreadBounds.md#interval_spread_bound" _blank
+  click C_SpreadBounds_column_imbalance_bound href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SpreadBounds.md#column_imbalance_bound" _blank
   click C_ColumnAction_column_action href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ColumnAction.md#column_action" _blank
-  click P_ShareBounds href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md" _blank
+  click C_ShareBounds_survivor_share_le_inv_log href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md#survivor_share_le_inv_log" _blank
+  click C_ShareBounds_twin_share_le_two_inv_log_sq href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md#twin_share_le_two_inv_log_sq" _blank
   click C_TwinShare_twin_share_eq_prod href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinShare.md#twin_share_eq_prod" _blank
   click C_TwinShare_twin_share_split href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinShare.md#twin_share_split" _blank
-  click P_InadmissibleOccurrences href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/InadmissibleOccurrences.md" _blank
+  click C_InadmissibleOccurrences_inadmissible_occurrence_contains_prime href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/InadmissibleOccurrences.md#inadmissible_occurrence_contains_prime" _blank
+  click C_InadmissibleOccurrences_gap_block_24242_unique href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/InadmissibleOccurrences.md#gap_block_24242_unique" _blank
   click P_GapCertificate href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapCertificate.md" _blank
   click P_JacobsthalQuadratic href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/JacobsthalQuadratic.md" _blank
   click P_BlockingRuns href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BlockingRuns.md" _blank
@@ -378,7 +391,7 @@ graph LR
   click P_CeilingOvershoot href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CeilingOvershoot.md" _blank
   click P_BirdseySchay href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirdseySchay.md" _blank
   click P_LargestGap href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LargestGap.md" _blank
-  click P_LehmerExcess href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LehmerExcess.md" _blank
+  click C_LehmerExcess_lehmer_excess_closed_form href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LehmerExcess.md#lehmer_excess_closed_form" _blank
   click P_GermainCriterion href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md" _blank
   click P_RoughInPrimeGaps href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RoughInPrimeGaps.md" _blank
 ```
@@ -485,14 +498,27 @@ The results nothing else builds on, each with everything beneath it.
 - [`SurvivorSymmetry.survivor_reflection`](docs/nodes/SurvivorSymmetry.md#survivor_reflection) — proved in Lean
 - [`SpreadBounds.interval_spread_bound`](docs/nodes/SpreadBounds.md#interval_spread_bound) — proved in Lean
   - [`Sawtooth.legendre_count`](docs/nodes/Sawtooth.md#legendre_count) — proved in Lean
+- [`SpreadBounds.column_imbalance_bound`](docs/nodes/SpreadBounds.md#column_imbalance_bound) — proved in Lean
+  - [`Sawtooth.column_legendre_count`](docs/nodes/Sawtooth.md#column_legendre_count) — proved in Lean
 - [`ColumnAction.column_action`](docs/nodes/ColumnAction.md#column_action) — proved in Lean
+- [`ShareBounds.survivor_share_le_inv_log`](docs/nodes/ShareBounds.md#survivor_share_le_inv_log) — proved in Lean
+  - [`SurvivorCount.general_survivor_count`](docs/nodes/SurvivorCount.md#general_survivor_count) — proved in Lean
+    - [`CRT.crt_map_bijective`](docs/nodes/CRT.md#crt_map_bijective) — proved in Lean
+- [`ShareBounds.twin_share_le_two_inv_log_sq`](docs/nodes/ShareBounds.md#twin_share_le_two_inv_log_sq) — proved in Lean
+  - [`SurvivorCount.twin_survivor_count`](docs/nodes/SurvivorCount.md#twin_survivor_count) — proved in Lean
+    - [`CRT.crt_map_bijective`](docs/nodes/CRT.md#crt_map_bijective) — proved in Lean
+  - [`SurvivorCount.general_survivor_count`](docs/nodes/SurvivorCount.md#general_survivor_count) — proved in Lean
+    - [`CRT.crt_map_bijective`](docs/nodes/CRT.md#crt_map_bijective) — proved in Lean
 - [`TwinShare.twin_share_eq_prod`](docs/nodes/TwinShare.md#twin_share_eq_prod) — proved in Lean
   - [`SurvivorCount.twin_survivor_count`](docs/nodes/SurvivorCount.md#twin_survivor_count) — proved in Lean
     - [`CRT.crt_map_bijective`](docs/nodes/CRT.md#crt_map_bijective) — proved in Lean
   - [`SurvivorCount.general_survivor_count`](docs/nodes/SurvivorCount.md#general_survivor_count) — proved in Lean
     - [`CRT.crt_map_bijective`](docs/nodes/CRT.md#crt_map_bijective) — proved in Lean
 - [`TwinShare.twin_share_split`](docs/nodes/TwinShare.md#twin_share_split) — proved in Lean
-- [`Sawtooth.sawtooth_identity`](docs/nodes/Sawtooth.md#sawtooth_identity) — proved in Lean
+- [`InadmissibleOccurrences.inadmissible_occurrence_contains_prime`](docs/nodes/InadmissibleOccurrences.md#inadmissible_occurrence_contains_prime) — proved in Lean
+- [`InadmissibleOccurrences.gap_block_24242_unique`](docs/nodes/InadmissibleOccurrences.md#gap_block_24242_unique) — proved in Lean
+- [`LehmerExcess.lehmer_excess_closed_form`](docs/nodes/LehmerExcess.md#lehmer_excess_closed_form) — proved in Lean
+  - [`Sawtooth.sawtooth_identity`](docs/nodes/Sawtooth.md#sawtooth_identity) — proved in Lean
 - [`Sawtooth.even_split_iff_remainders_cancel`](docs/nodes/Sawtooth.md#even_split_iff_remainders_cancel) — proved in Lean
 
 ## What the network takes on trust
@@ -554,15 +580,15 @@ exactly the following, each recorded as such rather than claimed:
 | 23 | [`SurvivorSymmetry`](docs/nodes/SurvivorSymmetry.md) | survivors are mirror-symmetric | proved in Lean |
 | 24 | [`SpreadBounds`](docs/nodes/SpreadBounds.md) | how unevenly survivors can spread | proved in Lean |
 | 25 | [`ColumnAction`](docs/nodes/ColumnAction.md) | how a wheel moves the columns | proved in Lean |
-| 26 | [`ShareBounds`](docs/nodes/ShareBounds.md) | the survivor share falls like one over the logarithm | planned: new, not yet proved |
+| 26 | [`ShareBounds`](docs/nodes/ShareBounds.md) | the survivor share falls like one over the logarithm | proved in Lean |
 | 27 | [`TwinShare`](docs/nodes/TwinShare.md) | the twin share of the cycle | proved in Lean |
-| 28 | [`InadmissibleOccurrences`](docs/nodes/InadmissibleOccurrences.md) | inadmissible patterns sit next to their blocking wheel | planned: new, not yet proved |
+| 28 | [`InadmissibleOccurrences`](docs/nodes/InadmissibleOccurrences.md) | inadmissible patterns sit next to their blocking wheel | proved in Lean |
 | 29 | [`GapCertificate`](docs/nodes/GapCertificate.md) | the Lacampagne-Selfridge counterexample | planned: new, not yet proved |
 | 30 | [`BlockingRuns`](docs/nodes/BlockingRuns.md) | blocking runs and the largest survivor gap | planned: new, not yet proved |
 | 31 | [`CeilingOvershoot`](docs/nodes/CeilingOvershoot.md) | the overshoot at the ceiling | planned: new, not yet proved |
 | 32 | [`BirdseySchay`](docs/nodes/BirdseySchay.md) | Birdsey and Schay's heuristic, as a hypothesis | planned: conditional |
 | 33 | [`LargestGap`](docs/nodes/LargestGap.md) | the largest gap from the proportional share | planned: new, not yet proved |
-| 34 | [`LehmerExcess`](docs/nodes/LehmerExcess.md) | Lehmer's closed form for the 6n-1 type | planned: new, not yet proved |
+| 34 | [`LehmerExcess`](docs/nodes/LehmerExcess.md) | Lehmer's closed form for the 6n-1 type | proved in Lean |
 | 35 | [`GermainCriterion`](docs/nodes/GermainCriterion.md) | Germain's exact criterion for an even split | planned: new, not yet proved |
 | 36 | [`Sawtooth`](docs/nodes/Sawtooth.md) | the survivor count minus its proportional share | proved in Lean |
 | 40 | [`MertensThird`](docs/nodes/MertensThird.md) | Mertens' third theorem | outside source: proved in Lean in another project |

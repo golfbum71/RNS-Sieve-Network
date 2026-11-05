@@ -24,4 +24,7 @@ import RNSSolutions.SurvivorSymmetry
 import RNSSolutions.ColumnAction
 import RNSSolutions.SpreadBounds
 import RNSSolutions.TwinShare
+import RNSSolutions.LehmerExcess
+import RNSSolutions.InadmissibleOccurrences
+import RNSSolutions.ShareBounds
 import RNSSolutions.Assemble

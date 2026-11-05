@@ -72,10 +72,35 @@ def even_split_iff_remainders_cancel : Prop :=
 
 **Proof:** `RNS.Sawtooth.even_split_iff_remainders_cancel_holds` in [`RNSSolutions/Sawtooth.lean`](../../RNSSolutions/Sawtooth.lean)
 
+<a id="column_legendre_count"></a>
+### `column_legendre_count`
+
+With wheels 2 and 3 in use, a column's survivors up to a bound are the signed sum, over choices of the other wheels, of the multipliers up to the bound over their product that put the product's multiple in that column.
+
+```lean
+/-- **Legendre's count, within one column.** For prime wheels `W` including 2
+and 3, a column `r` (1 for 6n+1, 5 for 6n-1) and a bound `x`: the column's
+survivors from 1 to `x` number the signed sum, over every choice `S` of some
+of the wheels other than 2 and 3, of how many multipliers from 1 to `x`
+divided by the product of the chosen wheels put that product's multiple in
+column `r`. -/
+def column_legendre_count : Prop :=
+  ∀ (W : Finset Nat) (r x : Nat), (∀ q ∈ W, q.Prime) → 2 ∈ W → 3 ∈ W → (r = 1 ∨ r = 5) →
+    ((column_survivors_upto W r x).card : Int)
+      = ∑ S ∈ ((W.erase 2).erase 3).powerset, (-1 : Int) ^ S.card *
+          (((Finset.Icc 1 (x / S.prod id)).filter (fun m => (S.prod id * m) % 6 = r)).card : Int)
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.Sawtooth.column_legendre_count_holds` in [`RNSSolutions/Sawtooth.lean`](../../RNSSolutions/Sawtooth.lean)
+
 ## Used by
 
 - [`SpreadBounds`](SpreadBounds.md)
+- [`LehmerExcess`](LehmerExcess.md)
 - [`GermainCriterion`](GermainCriterion.md)
+- [`LargestGap`](LargestGap.md)
 
 ## Files
 
