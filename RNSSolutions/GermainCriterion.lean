@@ -19,8 +19,8 @@ import Mathlib.Tactic.Ring
 Imports claims only, never other nodes' proofs. The sufficient direction rests
 on `Sawtooth.even_split_iff_remainders_cancel`, taken as a named hypothesis.
 
-Built clean by `lake build RNSSolutions` on 2026-11-05 (two-wheel sufficient direction);
-the analytic claims were added the same day and await their first build.
+Built clean by `lake build RNSSolutions` on 2026-11-05; `#print axioms` shows only
+the standard three for every theorem here.
 
 Idea. For the wheels `p`, `q`, the signed sum of `Sawtooth` has four terms:
 the remainders of `a p q`, `a q`, `a p` and `a` on division by `k`, with signs
