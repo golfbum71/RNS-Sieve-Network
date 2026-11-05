@@ -10,6 +10,8 @@ import RNSNetwork.Nodes.PrimeGapsBridge.Conclusions
 
 Imports claims only, never other nodes' proofs. Rests on no other node.
 
+Built clean by the GitHub Actions build on 2026-11-05.
+
 Idea: on the wheel of size `p`, the positions the pattern occupies form a
 subset of the `p` positions. It has fewer than `p` members exactly when some
 position is missing, and a missing position is a residue class that no

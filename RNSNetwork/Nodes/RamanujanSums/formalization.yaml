@@ -1,0 +1,35 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: RamanujanSums.v1
+  family: RamanujanSums
+  version: v1
+  order: 51
+  kind: paper
+  status: active
+  title: the survivor pattern's frequencies, wheel by wheel
+  description: Ramanujan's sum for the combined cycle, the survivors of one cycle turned by a chosen
+    frequency and added up, is a product over the wheels. A wheel contributes its size minus 1 if it
+    divides the frequency, and minus 1 if not. So each wheel acts on the frequencies independently.
+    Mathlib does not define Ramanujan sums; the sum is defined here.
+conclusions:
+- id: ramanujan_wheel_product
+  declaration: RNS.RamanujanSums.ramanujan_wheel_product
+  summary: For prime wheels, Ramanujan's sum of the cycle at any frequency is the product over the wheels
+    of (wheel size minus 1) when the wheel divides the frequency and minus 1 when it does not.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/RamanujanSums.lean
+    declaration: RNS.RamanujanSums.ramanujan_wheel_product_holds
+    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+      Checked numerically beforehand for every set of wheels from the primes up to 11, at frequencies up
+      to twice the cycle.
+  designated: lean-proof
+sources:
+- title: Ramanujan's sum (Wikipedia), with Kluyver's 1906 formula and von Sterneck's function
+  url: https://en.wikipedia.org/wiki/Ramanujan%27s_sum
+  relationship: the classical evaluation; this node proves its squarefree case

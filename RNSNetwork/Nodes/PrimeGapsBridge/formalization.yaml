@@ -22,10 +22,12 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/PrimeGapsBridge.lean
     declaration: RNS.PrimeGapsBridge.admissible_iff_primegaps_holds
-    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+    note: Complete Lean proof checked by the GitHub Actions build (lake build RNSSolutions, standard
+      axioms only, 2026-11-05, run 42023640835). Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 sources:
 - title: Axiom Math, PrimeGapsLib, Finset.Admissible (PrimeGapsTheory/NumberTheory/Admissible.lean,

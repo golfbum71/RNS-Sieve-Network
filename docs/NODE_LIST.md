@@ -363,6 +363,16 @@ apply to the network's patterns unchanged.
 - Rests on: Vocabulary only
 - Status: DRAFT (2026-11-05), awaiting the GitHub Actions build.
 
+### 51. `RamanujanSums` — the survivor pattern's frequencies, wheel by wheel
+Ramanujan's sum for the combined cycle (the survivors of one cycle, turned by
+a frequency and added up) is a product over the wheels: wheel size minus 1 if
+the wheel divides the frequency, minus 1 if not.
+- Prior work: the squarefree case of Kluyver's evaluation (1906).
+- Lean: `cycle_root`, `ramanujan_sum` (defined here; Mathlib has no Ramanujan
+  sums), `ramanujan_wheel_product` (proved in `RNSSolutions/RamanujanSums.lean`)
+- Rests on: Vocabulary only
+- Status: DRAFT (2026-11-05), awaiting the GitHub Actions build.
+
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence
 are `UniformSubdivision.frozen_wheels_repeat` and `one_wheel_removed`; the

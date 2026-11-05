@@ -50,6 +50,7 @@
 | 47 | [`MenonIdentity`](MenonIdentity.md) | a gcd sum over the survivors of one cycle | cited from a published paper; not proved in Lean |
 | 48 | [`GallagherAverage`](GallagherAverage.md) | the wheel correction is 1 on average | cited from a published paper; not proved in Lean |
 | 49 | [`LongGaps`](LongGaps.md) | blocked runs become long prime gaps | outside source: proved in Lean in another project |
-| 50 | [`PrimeGapsBridge`](PrimeGapsBridge.md) | the network's admissibility is PrimeGapsLib's | proof drafted, not yet built |
+| 50 | [`PrimeGapsBridge`](PrimeGapsBridge.md) | the network's admissibility is PrimeGapsLib's | proved in Lean |
+| 51 | [`RamanujanSums`](RamanujanSums.md) | the survivor pattern's frequencies, wheel by wheel | proof drafted, not yet built |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

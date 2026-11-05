@@ -31,4 +31,5 @@ import RNSSolutions.BlockingRuns
 import RNSSolutions.BonseCeiling
 import RNSSolutions.PillaiBrauer
 import RNSSolutions.PrimeGapsBridge
+import RNSSolutions.RamanujanSums
 import RNSSolutions.Assemble
