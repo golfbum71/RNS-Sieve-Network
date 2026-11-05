@@ -25,6 +25,7 @@ import RNSSolutions.GapTracks
 import RNSSolutions.UniformSubdivision
 import RNSSolutions.LehmerSplit
 import RNSSolutions.Sawtooth
+import RNSSolutions.SurvivorSymmetry
 import RNSSolutions.SpreadBounds
 import RNSSolutions.TwinShare
 import RNSSolutions.LehmerExcess
@@ -268,3 +269,11 @@ theorem RNS.GermainAuxiliary.fermat_first_case_thirteen_holds :
 #print axioms RNS.GermainAuxiliary.sophie_germain_wheel_auxiliary_holds
 #print axioms RNS.GermainAuxiliary.fermat_first_case_seven_holds
 #print axioms RNS.GermainAuxiliary.fermat_first_case_thirteen_holds
+
+/-- `SurvivorSymmetry`: the counting form of the mirror, from the position form. -/
+theorem RNS.SurvivorSymmetry.survivor_count_reflection_holds :
+    RNS.SurvivorSymmetry.survivor_count_reflection :=
+  RNS.SurvivorSymmetry.survivor_count_reflection_step
+    RNS.SurvivorSymmetry.survivor_reflection_holds
+
+#print axioms RNS.SurvivorSymmetry.survivor_count_reflection_holds

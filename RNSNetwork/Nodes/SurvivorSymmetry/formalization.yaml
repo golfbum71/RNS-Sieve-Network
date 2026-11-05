@@ -9,7 +9,9 @@ node:
   kind: paper
   status: active
   title: survivors are mirror-symmetric
-  description: A position survives the wheels exactly when its reflection in the combined cycle survives.
+  description: "A position survives the wheels exactly when its reflection in the combined cycle
+    survives. Counting form (Legendre's mirror for phi(x, a)): the survivors up to a point and up to its
+    mirror point together number one full cycle's survivors."
 conclusions:
 - id: survivor_reflection
   declaration: RNS.SurvivorSymmetry.survivor_reflection
@@ -25,7 +27,26 @@ conclusions:
     note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only
       because no Comparator receipt exists yet.
   designated: lean-proof
+- id: survivor_count_reflection
+  declaration: RNS.SurvivorSymmetry.survivor_count_reflection
+  summary: For nonempty wheels and a point t before the end of the cycle, the survivors up to t and up to
+    the cycle length minus t minus 1 together number one full cycle's survivors.
+  imports:
+  - SurvivorSymmetry.v1.survivor_reflection
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/SurvivorSymmetry.lean
+    declaration: RNS.SurvivorSymmetry.survivor_count_reflection_step
+    assembled: RNSSolutions/Assemble.lean (RNS.SurvivorSymmetry.survivor_count_reflection_holds)
+    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved. Checked
+      numerically beforehand on 44,628 cases.
+  designated: lean-proof
 sources:
+- title: Legendre's formula (MathWorld), the identity phi(t, k) = phi(m_k) - phi(m_k - t - 1, k)
+  url: https://mathworld.wolfram.com/LegendresFormula.html
+  relationship: the counting form, as Legendre's mirror identity for phi(x, a)
 - title: D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357
   url: https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf
   relationship: Theorem 1
