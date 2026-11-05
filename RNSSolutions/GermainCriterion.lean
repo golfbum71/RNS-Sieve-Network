@@ -288,7 +288,8 @@ theorem character_transform_holds : character_transform := by
         (-1 : Int) ^ S.card * ((j.val * (W \ S).prod id % k : Nat) : Int) : Int)) : ℂ)
       = ∑ S ∈ W.powerset, (-1 : ℂ) ^ S.card * (χ⁻¹ j * ((j.val * (W \ S).prod id % k : Nat) : ℂ)) := by
     intro j
-    push_cast
+    simp only [Int.cast_sum, Int.cast_mul, Int.cast_pow, Int.cast_neg, Int.cast_one,
+      Int.cast_natCast]
     rw [Finset.mul_sum]
     exact Finset.sum_congr rfl (fun S _ => by ring)
   rw [wheel_product_expand χ W, Finset.sum_mul, Finset.sum_congr rfl (fun j _ => hL j),
