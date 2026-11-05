@@ -18,7 +18,8 @@ import Mathlib.Tactic.Linarith
 Imports claims only, never other nodes' proofs. The bound rests on
 `BonseCeiling.ceiling_inside_cycle`, taken as a named hypothesis.
 
-Drafted 2026-11-05; awaiting its first `lake build RNSSolutions`.
+Built clean by `lake build RNSSolutions` on 2026-11-05; `#print axioms` shows only
+the standard three.
 
 Idea for the bound. Suppose every survivor of `N` is prime and `N` exceeds 30.
 Let `q` be the smallest prime whose square reaches `N`. Every prime below `q`

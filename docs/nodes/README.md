@@ -57,6 +57,6 @@
 | 54 | [`SophieGermainPowers`](SophieGermainPowers.md) | on the wheel of size 2p+1, p-th powers have three positions | proved in Lean |
 | 55 | [`SophieGermainTheorem`](SophieGermainTheorem.md) | the first case of Fermat's Last Theorem for Sophie Germain primes | proved in Lean |
 | 56 | [`GermainAuxiliary`](GermainAuxiliary.md) | Sophie Germain's theorem with any suitable wheel | proved in Lean |
-| 57 | [`Schatunowsky`](Schatunowsky.md) | 30 is the largest number whose survivors are all prime | proof drafted, not yet built |
+| 57 | [`Schatunowsky`](Schatunowsky.md) | 30 is the largest number whose survivors are all prime | proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

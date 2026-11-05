@@ -444,7 +444,8 @@ the next ceiling once the wheels reach 7, and below that only 30 fits.
 - Lean: `ceiling_forces_wheels`, `thirty_survivors_all_prime`,
   `schatunowsky_bound`
 - Rests on: `BonseCeiling` (for the bound)
-- Status: Drafted 2026-11-05; awaiting its first build.
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-05).
 
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence

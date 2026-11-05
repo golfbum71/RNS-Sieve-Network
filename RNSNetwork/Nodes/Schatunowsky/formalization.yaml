@@ -21,10 +21,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/Schatunowsky.lean
     declaration: RNS.Schatunowsky.ceiling_forces_wheels_holds
-    note: Lean proof drafted 2026-11-05; awaiting its first `lake build RNSSolutions`.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: thirty_survivors_all_prime
   declaration: RNS.Schatunowsky.thirty_survivors_all_prime
@@ -33,10 +34,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/Schatunowsky.lean
     declaration: RNS.Schatunowsky.thirty_survivors_all_prime_holds
-    note: Lean proof drafted 2026-11-05; awaiting its first `lake build RNSSolutions`.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: schatunowsky_bound
   declaration: RNS.Schatunowsky.schatunowsky_bound
@@ -46,12 +48,13 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/Schatunowsky.lean
     declaration: RNS.Schatunowsky.schatunowsky_bound_step
     assembled: RNSSolutions/Assemble.lean (RNS.Schatunowsky.schatunowsky_bound_holds)
-    note: Lean proof of the step from the imported claim, taken as a named hypothesis, drafted
-      2026-11-05; awaiting its first `lake build RNSSolutions`.
+    note: Lean proof of the step from the imported claim, taken as a named hypothesis; the proof
+      file imports claims only, never proofs. Built clean 2026-11-05 (standard axioms only). Recorded
+      as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 sources:
 - title: Schatunowsky's Theorem (ProofWiki), after S. O. Shatunovsky (1893)
