@@ -1,0 +1,36 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: BrunTwinSum.v1
+  family: BrunTwinSum
+  version: v1
+  order: 52
+  kind: paper
+  status: active
+  title: the twin primes' reciprocals add up to a finite total
+  description: The reciprocals of the twin primes have a finite sum (Brun's constant, about 1.902),
+    whether or not there are infinitely many twin primes. Its sieve heart is the wheel-level twin share
+    of ShareBounds. Brun's theorem, cited.
+conclusions:
+- id: brun_sum_finite
+  declaration: RNS.BrunTwinSum.brun_sum_finite
+  summary: The twin-prime reciprocals have a finite sum (cited).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: paper
+    kind: literature
+    source: V. Brun, La série 1/5 + 1/7 + 1/11 + 1/13 + ... où les dénominateurs sont nombres premiers
+      jumeaux est convergente ou finie, Bull. Sci. Math. 43 (1919)
+    locator: main theorem
+    note: Published theorem, cited. Not reproduced in Lean; a proof would combine Mathlib's Selberg
+      sieve (Mathlib.NumberTheory.SelbergSieve) with a Mertens-type estimate.
+  designated: paper
+sources:
+- title: Brun's theorem (lean-lang.org problem list, brun_constant_converges)
+  url: https://lean-lang.org/eval/problems/brun_constant_converges/
+  relationship: the same statement in Lean, still open there as a formalization target
+- title: Brun's theorem (Wikipedia)
+  url: https://en.wikipedia.org/wiki/Brun%27s_theorem
+  relationship: the theorem, the twin-prime count bound behind it, and Brun's constant

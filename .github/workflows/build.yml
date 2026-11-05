@@ -59,7 +59,7 @@ jobs:
               msg=$(printf '%s' "$line" | sed 's/%/%25/g')
               echo "::error title=$f::$msg"
             done
-            body=$(grep -A12 "error:" "$f" | head -200 | sed 's/%/%25/g' | sed ':a;N;$!ba;s/\n/%0A/g')
+            body=$(grep -B2 -A40 "error:" "$f" | grep -v "depends on axioms\|^ Classical.choice\|^ Quot.sound" | head -400 | sed 's/%/%25/g' | sed ':a;N;$!ba;s/\n/%0A/g')
             [ -n "$body" ] && echo "::error title=$f context::$body"
           done
           true

@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Geoffrey Fischer
 -/
 import RNSNetwork.Nodes.RamanujanSums.Conclusions
+import Mathlib.Algebra.BigOperators.Associated    -- `Finset.prod_primes_dvd`
 import Mathlib.Algebra.Field.GeomSum              -- `geom_sum_eq`
 import Mathlib.Algebra.BigOperators.Ring.Finset   -- `Finset.prod_add`, `Finset.sum_mul`
 import Mathlib.Algebra.BigOperators.Intervals     -- `Finset.sum_Ico_eq_sum_range`
@@ -166,7 +167,11 @@ theorem ramanujan_wheel_product_holds : ramanujan_wheel_product := by
   refine Finset.sum_congr rfl fun S _ => ?_
   have hS' : ∀ q ∈ W \ S, q.Prime := fun q hq => hW q (Finset.mem_sdiff.mp hq).1
   rw [Finset.prod_const, Finset.prod_ite_zero]
-  simp only [prod_dvd_iff hS' n, Nat.cast_prod, id_eq]
+  congr 1
+  by_cases h : ∀ q ∈ W \ S, q ∣ n
+  · rw [if_pos h, if_pos ((prod_dvd_iff hS' n).mpr h), Nat.cast_prod]
+    rfl
+  · rw [if_neg h, if_neg (fun h' => h ((prod_dvd_iff hS' n).mp h'))]
 
 end RNS.RamanujanSums
 

@@ -361,7 +361,8 @@ sets, including gaps of at most 246 infinitely often under Bombieri-Vinogradov,
 apply to the network's patterns unchanged.
 - Lean: `admissible_iff_primegaps` (proved in `RNSSolutions/PrimeGapsBridge.lean`)
 - Rests on: Vocabulary only
-- Status: DRAFT (2026-11-05), awaiting the GitHub Actions build.
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-05).
 
 ### 51. `RamanujanSums` — the survivor pattern's frequencies, wheel by wheel
 Ramanujan's sum for the combined cycle (the survivors of one cycle, turned by
@@ -372,6 +373,26 @@ the wheel divides the frequency, minus 1 if not.
   sums), `ramanujan_wheel_product` (proved in `RNSSolutions/RamanujanSums.lean`)
 - Rests on: Vocabulary only
 - Status: DRAFT (2026-11-05), awaiting the GitHub Actions build.
+
+### 52. `BrunTwinSum` — the twin primes' reciprocals add up to a finite total
+- Prior work: Brun (1919). Its sieve heart is the twin share of `ShareBounds`.
+- Lean: `twin_reciprocal`, `brun_sum_finite` (cited, not proved; a proof would
+  use Mathlib's Selberg sieve and a Mertens-type estimate)
+- Status: Cited (2026-11-05).
+
+### 53. `GapMoments` — the survivor gaps are spread as evenly as their average allows
+The gaps between consecutive survivors of one cycle, raised to any fixed power
+and added up, are at most a constant times their total if every gap were the
+average gap.
+- Prior work: Erdős's conjecture; Hooley (powers below 2); Montgomery and
+  Vaughan, Ann. of Math. 123 (1986), all powers.
+- Lean: `gap_moment_bound` (cited, not proved)
+- Status: Cited (2026-11-05). Checked numerically for every set of wheels from
+  the primes up to 13 at powers 1/2, 1, 2, 3 (constant at most 2.1).
+
+Not stated: Erdős's 1962 result that Jacobsthal's function is typically close
+to its average-gap prediction. Its exact normalization could not be confirmed
+from a primary source, so it is left out rather than stated wrongly.
 
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence

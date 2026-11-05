@@ -1,0 +1,38 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: GapMoments.v1
+  family: GapMoments
+  version: v1
+  order: 53
+  kind: paper
+  status: active
+  title: the survivor gaps are spread as evenly as their average allows
+  description: The gaps between consecutive survivors of one cycle, raised to any fixed power and added
+    up, are at most a constant times what they would total if every gap were the average gap (the cycle
+    length times the survivor share to one minus the power). Erdős's conjecture, proved by Montgomery and
+    Vaughan; cited.
+conclusions:
+- id: gap_moment_bound
+  declaration: RNS.GapMoments.gap_moment_bound
+  summary: For each positive power, the survivor gaps of one cycle raised to that power add up to at most
+    a constant times the cycle length times the survivor share to one minus the power (cited).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: paper
+    kind: literature
+    source: H. L. Montgomery and R. C. Vaughan, On the distribution of reduced residues, Ann. of Math.
+      123 (1986), 311-333
+    locator: the bound for all positive powers, as stated in arXiv:1502.05062, inequality (1.2)
+    note: Published theorem, cited; stated without the wrap-around gap, which only lowers the sum. Not
+      reproduced in Lean. Checked numerically for every set of wheels from the primes up to 13.
+  designated: paper
+sources:
+- title: Distribution of squares modulo a composite number (arXiv:1502.05062), introduction
+  url: https://arxiv.org/abs/1502.05062
+  relationship: states Erdős's conjecture (1.2), Hooley's partial result and Montgomery and Vaughan's proof
+- title: T. F. Bloom and V. Kuperberg, Odd moments and adding fractions (arXiv:2312.09021)
+  url: https://arxiv.org/abs/2312.09021
+  relationship: the related moments of survivor counts in short intervals, recent progress
