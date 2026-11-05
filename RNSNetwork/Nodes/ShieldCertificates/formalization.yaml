@@ -47,7 +47,7 @@ conclusions:
         solution: RNSSolutions/ShieldCertificates.lean
         declaration: RNS.ShieldCertificates.active_primes_cover_holds
         note: >-
-          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only because no Comparator
           receipt exists yet.
     designated: lean-proof
   - id: family_prime_of_shield_cover
@@ -129,7 +129,7 @@ conclusions:
         solution: RNSSolutions/ShieldCertificates.lean
         declaration: RNS.ShieldCertificates.ap_hits_wheel_holds
         note: >-
-          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only because no Comparator
           receipt exists yet.
     designated: lean-proof
   - id: ap_prime_run_length_lt_of_lt_start
@@ -143,7 +143,7 @@ conclusions:
         solution: RNSSolutions/ShieldCertificates.lean
         declaration: RNS.ShieldCertificates.ap_prime_run_length_lt_of_lt_start_holds
         note: >-
-          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only because no Comparator
           receipt exists yet.
     designated: lean-proof
   - id: ap_prime_run_forces_divisibility
@@ -157,7 +157,7 @@ conclusions:
         solution: RNSSolutions/ShieldCertificates.lean
         declaration: RNS.ShieldCertificates.ap_prime_run_forces_divisibility_holds
         note: >-
-          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only because no Comparator
           receipt exists yet.
     designated: lean-proof
   - id: window_prime_iff
@@ -205,7 +205,7 @@ conclusions:
         solution: RNSSolutions/ShieldCertificates.lean
         declaration: RNS.ShieldCertificates.backward_ap_hits_wheel_holds
         note: >-
-          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only because no Comparator
           receipt exists yet.
     designated: lean-proof
   - id: backward_ap_prime_run_length_lt_of_above
@@ -219,7 +219,7 @@ conclusions:
         solution: RNSSolutions/ShieldCertificates.lean
         declaration: RNS.ShieldCertificates.backward_ap_prime_run_length_lt_of_above_holds
         note: >-
-          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only because no Comparator
           receipt exists yet.
     designated: lean-proof
   - id: backward_ap_prime_run_forces_divisibility
@@ -233,7 +233,7 @@ conclusions:
         solution: RNSSolutions/ShieldCertificates.lean
         declaration: RNS.ShieldCertificates.backward_ap_prime_run_forces_divisibility_holds
         note: >-
-          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only because no Comparator
           receipt exists yet.
     designated: lean-proof
 

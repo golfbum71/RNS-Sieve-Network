@@ -285,10 +285,11 @@ the remainders cancel.
   function); the starting point of Germain, Canad. Math. Bull. 48 (2005),
   Theorem 1.1, which writes it over divisors with fractional parts.
 - Lean: `legendre_count`, `sawtooth_identity`,
-  `even_split_iff_remainders_cancel` (proved in `RNSSolutions/Sawtooth.lean`;
+  `even_split_iff_remainders_cancel`, `column_legendre_count` (proved in `RNSSolutions/Sawtooth.lean`;
   no source file)
 - Rests on: Vocabulary only
-- Status: pending `lake build RNSSolutions`. Checked numerically beforehand on
+- Status: Clean. All four claims proved; `#print axioms` shows only the
+  standard three (Geoffrey Fischer, 2026-11-04). Checked numerically beforehand on
   16,065 cases (wheels from 2 to 13, up to 14 intervals, fractions past the
   end of the cycle included).
 
@@ -401,17 +402,17 @@ Check here before searching again. Links pinned to a commit were current on
 - **Done (node `LehmerSplit`).** **Column form of Lehmer's split.** With wheels 2 and 3 frozen, if some
   wheel leaves remainder 1 on division by the least common multiple of 6
   and the number of intervals, each column splits evenly too. Checked.
-- **Done (node `SurvivorSymmetry`, pending build).** **Mirror symmetry** (Lehmer 1955, Thm 1; Grob and Schmitt 2019, Thm 2).
+- **Done (node `SurvivorSymmetry`, 2026-11-04).** **Mirror symmetry** (Lehmer 1955, Thm 1; Grob and Schmitt 2019, Thm 2).
   A position survives exactly when its reflection in the cycle survives.
   (The interval-by-interval form needs exact endpoints; with rounded-down
   endpoints it fails, as the test showed.)
-- **Done (node `SpreadBounds`, pending build; rests on `Sawtooth`).** **Spread bound** (Lehmer 1955, Thms 9-10). Any two equal intervals'
+- **Done (node `SpreadBounds`; rests on `Sawtooth`).** **Spread bound** (Lehmer 1955, Thms 9-10). Any two equal intervals'
   survivor counts differ by at most two to the number of wheels. Checked.
-- **Done (node `SpreadBounds`, pending build; rests on `Sawtooth`'s column count).** **Column-imbalance bound.** With wheels 2 and 3 frozen, the two columns'
+- **Done (node `SpreadBounds`; rests on `Sawtooth`'s column count).** **Column-imbalance bound.** With wheels 2 and 3 frozen, the two columns'
   survivor counts up to any point differ by at most two to the number of
   remaining wheels. Proof by inclusion-exclusion with the column sign.
   Checked.
-- **Done (node `ColumnAction`, pending build; proved directly, no overlap needed).** **Column action of a wheel.** Multiplying by a prime keeps the 6n-1 and
+- **Done (node `ColumnAction`; proved directly, no overlap needed).** **Column action of a wheel.** Multiplying by a prime keeps the 6n-1 and
   6n+1 columns in place if it leaves remainder 1 on division by 6, and
   swaps them if it leaves remainder 5. (The lemma behind both column forms;
   check overlap with `ColumnStructure` first.)
@@ -421,7 +422,7 @@ Check here before searching again. Links pinned to a commit were current on
   square of the number of intervals divides the modulus, the split is even.
   Only applies to moduli with repeated factors, so outside pure wheel
   cycles; low priority.
-- **Done (node `LehmerExcess`, pending build; rests on `Sawtooth`).** Proved in the form of Codecà and Nair 1998, Thm 2 (read from the paper). **Lehmer's closed form for 6n-1-type wheels** (Lehmer 1955, Thm 8; not yet checked against Lehmer): when
+- **Done (node `LehmerExcess`; rests on `Sawtooth`).** Proved in the form of Codecà and Nair 1998, Thm 2 (read from the paper). **Lehmer's closed form for 6n-1-type wheels** (Lehmer 1955, Thm 8; not yet checked against Lehmer): when
   every wheel leaves remainder one less than the number of intervals, the
   excess in the first intervals has an exact formula. The 6n-1 side of
   Lehmer's picture, and the natural partner to `uniform_subdivision_minus_side`.
@@ -454,7 +455,7 @@ Check here before searching again. Links pinned to a commit were current on
   hypothesis.
 
 **From Birdsey and Schay (arXiv:1906.09220, 2019)**
-- **Done (node `TwinShare`, pending build; rests on `SurvivorCount` only).** **Twin share of the cycle** (Tier 1). Among all survivors of a cycle, the
+- **Done (node `TwinShare`; rests on `SurvivorCount` only).** **Twin share of the cycle** (Tier 1). Among all survivors of a cycle, the
   twin survivors make up exactly the product, over the wheels from 3 up, of
   the wheel size minus 2 over the wheel size minus 1. Follows from the two
   existing counts in `SurvivorCount`. A companion finite identity splits
@@ -469,7 +470,7 @@ Check here before searching again. Links pinned to a commit were current on
   them as cited hypotheses. This puts the paper's unproven assumption on
   the graph as an open input, separate from the exact wheel share.
 
-**Survivor share bounds (Tier 1)** — done (node `ShareBounds`, pending build; rests on `SurvivorCount`).
+**Survivor share bounds (Tier 1)** — done (node `ShareBounds`; rests on `SurvivorCount`).
 - **The survivor share shrinks at least like one over the logarithm.**
   After the wheels up to a given prime, the share of the cycle that
   survives is at most one over the logarithm of that prime plus one.
@@ -485,7 +486,7 @@ Check here before searching again. Links pinned to a commit were current on
   of the plain one. Checked for wheels up to 200,000.
 
 **From DeepMind's formal-conjectures (statements there, proofs not in it)**
-- **Done (node `InadmissibleOccurrences`, pending build).** **Inadmissible patterns sit next to their blocking wheel** (Tier 1). If
+- **Done (node `InadmissibleOccurrences`).** **Inadmissible patterns sit next to their blocking wheel** (Tier 1). If
   an offset pattern covers every position on some wheel, then every
   starting point where all members are prime has that wheel's prime as a
   member, so the pattern occurs only finitely often. Corollary: the

@@ -26,7 +26,7 @@ conclusions:
         solution: RNSSolutions/LinearForms.lean
         declaration: RNS.LinearForms.sophieGermainSystem_admissible_holds
         note: >-
-          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only because no Comparator
           receipt exists yet.
     designated: lean-proof
   - id: sophie_germain_of_LinearForms_conjecture
@@ -41,7 +41,7 @@ conclusions:
         solution: RNSSolutions/LinearForms.lean
         declaration: RNS.LinearForms.sophie_germain_of_LinearForms_conjecture_holds
         note: >-
-          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only because no Comparator
           receipt exists yet.
     designated: lean-proof
 

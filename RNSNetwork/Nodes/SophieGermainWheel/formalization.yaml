@@ -42,7 +42,7 @@ conclusions:
         solution: RNSSolutions/SophieGermainWheel.lean
         declaration: RNS.SophieGermainWheel.sophie_germain_not_ends_in_seven_holds
         note: >-
-          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only because no Comparator
           receipt exists yet.
     designated: lean-proof
   - id: sophie_germain_last_digit

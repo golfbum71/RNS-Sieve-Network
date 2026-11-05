@@ -28,7 +28,7 @@ conclusions:
         solution: RNSSolutions/SingularSeries.lean
         declaration: RNS.SingularSeries.delta_bound_holds
         note: >-
-          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only because no Comparator
           receipt exists yet.
     designated: lean-proof
   - id: factor_multipliable
@@ -42,7 +42,7 @@ conclusions:
         solution: RNSSolutions/SingularSeries.lean
         declaration: RNS.SingularSeries.factor_multipliable_holds
         note: >-
-          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only because no Comparator
           receipt exists yet.
     designated: lean-proof
   - id: hardy_littlewood_constant_pos
@@ -56,7 +56,7 @@ conclusions:
         solution: RNSSolutions/SingularSeries.lean
         declaration: RNS.SingularSeries.hardy_littlewood_constant_pos_holds
         note: >-
-          Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only because no Comparator
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only because no Comparator
           receipt exists yet.
     designated: lean-proof
   - id: local_density_factorization

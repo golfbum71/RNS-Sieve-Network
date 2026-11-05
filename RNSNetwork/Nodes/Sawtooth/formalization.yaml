@@ -25,7 +25,7 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/Sawtooth.lean
     declaration: RNS.Sawtooth.legendre_count_holds
-    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only
       because no Comparator receipt exists yet.
   designated: lean-proof
 - id: sawtooth_identity
@@ -40,7 +40,7 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/Sawtooth.lean
     declaration: RNS.Sawtooth.sawtooth_identity_holds
-    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only
       because no Comparator receipt exists yet.
   designated: lean-proof
 - id: even_split_iff_remainders_cancel
@@ -54,7 +54,7 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/Sawtooth.lean
     declaration: RNS.Sawtooth.even_split_iff_remainders_cancel_holds
-    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only
       because no Comparator receipt exists yet.
   designated: lean-proof
 - id: column_legendre_count
@@ -69,7 +69,7 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/Sawtooth.lean
     declaration: RNS.Sawtooth.column_legendre_count_holds
-    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only
       because no Comparator receipt exists yet.
   designated: lean-proof
 sources:
