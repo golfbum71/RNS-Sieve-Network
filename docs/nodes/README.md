@@ -26,7 +26,7 @@
 | 20 | [`DudekJohnston`](DudekJohnston.md) | a near-prime between every pair of squares | cited from a published paper; not proved in Lean |
 | 21 | [`UniformSubdivision`](UniformSubdivision.md) | equal shares of survivors in equal intervals | proved in Lean |
 | 22 | [`LehmerSplit`](LehmerSplit.md) | Lehmer's even split | proved in Lean |
-| 23 | [`SurvivorSymmetry`](SurvivorSymmetry.md) | survivors are mirror-symmetric | proof drafted, not yet built |
+| 23 | [`SurvivorSymmetry`](SurvivorSymmetry.md) | survivors are mirror-symmetric | proved in Lean |
 | 24 | [`SpreadBounds`](SpreadBounds.md) | how unevenly survivors can spread | proved in Lean |
 | 25 | [`ColumnAction`](ColumnAction.md) | how a wheel moves the columns | proved in Lean |
 | 26 | [`ShareBounds`](ShareBounds.md) | the survivor share falls like one over the logarithm | proved in Lean |

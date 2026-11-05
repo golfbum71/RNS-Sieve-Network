@@ -36,12 +36,13 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/SurvivorSymmetry.lean
     declaration: RNS.SurvivorSymmetry.survivor_count_reflection_step
     assembled: RNSSolutions/Assemble.lean (RNS.SurvivorSymmetry.survivor_count_reflection_holds)
-    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved. Checked
-      numerically beforehand on 44,628 cases.
+    note: Lean proof of the step from the position-by-position mirror, checked by the GitHub Actions
+      build (standard axioms only, 2026-11-05, run 42061420167). Checked numerically beforehand on
+      44,628 cases. Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 sources:
 - title: Legendre's formula (MathWorld), the identity phi(t, k) = phi(m_k) - phi(m_k - t - 1, k)
