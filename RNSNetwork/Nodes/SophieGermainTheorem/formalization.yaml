@@ -1,0 +1,53 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: SophieGermainTheorem.v1
+  family: SophieGermainTheorem
+  version: v1
+  order: 55
+  kind: paper
+  status: active
+  title: the first case of Fermat's Last Theorem for Sophie Germain primes
+  description: For a prime p with 2p+1 prime, any integer solution of x^p + y^p + z^p = 0 has p dividing
+    x y z; so for odd p, x^p + y^p = z^p has no solution with p dividing none of x, y, z. The proof runs
+    on the wheel of size 2p+1, using SophieGermainPowers twice.
+conclusions:
+- id: sophie_germain_theorem
+  declaration: RNS.SophieGermainTheorem.sophie_germain_theorem
+  summary: For a prime p with 2p+1 prime, any integer solution of x^p + y^p + z^p = 0 has p dividing
+    x y z.
+  imports:
+  - SophieGermainPowers.v1.pth_power_positions
+  - SophieGermainPowers.v1.three_powers_blocked
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/SophieGermainTheorem.lean
+    declaration: RNS.SophieGermainTheorem.sophie_germain_theorem_step
+    assembled: RNSSolutions/Assemble.lean (RNS.SophieGermainTheorem.sophie_germain_theorem_holds)
+    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+  designated: lean-proof
+- id: fermat_first_case
+  declaration: RNS.SophieGermainTheorem.fermat_first_case
+  summary: For an odd prime p with 2p+1 prime, any integer solution of x^p + y^p = z^p has p dividing
+    x y z.
+  imports:
+  - SophieGermainTheorem.v1.sophie_germain_theorem
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/SophieGermainTheorem.lean
+    declaration: RNS.SophieGermainTheorem.fermat_first_case_step
+    assembled: RNSSolutions/Assemble.lean (RNS.SophieGermainTheorem.fermat_first_case_holds)
+    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+  designated: lean-proof
+sources:
+- title: B. Ballenghien, Sophie Germain's Theorem (Isabelle Archive of Formal Proofs, 2025)
+  url: https://www.isa-afp.org/entries/Sophie_Germain.html
+  relationship: the same theorem formalized in Isabelle; no Lean formalization was found
+- title: Sophie Germain's theorem, worked case p = 5 (MathPages)
+  url: https://mathpages.com/home/kmath367/kmath367.htm
+  relationship: the classical argument followed here

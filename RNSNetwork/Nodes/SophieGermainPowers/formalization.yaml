@@ -1,0 +1,46 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: SophieGermainPowers.v1
+  family: SophieGermainPowers
+  version: v1
+  order: 54
+  kind: paper
+  status: active
+  title: on the wheel of size 2p+1, p-th powers have three positions
+  description: For a Sophie Germain prime p, every p-th power sits at position 0, 1 or -1 on the wheel of
+    size 2p+1 (Fermat's little theorem). So if the wheel blocks a sum of three p-th powers, it blocks one
+    of the three numbers. The two wheel facts behind Sophie Germain's theorem.
+conclusions:
+- id: pth_power_positions
+  declaration: RNS.SophieGermainPowers.pth_power_positions
+  summary: On the wheel of size 2p+1, every p-th power sits at position 0, 1 or -1.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/SophieGermainPowers.lean
+    declaration: RNS.SophieGermainPowers.pth_power_positions_holds
+    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+  designated: lean-proof
+- id: three_powers_blocked
+  declaration: RNS.SophieGermainPowers.three_powers_blocked
+  summary: If the wheel of size 2p+1 divides x^p + y^p + z^p, it divides one of x, y, z.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/SophieGermainPowers.lean
+    declaration: RNS.SophieGermainPowers.three_powers_blocked_holds
+    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+  designated: lean-proof
+sources:
+- title: B. Ballenghien, Sophie Germain's Theorem (Isabelle Archive of Formal Proofs, 2025)
+  url: https://www.isa-afp.org/entries/Sophie_Germain.html
+  relationship: the same two lemmas, formalized in Isabelle
+- title: Sophie Germain's theorem, worked case p = 5 (MathPages)
+  url: https://mathpages.com/home/kmath367/kmath367.htm
+  relationship: the fifth powers modulo 11 are 0, 1, -1, and the three-term argument

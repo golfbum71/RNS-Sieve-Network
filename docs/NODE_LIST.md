@@ -395,6 +395,25 @@ Not stated: Erdős's 1962 result that Jacobsthal's function is typically close
 to its average-gap prediction. Its exact normalization could not be confirmed
 from a primary source, so it is left out rather than stated wrongly.
 
+### 54. `SophieGermainPowers` — on the wheel of size 2p+1, p-th powers have three positions
+For a Sophie Germain prime p, every p-th power sits at position 0, 1 or -1 on
+the wheel of size 2p+1 (Fermat's little theorem); so if that wheel blocks a
+sum of three p-th powers, it blocks one of the three numbers.
+- Lean: `pth_power_positions`, `three_powers_blocked`
+- Rests on: Vocabulary only
+- Status: DRAFT (2026-11-05), awaiting the GitHub Actions build.
+
+### 55. `SophieGermainTheorem` — Fermat's first case for Sophie Germain primes
+For a prime p with 2p+1 prime, x^p + y^p + z^p = 0 forces p to divide x y z;
+for odd p, x^p + y^p = z^p has no solution with p dividing none of x, y, z.
+The proof uses the wheel of size 2p+1 twice: on x, y, z, and on the p-th roots
+of the pairwise sums y+z, z+x, x+y.
+- Prior work: Sophie Germain (about 1823); formalized in Isabelle by
+  Ballenghien (2025). No Lean formalization found.
+- Lean: `sophie_germain_theorem`, `fermat_first_case`
+- Rests on: `SophieGermainPowers` (both claims)
+- Status: DRAFT (2026-11-05), awaiting the GitHub Actions build.
+
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence
 are `UniformSubdivision.frozen_wheels_repeat` and `one_wheel_removed`; the

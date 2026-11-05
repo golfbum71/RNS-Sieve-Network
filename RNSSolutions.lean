@@ -32,4 +32,6 @@ import RNSSolutions.BonseCeiling
 import RNSSolutions.PillaiBrauer
 import RNSSolutions.PrimeGapsBridge
 import RNSSolutions.RamanujanSums
+import RNSSolutions.SophieGermainPowers
+import RNSSolutions.SophieGermainTheorem
 import RNSSolutions.Assemble

@@ -30,6 +30,8 @@ import RNSSolutions.TwinShare
 import RNSSolutions.LehmerExcess
 import RNSSolutions.ShareBounds
 import RNSSolutions.BlockingRuns
+import RNSSolutions.SophieGermainPowers
+import RNSSolutions.SophieGermainTheorem
 
 /-!
 # Assembling the network
@@ -227,3 +229,19 @@ theorem RNS.BlockingRuns.longest_blocked_run_eq_max_gap_sub_one_holds :
 
 #print axioms RNS.BlockingRuns.blocked_run_is_shift_holds
 #print axioms RNS.BlockingRuns.longest_blocked_run_eq_max_gap_sub_one_holds
+
+/-- `SophieGermainPowers` → `SophieGermainTheorem`. -/
+theorem RNS.SophieGermainTheorem.sophie_germain_theorem_holds :
+    RNS.SophieGermainTheorem.sophie_germain_theorem :=
+  RNS.SophieGermainTheorem.sophie_germain_theorem_step
+    RNS.SophieGermainPowers.pth_power_positions_holds
+    RNS.SophieGermainPowers.three_powers_blocked_holds
+
+/-- `SophieGermainTheorem`: Fermat's first case, from Sophie Germain's theorem. -/
+theorem RNS.SophieGermainTheorem.fermat_first_case_holds :
+    RNS.SophieGermainTheorem.fermat_first_case :=
+  RNS.SophieGermainTheorem.fermat_first_case_step
+    RNS.SophieGermainTheorem.sophie_germain_theorem_holds
+
+#print axioms RNS.SophieGermainTheorem.sophie_germain_theorem_holds
+#print axioms RNS.SophieGermainTheorem.fermat_first_case_holds
