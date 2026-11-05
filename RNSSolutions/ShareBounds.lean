@@ -103,7 +103,7 @@ private theorem harmonic_le_prod (N : Nat) :
         push_cast
         rfl
     _ ≤ ∏ q ∈ active_primes (N + 1), ((q : Real) / ((q : Real) - 1)) := by
-        refine Finset.prod_le_prod (fun q _ => by positivity) (fun q hq => ?_)
+        refine Finset.prod_le_prod₀ (fun q _ => by positivity) (fun q hq => ?_)
         exact geom_factor_le q N (hS q hq).two_le
 
 /-- The plain share is the product over the wheels of the wheel size minus 1
@@ -189,7 +189,7 @@ theorem twin_share_le_two_inv_log_sq_step (htwin : twin_survivor_count)
         exact_mod_cast (show 3 ≤ q by omega)
       rw [if_neg h, if_neg h, one_mul, div_pow, div_le_div_iff₀ (by linarith) (by positivity)]
       nlinarith
-  have hle := Finset.prod_le_prod (fun q hq => by
+  have hle := Finset.prod_le_prod₀ (fun q hq => by
       by_cases h : q = 2
       · subst h
         norm_num
