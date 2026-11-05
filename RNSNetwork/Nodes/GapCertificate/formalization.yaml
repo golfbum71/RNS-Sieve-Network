@@ -22,10 +22,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GapCertificate.lean
     declaration: RNS.GapCertificate.survivor_gaps_even_holds
-    note: Lean proof drafted 2026-11-05; awaiting its first `lake build RNSSolutions`.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: survivor_gaps_30030_miss_20
   declaration: RNS.GapCertificate.survivor_gaps_30030_miss_20
@@ -34,10 +34,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GapCertificate.lean
     declaration: RNS.GapCertificate.survivor_gaps_30030_miss_20_holds
-    note: Lean proof drafted 2026-11-05; awaiting its first `lake build RNSSolutions`. Reduces every
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet. Reduces every
       occurrence to the first cycle, then checks the first cycle with `decide +kernel` in 30 blocks
       of 1001 (no `native_decide`).
   designated: lean-proof
@@ -49,10 +49,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GapCertificate.lean
     declaration: RNS.GapCertificate.survivor_gaps_30030_present_holds
-    note: Lean proof drafted 2026-11-05; awaiting its first `lake build RNSSolutions`.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: de_polignac_gap_guess_false
   declaration: RNS.GapCertificate.de_polignac_gap_guess_false
@@ -62,10 +62,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GapCertificate.lean
     declaration: RNS.GapCertificate.de_polignac_gap_guess_false_holds
-    note: Lean proof drafted 2026-11-05; awaiting its first `lake build RNSSolutions`.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: erdos_first_guess_fails_at_13
   declaration: RNS.GapCertificate.erdos_first_guess_fails_at_13
@@ -74,10 +74,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GapCertificate.lean
     declaration: RNS.GapCertificate.erdos_first_guess_fails_at_13_holds
-    note: Lean proof drafted 2026-11-05; awaiting its first `lake build RNSSolutions`.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 sources:
 - title: M. Ziller, On differences between consecutive numbers coprime to primorials, arXiv:2007.01808

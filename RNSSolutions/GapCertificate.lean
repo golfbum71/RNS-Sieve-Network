@@ -12,7 +12,8 @@ import Mathlib.Tactic.IntervalCases    -- the fourteen cases below 14
 
 Imports claims only, never other nodes' proofs. Rests on no other node.
 
-Drafted 2026-11-05; awaiting its first `lake build RNSSolutions`.
+Built clean by `lake build RNSSolutions` on 2026-11-05; `#print axioms` shows only
+the standard three.
 
 Idea. Survivorship repeats with the cycle, so a gap occurring anywhere also
 occurs starting inside the first cycle (`gapM_iff_exists_lt`). The first cycle
