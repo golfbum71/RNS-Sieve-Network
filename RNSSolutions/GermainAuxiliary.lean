@@ -12,6 +12,7 @@ import Mathlib.Algebra.Ring.GeomSum                               -- `Commute.ge
 import Mathlib.Data.Nat.Prime.Int                                 -- `Nat.prime_iff_prime_int`
 import Mathlib.FieldTheory.Finite.Basic                           -- remainders mod a prime form a field
 import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.NormNum.Prime                               -- `norm_num` proving small numbers prime
 
 /-!
 # Proofs for GermainAuxiliary
