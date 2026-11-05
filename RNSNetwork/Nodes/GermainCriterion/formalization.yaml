@@ -12,8 +12,9 @@ node:
   description: Cut the cycle of two prime wheels into a given number of equal parts. The survivors split
     evenly exactly when one wheel leaves remainder 1 on division by the number of parts, or the first
     wheel's square leaves remainder 1 and the second wheel is the negative of the first (Germain 2005,
-    Corollary 1.4). Built so far, the "if" half, by remainder arithmetic alone, and the analytic input, that an odd
-    primitive character's weighted residue sum is never zero. Next stage, the "only if"
+    Corollary 1.4). Built so far, the "if" half, by remainder arithmetic alone; the analytic input, that an odd
+    primitive character's weighted residue sum is never zero; and the character transform of the
+    remainder sum (Germain's (3.1)). Next stage, the "only if"
     half, which is Erdős's conjecture on Lehmer's even split, through odd Dirichlet characters and
     the nonvanishing of their L-functions at 1 (Mathlib's LFunction_apply_one_ne_zero).
   improves: LehmerSplit gives an even split when one wheel leaves remainder 1, for any number of
@@ -77,11 +78,12 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.character_transform_holds
-    note: Lean proof drafted 2026-11-05; awaiting its first `lake build RNSSolutions`. Checked
-      numerically first for every character of 7, 8, 9, 12, 15, 16, 20 and 21 parts.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-05),
+      after a numerical check for every character of 7, 8, 9, 12, 15, 16, 20 and 21 parts. Recorded
+      as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 sources:
 - title: J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220

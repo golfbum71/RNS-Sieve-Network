@@ -38,7 +38,7 @@
 | 32 | [`BirdseySchay`](BirdseySchay.md) | Birdsey and Schay's heuristic, as a hypothesis | planned: conditional |
 | 33 | [`LargestGap`](LargestGap.md) | the largest gap from the proportional share | planned: new, not yet proved |
 | 34 | [`LehmerExcess`](LehmerExcess.md) | Lehmer's closed form for the 6n-1 type | proved in Lean |
-| 35 | [`GermainCriterion`](GermainCriterion.md) | Germain's exact criterion for an even split | proof drafted, not yet built |
+| 35 | [`GermainCriterion`](GermainCriterion.md) | Germain's exact criterion for an even split | proved in Lean |
 | 36 | [`Sawtooth`](Sawtooth.md) | the survivor count minus its proportional share | proved in Lean |
 | 40 | [`MertensThird`](MertensThird.md) | Mertens' third theorem | outside source: proved in Lean in another project |
 | 41 | [`PrimeNumberTheorem`](PrimeNumberTheorem.md) | the prime number theorem | outside source: proved in Lean in another project |
