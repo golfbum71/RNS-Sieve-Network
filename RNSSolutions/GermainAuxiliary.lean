@@ -17,6 +17,8 @@ import Mathlib.Tactic.NormNum.Prime                               -- `norm_num` 
 /-!
 # Proofs for GermainAuxiliary
 
+Built clean by the GitHub Actions build on 2026-11-05.
+
 Imports claims only, never other nodes' proofs. `auxiliary_prime_theorem`
 and the two wheel certificates rest on no other node;
 `sophie_germain_wheel_auxiliary` rests on `SophieGermainPowers`; the two

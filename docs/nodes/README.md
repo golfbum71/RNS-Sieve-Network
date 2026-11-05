@@ -56,6 +56,6 @@
 | 53 | [`GapMoments`](GapMoments.md) | the survivor gaps are spread as evenly as their average allows | cited from a published paper; not proved in Lean |
 | 54 | [`SophieGermainPowers`](SophieGermainPowers.md) | on the wheel of size 2p+1, p-th powers have three positions | proved in Lean |
 | 55 | [`SophieGermainTheorem`](SophieGermainTheorem.md) | the first case of Fermat's Last Theorem for Sophie Germain primes | proved in Lean |
-| 56 | [`GermainAuxiliary`](GermainAuxiliary.md) | Sophie Germain's theorem with any suitable wheel | proof drafted, not yet built |
+| 56 | [`GermainAuxiliary`](GermainAuxiliary.md) | Sophie Germain's theorem with any suitable wheel | proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

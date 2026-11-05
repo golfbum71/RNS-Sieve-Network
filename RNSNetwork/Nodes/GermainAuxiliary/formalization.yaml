@@ -22,10 +22,12 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainAuxiliary.lean
     declaration: RNS.GermainAuxiliary.auxiliary_prime_theorem_holds
-    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+    note: Complete Lean proof checked by the GitHub Actions build (lake build RNSSolutions, standard
+      axioms only, 2026-11-05, run 42046642073). Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 - id: sophie_germain_wheel_auxiliary
   declaration: RNS.GermainAuxiliary.sophie_germain_wheel_auxiliary
@@ -35,11 +37,13 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainAuxiliary.lean
     declaration: RNS.GermainAuxiliary.sophie_germain_wheel_auxiliary_step
     assembled: RNSSolutions/Assemble.lean (RNS.GermainAuxiliary.sophie_germain_wheel_auxiliary_holds)
-    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+    note: Complete Lean proof checked by the GitHub Actions build (lake build RNSSolutions, standard
+      axioms only, 2026-11-05, run 42046642073). Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 - id: auxiliary_seven
   declaration: RNS.GermainAuxiliary.auxiliary_seven
@@ -48,10 +52,12 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainAuxiliary.lean
     declaration: RNS.GermainAuxiliary.auxiliary_seven_holds
-    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+    note: Complete Lean proof checked by the GitHub Actions build (lake build RNSSolutions, standard
+      axioms only, 2026-11-05, run 42046642073). Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 - id: auxiliary_thirteen
   declaration: RNS.GermainAuxiliary.auxiliary_thirteen
@@ -60,10 +66,12 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainAuxiliary.lean
     declaration: RNS.GermainAuxiliary.auxiliary_thirteen_holds
-    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+    note: Complete Lean proof checked by the GitHub Actions build (lake build RNSSolutions, standard
+      axioms only, 2026-11-05, run 42046642073). Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 - id: fermat_first_case_seven
   declaration: RNS.GermainAuxiliary.fermat_first_case_seven
@@ -74,11 +82,13 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainAuxiliary.lean
     declaration: RNS.GermainAuxiliary.fermat_first_case_seven_step
     assembled: RNSSolutions/Assemble.lean (RNS.GermainAuxiliary.fermat_first_case_seven_holds)
-    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+    note: Complete Lean proof checked by the GitHub Actions build (lake build RNSSolutions, standard
+      axioms only, 2026-11-05, run 42046642073). Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 - id: fermat_first_case_thirteen
   declaration: RNS.GermainAuxiliary.fermat_first_case_thirteen
@@ -89,11 +99,13 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainAuxiliary.lean
     declaration: RNS.GermainAuxiliary.fermat_first_case_thirteen_step
     assembled: RNSSolutions/Assemble.lean (RNS.GermainAuxiliary.fermat_first_case_thirteen_holds)
-    note: DRAFT (2026-11-05); checked by the GitHub Actions build before being marked proved.
+    note: Complete Lean proof checked by the GitHub Actions build (lake build RNSSolutions, standard
+      axioms only, 2026-11-05, run 42046642073). Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 sources:
 - title: B. Ballenghien, Sophie Germain's Theorem (Isabelle Archive of Formal Proofs, 2025), section 5,

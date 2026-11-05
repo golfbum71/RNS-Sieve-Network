@@ -429,7 +429,8 @@ Germain primes, giving the first case of Fermat's Last Theorem for 7 and 13.
   `auxiliary_seven`, `auxiliary_thirteen`, `fermat_first_case_seven`,
   `fermat_first_case_thirteen`
 - Rests on: `SophieGermainPowers` (for the Sophie Germain link)
-- Status: DRAFT (2026-11-05), awaiting the GitHub Actions build.
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-05).
 
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence
