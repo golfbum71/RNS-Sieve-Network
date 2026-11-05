@@ -13,6 +13,8 @@ import Mathlib.Tactic.Ring
 /-!
 # Proofs for RamanujanSums
 
+Built clean by the GitHub Actions build on 2026-11-05.
+
 Imports claims only, never other nodes' proofs. Rests on no other node; the
 first three helper lemmas repeat ones in `RNSSolutions/Sawtooth.lean`, with
 complex numbers in place of integers.

@@ -372,7 +372,8 @@ the wheel divides the frequency, minus 1 if not.
 - Lean: `cycle_root`, `ramanujan_sum` (defined here; Mathlib has no Ramanujan
   sums), `ramanujan_wheel_product` (proved in `RNSSolutions/RamanujanSums.lean`)
 - Rests on: Vocabulary only
-- Status: DRAFT (2026-11-05), awaiting the GitHub Actions build.
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-05).
 
 ### 52. `BrunTwinSum` — the twin primes' reciprocals add up to a finite total
 - Prior work: Brun (1919). Its sieve heart is the twin share of `ShareBounds`.

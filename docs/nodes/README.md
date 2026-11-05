@@ -51,7 +51,7 @@
 | 48 | [`GallagherAverage`](GallagherAverage.md) | the wheel correction is 1 on average | cited from a published paper; not proved in Lean |
 | 49 | [`LongGaps`](LongGaps.md) | blocked runs become long prime gaps | outside source: proved in Lean in another project |
 | 50 | [`PrimeGapsBridge`](PrimeGapsBridge.md) | the network's admissibility is PrimeGapsLib's | proved in Lean |
-| 51 | [`RamanujanSums`](RamanujanSums.md) | the survivor pattern's frequencies, wheel by wheel | proof drafted, not yet built |
+| 51 | [`RamanujanSums`](RamanujanSums.md) | the survivor pattern's frequencies, wheel by wheel | proved in Lean |
 | 52 | [`BrunTwinSum`](BrunTwinSum.md) | the twin primes' reciprocals add up to a finite total | cited from a published paper; not proved in Lean |
 | 53 | [`GapMoments`](GapMoments.md) | the survivor gaps are spread as evenly as their average allows | cited from a published paper; not proved in Lean |
 
