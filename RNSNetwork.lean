@@ -43,3 +43,4 @@ import RNSNetwork.Nodes.SophieGermainPowers.Conclusions
 import RNSNetwork.Nodes.SophieGermainTheorem.Conclusions
 import RNSNetwork.Nodes.GermainAuxiliary.Conclusions
 import RNSNetwork.Nodes.GapCertificate.Conclusions
+import RNSNetwork.Nodes.Schatunowsky.Conclusions

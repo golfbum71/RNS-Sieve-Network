@@ -1,0 +1,66 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: Schatunowsky.v1
+  family: Schatunowsky
+  version: v1
+  order: 57
+  kind: paper
+  status: active
+  title: 30 is the largest number whose survivors are all prime
+  description: Treat a number as a cycle; its survivors are the numbers below it sharing no factor
+    with it. For 30 every survivor other than 1 is prime, and no larger number has this property
+    (Schatunowsky, 1893). The ceiling forces the wheels; Bonse's inequality then caps the number.
+conclusions:
+- id: ceiling_forces_wheels
+  declaration: RNS.Schatunowsky.ceiling_forces_wheels
+  summary: If every survivor of a number is prime, every prime whose square lies below the number
+    divides it.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/Schatunowsky.lean
+    declaration: RNS.Schatunowsky.ceiling_forces_wheels_holds
+    note: Lean proof drafted 2026-11-05; awaiting its first `lake build RNSSolutions`.
+  designated: lean-proof
+- id: thirty_survivors_all_prime
+  declaration: RNS.Schatunowsky.thirty_survivors_all_prime
+  summary: Every survivor of 30 other than 1 is prime.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/Schatunowsky.lean
+    declaration: RNS.Schatunowsky.thirty_survivors_all_prime_holds
+    note: Lean proof drafted 2026-11-05; awaiting its first `lake build RNSSolutions`.
+  designated: lean-proof
+- id: schatunowsky_bound
+  declaration: RNS.Schatunowsky.schatunowsky_bound
+  summary: A number whose survivors are all prime is at most 30 (Schatunowsky's theorem).
+  imports:
+  - BonseCeiling.v1.ceiling_inside_cycle
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/Schatunowsky.lean
+    declaration: RNS.Schatunowsky.schatunowsky_bound_step
+    assembled: RNSSolutions/Assemble.lean (RNS.Schatunowsky.schatunowsky_bound_holds)
+    note: Lean proof of the step from the imported claim, taken as a named hypothesis, drafted
+      2026-11-05; awaiting its first `lake build RNSSolutions`.
+  designated: lean-proof
+sources:
+- title: Schatunowsky's Theorem (ProofWiki), after S. O. Shatunovsky (1893)
+  url: https://proofwiki.org/wiki/Schatunowsky's_Theorem
+  relationship: the theorem this node proves; the classical proof uses the same ceiling argument
+- title: V. Pambuccian, Schatunowsky's theorem, Bonse's inequality, and Chebyshev's theorem in weak
+    fragments of Peano arithmetic, Math. Log. Quart. 61 (2015)
+  url: https://doi.org/10.1002/malq.201400064
+  relationship: shows Schatunowsky follows from Bonse's inequality, the route taken here
+- title: H. King and V. Pambuccian, Generalized Schatunowsky theorem in a weak arithmetic (2025)
+  url: https://arxiv.org/abs/2506.08256
+  relationship: the generalization (Kaneko–Nakai) for survivors of the wheels above a fixed prime

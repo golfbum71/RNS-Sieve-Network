@@ -32,6 +32,10 @@ def ceiling_inside_cycle : Prop :=
 
 **Proof:** `RNS.BonseCeiling.ceiling_inside_cycle_holds` in [`RNSSolutions/BonseCeiling.lean`](../../RNSSolutions/BonseCeiling.lean)
 
+## Used by
+
+- [`Schatunowsky`](Schatunowsky.md)
+
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/BonseCeiling/Conclusions.lean)

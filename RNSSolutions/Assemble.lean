@@ -34,6 +34,8 @@ import RNSSolutions.BlockingRuns
 import RNSSolutions.SophieGermainPowers
 import RNSSolutions.SophieGermainTheorem
 import RNSSolutions.GermainAuxiliary
+import RNSSolutions.BonseCeiling
+import RNSSolutions.Schatunowsky
 
 /-!
 # Assembling the network
@@ -277,3 +279,9 @@ theorem RNS.SurvivorSymmetry.survivor_count_reflection_holds :
     RNS.SurvivorSymmetry.survivor_reflection_holds
 
 #print axioms RNS.SurvivorSymmetry.survivor_count_reflection_holds
+
+/-- `BonseCeiling` → `Schatunowsky`: 30 is the largest number whose survivors are all prime. -/
+theorem RNS.Schatunowsky.schatunowsky_bound_holds : RNS.Schatunowsky.schatunowsky_bound :=
+  RNS.Schatunowsky.schatunowsky_bound_step RNS.BonseCeiling.ceiling_inside_cycle_holds
+
+#print axioms RNS.Schatunowsky.schatunowsky_bound_holds

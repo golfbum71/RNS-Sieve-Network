@@ -432,6 +432,20 @@ Germain primes, giving the first case of Fermat's Last Theorem for 7 and 13.
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
   Actions build, 2026-11-05).
 
+### 57. `Schatunowsky` — 30 is the largest number whose survivors are all prime
+Treat a number as a cycle: its survivors are the numbers below it sharing no
+factor with it. For 30 every survivor other than 1 is prime. If a prime's
+square lies below a number and the prime does not divide it, that square is a
+composite survivor; so every prime below the ceiling's root must be a wheel of
+the number. Bonse's inequality then puts the product of those wheels above
+the next ceiling once the wheels reach 7, and below that only 30 fits.
+- Prior work: Schatunowsky (1893); Pambuccian (2015) derives it from Bonse's
+  inequality.
+- Lean: `ceiling_forces_wheels`, `thirty_survivors_all_prime`,
+  `schatunowsky_bound`
+- Rests on: `BonseCeiling` (for the bound)
+- Status: Drafted 2026-11-05; awaiting its first build.
+
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence
 are `UniformSubdivision.frozen_wheels_repeat` and `one_wheel_removed`; the
