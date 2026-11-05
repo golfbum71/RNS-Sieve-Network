@@ -14,8 +14,8 @@ import Mathlib.Tactic.Linarith
 
 Imports claims only, never other nodes' proofs. Rests on no other node.
 
-DRAFT (2026-11-05): written without a Lean toolchain at hand; not yet built.
-Run `lake build RNSSolutions` before trusting it.
+Built clean by `lake build RNSSolutions` on 2026-11-05; `#print axioms` shows only
+the standard three.
 
 Idea (the classical proof, by strong induction over the primes). For a prime
 `p` from 11 on, Bertrand's postulate gives a prime `q` with `p/2 < q < p`.

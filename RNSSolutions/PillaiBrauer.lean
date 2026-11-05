@@ -10,8 +10,8 @@ import RNSNetwork.Nodes.PillaiBrauer.Conclusions
 
 Imports claims only, never other nodes' proofs. Rests on no other node.
 
-DRAFT (2026-11-05): written without a Lean toolchain at hand; not yet built.
-Run `lake build RNSSolutions` before trusting it. The two `decide` calls are
+Built clean by `lake build RNSSolutions` on 2026-11-05; `#print axioms` shows only
+the standard three. The two `decide` calls are
 finite checks (17 × 17 × 6 divisibility tests, and six divisibility tests);
 the witness was checked numerically beforehand.
 

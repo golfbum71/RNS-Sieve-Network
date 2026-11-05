@@ -36,11 +36,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/PillaiBrauer.lean
     declaration: RNS.PillaiBrauer.pillai_witness_17_holds
-    note: DRAFT (2026-11-05), written without a Lean toolchain; not yet built. A finite check by
-      decide.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: pillai_witness_17_repeats
   declaration: RNS.PillaiBrauer.pillai_witness_17_repeats
@@ -50,10 +50,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/PillaiBrauer.lean
     declaration: RNS.PillaiBrauer.pillai_witness_17_repeats_holds
-    note: DRAFT (2026-11-05), written without a Lean toolchain; not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 sources:
 - title: M. Waldschmidt, S. S. Pillai's work on consecutive integers (lecture notes, 2006)

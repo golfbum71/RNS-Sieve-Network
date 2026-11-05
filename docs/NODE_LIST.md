@@ -299,12 +299,12 @@ is smaller than the product of the wheels below it (their combined cycle).
 With 2, 3, 5 the ceiling 49 lies outside the cycle 30; once 7 is in, the
 ceiling 121 lies inside the cycle 210, and it stays inside.
 - Prior work: Bonse's inequality (1907).
-- Lean: `ceiling_inside_cycle` (proof drafted in `RNSSolutions/BonseCeiling.lean`;
+- Lean: `ceiling_inside_cycle` (proved in `RNSSolutions/BonseCeiling.lean`;
   no source file). Strong induction over the primes, using Bertrand's postulate
   from Mathlib.
 - Rests on: Vocabulary only
-- Status: DRAFT (2026-11-05), written without a Lean toolchain; awaiting
-  `lake build` and `#print axioms`.
+- Status: Clean. Proved; `#print axioms` shows only the standard three
+  (Geoffrey Fischer, 2026-11-05).
 
 ### 45. `PillaiBrauer` — runs where no member is coprime to all the others
 Among any 16 or fewer consecutive positive integers one is coprime to all the
@@ -313,9 +313,10 @@ every member of the run 2184 to 2200 shares one of 2, 3, 5, 7, 11, 13 with
 another member, and shifting by any multiple of the cycle 30030 keeps that.
 - Prior work: Pillai (1940), Brauer (1941).
 - Lean: `pillai_sixteen` (cited), `pillai_witness_17`,
-  `pillai_witness_17_repeats` (proofs drafted in `RNSSolutions/PillaiBrauer.lean`)
+  `pillai_witness_17_repeats` (proved in `RNSSolutions/PillaiBrauer.lean`)
 - Rests on: Vocabulary only
-- Status: DRAFT (2026-11-05), not yet built. The 16-or-fewer half was checked
+- Status: Clean for the two witness claims; `#print axioms` shows only the
+  standard three (Geoffrey Fischer, 2026-11-05). The 16-or-fewer half was checked
   numerically for every start up to 30030, which covers every position of the
   cycle; proving it in Lean is future work.
 

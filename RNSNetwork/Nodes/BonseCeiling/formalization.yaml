@@ -22,11 +22,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BonseCeiling.lean
     declaration: RNS.BonseCeiling.ceiling_inside_cycle_holds
-    note: DRAFT (2026-11-05), written without a Lean toolchain; not yet built. Uses Bertrand's
-      postulate from Mathlib.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 sources:
 - title: Bonse's inequality (Wikipedia), after H. Bonse, Archiv der Mathematik und Physik 3 (12) (1907),
