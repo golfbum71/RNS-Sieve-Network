@@ -143,11 +143,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.all_residues_split_iff_wheels_step
-    note: Lean proof drafted 2026-11-05 from Proposition 3.1 by dividing out the common factor of the
-      residue and k, and by passing to the conductor; awaiting its first build. Checked numerically
+    note: Lean proof from Proposition 3.1 by dividing out the common factor of the residue and k, and
+      by passing to the conductor; built clean 2026-11-05 (standard axioms only), a step until
+      HurwitzZetaZero is proved in Lean. Checked numerically
       first in 1,827 cases (moduli 2 to 30, up to three wheels), 479 of them even splits at every
       residue.
   designated: lean-proof
