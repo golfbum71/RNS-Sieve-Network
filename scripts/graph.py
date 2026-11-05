@@ -81,6 +81,11 @@ def is_cited(c):
     return designated(c).get("kind") == "literature"
 
 
+def is_draft(c):
+    """A proof written but not yet built: shown as a draft, never as proved."""
+    return designated(c).get("kind") == "lean-draft"
+
+
 def is_project_file(s):
     """A `sources` entry naming one of the project's own Lean files, not a publication."""
     return s.get("relationship") == "formalizes"
@@ -169,6 +174,8 @@ def topo_order(nodes, edges):
 def node_kind(n):
     """One of: verified, conditional_built, cited_built, planned, conditional, cited, new, external."""
     if n["built"]:
+        if any(is_draft(c) for c in n["conclusions"]):
+            return "draft"
         if any(is_cited(c) for c in n["conclusions"]):
             return "cited_built"
         if opens_of(n):
@@ -182,6 +189,7 @@ STATUS_WORDS = {
     "verified": "proved in Lean",
     "conditional_built": "proved in Lean; rests on open conjectures as hypotheses",
     "cited_built": "cited from a published paper; not proved in Lean",
+    "draft": "proof drafted, not yet built",
     "planned": "planned: proved in source file",
     "conditional": "planned: conditional",
     "cited": "planned: cited from a paper",
@@ -197,6 +205,8 @@ def status_word(n):
 def claim_word(c):
     if is_cited(c):
         return "cited"
+    if is_draft(c):
+        return "proof drafted, not yet built"
     if c.get("open_inputs"):
         return "proved in Lean, assuming open conjecture(s)"
     return "proved in Lean"
@@ -217,10 +227,11 @@ CLASSDEFS = """  classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional fill:#ffffff,stroke:#9a6700,color:#57606a,stroke-dasharray: 5 4;
   classDef cited fill:#ffffff,stroke:#0969da,color:#57606a,stroke-dasharray: 5 4;
   classDef new fill:#ffffff,stroke:#57606a,color:#57606a,stroke-dasharray: 5 4;
+  classDef draft fill:#ffffff,stroke:#1a7f37,color:#1f2328,stroke-width:2px,stroke-dasharray: 2 2;
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;"""
 
-KINDS = ["verified", "conditional_built", "cited_built", "planned", "conditional", "cited", "new",
+KINDS = ["verified", "conditional_built", "cited_built", "draft", "planned", "conditional", "cited", "new",
          "external"]
 
 
@@ -269,6 +280,7 @@ def network_mermaid(nodes, order):
             continue
         for c in n["conclusions"]:
             key = ("cited_built" if is_cited(c) else
+                   "draft" if is_draft(c) else
                    "conditional_built" if c.get("open_inputs") else "verified")
             groups[key].append(f"C_{nm}_{c['id']}")
     for cls, ids in groups.items():
@@ -315,7 +327,8 @@ def write_graph(nodes, order, edges):
     built = [nm for nm in order if nodes[nm]["built"]]
     planned = [nm for nm in order if not nodes[nm]["built"]]
     all_claims = [(nm, c) for nm in built for c in nodes[nm]["conclusions"]]
-    n_lean = sum(1 for _, c in all_claims if not is_cited(c))
+    n_lean = sum(1 for _, c in all_claims if not is_cited(c) and not is_draft(c))
+    n_draft = sum(1 for _, c in all_claims if is_draft(c))
     n_cited = sum(1 for _, c in all_claims if is_cited(c))
     n_arrows = sum(len(p) for p in edges.values())
     built_opens = []
@@ -326,6 +339,7 @@ def write_graph(nodes, order, edges):
 
     standing = (f"**Where things stand:** {len(built)} of {len(nodes)} nodes are built, holding "
                 f"{len(all_claims)} claims: {n_lean} proved in Lean"
+                + (f", {n_draft} with a proof drafted but not yet built" if n_draft else "")
                 + (f" and {n_cited} cited from a published paper" if n_cited else "")
                 + f". They are joined by {n_arrows} arrows, each a Lean-checked step.")
     if planned:
@@ -369,6 +383,8 @@ without opening a single proof.
   exact Lean statement, what it rests on, and where its proof lives.
 - **Green box:** proved in Lean. Every proof uses only the standard axioms
   `propext`, `Classical.choice` and `Quot.sound`.
+- **White box with a dotted green border:** a proof is drafted but has not
+  yet been built with `lake build`; not counted as proved.
 - **Green box with an amber border:** proved in Lean, but the claim is an
   implication whose hypotheses include an open conjecture. What is proved is
   "if the conjecture holds, then …" — never the conjecture.

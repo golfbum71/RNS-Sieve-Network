@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 31 of 40 nodes are built, holding 89 claims: 88 proved in Lean and 1 cited from a published paper. They are joined by 37 arrows, each a Lean-checked step. Of the other 9 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 4 are new work, stated or scoped but not yet proved; 4 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 34 of 43 nodes are built, holding 94 claims: 88 proved in Lean, 3 with a proof drafted but not yet built and 3 cited from a published paper. They are joined by 37 arrows, each a Lean-checked step. Of the other 9 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 4 are new work, stated or scoped but not yet proved; 4 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -17,6 +17,8 @@ without opening a single proof.
   exact Lean statement, what it rests on, and where its proof lives.
 - **Green box:** proved in Lean. Every proof uses only the standard axioms
   `propext`, `Classical.choice` and `Quot.sound`.
+- **White box with a dotted green border:** a proof is drafted but has not
+  yet been built with `lake build`; not counted as proved.
 - **Green box with an amber border:** proved in Lean, but the claim is an
   implication whose hypotheses include an open conjecture. What is proved is
   "if the conjecture holds, then …" — never the conjecture.
@@ -218,6 +220,17 @@ graph LR
   subgraph S_RoughInPrimeGaps["<b>43. RoughInPrimeGaps — almost every prime gap holds a survivor of the wheels below its length</b>"]
     P_RoughInPrimeGaps["<i>outside source: plby/lean-proofs</i>"]
   end
+  subgraph S_BonseCeiling["<b>44. BonseCeiling — from four wheels on, the ceiling sits inside one cycle</b>"]
+    C_BonseCeiling_ceiling_inside_cycle["ceiling_inside_cycle"]
+  end
+  subgraph S_PillaiBrauer["<b>45. PillaiBrauer — runs where no member is coprime to all the others</b>"]
+    C_PillaiBrauer_pillai_sixteen["pillai_sixteen"]
+    C_PillaiBrauer_pillai_witness_17["pillai_witness_17"]
+    C_PillaiBrauer_pillai_witness_17_repeats["pillai_witness_17_repeats"]
+  end
+  subgraph S_KanoldBound["<b>46. KanoldBound — every stretch of 2^k numbers holds a survivor of k wheels</b>"]
+    C_KanoldBound_stretch_holds_survivor["stretch_holds_survivor"]
+  end
   O_hardy_littlewood_conjecture{{"<i>open conjecture</i><br/>hardy_littlewood_conjecture"}}
   O_HL_conjecture_A{{"<i>open conjecture</i><br/>HL_conjecture_A"}}
   O_HL_conjecture_B{{"<i>open conjecture</i><br/>HL_conjecture_B"}}
@@ -290,11 +303,13 @@ graph LR
   classDef conditional fill:#ffffff,stroke:#9a6700,color:#57606a,stroke-dasharray: 5 4;
   classDef cited fill:#ffffff,stroke:#0969da,color:#57606a,stroke-dasharray: 5 4;
   classDef new fill:#ffffff,stroke:#57606a,color:#57606a,stroke-dasharray: 5 4;
+  classDef draft fill:#ffffff,stroke:#1a7f37,color:#1f2328,stroke-width:2px,stroke-dasharray: 2 2;
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   class C_Wheel6_prime_gt_three_is_candidate,C_CRT_crt_map_bijective,C_SquareRootShield_square_root_shield,C_Admissibility_admissible_of_large_primes,C_Admissibility_zero_two_admissible,C_Admissibility_zero_two_four_not_admissible,C_Admissibility_ap_offsets_admissible_iff,C_SurvivorCount_twin_survivor_count,C_SurvivorCount_local_survivor_count,C_SurvivorCount_general_survivor_count,C_SingularSeries_delta_bound,C_SingularSeries_factor_multipliable,C_SingularSeries_hardy_littlewood_constant_pos,C_SingularSeries_local_density_factorization,C_TwinConstant_twin_prime_constant_eq_classical,C_Pruning_valid_starting_residues_card_formula,C_WheelOrder_wheel_marginal_new_formula,C_WheelOrder_prime_gt_five_digit_ok,C_WheelOrder_wheel_gap_floor,C_ShieldCertificates_prime_of_shield_cover,C_ShieldCertificates_active_primes_cover,C_ShieldCertificates_family_prime_of_shield_cover,C_ShieldCertificates_forward_ap_prime_of_active_shield,C_ShieldCertificates_backward_ap_prime_of_active_shield,C_ShieldCertificates_tuple_prime_of_active_shield,C_ShieldCertificates_ap_hits_wheel,C_ShieldCertificates_ap_prime_run_length_lt_of_lt_start,C_ShieldCertificates_ap_prime_run_forces_divisibility,C_ShieldCertificates_window_prime_iff,C_ShieldCertificates_window_twin_iff,C_ShieldCertificates_backward_ap_hits_wheel,C_ShieldCertificates_backward_ap_prime_run_length_lt_of_above,C_ShieldCertificates_backward_ap_prime_run_forces_divisibility,C_Infinitude_euclid_primes_unbounded,C_Infinitude_squarefree_counting_no_finite_supply,C_ColumnStructure_columns_multiply,C_ColumnStructure_col_minus_periodicity,C_ColumnStructure_col_minus_has_minus_prime_factor,C_ColumnStructure_col_minus_composite_has_proper_minus_factor,C_DirichletColumns_col_minus_primes_infinite,C_DirichletColumns_col_plus_primes_infinite,C_DirichletColumns_col_minus_primes_unbounded,C_DirichletColumns_col_plus_primes_unbounded,C_LinearForms_sophieGermainSystem_admissible,C_SophieGermainWheel_sophie_germain_mod_six,C_SophieGermainWheel_sophie_germain_not_ends_in_seven,C_SophieGermainWheel_sophie_germain_last_digit,C_GapTracks_twin_prime_mod_six,C_GapTracks_cousin_prime_mod_six,C_GapTracks_sexy_prime_same_track,C_GapTracks_sexy_middle_not_always_blocked,C_GapTracks_prime_gap_forbidden_four_from_six_minus_one,C_GapTracks_prime_gap_forbidden_two_from_six_plus_one,C_GapTracks_prime_gap_same_track_of_six_dvd,C_UniformSubdivision_frozen_wheels_repeat,C_UniformSubdivision_one_wheel_removed,C_UniformSubdivision_uniform_subdivision,C_UniformSubdivision_uniform_subdivision_plus_side,C_UniformSubdivision_uniform_subdivision_minus_side,C_UniformSubdivision_column_frozen_repeat,C_UniformSubdivision_column_one_wheel_removed,C_LehmerSplit_lehmer_even_split,C_LehmerSplit_lehmer_even_split_column,C_SurvivorSymmetry_survivor_reflection,C_Sawtooth_legendre_count,C_Sawtooth_sawtooth_identity,C_Sawtooth_even_split_iff_remainders_cancel,C_Sawtooth_column_legendre_count,C_SpreadBounds_interval_spread_bound,C_SpreadBounds_column_imbalance_bound,C_ColumnAction_column_action,C_ShareBounds_survivor_share_le_inv_log,C_ShareBounds_twin_share_le_two_inv_log_sq,C_TwinShare_twin_share_eq_prod,C_TwinShare_twin_share_split,C_InadmissibleOccurrences_inadmissible_occurrence_contains_prime,C_InadmissibleOccurrences_gap_block_24242_unique,C_BlockingRuns_blocked_run_is_shift,C_BlockingRuns_longest_blocked_run_eq_max_gap_sub_one,C_LehmerExcess_lehmer_excess_closed_form verified;
   class C_HardyLittlewood_twin_prime_conjecture_implies_infinite_twin_primes,C_HensleyRichards_HL_A_and_B_incompatible,C_LinearForms_sophie_germain_of_LinearForms_conjecture,C_GapConjectures_legendre_of_jacobsthal,C_GapConjectures_brocard_of_four_survivors,C_GapConjectures_oppermann_of_bound,C_GapConjectures_andrica_of_oppermann,C_GapConjectures_legendre_of_oppermann conditional_built;
-  class C_DudekJohnston_dudek_johnston_statement cited_built;
+  class C_DudekJohnston_dudek_johnston_statement,C_PillaiBrauer_pillai_sixteen,C_KanoldBound_stretch_holds_survivor cited_built;
+  class C_BonseCeiling_ceiling_inside_cycle,C_PillaiBrauer_pillai_witness_17,C_PillaiBrauer_pillai_witness_17_repeats draft;
   class P_BirdseySchay conditional;
   class P_GapCertificate,P_CeilingOvershoot,P_LargestGap,P_GermainCriterion new;
   class P_JacobsthalQuadratic,P_MertensThird,P_PrimeNumberTheorem,P_RoughInPrimeGaps external;
@@ -397,6 +412,11 @@ graph LR
   click C_LehmerExcess_lehmer_excess_closed_form href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LehmerExcess.md#lehmer_excess_closed_form" _blank
   click P_GermainCriterion href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md" _blank
   click P_RoughInPrimeGaps href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RoughInPrimeGaps.md" _blank
+  click C_BonseCeiling_ceiling_inside_cycle href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BonseCeiling.md#ceiling_inside_cycle" _blank
+  click C_PillaiBrauer_pillai_sixteen href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PillaiBrauer.md#pillai_sixteen" _blank
+  click C_PillaiBrauer_pillai_witness_17 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PillaiBrauer.md#pillai_witness_17" _blank
+  click C_PillaiBrauer_pillai_witness_17_repeats href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PillaiBrauer.md#pillai_witness_17_repeats" _blank
+  click C_KanoldBound_stretch_holds_survivor href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/KanoldBound.md#stretch_holds_survivor" _blank
 ```
 
 ## What each result rests on
@@ -526,6 +546,11 @@ The results nothing else builds on, each with everything beneath it.
 - [`LehmerExcess.lehmer_excess_closed_form`](docs/nodes/LehmerExcess.md#lehmer_excess_closed_form) — proved in Lean
   - [`Sawtooth.sawtooth_identity`](docs/nodes/Sawtooth.md#sawtooth_identity) — proved in Lean
 - [`Sawtooth.even_split_iff_remainders_cancel`](docs/nodes/Sawtooth.md#even_split_iff_remainders_cancel) — proved in Lean
+- [`BonseCeiling.ceiling_inside_cycle`](docs/nodes/BonseCeiling.md#ceiling_inside_cycle) — proof drafted, not yet built
+- [`PillaiBrauer.pillai_sixteen`](docs/nodes/PillaiBrauer.md#pillai_sixteen) — cited
+- [`PillaiBrauer.pillai_witness_17`](docs/nodes/PillaiBrauer.md#pillai_witness_17) — proof drafted, not yet built
+- [`PillaiBrauer.pillai_witness_17_repeats`](docs/nodes/PillaiBrauer.md#pillai_witness_17_repeats) — proof drafted, not yet built
+- [`KanoldBound.stretch_holds_survivor`](docs/nodes/KanoldBound.md#stretch_holds_survivor) — cited
 
 ## What the network takes on trust
 
@@ -547,6 +572,8 @@ exactly the following, each recorded as such rather than claimed:
 **Published results, cited rather than proved in Lean:**
 
 - [`DudekJohnston.dudek_johnston_statement`](docs/nodes/DudekJohnston.md#dudek_johnston_statement) — Dudek and Johnston, Almost primes between all squares, arXiv:2501.18048 (2025), Theorem 1.2
+- [`PillaiBrauer.pillai_sixteen`](docs/nodes/PillaiBrauer.md#pillai_sixteen) — S. S. Pillai (1940), as stated in M. Waldschmidt's notes on Pillai's work (exact paper reference to be checked), main theorem
+- [`KanoldBound.stretch_holds_survivor`](docs/nodes/KanoldBound.md#stretch_holds_survivor) — H.-J. Kanold, Über eine zahlentheoretische Funktion von Jacobsthal, Math. Ann. 170 (1967), 314-326, the bound g(n) at most 2 to the number of prime factors of n, as quoted by Costello and Watts
 
 **Outside sources, proved in Lean elsewhere and cited here:**
 
@@ -619,6 +646,15 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 - [`RoughInPrimeGaps`](docs/nodes/RoughInPrimeGaps.md)
   - [A. Gafni and T. Tao, Rough numbers between consecutive primes, arXiv:2508.06463 (2025)](https://arxiv.org/abs/2508.06463) — the proof
   - [DeepMind formal-conjectures, Erdős Problem 682](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/682.lean) — the Lean statement
+- [`BonseCeiling`](docs/nodes/BonseCeiling.md)
+  - [Bonse's inequality (Wikipedia), after H. Bonse, Archiv der Mathematik und Physik 3 (12) (1907), 292-295](https://en.wikipedia.org/wiki/Bonse%27s_inequality) — the inequality this node proves, in the network's ceiling language
+  - [Bonse's Inequality along Subsequences of Primes, Integers 26 (2026)](https://math.colgate.edu/~integers/aa99/aa99.pdf) — survey of extensions (higher powers, Panaitopol, Zhang)
+- [`PillaiBrauer`](docs/nodes/PillaiBrauer.md)
+  - [M. Waldschmidt, S. S. Pillai's work on consecutive integers (lecture notes, 2006)](https://webusers.imj-prg.fr/%7Emichel.waldschmidt/articles/pdf/Kumbakonam21122006.pdf) — states both halves and the run from 2184 with shifts by multiples of 30030
+  - [Arithmetic Progressions in a Unique Factorization Domain (arXiv:1108.1267)](https://ar5iv.labs.arxiv.org/html/1108.1267) — history of Pillai's and Brauer's results and the arithmetic-progression form
+- [`KanoldBound`](docs/nodes/KanoldBound.md)
+  - [H.-J. Kanold, Über eine zahlentheoretische Funktion von Jacobsthal, Math. Ann. 170 (1967), 314-326](https://doi.org/10.1007/BF01350607) — the bound, cited
+  - [F. Costello and P. Watts, A short note on Jacobsthal's function (arXiv:1306.1064)](https://arxiv.org/abs/1306.1064) — quotes Kanold's bound and compares it with Stevens' and Iwaniec's
 
 ## Node index
 
@@ -664,3 +700,6 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 41 | [`PrimeNumberTheorem`](docs/nodes/PrimeNumberTheorem.md) | the prime number theorem | outside source: proved in Lean in another project |
 | 42 | [`JacobsthalQuadratic`](docs/nodes/JacobsthalQuadratic.md) | the quadratic bound on Jacobsthal's function | outside source: proved in Lean in another project |
 | 43 | [`RoughInPrimeGaps`](docs/nodes/RoughInPrimeGaps.md) | almost every prime gap holds a survivor of the wheels below its length | outside source: proved in Lean in another project |
+| 44 | [`BonseCeiling`](docs/nodes/BonseCeiling.md) | from four wheels on, the ceiling sits inside one cycle | proof drafted, not yet built |
+| 45 | [`PillaiBrauer`](docs/nodes/PillaiBrauer.md) | runs where no member is coprime to all the others | proof drafted, not yet built |
+| 46 | [`KanoldBound`](docs/nodes/KanoldBound.md) | every stretch of 2^k numbers holds a survivor of k wheels | cited from a published paper; not proved in Lean |

@@ -1,0 +1,39 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: KanoldBound.v1
+  family: KanoldBound
+  version: v1
+  order: 46
+  kind: paper
+  status: active
+  title: every stretch of 2^k numbers holds a survivor of k wheels
+  description: For any k prime wheels, every stretch of two to the k consecutive numbers contains a
+    survivor; so the largest survivor gap is at most two to the number of wheels. Kanold's explicit
+    bound on Jacobsthal's function, cited. Weaker than JacobsthalQuadratic for many wheels, but with no
+    hidden constant, so it can be evaluated for any concrete set of frozen wheels.
+conclusions:
+- id: stretch_holds_survivor
+  declaration: RNS.KanoldBound.stretch_holds_survivor
+  summary: For any set of prime wheels, every stretch of two to the number of wheels consecutive numbers
+    contains a survivor (cited).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: paper
+    kind: literature
+    source: H.-J. Kanold, Über eine zahlentheoretische Funktion von Jacobsthal, Math. Ann. 170 (1967),
+      314-326
+    locator: the bound g(n) at most 2 to the number of prime factors of n, as quoted by Costello and Watts
+    note: Published theorem, cited. Not reproduced in Lean. Checked numerically for every set of up to
+      six wheels from the primes up to 23 (2026-11-05).
+  designated: paper
+sources:
+- title: H.-J. Kanold, Über eine zahlentheoretische Funktion von Jacobsthal, Math. Ann. 170 (1967),
+    314-326
+  url: https://doi.org/10.1007/BF01350607
+  relationship: the bound, cited
+- title: F. Costello and P. Watts, A short note on Jacobsthal's function (arXiv:1306.1064)
+  url: https://arxiv.org/abs/1306.1064
+  relationship: quotes Kanold's bound and compares it with Stevens' and Iwaniec's

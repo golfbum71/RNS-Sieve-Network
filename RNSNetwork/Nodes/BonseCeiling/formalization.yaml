@@ -1,0 +1,38 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: BonseCeiling.v1
+  family: BonseCeiling
+  version: v1
+  order: 44
+  kind: paper
+  status: active
+  title: from four wheels on, the ceiling sits inside one cycle
+  description: For every prime from 11 on, its square (the ceiling of the wheels below it) is smaller
+    than the product of the wheels below it (their combined cycle). With wheels 2, 3, 5 the ceiling
+    49 lies outside the cycle 30; once 7 is in, the ceiling 121 lies inside the cycle 210, and it
+    stays inside from then on. This is Bonse's inequality.
+conclusions:
+- id: ceiling_inside_cycle
+  declaration: RNS.BonseCeiling.ceiling_inside_cycle
+  summary: For every prime from 11 on, its square is smaller than the product of the primes below it
+    (Bonse's inequality).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BonseCeiling.lean
+    declaration: RNS.BonseCeiling.ceiling_inside_cycle_holds
+    note: DRAFT (2026-11-05), written without a Lean toolchain; not yet built. Uses Bertrand's
+      postulate from Mathlib.
+  designated: lean-proof
+sources:
+- title: Bonse's inequality (Wikipedia), after H. Bonse, Archiv der Mathematik und Physik 3 (12) (1907),
+    292-295
+  url: https://en.wikipedia.org/wiki/Bonse%27s_inequality
+  relationship: the inequality this node proves, in the network's ceiling language
+- title: Bonse's Inequality along Subsequences of Primes, Integers 26 (2026)
+  url: https://math.colgate.edu/~integers/aa99/aa99.pdf
+  relationship: survey of extensions (higher powers, Panaitopol, Zhang)

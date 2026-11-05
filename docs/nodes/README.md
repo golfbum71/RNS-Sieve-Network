@@ -44,5 +44,8 @@
 | 41 | [`PrimeNumberTheorem`](PrimeNumberTheorem.md) | the prime number theorem | outside source: proved in Lean in another project |
 | 42 | [`JacobsthalQuadratic`](JacobsthalQuadratic.md) | the quadratic bound on Jacobsthal's function | outside source: proved in Lean in another project |
 | 43 | [`RoughInPrimeGaps`](RoughInPrimeGaps.md) | almost every prime gap holds a survivor of the wheels below its length | outside source: proved in Lean in another project |
+| 44 | [`BonseCeiling`](BonseCeiling.md) | from four wheels on, the ceiling sits inside one cycle | proof drafted, not yet built |
+| 45 | [`PillaiBrauer`](PillaiBrauer.md) | runs where no member is coprime to all the others | proof drafted, not yet built |
+| 46 | [`KanoldBound`](KanoldBound.md) | every stretch of 2^k numbers holds a survivor of k wheels | cited from a published paper; not proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

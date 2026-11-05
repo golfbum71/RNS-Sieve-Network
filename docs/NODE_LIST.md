@@ -293,6 +293,48 @@ the remainders cancel.
   16,065 cases (wheels from 2 to 13, up to 14 intervals, fractions past the
   end of the cycle included).
 
+### 44. `BonseCeiling` — from four wheels on, the ceiling sits inside one cycle
+For every prime from 11 on, its square (the ceiling of the wheels below it)
+is smaller than the product of the wheels below it (their combined cycle).
+With 2, 3, 5 the ceiling 49 lies outside the cycle 30; once 7 is in, the
+ceiling 121 lies inside the cycle 210, and it stays inside.
+- Prior work: Bonse's inequality (1907).
+- Lean: `ceiling_inside_cycle` (proof drafted in `RNSSolutions/BonseCeiling.lean`;
+  no source file). Strong induction over the primes, using Bertrand's postulate
+  from Mathlib.
+- Rests on: Vocabulary only
+- Status: DRAFT (2026-11-05), written without a Lean toolchain; awaiting
+  `lake build` and `#print axioms`.
+
+### 45. `PillaiBrauer` — runs where no member is coprime to all the others
+Among any 16 or fewer consecutive positive integers one is coprime to all the
+others (Pillai, cited). From 17 on this fails through the wheels up to 13:
+every member of the run 2184 to 2200 shares one of 2, 3, 5, 7, 11, 13 with
+another member, and shifting by any multiple of the cycle 30030 keeps that.
+- Prior work: Pillai (1940), Brauer (1941).
+- Lean: `pillai_sixteen` (cited), `pillai_witness_17`,
+  `pillai_witness_17_repeats` (proofs drafted in `RNSSolutions/PillaiBrauer.lean`)
+- Rests on: Vocabulary only
+- Status: DRAFT (2026-11-05), not yet built. The 16-or-fewer half was checked
+  numerically for every start up to 30030, which covers every position of the
+  cycle; proving it in Lean is future work.
+
+### 46. `KanoldBound` — every stretch of 2^k numbers holds a survivor of k wheels
+For any k prime wheels, every stretch of two to the k consecutive numbers
+contains a survivor, so the largest survivor gap is at most two to the number
+of wheels. Kanold's explicit bound on Jacobsthal's function.
+- Prior work: Kanold, Math. Ann. 170 (1967).
+- Lean: `stretch_holds_survivor` (cited, not proved)
+- Rests on: Vocabulary only
+- Status: Cited (2026-11-05). Checked numerically for every set of up to six
+  wheels from the primes up to 23. A Lean proof is future work.
+
+Not given new nodes, because the network already has them: Legendre's
+identities for the survivor count (periodicity and the one-wheel recurrence
+are `UniformSubdivision.frozen_wheels_repeat` and `one_wheel_removed`; the
+mirror is `SurvivorSymmetry`; the signed count is `Sawtooth.legendre_count`),
+and Dirichlet's theorem for the columns (`DirichletColumns`).
+
 ---
 
 ## Candidate formalizations (not yet started)
