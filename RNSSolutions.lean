@@ -19,4 +19,9 @@ import RNSSolutions.SophieGermainWheel
 import RNSSolutions.GapTracks
 import RNSSolutions.UniformSubdivision
 import RNSSolutions.LehmerSplit
+import RNSSolutions.Sawtooth
+import RNSSolutions.SurvivorSymmetry
+import RNSSolutions.ColumnAction
+import RNSSolutions.SpreadBounds
+import RNSSolutions.TwinShare
 import RNSSolutions.Assemble

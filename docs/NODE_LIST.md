@@ -273,6 +273,25 @@ so each interval is off by the two columns' difference in the overhang.
   standard three (Geoffrey Fischer, 2026-11-04). Checked numerically
   beforehand on 3,647 cases.
 
+### 36. `Sawtooth` — the survivor count minus its proportional share
+The survivors up to any point are a signed count over the ways of choosing
+some of the wheels: the bound divided by the product of the chosen wheels,
+plus for an even number chosen and minus for an odd number (Legendre). At a
+fraction of the cycle, the survivors minus their proportional share, times
+the fraction's denominator, are minus a signed sum of remainders, one for
+each choice of wheels. So the split at that fraction is even exactly when
+the remainders cancel.
+- Prior work: the classical identity (Legendre's count with the Möbius
+  function); the starting point of Germain, Canad. Math. Bull. 48 (2005),
+  Theorem 1.1, which writes it over divisors with fractional parts.
+- Lean: `legendre_count`, `sawtooth_identity`,
+  `even_split_iff_remainders_cancel` (proved in `RNSSolutions/Sawtooth.lean`;
+  no source file)
+- Rests on: Vocabulary only
+- Status: pending `lake build RNSSolutions`. Checked numerically beforehand on
+  16,065 cases (wheels from 2 to 13, up to 14 intervals, fractions past the
+  end of the cycle included).
+
 ---
 
 ## Candidate formalizations (not yet started)
@@ -382,17 +401,17 @@ Check here before searching again. Links pinned to a commit were current on
 - **Done (node `LehmerSplit`).** **Column form of Lehmer's split.** With wheels 2 and 3 frozen, if some
   wheel leaves remainder 1 on division by the least common multiple of 6
   and the number of intervals, each column splits evenly too. Checked.
-- **Mirror symmetry** (Lehmer 1955, Thm 1; Grob and Schmitt 2019, Thm 2).
+- **Done (node `SurvivorSymmetry`, pending build).** **Mirror symmetry** (Lehmer 1955, Thm 1; Grob and Schmitt 2019, Thm 2).
   A position survives exactly when its reflection in the cycle survives.
   (The interval-by-interval form needs exact endpoints; with rounded-down
   endpoints it fails, as the test showed.)
-- **Spread bound** (Lehmer 1955, Thms 9-10). Any two equal intervals'
+- **Done (node `SpreadBounds`, pending build; rests on `Sawtooth`).** **Spread bound** (Lehmer 1955, Thms 9-10). Any two equal intervals'
   survivor counts differ by at most two to the number of wheels. Checked.
-- **Column-imbalance bound.** With wheels 2 and 3 frozen, the two columns'
+- **Next (planned claim in `SpreadBounds`).** **Column-imbalance bound.** With wheels 2 and 3 frozen, the two columns'
   survivor counts up to any point differ by at most two to the number of
   remaining wheels. Proof by inclusion-exclusion with the column sign.
   Checked.
-- **Column action of a wheel.** Multiplying by a prime keeps the 6n-1 and
+- **Done (node `ColumnAction`, pending build; proved directly, no overlap needed).** **Column action of a wheel.** Multiplying by a prime keeps the 6n-1 and
   6n+1 columns in place if it leaves remainder 1 on division by 6, and
   swaps them if it leaves remainder 5. (The lemma behind both column forms;
   check overlap with `ColumnStructure` first.)
@@ -419,9 +438,13 @@ Check here before searching again. Links pinned to a commit were current on
   odd Dirichlet character for that number takes the value 1 at some wheel.
   The proof uses the nonvanishing of Dirichlet L-functions at 1; check
   what Mathlib provides before scoping.
+  Staged in three: (1) the sawtooth identity, now node `Sawtooth`;
+  (2) the character transform and the "if" direction; (3) the "only if"
+  direction, first with nonzero constants for odd characters as a named
+  hypothesis.
 
 **From Birdsey and Schay (arXiv:1906.09220, 2019)**
-- **Twin share of the cycle** (Tier 1). Among all survivors of a cycle, the
+- **Done (node `TwinShare`, pending build; rests on `SurvivorCount` only).** **Twin share of the cycle** (Tier 1). Among all survivors of a cycle, the
   twin survivors make up exactly the product, over the wheels from 3 up, of
   the wheel size minus 2 over the wheel size minus 1. Follows from the two
   existing counts in `SurvivorCount`. A companion finite identity splits

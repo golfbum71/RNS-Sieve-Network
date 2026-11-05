@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: SurvivorSymmetry.v1
@@ -7,17 +7,24 @@ node:
   version: v1
   order: 23
   kind: paper
-  status: planned
+  status: active
   title: survivors are mirror-symmetric
-  description: A position survives the wheels exactly when its reflection in the combined
-    cycle survives.
-conclusions: []
-planned:
-  source_status: New
-  rests_on: []
-  claims:
-  - survivor_reflection
-  tier: 'Tier 1: elementary.'
+  description: A position survives the wheels exactly when its reflection in the combined cycle survives.
+conclusions:
+- id: survivor_reflection
+  declaration: RNS.SurvivorSymmetry.survivor_reflection
+  summary: A position at or below the cycle length survives exactly when the cycle length minus the
+    position survives.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/SurvivorSymmetry.lean
+    declaration: RNS.SurvivorSymmetry.survivor_reflection_holds
+    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only
+      because no Comparator receipt exists yet.
+  designated: lean-proof
 sources:
 - title: D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357
   url: https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf

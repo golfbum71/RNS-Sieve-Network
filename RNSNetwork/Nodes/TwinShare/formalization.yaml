@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: TwinShare.v1
@@ -7,21 +7,43 @@ node:
   version: v1
   order: 27
   kind: paper
-  status: planned
+  status: active
   title: the twin share of the cycle
-  description: Among all survivors of a cycle, the twin survivors make up exactly the product
-    over the wheels from 3 up of the wheel size minus 2 over the wheel size minus 1. That
-    product splits into the partial twin-prime constant times the coprime share.
-conclusions: []
-planned:
-  source_status: New
-  rests_on:
-  - SurvivorCount
-  - TwinConstant
-  claims:
-  - twin_share_eq_prod
-  - twin_share_split
-  tier: 'Tier 1: from the two existing counts.'
+  description: Among all survivors of a cycle, the twin survivors make up exactly the product over
+    the wheels from 3 up of the wheel size minus 2 over the wheel size minus 1. That product splits
+    into the partial twin-prime constant times the coprime share.
+conclusions:
+- id: twin_share_eq_prod
+  declaration: RNS.TwinShare.twin_share_eq_prod
+  summary: The twin survivors of the cycle, as a share of the survivors of the pattern {0}, equal
+    the product over the odd active wheels of the wheel size minus 2 over the wheel size minus 1.
+  imports:
+  - SurvivorCount.v1.twin_survivor_count
+  - SurvivorCount.v1.general_survivor_count
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/TwinShare.lean
+    declaration: RNS.TwinShare.twin_share_eq_prod_step
+    assembled: RNSSolutions/Assemble.lean (RNS.TwinShare.twin_share_eq_prod_holds)
+    note: Lean proof of the step from the imported claims, taken as named hypotheses; the proof file
+      imports claims only, never proofs. Recorded as noncompliant only because no Comparator receipt
+      exists yet.
+  designated: lean-proof
+- id: twin_share_split
+  declaration: RNS.TwinShare.twin_share_split
+  summary: That product is the partial twin-prime constant times the share the odd wheels leave open.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/TwinShare.lean
+    declaration: RNS.TwinShare.twin_share_split_holds
+    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only
+      because no Comparator receipt exists yet.
+  designated: lean-proof
 sources:
 - title: J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220
   url: https://arxiv.org/abs/1906.09220

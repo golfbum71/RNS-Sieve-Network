@@ -24,6 +24,9 @@ import RNSSolutions.SophieGermainWheel
 import RNSSolutions.GapTracks
 import RNSSolutions.UniformSubdivision
 import RNSSolutions.LehmerSplit
+import RNSSolutions.Sawtooth
+import RNSSolutions.SpreadBounds
+import RNSSolutions.TwinShare
 
 /-!
 # Assembling the network
@@ -168,3 +171,16 @@ theorem RNS.LehmerSplit.lehmer_even_split_column_holds :
 
 #print axioms RNS.LehmerSplit.lehmer_even_split_holds
 #print axioms RNS.LehmerSplit.lehmer_even_split_column_holds
+
+/-- `Sawtooth` → `SpreadBounds`. -/
+theorem RNS.SpreadBounds.interval_spread_bound_holds : RNS.SpreadBounds.interval_spread_bound :=
+  RNS.SpreadBounds.interval_spread_bound_step RNS.Sawtooth.legendre_count_holds
+
+#print axioms RNS.SpreadBounds.interval_spread_bound_holds
+
+/-- `SurvivorCount` → `TwinShare`. -/
+theorem RNS.TwinShare.twin_share_eq_prod_holds : RNS.TwinShare.twin_share_eq_prod :=
+  RNS.TwinShare.twin_share_eq_prod_step RNS.SurvivorCount.twin_survivor_count_holds
+    RNS.SurvivorCount.general_survivor_count_holds
+
+#print axioms RNS.TwinShare.twin_share_eq_prod_holds

@@ -8,7 +8,7 @@ The survivors split evenly across a given number of equal intervals exactly when
 
 ## Planned
 
-**Will rest on:** [`LehmerSplit`](LehmerSplit.md)
+**Will rest on:** [`LehmerSplit`](LehmerSplit.md), [`Sawtooth`](Sawtooth.md)
 
 **Planned claims:** `germain_criterion`
 

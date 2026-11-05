@@ -78,10 +78,6 @@ def col_minus_composite_has_proper_minus_factor : Prop :=
 
 **Proof:** `RNS.ColumnStructure.col_minus_composite_has_proper_minus_factor_step` in [`RNSSolutions/ColumnStructure.lean`](../../RNSSolutions/ColumnStructure.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
-## Used by
-
-- [`ColumnAction`](ColumnAction.md)
-
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/ColumnStructure/Conclusions.lean)

@@ -16,6 +16,7 @@ planned:
   source_status: New
   rests_on:
   - LehmerSplit
+  - Sawtooth
   claims:
   - germain_criterion
   tier: 'Tier 3: uses the nonvanishing of Dirichlet L-functions at 1, which Mathlib provides

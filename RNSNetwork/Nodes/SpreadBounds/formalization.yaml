@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: SpreadBounds.v1
@@ -7,21 +7,39 @@ node:
   version: v1
   order: 24
   kind: paper
-  status: planned
+  status: active
   title: how unevenly survivors can spread
-  description: Any two equal intervals of the cycle hold survivor counts differing by at most
-    two to the number of wheels. With wheels 2 and 3 frozen, the two columns' survivor counts
-    up to any point differ by at most two to the number of remaining wheels.
-conclusions: []
+  description: Any two equal intervals of the cycle hold survivor counts differing by at most two
+    to the number of wheels. With wheels 2 and 3 frozen, the two columns' survivor counts up to any
+    point differ by at most two to the number of remaining wheels.
+conclusions:
+- id: interval_spread_bound
+  declaration: RNS.SpreadBounds.interval_spread_bound
+  summary: Two stretches of the same length hold survivor counts differing by at most two to the
+    number of wheels.
+  imports:
+  - Sawtooth.v1.legendre_count
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/SpreadBounds.lean
+    declaration: RNS.SpreadBounds.interval_spread_bound_step
+    assembled: RNSSolutions/Assemble.lean (RNS.SpreadBounds.interval_spread_bound_holds)
+    note: Lean proof of the step from the imported claim, taken as a named hypothesis; the proof
+      file imports claims only, never proofs. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
+  designated: lean-proof
 planned:
   source_status: New
   rests_on: []
   claims:
-  - interval_spread_bound
   - column_imbalance_bound
-  evidence: Both checked numerically (4,761 cases). The column imbalance reaches 18 at the
-    wheels up to 23, against a bound of 128.
+  evidence: Both checked numerically (4,761 cases). The column imbalance reaches 18 at the wheels
+    up to 23, against a bound of 128.
   tier: 'Tier 1: inclusion-exclusion.'
+  plan: Column form of Legendre's count (inclusion-exclusion over the wheels other than 2 and 3,
+    with ColumnAction's swap deciding each term's column), then the same term-by-term bound.
 sources:
 - title: D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357
   url: https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf

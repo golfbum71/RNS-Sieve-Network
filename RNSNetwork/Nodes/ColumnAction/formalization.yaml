@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: ColumnAction.v1
@@ -7,19 +7,25 @@ node:
   version: v1
   order: 25
   kind: paper
-  status: planned
+  status: active
   title: how a wheel moves the columns
-  description: Multiplying by a prime keeps the 6n-1 and 6n+1 columns in place if the prime
-    leaves remainder 1 on division by 6, and swaps them if it leaves remainder 5. The lemma
-    behind every column form in the network.
-conclusions: []
-planned:
-  source_status: New
-  rests_on:
-  - ColumnStructure
-  claims:
-  - column_action
-  plan: Check first whether ColumnStructure's multiplicative closure identities already give
-    it.
-  tier: 'Tier 1: modular arithmetic.'
+  description: Multiplying by a prime keeps the 6n-1 and 6n+1 columns in place if the prime leaves
+    remainder 1 on division by 6, and swaps them if it leaves remainder 5. The lemma behind every
+    column form in the network. Proved directly from remainders; ColumnStructure's columns_multiply
+    says the same for column entries.
+conclusions:
+- id: column_action
+  declaration: RNS.ColumnAction.column_action
+  summary: Multiplying by a number leaving remainder 1 on division by 6 keeps the column; by one
+    leaving remainder 5, swaps the 6n+1 and 6n-1 columns.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/ColumnAction.lean
+    declaration: RNS.ColumnAction.column_action_holds
+    note: Complete Lean proof checked by `lake build RNSSolutions`. Recorded as noncompliant only
+      because no Comparator receipt exists yet.
+  designated: lean-proof
 sources: []
