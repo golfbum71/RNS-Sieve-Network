@@ -28,6 +28,7 @@ RNSSolutions/<Node>.lean          the proofs
 RNSSolutions/Assemble.lean        joins the proofs along the arrows
 scripts/graph.py                  regenerates GRAPH.md and docs/nodes/
 docs/NODE_LIST.md                 the plain-language list of all planned nodes
+docs/NODE_STANDARDS.md            what every node must show: arrows, a plain note, sources
 ```
 
 **Every arrow is its own theorem.** A proof file imports other nodes' claims,
@@ -85,6 +86,10 @@ python scripts/graph.py
 `GRAPH.md` and `docs/nodes/` are generated from the `formalization.yaml` files
 and the claims in each `Conclusions.lean`. Edit those and re-run; never edit
 the generated pages by hand.
+
+Every node must meet [`docs/NODE_STANDARDS.md`](docs/NODE_STANDARDS.md): an
+arrow for each input from another node, a plain note on what the node is and
+what it adds, and links to the published source of anything not original.
 
 ## Related
 
