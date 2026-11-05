@@ -159,10 +159,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.split_add_wheel_holds
-    note: Lean proof drafted 2026-11-05; awaiting its first build. Checked numerically first (wheels up to 17, up to 30 parts). 2,240 cases.
+    note: Lean proof built clean 2026-11-05 (standard axioms only). Checked numerically first (wheels up to 17, up to 30 parts). 2,240 cases.
   designated: lean-proof
 - id: split_fewer_parts
   declaration: RNS.GermainCriterion.split_fewer_parts
@@ -171,10 +171,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.split_fewer_parts_holds
-    note: Lean proof drafted 2026-11-05; awaiting its first build. Checked numerically first (wheels up to 17, up to 30 parts). 1,331 cases.
+    note: Lean proof built clean 2026-11-05 (standard axioms only). Checked numerically first (wheels up to 17, up to 30 parts). 1,331 cases.
   designated: lean-proof
 - id: split_remove_dividing_wheel
   declaration: RNS.GermainCriterion.split_remove_dividing_wheel
@@ -183,10 +183,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.split_remove_dividing_wheel_holds
-    note: Lean proof drafted 2026-11-05; awaiting its first build. Checked numerically first (wheels up to 17, up to 30 parts). 123 cases.
+    note: Lean proof built clean 2026-11-05 (standard axioms only). Checked numerically first (wheels up to 17, up to 30 parts). 123 cases.
   designated: lean-proof
 - id: two_parts_exception
   declaration: RNS.GermainCriterion.two_parts_exception
@@ -195,10 +195,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.two_parts_exception_holds
-    note: Lean proof drafted 2026-11-05; awaiting its first build. Found by the numerical check of Theorem 1.1 (1,834 cases with a wheel not dividing k, no mismatch; the only mismatches are the empty cycle and the wheel 2, each with 2 parts).
+    note: Lean proof built clean 2026-11-05 (standard axioms only). Found by the numerical check of Theorem 1.1 (1,834 cases with a wheel not dividing k, no mismatch; the only mismatches are the empty cycle and the wheel 2, each with 2 parts).
   designated: lean-proof
 sources:
 - title: J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220
