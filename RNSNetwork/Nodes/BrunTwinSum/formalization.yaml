@@ -24,13 +24,31 @@ conclusions:
     source: V. Brun, La série 1/5 + 1/7 + 1/11 + 1/13 + ... où les dénominateurs sont nombres premiers
       jumeaux est convergente ou finie, Bull. Sci. Math. 43 (1919)
     locator: main theorem
-    note: Published theorem, cited. Not reproduced in Lean; a proof would combine Mathlib's Selberg
-      sieve (Mathlib.NumberTheory.SelbergSieve) with a Mertens-type estimate.
+    note: Published theorem, cited. Not reproduced in this repository.
+  - id: outside-lean
+    kind: external
+    source: lean-eval benchmark problem brun_constant_converges, accepted solutions from June 22 2026
+      on (Seed Prover, Aristotle, Tau, GPT-5.6)
+    locator: brun_constant_converges, Summable twinPrimeReciprocalTerm
+    note: Identified 2026-11-06, not yet checked here. Several machine-generated Lean proofs were
+      accepted by the benchmark's checker; most are in private repositories, and the one public gist
+      (GPT-5.6, accepted 2026-07-12) could not be read from the build session. Before relying on it,
+      read the proof, confirm `#print axioms` shows only the standard three, and match its statement
+      to brun_sum_finite.
   designated: paper
 sources:
 - title: Brun's theorem (lean-lang.org problem list, brun_constant_converges)
   url: https://lean-lang.org/eval/problems/brun_constant_converges/
-  relationship: the same statement in Lean, still open there as a formalization target
+  relationship: the same statement in Lean; solved there by several provers from June 22 2026 on
+- title: lean-eval submissions (accepted results, including brun_constant_converges)
+  url: https://github.com/leanprover/lean-eval-submissions
+  relationship: where the accepted solutions are recorded, with the solver repositories
+- title: Public Lean proof of brun_constant_converges (GPT-5.6, gist by Morgan-Griffiths)
+  url: https://gist.github.com/Morgan-Griffiths/31fe931d423ce48a65e7841a44bb3ae2
+  relationship: the one public accepted proof; not yet read or checked here
+- title: BrunPureSieve (this network)
+  url: https://github.com/golfbum71/RNS-Sieve-Network/blob/main/RNSNetwork/Nodes/BrunPureSieve/Conclusions.lean
+  relationship: Brun's truncated inclusion-exclusion for the wheels, proved here
 - title: Brun's theorem (Wikipedia)
   url: https://en.wikipedia.org/wiki/Brun%27s_theorem
   relationship: the theorem, the twin-prime count bound behind it, and Brun's constant

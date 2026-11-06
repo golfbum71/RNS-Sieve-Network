@@ -998,7 +998,10 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 - [`RamanujanSums`](docs/nodes/RamanujanSums.md)
   - [Ramanujan's sum (Wikipedia), with Kluyver's 1906 formula and von Sterneck's function](https://en.wikipedia.org/wiki/Ramanujan%27s_sum) — the classical evaluation; this node proves its squarefree case
 - [`BrunTwinSum`](docs/nodes/BrunTwinSum.md)
-  - [Brun's theorem (lean-lang.org problem list, brun_constant_converges)](https://lean-lang.org/eval/problems/brun_constant_converges/) — the same statement in Lean, still open there as a formalization target
+  - [Brun's theorem (lean-lang.org problem list, brun_constant_converges)](https://lean-lang.org/eval/problems/brun_constant_converges/) — the same statement in Lean; solved there by several provers from June 22 2026 on
+  - [lean-eval submissions (accepted results, including brun_constant_converges)](https://github.com/leanprover/lean-eval-submissions) — where the accepted solutions are recorded, with the solver repositories
+  - [Public Lean proof of brun_constant_converges (GPT-5.6, gist by Morgan-Griffiths)](https://gist.github.com/Morgan-Griffiths/31fe931d423ce48a65e7841a44bb3ae2) — the one public accepted proof; not yet read or checked here
+  - [BrunPureSieve (this network)](https://github.com/golfbum71/RNS-Sieve-Network/blob/main/RNSNetwork/Nodes/BrunPureSieve/Conclusions.lean) — Brun's truncated inclusion-exclusion for the wheels, proved here
   - [Brun's theorem (Wikipedia)](https://en.wikipedia.org/wiki/Brun%27s_theorem) — the theorem, the twin-prime count bound behind it, and Brun's constant
 - [`GapMoments`](docs/nodes/GapMoments.md)
   - [Distribution of squares modulo a composite number (arXiv:1502.05062), introduction](https://arxiv.org/abs/1502.05062) — states Erdős's conjecture (1.2), Hooley's partial result and Montgomery and Vaughan's proof
