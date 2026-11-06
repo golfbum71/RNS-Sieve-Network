@@ -341,10 +341,18 @@ For prime wheels, the gcds of (survivor minus one) with the cycle length, added
 over the survivors of one cycle, total the survivor count times two to the
 number of wheels.
 - Prior work: Menon, J. Indian Math. Soc. 29 (1965).
-- Lean: `menon_wheel_sum` (cited, not proved)
+- Lean: `menon_wheel_sum` (proved in `RNSSolutions/MenonIdentity.lean`)
 - Rests on: Vocabulary only
-- Status: Cited (2026-11-05). Checked numerically for every set of wheels from
-  the primes up to 13.
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-05). Checked numerically first for every set of wheels
+  from the primes up to 13.
+- How it is proved: the gcd is the sum of the totients of its divisors; swapping
+  the sums, each divisor d of the cycle counts the survivors leaving remainder 1
+  on division by d. Those are 1 + d·t for t below the cofactor e, and since d is
+  invertible modulo e their remainders run once through every remainder, so φ(e)
+  of them survive. Each divisor then gives φ(d)·φ(e) = φ(cycle), and the cycle
+  of k wheels has 2^k divisors. Elementary; no Chinese Remainder Theorem
+  machinery needed.
 
 ### 48. `GallagherAverage` — the wheel correction is 1 on average
 Averaged over all patterns of k distinct offsets from 1 to h, the

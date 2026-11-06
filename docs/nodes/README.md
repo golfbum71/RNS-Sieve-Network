@@ -47,7 +47,7 @@
 | 44 | [`BonseCeiling`](BonseCeiling.md) | from four wheels on, the ceiling sits inside one cycle | proved in Lean |
 | 45 | [`PillaiBrauer`](PillaiBrauer.md) | runs where no member is coprime to all the others | proved in Lean |
 | 46 | [`KanoldBound`](KanoldBound.md) | every stretch of 2^k numbers holds a survivor of k wheels | cited from a published paper; not proved in Lean |
-| 47 | [`MenonIdentity`](MenonIdentity.md) | a gcd sum over the survivors of one cycle | cited from a published paper; not proved in Lean |
+| 47 | [`MenonIdentity`](MenonIdentity.md) | a gcd sum over the survivors of one cycle | proved in Lean |
 | 48 | [`GallagherAverage`](GallagherAverage.md) | the wheel correction is 1 on average | cited from a published paper; not proved in Lean |
 | 49 | [`LongGaps`](LongGaps.md) | blocked runs become long prime gaps | outside source: proved in Lean in another project |
 | 50 | [`PrimeGapsBridge`](PrimeGapsBridge.md) | the network's admissibility is PrimeGapsLib's | proved in Lean |

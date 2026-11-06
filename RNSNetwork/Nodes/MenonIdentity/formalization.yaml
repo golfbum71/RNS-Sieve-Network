@@ -11,28 +11,29 @@ node:
   title: a gcd sum over the survivors of one cycle
   description: For prime wheels, add up over the survivors of one cycle the greatest common divisor of
     (the survivor minus one) with the cycle length; the total is the number of survivors times two to
-    the number of wheels. Menon's identity for a squarefree modulus, cited.
+    the number of wheels. Menon's identity for a squarefree modulus, proved.
 conclusions:
 - id: menon_wheel_sum
   declaration: RNS.MenonIdentity.menon_wheel_sum
   summary: Over the survivors of one cycle, the gcds of (survivor minus one) with the cycle length add up
-    to the survivor count times two to the number of wheels (cited).
+    to the survivor count times two to the number of wheels.
   imports: []
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/MenonIdentity.lean
     declaration: RNS.MenonIdentity.menon_wheel_sum_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   - id: paper
     kind: literature
     source: P. K. Menon, On the sum gcd(a-1, n) [(a, n) = 1], J. Indian Math. Soc. (N.S.) 29 (1965),
       155-163
     locator: the identity, specialised to a squarefree modulus
-    note: Published theorem, cited. Not reproduced in Lean. Checked numerically for every set of wheels
+    note: The published theorem, kept as the source of record; the Lean proof above reproduces it. Checked numerically for every set of wheels
       from the primes up to 13 (2026-11-05).
-  designated: paper
+  designated: lean-proof
 sources:
 - title: L. Tóth, Menon's identity and arithmetical sums representing functions of several variables
     (arXiv:1103.5861)

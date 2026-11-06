@@ -18,7 +18,8 @@ gcd(k - 1, n) over the k from 1 to n coprime to n equals the totient of n
 times the number of divisors of n. For the cycle of `k` prime wheels the
 number of divisors is two to the `k`.
 
-Cited, not proved in Lean. Checked numerically on 2026-11-05 for every set
+Proved in `RNSSolutions/MenonIdentity.lean` (elementary counting). Checked
+numerically first, on 2026-11-05, for every set
 of wheels drawn from the primes up to 13.
 
 Metadata: `formalization.yaml`.
@@ -26,7 +27,7 @@ Metadata: `formalization.yaml`.
 
 namespace RNS.MenonIdentity
 
-/-- **Menon's identity, wheel form** (cited). For a finite set `W` of prime
+/-- **Menon's identity, wheel form**. For a finite set `W` of prime
 wheels with cycle length `W.prod id`, the sum over the survivors `k` of one
 cycle of `gcd (k - 1, cycle length)` equals the number of survivors times
 two to the number of wheels. -/

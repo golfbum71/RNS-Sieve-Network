@@ -16,6 +16,9 @@ import Mathlib.Algebra.BigOperators.Group.Finset.Sigma  -- `Finset.sum_comm`
 
 Imports claims only, never other nodes' proofs. Rests on no other node.
 
+Built clean by `lake build RNSSolutions` on 2026-11-05; `#print axioms` shows only
+the standard three.
+
 Idea. Write the cycle length as `N`. The gcd of (survivor minus one) with `N`
 is the sum of the totients of its divisors, which are the divisors `d` of `N`
 dividing (survivor minus one). Swapping the two sums, each divisor `d` of `N`
