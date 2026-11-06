@@ -471,6 +471,41 @@ could be offered to Mathlib.
   formula would still have to be tied to Mathlib's `hurwitzZeta` at s = 0 by
   analytic continuation.
 
+### 59. `FortunateCeiling` — what lands on a prime just above the cycle
+Add a number above 1 to the combined cycle of the wheels. If the sum is prime,
+a wheel dividing the number would divide the sum too, and the sum is larger
+than the wheel; so no wheel divides the number. The ceiling argument then
+applies: below the next prime's square the number is prime, a composite one is
+at least that square, and below the next prime's cube a composite one is a
+product of exactly two primes. This settles the RNS half of two open
+statements in DeepMind's `formal-conjectures`:
+- Fortune's conjecture (every Fortunate number is prime): every Fortunate
+  number is at least the next prime, and is prime whenever it lies below the
+  next prime's square, so the conjecture follows from that ceiling bound
+  (`fortune_of_ceiling`). The bound itself is open.
+- OEIS A038771 (smallest composite that lands on a prime): never below the next
+  prime's square, for every wheel count, which is the "ratio at least 1" half
+  of the Greathouse–Ordowski conjecture; and Kamenetsky's conjecture (always
+  two prime factors) holds whenever the value is below the next prime's cube
+  (`semiprime_conjecture_of_cube`). The cube bound is open.
+The definitions follow `formal-conjectures` (`Wikipedia/FortuneConjecture.lean`,
+`OEIS/38771.lean`) with the same wheels and indexing; two bridge claims tie
+Mathlib's `primorial` and the product of the first primes to the network's
+`primorial_modulus`.
+- Prior work: OEIS A005235, A038771; the existence of a composite that lands
+  on a prime uses Dirichlet's theorem, as in `formal-conjectures`' `a_n_exists`.
+- Lean: `shift_avoids_wheels`, `shift_prime_below_ceiling`,
+  `composite_shift_at_least_ceiling`, `composite_shift_semiprime_below_cube`,
+  `first_primes_eq_cycle`, `primorial_eq_cycle`, `fortunate_spec`,
+  `fortunate_at_least_next_prime`, `fortunate_prime_below_ceiling`,
+  `fortune_of_ceiling`, `smallest_composite_shift_spec`,
+  `smallest_composite_shift_floor`,
+  `smallest_composite_shift_semiprime_below_cube`, `semiprime_conjecture_of_cube`
+- Rests on: `ShieldCertificates` (`window_prime_iff`, for the three
+  prime-below-the-ceiling claims); everything else on Mathlib only
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-05).
+
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence
 are `UniformSubdivision.frozen_wheels_repeat` and `one_wheel_removed`; the

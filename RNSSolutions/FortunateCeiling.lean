@@ -19,6 +19,9 @@ Imports claims only, never other nodes' proofs. The prime-below-the-ceiling
 claims rest on `ShieldCertificates.window_prime_iff`, taken as a named
 hypothesis; everything else rests on Mathlib only.
 
+Built clean by `lake build RNSSolutions` on 2026-11-05; `#print axioms` shows only
+the standard three.
+
 Idea. Add a number above 1 to the cycle of the wheels below a bound. If the sum
 is prime, a wheel dividing the number would divide the sum as well, and the sum
 is bigger than the wheel, so no wheel divides it. Its smallest prime factor is

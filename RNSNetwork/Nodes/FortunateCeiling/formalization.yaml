@@ -27,10 +27,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/FortunateCeiling.lean
     declaration: RNS.FortunateCeiling.shift_avoids_wheels_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: shift_prime_below_ceiling
   declaration: RNS.FortunateCeiling.shift_prime_below_ceiling
@@ -40,11 +41,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/FortunateCeiling.lean
     declaration: RNS.FortunateCeiling.shift_prime_below_ceiling_step
     assembled: RNSSolutions/Assemble.lean (RNS.FortunateCeiling.shift_prime_below_ceiling_holds)
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: composite_shift_at_least_ceiling
   declaration: RNS.FortunateCeiling.composite_shift_at_least_ceiling
@@ -53,10 +55,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/FortunateCeiling.lean
     declaration: RNS.FortunateCeiling.composite_shift_at_least_ceiling_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: composite_shift_semiprime_below_cube
   declaration: RNS.FortunateCeiling.composite_shift_semiprime_below_cube
@@ -65,10 +68,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/FortunateCeiling.lean
     declaration: RNS.FortunateCeiling.composite_shift_semiprime_below_cube_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: first_primes_eq_cycle
   declaration: RNS.FortunateCeiling.first_primes_eq_cycle
@@ -77,10 +81,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/FortunateCeiling.lean
     declaration: RNS.FortunateCeiling.first_primes_eq_cycle_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: primorial_eq_cycle
   declaration: RNS.FortunateCeiling.primorial_eq_cycle
@@ -89,10 +94,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/FortunateCeiling.lean
     declaration: RNS.FortunateCeiling.primorial_eq_cycle_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: fortunate_spec
   declaration: RNS.FortunateCeiling.fortunate_spec
@@ -101,10 +107,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/FortunateCeiling.lean
     declaration: RNS.FortunateCeiling.fortunate_spec_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: fortunate_at_least_next_prime
   declaration: RNS.FortunateCeiling.fortunate_at_least_next_prime
@@ -113,10 +120,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/FortunateCeiling.lean
     declaration: RNS.FortunateCeiling.fortunate_at_least_next_prime_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: fortunate_prime_below_ceiling
   declaration: RNS.FortunateCeiling.fortunate_prime_below_ceiling
@@ -126,11 +134,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/FortunateCeiling.lean
     declaration: RNS.FortunateCeiling.fortunate_prime_below_ceiling_step
     assembled: RNSSolutions/Assemble.lean (RNS.FortunateCeiling.fortunate_prime_below_ceiling_holds)
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: fortune_of_ceiling
   declaration: RNS.FortunateCeiling.fortune_of_ceiling
@@ -140,11 +149,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/FortunateCeiling.lean
     declaration: RNS.FortunateCeiling.fortune_of_ceiling_step
     assembled: RNSSolutions/Assemble.lean (RNS.FortunateCeiling.fortune_of_ceiling_holds)
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: smallest_composite_shift_spec
   declaration: RNS.FortunateCeiling.smallest_composite_shift_spec
@@ -153,10 +163,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/FortunateCeiling.lean
     declaration: RNS.FortunateCeiling.smallest_composite_shift_spec_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: smallest_composite_shift_floor
   declaration: RNS.FortunateCeiling.smallest_composite_shift_floor
@@ -165,10 +176,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/FortunateCeiling.lean
     declaration: RNS.FortunateCeiling.smallest_composite_shift_floor_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: smallest_composite_shift_semiprime_below_cube
   declaration: RNS.FortunateCeiling.smallest_composite_shift_semiprime_below_cube
@@ -177,10 +189,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/FortunateCeiling.lean
     declaration: RNS.FortunateCeiling.smallest_composite_shift_semiprime_below_cube_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: semiprime_conjecture_of_cube
   declaration: RNS.FortunateCeiling.semiprime_conjecture_of_cube
@@ -190,10 +203,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/FortunateCeiling.lean
     declaration: RNS.FortunateCeiling.semiprime_conjecture_of_cube_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-05). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 sources:
 - title: Fortune's conjecture, formal-conjectures (Google DeepMind), Wikipedia/FortuneConjecture.lean

@@ -59,6 +59,6 @@
 | 56 | [`GermainAuxiliary`](GermainAuxiliary.md) | Sophie Germain's theorem with any suitable wheel | proved in Lean |
 | 57 | [`Schatunowsky`](Schatunowsky.md) | 30 is the largest number whose survivors are all prime | proved in Lean |
 | 58 | [`HurwitzZetaZero`](HurwitzZetaZero.md) | the Hurwitz zeta function at 0 | proved in Lean |
-| 59 | [`FortunateCeiling`](FortunateCeiling.md) | what lands on a prime just above the cycle (Fortune's conjecture, OEIS A038771) | proof drafted, not yet built |
+| 59 | [`FortunateCeiling`](FortunateCeiling.md) | what lands on a prime just above the cycle (Fortune's conjecture, OEIS A038771) | proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.
