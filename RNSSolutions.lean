@@ -40,4 +40,5 @@ import RNSSolutions.Schatunowsky
 import RNSSolutions.GermainCriterion
 import RNSSolutions.HurwitzZetaZero
 import RNSSolutions.FortunateCeiling
+import RNSSolutions.MenonIdentity
 import RNSSolutions.Assemble

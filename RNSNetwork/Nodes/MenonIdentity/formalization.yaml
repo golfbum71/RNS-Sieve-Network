@@ -20,6 +20,11 @@ conclusions:
   imports: []
   imports_status: none
   justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/MenonIdentity.lean
+    declaration: RNS.MenonIdentity.menon_wheel_sum_holds
+    note: Proof drafted, not yet built.
   - id: paper
     kind: literature
     source: P. K. Menon, On the sum gcd(a-1, n) [(a, n) = 1], J. Indian Math. Soc. (N.S.) 29 (1965),
