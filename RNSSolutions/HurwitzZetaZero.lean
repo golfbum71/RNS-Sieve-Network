@@ -178,7 +178,7 @@ theorem sawtooth_partial_sums_holds : sawtooth_partial_sums := by
     have h1 : ContinuousAt (fun r : ℝ => 1 - (r : ℂ) * w) 1 :=
       (continuous_const.sub (Complex.continuous_ofReal.mul continuous_const)).continuousAt
     have hc : ContinuousAt (fun r : ℝ => -Complex.log (1 - (r : ℂ) * w)) 1 :=
-      ((Complex.continuousAt_clog hslit).comp_of_eq h1 (by simp)).neg
+      ((continuousAt_clog hslit).comp_of_eq h1 (by simp)).neg
     have h2 := hc.tendsto
     simp only [Complex.ofReal_one, one_mul] at h2
     exact h2.mono_left nhdsWithin_le_nhds
