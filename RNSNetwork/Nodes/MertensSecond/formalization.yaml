@@ -1,0 +1,53 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: MertensSecond.v1
+  family: MertensSecond
+  version: v1
+  order: 68
+  kind: paper
+  status: active
+  improves: Supplies the upper bound on the sum of prime reciprocals that Brun's choice of stopping point
+    needs.
+  title: the sum of the reciprocals of the primes (Mertens' second theorem)
+  description: The sum of one over each prime up to x is log log x plus a constant plus a remainder at most
+    a constant over log x (outside claim, from PNT+); so it is at most log log x plus a constant.
+conclusions:
+- id: mertens_second_remainder
+  declaration: RNS.MertensSecond.mertens_second_remainder
+  summary: The sum of the prime reciprocals up to x is log log x plus a constant, with remainder at most a
+    constant over log x, for x at least 2 (outside source; PNT+ Mertens.sum_prime_div_eq with
+    Mertens.E₂p.abs_le, the two explicit constants replaced by some constant).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: outside-lean
+    kind: external
+    source: PrimeNumberTheoremAnd (PNT+), Mertens.sum_prime_div_eq and Mertens.E₂p.abs_le in
+      PrimeNumberTheoremAnd/IEANTN/Mertens.lean, commit 127b50e33f6033e2147921167a117af96d9ba4ea
+      (2026-10-19), Lean v4.35.0
+    locator: Mertens.E₂p.abs_le
+    note: PNT+ gives the constants explicitly (the constant M and log 4 + 6 + E₁); the claim here asks only
+      for some constants, so it follows from the two results directly. Mertens.lean was checked on
+      2026-11-06 to contain no sorry and no axiom at that commit; not rebuilt here (toolchain differs), so
+      `#print axioms` has not been run on it from this repository.
+  designated: outside-lean
+- id: prime_reciprocal_upper
+  declaration: RNS.MertensSecond.prime_reciprocal_upper
+  summary: The sum of the prime reciprocals up to x is at most log log x plus a constant, for x at least 2.
+  imports:
+  - MertensSecond.v1.mertens_second_remainder
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/MertensSecond.lean
+    declaration: RNS.MertensSecond.prime_reciprocal_upper_step
+    note: Step drafted, not yet built.
+  designated: lean-proof
+sources:
+- title: Mertens' theorems (Wikipedia)
+  url: https://en.wikipedia.org/wiki/Mertens%27_theorems
+- title: PrimeNumberTheoremAnd, Mertens.lean
+  url: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/main/PrimeNumberTheoremAnd/IEANTN/Mertens.lean

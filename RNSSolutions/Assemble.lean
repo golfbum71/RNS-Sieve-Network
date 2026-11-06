@@ -43,6 +43,8 @@ import RNSSolutions.BrunPureSieve
 import RNSSolutions.BrunTwinCount
 import RNSSolutions.BrunTruncation
 import RNSSolutions.BrunTwinBound
+import RNSSolutions.MertensSecond
+import RNSSolutions.BrunAnalytic
 
 /-!
 # Assembling the network
@@ -386,3 +388,20 @@ theorem RNS.BrunTwinBound.twin_sifted_bound_holds : RNS.BrunTwinBound.twin_sifte
     RNS.BrunTwinCount.twin_multiples_count_holds RNS.BrunTruncation.truncation_error_holds
 
 #print axioms RNS.BrunTwinBound.twin_sifted_bound_holds
+
+/-- `SurvivorCount`, `ShareBounds` → `BrunAnalytic`: the twin product for the wheels below `L`. -/
+theorem RNS.BrunAnalytic.twin_product_bound_holds : RNS.BrunAnalytic.twin_product_bound :=
+  RNS.BrunAnalytic.twin_product_bound_step RNS.SurvivorCount.twin_survivor_count_holds
+    RNS.ShareBounds.twin_share_le_two_inv_log_sq_holds
+
+/-- `BrunTwinBound`, `BrunTruncation`, `MertensSecond` → `BrunAnalytic`: Brun's bound on the twin
+primes, with every arrow inside the network joined. The one remaining hypothesis is the outside claim
+`MertensSecond.mertens_second_remainder` (from PNT+). -/
+theorem RNS.BrunAnalytic.twin_prime_count_bound_of_mertens_second
+    (h : RNS.MertensSecond.mertens_second_remainder) : RNS.BrunAnalytic.twin_prime_count_bound :=
+  RNS.BrunAnalytic.twin_prime_count_bound_step RNS.BrunTwinBound.twin_sifted_bound_holds
+    RNS.BrunTwinBound.twin_count_le_sifted_holds RNS.BrunTruncation.esymm_power_bound_holds
+    RNS.BrunAnalytic.twin_product_bound_holds (RNS.MertensSecond.prime_reciprocal_upper_step h)
+
+#print axioms RNS.BrunAnalytic.twin_product_bound_holds
+#print axioms RNS.BrunAnalytic.twin_prime_count_bound_of_mertens_second

@@ -52,3 +52,5 @@ import RNSSolutions.Assemble
 import RNSSolutions.BrunTwinCount
 import RNSSolutions.BrunTruncation
 import RNSSolutions.BrunTwinBound
+import RNSSolutions.MertensSecond
+import RNSSolutions.BrunAnalytic

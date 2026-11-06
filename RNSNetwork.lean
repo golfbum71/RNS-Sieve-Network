@@ -57,3 +57,5 @@ import RNSNetwork.Nodes.HurwitzZetaZero.Conclusions
 import RNSNetwork.Nodes.BrunTwinCount.Conclusions
 import RNSNetwork.Nodes.BrunTruncation.Conclusions
 import RNSNetwork.Nodes.BrunTwinBound.Conclusions
+import RNSNetwork.Nodes.MertensSecond.Conclusions
+import RNSNetwork.Nodes.BrunAnalytic.Conclusions
