@@ -86,6 +86,23 @@ conclusions:
       take their imports as named hypotheses. Recorded as noncompliant only because no Comparator
       receipt exists yet.
   designated: lean-proof
+- id: pattern_share_asymptotic
+  declaration: RNS.ShareAsymptotics.pattern_share_asymptotic
+  summary: For every nonempty admissible offset pattern, with the wheels up to n, the pattern's share of
+    the cycle times log n to the number of offsets tends to its Hardy-Littlewood constant times e to the
+    minus Euler's constant to the number of offsets.
+  imports:
+  - SingularSeries.v1.local_density_factorization
+  - SingularSeries.v1.factor_multipliable
+  - MertensThird.v1.mertens_third
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/ShareAsymptotics.lean
+    declaration: RNS.ShareAsymptotics.pattern_share_asymptotic_step
+    note: Proof drafted, not yet built.
+  designated: lean-proof
 sources:
 - title: "Mertens' theorems (Wikipedia)"
   url: "https://en.wikipedia.org/wiki/Mertens%27_theorems"

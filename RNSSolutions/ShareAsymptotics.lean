@@ -6,6 +6,7 @@ Authors: Geoffrey Fischer
 import RNSNetwork.Nodes.ShareAsymptotics.Conclusions
 import RNSNetwork.Nodes.SurvivorCount.Conclusions
 import RNSNetwork.Nodes.TwinShare.Conclusions
+import RNSNetwork.Nodes.SingularSeries.Conclusions
 import Mathlib.Topology.Algebra.InfiniteSum.Basic       -- `Function.Injective.tprod_eq`
 import Mathlib.Analysis.SpecialFunctions.Log.Summable  -- `Real.multipliable_one_add_of_summable`
 import Mathlib.Analysis.PSeries                        -- `summable_one_div_nat_pow`
@@ -21,7 +22,8 @@ import Mathlib.Tactic.NormNum
 # Proofs for ShareAsymptotics
 
 Built clean by `lake build RNSSolutions` on 2026-11-06; `#print axioms` shows only
-the standard three.
+the standard three. (`pattern_share_asymptotic_step` added afterwards; see its
+metadata for its build status.)
 
 Imports claims only. Both claims are steps: from `SurvivorCount`'s
 `general_survivor_count`, `TwinShare`'s two twin-share claims, and
@@ -40,7 +42,7 @@ four over the prime squared), and Mertens gives the rest.
 
 namespace RNS.ShareAsymptotics
 
-open Filter Topology RNS.SurvivorCount RNS.TwinShare RNS.MertensThird
+open Filter Topology RNS.SurvivorCount RNS.TwinShare RNS.MertensThird RNS.SingularSeries
 
 private theorem mem_active {limit q : Nat} (hq : q ∈ active_primes limit) :
     q.Prime ∧ q < limit := by
@@ -187,9 +189,66 @@ theorem twin_share_asymptotic_classical_step (hgen : general_survivor_count)
   rw [← odd_twin_product_eq_classical_holds]
   exact h
 
+/-- A pattern's correction factor at the primes, extended by 1 to all whole
+numbers. -/
+private noncomputable def ext_factor (T : Finset ℕ) (m : ℕ) : ℝ :=
+  if m.Prime then singular_series_factor T m else 1
+
+/-- The plain wheel product up to `n` is Mertens' survivor share at `n`. -/
+private theorem prod_one_sub_eq (n : ℕ) :
+    ∏ q ∈ active_primes (n + 1), (1 - 1 / (q : ℝ)) = survivor_share (n : ℝ) := by
+  unfold survivor_share
+  rw [Nat.floor_natCast]
+
+theorem pattern_share_asymptotic_step (hld : local_density_factorization)
+    (hmul : factor_multipliable) (hm : mertens_third) : pattern_share_asymptotic := by
+  intro T hT hk
+  unfold mertens_third at hm
+  have hg : Function.Injective (fun p : Nat.Primes => (p : ℕ)) := Subtype.val_injective
+  have hf1 : ∀ x ∉ Set.range (fun p : Nat.Primes => (p : ℕ)), ext_factor T x = 1 := by
+    intro x hx
+    unfold ext_factor
+    rw [if_neg]
+    intro hp
+    exact hx ⟨⟨x, hp⟩, rfl⟩
+  have hcomp : (ext_factor T ∘ fun p : Nat.Primes => (p : ℕ)) =
+      fun p : Nat.Primes => singular_series_factor T p := by
+    funext p
+    show (if (p : ℕ).Prime then singular_series_factor T p else 1) = _
+    rw [if_pos p.prop]
+  have hmulT : Multipliable (ext_factor T) := by
+    refine (hg.multipliable_iff hf1).mp ?_
+    rw [hcomp]
+    exact hmul T hk
+  have hval : ∏' m, ext_factor T m = hardy_littlewood_constant T := by
+    unfold hardy_littlewood_constant
+    rw [← hg.tprod_eq (f := ext_factor T)
+      (fun x hx => by_contra fun hn => hx (hf1 x hn))]
+    refine tprod_congr fun p => ?_
+    show (if (p : ℕ).Prime then singular_series_factor T p else 1) = _
+    rw [if_pos p.prop]
+  have hpart : ∀ n : ℕ, ∏ i ∈ Finset.range (n + 1), ext_factor T i =
+      ∏ q ∈ active_primes (n + 1), singular_series_factor T q := by
+    intro n
+    unfold ext_factor
+    rw [← Finset.prod_filter]
+    first | rfl | simp [active_primes]
+  have ht := (hmulT.hasProd.tendsto_prod_nat).comp (tendsto_add_atTop_nat 1)
+  rw [hval] at ht
+  have hs := (hm.comp tendsto_natCast_atTop_atTop).pow T.card
+  have hc := ht.mul hs
+  refine Filter.Tendsto.congr (fun n => ?_) hc
+  show (∏ i ∈ Finset.range (n + 1), ext_factor T i) *
+      (survivor_share (n : ℝ) * Real.log (n : ℝ)) ^ T.card =
+    ((wheel_survivors_gen T (n + 1)).card : ℝ) / (primorial_modulus (n + 1) : ℝ) *
+      Real.log (n : ℝ) ^ T.card
+  rw [hld T (n + 1) hT hk, Finset.prod_pow, prod_one_sub_eq n, hpart n]
+  ring
+
 end RNS.ShareAsymptotics
 
 #print axioms RNS.ShareAsymptotics.survivor_share_asymptotic_step
 #print axioms RNS.ShareAsymptotics.twin_share_asymptotic_step
 #print axioms RNS.ShareAsymptotics.odd_twin_product_eq_classical_holds
 #print axioms RNS.ShareAsymptotics.twin_share_asymptotic_classical_step
+#print axioms RNS.ShareAsymptotics.pattern_share_asymptotic_step

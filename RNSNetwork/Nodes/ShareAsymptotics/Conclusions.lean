@@ -73,4 +73,16 @@ def twin_share_asymptotic_classical : Prop :=
     atTop (𝓝 (RNS.TwinConstant.twin_prime_classical_constant *
       Real.exp (-Real.eulerMascheroniConstant) ^ 2))
 
+/-- **Every admissible pattern's rate.** For a nonempty admissible offset
+pattern, with the wheels up to `n`, the share of the cycle surviving the
+pattern, times the logarithm of `n` to the number of offsets, tends to the
+pattern's Hardy–Littlewood constant times e to the minus Euler's constant, to
+the number of offsets. -/
+def pattern_share_asymptotic : Prop :=
+  ∀ T : Finset ℕ, is_admissible T → 1 ≤ T.card →
+    Tendsto (fun n : ℕ => ((wheel_survivors_gen T (n + 1)).card : ℝ) /
+        (primorial_modulus (n + 1) : ℝ) * Real.log n ^ T.card)
+      atTop (𝓝 (hardy_littlewood_constant T *
+        Real.exp (-Real.eulerMascheroniConstant) ^ T.card))
+
 end RNS.ShareAsymptotics
