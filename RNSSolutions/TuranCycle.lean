@@ -83,7 +83,7 @@ theorem turan_wheels_holds : turan_wheels := by
     · rintro ⟨⟨h1, h2⟩, h3⟩
       exact ⟨⟨by omega, h2⟩, by intro q hq; exact h3 hq⟩
     · rintro ⟨⟨h1, h2⟩, h3⟩
-      exact ⟨⟨by omega, h2⟩, by intro q hq; exact h3 q hq⟩
+      exact ⟨⟨by omega, h2⟩, by intro q hq; exact h3 hq⟩
   have h1 : (∑ m ∈ Finset.Ioc 0 N, (hits W m : ℤ)) = ∑ q ∈ W, ((N / q : Nat) : ℤ) := by
     rw [← Nat.cast_sum, ← Nat.cast_sum, hits_sum_holds W N]
   have h2 : (∑ m ∈ Finset.Ioc 0 N, (hits W m : ℤ) ^ 2) =
