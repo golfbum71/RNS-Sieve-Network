@@ -43,4 +43,5 @@ import RNSSolutions.FortunateCeiling
 import RNSSolutions.MenonIdentity
 import RNSSolutions.AlmostPrimeWindow
 import RNSSolutions.TuranCycle
+import RNSSolutions.BrunPureSieve
 import RNSSolutions.Assemble

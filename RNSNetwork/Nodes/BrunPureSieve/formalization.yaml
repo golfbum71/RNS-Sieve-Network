@@ -1,0 +1,69 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: BrunPureSieve.v1
+  family: BrunPureSieve
+  version: v1
+  order: 62
+  kind: paper
+  status: active
+  improves: SurvivorCount and Sawtooth count survivors exactly; this node shows how inclusion-exclusion
+    stopped early brackets that count from above and below, the step Brun's sieve and the fundamental
+    lemma are built on.
+  title: truncated inclusion-exclusion for the wheels (Brun's pure sieve)
+  description: Count the survivors of prime wheels among 1 to N by inclusion-exclusion over sets of
+    wheels. Stopping after the sets of at most an even number of wheels overcounts, stopping after an
+    odd number undercounts (the Bonferroni inequalities), and going all the way is exact (Legendre's
+    identity). Exact and finite; the starting point of Brun's sieve.
+conclusions:
+- id: bonferroni_even
+  declaration: RNS.BrunPureSieve.bonferroni_even
+  summary: Inclusion-exclusion stopped at an even number of wheels is at least the survivor count.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BrunPureSieve.lean
+    declaration: RNS.BrunPureSieve.bonferroni_even_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: bonferroni_odd
+  declaration: RNS.BrunPureSieve.bonferroni_odd
+  summary: Inclusion-exclusion stopped at an odd number of wheels is at most the survivor count.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BrunPureSieve.lean
+    declaration: RNS.BrunPureSieve.bonferroni_odd_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: legendre_exact
+  declaration: RNS.BrunPureSieve.legendre_exact
+  summary: Inclusion-exclusion over all sets of wheels gives the survivor count exactly (Legendre).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BrunPureSieve.lean
+    declaration: RNS.BrunPureSieve.legendre_exact_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+sources:
+- title: Brun sieve (Wikipedia)
+  url: https://en.wikipedia.org/wiki/Brun_sieve
+  relationship: Brun's pure sieve, whose truncation inequalities this node proves for the wheels
+- title: V. Brun, Le crible d'Eratosthène et le théorème de Goldbach, C. R. Acad. Sci. Paris 168 (1919)
+  url: https://en.wikipedia.org/wiki/Viggo_Brun
+  relationship: the origin of the truncated inclusion-exclusion method
+related:
+- node: SurvivorCount
+  note: "the exact count that the truncations bracket"
+- node: TuranCycle
+  note: "the other elementary sieve bound on the same positions"
+- node: BrunTwinSum
+  note: "Brun's theorem, the first application of his sieve (cited)"

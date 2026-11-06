@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 50 of 58 nodes are built, holding 161 claims: 156 proved in Lean and 5 cited from a published paper. They are joined by 62 arrows, each a Lean-checked step. Of the other 8 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 2 are new work, stated or scoped but not yet proved; 5 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 51 of 59 nodes are built, holding 164 claims: 156 proved in Lean, 3 with a proof drafted but not yet built and 5 cited from a published paper. They are joined by 62 arrows, each a Lean-checked step. Of the other 8 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 2 are new work, stated or scoped but not yet proved; 5 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -327,6 +327,11 @@ graph LR
     c160["turan_inequality"]
     c161["turan_wheels"]
   end
+  subgraph s59["<b>62. BrunPureSieve — truncated inclusion-exclusion for the wheels (Brun's pure sieve)</b>"]
+    c162["bonferroni_even"]
+    c163["bonferroni_odd"]
+    c164["legendre_exact"]
+  end
   o1{{"<i>open conjecture</i><br/>hardy_littlewood_conjecture"}}
   o2{{"<i>open conjecture</i><br/>HL_conjecture_A"}}
   o3{{"<i>open conjecture</i><br/>HL_conjecture_B"}}
@@ -428,6 +433,7 @@ graph LR
   class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c46,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78,c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c92,c93,c94,c95,c96,c97,c98,c99,c100,c101,c102,c103,c104,c105,c106,c107,c108,c109,c110,c111,c112,c113,c114,c115,c116,c117,c118,c119,c120,c122,c124,c125,c128,c129,c130,c131,c132,c133,c134,c135,c136,c137,c138,c139,c140,c141,c142,c143,c144,c145,c146,c147,c148,c149,c150,c151,c152,c153,c154,c155,c156,c157,c158,c159,c160,c161 verified;
   class c44,c45,c47,c48,c49,c50,c51,c52 conditional_built;
   class c63,c121,c123,c126,c127 cited_built;
+  class c162,c163,c164 draft;
   class p5 conditional;
   class p4,p6 new;
   class p1,p2,p3,p7,p8 external;
@@ -601,6 +607,9 @@ graph LR
   click c159 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TuranCycle.md#hits_sq_sum" _blank
   click c160 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TuranCycle.md#turan_inequality" _blank
   click c161 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TuranCycle.md#turan_wheels" _blank
+  click c162 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#bonferroni_even" _blank
+  click c163 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#bonferroni_odd" _blank
+  click c164 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#legendre_exact" _blank
 ```
 
 ## What each result rests on
@@ -818,6 +827,9 @@ The results nothing else builds on, each with everything beneath it.
 - [`TuranCycle.hits_sq_sum`](docs/nodes/TuranCycle.md#hits_sq_sum) — proved in Lean
 - [`TuranCycle.turan_inequality`](docs/nodes/TuranCycle.md#turan_inequality) — proved in Lean
 - [`TuranCycle.turan_wheels`](docs/nodes/TuranCycle.md#turan_wheels) — proved in Lean
+- [`BrunPureSieve.bonferroni_even`](docs/nodes/BrunPureSieve.md#bonferroni_even) — proof drafted, not yet built
+- [`BrunPureSieve.bonferroni_odd`](docs/nodes/BrunPureSieve.md#bonferroni_odd) — proof drafted, not yet built
+- [`BrunPureSieve.legendre_exact`](docs/nodes/BrunPureSieve.md#legendre_exact) — proof drafted, not yet built
 
 ## What the network takes on trust
 
@@ -1020,6 +1032,9 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 - [`TuranCycle`](docs/nodes/TuranCycle.md)
   - [Sieve theory (Wikipedia), the Turán sieve](https://en.wikipedia.org/wiki/Turán_sieve) — the sieve this node proves exactly for the wheels
   - [P. Turán, On a theorem of Hardy and Ramanujan, J. London Math. Soc. 9 (1934), 274-276](https://doi.org/10.1112/jlms/s1-9.4.274) — the second-moment argument (here for the number of wheels dividing a position)
+- [`BrunPureSieve`](docs/nodes/BrunPureSieve.md)
+  - [Brun sieve (Wikipedia)](https://en.wikipedia.org/wiki/Brun_sieve) — Brun's pure sieve, whose truncation inequalities this node proves for the wheels
+  - [V. Brun, Le crible d'Eratosthène et le théorème de Goldbach, C. R. Acad. Sci. Paris 168 (1919)](https://en.wikipedia.org/wiki/Viggo_Brun) — the origin of the truncated inclusion-exclusion method
 
 ## Node index
 
@@ -1083,3 +1098,4 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 59 | [`FortunateCeiling`](docs/nodes/FortunateCeiling.md) | what lands on a prime just above the cycle (Fortune's conjecture, OEIS A038771) | proved in Lean |
 | 60 | [`AlmostPrimeWindow`](docs/nodes/AlmostPrimeWindow.md) | survivors between the cutoff and its cube are primes or semiprimes | proved in Lean |
 | 61 | [`TuranCycle`](docs/nodes/TuranCycle.md) | Turán's sieve, exactly, on the positions 1 to N | proved in Lean |
+| 62 | [`BrunPureSieve`](docs/nodes/BrunPureSieve.md) | truncated inclusion-exclusion for the wheels (Brun's pure sieve) | proof drafted, not yet built |
