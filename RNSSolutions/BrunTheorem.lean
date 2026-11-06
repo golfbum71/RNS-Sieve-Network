@@ -76,7 +76,7 @@ theorem block_le (k : ℕ) : block k ≤ (twin_prime_count (2 ^ (k + 1)) : ℝ) 
   have hk : (0 : ℝ) < 2 ^ k := by positivity
   unfold block twin_reciprocal
   rw [← Finset.sum_filter]
-  have h1 : ∀ n ∈ (Finset.Ico (2 ^ k) (2 ^ (k + 1))).filter (fun n => n.Prime ∧ (n + 2).Prime),
+  have h1 : ∀ n : ℕ, n ∈ (Finset.Ico (2 ^ k) (2 ^ (k + 1))).filter (fun n => n.Prime ∧ (n + 2).Prime) →
       1 / (n : ℝ) + 1 / ((n : ℝ) + 2) ≤ 2 / 2 ^ k := by
     intro n hn
     rw [Finset.mem_filter, Finset.mem_Ico] at hn
