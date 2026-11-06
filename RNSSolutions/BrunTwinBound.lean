@@ -74,7 +74,7 @@ theorem twin_sifted_bound_step (hbon : twin_bonferroni_upper) (hcount : twin_mul
     have hDp : ∀ p ∈ D, p.Prime := fun p hp => hW p (hDW hp)
     have hc := hcount D N hDp
     rw [← twin_g_prod D]
-    rw [abs_le] at hc
+    rw [abs_le, mul_div_assoc] at hc
     rcases neg_one_pow_eq_or ℝ D.card with h | h <;> rw [h] <;> nlinarith [hc.1, hc.2]
   have hE := (htr W twin_g t hg).2
   rw [Even.neg_one_pow ht, one_mul] at hE
