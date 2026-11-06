@@ -520,6 +520,23 @@ Mathlib's `primorial` and the product of the first primes to the network's
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
   Actions build, 2026-11-05).
 
+### 60. `AlmostPrimeWindow` — survivors between the cutoff and its cube
+Take the wheels below a cutoff. From the cutoff up to its cube, a number no
+wheel divides is a prime or a product of exactly two primes: every prime
+factor is at least the cutoff, so three would already reach the cube. The
+composite survivors are exactly the products of two primes each at least the
+cutoff. This is the almost-prime mechanism behind Chen's theorem. It also
+places the parity problem exactly: in this window a survivor is prime
+precisely when its number of prime factors is odd, and the wheels by
+themselves cannot tell one factor from two.
+- Prior work: the standard step behind sifting at the cube root (Chen's
+  theorem); the parity problem (Selberg; Tao's 2007 exposition).
+- Lean: `window_almost_prime`, `window_composite_iff`,
+  `window_prime_iff_odd_factors`
+- Rests on: Vocabulary only. Generalises `FortunateCeiling`'s cube claim.
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-06).
+
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence
 are `UniformSubdivision.frozen_wheels_repeat` and `one_wheel_removed`; the

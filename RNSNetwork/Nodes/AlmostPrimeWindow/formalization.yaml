@@ -27,10 +27,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/AlmostPrimeWindow.lean
     declaration: RNS.AlmostPrimeWindow.window_almost_prime_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-06). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: window_composite_iff
   declaration: RNS.AlmostPrimeWindow.window_composite_iff
@@ -40,10 +41,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/AlmostPrimeWindow.lean
     declaration: RNS.AlmostPrimeWindow.window_composite_iff_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-06). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: window_prime_iff_odd_factors
   declaration: RNS.AlmostPrimeWindow.window_prime_iff_odd_factors
@@ -53,10 +55,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/AlmostPrimeWindow.lean
     declaration: RNS.AlmostPrimeWindow.window_prime_iff_odd_factors_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-06). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 sources:
 - title: Sieve theory (Wikipedia), almost primes, Chen's theorem and the parity problem

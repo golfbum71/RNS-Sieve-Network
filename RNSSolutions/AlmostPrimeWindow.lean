@@ -11,6 +11,9 @@ import Mathlib.Data.Nat.Prime.Basic               -- `Nat.not_prime_mul`
 
 Imports claims only, never other nodes' proofs. Rests on no other node.
 
+Built clean by `lake build RNSSolutions` on 2026-11-06; `#print axioms` shows only
+the standard three.
+
 Idea. Every prime factor of a number no wheel divides is at least the cutoff.
 If such a number is composite, write it as its smallest prime factor times a
 cofactor. The cofactor is at least the cutoff; if it were composite it would
