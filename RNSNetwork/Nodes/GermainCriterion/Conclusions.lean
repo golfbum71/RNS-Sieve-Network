@@ -177,4 +177,37 @@ def germain_theorem : Prop :=
         = a * (survivors_upto W (W.prod id)).card) ↔
       ∀ χ : DirichletCharacter ℂ k, χ.Odd → ∃ p ∈ W, χ (p : ZMod k) = 1)
 
+/-! ## Two wheels: Erdős's conjecture and Germain's Corollary 1.4 -/
+
+/-- **Character separation through odd characters.** For a residue `u` that is
+a unit modulo `k`: if every odd Dirichlet character modulo `k` equals 1 at `u`,
+then `u` is 1. (Every even character is a fixed odd one times an odd one; and
+modulo 1 or 2, where no odd character exists, the only unit is 1.) -/
+def eq_one_of_odd_characters : Prop :=
+  ∀ (k : Nat) [NeZero k] (u : ZMod k), IsUnit u →
+    (∀ χ : DirichletCharacter ℂ k, χ.Odd → χ u = 1) → u = 1
+
+/-- **Erdős's conjecture on Lehmer's even split** (proved by Hall and Shiu,
+2002; here by Germain's route, his Corollary 1.4 proof (ii)). For two different
+prime wheels `p` and `q` and a number of equal parts `k`: if the survivors
+split evenly into `k` parts, then `p` or `q` leaves remainder 1 on division by
+`k`, or `p` times `p` leaves remainder 1 and `p` plus `q` is a multiple of
+`k`. -/
+def two_wheel_remainders_of_split : Prop :=
+  ∀ p q k : Nat, p.Prime → q.Prime → p ≠ q → 0 < k →
+    (∀ a : Nat, k * (survivors_upto {p, q} (a * ({p, q} : Finset Nat).prod id / k)).card
+      = a * (survivors_upto {p, q} (({p, q} : Finset Nat).prod id)).card) →
+    (p % k = 1 % k ∨ q % k = 1 % k ∨ ((p * p) % k = 1 % k ∧ (p + q) % k = 0))
+
+/-- **Germain's Corollary 1.4: the two-wheel even split, exactly.** For two
+different prime wheels `p` and `q` and a number of equal parts `k`: the
+survivors split evenly into `k` parts exactly when `p` or `q` leaves remainder
+1 on division by `k`, or `p` times `p` leaves remainder 1 and `p` plus `q` is a
+multiple of `k`. -/
+def two_wheel_split_iff : Prop :=
+  ∀ p q k : Nat, p.Prime → q.Prime → p ≠ q → 0 < k →
+    ((∀ a : Nat, k * (survivors_upto {p, q} (a * ({p, q} : Finset Nat).prod id / k)).card
+      = a * (survivors_upto {p, q} (({p, q} : Finset Nat).prod id)).card) ↔
+    (p % k = 1 % k ∨ q % k = 1 % k ∨ ((p * p) % k = 1 % k ∧ (p + q) % k = 0)))
+
 end RNS.GermainCriterion

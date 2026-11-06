@@ -879,6 +879,199 @@ theorem germain_theorem_step
     rw [MulChar.map_nonunit _ hnu] at h1
     exact zero_ne_one h1
 
+/-! ## Two wheels: Erdős's conjecture and Germain's Corollary 1.4 -/
+
+/-- An odd character times an even one is odd. -/
+private theorem mul_odd_of_odd_even {k : Nat} {χ ψ : DirichletCharacter ℂ k} (hχ : χ.Odd)
+    (hψ : ψ.Even) : (χ * ψ).Odd := by
+  unfold DirichletCharacter.Odd at hχ ⊢
+  unfold DirichletCharacter.Even at hψ
+  rw [MulChar.mul_apply, hχ, hψ, mul_one]
+
+/-- A product of three odd characters is odd. -/
+private theorem mul_three_odd {k : Nat} {χ₁ χ₂ χ₃ : DirichletCharacter ℂ k} (h₁ : χ₁.Odd)
+    (h₂ : χ₂.Odd) (h₃ : χ₃.Odd) : (χ₁ * χ₂ * χ₃).Odd := by
+  unfold DirichletCharacter.Odd at h₁ h₂ h₃ ⊢
+  rw [MulChar.mul_apply, MulChar.mul_apply, h₁, h₂, h₃]
+  norm_num
+
+theorem eq_one_of_odd_characters_holds : eq_one_of_odd_characters := by
+  intro k _ u hu h
+  by_cases hm : (-1 : ZMod k) = 1
+  · -- modulo 1 or 2 the only unit is 1
+    obtain ⟨v, hv⟩ := hu.exists_right_inv
+    clear h hu
+    rcases ZMod.neg_one_eq_one_iff.mp hm with rfl | rfl
+    · clear hm
+      revert u v
+      decide
+    · clear hm
+      revert u v
+      decide
+  · -- otherwise there is an odd character, and every even one is odd times it
+    obtain ⟨χ₀, h₀⟩ := DirichletCharacter.exists_apply_ne_one_of_hasEnoughRootsOfUnity ℂ hm
+    have hodd₀ : χ₀.Odd := (DirichletCharacter.even_or_odd χ₀).resolve_left h₀
+    by_contra hne
+    obtain ⟨ψ, hψ⟩ := DirichletCharacter.exists_apply_ne_one_of_hasEnoughRootsOfUnity ℂ hne
+    rcases DirichletCharacter.even_or_odd ψ with he | ho
+    · have h1 := h (χ₀ * ψ) (mul_odd_of_odd_even hodd₀ he)
+      rw [MulChar.mul_apply, h χ₀ hodd₀, one_mul] at h1
+      exact hψ h1
+    · exact hψ (h ψ ho)
+
+/-- **The two-wheel character condition.** If every odd character is 1 at `x`
+or at `y`, then `x` is 1, or `y` is 1, or `x²` is 1 and `x·y` is `-1`. -/
+private theorem pair_cover {k : Nat} [NeZero k] {x y : ZMod k} (hx : IsUnit x) (hy : IsUnit y)
+    (h : ∀ χ : DirichletCharacter ℂ k, χ.Odd → χ x = 1 ∨ χ y = 1) :
+    x = 1 ∨ y = 1 ∨ (x * x = 1 ∧ -(x * y) = 1) := by
+  by_cases hx1 : ∀ χ : DirichletCharacter ℂ k, χ.Odd → χ x = 1
+  · exact Or.inl (eq_one_of_odd_characters_holds k x hx hx1)
+  by_cases hy1 : ∀ χ : DirichletCharacter ℂ k, χ.Odd → χ y = 1
+  · exact Or.inr (Or.inl (eq_one_of_odd_characters_holds k y hy hy1))
+  push_neg at hx1 hy1
+  obtain ⟨χ₁, ho₁, h₁⟩ := hx1
+  obtain ⟨χ₂, ho₂, h₂⟩ := hy1
+  have h₁y : χ₁ y = 1 := (h χ₁ ho₁).resolve_left h₁
+  have h₂x : χ₂ x = 1 := (h χ₂ ho₂).resolve_right h₂
+  -- no odd character is 1 at both `x` and `y`: else `χ₁ χ₂ χ` is 1 at neither
+  have hone : ∀ χ : DirichletCharacter ℂ k, χ.Odd → χ x = 1 → χ y ≠ 1 := by
+    intro χ ho hχx hχy
+    rcases h (χ₁ * χ₂ * χ) (mul_three_odd ho₁ ho₂ ho) with hh | hh
+    · simp only [MulChar.mul_apply, h₂x, hχx, mul_one] at hh
+      exact h₁ hh
+    · simp only [MulChar.mul_apply, h₁y, hχy, one_mul, mul_one] at hh
+      exact h₂ hh
+  -- every odd character squares to 1 at `x` (use `χ χ χ₂`) and at `y` (use `χ χ χ₁`)
+  have hsqx : ∀ χ : DirichletCharacter ℂ k, χ.Odd → χ x * χ x = 1 := by
+    intro χ ho
+    by_cases hχx : χ x = 1
+    · rw [hχx, mul_one]
+    · have hχy := (h χ ho).resolve_left hχx
+      rcases h (χ * χ * χ₂) (mul_three_odd ho ho ho₂) with hh | hh
+      · simp only [MulChar.mul_apply, h₂x, mul_one] at hh
+        exact hh
+      · simp only [MulChar.mul_apply, hχy, one_mul] at hh
+        exact absurd hh h₂
+  have hsqy : ∀ χ : DirichletCharacter ℂ k, χ.Odd → χ y * χ y = 1 := by
+    intro χ ho
+    by_cases hχy : χ y = 1
+    · rw [hχy, mul_one]
+    · have hχx := (h χ ho).resolve_right hχy
+      rcases h (χ * χ * χ₁) (mul_three_odd ho ho ho₁) with hh | hh
+      · simp only [MulChar.mul_apply, hχx, one_mul] at hh
+        exact absurd hh h₁
+      · simp only [MulChar.mul_apply, h₁y, mul_one] at hh
+        exact hh
+  refine Or.inr (Or.inr ⟨?_, ?_⟩)
+  · refine eq_one_of_odd_characters_holds k _ (hx.mul hx) (fun χ ho => ?_)
+    rw [map_mul]
+    exact hsqx χ ho
+  · refine eq_one_of_odd_characters_holds k _ (hx.mul hy).neg (fun χ ho => ?_)
+    have hm1 : χ (-1) = -1 := ho
+    rw [neg_eq_neg_one_mul, map_mul, map_mul, hm1]
+    by_cases hχx : χ x = 1
+    · have hy' : χ y = -1 :=
+        (mul_self_eq_one_iff.mp (hsqy χ ho)).resolve_left (hone χ ho hχx)
+      rw [hχx, hy']
+      norm_num
+    · have hχy := (h χ ho).resolve_left hχx
+      have hx' : χ x = -1 := (mul_self_eq_one_iff.mp (hsqx χ ho)).resolve_left hχx
+      rw [hχy, hx']
+      norm_num
+
+/-- A single prime wheel `q` never splits evenly into `q` parts. -/
+private theorem single_wheel_not_split (q : Nat) (hq : 1 < q) : ¬ remainders_cancel {q} q := by
+  intro h
+  have h1 : remSumN q (insert q ∅) 1 = 0 := h 1
+  rw [remSumN_insert q ∅ q 1 (Finset.notMem_empty q)] at h1
+  simp [remSumN, Nat.mod_eq_of_lt hq] at h1
+
+theorem two_wheel_remainders_of_split_step
+    (h_saw : RNS.Sawtooth.even_split_iff_remainders_cancel)
+    (h_hz : RNS.HurwitzZetaZero.hurwitz_zeta_at_zero) :
+    two_wheel_remainders_of_split := by
+  intro p q k hp hq hpq hk hsplit
+  haveI : NeZero k := ⟨hk.ne'⟩
+  have hW : ∀ r ∈ ({p, q} : Finset Nat), r.Prime := by
+    intro r hr
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hr
+    rcases hr with rfl | rfl
+    · exact hp
+    · exact hq
+  have hc : remainders_cancel {p, q} k := fun a => (h_saw {p, q} k a hW).mp (hsplit a)
+  have hc' : remainders_cancel {q, p} k := by
+    rw [Finset.pair_comm]
+    exact hc
+  have hq1 : ∀ r ∈ ({q} : Finset Nat), r.Prime := fun r hr => by
+    rw [Finset.mem_singleton.mp hr]
+    exact hq
+  have hp1 : ∀ r ∈ ({p} : Finset Nat), r.Prime := fun r hr => by
+    rw [Finset.mem_singleton.mp hr]
+    exact hp
+  have hpq' : p ∉ ({q} : Finset Nat) := by simpa using hpq
+  have hqp' : q ∉ ({p} : Finset Nat) := by simpa using hpq.symm
+  have unit : ∀ r : Nat, r.Prime → ¬ r ∣ k → IsUnit (r : ZMod k) := fun r hr hrk =>
+    (ZMod.isUnit_iff_coprime r k).mpr ((Nat.Prime.coprime_iff_not_dvd hr).mpr hrk)
+  have cast1 : ∀ r : Nat, (r : ZMod k) = 1 → r % k = 1 % k := fun r h => by
+    rw [← Nat.cast_one, ZMod.natCast_eq_natCast_iff'] at h
+    exact h
+  -- one wheel left, not dividing `k`: Corollary 3.2 and character separation
+  have single : ∀ r : Nat, r.Prime → ¬ r ∣ k → remainders_cancel {r} k → r % k = 1 % k := by
+    intro r hr hrk h
+    have hr1 : ∀ s ∈ ({r} : Finset Nat), s.Prime := fun s hs => by
+      rw [Finset.mem_singleton.mp hs]
+      exact hr
+    have h2 := (all_residues_split_iff_wheels_step h_hz k {r} (Finset.singleton_nonempty r) hr1
+      (fun s hs => by
+        rw [Finset.mem_singleton.mp hs]
+        exact hrk)).mp h
+    apply cast1
+    refine eq_one_of_odd_characters_holds k _ (unit r hr hrk) (fun χ ho => ?_)
+    obtain ⟨s, hs, h3⟩ := h2 χ ho
+    rw [Finset.mem_singleton.mp hs] at h3
+    exact h3
+  by_cases hpk : p ∣ k <;> by_cases hqk : q ∣ k
+  · -- both wheels divide `k`: remove `p`, then `q` alone cannot split into `q` parts
+    exfalso
+    have h1 : remainders_cancel {q} k :=
+      split_remove_dividing_wheel_holds {q} k p hq1 hp hpq' (Finset.singleton_nonempty q) hk hpk hc
+    exact single_wheel_not_split q hq.one_lt (split_fewer_parts_holds {q} k q hk hqk h1)
+  · exact Or.inr (Or.inl (single q hq hqk
+      (split_remove_dividing_wheel_holds {q} k p hq1 hp hpq' (Finset.singleton_nonempty q) hk hpk hc)))
+  · exact Or.inl (single p hp hpk
+      (split_remove_dividing_wheel_holds {p} k q hp1 hq hqp' (Finset.singleton_nonempty p) hk hqk hc'))
+  · -- neither divides `k`: Corollary 3.2 for both wheels, then the character condition
+    have h2 := (all_residues_split_iff_wheels_step h_hz k {p, q} (Finset.insert_nonempty p {q}) hW
+      (fun r hr => by
+        simp only [Finset.mem_insert, Finset.mem_singleton] at hr
+        rcases hr with rfl | rfl
+        · exact hpk
+        · exact hqk)).mp hc
+    have hcov : ∀ χ : DirichletCharacter ℂ k, χ.Odd →
+        χ (p : ZMod k) = 1 ∨ χ (q : ZMod k) = 1 := by
+      intro χ ho
+      obtain ⟨r, hr, h3⟩ := h2 χ ho
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hr
+      rcases hr with rfl | rfl
+      · exact Or.inl h3
+      · exact Or.inr h3
+    rcases pair_cover (unit p hp hpk) (unit q hq hqk) hcov with h | h | ⟨hxx, hxy⟩
+    · exact Or.inl (cast1 p h)
+    · exact Or.inr (Or.inl (cast1 q h))
+    · refine Or.inr (Or.inr ⟨cast1 (p * p) (by rw [Nat.cast_mul]; exact hxx), ?_⟩)
+      apply Nat.mod_eq_zero_of_dvd
+      rw [← ZMod.natCast_eq_zero_iff]
+      push_cast
+      linear_combination (-(q : ZMod k)) * hxx + (-(p : ZMod k)) * hxy
+
+theorem two_wheel_split_iff_step
+    (h_saw : RNS.Sawtooth.even_split_iff_remainders_cancel)
+    (h_hz : RNS.HurwitzZetaZero.hurwitz_zeta_at_zero) :
+    two_wheel_split_iff := by
+  intro p q k hp hq hpq hk
+  exact ⟨two_wheel_remainders_of_split_step h_saw h_hz p q k hp hq hpq hk,
+    fun hcase a => two_wheel_split_of_remainders_step h_saw p q k a hp hq hpq hk hcase⟩
+
 end RNS.GermainCriterion
 
 #print axioms RNS.GermainCriterion.two_wheel_split_of_remainders_step
@@ -895,3 +1088,6 @@ end RNS.GermainCriterion
 #print axioms RNS.GermainCriterion.two_parts_exception_holds
 #print axioms RNS.GermainCriterion.split_iff_nondividing_wheels_holds
 #print axioms RNS.GermainCriterion.germain_theorem_step
+#print axioms RNS.GermainCriterion.eq_one_of_odd_characters_holds
+#print axioms RNS.GermainCriterion.two_wheel_remainders_of_split_step
+#print axioms RNS.GermainCriterion.two_wheel_split_iff_step

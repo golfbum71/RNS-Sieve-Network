@@ -227,6 +227,46 @@ conclusions:
     declaration: RNS.GermainCriterion.germain_theorem_step
     note: Lean proof built clean 2026-11-05 (standard axioms only). Survivors to remainders by Sawtooth, the dividing wheels dropped, then Corollary 3.2; a character is 0, never 1, at a wheel dividing k. A step until HurwitzZetaZero is proved in Lean. Checked numerically first in 1,834 cases, no mismatch.
   designated: lean-proof
+- id: eq_one_of_odd_characters
+  declaration: RNS.GermainCriterion.eq_one_of_odd_characters
+  summary: A unit residue mod k at which every odd Dirichlet character equals 1 is the residue 1 (character separation through odd characters; mod 1 and 2 the only unit is 1).
+  imports: []
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainCriterion.lean
+    declaration: RNS.GermainCriterion.eq_one_of_odd_characters_holds
+    note: Lean proof drafted, not yet built. From Mathlib's exists_apply_ne_one_of_hasEnoughRootsOfUnity, with every even character an odd one times a fixed odd one.
+  designated: lean-proof
+- id: two_wheel_remainders_of_split
+  declaration: RNS.GermainCriterion.two_wheel_remainders_of_split
+  summary: Erdős's conjecture on Lehmer's even split (Hall and Shiu 2002). If the survivors of two prime wheels split evenly into k parts, one wheel leaves remainder 1 on division by k, or the first wheel's square leaves remainder 1 and the two wheels add up to a multiple of k.
+  imports:
+  - Sawtooth.v1.even_split_iff_remainders_cancel
+  - HurwitzZetaZero.v1.hurwitz_zeta_at_zero
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainCriterion.lean
+    declaration: RNS.GermainCriterion.two_wheel_remainders_of_split_step
+    note: Lean proof drafted, not yet built. Germain's Corollary 1.4 proof (ii) from Corollary 3.2 and Proposition 2.1, with character separation. A step until HurwitzZetaZero is proved in Lean. Checked numerically first in 4,320 cases (wheels up to 23, 1 to 60 parts, wheels dividing k included), 446 even splits, no mismatch.
+  designated: lean-proof
+- id: two_wheel_split_iff
+  declaration: RNS.GermainCriterion.two_wheel_split_iff
+  summary: Germain's Corollary 1.4. The survivors of two prime wheels split evenly into k parts exactly when one wheel leaves remainder 1 on division by k, or the first wheel's square leaves remainder 1 and the two wheels add up to a multiple of k.
+  imports:
+  - Sawtooth.v1.even_split_iff_remainders_cancel
+  - HurwitzZetaZero.v1.hurwitz_zeta_at_zero
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainCriterion.lean
+    declaration: RNS.GermainCriterion.two_wheel_split_iff_step
+    note: Lean proof drafted, not yet built. The "if" half and Erdős's conjecture together. A step until HurwitzZetaZero is proved in Lean.
+  designated: lean-proof
 sources:
 - title: J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220
   url: https://doi.org/10.4153/CMB-2005-019-9
