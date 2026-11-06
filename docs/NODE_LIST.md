@@ -562,10 +562,17 @@ hit set by size, and Mathlib's partial alternating binomial sum
 (`Int.alternating_sum_range_choose_eq_choose`) does the rest. Brun's pure
 sieve, the starting point of his sieve and of the fundamental lemma.
 - Prior work: Brun (1915, 1919); Bonferroni inequalities; Legendre.
-- Lean: `bonferroni_even`, `bonferroni_odd`, `legendre_exact`
+- Lean: `bonferroni_even`, `bonferroni_odd`, `legendre_exact`, `bonferroni_even_fn`,
+  `bonferroni_odd_fn`, `twin_bonferroni_upper`
 - Rests on: Vocabulary only
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
   Actions build, 2026-11-06).
+- Brun stage 1 (added 2026-11-06): the same truncation works for any function
+  of the position, not only the position itself. A position survives when no
+  wheel divides the function's value there. Applied to the product of a
+  position and the position two further on, this gives Brun's upper bound for
+  twin survivors: the count is at most inclusion–exclusion stopped at an even
+  number of wheels. Clean; standard three axioms only.
 
 ### 63. `MertensThird`, `PrimeNumberTheorem`, `CeilingOvershoot` — stated and connected
 `MertensThird` and `PrimeNumberTheorem` were metadata only; both now have Lean
