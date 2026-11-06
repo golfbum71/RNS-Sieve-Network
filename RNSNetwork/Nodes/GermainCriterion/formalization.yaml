@@ -12,12 +12,10 @@ node:
   description: Cut the cycle of two prime wheels into a given number of equal parts. The survivors split
     evenly exactly when one wheel leaves remainder 1 on division by the number of parts, or the first
     wheel's square leaves remainder 1 and the second wheel is the negative of the first (Germain 2005,
-    Corollary 1.4). Built so far, the "if" half, by remainder arithmetic alone; the analytic input, that an odd
-    primitive character's weighted residue sum is never zero; and the character transform of the
-    remainder sum (Germain's (3.1)), through to Germain's Theorem 1.1 for distinct prime wheels with a
-    wheel not dividing the number of parts. Next stage, the "only if"
-    half for two wheels, which is Erdős's conjecture on Lehmer's even split, through odd Dirichlet characters and
-    the nonvanishing of their L-functions at 1 (Mathlib's LFunction_apply_one_ne_zero).
+    Corollary 1.4). Both halves are built. The "if" half is remainder arithmetic alone. The "only if"
+    half is Erdős's conjecture on Lehmer's even split (Hall and Shiu 2002), reached by Germain's route
+    through odd Dirichlet characters, his Theorem 1.1 for distinct prime wheels, and the nonvanishing
+    of L-functions (resting on the cited node HurwitzZetaZero).
   improves: LehmerSplit gives an even split when one wheel leaves remainder 1, for any number of
     wheels. For two wheels this node adds the second sufficient case (the second wheel the negative of
     the first, with the first wheel's square leaving remainder 1), which LehmerSplit does not cover.
@@ -234,10 +232,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.eq_one_of_odd_characters_holds
-    note: Lean proof drafted, not yet built. From Mathlib's exists_apply_ne_one_of_hasEnoughRootsOfUnity, with every even character an odd one times a fixed odd one.
+    note: Lean proof built clean 2026-11-05 (standard axioms only). From Mathlib's exists_apply_ne_one_of_hasEnoughRootsOfUnity, with every even character an odd one times a fixed odd one.
   designated: lean-proof
 - id: two_wheel_remainders_of_split
   declaration: RNS.GermainCriterion.two_wheel_remainders_of_split
@@ -248,10 +246,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.two_wheel_remainders_of_split_step
-    note: Lean proof drafted, not yet built. Germain's Corollary 1.4 proof (ii) from Corollary 3.2 and Proposition 2.1, with character separation. A step until HurwitzZetaZero is proved in Lean. Checked numerically first in 4,320 cases (wheels up to 23, 1 to 60 parts, wheels dividing k included), 446 even splits, no mismatch.
+    note: Lean proof built clean 2026-11-05 (standard axioms only). Germain's Corollary 1.4 proof (ii) from Corollary 3.2 and Proposition 2.1, with character separation. A step until HurwitzZetaZero is proved in Lean. Checked numerically first in 4,320 cases (wheels up to 23, 1 to 60 parts, wheels dividing k included), 446 even splits, no mismatch.
   designated: lean-proof
 - id: two_wheel_split_iff
   declaration: RNS.GermainCriterion.two_wheel_split_iff
@@ -262,18 +260,18 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.two_wheel_split_iff_step
-    note: Lean proof drafted, not yet built. The "if" half and Erdős's conjecture together. A step until HurwitzZetaZero is proved in Lean.
+    note: Lean proof built clean 2026-11-05 (standard axioms only). The "if" half and Erdős's conjecture together. A step until HurwitzZetaZero is proved in Lean.
   designated: lean-proof
 sources:
 - title: J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220
   url: https://doi.org/10.4153/CMB-2005-019-9
-  relationship: Theorem 1.1 and Corollary 1.4; this node proves the "if" half of Corollary 1.4
+  relationship: Theorem 1.1 and Corollary 1.4, both proved here (Corollary 1.4 by its proof (ii)), with the two-part exception to Theorem 1.1 recorded
 - title: R. R. Hall and P. Shiu, The distribution of totatives, Canad. Math. Bull. 45 (2002), 109-114
   url: https://doi.org/10.4153/CMB-2002-012-1
-  relationship: proves Erdős's conjecture (the "only if" half of Corollary 1.4); its ordering-of-residues
+  relationship: proves Erdős's conjecture (the "only if" half of Corollary 1.4), reproved here by Germain's route; its ordering-of-residues
     theorem is false as stated for composite moduli (smallest case 8 parts with residues 1, 3, 5), though
     the triples its reduction produces were all fine in 8,012 checked cases
 related:

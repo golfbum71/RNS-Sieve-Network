@@ -22,7 +22,9 @@ import Mathlib.Tactic.Ring
 Imports claims only, never other nodes' proofs. The sufficient direction rests
 on `Sawtooth.even_split_iff_remainders_cancel`, taken as a named hypothesis.
 Germain's Theorem 1.1 (`germain_theorem_step`) rests on `Sawtooth` and on the
-cited node `HurwitzZetaZero` (through Corollary 3.2).
+cited node `HurwitzZetaZero` (through Corollary 3.2), and so do Erdős's
+conjecture (`two_wheel_remainders_of_split_step`) and Germain's Corollary 1.4
+(`two_wheel_split_iff_step`).
 
 Built clean by `lake build RNSSolutions` on 2026-11-05; `#print axioms` shows only
 the standard three for every theorem here.

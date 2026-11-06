@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean
 
-Cut the cycle of two prime wheels into a given number of equal parts. The survivors split evenly exactly when one wheel leaves remainder 1 on division by the number of parts, or the first wheel's square leaves remainder 1 and the second wheel is the negative of the first (Germain 2005, Corollary 1.4). Built so far, the "if" half, by remainder arithmetic alone; the analytic input, that an odd primitive character's weighted residue sum is never zero; and the character transform of the remainder sum (Germain's (3.1)), through to Germain's Theorem 1.1 for distinct prime wheels with a wheel not dividing the number of parts. Next stage, the "only if" half for two wheels, which is Erdős's conjecture on Lehmer's even split, through odd Dirichlet characters and the nonvanishing of their L-functions at 1 (Mathlib's LFunction_apply_one_ne_zero).
+Cut the cycle of two prime wheels into a given number of equal parts. The survivors split evenly exactly when one wheel leaves remainder 1 on division by the number of parts, or the first wheel's square leaves remainder 1 and the second wheel is the negative of the first (Germain 2005, Corollary 1.4). Both halves are built. The "if" half is remainder arithmetic alone. The "only if" half is Erdős's conjecture on Lehmer's even split (Hall and Shiu 2002), reached by Germain's route through odd Dirichlet characters, his Theorem 1.1 for distinct prime wheels, and the nonvanishing of L-functions (resting on the cited node HurwitzZetaZero).
 
 **What it adds:** LehmerSplit gives an even split when one wheel leaves remainder 1, for any number of wheels. For two wheels this node adds the second sufficient case (the second wheel the negative of the first, with the first wheel's square leaving remainder 1), which LehmerSplit does not cover.
 
@@ -12,8 +12,8 @@ Cut the cycle of two prime wheels into a given number of equal parts. The surviv
 
 Published work this node rests on or relates to; each entry says how.
 
-- [J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220](https://doi.org/10.4153/CMB-2005-019-9) — Theorem 1.1 and Corollary 1.4; this node proves the "if" half of Corollary 1.4
-- [R. R. Hall and P. Shiu, The distribution of totatives, Canad. Math. Bull. 45 (2002), 109-114](https://doi.org/10.4153/CMB-2002-012-1) — proves Erdős's conjecture (the "only if" half of Corollary 1.4); its ordering-of-residues theorem is false as stated for composite moduli (smallest case 8 parts with residues 1, 3, 5), though the triples its reduction produces were all fine in 8,012 checked cases
+- [J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220](https://doi.org/10.4153/CMB-2005-019-9) — Theorem 1.1 and Corollary 1.4, both proved here (Corollary 1.4 by its proof (ii)), with the two-part exception to Theorem 1.1 recorded
+- [R. R. Hall and P. Shiu, The distribution of totatives, Canad. Math. Bull. 45 (2002), 109-114](https://doi.org/10.4153/CMB-2002-012-1) — proves Erdős's conjecture (the "only if" half of Corollary 1.4), reproved here by Germain's route; its ordering-of-residues theorem is false as stated for composite moduli (smallest case 8 parts with residues 1, 3, 5), though the triples its reduction produces were all fine in 8,012 checked cases
 
 ## Related nodes
 
@@ -309,6 +309,70 @@ def germain_theorem : Prop :=
 **Rests on:** [`Sawtooth.even_split_iff_remainders_cancel`](Sawtooth.md#even_split_iff_remainders_cancel), [`HurwitzZetaZero.hurwitz_zeta_at_zero`](HurwitzZetaZero.md#hurwitz_zeta_at_zero)
 
 **Proof:** `RNS.GermainCriterion.germain_theorem_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean)
+
+<a id="eq_one_of_odd_characters"></a>
+### `eq_one_of_odd_characters`
+
+A unit residue mod k at which every odd Dirichlet character equals 1 is the residue 1 (character separation through odd characters; mod 1 and 2 the only unit is 1).
+
+```lean
+/-- **Character separation through odd characters.** For a residue `u` that is
+a unit modulo `k`: if every odd Dirichlet character modulo `k` equals 1 at `u`,
+then `u` is 1. (Every even character is a fixed odd one times an odd one; and
+modulo 1 or 2, where no odd character exists, the only unit is 1.) -/
+def eq_one_of_odd_characters : Prop :=
+  ∀ (k : Nat) [NeZero k] (u : ZMod k), IsUnit u →
+    (∀ χ : DirichletCharacter ℂ k, χ.Odd → χ u = 1) → u = 1
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.GermainCriterion.eq_one_of_odd_characters_holds` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean)
+
+<a id="two_wheel_remainders_of_split"></a>
+### `two_wheel_remainders_of_split`
+
+Erdős's conjecture on Lehmer's even split (Hall and Shiu 2002). If the survivors of two prime wheels split evenly into k parts, one wheel leaves remainder 1 on division by k, or the first wheel's square leaves remainder 1 and the two wheels add up to a multiple of k.
+
+```lean
+/-- **Erdős's conjecture on Lehmer's even split** (proved by Hall and Shiu,
+2002; here by Germain's route, his Corollary 1.4 proof (ii)). For two different
+prime wheels `p` and `q` and a number of equal parts `k`: if the survivors
+split evenly into `k` parts, then `p` or `q` leaves remainder 1 on division by
+`k`, or `p` times `p` leaves remainder 1 and `p` plus `q` is a multiple of
+`k`. -/
+def two_wheel_remainders_of_split : Prop :=
+  ∀ p q k : Nat, p.Prime → q.Prime → p ≠ q → 0 < k →
+    (∀ a : Nat, k * (survivors_upto {p, q} (a * ({p, q} : Finset Nat).prod id / k)).card
+      = a * (survivors_upto {p, q} (({p, q} : Finset Nat).prod id)).card) →
+    (p % k = 1 % k ∨ q % k = 1 % k ∨ ((p * p) % k = 1 % k ∧ (p + q) % k = 0))
+```
+
+**Rests on:** [`Sawtooth.even_split_iff_remainders_cancel`](Sawtooth.md#even_split_iff_remainders_cancel), [`HurwitzZetaZero.hurwitz_zeta_at_zero`](HurwitzZetaZero.md#hurwitz_zeta_at_zero)
+
+**Proof:** `RNS.GermainCriterion.two_wheel_remainders_of_split_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean)
+
+<a id="two_wheel_split_iff"></a>
+### `two_wheel_split_iff`
+
+Germain's Corollary 1.4. The survivors of two prime wheels split evenly into k parts exactly when one wheel leaves remainder 1 on division by k, or the first wheel's square leaves remainder 1 and the two wheels add up to a multiple of k.
+
+```lean
+/-- **Germain's Corollary 1.4: the two-wheel even split, exactly.** For two
+different prime wheels `p` and `q` and a number of equal parts `k`: the
+survivors split evenly into `k` parts exactly when `p` or `q` leaves remainder
+1 on division by `k`, or `p` times `p` leaves remainder 1 and `p` plus `q` is a
+multiple of `k`. -/
+def two_wheel_split_iff : Prop :=
+  ∀ p q k : Nat, p.Prime → q.Prime → p ≠ q → 0 < k →
+    ((∀ a : Nat, k * (survivors_upto {p, q} (a * ({p, q} : Finset Nat).prod id / k)).card
+      = a * (survivors_upto {p, q} (({p, q} : Finset Nat).prod id)).card) ↔
+    (p % k = 1 % k ∨ q % k = 1 % k ∨ ((p * p) % k = 1 % k ∧ (p + q) % k = 0)))
+```
+
+**Rests on:** [`Sawtooth.even_split_iff_remainders_cancel`](Sawtooth.md#even_split_iff_remainders_cancel), [`HurwitzZetaZero.hurwitz_zeta_at_zero`](HurwitzZetaZero.md#hurwitz_zeta_at_zero)
+
+**Proof:** `RNS.GermainCriterion.two_wheel_split_iff_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean)
 
 ## Files
 
