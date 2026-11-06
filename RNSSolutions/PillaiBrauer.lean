@@ -74,7 +74,7 @@ as each of those wheels dividing it has no other multiple in the run, and
 that depends only on the run's start modulo the cycle 30030. A Boolean
 program, evaluated by the kernel (`decide +kernel`, no extra axiom), finds
 such a member for every start in the cycle and every length from 1 to 16
-(30 blocks of 1001 starts).
+(30 blocks of 1001 starts, each its own kernel check).
 -/
 
 namespace RNS.PillaiBrauer
@@ -139,24 +139,77 @@ private theorem allIn_spec {lo : Nat} :
       subst hrl
       exact h.1
 
-/-- The first `N` blocks of width `B` all pass. -/
-private def allBlocks (B : Nat) : Nat → Bool
-  | 0 => true
-  | N + 1 => allIn (N * B) B && allBlocks B N
-
-private theorem allBlocks_spec {B : Nat} :
-    ∀ N, allBlocks B N = true → ∀ r, r < N * B → allK r 16 = true
-  | 0, _, r, hr => by simp at hr
-  | N + 1, h, r, hr => by
-    simp only [allBlocks, Bool.and_eq_true] at h
-    rw [Nat.add_mul, Nat.one_mul] at hr
-    rcases Nat.lt_or_ge r (N * B) with h' | h'
-    · exact allBlocks_spec N h.2 r h'
-    · exact allIn_spec B h.1 r h' (by omega)
+/-- The cycle 30030 in 30 blocks of 1001 starts, each checked by the kernel
+separately (one check over the whole cycle is too large for the build). -/
+private theorem block_0 : allIn 0 1001 = true := by decide +kernel
+private theorem block_1 : allIn 1001 1001 = true := by decide +kernel
+private theorem block_2 : allIn 2002 1001 = true := by decide +kernel
+private theorem block_3 : allIn 3003 1001 = true := by decide +kernel
+private theorem block_4 : allIn 4004 1001 = true := by decide +kernel
+private theorem block_5 : allIn 5005 1001 = true := by decide +kernel
+private theorem block_6 : allIn 6006 1001 = true := by decide +kernel
+private theorem block_7 : allIn 7007 1001 = true := by decide +kernel
+private theorem block_8 : allIn 8008 1001 = true := by decide +kernel
+private theorem block_9 : allIn 9009 1001 = true := by decide +kernel
+private theorem block_10 : allIn 10010 1001 = true := by decide +kernel
+private theorem block_11 : allIn 11011 1001 = true := by decide +kernel
+private theorem block_12 : allIn 12012 1001 = true := by decide +kernel
+private theorem block_13 : allIn 13013 1001 = true := by decide +kernel
+private theorem block_14 : allIn 14014 1001 = true := by decide +kernel
+private theorem block_15 : allIn 15015 1001 = true := by decide +kernel
+private theorem block_16 : allIn 16016 1001 = true := by decide +kernel
+private theorem block_17 : allIn 17017 1001 = true := by decide +kernel
+private theorem block_18 : allIn 18018 1001 = true := by decide +kernel
+private theorem block_19 : allIn 19019 1001 = true := by decide +kernel
+private theorem block_20 : allIn 20020 1001 = true := by decide +kernel
+private theorem block_21 : allIn 21021 1001 = true := by decide +kernel
+private theorem block_22 : allIn 22022 1001 = true := by decide +kernel
+private theorem block_23 : allIn 23023 1001 = true := by decide +kernel
+private theorem block_24 : allIn 24024 1001 = true := by decide +kernel
+private theorem block_25 : allIn 25025 1001 = true := by decide +kernel
+private theorem block_26 : allIn 26026 1001 = true := by decide +kernel
+private theorem block_27 : allIn 27027 1001 = true := by decide +kernel
+private theorem block_28 : allIn 28028 1001 = true := by decide +kernel
+private theorem block_29 : allIn 29029 1001 = true := by decide +kernel
 
 /-- The whole cycle 30030 passes. -/
-private theorem cycle_checked : ∀ r, r < 30030 → allK r 16 = true := fun r hr =>
-  allBlocks_spec (B := 1001) 30 (by decide +kernel) r (by omega)
+private theorem cycle_checked : ∀ r, r < 30030 → allK r 16 = true := by
+  intro r hr
+  have hb : r / 1001 < 30 := by omega
+  have hlo : r / 1001 * 1001 ≤ r := Nat.div_mul_le_self r 1001
+  have hhi : r < r / 1001 * 1001 + 1001 := by omega
+  generalize r / 1001 = b at hb hlo hhi
+  interval_cases b
+  · exact allIn_spec 1001 block_0 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_1 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_2 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_3 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_4 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_5 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_6 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_7 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_8 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_9 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_10 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_11 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_12 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_13 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_14 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_15 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_16 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_17 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_18 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_19 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_20 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_21 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_22 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_23 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_24 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_25 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_26 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_27 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_28 r (by omega) (by omega)
+  · exact allIn_spec 1001 block_29 r (by omega) (by omega)
 
 private theorem list_wheels_dvd_cycle : ∀ q ∈ [2, 3, 5, 7, 11, 13], q ∣ 30030 := by
   decide
