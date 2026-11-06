@@ -39,10 +39,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/MertensThird.lean
     declaration: RNS.MertensThird.product_identity_holds
-    note: Proof drafted, not yet built. Adapted from PNT+ Mertens.prod_one_minus_div_prime_eq.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-06), adapted from PNT+ Mertens.prod_one_minus_div_prime_eq.
   designated: lean-proof
 - id: mertens_third
   declaration: RNS.MertensThird.mertens_third
@@ -53,10 +54,11 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/MertensThird.lean
     declaration: RNS.MertensThird.mertens_third_step
-    note: Proof drafted, not yet built.
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-06),
+      from its imports taken as named hypotheses.
   designated: lean-proof
 sources:
 - title: "PrimeNumberTheoremAnd, Mertens' third theorem (Lean)"

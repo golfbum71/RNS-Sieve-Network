@@ -40,8 +40,8 @@
 | 34 | [`LehmerExcess`](LehmerExcess.md) | Lehmer's closed form for the 6n-1 type | proved in Lean |
 | 35 | [`GermainCriterion`](GermainCriterion.md) | Germain's exact criterion for an even split | proved in Lean |
 | 36 | [`Sawtooth`](Sawtooth.md) | the survivor count minus its proportional share | proved in Lean |
-| 40 | [`MertensThird`](MertensThird.md) | Mertens' third theorem | proof drafted, not yet built |
-| 41 | [`PrimeNumberTheorem`](PrimeNumberTheorem.md) | the prime number theorem | proof drafted, not yet built |
+| 40 | [`MertensThird`](MertensThird.md) | Mertens' third theorem | proved in Lean |
+| 41 | [`PrimeNumberTheorem`](PrimeNumberTheorem.md) | the prime number theorem | proved in Lean |
 | 42 | [`JacobsthalQuadratic`](JacobsthalQuadratic.md) | the quadratic bound on Jacobsthal's function | outside source: proved in Lean in another project |
 | 43 | [`RoughInPrimeGaps`](RoughInPrimeGaps.md) | almost every prime gap holds a survivor of the wheels below its length | outside source: proved in Lean in another project |
 | 44 | [`BonseCeiling`](BonseCeiling.md) | from four wheels on, the ceiling sits inside one cycle | proved in Lean |

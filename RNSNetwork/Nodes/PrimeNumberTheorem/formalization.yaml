@@ -38,10 +38,11 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/PrimeNumberTheorem.lean
     declaration: RNS.PrimeNumberTheorem.prime_number_theorem_step
-    note: Proof drafted, not yet built.
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-06),
+      from its imports taken as named hypotheses.
   designated: lean-proof
 sources:
 - title: "PrimeNumberTheoremAnd, the prime number theorem (Lean)"
