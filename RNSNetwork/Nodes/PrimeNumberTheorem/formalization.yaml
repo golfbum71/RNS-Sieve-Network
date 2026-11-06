@@ -9,23 +9,40 @@ node:
   kind: external
   status: active
   title: the prime number theorem
-  description: The number of primes up to x, times log x, divided by x, tends to 1. Proved in Lean in
-    PrimeNumberTheoremAnd and taken here as a named hypothesis (PNT+ builds on a different toolchain).
+  description: The number of primes up to x is asymptotically x over log x. Proved in Lean in
+    PrimeNumberTheoremAnd and copied here word for word as a named hypothesis (PNT+ builds on a
+    different toolchain); the limit form used by other nodes is proved here from it.
 conclusions:
-- id: prime_number_theorem
-  declaration: RNS.PrimeNumberTheorem.prime_number_theorem
-  summary: The number of primes up to x times log x over x tends to 1 (outside source).
+- id: pnt_equivalent
+  declaration: RNS.PrimeNumberTheorem.pnt_equivalent
+  summary: The number of primes up to x is asymptotically equivalent to x over log x (outside source;
+    word for word PNT+ pi_alt').
   imports: []
   imports_status: none
   justifications:
   - id: outside-lean
     kind: external
-    source: PrimeNumberTheoremAnd (PNT+), declaration pi_alt' in PrimeNumberTheoremAnd/Consequences.lean
+    source: PrimeNumberTheoremAnd (PNT+), pi_alt' in PrimeNumberTheoremAnd/Consequences.lean, commit
+      127b50e33f6033e2147921167a117af96d9ba4ea (2026-10-19), Lean v4.35.0
     locator: pi_alt'
-    note: Stated here in the classical limit form, not copied from pi_alt'. Before relying on it,
-      confirm that the PNT+ statement implies this one and that its `#print axioms` shows only the
-      standard three.
+    note: Statement copied word for word. Checked 2026-11-06 by text search over the 11 PNT+ files it
+      imports - the only sorry statements are prelim_decay_2 and prelim_decay_3 in Wiener.lean, used
+      only by decay_alt, which nothing in that import chain uses. Not rebuilt here (toolchain differs),
+      so `#print axioms` has not been run on it from this repository.
   designated: outside-lean
+- id: prime_number_theorem
+  declaration: RNS.PrimeNumberTheorem.prime_number_theorem
+  summary: The number of primes up to x times log x over x tends to 1.
+  imports:
+  - PrimeNumberTheorem.v1.pnt_equivalent
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/PrimeNumberTheorem.lean
+    declaration: RNS.PrimeNumberTheorem.prime_number_theorem_step
+    note: Proof drafted, not yet built.
+  designated: lean-proof
 sources:
 - title: "PrimeNumberTheoremAnd, the prime number theorem (Lean)"
   url: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/Consequences.lean#L900"

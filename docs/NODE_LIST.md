@@ -581,11 +581,14 @@ to x tends to 2e^(-γ), about 1.1229. Below the ceiling the survivors are
 exactly the primes, so the wheel product overshoots them by about 12%.
 Numerically 0.91 at a thousand, 1.05 at ten million.
 - Lean: `mertens_third_remainder` (outside, PNT+ word for word),
-  `product_identity`, `mertens_third`, `prime_number_theorem` (outside, classical
-  form; still to match against PNT+), `ceiling_overshoot`
+  `product_identity`, `mertens_third`, `pnt_equivalent` (outside, PNT+ `pi_alt'`
+  word for word), `prime_number_theorem`, `ceiling_overshoot`
 - Rests on: PNT+ (two outside claims)
-- Status: the identity and the two steps are Clean (GitHub Actions build,
-  2026-11-06); the two outside claims are cited.
+- Status: the identity and the three steps are Clean (GitHub Actions build,
+  2026-11-06); the two outside claims are cited. By text search the PNT+
+  chain behind `pi_alt'` has two `sorry` lemmas (`prelim_decay_2`,
+  `prelim_decay_3` in `Wiener.lean`) that nothing in that chain uses; a
+  `#print axioms` run inside PNT+ would confirm.
 
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence

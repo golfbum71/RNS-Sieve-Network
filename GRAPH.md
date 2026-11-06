@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 54 of 59 nodes are built, holding 169 claims: 162 proved in Lean, 2 with a proof drafted but not yet built and 5 cited from a published paper. They are joined by 66 arrows, each a Lean-checked step. Of the other 5 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 1 is new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 54 of 59 nodes are built, holding 170 claims: 162 proved in Lean, 3 with a proof drafted but not yet built and 5 cited from a published paper. They are joined by 67 arrows, each a Lean-checked step. Of the other 5 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 1 is new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -207,10 +207,11 @@ graph LR
     c97["mertens_third"]
   end
   subgraph s34["<b>41. PrimeNumberTheorem — the prime number theorem</b>"]
-    c98["prime_number_theorem"]
+    c98["pnt_equivalent"]
+    c99["prime_number_theorem"]
   end
   subgraph s35["<b>31. CeilingOvershoot — the wheel product overshoots the primes by about 12%</b>"]
-    c99["ceiling_overshoot"]
+    c100["ceiling_overshoot"]
   end
   subgraph s36["<b>32. BirdseySchay — Birdsey and Schay's heuristic, as a hypothesis</b>"]
     p2["<i>planned: conditional</i>"]
@@ -219,120 +220,120 @@ graph LR
     p3["<i>planned: new, not yet proved</i>"]
   end
   subgraph s38["<b>34. LehmerExcess — Lehmer's closed form for the 6n-1 type</b>"]
-    c100["lehmer_excess_closed_form"]
+    c101["lehmer_excess_closed_form"]
   end
   subgraph s39["<b>58. HurwitzZetaZero — the Hurwitz zeta function at 0</b>"]
-    c101["hurwitz_zeta_at_zero"]
-    c102["sin_zeta_at_one"]
-    c103["sawtooth_partial_sums"]
-    c104["sin_zeta_at_one_eq_series"]
+    c102["hurwitz_zeta_at_zero"]
+    c103["sin_zeta_at_one"]
+    c104["sawtooth_partial_sums"]
+    c105["sin_zeta_at_one_eq_series"]
   end
   subgraph s40["<b>35. GermainCriterion — Germain's exact criterion for an even split</b>"]
-    c105["two_wheel_split_of_remainders"]
-    c106["odd_primitive_LFunction_zero_ne_zero"]
-    c107["odd_primitive_weighted_sum_ne_zero"]
-    c108["character_transform"]
-    c109["weighted_sum_eq_LFunction_zero"]
-    c110["odd_weighted_sum_ne_zero_iff"]
-    c111["coprime_split_iff_characters"]
-    c112["all_residues_split_iff_wheels"]
-    c113["split_add_wheel"]
-    c114["split_fewer_parts"]
-    c115["split_remove_dividing_wheel"]
-    c116["two_parts_exception"]
-    c117["split_iff_nondividing_wheels"]
-    c118["germain_theorem"]
-    c119["eq_one_of_odd_characters"]
-    c120["two_wheel_remainders_of_split"]
-    c121["two_wheel_split_iff"]
+    c106["two_wheel_split_of_remainders"]
+    c107["odd_primitive_LFunction_zero_ne_zero"]
+    c108["odd_primitive_weighted_sum_ne_zero"]
+    c109["character_transform"]
+    c110["weighted_sum_eq_LFunction_zero"]
+    c111["odd_weighted_sum_ne_zero_iff"]
+    c112["coprime_split_iff_characters"]
+    c113["all_residues_split_iff_wheels"]
+    c114["split_add_wheel"]
+    c115["split_fewer_parts"]
+    c116["split_remove_dividing_wheel"]
+    c117["two_parts_exception"]
+    c118["split_iff_nondividing_wheels"]
+    c119["germain_theorem"]
+    c120["eq_one_of_odd_characters"]
+    c121["two_wheel_remainders_of_split"]
+    c122["two_wheel_split_iff"]
   end
   subgraph s41["<b>43. RoughInPrimeGaps — almost every prime gap holds a survivor of the wheels below its length</b>"]
     p4["<i>outside source: plby/lean-proofs</i>"]
   end
   subgraph s42["<b>44. BonseCeiling — from four wheels on, the ceiling sits inside one cycle</b>"]
-    c122["ceiling_inside_cycle"]
+    c123["ceiling_inside_cycle"]
   end
   subgraph s43["<b>45. PillaiBrauer — runs where no member is coprime to all the others</b>"]
-    c123["pillai_sixteen"]
-    c124["pillai_witness_17"]
-    c125["pillai_witness_17_repeats"]
+    c124["pillai_sixteen"]
+    c125["pillai_witness_17"]
+    c126["pillai_witness_17_repeats"]
   end
   subgraph s44["<b>46. KanoldBound — every stretch of 2^k numbers holds a survivor of k wheels</b>"]
-    c126["stretch_holds_survivor"]
+    c127["stretch_holds_survivor"]
   end
   subgraph s45["<b>47. MenonIdentity — a gcd sum over the survivors of one cycle</b>"]
-    c127["menon_wheel_sum"]
+    c128["menon_wheel_sum"]
   end
   subgraph s46["<b>48. GallagherAverage — the wheel correction is 1 on average</b>"]
-    c128["singular_series_average_one"]
+    c129["singular_series_average_one"]
   end
   subgraph s47["<b>49. LongGaps — blocked runs become long prime gaps</b>"]
     p5["<i>outside source: openai/LongGapsBetweenPrimes</i>"]
   end
   subgraph s48["<b>50. PrimeGapsBridge — the network's admissibility is PrimeGapsLib's</b>"]
-    c129["admissible_iff_primegaps"]
+    c130["admissible_iff_primegaps"]
   end
   subgraph s49["<b>51. RamanujanSums — the survivor pattern's frequencies, wheel by wheel</b>"]
-    c130["ramanujan_wheel_product"]
+    c131["ramanujan_wheel_product"]
   end
   subgraph s50["<b>52. BrunTwinSum — the twin primes' reciprocals add up to a finite total</b>"]
-    c131["brun_sum_finite"]
+    c132["brun_sum_finite"]
   end
   subgraph s51["<b>53. GapMoments — the survivor gaps are spread as evenly as their average allows</b>"]
-    c132["gap_moment_bound"]
+    c133["gap_moment_bound"]
   end
   subgraph s52["<b>54. SophieGermainPowers — on the wheel of size 2p+1, p-th powers have three positions</b>"]
-    c133["pth_power_positions"]
-    c134["three_powers_blocked"]
+    c134["pth_power_positions"]
+    c135["three_powers_blocked"]
   end
   subgraph s53["<b>55. SophieGermainTheorem — the first case of Fermat's Last Theorem for Sophie Germain primes</b>"]
-    c135["sophie_germain_theorem"]
-    c136["fermat_first_case"]
+    c136["sophie_germain_theorem"]
+    c137["fermat_first_case"]
   end
   subgraph s54["<b>56. GermainAuxiliary — Sophie Germain's theorem with any suitable wheel</b>"]
-    c137["auxiliary_prime_theorem"]
-    c138["sophie_germain_wheel_auxiliary"]
-    c139["auxiliary_seven"]
-    c140["auxiliary_thirteen"]
-    c141["fermat_first_case_seven"]
-    c142["fermat_first_case_thirteen"]
+    c138["auxiliary_prime_theorem"]
+    c139["sophie_germain_wheel_auxiliary"]
+    c140["auxiliary_seven"]
+    c141["auxiliary_thirteen"]
+    c142["fermat_first_case_seven"]
+    c143["fermat_first_case_thirteen"]
   end
   subgraph s55["<b>57. Schatunowsky — 30 is the largest number whose survivors are all prime</b>"]
-    c143["ceiling_forces_wheels"]
-    c144["thirty_survivors_all_prime"]
-    c145["schatunowsky_bound"]
+    c144["ceiling_forces_wheels"]
+    c145["thirty_survivors_all_prime"]
+    c146["schatunowsky_bound"]
   end
   subgraph s56["<b>59. FortunateCeiling — what lands on a prime just above the cycle (Fortune's conjecture, OEIS A038771)</b>"]
-    c146["shift_avoids_wheels"]
-    c147["shift_prime_below_ceiling"]
-    c148["composite_shift_at_least_ceiling"]
-    c149["composite_shift_semiprime_below_cube"]
-    c150["first_primes_eq_cycle"]
-    c151["primorial_eq_cycle"]
-    c152["fortunate_spec"]
-    c153["fortunate_at_least_next_prime"]
-    c154["fortunate_prime_below_ceiling"]
-    c155["fortune_of_ceiling"]
-    c156["smallest_composite_shift_spec"]
-    c157["smallest_composite_shift_floor"]
-    c158["smallest_composite_shift_semiprime_below_cube"]
-    c159["semiprime_conjecture_of_cube"]
+    c147["shift_avoids_wheels"]
+    c148["shift_prime_below_ceiling"]
+    c149["composite_shift_at_least_ceiling"]
+    c150["composite_shift_semiprime_below_cube"]
+    c151["first_primes_eq_cycle"]
+    c152["primorial_eq_cycle"]
+    c153["fortunate_spec"]
+    c154["fortunate_at_least_next_prime"]
+    c155["fortunate_prime_below_ceiling"]
+    c156["fortune_of_ceiling"]
+    c157["smallest_composite_shift_spec"]
+    c158["smallest_composite_shift_floor"]
+    c159["smallest_composite_shift_semiprime_below_cube"]
+    c160["semiprime_conjecture_of_cube"]
   end
   subgraph s57["<b>60. AlmostPrimeWindow — survivors between the cutoff and its cube are primes or semiprimes</b>"]
-    c160["window_almost_prime"]
-    c161["window_composite_iff"]
-    c162["window_prime_iff_odd_factors"]
+    c161["window_almost_prime"]
+    c162["window_composite_iff"]
+    c163["window_prime_iff_odd_factors"]
   end
   subgraph s58["<b>61. TuranCycle — Turán's sieve, exactly, on the positions 1 to N</b>"]
-    c163["hits_sum"]
-    c164["hits_sq_sum"]
-    c165["turan_inequality"]
-    c166["turan_wheels"]
+    c164["hits_sum"]
+    c165["hits_sq_sum"]
+    c166["turan_inequality"]
+    c167["turan_wheels"]
   end
   subgraph s59["<b>62. BrunPureSieve — truncated inclusion-exclusion for the wheels (Brun's pure sieve)</b>"]
-    c167["bonferroni_even"]
-    c168["bonferroni_odd"]
-    c169["legendre_exact"]
+    c168["bonferroni_even"]
+    c169["bonferroni_odd"]
+    c170["legendre_exact"]
   end
   o1{{"<i>open conjecture</i><br/>hardy_littlewood_conjecture"}}
   o2{{"<i>open conjecture</i><br/>HL_conjecture_A"}}
@@ -391,38 +392,39 @@ graph LR
   s31 -.-> s32
   c95 ==> c97
   c96 ==> c97
-  c97 ==> c99
   c98 ==> c99
+  c97 ==> c100
+  c99 ==> c100
   s28 -.-> s36
   s33 -.-> s36
   s34 -.-> s36
   s24 -.-> s37
   s21 -.-> s37
-  c76 ==> c100
-  c77 ==> c105
-  c101 ==> c107
-  c101 ==> c109
-  c101 ==> c110
-  c101 ==> c111
-  c101 ==> c112
-  c77 ==> c118
-  c101 ==> c118
-  c77 ==> c120
-  c101 ==> c120
+  c76 ==> c101
+  c77 ==> c106
+  c102 ==> c108
+  c102 ==> c110
+  c102 ==> c111
+  c102 ==> c112
+  c102 ==> c113
+  c77 ==> c119
+  c102 ==> c119
   c77 ==> c121
-  c101 ==> c121
-  c133 ==> c135
-  c134 ==> c135
+  c102 ==> c121
+  c77 ==> c122
+  c102 ==> c122
+  c134 ==> c136
   c135 ==> c136
-  c133 ==> c138
-  c137 ==> c141
-  c139 ==> c141
-  c137 ==> c142
+  c136 ==> c137
+  c134 ==> c139
+  c138 ==> c142
   c140 ==> c142
-  c122 ==> c145
-  c29 ==> c147
-  c29 ==> c154
+  c138 ==> c143
+  c141 ==> c143
+  c123 ==> c146
+  c29 ==> c148
   c29 ==> c155
+  c29 ==> c156
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
   classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
@@ -433,10 +435,10 @@ graph LR
   classDef draft fill:#ffffff,stroke:#1a7f37,color:#1f2328,stroke-width:2px,stroke-dasharray: 2 2;
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c46,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78,c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c92,c93,c94,c95,c98,c99,c100,c101,c102,c103,c104,c105,c106,c107,c108,c109,c110,c111,c112,c113,c114,c115,c116,c117,c118,c119,c120,c121,c122,c123,c124,c125,c127,c129,c130,c133,c134,c135,c136,c137,c138,c139,c140,c141,c142,c143,c144,c145,c146,c147,c148,c149,c150,c151,c152,c153,c154,c155,c156,c157,c158,c159,c160,c161,c162,c163,c164,c165,c166,c167,c168,c169 verified;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c46,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78,c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c92,c93,c94,c95,c98,c100,c101,c102,c103,c104,c105,c106,c107,c108,c109,c110,c111,c112,c113,c114,c115,c116,c117,c118,c119,c120,c121,c122,c123,c124,c125,c126,c128,c130,c131,c134,c135,c136,c137,c138,c139,c140,c141,c142,c143,c144,c145,c146,c147,c148,c149,c150,c151,c152,c153,c154,c155,c156,c157,c158,c159,c160,c161,c162,c163,c164,c165,c166,c167,c168,c169,c170 verified;
   class c44,c45,c47,c48,c49,c50,c51,c52 conditional_built;
-  class c63,c126,c128,c131,c132 cited_built;
-  class c96,c97 draft;
+  class c63,c127,c129,c132,c133 cited_built;
+  class c96,c97,c99 draft;
   class p2 conditional;
   class p3 new;
   class p1,p4,p5 external;
@@ -539,82 +541,83 @@ graph LR
   click c95 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensThird.md#mertens_third_remainder" _blank
   click c96 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensThird.md#product_identity" _blank
   click c97 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensThird.md#mertens_third" _blank
-  click c98 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeNumberTheorem.md#prime_number_theorem" _blank
-  click c99 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CeilingOvershoot.md#ceiling_overshoot" _blank
+  click c98 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeNumberTheorem.md#pnt_equivalent" _blank
+  click c99 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeNumberTheorem.md#prime_number_theorem" _blank
+  click c100 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CeilingOvershoot.md#ceiling_overshoot" _blank
   click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirdseySchay.md" _blank
   click p3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LargestGap.md" _blank
-  click c100 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LehmerExcess.md#lehmer_excess_closed_form" _blank
-  click c101 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HurwitzZetaZero.md#hurwitz_zeta_at_zero" _blank
-  click c102 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HurwitzZetaZero.md#sin_zeta_at_one" _blank
-  click c103 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HurwitzZetaZero.md#sawtooth_partial_sums" _blank
-  click c104 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HurwitzZetaZero.md#sin_zeta_at_one_eq_series" _blank
-  click c105 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#two_wheel_split_of_remainders" _blank
-  click c106 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#odd_primitive_lfunction_zero_ne_zero" _blank
-  click c107 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#odd_primitive_weighted_sum_ne_zero" _blank
-  click c108 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#character_transform" _blank
-  click c109 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#weighted_sum_eq_lfunction_zero" _blank
-  click c110 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#odd_weighted_sum_ne_zero_iff" _blank
-  click c111 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#coprime_split_iff_characters" _blank
-  click c112 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#all_residues_split_iff_wheels" _blank
-  click c113 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#split_add_wheel" _blank
-  click c114 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#split_fewer_parts" _blank
-  click c115 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#split_remove_dividing_wheel" _blank
-  click c116 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#two_parts_exception" _blank
-  click c117 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#split_iff_nondividing_wheels" _blank
-  click c118 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#germain_theorem" _blank
-  click c119 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#eq_one_of_odd_characters" _blank
-  click c120 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#two_wheel_remainders_of_split" _blank
-  click c121 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#two_wheel_split_iff" _blank
+  click c101 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LehmerExcess.md#lehmer_excess_closed_form" _blank
+  click c102 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HurwitzZetaZero.md#hurwitz_zeta_at_zero" _blank
+  click c103 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HurwitzZetaZero.md#sin_zeta_at_one" _blank
+  click c104 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HurwitzZetaZero.md#sawtooth_partial_sums" _blank
+  click c105 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HurwitzZetaZero.md#sin_zeta_at_one_eq_series" _blank
+  click c106 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#two_wheel_split_of_remainders" _blank
+  click c107 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#odd_primitive_lfunction_zero_ne_zero" _blank
+  click c108 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#odd_primitive_weighted_sum_ne_zero" _blank
+  click c109 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#character_transform" _blank
+  click c110 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#weighted_sum_eq_lfunction_zero" _blank
+  click c111 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#odd_weighted_sum_ne_zero_iff" _blank
+  click c112 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#coprime_split_iff_characters" _blank
+  click c113 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#all_residues_split_iff_wheels" _blank
+  click c114 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#split_add_wheel" _blank
+  click c115 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#split_fewer_parts" _blank
+  click c116 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#split_remove_dividing_wheel" _blank
+  click c117 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#two_parts_exception" _blank
+  click c118 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#split_iff_nondividing_wheels" _blank
+  click c119 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#germain_theorem" _blank
+  click c120 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#eq_one_of_odd_characters" _blank
+  click c121 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#two_wheel_remainders_of_split" _blank
+  click c122 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainCriterion.md#two_wheel_split_iff" _blank
   click p4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RoughInPrimeGaps.md" _blank
-  click c122 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BonseCeiling.md#ceiling_inside_cycle" _blank
-  click c123 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PillaiBrauer.md#pillai_sixteen" _blank
-  click c124 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PillaiBrauer.md#pillai_witness_17" _blank
-  click c125 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PillaiBrauer.md#pillai_witness_17_repeats" _blank
-  click c126 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/KanoldBound.md#stretch_holds_survivor" _blank
-  click c127 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MenonIdentity.md#menon_wheel_sum" _blank
-  click c128 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GallagherAverage.md#singular_series_average_one" _blank
+  click c123 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BonseCeiling.md#ceiling_inside_cycle" _blank
+  click c124 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PillaiBrauer.md#pillai_sixteen" _blank
+  click c125 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PillaiBrauer.md#pillai_witness_17" _blank
+  click c126 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PillaiBrauer.md#pillai_witness_17_repeats" _blank
+  click c127 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/KanoldBound.md#stretch_holds_survivor" _blank
+  click c128 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MenonIdentity.md#menon_wheel_sum" _blank
+  click c129 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GallagherAverage.md#singular_series_average_one" _blank
   click p5 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LongGaps.md" _blank
-  click c129 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeGapsBridge.md#admissible_iff_primegaps" _blank
-  click c130 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RamanujanSums.md#ramanujan_wheel_product" _blank
-  click c131 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTwinSum.md#brun_sum_finite" _blank
-  click c132 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapMoments.md#gap_moment_bound" _blank
-  click c133 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainPowers.md#pth_power_positions" _blank
-  click c134 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainPowers.md#three_powers_blocked" _blank
-  click c135 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainTheorem.md#sophie_germain_theorem" _blank
-  click c136 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainTheorem.md#fermat_first_case" _blank
-  click c137 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainAuxiliary.md#auxiliary_prime_theorem" _blank
-  click c138 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainAuxiliary.md#sophie_germain_wheel_auxiliary" _blank
-  click c139 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainAuxiliary.md#auxiliary_seven" _blank
-  click c140 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainAuxiliary.md#auxiliary_thirteen" _blank
-  click c141 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainAuxiliary.md#fermat_first_case_seven" _blank
-  click c142 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainAuxiliary.md#fermat_first_case_thirteen" _blank
-  click c143 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Schatunowsky.md#ceiling_forces_wheels" _blank
-  click c144 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Schatunowsky.md#thirty_survivors_all_prime" _blank
-  click c145 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Schatunowsky.md#schatunowsky_bound" _blank
-  click c146 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#shift_avoids_wheels" _blank
-  click c147 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#shift_prime_below_ceiling" _blank
-  click c148 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#composite_shift_at_least_ceiling" _blank
-  click c149 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#composite_shift_semiprime_below_cube" _blank
-  click c150 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#first_primes_eq_cycle" _blank
-  click c151 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#primorial_eq_cycle" _blank
-  click c152 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#fortunate_spec" _blank
-  click c153 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#fortunate_at_least_next_prime" _blank
-  click c154 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#fortunate_prime_below_ceiling" _blank
-  click c155 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#fortune_of_ceiling" _blank
-  click c156 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#smallest_composite_shift_spec" _blank
-  click c157 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#smallest_composite_shift_floor" _blank
-  click c158 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#smallest_composite_shift_semiprime_below_cube" _blank
-  click c159 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#semiprime_conjecture_of_cube" _blank
-  click c160 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/AlmostPrimeWindow.md#window_almost_prime" _blank
-  click c161 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/AlmostPrimeWindow.md#window_composite_iff" _blank
-  click c162 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/AlmostPrimeWindow.md#window_prime_iff_odd_factors" _blank
-  click c163 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TuranCycle.md#hits_sum" _blank
-  click c164 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TuranCycle.md#hits_sq_sum" _blank
-  click c165 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TuranCycle.md#turan_inequality" _blank
-  click c166 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TuranCycle.md#turan_wheels" _blank
-  click c167 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#bonferroni_even" _blank
-  click c168 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#bonferroni_odd" _blank
-  click c169 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#legendre_exact" _blank
+  click c130 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeGapsBridge.md#admissible_iff_primegaps" _blank
+  click c131 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RamanujanSums.md#ramanujan_wheel_product" _blank
+  click c132 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTwinSum.md#brun_sum_finite" _blank
+  click c133 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapMoments.md#gap_moment_bound" _blank
+  click c134 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainPowers.md#pth_power_positions" _blank
+  click c135 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainPowers.md#three_powers_blocked" _blank
+  click c136 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainTheorem.md#sophie_germain_theorem" _blank
+  click c137 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainTheorem.md#fermat_first_case" _blank
+  click c138 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainAuxiliary.md#auxiliary_prime_theorem" _blank
+  click c139 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainAuxiliary.md#sophie_germain_wheel_auxiliary" _blank
+  click c140 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainAuxiliary.md#auxiliary_seven" _blank
+  click c141 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainAuxiliary.md#auxiliary_thirteen" _blank
+  click c142 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainAuxiliary.md#fermat_first_case_seven" _blank
+  click c143 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainAuxiliary.md#fermat_first_case_thirteen" _blank
+  click c144 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Schatunowsky.md#ceiling_forces_wheels" _blank
+  click c145 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Schatunowsky.md#thirty_survivors_all_prime" _blank
+  click c146 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Schatunowsky.md#schatunowsky_bound" _blank
+  click c147 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#shift_avoids_wheels" _blank
+  click c148 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#shift_prime_below_ceiling" _blank
+  click c149 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#composite_shift_at_least_ceiling" _blank
+  click c150 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#composite_shift_semiprime_below_cube" _blank
+  click c151 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#first_primes_eq_cycle" _blank
+  click c152 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#primorial_eq_cycle" _blank
+  click c153 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#fortunate_spec" _blank
+  click c154 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#fortunate_at_least_next_prime" _blank
+  click c155 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#fortunate_prime_below_ceiling" _blank
+  click c156 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#fortune_of_ceiling" _blank
+  click c157 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#smallest_composite_shift_spec" _blank
+  click c158 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#smallest_composite_shift_floor" _blank
+  click c159 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#smallest_composite_shift_semiprime_below_cube" _blank
+  click c160 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#semiprime_conjecture_of_cube" _blank
+  click c161 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/AlmostPrimeWindow.md#window_almost_prime" _blank
+  click c162 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/AlmostPrimeWindow.md#window_composite_iff" _blank
+  click c163 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/AlmostPrimeWindow.md#window_prime_iff_odd_factors" _blank
+  click c164 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TuranCycle.md#hits_sum" _blank
+  click c165 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TuranCycle.md#hits_sq_sum" _blank
+  click c166 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TuranCycle.md#turan_inequality" _blank
+  click c167 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TuranCycle.md#turan_wheels" _blank
+  click c168 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#bonferroni_even" _blank
+  click c169 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#bonferroni_odd" _blank
+  click c170 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#legendre_exact" _blank
 ```
 
 ## What each result rests on
@@ -749,7 +752,8 @@ The results nothing else builds on, each with everything beneath it.
   - [`MertensThird.mertens_third`](docs/nodes/MertensThird.md#mertens_third) — proof drafted, not yet built
     - [`MertensThird.mertens_third_remainder`](docs/nodes/MertensThird.md#mertens_third_remainder) — proved in Lean
     - [`MertensThird.product_identity`](docs/nodes/MertensThird.md#product_identity) — proof drafted, not yet built
-  - [`PrimeNumberTheorem.prime_number_theorem`](docs/nodes/PrimeNumberTheorem.md#prime_number_theorem) — proved in Lean
+  - [`PrimeNumberTheorem.prime_number_theorem`](docs/nodes/PrimeNumberTheorem.md#prime_number_theorem) — proof drafted, not yet built
+    - [`PrimeNumberTheorem.pnt_equivalent`](docs/nodes/PrimeNumberTheorem.md#pnt_equivalent) — proved in Lean
 - [`LehmerExcess.lehmer_excess_closed_form`](docs/nodes/LehmerExcess.md#lehmer_excess_closed_form) — proved in Lean
   - [`Sawtooth.sawtooth_identity`](docs/nodes/Sawtooth.md#sawtooth_identity) — proved in Lean
 - [`GermainCriterion.two_wheel_split_of_remainders`](docs/nodes/GermainCriterion.md#two_wheel_split_of_remainders) — proved in Lean
@@ -1090,7 +1094,7 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 35 | [`GermainCriterion`](docs/nodes/GermainCriterion.md) | Germain's exact criterion for an even split | proved in Lean |
 | 36 | [`Sawtooth`](docs/nodes/Sawtooth.md) | the survivor count minus its proportional share | proved in Lean |
 | 40 | [`MertensThird`](docs/nodes/MertensThird.md) | Mertens' third theorem | proof drafted, not yet built |
-| 41 | [`PrimeNumberTheorem`](docs/nodes/PrimeNumberTheorem.md) | the prime number theorem | proved in Lean |
+| 41 | [`PrimeNumberTheorem`](docs/nodes/PrimeNumberTheorem.md) | the prime number theorem | proof drafted, not yet built |
 | 42 | [`JacobsthalQuadratic`](docs/nodes/JacobsthalQuadratic.md) | the quadratic bound on Jacobsthal's function | outside source: proved in Lean in another project |
 | 43 | [`RoughInPrimeGaps`](docs/nodes/RoughInPrimeGaps.md) | almost every prime gap holds a survivor of the wheels below its length | outside source: proved in Lean in another project |
 | 44 | [`BonseCeiling`](docs/nodes/BonseCeiling.md) | from four wheels on, the ceiling sits inside one cycle | proved in Lean |
