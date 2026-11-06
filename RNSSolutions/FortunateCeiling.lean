@@ -145,14 +145,17 @@ theorem primorial_eq_cycle_holds : primorial_eq_cycle := by
   constructor
   · rintro ⟨hq, hp⟩
     refine ⟨?_, hp⟩
-    have := (Nat.nth_lt_nth Nat.infinite_setOfPred_prime).mpr (Nat.lt_succ_self n)
+    have hlt : Nat.nth Nat.Prime n < Nat.nth Nat.Prime (n + 1) :=
+      (Nat.nth_lt_nth Nat.infinite_setOfPred_prime).mpr (by omega)
     omega
   · rintro ⟨hq, hp⟩
     refine ⟨?_, hp⟩
     have h := Nat.nth_count hp
     rw [← h] at hq ⊢
-    have hc := (Nat.nth_lt_nth Nat.infinite_setOfPred_prime).mp hq
-    have := (Nat.nth_le_nth Nat.infinite_setOfPred_prime).mpr (Nat.lt_succ_iff.mp hc)
+    have hc : Nat.count Nat.Prime q < n + 1 :=
+      (Nat.nth_lt_nth Nat.infinite_setOfPred_prime).mp hq
+    have hle : Nat.nth Nat.Prime (Nat.count Nat.Prime q) ≤ Nat.nth Nat.Prime n :=
+      (Nat.nth_le_nth Nat.infinite_setOfPred_prime).mpr (by omega)
     omega
 
 /-! ## Fortune -/
