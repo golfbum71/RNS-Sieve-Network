@@ -57,6 +57,7 @@ def twin_share_split : Prop :=
 
 ## Used by
 
+- [`ShareAsymptotics`](ShareAsymptotics.md)
 - [`BirdseySchay`](BirdseySchay.md)
 
 ## Files

@@ -63,5 +63,6 @@
 | 60 | [`AlmostPrimeWindow`](AlmostPrimeWindow.md) | survivors between the cutoff and its cube are primes or semiprimes | proved in Lean |
 | 61 | [`TuranCycle`](TuranCycle.md) | Turán's sieve, exactly, on the positions 1 to N | proved in Lean |
 | 62 | [`BrunPureSieve`](BrunPureSieve.md) | truncated inclusion-exclusion for the wheels (Brun's pure sieve) | proved in Lean |
+| 64 | [`ShareAsymptotics`](ShareAsymptotics.md) | how fast the survivor and twin shares of the cycle shrink | proof drafted, not yet built |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

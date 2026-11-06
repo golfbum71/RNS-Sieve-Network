@@ -1,0 +1,63 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: ShareAsymptotics.v1
+  family: ShareAsymptotics
+  version: v1
+  order: 64
+  kind: paper
+  status: active
+  improves: ShareBounds bounds the survivor share by one over the logarithm and the twin share by twice
+    its square; this node gives the true rates, showing the first bound is sharp up to the factor e to
+    the minus Euler's constant.
+  title: how fast the survivor and twin shares of the cycle shrink
+  description: With the wheels up to n, the share of the cycle that survives, times log n, tends to e to
+    the minus Euler's constant (about 0.5615); the twin share times log n squared tends to twice the
+    odd twin product times e to the minus twice Euler's constant (about 0.4162). Numerically 0.56144
+    and 0.41618 at n a million.
+conclusions:
+- id: survivor_share_asymptotic
+  declaration: RNS.ShareAsymptotics.survivor_share_asymptotic
+  summary: With the wheels up to n, the survivor share of the cycle times log n tends to e to the minus
+    Euler's constant.
+  imports:
+  - SurvivorCount.v1.general_survivor_count
+  - MertensThird.v1.mertens_third
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/ShareAsymptotics.lean
+    declaration: RNS.ShareAsymptotics.survivor_share_asymptotic_step
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: twin_share_asymptotic
+  declaration: RNS.ShareAsymptotics.twin_share_asymptotic
+  summary: With the wheels up to n, the twin share of the cycle times log n squared tends to twice the
+    odd twin product times e to the minus twice Euler's constant.
+  imports:
+  - SurvivorCount.v1.general_survivor_count
+  - TwinShare.v1.twin_share_eq_prod
+  - TwinShare.v1.twin_share_split
+  - MertensThird.v1.mertens_third
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/ShareAsymptotics.lean
+    declaration: RNS.ShareAsymptotics.twin_share_asymptotic_step
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+sources:
+- title: "Mertens' theorems (Wikipedia)"
+  url: "https://en.wikipedia.org/wiki/Mertens%27_theorems"
+  relationship: "Mertens' third theorem, which gives both rates"
+- title: "Twin prime constant (Wikipedia, Twin prime)"
+  url: "https://en.wikipedia.org/wiki/Twin_prime#First_Hardy%E2%80%93Littlewood_conjecture"
+  relationship: "the odd twin product (twin-prime constant), about 0.6602"
+related:
+- node: ShareBounds
+  note: "the elementary upper bounds these rates sharpen"
+- node: TwinConstant
+  note: "the classical twin-prime constant, twice the odd twin product (not yet linked in Lean)"

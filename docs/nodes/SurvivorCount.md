@@ -74,6 +74,7 @@ def general_survivor_count : Prop :=
 - [`Pruning`](Pruning.md)
 - [`ShareBounds`](ShareBounds.md)
 - [`TwinShare`](TwinShare.md)
+- [`ShareAsymptotics`](ShareAsymptotics.md)
 
 ## Files
 
