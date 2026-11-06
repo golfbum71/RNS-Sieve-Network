@@ -18,6 +18,9 @@ import Mathlib.Tactic.NormNum
 
 Imports claims only, never other nodes' proofs. Rests on no other node.
 
+Built clean by `lake build RNSSolutions` on 2026-11-06; `#print axioms` shows only
+the standard three.
+
 Idea. Add one wheel at a time. Adding a wheel with share `a` multiplies the
 product by one minus `a`. In the stopped sum, the sets that leave the new
 wheel out give the old stopped sum, and the sets that use it give minus `a`

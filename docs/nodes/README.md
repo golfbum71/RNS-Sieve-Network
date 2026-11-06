@@ -65,5 +65,6 @@
 | 62 | [`BrunPureSieve`](BrunPureSieve.md) | truncated inclusion-exclusion for the wheels (Brun's pure sieve) | proved in Lean |
 | 64 | [`ShareAsymptotics`](ShareAsymptotics.md) | how fast the survivor and twin shares of the cycle shrink | proved in Lean |
 | 65 | [`BrunTwinCount`](BrunTwinCount.md) | counting the twin multiples of a set of wheels exactly (Brun stage 2) | proved in Lean |
+| 66 | [`BrunTruncation`](BrunTruncation.md) | stopping inclusion-exclusion early for a product of shares (Brun stage 3) | proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

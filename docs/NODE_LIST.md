@@ -657,6 +657,20 @@ minus two (the same residue for the wheel at 2).
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
   Actions build, 2026-11-06).
 
+### 66. `BrunTruncation` — stopping early for a product of shares (Brun stage 3)
+Give each wheel a share between zero and one. The share escaping every wheel
+is the product of one minus each share. Expand it by inclusion–exclusion and
+stop after the sets of at most some number of wheels: stopping at an even
+number overestimates, at an odd number underestimates, and the error is at
+most the sum, over the sets of one more wheel, of the product of their
+shares. That sum is at most the total share raised to that number, divided
+by its factorial. Proved by adding one wheel at a time.
+- Prior work: Brun (1919); the Bonferroni inequalities for independent events.
+- Lean: `truncation_error`, `esymm_power_bound`
+- Rests on: Vocabulary only
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-06).
+
 ### Where to look first
 
 Places already found to hold results, statements or tools these items need.
