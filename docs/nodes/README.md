@@ -61,5 +61,6 @@
 | 58 | [`HurwitzZetaZero`](HurwitzZetaZero.md) | the Hurwitz zeta function at 0 | proved in Lean |
 | 59 | [`FortunateCeiling`](FortunateCeiling.md) | what lands on a prime just above the cycle (Fortune's conjecture, OEIS A038771) | proved in Lean |
 | 60 | [`AlmostPrimeWindow`](AlmostPrimeWindow.md) | survivors between the cutoff and its cube are primes or semiprimes | proved in Lean |
+| 61 | [`TuranCycle`](TuranCycle.md) | Turán's sieve, exactly, on the positions 1 to N | proof drafted, not yet built |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

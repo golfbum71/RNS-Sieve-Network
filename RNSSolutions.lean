@@ -42,4 +42,5 @@ import RNSSolutions.HurwitzZetaZero
 import RNSSolutions.FortunateCeiling
 import RNSSolutions.MenonIdentity
 import RNSSolutions.AlmostPrimeWindow
+import RNSSolutions.TuranCycle
 import RNSSolutions.Assemble

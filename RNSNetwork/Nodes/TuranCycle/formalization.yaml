@@ -1,0 +1,82 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: TuranCycle.v1
+  family: TuranCycle
+  version: v1
+  order: 61
+  kind: paper
+  status: active
+  improves: SurvivorCount counts survivors exactly; this node puts the classical second-moment
+    (Turán) sieve on the same footing, with the average and spread of the wheel hits computed exactly
+    rather than estimated, as the first step from exact counts to sieve bounds.
+  title: Turán's sieve, exactly, on the positions 1 to N
+  description: For a set of wheels, count at each position how many wheels divide it. Over the positions
+    1 to N the hits total the multiples of each wheel, and the squared hits total the multiples of the
+    least common multiple of each ordered pair of wheels, both exactly. Turán's second-moment
+    inequality then bounds the survivors, since a survivor has no hits. Weak (about 15,100 against the
+    true 5760 for the wheels up to 13 on one cycle) but exact in every ingredient.
+conclusions:
+- id: hits_sum
+  declaration: RNS.TuranCycle.hits_sum
+  summary: Over the positions 1 to N, the wheel hits total the sum over the wheels of N divided by the
+    wheel.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/TuranCycle.lean
+    declaration: RNS.TuranCycle.hits_sum_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: hits_sq_sum
+  declaration: RNS.TuranCycle.hits_sq_sum
+  summary: Over the positions 1 to N, the squared hits total the sum over ordered pairs of wheels of N
+    divided by their least common multiple.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/TuranCycle.lean
+    declaration: RNS.TuranCycle.hits_sq_sum_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: turan_inequality
+  declaration: RNS.TuranCycle.turan_inequality
+  summary: Turán's second-moment inequality for any counting function on a finite set.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/TuranCycle.lean
+    declaration: RNS.TuranCycle.turan_inequality_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: turan_wheels
+  declaration: RNS.TuranCycle.turan_wheels
+  summary: Turán's sieve for the wheels, with both moments exact.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/TuranCycle.lean
+    declaration: RNS.TuranCycle.turan_wheels_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+sources:
+- title: Sieve theory (Wikipedia), the Turán sieve
+  url: https://en.wikipedia.org/wiki/Turán_sieve
+  relationship: the sieve this node proves exactly for the wheels
+- title: P. Turán, On a theorem of Hardy and Ramanujan, J. London Math. Soc. 9 (1934), 274-276
+  url: https://doi.org/10.1112/jlms/s1-9.4.274
+  relationship: the second-moment argument (here for the number of wheels dividing a position)
+related:
+- node: SurvivorCount
+  note: "the exact survivor count that Turán's bound is compared with"
+- node: SpreadBounds
+  note: "another exact bound on how survivors distribute over intervals"

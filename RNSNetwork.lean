@@ -46,5 +46,6 @@ import RNSNetwork.Nodes.GapCertificate.Conclusions
 import RNSNetwork.Nodes.Schatunowsky.Conclusions
 import RNSNetwork.Nodes.FortunateCeiling.Conclusions
 import RNSNetwork.Nodes.AlmostPrimeWindow.Conclusions
+import RNSNetwork.Nodes.TuranCycle.Conclusions
 import RNSNetwork.Nodes.GermainCriterion.Conclusions
 import RNSNetwork.Nodes.HurwitzZetaZero.Conclusions
