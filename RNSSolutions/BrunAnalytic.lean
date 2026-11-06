@@ -171,7 +171,7 @@ theorem bounded_sets_sum (y : ℕ → ℝ) (W : Finset ℕ) : (∀ p ∈ W, 0 �
 
 theorem pow_div_fact_le (S : ℝ) (hS : 0 ≤ S) (n : ℕ) :
     S ^ n / (n.factorial : ℝ) ≤ Real.exp (Real.exp 1 * S - n) := by
-  have h := Real.pow_div_factorial_le_exp (mul_nonneg (Real.exp_pos 1).le hS) n
+  have h := Real.pow_div_factorial_le_exp _ (mul_nonneg (Real.exp_pos 1).le hS) n
   rw [mul_pow] at h
   have he : (0 : ℝ) < Real.exp 1 ^ n := pow_pos (Real.exp_pos 1) n
   have hn : Real.exp (n : ℝ) = Real.exp 1 ^ n := by
@@ -209,8 +209,16 @@ theorem poly_bound (u K₂ : ℝ) (hK : 0 ≤ K₂) (hu : 196 + 4 * K₂ ≤ u) 
   have h5 : u * (u * u ^ 6) = u ^ 8 := by ring
   linarith
 
+theorem small_power_bound (u K₂ : ℝ) (hK : 0 ≤ K₂) (hu : 196 + 4 * K₂ ≤ u)
+    (hlogu : Real.log u ≤ u) : u ^ 6 + 1 + 12 * Real.log u ≤ u ^ 8 := by
+  have h1 := poly_bound u K₂ hK hu
+  have h2 : 0 ≤ (46 * u + K₂ - 1) * (u ^ 6 + 3) :=
+    mul_nonneg (by linarith) (by positivity)
+  nlinarith [h1, h2]
+
 /-! ### The count -/
 
+set_option maxHeartbeats 1000000 in
 theorem twin_core (B : ℝ) (hB0 : 0 ≤ B)
     (hB : ∀ x : ℝ, 2 ≤ x →
       (∑ p ∈ Finset.Ioc 0 ⌊x⌋₊ with p.Prime, (1 : ℝ) / p) ≤ Real.log (Real.log x) + B)
@@ -351,7 +359,7 @@ theorem twin_core (B : ℝ) (hB0 : 0 ≤ B)
       Finset.sum_le_sum (fun p _ => by split_ifs <;> norm_num)
     rw [Finset.sum_const, nsmul_eq_mul] at h2
     have h3 : 1 + ∑ p ∈ active_primes L, (if p = 2 then (1 : ℝ) else 2) ≤ 3 * (L : ℝ) := by
-      nlinarith
+      linarith
     have h30 : 0 ≤ 1 + ∑ p ∈ active_primes L, (if p = 2 then (1 : ℝ) else 2) :=
       by linarith [Finset.sum_nonneg hy]
     have h4 : (1 + ∑ p ∈ active_primes L, (if p = 2 then (1 : ℝ) else 2)) ^ (2 * m)
@@ -376,7 +384,7 @@ theorem twin_core (B : ℝ) (hB0 : 0 ≤ B)
           Real.exp_log hu12pos]
       rw [e1, e2, ← Real.exp_add, ← hNexp]
       apply Real.exp_le_exp.mpr
-      nlinarith
+      linarith
     have h6 : (3 * (L : ℝ)) ^ (2 * m) ≤ (N : ℝ) * (1 / u ^ 12) := by
       rw [mul_one_div, le_div_iff₀ hu12pos]
       exact h5
@@ -387,14 +395,11 @@ theorem twin_core (B : ℝ) (hB0 : 0 ≤ B)
     have e2 : u ^ 12 = Real.exp (12 * Real.log u) := by
       rw [show (12 : ℝ) * Real.log u = Real.log (u ^ 12) by rw [Real.log_pow]; norm_num,
         Real.exp_log hu12pos]
-    have hpos1 : 0 ≤ (46 * u + (2 * (K : ℝ) + 2) - 1) * (u ^ 6 + 3) :=
-      mul_nonneg (by linarith) (by positivity)
+    have hsmall := small_power_bound u (2 * (K : ℝ) + 2) (by linarith) (by linarith) hlogu
     calc (L : ℝ) * u ^ 12 ≤ Real.exp (u ^ 6 + 1) * u ^ 12 :=
           mul_le_mul_of_nonneg_right hLexp hu12pos.le
       _ = Real.exp (u ^ 6 + 1 + 12 * Real.log u) := by rw [e2, ← Real.exp_add]
-      _ ≤ Real.exp (u ^ 8) := by
-          apply Real.exp_le_exp.mpr
-          nlinarith
+      _ ≤ Real.exp (u ^ 8) := Real.exp_le_exp.mpr hsmall
       _ = N := hNexp
   -- adding up
   have hmain := hsb (active_primes L) N (2 * m) hWp ht
