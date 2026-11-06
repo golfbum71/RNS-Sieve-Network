@@ -67,5 +67,7 @@
 | 65 | [`BrunTwinCount`](BrunTwinCount.md) | counting the twin multiples of a set of wheels exactly (Brun stage 2) | proved in Lean |
 | 66 | [`BrunTruncation`](BrunTruncation.md) | stopping inclusion-exclusion early for a product of shares (Brun stage 3) | proved in Lean |
 | 67 | [`BrunTwinBound`](BrunTwinBound.md) | Brun's upper bound for the twin survivors, with every error term (Brun stage 4) | proved in Lean |
+| 68 | [`MertensSecond`](MertensSecond.md) | the sum of the reciprocals of the primes (Mertens' second theorem) | proved in Lean |
+| 69 | [`BrunAnalytic`](BrunAnalytic.md) | how few twin primes there are (Brun stage 5) | proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

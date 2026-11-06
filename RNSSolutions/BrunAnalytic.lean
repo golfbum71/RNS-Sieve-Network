@@ -22,6 +22,9 @@ import Mathlib.Tactic.FieldSimp
 /-!
 # Proofs for BrunAnalytic
 
+Built clean by `lake build RNSSolutions` on 2026-11-06; `#print axioms` shows only
+the standard three.
+
 Imports claims only, never other nodes' proofs. Both claims are steps; the
 arrows are joined in `RNSSolutions/Assemble.lean`.
 

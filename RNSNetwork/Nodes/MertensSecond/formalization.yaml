@@ -41,10 +41,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/MertensSecond.lean
     declaration: RNS.MertensSecond.prime_reciprocal_upper_step
-    note: Step drafted, not yet built.
+    note: Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-06); the step
+      takes its imports as named hypotheses. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 sources:
 - title: Mertens' theorems (Wikipedia)

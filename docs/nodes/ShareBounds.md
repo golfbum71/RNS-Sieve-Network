@@ -54,6 +54,10 @@ def twin_share_le_two_inv_log_sq : Prop :=
 
 **Proof:** `RNS.ShareBounds.twin_share_le_two_inv_log_sq_step` in [`RNSSolutions/ShareBounds.lean`](../../RNSSolutions/ShareBounds.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
+## Used by
+
+- [`BrunAnalytic`](BrunAnalytic.md)
+
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/ShareBounds/Conclusions.lean)

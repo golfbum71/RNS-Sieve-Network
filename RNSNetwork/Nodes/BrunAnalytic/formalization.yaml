@@ -26,10 +26,13 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BrunAnalytic.lean
     declaration: RNS.BrunAnalytic.twin_product_bound_step
-    note: Step drafted, not yet built.
+    note: Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-06); the step
+      takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean as
+      `twin_product_bound_holds`. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 - id: twin_prime_count_bound
   declaration: RNS.BrunAnalytic.twin_prime_count_bound
@@ -44,10 +47,14 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BrunAnalytic.lean
     declaration: RNS.BrunAnalytic.twin_prime_count_bound_step
-    note: Step drafted, not yet built.
+    note: Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-06); the step
+      takes its imports as named hypotheses; in RNSSolutions/Assemble.lean every arrow inside the network is
+      joined (`twin_prime_count_bound_of_mertens_second`), leaving only the outside claim
+      MertensSecond.mertens_second_remainder. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 sources:
 - title: Brun's theorem (Wikipedia)

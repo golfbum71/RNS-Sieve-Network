@@ -49,6 +49,10 @@ def twin_count_le_sifted : Prop :=
 
 **Proof:** `RNS.BrunTwinBound.twin_count_le_sifted_holds` in [`RNSSolutions/BrunTwinBound.lean`](../../RNSSolutions/BrunTwinBound.lean)
 
+## Used by
+
+- [`BrunAnalytic`](BrunAnalytic.md)
+
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/BrunTwinBound/Conclusions.lean)

@@ -11,6 +11,9 @@ import Mathlib.Tactic.Positivity
 /-!
 # Proofs for MertensSecond
 
+Built clean by `lake build RNSSolutions` on 2026-11-06; `#print axioms` shows only
+the standard three.
+
 Imports claims only. `prime_reciprocal_upper` is a step from the outside
 claim `mertens_second_remainder`, taken as a named hypothesis.
 

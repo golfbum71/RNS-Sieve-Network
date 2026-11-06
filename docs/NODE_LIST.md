@@ -686,6 +686,38 @@ pairs up to N are at most L plus the twin survivors of the wheels below L.
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
   Actions build, 2026-11-06).
 
+### 68. `MertensSecond` — the sum of the reciprocals of the primes
+The sum of one over each prime up to x is the logarithm of the logarithm of
+x, plus a constant, plus a remainder at most a constant over the logarithm of
+x. This is an outside claim: PNT+ proves it with explicit constants
+(`Mertens.sum_prime_div_eq` with `Mertens.E₂p.abs_le`), and the claim here
+asks only for some constants. From it, as a step: the sum is at most the
+logarithm of the logarithm plus a constant.
+- Prior work: Mertens (1874); PrimeNumberTheoremAnd.
+- Lean: `mertens_second_remainder` (outside), `prime_reciprocal_upper` (step)
+- Status: the step is clean (standard three axioms); the outside claim is cited, not rebuilt.
+
+### 69. `BrunAnalytic` — how few twin primes there are (Brun stage 5)
+For the wheels below L, the product of one minus each twin share is the twin
+share of the cycle, so `ShareBounds` bounds it by twice one over the
+logarithm of L, squared. Then the choice: with u the eighth root of the
+logarithm of N, take the wheels below about e to the u to the sixth and stop
+inclusion–exclusion after the sets of about 46 u wheels. Each part of
+`BrunTwinBound`'s bound is then at most a small multiple of N over the
+logarithm of N to the three halves; in all, from some point on, the twin
+prime pairs up to N are at most 5 N over the logarithm of N to the three
+halves. The power is more than one, which is what makes the sum of the
+reciprocals of the twin primes converge.
+- Prior work: Brun (1919), who obtains the sharper power two with a log log
+  factor; three halves is what the summation needs.
+- Lean: `twin_product_bound`, `twin_prime_count_bound` (steps)
+- Rests on: `SurvivorCount`, `ShareBounds`, `BrunTwinBound`, `BrunTruncation`,
+  `MertensSecond`. In `RNSSolutions/Assemble.lean` every arrow inside the
+  network is joined; the one remaining hypothesis is the outside claim
+  `MertensSecond.mertens_second_remainder`.
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-06).
+
 ### Where to look first
 
 Places already found to hold results, statements or tools these items need.
