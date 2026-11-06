@@ -5,20 +5,29 @@ Authors: Geoffrey Fischer
 -/
 import RNSNetwork.Nodes.HurwitzZetaZero.Conclusions
 import Mathlib.NumberTheory.LSeries.HurwitzZeta
+import Mathlib.Analysis.Complex.AbelLimit                     -- Abel's limit theorem
+import Mathlib.Analysis.SpecialFunctions.Complex.LogBounds    -- `hasSum_taylorSeries_neg_log`
+import Mathlib.Analysis.SpecificLimits.Normed                 -- Dirichlet's test
 
 /-!
 # Proofs for HurwitzZetaZero
 
 Imports claims only, never other nodes' proofs. The value of the Hurwitz zeta
-function at 0 rests on the node's cited claim `sin_zeta_at_one`, taken as a
-named hypothesis.
+function at 0 rests on `sin_zeta_at_one`, which rests on the node's cited claim
+`sin_zeta_at_one_eq_series`, taken as a named hypothesis.
 
 Idea. Mathlib's Hurwitz zeta function is its even part plus its odd part. At 0
 the even part is `-1/2` at the point 0 of the circle and 0 elsewhere
 (`hurwitzZetaEven_apply_zero`). The functional equation
 (`hurwitzZetaOdd_one_sub` at `s = 1`) makes the odd part at 0 equal to
 `sinZeta` at 1 divided by π. At `x = 1`, the point 0 of the circle, `sinZeta`
-vanishes, being odd; for `0 < x < 1` the cited claim gives `π (1/2 - x)`.
+vanishes, being odd; for `0 < x < 1`, `sin_zeta_at_one` gives `π (1/2 - x)`.
+
+The sawtooth series. Put `w = e^(2πix)`. The partial sums of `∑ wⁿ` are
+bounded, so `∑ wⁿ/n` converges (Dirichlet's test). Inside the disc,
+`∑ (rw)ⁿ/n = -log(1 - rw)`; letting `r` rise to 1, Abel's limit theorem makes
+the sum `-log(1 - w)`. Writing `1 - w = 2 sin(πx) e^(i(πx - π/2))` gives its
+argument `πx - π/2`, so the imaginary part of the sum is `π/2 - πx`.
 
 Built clean by `lake build RNSSolutions` on 2026-11-05; `#print axioms` shows only
 the standard three.
@@ -72,6 +81,145 @@ theorem hurwitz_zeta_at_zero_step (h_sin : sin_zeta_at_one) : hurwitz_zeta_at_ze
     rw [hs0, zero_div]
     norm_num
 
+/-! ## The sawtooth series -/
+
+/-- The `n`-th term of the series `∑ wⁿ / n` for `-log (1 - w)`. -/
+private noncomputable def logTerm (w : ℂ) (n : ℕ) : ℂ := w ^ n / n
+
+/-- `1 - e^(2it) = 2 sin t · e^(i(t - π/2))`. -/
+private theorem one_sub_exp (t : ℝ) :
+    (1 : ℂ) - Complex.exp (↑(2 * t) * Complex.I) =
+      ↑(2 * Real.sin t) * (Complex.cos ↑(t - Real.pi / 2) +
+        Complex.sin ↑(t - Real.pi / 2) * Complex.I) := by
+  have h1 := Real.sin_sq_add_cos_sq t
+  apply Complex.ext
+  · simp only [Complex.sub_re, Complex.one_re, Complex.exp_ofReal_mul_I_re, Complex.mul_re,
+      Complex.ofReal_re, Complex.ofReal_im, Complex.add_re, Complex.add_im, Complex.cos_ofReal_re,
+      Complex.cos_ofReal_im, Complex.sin_ofReal_re, Complex.sin_ofReal_im, Complex.I_re,
+      Complex.I_im]
+    rw [Real.cos_sub_pi_div_two, Real.sin_sub_pi_div_two, Real.cos_two_mul]
+    linear_combination (-2) * h1
+  · simp only [Complex.sub_im, Complex.one_im, Complex.exp_ofReal_mul_I_im, Complex.mul_im,
+      Complex.ofReal_re, Complex.ofReal_im, Complex.add_re, Complex.add_im, Complex.cos_ofReal_re,
+      Complex.cos_ofReal_im, Complex.sin_ofReal_re, Complex.sin_ofReal_im, Complex.I_re,
+      Complex.I_im]
+    rw [Real.cos_sub_pi_div_two, Real.sin_sub_pi_div_two, Real.sin_two_mul]
+    ring
+
+theorem sawtooth_partial_sums_holds : sawtooth_partial_sums := by
+  intro x hx0 hx1
+  have hπx0 : 0 < Real.pi * x := mul_pos Real.pi_pos hx0
+  have hπx1 : Real.pi * x < Real.pi := mul_lt_of_lt_one_right Real.pi_pos hx1
+  have hsin : 0 < Real.sin (Real.pi * x) := Real.sin_pos_of_pos_of_lt_pi hπx0 hπx1
+  obtain ⟨w, hw⟩ : ∃ w : ℂ, w = Complex.exp (↑(2 * (Real.pi * x)) * Complex.I) := ⟨_, rfl⟩
+  have hwn1 : ‖w‖ = 1 := by
+    rw [hw]
+    exact Complex.norm_exp_ofReal_mul_I _
+  -- `1 - w` lies in the right half plane
+  have hre : 0 < (1 - w).re := by
+    rw [hw]
+    simp only [Complex.sub_re, Complex.one_re, Complex.exp_ofReal_mul_I_re]
+    rw [Real.cos_two_mul]
+    nlinarith [Real.sin_sq_add_cos_sq (Real.pi * x), pow_pos hsin 2]
+  have hslit : 1 - w ∈ Complex.slitPlane := Complex.mem_slitPlane_iff.mpr (Or.inl hre)
+  have hw1 : w ≠ 1 := by
+    intro h
+    rw [h, sub_self] at hre
+    simp at hre
+  -- Dirichlet's test: the partial sums of `wⁱ⁺¹` are bounded
+  have hb : ∀ n, ‖∑ i ∈ Finset.range n, w ^ (i + 1)‖ ≤ 2 / ‖w - 1‖ := by
+    intro n
+    have he : ∑ i ∈ Finset.range n, w ^ (i + 1) = w * ((w ^ n - 1) / (w - 1)) := by
+      rw [← geom_sum_eq hw1 n, Finset.mul_sum]
+      exact Finset.sum_congr rfl (fun i _ => pow_succ' w i)
+    rw [he, norm_mul, norm_div, hwn1, one_mul]
+    gcongr
+    calc ‖w ^ n - 1‖ ≤ ‖w ^ n‖ + ‖(1 : ℂ)‖ := norm_sub_le _ _
+      _ = 2 := by rw [norm_pow, hwn1, one_pow, norm_one]; norm_num
+  have hfa : Antitone (fun i : ℕ => 1 / ((i : ℝ) + 1)) := by
+    intro a b hab
+    have : (a : ℝ) ≤ b := Nat.cast_le.mpr hab
+    dsimp only
+    gcongr
+  have hcs := Antitone.cauchySeq_series_mul_of_tendsto_zero_of_bounded
+    (f := fun i : ℕ => 1 / ((i : ℝ) + 1)) (z := fun i : ℕ => w ^ (i + 1)) hfa
+    tendsto_one_div_add_atTop_nhds_zero_nat hb
+  obtain ⟨l, hl⟩ := cauchySeq_tendsto_of_complete hcs
+  -- the same partial sums, as those of `∑ wⁿ / n`
+  have hsum : ∀ n, ∑ i ∈ Finset.range (n + 1), logTerm w i
+      = ∑ i ∈ Finset.range n, (1 / ((i : ℝ) + 1)) • w ^ (i + 1) := by
+    intro n
+    rw [Finset.sum_range_succ']
+    simp only [logTerm, Nat.cast_zero, div_zero, add_zero]
+    refine Finset.sum_congr rfl (fun i _ => ?_)
+    rw [Complex.real_smul]
+    push_cast
+    ring
+  have hg : Filter.Tendsto (fun n => ∑ i ∈ Finset.range n, logTerm w i) Filter.atTop (nhds l) := by
+    rw [← Filter.tendsto_add_atTop_iff_nat 1]
+    simp only [hsum]
+    exact hl
+  -- Abel's limit theorem, and `∑ (rw)ⁿ/n = -log(1 - rw)` inside the disc
+  have habel := Complex.tendsto_tsum_powerSeries_nhdsWithin_lt hg
+  rw [Filter.tendsto_map'_iff] at habel
+  have heq : ((fun z : ℂ => ∑' n, logTerm w n * z ^ n) ∘ Complex.ofReal)
+      =ᶠ[nhdsWithin 1 (Set.Iio 1)] fun r : ℝ => -Complex.log (1 - (r : ℂ) * w) := by
+    filter_upwards [Ioo_mem_nhdsLT (show (-1 : ℝ) < 1 by norm_num)] with r hr
+    have hn : ‖(r : ℂ) * w‖ < 1 := by
+      rw [norm_mul, hwn1, mul_one, Complex.norm_real, Real.norm_eq_abs, abs_lt]
+      exact ⟨hr.1, hr.2⟩
+    rw [Function.comp_apply, ← (Complex.hasSum_taylorSeries_neg_log hn).tsum_eq]
+    congr 1
+    ext n
+    unfold logTerm
+    ring
+  have hcont : Filter.Tendsto (fun r : ℝ => -Complex.log (1 - (r : ℂ) * w))
+      (nhdsWithin 1 (Set.Iio 1)) (nhds (-Complex.log (1 - w))) := by
+    have h1 : ContinuousAt (fun r : ℝ => 1 - (r : ℂ) * w) 1 :=
+      (continuous_const.sub (Complex.continuous_ofReal.mul continuous_const)).continuousAt
+    have hc : ContinuousAt (fun r : ℝ => -Complex.log (1 - (r : ℂ) * w)) 1 :=
+      ((Complex.continuousAt_clog hslit).comp_of_eq h1 (by simp)).neg
+    have h2 := hc.tendsto
+    simp only [Complex.ofReal_one, one_mul] at h2
+    exact h2.mono_left nhdsWithin_le_nhds
+  have hl_eq : l = -Complex.log (1 - w) := tendsto_nhds_unique (habel.congr' heq) hcont
+  -- the imaginary part
+  have harg : Complex.arg (1 - w) = Real.pi * x - Real.pi / 2 := by
+    rw [hw, one_sub_exp (Real.pi * x)]
+    have hr2 : 0 < 2 * Real.sin (Real.pi * x) := by linarith
+    exact Complex.arg_mul_cos_add_sin_mul_I hr2 ⟨by linarith [Real.pi_pos], by linarith [Real.pi_pos]⟩
+  have hval : l.im = Real.pi * (1 / 2 - x) := by
+    rw [hl_eq, Complex.neg_im, Complex.log_im, harg]
+    ring
+  have hgi : ∀ i : ℕ, (logTerm w i).im = Real.sin (2 * Real.pi * x * i) / i := by
+    intro i
+    have e : w ^ i = Complex.exp (↑(2 * Real.pi * x * i) * Complex.I) := by
+      rw [hw, ← Complex.exp_nat_mul]
+      congr 1
+      push_cast
+      ring
+    unfold logTerm
+    rw [e, ← Complex.ofReal_natCast, Complex.div_ofReal_im, Complex.exp_ofReal_mul_I_im]
+  have him := (Complex.continuous_im.tendsto l).comp hg
+  rw [hval] at him
+  refine him.congr (fun N => ?_)
+  rw [Function.comp_apply, Complex.im_sum]
+  exact Finset.sum_congr rfl (fun i _ => hgi i)
+
+theorem sin_zeta_at_one_step (h_series : sin_zeta_at_one_eq_series) : sin_zeta_at_one := by
+  intro x hx0 hx1
+  have hr := sawtooth_partial_sums_holds x hx0 hx1
+  have hc : Filter.Tendsto
+      (fun N : ℕ => ∑ n ∈ Finset.range N, (Real.sin (2 * Real.pi * x * n) : ℂ) / (n : ℂ))
+      Filter.atTop (nhds ((Real.pi * (1 / 2 - x) : ℝ) : ℂ)) := by
+    refine ((Complex.continuous_ofReal.tendsto _).comp hr).congr (fun N => ?_)
+    simp only [Function.comp_apply, Complex.ofReal_sum, Complex.ofReal_div, Complex.ofReal_natCast]
+  rw [tendsto_nhds_unique (h_series x hx0 hx1) hc]
+  push_cast
+  ring
+
 end RNS.HurwitzZetaZero
 
 #print axioms RNS.HurwitzZetaZero.hurwitz_zeta_at_zero_step
+#print axioms RNS.HurwitzZetaZero.sawtooth_partial_sums_holds
+#print axioms RNS.HurwitzZetaZero.sin_zeta_at_one_step
