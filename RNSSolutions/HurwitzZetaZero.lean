@@ -37,7 +37,8 @@ private theorem odd_at_zero (a : UnitAddCircle) :
     have h3 : (0 : ℝ) ≤ n := Nat.cast_nonneg n
     linarith
   have h := hurwitzZetaOdd_one_sub a hs
-  rw [sub_self, Complex.cpow_neg_one, Complex.Gamma_one, mul_one, Complex.sin_pi_div_two] at h
+  rw [sub_self, Complex.cpow_neg_one, Complex.Gamma_one, mul_one, mul_one,
+    Complex.sin_pi_div_two] at h
   rw [h, mul_inv, div_eq_mul_inv]
   ring
 
@@ -57,7 +58,8 @@ theorem hurwitz_zeta_at_zero_step (h_sin : sin_zeta_at_one) : hurwitz_zeta_at_ze
         linarith
       · have : (1 : ℝ) ≤ n := Nat.one_le_cast.mpr hpos
         linarith
-    rw [if_neg hne, h_sin x hx0 hlt, zero_add]
+    simp only [hne, ↓reduceIte]
+    rw [h_sin x hx0 hlt, zero_add]
     exact mul_div_cancel_left₀ _ hπ
   · -- `x = 1`: the point 0 of the circle, where `sinZeta` vanishes
     have h0 : ((1 : ℝ) : UnitAddCircle) = 0 := AddCircle.coe_period (1 : ℝ)
@@ -65,7 +67,8 @@ theorem hurwitz_zeta_at_zero_step (h_sin : sin_zeta_at_one) : hurwitz_zeta_at_ze
       have h := sinZeta_neg (0 : UnitAddCircle) 1
       rw [neg_zero] at h
       linear_combination h / 2
-    rw [if_pos h0, h0, hs0, zero_div]
+    simp only [h0, ↓reduceIte]
+    rw [hs0, zero_div]
     norm_num
 
 end RNS.HurwitzZetaZero
