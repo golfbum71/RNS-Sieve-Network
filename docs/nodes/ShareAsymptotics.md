@@ -20,7 +20,7 @@ Published work this node rests on or relates to; each entry says how.
 Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
 
 - [`ShareBounds`](ShareBounds.md) — the elementary upper bounds these rates sharpen
-- [`TwinConstant`](TwinConstant.md) — the classical twin-prime constant, twice the odd twin product (not yet linked in Lean)
+- [`TwinConstant`](TwinConstant.md) — the classical twin-prime constant, twice the odd twin product (odd_twin_product_eq_classical)
 
 ## Claims
 
@@ -61,6 +61,43 @@ def twin_share_asymptotic : Prop :=
 **Rests on:** [`SurvivorCount.general_survivor_count`](SurvivorCount.md#general_survivor_count), [`TwinShare.twin_share_eq_prod`](TwinShare.md#twin_share_eq_prod), [`TwinShare.twin_share_split`](TwinShare.md#twin_share_split), [`MertensThird.mertens_third`](MertensThird.md#mertens_third)
 
 **Proof:** `RNS.ShareAsymptotics.twin_share_asymptotic_step` in [`RNSSolutions/ShareAsymptotics.lean`](../../RNSSolutions/ShareAsymptotics.lean)
+
+<a id="odd_twin_product_eq_classical"></a>
+### `odd_twin_product_eq_classical`
+
+Twice the odd twin product is the classical twin-prime constant.
+
+```lean
+/-- **The odd twin product, linked.** Twice the odd twin product is the
+classical twin-prime constant of `TwinConstant` (about 1.3203), which that node
+proves equal to the Hardy–Littlewood constant of the twin pattern. -/
+def odd_twin_product_eq_classical : Prop :=
+  2 * odd_twin_product = RNS.TwinConstant.twin_prime_classical_constant
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.ShareAsymptotics.odd_twin_product_eq_classical_holds` in [`RNSSolutions/ShareAsymptotics.lean`](../../RNSSolutions/ShareAsymptotics.lean)
+
+<a id="twin_share_asymptotic_classical"></a>
+### `twin_share_asymptotic_classical`
+
+With the wheels up to n, the twin share of the cycle times log n squared tends to the twin-prime constant times e to the minus twice Euler's constant.
+
+```lean
+/-- **The twin share's rate, with the classical constant.** With the wheels up
+to `n`, the twin share of the cycle times the logarithm of `n` squared tends to
+the twin-prime constant times e to the minus Euler's constant, squared. -/
+def twin_share_asymptotic_classical : Prop :=
+  Tendsto (fun n : ℕ => ((wheel_survivors (n + 1)).card : ℝ) /
+      (primorial_modulus (n + 1) : ℝ) * Real.log n ^ 2)
+    atTop (𝓝 (RNS.TwinConstant.twin_prime_classical_constant *
+      Real.exp (-Real.eulerMascheroniConstant) ^ 2))
+```
+
+**Rests on:** [`SurvivorCount.general_survivor_count`](SurvivorCount.md#general_survivor_count), [`TwinShare.twin_share_eq_prod`](TwinShare.md#twin_share_eq_prod), [`TwinShare.twin_share_split`](TwinShare.md#twin_share_split), [`MertensThird.mertens_third`](MertensThird.md#mertens_third)
+
+**Proof:** `RNS.ShareAsymptotics.twin_share_asymptotic_classical_step` in [`RNSSolutions/ShareAsymptotics.lean`](../../RNSSolutions/ShareAsymptotics.lean)
 
 ## Files
 

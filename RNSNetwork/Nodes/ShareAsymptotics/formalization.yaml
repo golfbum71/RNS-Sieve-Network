@@ -49,6 +49,35 @@ conclusions:
     declaration: RNS.ShareAsymptotics.twin_share_asymptotic_step
     note: Proof drafted, not yet built.
   designated: lean-proof
+- id: odd_twin_product_eq_classical
+  declaration: RNS.ShareAsymptotics.odd_twin_product_eq_classical
+  summary: Twice the odd twin product is the classical twin-prime constant.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/ShareAsymptotics.lean
+    declaration: RNS.ShareAsymptotics.odd_twin_product_eq_classical_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: twin_share_asymptotic_classical
+  declaration: RNS.ShareAsymptotics.twin_share_asymptotic_classical
+  summary: With the wheels up to n, the twin share of the cycle times log n squared tends to the
+    twin-prime constant times e to the minus twice Euler's constant.
+  imports:
+  - SurvivorCount.v1.general_survivor_count
+  - TwinShare.v1.twin_share_eq_prod
+  - TwinShare.v1.twin_share_split
+  - MertensThird.v1.mertens_third
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/ShareAsymptotics.lean
+    declaration: RNS.ShareAsymptotics.twin_share_asymptotic_classical_step
+    note: Proof drafted, not yet built.
+  designated: lean-proof
 sources:
 - title: "Mertens' theorems (Wikipedia)"
   url: "https://en.wikipedia.org/wiki/Mertens%27_theorems"
@@ -60,4 +89,4 @@ related:
 - node: ShareBounds
   note: "the elementary upper bounds these rates sharpen"
 - node: TwinConstant
-  note: "the classical twin-prime constant, twice the odd twin product (not yet linked in Lean)"
+  note: "the classical twin-prime constant, twice the odd twin product (odd_twin_product_eq_classical)"

@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Geoffrey Fischer
 -/
 import RNSNetwork.Nodes.MertensThird.Conclusions
+import RNSNetwork.Nodes.TwinConstant.Conclusions
 
 /-!
 # ShareAsymptotics — how fast the survivor and twin shares of the cycle shrink
@@ -56,5 +57,20 @@ def twin_share_asymptotic : Prop :=
   Tendsto (fun n : ℕ => ((wheel_survivors (n + 1)).card : ℝ) /
       (primorial_modulus (n + 1) : ℝ) * Real.log n ^ 2)
     atTop (𝓝 (2 * odd_twin_product * Real.exp (-Real.eulerMascheroniConstant) ^ 2))
+
+/-- **The odd twin product, linked.** Twice the odd twin product is the
+classical twin-prime constant of `TwinConstant` (about 1.3203), which that node
+proves equal to the Hardy–Littlewood constant of the twin pattern. -/
+def odd_twin_product_eq_classical : Prop :=
+  2 * odd_twin_product = RNS.TwinConstant.twin_prime_classical_constant
+
+/-- **The twin share's rate, with the classical constant.** With the wheels up
+to `n`, the twin share of the cycle times the logarithm of `n` squared tends to
+the twin-prime constant times e to the minus Euler's constant, squared. -/
+def twin_share_asymptotic_classical : Prop :=
+  Tendsto (fun n : ℕ => ((wheel_survivors (n + 1)).card : ℝ) /
+      (primorial_modulus (n + 1) : ℝ) * Real.log n ^ 2)
+    atTop (𝓝 (RNS.TwinConstant.twin_prime_classical_constant *
+      Real.exp (-Real.eulerMascheroniConstant) ^ 2))
 
 end RNS.ShareAsymptotics

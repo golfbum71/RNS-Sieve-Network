@@ -6,6 +6,7 @@ Authors: Geoffrey Fischer
 import RNSNetwork.Nodes.ShareAsymptotics.Conclusions
 import RNSNetwork.Nodes.SurvivorCount.Conclusions
 import RNSNetwork.Nodes.TwinShare.Conclusions
+import Mathlib.Topology.Algebra.InfiniteSum.Basic       -- `Function.Injective.tprod_eq`
 import Mathlib.Analysis.SpecialFunctions.Log.Summable  -- `Real.multipliable_one_add_of_summable`
 import Mathlib.Analysis.PSeries                        -- `summable_one_div_nat_pow`
 import Mathlib.Topology.Algebra.InfiniteSum.NatInt     -- `HasProd.tendsto_prod_nat`
@@ -80,7 +81,7 @@ theorem survivor_share_asymptotic_step (hgen : general_survivor_count)
 private theorem twin_multipliable : Multipliable odd_twin_factor := by
   have hf : Summable (fun n : ℕ => if n.Prime ∧ n ≠ 2 then -(1 / ((n : ℝ) - 1) ^ 2) else 0) := by
     refine Summable.of_norm_bounded
-      ((summable_one_div_nat_pow.mpr (by norm_num : 1 < 2)).mul_left 4) (fun n => ?_)
+      ((Real.summable_one_div_nat_pow.mpr (by norm_num : 1 < 2)).mul_left 4) (fun n => ?_)
     split_ifs with h
     · have h3 : (3 : ℝ) ≤ n := by
         have h2 := h.1.two_le
@@ -149,7 +150,43 @@ theorem twin_share_asymptotic_step (hgen : general_survivor_count)
     prod_eq_survivor_share n, partial_eq n]
   ring
 
+/-- **Twice the odd twin product is the classical twin-prime constant.** The
+odd primes are exactly where the factor differs from 1, so the product over
+the whole numbers equals the product over the odd primes. -/
+theorem odd_twin_product_eq_classical_holds : odd_twin_product_eq_classical := by
+  unfold odd_twin_product_eq_classical odd_twin_product RNS.TwinConstant.twin_prime_classical_constant
+  congr 1
+  let g : {q : Nat.Primes // (q : ℕ) ≠ 2} → ℕ := fun p => ((p : Nat.Primes) : ℕ)
+  have hg : Function.Injective g := by
+    intro a b h
+    apply Subtype.ext
+    apply Subtype.ext
+    exact h
+  have hsupp : Function.mulSupport odd_twin_factor ⊆ Set.range g := by
+    intro n hn
+    rw [Function.mem_mulSupport] at hn
+    unfold odd_twin_factor at hn
+    split_ifs at hn with h
+    · exact ⟨⟨⟨n, h.1⟩, h.2⟩, rfl⟩
+    · exact absurd rfl hn
+  rw [← hg.tprod_eq hsupp]
+  refine tprod_congr fun p => ?_
+  show odd_twin_factor ((p : Nat.Primes) : ℕ) = _
+  unfold odd_twin_factor
+  rw [if_pos ⟨(p : Nat.Primes).prop, p.prop⟩]
+
+theorem twin_share_asymptotic_classical_step (hgen : general_survivor_count)
+    (heq : twin_share_eq_prod) (hsplit : twin_share_split) (hm : mertens_third) :
+    twin_share_asymptotic_classical := by
+  have h := twin_share_asymptotic_step hgen heq hsplit hm
+  unfold twin_share_asymptotic at h
+  unfold twin_share_asymptotic_classical
+  rw [← odd_twin_product_eq_classical_holds]
+  exact h
+
 end RNS.ShareAsymptotics
 
 #print axioms RNS.ShareAsymptotics.survivor_share_asymptotic_step
 #print axioms RNS.ShareAsymptotics.twin_share_asymptotic_step
+#print axioms RNS.ShareAsymptotics.odd_twin_product_eq_classical_holds
+#print axioms RNS.ShareAsymptotics.twin_share_asymptotic_classical_step
