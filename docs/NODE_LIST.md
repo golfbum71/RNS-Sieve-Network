@@ -597,11 +597,17 @@ sharp up to that factor. The twin share times log² n tends to the twin-prime
 constant times e^(-2γ) (about 0.4162). Twice the odd twin product (over the
 odd primes of 1 − 1/(p−1)²) is proved equal to `TwinConstant`'s classical
 twin-prime constant, which `TwinConstant` proves equal to the Hardy–Littlewood
-constant of the twin pattern. Numerically 0.56144 and 0.41618 at n a million.
+constant of the twin pattern. In general, for any nonempty admissible offset
+pattern with k offsets, its share of the cycle times (log n)^k tends to its
+Hardy–Littlewood constant times e^(-kγ): the wheel-side form of the
+Hardy–Littlewood prediction, exact in everything but Mertens. Numerically
+0.56144, 0.41618, and 0.50583 for the pattern 0, 2, 6 (limit 0.50589), at n a
+million.
 - Lean: `survivor_share_asymptotic`, `twin_share_asymptotic`,
-  `odd_twin_product_eq_classical`, `twin_share_asymptotic_classical`
-- Rests on: `SurvivorCount`, `TwinShare`, `MertensThird` (hence on the PNT+
-  remainder bound)
+  `odd_twin_product_eq_classical`, `twin_share_asymptotic_classical`,
+  `pattern_share_asymptotic`
+- Rests on: `SurvivorCount`, `TwinShare`, `SingularSeries`, `MertensThird`
+  (hence on the PNT+ remainder bound)
 - Status: Clean. Steps proved; `#print axioms` shows only the standard three
   (GitHub Actions build, 2026-11-06).
 
