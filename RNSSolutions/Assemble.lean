@@ -45,6 +45,7 @@ import RNSSolutions.BrunTruncation
 import RNSSolutions.BrunTwinBound
 import RNSSolutions.MertensSecond
 import RNSSolutions.BrunAnalytic
+import RNSSolutions.BrunTheorem
 
 /-!
 # Assembling the network
@@ -405,3 +406,11 @@ theorem RNS.BrunAnalytic.twin_prime_count_bound_of_mertens_second
 
 #print axioms RNS.BrunAnalytic.twin_product_bound_holds
 #print axioms RNS.BrunAnalytic.twin_prime_count_bound_of_mertens_second
+
+/-- `BrunAnalytic` → `BrunTheorem`: Brun's theorem, with every arrow inside the network joined. The
+one remaining hypothesis is the outside claim `MertensSecond.mertens_second_remainder` (from PNT+). -/
+theorem RNS.BrunTheorem.brun_theorem_of_mertens_second
+    (h : RNS.MertensSecond.mertens_second_remainder) : RNS.BrunTheorem.brun_theorem :=
+  RNS.BrunTheorem.brun_theorem_step (RNS.BrunAnalytic.twin_prime_count_bound_of_mertens_second h)
+
+#print axioms RNS.BrunTheorem.brun_theorem_of_mertens_second

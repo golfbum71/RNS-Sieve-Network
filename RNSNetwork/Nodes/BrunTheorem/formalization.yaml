@@ -1,0 +1,32 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: BrunTheorem.v1
+  family: BrunTheorem
+  version: v1
+  order: 70
+  kind: paper
+  status: active
+  improves: Turns BrunAnalytic's bound on the number of twin primes into Brun's theorem.
+  title: the reciprocals of the twin primes have a finite sum (Brun's theorem)
+  description: Adding one over p and one over p plus 2 for every twin prime pair gives a finite total.
+    Proved stretch by stretch between powers of 2, each stretch adding at most a constant over k to the
+    three halves once it is past the starting point of BrunAnalytic's bound.
+conclusions:
+- id: brun_theorem
+  declaration: RNS.BrunTheorem.brun_theorem
+  summary: The sum over the twin prime pairs p, p plus 2 of one over p plus one over p plus 2 converges.
+  imports:
+  - BrunAnalytic.v1.twin_prime_count_bound
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BrunTheorem.lean
+    declaration: RNS.BrunTheorem.brun_theorem_step
+    note: Step drafted, not yet built.
+  designated: lean-proof
+sources:
+- title: Brun's theorem (Wikipedia)
+  url: https://en.wikipedia.org/wiki/Brun%27s_theorem
