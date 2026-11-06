@@ -51,3 +51,4 @@ import RNSSolutions.ShareAsymptotics
 import RNSSolutions.Assemble
 import RNSSolutions.BrunTwinCount
 import RNSSolutions.BrunTruncation
+import RNSSolutions.BrunTwinBound

@@ -1,0 +1,49 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: BrunTwinBound.v1
+  family: BrunTwinBound
+  version: v1
+  order: 67
+  kind: paper
+  status: active
+  improves: Joins Brun stages 1 to 3 into one upper bound for the twin survivors with every error term
+    explicit, and links twin primes to twin survivors; stage 4 of Brun's theorem.
+  title: Brun's upper bound for the twin survivors, with every error term (Brun stage 4)
+  description: The twin survivors of prime wheels up to N are at most N times (the product of one minus
+    each wheel's twin share, plus the sum over the sets of one more wheel than the stopping point of the
+    products of their twin shares), plus the total number of twin roots over the sets used. Twin prime
+    pairs up to N are at most L plus the twin survivors of the wheels below L.
+conclusions:
+- id: twin_sifted_bound
+  declaration: RNS.BrunTwinBound.twin_sifted_bound
+  summary: The twin survivors up to N are at most N times the product of one minus the twin shares plus
+    the truncation error, plus the twin roots over the sets used.
+  imports:
+  - BrunPureSieve.v1.twin_bonferroni_upper
+  - BrunTwinCount.v1.twin_multiples_count
+  - BrunTruncation.v1.truncation_error
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BrunTwinBound.lean
+    declaration: RNS.BrunTwinBound.twin_sifted_bound_step
+    note: Step drafted, not yet built; the arrow is joined in RNSSolutions/Assemble.lean.
+  designated: lean-proof
+- id: twin_count_le_sifted
+  declaration: RNS.BrunTwinBound.twin_count_le_sifted
+  summary: The twin prime pairs up to N are at most L plus the twin survivors of the wheels below L.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BrunTwinBound.lean
+    declaration: RNS.BrunTwinBound.twin_count_le_sifted_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+sources:
+- title: Brun sieve (Wikipedia)
+  url: https://en.wikipedia.org/wiki/Brun_sieve

@@ -39,6 +39,10 @@ import RNSSolutions.Schatunowsky
 import RNSSolutions.GermainCriterion
 import RNSSolutions.HurwitzZetaZero
 import RNSSolutions.FortunateCeiling
+import RNSSolutions.BrunPureSieve
+import RNSSolutions.BrunTwinCount
+import RNSSolutions.BrunTruncation
+import RNSSolutions.BrunTwinBound
 
 /-!
 # Assembling the network
@@ -374,3 +378,11 @@ theorem RNS.FortunateCeiling.fortune_of_ceiling_holds : RNS.FortunateCeiling.for
 #print axioms RNS.FortunateCeiling.shift_prime_below_ceiling_holds
 #print axioms RNS.FortunateCeiling.fortunate_prime_below_ceiling_holds
 #print axioms RNS.FortunateCeiling.fortune_of_ceiling_holds
+
+/-- `BrunPureSieve`, `BrunTwinCount`, `BrunTruncation` → `BrunTwinBound`: Brun's twin bound with
+its error terms. -/
+theorem RNS.BrunTwinBound.twin_sifted_bound_holds : RNS.BrunTwinBound.twin_sifted_bound :=
+  RNS.BrunTwinBound.twin_sifted_bound_step RNS.BrunPureSieve.twin_bonferroni_upper_holds
+    RNS.BrunTwinCount.twin_multiples_count_holds RNS.BrunTruncation.truncation_error_holds
+
+#print axioms RNS.BrunTwinBound.twin_sifted_bound_holds
