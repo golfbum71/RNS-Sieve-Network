@@ -394,6 +394,11 @@ the wheel divides the frequency, minus 1 if not.
 - Lean: `twin_reciprocal`, `brun_sum_finite` (cited, not proved; a proof would
   use Mathlib's Selberg sieve and a Mertens-type estimate)
 - Status: Cited (2026-11-05).
+- Update 2026-11-06: now proved in this network, by Brun's own route, as a
+  step from `BrunTheorem` (node 70). Every arrow inside the network is joined
+  in `RNSSolutions/Assemble.lean` (`brun_sum_finite_of_mertens_second`); the
+  one remaining hypothesis is Mertens' second theorem, an outside claim from
+  PNT+ (`MertensSecond`). Standard three axioms only.
 
 ### 53. `GapMoments` — the survivor gaps are spread as evenly as their average allows
 The gaps between consecutive survivors of one cycle, raised to any fixed power
@@ -715,6 +720,26 @@ reciprocals of the twin primes converge.
   `MertensSecond`. In `RNSSolutions/Assemble.lean` every arrow inside the
   network is joined; the one remaining hypothesis is the outside claim
   `MertensSecond.mertens_second_remainder`.
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-06).
+
+### 70. `BrunTheorem` — the reciprocals of the twin primes have a finite sum
+Brun's theorem. Cut the positions into stretches from one power of 2 to the
+next. In the stretch from 2ᵏ to 2ᵏ⁺¹ each twin pair adds at most 2 / 2ᵏ, and
+the twin pairs there are among those up to 2ᵏ⁺¹. So a stretch adds at most
+4, and, once 2ᵏ⁺¹ passes the starting point of `BrunAnalytic`'s bound, at
+most a constant over k to the three halves. Those amounts have a finite
+total, so the sum converges.
+- Prior work: Brun (1919).
+- Lean: `twin_reciprocal`, `brun_theorem` (step)
+- Rests on: `BrunAnalytic.twin_prime_count_bound`. The whole chain, from the
+  wheels to the sum, is joined in `RNSSolutions/Assemble.lean` as
+  `brun_theorem_of_mertens_second`: its one hypothesis is the outside claim
+  `MertensSecond.mertens_second_remainder` (PNT+).
+- The chain: `BrunPureSieve` (truncated inclusion–exclusion, twin pattern) →
+  `BrunTwinCount` (twin multiples, one cycle at a time) → `BrunTruncation`
+  (error of stopping early) → `BrunTwinBound` (the bound with every error
+  term) → `BrunAnalytic` (the choice of wheels and stopping point) → here.
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
   Actions build, 2026-11-06).
 

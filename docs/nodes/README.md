@@ -52,7 +52,7 @@
 | 49 | [`LongGaps`](LongGaps.md) | blocked runs become long prime gaps | outside source: proved in Lean in another project |
 | 50 | [`PrimeGapsBridge`](PrimeGapsBridge.md) | the network's admissibility is PrimeGapsLib's | proved in Lean |
 | 51 | [`RamanujanSums`](RamanujanSums.md) | the survivor pattern's frequencies, wheel by wheel | proved in Lean |
-| 52 | [`BrunTwinSum`](BrunTwinSum.md) | the twin primes' reciprocals add up to a finite total | cited from a published paper; not proved in Lean |
+| 52 | [`BrunTwinSum`](BrunTwinSum.md) | the twin primes' reciprocals add up to a finite total | proved in Lean |
 | 53 | [`GapMoments`](GapMoments.md) | the survivor gaps are spread as evenly as their average allows | cited from a published paper; not proved in Lean |
 | 54 | [`SophieGermainPowers`](SophieGermainPowers.md) | on the wheel of size 2p+1, p-th powers have three positions | proved in Lean |
 | 55 | [`SophieGermainTheorem`](SophieGermainTheorem.md) | the first case of Fermat's Last Theorem for Sophie Germain primes | proved in Lean |
@@ -69,5 +69,6 @@
 | 67 | [`BrunTwinBound`](BrunTwinBound.md) | Brun's upper bound for the twin survivors, with every error term (Brun stage 4) | proved in Lean |
 | 68 | [`MertensSecond`](MertensSecond.md) | the sum of the reciprocals of the primes (Mertens' second theorem) | proved in Lean |
 | 69 | [`BrunAnalytic`](BrunAnalytic.md) | how few twin primes there are (Brun stage 5) | proved in Lean |
+| 70 | [`BrunTheorem`](BrunTheorem.md) | the reciprocals of the twin primes have a finite sum (Brun's theorem) | proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

@@ -20,6 +20,9 @@ import Mathlib.Tactic.NormNum
 /-!
 # Proofs for BrunTheorem
 
+Built clean by `lake build RNSSolutions` on 2026-11-06; `#print axioms` shows only
+the standard three.
+
 Imports claims only. The theorem is a step from `BrunAnalytic.twin_prime_count_bound`,
 taken as a named hypothesis; the arrow is joined in `RNSSolutions/Assemble.lean`.
 

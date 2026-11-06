@@ -10,6 +10,9 @@ import Mathlib.Tactic.NormNum
 /-!
 # Proofs for BrunTwinSum
 
+Built clean by `lake build RNSSolutions` on 2026-11-06; `#print axioms` shows only
+the standard three.
+
 Imports claims only. `brun_sum_finite` is a step from
 `BrunTheorem.brun_theorem`, taken as a named hypothesis: the two nodes add
 the same terms (one over `p` plus one over `p + 2` for each twin pair), with

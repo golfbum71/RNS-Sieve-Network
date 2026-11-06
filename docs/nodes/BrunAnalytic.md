@@ -50,6 +50,7 @@ def twin_prime_count_bound : Prop :=
 ## Used by
 
 - [`BrunAnalytic`](BrunAnalytic.md)
+- [`BrunTheorem`](BrunTheorem.md)
 
 ## Files
 

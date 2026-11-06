@@ -11,14 +11,25 @@ node:
   title: the twin primes' reciprocals add up to a finite total
   description: The reciprocals of the twin primes have a finite sum (Brun's constant, about 1.902),
     whether or not there are infinitely many twin primes. Its sieve heart is the wheel-level twin share
-    of ShareBounds. Brun's theorem, cited.
+    of ShareBounds. Brun's theorem; proved in this network through BrunTheorem, resting on one outside
+    claim (Mertens' second theorem, from PNT+).
 conclusions:
 - id: brun_sum_finite
   declaration: RNS.BrunTwinSum.brun_sum_finite
-  summary: The twin-prime reciprocals have a finite sum (cited).
-  imports: []
-  imports_status: none
+  summary: The twin-prime reciprocals have a finite sum.
+  imports:
+  - BrunTheorem.v1.brun_theorem
+  imports_status: identified
   justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/BrunTwinSum.lean
+    declaration: RNS.BrunTwinSum.brun_sum_finite_step
+    note: Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-06); a step from
+      BrunTheorem.brun_theorem (the same sum). Joined in RNSSolutions/Assemble.lean as
+      `brun_sum_finite_of_mertens_second`, whose one hypothesis is the outside claim
+      MertensSecond.mertens_second_remainder (from PNT+). Recorded as noncompliant only because no
+      Comparator receipt exists yet.
   - id: paper
     kind: literature
     source: V. Brun, La série 1/5 + 1/7 + 1/11 + 1/13 + ... où les dénominateurs sont nombres premiers
@@ -36,7 +47,7 @@ conclusions:
       2026-07-12) is no longer listed among the author's public gists. Before relying on any of them,
       obtain the proof, confirm `#print axioms` shows only the standard three, and match its statement
       to brun_sum_finite.
-  designated: paper
+  designated: lean-proof
 sources:
 - title: Brun's theorem (lean-lang.org problem list, brun_constant_converges)
   url: https://lean-lang.org/eval/problems/brun_constant_converges/
