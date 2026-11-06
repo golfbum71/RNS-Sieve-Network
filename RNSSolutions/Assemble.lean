@@ -37,6 +37,7 @@ import RNSSolutions.GermainAuxiliary
 import RNSSolutions.BonseCeiling
 import RNSSolutions.Schatunowsky
 import RNSSolutions.GermainCriterion
+import RNSSolutions.HurwitzZetaZero
 
 /-!
 # Assembling the network
@@ -294,3 +295,63 @@ theorem RNS.GermainCriterion.two_wheel_split_of_remainders_holds :
     RNS.Sawtooth.even_split_iff_remainders_cancel_holds
 
 #print axioms RNS.GermainCriterion.two_wheel_split_of_remainders_holds
+
+/-- `HurwitzZetaZero` → `GermainCriterion`: the weighted residue sum of an odd primitive character is not zero. -/
+theorem RNS.GermainCriterion.odd_primitive_weighted_sum_ne_zero_holds :
+    RNS.GermainCriterion.odd_primitive_weighted_sum_ne_zero :=
+  RNS.GermainCriterion.odd_primitive_weighted_sum_ne_zero_step
+    RNS.HurwitzZetaZero.hurwitz_zeta_at_zero_holds
+
+/-- `HurwitzZetaZero` → `GermainCriterion`: the weighted residue sum is a value of the L-function at 0. -/
+theorem RNS.GermainCriterion.weighted_sum_eq_LFunction_zero_holds :
+    RNS.GermainCriterion.weighted_sum_eq_LFunction_zero :=
+  RNS.GermainCriterion.weighted_sum_eq_LFunction_zero_step
+    RNS.HurwitzZetaZero.hurwitz_zeta_at_zero_holds
+
+/-- `HurwitzZetaZero` → `GermainCriterion`: Germain's (3.2). -/
+theorem RNS.GermainCriterion.odd_weighted_sum_ne_zero_iff_holds :
+    RNS.GermainCriterion.odd_weighted_sum_ne_zero_iff :=
+  RNS.GermainCriterion.odd_weighted_sum_ne_zero_iff_step
+    RNS.HurwitzZetaZero.hurwitz_zeta_at_zero_holds
+
+/-- `HurwitzZetaZero` → `GermainCriterion`: Germain's Proposition 3.1. -/
+theorem RNS.GermainCriterion.coprime_split_iff_characters_holds :
+    RNS.GermainCriterion.coprime_split_iff_characters :=
+  RNS.GermainCriterion.coprime_split_iff_characters_step
+    RNS.HurwitzZetaZero.hurwitz_zeta_at_zero_holds
+
+/-- `HurwitzZetaZero` → `GermainCriterion`: Germain's Corollary 3.2. -/
+theorem RNS.GermainCriterion.all_residues_split_iff_wheels_holds :
+    RNS.GermainCriterion.all_residues_split_iff_wheels :=
+  RNS.GermainCriterion.all_residues_split_iff_wheels_step
+    RNS.HurwitzZetaZero.hurwitz_zeta_at_zero_holds
+
+/-- `Sawtooth` and `HurwitzZetaZero` → `GermainCriterion`: Germain's Theorem 1.1. -/
+theorem RNS.GermainCriterion.germain_theorem_holds :
+    RNS.GermainCriterion.germain_theorem :=
+  RNS.GermainCriterion.germain_theorem_step
+    RNS.Sawtooth.even_split_iff_remainders_cancel_holds
+    RNS.HurwitzZetaZero.hurwitz_zeta_at_zero_holds
+
+/-- `Sawtooth` and `HurwitzZetaZero` → `GermainCriterion`: Erdős's conjecture on Lehmer's even split. -/
+theorem RNS.GermainCriterion.two_wheel_remainders_of_split_holds :
+    RNS.GermainCriterion.two_wheel_remainders_of_split :=
+  RNS.GermainCriterion.two_wheel_remainders_of_split_step
+    RNS.Sawtooth.even_split_iff_remainders_cancel_holds
+    RNS.HurwitzZetaZero.hurwitz_zeta_at_zero_holds
+
+/-- `Sawtooth` and `HurwitzZetaZero` → `GermainCriterion`: Germain's Corollary 1.4. -/
+theorem RNS.GermainCriterion.two_wheel_split_iff_holds :
+    RNS.GermainCriterion.two_wheel_split_iff :=
+  RNS.GermainCriterion.two_wheel_split_iff_step
+    RNS.Sawtooth.even_split_iff_remainders_cancel_holds
+    RNS.HurwitzZetaZero.hurwitz_zeta_at_zero_holds
+
+#print axioms RNS.GermainCriterion.odd_primitive_weighted_sum_ne_zero_holds
+#print axioms RNS.GermainCriterion.weighted_sum_eq_LFunction_zero_holds
+#print axioms RNS.GermainCriterion.odd_weighted_sum_ne_zero_iff_holds
+#print axioms RNS.GermainCriterion.coprime_split_iff_characters_holds
+#print axioms RNS.GermainCriterion.all_residues_split_iff_wheels_holds
+#print axioms RNS.GermainCriterion.germain_theorem_holds
+#print axioms RNS.GermainCriterion.two_wheel_remainders_of_split_holds
+#print axioms RNS.GermainCriterion.two_wheel_split_iff_holds
