@@ -50,3 +50,4 @@ import RNSSolutions.CeilingOvershoot
 import RNSSolutions.ShareAsymptotics
 import RNSSolutions.Assemble
 import RNSSolutions.BrunTwinCount
+import RNSSolutions.BrunTruncation

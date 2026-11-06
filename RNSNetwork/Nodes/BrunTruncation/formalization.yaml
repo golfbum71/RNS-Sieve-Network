@@ -1,0 +1,47 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: BrunTruncation.v1
+  family: BrunTruncation
+  version: v1
+  order: 66
+  kind: paper
+  status: active
+  improves: BrunPureSieve stops inclusion-exclusion early for counts; this node does the same for the
+    product of one minus each wheel's share, with the size of the error, stage 3 of Brun's theorem.
+  title: stopping inclusion-exclusion early for a product of shares (Brun stage 3)
+  description: With shares between zero and one, inclusion-exclusion for the product of one minus each
+    share, stopped after the sets of at most some number of wheels, overestimates at an even stopping
+    point and underestimates at an odd one, by at most the sum over sets of one more wheel of the
+    product of their shares; that sum is at most the total share to that power over its factorial.
+conclusions:
+- id: truncation_error
+  declaration: RNS.BrunTruncation.truncation_error
+  summary: The signed error of stopping early lies between zero and the sum over the sets of one more
+    wheel of the product of their shares.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BrunTruncation.lean
+    declaration: RNS.BrunTruncation.truncation_error_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: esymm_power_bound
+  declaration: RNS.BrunTruncation.esymm_power_bound
+  summary: The sum over the sets of k wheels of the product of their shares is at most the total share
+    to the k over k factorial.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BrunTruncation.lean
+    declaration: RNS.BrunTruncation.esymm_power_bound_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+sources:
+- title: Brun sieve (Wikipedia)
+  url: https://en.wikipedia.org/wiki/Brun_sieve
