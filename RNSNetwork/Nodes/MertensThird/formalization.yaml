@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: MertensThird.v1
@@ -7,27 +7,51 @@ node:
   version: v1
   order: 40
   kind: external
-  status: planned
+  status: active
   title: Mertens' third theorem
-  description: The survivor share after the wheels up to x, times log x, tends to e to the
-    minus Euler's constant. Proved in Lean in PrimeNumberTheoremAnd, with error of order one
-    over log x squared.
-conclusions: []
-planned:
-  source_status: External
-  rests_on: []
-  external:
-    project: PrimeNumberTheoremAnd (PNT+)
-    declaration: E₃.bound''
-    url: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/IEANTN/Mertens.lean#L2419
-    toolchain: Lean v4.35.0
-    note: 'No sorry in the file. Before relying on it, confirm with #print axioms in PNT+
-      that nothing it imports uses sorry. PNT+ builds on a newer toolchain than this repository,
-      so nodes here take the statement as a named hypothesis instead of importing PNT+.'
+  description: The survivor share after the wheels up to x (the product over the primes up to x of one
+    minus one over the prime) is e to the minus Euler's constant over log x, with an error of order one
+    over log x squared. Proved in Lean in PrimeNumberTheoremAnd and taken here as a named hypothesis
+    (PNT+ builds on a different toolchain); the limit form used by other nodes is proved here from it.
+conclusions:
+- id: mertens_third_error
+  declaration: RNS.MertensThird.mertens_third_error
+  summary: The survivor share is e to the minus Euler's constant over log x, up to a constant over log x
+    squared (outside source).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: outside-lean
+    kind: external
+    source: PrimeNumberTheoremAnd (PNT+), declaration E₃.bound'' in PrimeNumberTheoremAnd/IEANTN/Mertens.lean
+    locator: E₃.bound''
+    note: Stated here in the classical form of the PNT+ blueprint (Mertens' third theorem with error of
+      order one over log x squared), not copied from E₃.bound''. Before relying on it, confirm that the
+      PNT+ statement implies this one and that its `#print axioms` shows only the standard three.
+  designated: outside-lean
+- id: mertens_third
+  declaration: RNS.MertensThird.mertens_third
+  summary: The survivor share times log x tends to e to the minus Euler's constant.
+  imports:
+  - MertensThird.v1.mertens_third_error
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/MertensThird.lean
+    declaration: RNS.MertensThird.mertens_third_step
+    note: Proof drafted, not yet built.
+  designated: lean-proof
 sources:
 - title: "PrimeNumberTheoremAnd, Mertens' third theorem (Lean)"
   url: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/IEANTN/Mertens.lean#L2419"
   relationship: "the outside Lean proof this node cites"
+- title: "PNT+ blueprint, explicit chapter (Mertens' theorems, after Goldmakher)"
+  url: "https://alexkontorovich.github.io/PrimeNumberTheoremAnd/blueprint/explicit-chapter.html"
+  relationship: "the classical statement used for mertens_third_error"
 - title: "Mertens' theorems (Wikipedia)"
   url: "https://en.wikipedia.org/wiki/Mertens%27_theorems"
   relationship: "the classical statement"
+related:
+- node: ShareBounds
+  note: "the elementary bound on the same share (at most one over the logarithm), proved here"

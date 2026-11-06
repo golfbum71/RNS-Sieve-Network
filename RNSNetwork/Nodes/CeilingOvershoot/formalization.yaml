@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: CeilingOvershoot.v1
@@ -7,25 +7,44 @@ node:
   version: v1
   order: 31
   kind: paper
-  status: planned
-  title: the overshoot at the ceiling
-  description: With the wheels up to the square root of a bound, the survivor share times
-    the bound, divided by the number of primes up to the bound, tends to twice e to the minus
-    Euler's constant, about 1.1229.
-conclusions: []
-planned:
-  source_status: New
-  rests_on:
-  - SurvivorCount
-  - MertensThird
-  - PrimeNumberTheorem
-  claims:
-  - ceiling_overshoot
-  tier: 'Tier 2: a short step from the two outside sources.'
+  status: active
+  improves: ShieldCertificates shows that below the ceiling the survivors are exactly the primes; this
+    node shows that the wheel product does not count them correctly, overshooting by the factor twice e
+    to the minus Euler's constant.
+  title: the wheel product overshoots the primes by about 12%
+  description: With the wheels up to the square root of x, the survivors below x are 1 and the primes
+    above the wheels, but x times the survivor share, divided by the number of primes up to x, tends to
+    twice e to the minus Euler's constant, about 1.1229. The classical demonstration that sieve error
+    terms do not vanish once the wheels reach the square root. Numerically the ratio climbs slowly (0.91
+    at a thousand, 1.05 at ten million).
+conclusions:
+- id: ceiling_overshoot
+  declaration: RNS.CeilingOvershoot.ceiling_overshoot
+  summary: With the wheels up to the square root, x times the survivor share over the prime count
+    tends to twice e to the minus Euler's constant.
+  imports:
+  - MertensThird.v1.mertens_third
+  - PrimeNumberTheorem.v1.prime_number_theorem
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/CeilingOvershoot.lean
+    declaration: RNS.CeilingOvershoot.ceiling_overshoot_step
+    note: Proof drafted, not yet built.
+  designated: lean-proof
 sources:
 - title: "Mertens' theorems (Wikipedia)"
   url: "https://en.wikipedia.org/wiki/Mertens%27_theorems"
-  relationship: "Mertens' third theorem, one of the two limits this node will combine"
+  relationship: "Mertens' third theorem, one of the two limits this node combines"
 - title: "Prime number theorem (Wikipedia)"
   url: "https://en.wikipedia.org/wiki/Prime_number_theorem"
   relationship: "the other limit; with the wheels up to the square root, their ratio gives twice e to the minus Euler's constant"
+- title: "Sieve theory (Wikipedia), accumulation of error terms"
+  url: "https://en.wikipedia.org/wiki/Sieve_theory"
+  relationship: "the phenomenon this node makes exact for the wheels"
+related:
+- node: AlmostPrimeWindow
+  note: "the parity obstruction, the other reason the wheels alone cannot count primes"
+- node: ShieldCertificates
+  note: "below the ceiling the survivors are exactly the primes"
