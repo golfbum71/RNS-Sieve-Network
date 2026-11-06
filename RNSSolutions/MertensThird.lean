@@ -14,6 +14,9 @@ import Mathlib.Tactic.Linarith
 /-!
 # Proofs for MertensThird
 
+Built clean by `lake build RNSSolutions` on 2026-11-06; `#print axioms` shows only
+the standard three.
+
 Imports claims only. `mertens_third_error` is an outside source (PNT+) and is
 not proved here; the limit form is proved from it.
 

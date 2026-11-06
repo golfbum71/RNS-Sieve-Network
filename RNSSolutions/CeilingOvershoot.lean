@@ -14,6 +14,9 @@ import Mathlib.Tactic.Linarith
 /-!
 # Proofs for CeilingOvershoot
 
+Built clean by `lake build RNSSolutions` on 2026-11-06; `#print axioms` shows only
+the standard three.
+
 Imports claims only. A step from `MertensThird.mertens_third` and
 `PrimeNumberTheorem.prime_number_theorem`, both taken as named hypotheses.
 

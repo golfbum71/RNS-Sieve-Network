@@ -567,6 +567,24 @@ sieve, the starting point of his sieve and of the fundamental lemma.
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
   Actions build, 2026-11-06).
 
+### 63. `MertensThird`, `PrimeNumberTheorem`, `CeilingOvershoot` — stated and connected
+`MertensThird` and `PrimeNumberTheorem` were metadata only; both now have
+Lean statements, taken as named hypotheses pointing at their PNT+ proofs
+(`E₃.bound''`, `pi_alt'`), since PNT+ builds on a different toolchain.
+Mertens' third theorem is stated with its error term (the survivor share is
+e^(-γ)/log x up to a constant over log² x); the limit form (share times log x
+tends to e^(-γ)) is proved here from it. `CeilingOvershoot` is then a step:
+with the wheels up to the square root of x, x times the survivor share over
+the number of primes up to x tends to 2e^(-γ), about 1.1229. Below the
+ceiling the survivors are exactly the primes, so the wheel product overshoots
+them by about 12%. Numerically 0.91 at a thousand, 1.05 at ten million.
+- Lean: `mertens_third_error` (outside), `mertens_third`, `prime_number_theorem`
+  (outside), `ceiling_overshoot`
+- Rests on: PNT+ (two outside claims, not yet checked against their exact
+  PNT+ forms)
+- Status: the two steps are Clean (GitHub Actions build, 2026-11-06); the two
+  outside claims are cited.
+
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence
 are `UniformSubdivision.frozen_wheels_repeat` and `one_wheel_removed`; the
@@ -797,7 +815,11 @@ Check here before searching again. Links pinned to a commit were current on
   redo it.
 
 **From PrimeNumberTheoremAnd (PNT+)**
-- **The overshoot at the ceiling** (Tier 2). With the wheels up to the
+- **Done (node `CeilingOvershoot`, 2026-11-06; standard axioms only): a step
+  from `MertensThird.mertens_third` and `PrimeNumberTheorem.prime_number_theorem`,
+  both stated in Lean and taken as named hypotheses pointing at PNT+.
+  `MertensThird` holds the error-term form as the outside claim and proves
+  the limit form from it.** **The overshoot at the ceiling** (Tier 2). With the wheels up to the
   square root of a bound, the survivor share times the bound, divided by
   the number of primes up to the bound, tends to twice e to the minus
   Euler's constant (about 1.1229). A short step from two results PNT+

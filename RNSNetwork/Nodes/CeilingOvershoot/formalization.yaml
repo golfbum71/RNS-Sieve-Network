@@ -28,10 +28,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/CeilingOvershoot.lean
     declaration: RNS.CeilingOvershoot.ceiling_overshoot_step
-    note: Proof drafted, not yet built.
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-06),
+      from its imports taken as named hypotheses. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 sources:
 - title: "Mertens' theorems (Wikipedia)"

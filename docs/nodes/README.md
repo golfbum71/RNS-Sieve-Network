@@ -34,13 +34,13 @@
 | 28 | [`InadmissibleOccurrences`](InadmissibleOccurrences.md) | inadmissible patterns sit next to their blocking wheel | proved in Lean |
 | 29 | [`GapCertificate`](GapCertificate.md) | the Lacampagne-Selfridge counterexample | proved in Lean |
 | 30 | [`BlockingRuns`](BlockingRuns.md) | blocking runs and the largest survivor gap | proved in Lean |
-| 31 | [`CeilingOvershoot`](CeilingOvershoot.md) | the wheel product overshoots the primes by about 12% | proof drafted, not yet built |
+| 31 | [`CeilingOvershoot`](CeilingOvershoot.md) | the wheel product overshoots the primes by about 12% | proved in Lean |
 | 32 | [`BirdseySchay`](BirdseySchay.md) | Birdsey and Schay's heuristic, as a hypothesis | planned: conditional |
 | 33 | [`LargestGap`](LargestGap.md) | the largest gap from the proportional share | planned: new, not yet proved |
 | 34 | [`LehmerExcess`](LehmerExcess.md) | Lehmer's closed form for the 6n-1 type | proved in Lean |
 | 35 | [`GermainCriterion`](GermainCriterion.md) | Germain's exact criterion for an even split | proved in Lean |
 | 36 | [`Sawtooth`](Sawtooth.md) | the survivor count minus its proportional share | proved in Lean |
-| 40 | [`MertensThird`](MertensThird.md) | Mertens' third theorem | proof drafted, not yet built |
+| 40 | [`MertensThird`](MertensThird.md) | Mertens' third theorem | proved in Lean |
 | 41 | [`PrimeNumberTheorem`](PrimeNumberTheorem.md) | the prime number theorem | proved in Lean |
 | 42 | [`JacobsthalQuadratic`](JacobsthalQuadratic.md) | the quadratic bound on Jacobsthal's function | outside source: proved in Lean in another project |
 | 43 | [`RoughInPrimeGaps`](RoughInPrimeGaps.md) | almost every prime gap holds a survivor of the wheels below its length | outside source: proved in Lean in another project |
