@@ -56,14 +56,15 @@ theorem ioc_count_eq (P : ℕ → Prop) [DecidablePred P] (N : ℕ) :
     obtain ⟨⟨h1, h2⟩, h3⟩ := hm
     rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_range]
     have h : m - 1 + 1 = m := by omega
+    show m - 1 < N ∧ P (m - 1 + 1)
     refine ⟨by omega, ?_⟩
-    show P (m - 1 + 1)
     rw [h]
     exact h3
   · intro k hk
     rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_range] at hk
     obtain ⟨h1, h2⟩ := hk
     rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_Ioc]
+    show (0 < k + 1 ∧ k + 1 ≤ N) ∧ P (k + 1)
     exact ⟨⟨by omega, by omega⟩, h2⟩
   · intro m hm
     rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_Ioc] at hm
