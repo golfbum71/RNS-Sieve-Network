@@ -38,4 +38,5 @@ import RNSSolutions.GermainAuxiliary
 import RNSSolutions.GapCertificate
 import RNSSolutions.Schatunowsky
 import RNSSolutions.GermainCriterion
+import RNSSolutions.HurwitzZetaZero
 import RNSSolutions.Assemble

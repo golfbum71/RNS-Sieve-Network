@@ -447,6 +447,33 @@ the next ceiling once the wheels reach 7, and below that only 30 fits.
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
   Actions build, 2026-11-05).
 
+### 58. `HurwitzZetaZero` — the Hurwitz zeta function at 0
+For 0 < x ≤ 1 the Hurwitz zeta function at 0 equals 1/2 − x. This turns
+L-function values into finite sums over a cycle's residues, the one analytic
+input `GermainCriterion` needs beyond Mathlib. Mathlib's even part at 0 and its
+functional equation reduce it to one classical identity: the sawtooth's
+Fourier series, ∑ sin(2πnx)/n = π(1/2 − x) for 0 < x < 1, read as Mathlib's
+`sinZeta x` at 1.
+- Prior work: Apostol, Introduction to Analytic Number Theory (1976),
+  Thm 12.13. Mathlib's `hurwitzZeta_neg_nat` covers the negative integers and
+  records s = 0 as a TODO.
+- Lean: `hurwitz_zeta_at_zero` (proved from the next claim),
+  `sin_zeta_at_one` (cited)
+- Rests on: Mathlib, and the cited claim `sin_zeta_at_one`
+- Status: proof of `hurwitz_zeta_at_zero` drafted, not yet built;
+  `sin_zeta_at_one` cited, not proved.
+- Planned proof of `sin_zeta_at_one`: Abel summation (Mathlib's
+  `LSeries_eq_mul_integral`) and analytic continuation carry `sinZeta x` to
+  the conditionally convergent series at 1; Abel's limit theorem
+  (`Analysis/Complex/AbelLimit.lean`) on −log(1 − z) at z = e^(2πix) sums it.
+- Later, to look at: the residue theorem route. Riemann's Hankel-loop formula
+  for the Hurwitz zeta function becomes, at s = 0, a loop integral of
+  e^(−az)/(z(1 − e^(−z))) whose only enclosed pole, at z = 0, has residue
+  1/2 − a. The residue step fits Mathlib's Cauchy integral formula on circles,
+  but Mathlib has no Hankel loops and no general residue theorem, and the loop
+  formula would still have to be tied to Mathlib's `hurwitzZeta` at s = 0 by
+  analytic continuation.
+
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence
 are `UniformSubdivision.frozen_wheels_repeat` and `one_wheel_removed`; the
