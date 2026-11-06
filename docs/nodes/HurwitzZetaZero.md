@@ -4,7 +4,7 @@
 
 **Status:** cited from a published paper; not proved in Lean
 
-For a point x with 0 < x ≤ 1, the Hurwitz zeta function at 0 equals one half minus x. Proved here from one cited input, the sawtooth's Fourier series as Mathlib's sinZeta at 1. The even part of the Hurwitz zeta function at 0 is in Mathlib, and Mathlib's functional equation makes the odd part sinZeta at 1 divided by π. Mathlib has the Hurwitz zeta values at the negative integers but stops short of 0, where the matching Fourier series converges only conditionally. It is the one analytic input GermainCriterion needs beyond Mathlib, and could be proved later or contributed to Mathlib without changing anything downstream.
+For a point x with 0 < x ≤ 1, the Hurwitz zeta function at 0 equals one half minus x. Proved here from one cited input, that Mathlib's sinZeta x at 1 is the sum of its series; the sum itself, the sawtooth's Fourier series, is proved here by Abel's limit theorem. The even part of the Hurwitz zeta function at 0 is in Mathlib, and Mathlib's functional equation makes the odd part sinZeta at 1 divided by π. Mathlib has the Hurwitz zeta values at the negative integers but stops short of 0, where the matching Fourier series converges only conditionally. It is the one analytic input GermainCriterion needs beyond Mathlib, and could be proved later or contributed to Mathlib without changing anything downstream.
 
 ## Published sources
 
@@ -34,13 +34,13 @@ def hurwitz_zeta_at_zero : Prop :=
 <a id="sin_zeta_at_one"></a>
 ### `sin_zeta_at_one`
 
-For 0 < x < 1, Mathlib's sinZeta x at 1 equals π(1/2 - x), the sum of the sawtooth's Fourier series (cited).
+For 0 < x < 1, Mathlib's sinZeta x at 1 equals π(1/2 - x), the sum of the sawtooth's Fourier series.
 
 ```lean
-/-- **The sawtooth's Fourier series at 1** (cited). For `0 < x < 1`, Mathlib's
+/-- **The sawtooth's Fourier series at 1.** For `0 < x < 1`, Mathlib's
 `sinZeta x`, the continuation of `∑ sin(2π n x) / nˢ`, equals `π (1/2 - x)` at
-1: the series `∑ sin(2π n x) / n` sums to `π (1/2 - x)`. At 1 the series
-converges only conditionally, which is why Mathlib stops short of it. -/
+1. Proved here from `sawtooth_partial_sums` and the cited
+`sin_zeta_at_one_eq_series`. -/
 def sin_zeta_at_one : Prop :=
   ∀ x : ℝ, 0 < x → x < 1 →
     HurwitzZeta.sinZeta (x : UnitAddCircle) 1 = (Real.pi : ℂ) * (1 / 2 - (x : ℂ))
@@ -48,7 +48,47 @@ def sin_zeta_at_one : Prop :=
 
 **Rests on:** no other node (Mathlib and the Vocabulary only)
 
-**Justification:** cited — A. Zygmund, Trigonometric Series, Cambridge University Press (1959), Chapter I, the Fourier series of the sawtooth, sum of sin(nt)/n equals (π - t)/2 for 0 < t < 2π (take t = 2πx). Not proved in Lean.
+**Proof:** `RNS.HurwitzZetaZero.sin_zeta_at_one_step` in [`RNSSolutions/HurwitzZetaZero.lean`](../../RNSSolutions/HurwitzZetaZero.lean)
+
+<a id="sawtooth_partial_sums"></a>
+### `sawtooth_partial_sums`
+
+For 0 < x < 1, the partial sums of the sawtooth series, sin(2πnx)/n summed over n, tend to π(1/2 - x).
+
+```lean
+/-- **The sawtooth series sums to the sawtooth.** For `0 < x < 1`, the partial
+sums of `∑ sin(2π n x) / n` tend to `π (1/2 - x)`. The series converges only
+conditionally, so this is a limit of partial sums, not an unconditional sum. -/
+def sawtooth_partial_sums : Prop :=
+  ∀ x : ℝ, 0 < x → x < 1 →
+    Filter.Tendsto (fun N : ℕ => ∑ n ∈ Finset.range N, Real.sin (2 * Real.pi * x * n) / n)
+      Filter.atTop (nhds (Real.pi * (1 / 2 - x)))
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.HurwitzZetaZero.sawtooth_partial_sums_holds` in [`RNSSolutions/HurwitzZetaZero.lean`](../../RNSSolutions/HurwitzZetaZero.lean)
+
+<a id="sin_zeta_at_one_eq_series"></a>
+### `sin_zeta_at_one_eq_series`
+
+For 0 < x < 1, the partial sums of the sawtooth series tend to Mathlib's sinZeta x at 1 (cited). Mathlib has the series for sinZeta only where it converges absolutely.
+
+```lean
+/-- **`sinZeta` at 1 is the sum of its series** (cited). For `0 < x < 1`, the
+partial sums of `∑ sin(2π n x) / n` tend to Mathlib's `sinZeta x` at 1. Mathlib
+gives the series for `sinZeta` only where it converges absolutely (`s > 1`);
+this carries it to the edge, where it converges only conditionally. -/
+def sin_zeta_at_one_eq_series : Prop :=
+  ∀ x : ℝ, 0 < x → x < 1 →
+    Filter.Tendsto
+      (fun N : ℕ => ∑ n ∈ Finset.range N, (Real.sin (2 * Real.pi * x * n) : ℂ) / (n : ℂ))
+      Filter.atTop (nhds (HurwitzZeta.sinZeta (x : UnitAddCircle) 1))
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Justification:** cited — T. M. Apostol, Introduction to Analytic Number Theory, Springer (1976), Chapter 11, Dirichlet series with bounded partial sums of coefficients converge and are analytic for real part above 0 (theorem number to be checked); with the identity theorem this identifies Mathlib's sinZeta x at 1 with the series. Not proved in Lean.
 
 ## Used by
 

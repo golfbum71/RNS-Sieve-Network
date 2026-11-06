@@ -43,10 +43,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/HurwitzZetaZero.lean
     declaration: RNS.HurwitzZetaZero.sin_zeta_at_one_step
-    note: Lean proof drafted, not yet built. From sawtooth_partial_sums and the cited sin_zeta_at_one_eq_series, by uniqueness of limits.
+    note: Lean proof built clean 2026-11-05 (standard axioms only). From sawtooth_partial_sums and the cited sin_zeta_at_one_eq_series, by uniqueness of limits.
   - id: paper
     kind: literature
     source: A. Zygmund, Trigonometric Series, Cambridge University Press (1959), Chapter I
@@ -60,10 +60,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/HurwitzZetaZero.lean
     declaration: RNS.HurwitzZetaZero.sawtooth_partial_sums_holds
-    note: Lean proof drafted, not yet built. Dirichlet's test for convergence, Abel's limit theorem on the series for -log(1 - z) at z = e^(2πix) (Mathlib's AbelLimit and hasSum_taylorSeries_neg_log), and the argument of 1 - e^(2πix).
+    note: Lean proof built clean 2026-11-05 (standard axioms only). Dirichlet's test for convergence, Abel's limit theorem on the series for -log(1 - z) at z = e^(2πix) (Mathlib's AbelLimit and hasSum_taylorSeries_neg_log), and the argument of 1 - e^(2πix).
   designated: lean-proof
 - id: sin_zeta_at_one_eq_series
   declaration: RNS.HurwitzZetaZero.sin_zeta_at_one_eq_series

@@ -451,22 +451,25 @@ the next ceiling once the wheels reach 7, and below that only 30 fits.
 For 0 < x ≤ 1 the Hurwitz zeta function at 0 equals 1/2 − x. This turns
 L-function values into finite sums over a cycle's residues, the one analytic
 input `GermainCriterion` needs beyond Mathlib. Mathlib's even part at 0 and its
-functional equation reduce it to one classical identity: the sawtooth's
-Fourier series, ∑ sin(2πnx)/n = π(1/2 − x) for 0 < x < 1, read as Mathlib's
-`sinZeta x` at 1.
+functional equation reduce it to the sawtooth's Fourier series,
+∑ sin(2πnx)/n = π(1/2 − x) for 0 < x < 1, read as Mathlib's `sinZeta x` at 1.
+The series itself is summed here by Abel's limit theorem; what is still cited
+is that Mathlib's `sinZeta x` at 1 is that sum.
 - Prior work: Apostol, Introduction to Analytic Number Theory (1976),
   Thm 12.13. Mathlib's `hurwitzZeta_neg_nat` covers the negative integers and
   records s = 0 as a TODO.
-- Lean: `hurwitz_zeta_at_zero` (proved from the next claim),
-  `sin_zeta_at_one` (cited)
-- Rests on: Mathlib, and the cited claim `sin_zeta_at_one`
-- Status: `hurwitz_zeta_at_zero` proved from `sin_zeta_at_one`; `#print
-  axioms` shows only the standard three (GitHub Actions build, 2026-11-05).
-  `sin_zeta_at_one` cited, not proved.
-- Planned proof of `sin_zeta_at_one`: Abel summation (Mathlib's
-  `LSeries_eq_mul_integral`) and analytic continuation carry `sinZeta x` to
-  the conditionally convergent series at 1; Abel's limit theorem
-  (`Analysis/Complex/AbelLimit.lean`) on −log(1 − z) at z = e^(2πix) sums it.
+- Lean: `hurwitz_zeta_at_zero` (from the next), `sin_zeta_at_one` (from the
+  next two), `sawtooth_partial_sums` (proved: Dirichlet's test, Abel's limit
+  theorem on −log(1 − z) at z = e^(2πix), and the argument of 1 − e^(2πix)),
+  `sin_zeta_at_one_eq_series` (cited)
+- Rests on: Mathlib, and the cited claim `sin_zeta_at_one_eq_series`
+- Status: everything but `sin_zeta_at_one_eq_series` proved; `#print axioms`
+  shows only the standard three (GitHub Actions build, 2026-11-05).
+- Planned proof of `sin_zeta_at_one_eq_series`: Abel summation (Mathlib's
+  `LSeries_eq_mul_integral`) writes `sinZeta x s` for s > 1 as s times an
+  integral of the bounded partial sums; that integral is holomorphic for
+  real part above 0, so the identity theorem carries the formula to s = 1,
+  where Abel summation in reverse gives the limit of the partial sums.
 - Later, to look at: the residue theorem route. Riemann's Hankel-loop formula
   for the Hurwitz zeta function becomes, at s = 0, a loop integral of
   e^(−az)/(z(1 − e^(−z))) whose only enclosed pole, at z = 0, has residue
