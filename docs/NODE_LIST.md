@@ -552,6 +552,21 @@ ingredient exact.
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
   Actions build, 2026-11-06).
 
+### 62. `BrunPureSieve` — truncated inclusion–exclusion for the wheels
+Count the survivors of prime wheels among the positions 1 to N by
+inclusion–exclusion over sets of wheels. Stopping after the sets of at most an
+even number of wheels gives at least the true count; stopping after an odd
+number gives at most it (the Bonferroni inequalities); going all the way is
+exact (Legendre's identity). The proof groups the subsets of each position's
+hit set by size, and Mathlib's partial alternating binomial sum
+(`Int.alternating_sum_range_choose_eq_choose`) does the rest. Brun's pure
+sieve, the starting point of his sieve and of the fundamental lemma.
+- Prior work: Brun (1915, 1919); Bonferroni inequalities; Legendre.
+- Lean: `bonferroni_even`, `bonferroni_odd`, `legendre_exact`
+- Rests on: Vocabulary only
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-06).
+
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence
 are `UniformSubdivision.frozen_wheels_repeat` and `one_wheel_removed`; the

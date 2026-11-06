@@ -24,10 +24,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BrunPureSieve.lean
     declaration: RNS.BrunPureSieve.bonferroni_even_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-06). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: bonferroni_odd
   declaration: RNS.BrunPureSieve.bonferroni_odd
@@ -36,10 +37,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BrunPureSieve.lean
     declaration: RNS.BrunPureSieve.bonferroni_odd_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-06). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: legendre_exact
   declaration: RNS.BrunPureSieve.legendre_exact
@@ -48,10 +50,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BrunPureSieve.lean
     declaration: RNS.BrunPureSieve.legendre_exact_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-06). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 sources:
 - title: Brun sieve (Wikipedia)

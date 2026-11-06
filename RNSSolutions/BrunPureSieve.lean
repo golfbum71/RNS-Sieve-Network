@@ -17,6 +17,9 @@ import Mathlib.Algebra.Ring.Parity                    -- `Even.neg_one_pow`, `Od
 
 Imports claims only, never other nodes' proofs. Rests on no other node.
 
+Built clean by `lake build RNSSolutions` on 2026-11-06; `#print axioms` shows only
+the standard three.
+
 Idea. For prime wheels, the product of a set of wheels divides a position
 exactly when every wheel in the set does, so the multiples of the product
 count the positions whose hit set contains the set. Swapping the sums, the
