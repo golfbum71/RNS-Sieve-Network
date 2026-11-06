@@ -221,11 +221,6 @@ private theorem sifted_card_eq (W : Finset Nat) (g : Nat → Nat) (N : Nat) :
     unfold sifted
     refine Finset.filter_congr fun m _ => ?_
     simp only [hitSetFn, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
-    constructor
-    · intro h q hq
-      first | exact h q hq | exact h hq
-    · intro h q hq
-      first | exact h hq | exact h q hq
   rw [hS, Finset.natCast_card_filter]
 
 theorem bonferroni_even_fn_holds : bonferroni_even_fn := by
