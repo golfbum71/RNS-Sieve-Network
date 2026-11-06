@@ -12,7 +12,7 @@ Published work this node rests on or relates to; each entry says how.
 
 - [Brun's theorem (lean-lang.org problem list, brun_constant_converges)](https://lean-lang.org/eval/problems/brun_constant_converges/) — the same statement in Lean; solved there by several provers from June 22 2026 on
 - [lean-eval submissions (accepted results, including brun_constant_converges)](https://github.com/leanprover/lean-eval-submissions) — where the accepted solutions are recorded, with the solver repositories
-- [Public Lean proof of brun_constant_converges (GPT-5.6, gist by Morgan-Griffiths)](https://gist.github.com/Morgan-Griffiths/31fe931d423ce48a65e7841a44bb3ae2) — the one public accepted proof; not yet read or checked here
+- [Lean proof of brun_constant_converges (GPT-5.6, gist by Morgan-Griffiths)](https://gist.github.com/Morgan-Griffiths/31fe931d423ce48a65e7841a44bb3ae2) — recorded as public when accepted; no longer listed publicly on 2026-11-06, not read here
 - [BrunPureSieve (this network)](https://github.com/golfbum71/RNS-Sieve-Network/blob/main/RNSNetwork/Nodes/BrunPureSieve/Conclusions.lean) — Brun's truncated inclusion-exclusion for the wheels, proved here
 - [Brun's theorem (Wikipedia)](https://en.wikipedia.org/wiki/Brun%27s_theorem) — the theorem, the twin-prime count bound behind it, and Brun's constant
 

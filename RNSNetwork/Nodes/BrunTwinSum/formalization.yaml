@@ -31,9 +31,10 @@ conclusions:
       on (Seed Prover, Aristotle, Tau, GPT-5.6)
     locator: brun_constant_converges, Summable twinPrimeReciprocalTerm
     note: Identified 2026-11-06, not yet checked here. Several machine-generated Lean proofs were
-      accepted by the benchmark's checker; most are in private repositories, and the one public gist
-      (GPT-5.6, accepted 2026-07-12) could not be read from the build session. Before relying on it,
-      read the proof, confirm `#print axioms` shows only the standard three, and match its statement
+      accepted by the benchmark's checker, but none is publicly readable as of 2026-11-06; the
+      others are in private repositories, and the gist recorded as public at acceptance (GPT-5.6,
+      2026-07-12) is no longer listed among the author's public gists. Before relying on any of them,
+      obtain the proof, confirm `#print axioms` shows only the standard three, and match its statement
       to brun_sum_finite.
   designated: paper
 sources:
@@ -43,9 +44,9 @@ sources:
 - title: lean-eval submissions (accepted results, including brun_constant_converges)
   url: https://github.com/leanprover/lean-eval-submissions
   relationship: where the accepted solutions are recorded, with the solver repositories
-- title: Public Lean proof of brun_constant_converges (GPT-5.6, gist by Morgan-Griffiths)
+- title: Lean proof of brun_constant_converges (GPT-5.6, gist by Morgan-Griffiths)
   url: https://gist.github.com/Morgan-Griffiths/31fe931d423ce48a65e7841a44bb3ae2
-  relationship: the one public accepted proof; not yet read or checked here
+  relationship: recorded as public when accepted; no longer listed publicly on 2026-11-06, not read here
 - title: BrunPureSieve (this network)
   url: https://github.com/golfbum71/RNS-Sieve-Network/blob/main/RNSNetwork/Nodes/BrunPureSieve/Conclusions.lean
   relationship: Brun's truncated inclusion-exclusion for the wheels, proved here
