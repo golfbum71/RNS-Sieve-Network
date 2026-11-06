@@ -53,18 +53,21 @@ theorem ioc_count_eq (P : ℕ → Prop) [DecidablePred P] (N : ℕ) :
   apply Finset.card_nbij' (fun m => m - 1) (fun k => k + 1)
   · intro m hm
     rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_Ioc] at hm
+    obtain ⟨⟨h1, h2⟩, h3⟩ := hm
     rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_range]
     have h : m - 1 + 1 = m := by omega
     refine ⟨by omega, ?_⟩
     show P (m - 1 + 1)
     rw [h]
-    exact hm.2
+    exact h3
   · intro k hk
     rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_range] at hk
+    obtain ⟨h1, h2⟩ := hk
     rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_Ioc]
-    exact ⟨⟨by omega, by omega⟩, hk.2⟩
+    exact ⟨⟨by omega, by omega⟩, h2⟩
   · intro m hm
     rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_Ioc] at hm
+    obtain ⟨⟨h1, _⟩, _⟩ := hm
     show m - 1 + 1 = m
     omega
   · intro k _
@@ -121,8 +124,7 @@ theorem count_bound_real (Q : ℕ → Prop) [DecidablePred Q] (d : ℕ) (hd : 0 
       = ((N / d : ℕ) : ℝ) * (Nat.count Q d : ℝ)
         + ((N % d : ℕ) : ℝ) * (Nat.count Q d : ℝ) / (d : ℝ) := by
     rw [hN]
-    field_simp
-    ring
+    field_simp <;> ring
   rw [hsplit]
   push_cast
   rw [abs_le]
@@ -142,7 +144,7 @@ theorem twin_periodic (d k : ℕ) :
 theorem twin_period_count (d : ℕ) (hd : 0 < d) :
     Nat.count (fun k => d ∣ (k + 1) * (k + 1 + 2)) d =
       Nat.card {x : ZMod d // x * (x + 2) = 0} := by
-  haveI : NeZero d := ⟨hd.ne'⟩
+  have : NeZero d := ⟨hd.ne'⟩
   have e1 : Nat.card {x : ZMod d // x * (x + 2) = 0} =
       Nat.card {x : ZMod d // (x + 1) * (x + 1 + 2) = 0} :=
     (Nat.card_congr (Equiv.subtypeEquiv (Equiv.addRight (1 : ZMod d)) (fun x => Iff.rfl))).symm
@@ -211,7 +213,9 @@ theorem twin_roots_prime (p : ℕ) (hp : p.Prime) :
   rw [hset]
   split_ifs with h2
   · subst h2
-    have h : (-2 : ZMod 2) = 0 := by decide
+    have h2z : ((2 : ℕ) : ZMod 2) = 0 := ZMod.natCast_self 2
+    have h2z' : (2 : ZMod 2) = 0 := by exact_mod_cast h2z
+    have h : (-2 : ZMod 2) = 0 := by rw [h2z', neg_zero]
     rw [h]
     simp
   · have hne : (0 : ZMod p) ≠ -2 := by
