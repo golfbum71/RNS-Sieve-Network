@@ -56,3 +56,4 @@ import RNSNetwork.Nodes.GermainCriterion.Conclusions
 import RNSNetwork.Nodes.HurwitzZetaZero.Conclusions
 import RNSNetwork.Nodes.BrunTwinCount.Conclusions
 import RNSNetwork.Nodes.BrunTruncation.Conclusions
+import RNSNetwork.Nodes.BrunTwinBound.Conclusions
