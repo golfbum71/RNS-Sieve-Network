@@ -10,47 +10,61 @@ node:
   status: active
   title: Mertens' third theorem
   description: The survivor share after the wheels up to x (the product over the primes up to x of one
-    minus one over the prime) is e to the minus Euler's constant over log x, with an error of order one
-    over log x squared. Proved in Lean in PrimeNumberTheoremAnd and taken here as a named hypothesis
-    (PNT+ builds on a different toolchain); the limit form used by other nodes is proved here from it.
+    minus one over the prime) is e to the minus Euler's constant over log x, times e to a remainder that
+    is at most a constant over log x. The remainder bound is proved in Lean in PrimeNumberTheoremAnd
+    (no sorry) and copied here word for word as a named hypothesis; the identity and the limit form
+    used by other nodes are proved here.
 conclusions:
-- id: mertens_third_error
-  declaration: RNS.MertensThird.mertens_third_error
-  summary: The survivor share is e to the minus Euler's constant over log x, up to a constant over log x
-    squared (outside source).
+- id: mertens_third_remainder
+  declaration: RNS.MertensThird.mertens_third_remainder
+  summary: The remainder in Mertens' third theorem is at most a constant over log x, for x at least 2
+    (outside source; word for word PNT+ Mertens.E₃.abs_le).
   imports: []
   imports_status: none
   justifications:
   - id: outside-lean
     kind: external
-    source: PrimeNumberTheoremAnd (PNT+), declaration E₃.bound'' in PrimeNumberTheoremAnd/IEANTN/Mertens.lean
-    locator: E₃.bound''
-    note: Stated here in the classical form of the PNT+ blueprint (Mertens' third theorem with error of
-      order one over log x squared), not copied from E₃.bound''. Before relying on it, confirm that the
-      PNT+ statement implies this one and that its `#print axioms` shows only the standard three.
+    source: PrimeNumberTheoremAnd (PNT+), Mertens.E₃.abs_le in PrimeNumberTheoremAnd/IEANTN/Mertens.lean,
+      commit 127b50e33f6033e2147921167a117af96d9ba4ea (2026-10-19), Lean v4.35.0; blueprint Theorem 7.1.8
+    locator: Mertens.E₃.abs_le
+    note: Statement and the definition E₃ copied word for word. Checked 2026-11-06 that Mertens.lean and
+      its one non-Mathlib import (EulerMaclaurin.lean) contain no sorry and no axiom at that commit; not
+      rebuilt here (toolchain differs), so `#print axioms` has not been run on it from this repository.
   designated: outside-lean
+- id: product_identity
+  declaration: RNS.MertensThird.product_identity
+  summary: The survivor share equals e to the minus Euler's constant times e to the remainder over log x
+    (blueprint Theorem 7.1.7).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/MertensThird.lean
+    declaration: RNS.MertensThird.product_identity_holds
+    note: Proof drafted, not yet built. Adapted from PNT+ Mertens.prod_one_minus_div_prime_eq.
+  designated: lean-proof
 - id: mertens_third
   declaration: RNS.MertensThird.mertens_third
   summary: The survivor share times log x tends to e to the minus Euler's constant.
   imports:
-  - MertensThird.v1.mertens_third_error
+  - MertensThird.v1.mertens_third_remainder
+  - MertensThird.v1.product_identity
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-noncompliant
+    kind: lean-draft
     solution: RNSSolutions/MertensThird.lean
     declaration: RNS.MertensThird.mertens_third_step
-    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-06),
-      from its imports taken as named hypotheses. Recorded as noncompliant only because no Comparator
-      receipt exists yet.
+    note: Proof drafted, not yet built.
   designated: lean-proof
 sources:
 - title: "PrimeNumberTheoremAnd, Mertens' third theorem (Lean)"
-  url: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/IEANTN/Mertens.lean#L2419"
+  url: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/IEANTN/Mertens.lean#L2379"
   relationship: "the outside Lean proof this node cites"
 - title: "PNT+ blueprint, explicit chapter (Mertens' theorems, after Goldmakher)"
   url: "https://alexkontorovich.github.io/PrimeNumberTheoremAnd/blueprint/explicit-chapter.html"
-  relationship: "the classical statement used for mertens_third_error"
+  relationship: "Theorems 7.1.6 to 7.1.8, the definition, identity and bound used here"
 - title: "Mertens' theorems (Wikipedia)"
   url: "https://en.wikipedia.org/wiki/Mertens%27_theorems"
   relationship: "the classical statement"
