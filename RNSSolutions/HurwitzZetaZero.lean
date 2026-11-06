@@ -340,7 +340,9 @@ theorem sin_zeta_at_one_eq_series_holds : sin_zeta_at_one_eq_series := by
   simp only [Complex.cpow_neg_one] at hA
   -- `G(s) = ∫₁^∞ A(t) t^(-s-1) dt`, continuous as `s` falls to 1
   set A : ℝ → ℂ := fun t => ∑ k ∈ Icc 1 ⌊t⌋₊, a k with hA_def
-  have hAmeas : Measurable A := measurable_from_nat.comp Nat.measurable_floor
+  have hAmeas : Measurable A := by
+    rw [hA_def]
+    exact (measurable_from_nat (f := fun n : ℕ => ∑ k ∈ Icc 1 n, a k)).comp Nat.measurable_floor
   have hAbound : ∀ t : ℝ, ‖A t‖ ≤ B := fun t => hB _
   have hGcont : ContinuousWithinAt
       (fun σ : ℝ => ∫ t in Set.Ioi (1 : ℝ), A t * (t : ℂ) ^ (-((σ : ℂ) + 1))) (Set.Ici 1) 1 := by
