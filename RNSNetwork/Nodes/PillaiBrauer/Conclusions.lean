@@ -19,8 +19,8 @@ with another member is a setting of those six wheels, which repeats with
 their combined cycle 30030.
 
 Stated here:
-* `pillai_sixteen` — the "at most 16" half, cited from Pillai (not proved in
-  Lean: it needs a case analysis over all positions of the cycle 30030);
+* `pillai_sixteen` — the "at most 16" half (Pillai), proved by a
+  kernel-checked pass over all positions of the cycle 30030;
 * `pillai_witness_17` — the run 2184, ..., 2200: every member shares one of
   the wheels 2, 3, 5, 7, 11, 13 with another member (a finite check);
 * `pillai_witness_17_repeats` — shifting that run by any multiple of the
@@ -34,7 +34,7 @@ namespace RNS.PillaiBrauer
 /-- The six wheels up to 13. -/
 def small_wheels : Finset Nat := {2, 3, 5, 7, 11, 13}
 
-/-- **Pillai's theorem** (cited). Any run of between 1 and 16 consecutive
+/-- **Pillai's theorem**. Any run of between 1 and 16 consecutive
 positive integers contains a member coprime to every other member. -/
 def pillai_sixteen : Prop :=
   ∀ n k : Nat, 1 ≤ n → 1 ≤ k → k ≤ 16 →

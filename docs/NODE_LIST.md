@@ -308,17 +308,23 @@ ceiling 121 lies inside the cycle 210, and it stays inside.
 
 ### 45. `PillaiBrauer` — runs where no member is coprime to all the others
 Among any 16 or fewer consecutive positive integers one is coprime to all the
-others (Pillai, cited). From 17 on this fails through the wheels up to 13:
+others (Pillai; now proved here). From 17 on this fails through the wheels up to 13:
 every member of the run 2184 to 2200 shares one of 2, 3, 5, 7, 11, 13 with
 another member, and shifting by any multiple of the cycle 30030 keeps that.
 - Prior work: Pillai (1940), Brauer (1941).
-- Lean: `pillai_sixteen` (cited), `pillai_witness_17`,
-  `pillai_witness_17_repeats` (proved in `RNSSolutions/PillaiBrauer.lean`)
+- Lean: `pillai_sixteen`, `pillai_witness_17`, `pillai_witness_17_repeats`
+  (all proved in `RNSSolutions/PillaiBrauer.lean`)
 - Rests on: Vocabulary only
-- Status: Clean for the two witness claims; `#print axioms` shows only the
-  standard three (Geoffrey Fischer, 2026-11-05). The 16-or-fewer half was checked
-  numerically for every start up to 30030, which covers every position of the
-  cycle; proving it in Lean is future work.
+- Status: Clean. All three claims proved; `#print axioms` shows only the
+  standard three (witness claims: Geoffrey Fischer, 2026-11-05; `pillai_sixteen`:
+  GitHub Actions build, 2026-11-05).
+- How `pillai_sixteen` is proved: two members of a run of at most 16 differ by
+  at most 15, so a prime dividing both is a wheel up to 13. A member is
+  coprime to all the others as soon as every wheel up to 13 dividing it has no
+  other multiple in the run, which depends only on the run's start in the
+  cycle 30030. The kernel checks every start of the cycle and every length
+  from 1 to 16 (`decide +kernel`, 30 separate block checks; about 3.5 minutes
+  of build time).
 
 ### 46. `KanoldBound` — every stretch of 2^k numbers holds a survivor of k wheels
 For any k prime wheels, every stretch of two to the k consecutive numbers

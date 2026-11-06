@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 48 of 56 nodes are built, holding 154 claims: 147 proved in Lean and 7 cited from a published paper. They are joined by 62 arrows, each a Lean-checked step. Of the other 8 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 2 are new work, stated or scoped but not yet proved; 5 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 48 of 56 nodes are built, holding 154 claims: 148 proved in Lean and 6 cited from a published paper. They are joined by 62 arrows, each a Lean-checked step. Of the other 8 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 2 are new work, stated or scoped but not yet proved; 5 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -414,9 +414,9 @@ graph LR
   classDef draft fill:#ffffff,stroke:#1a7f37,color:#1f2328,stroke-width:2px,stroke-dasharray: 2 2;
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c46,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78,c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c92,c93,c94,c95,c96,c97,c98,c99,c100,c101,c102,c103,c104,c105,c106,c107,c108,c109,c110,c111,c112,c113,c114,c115,c116,c117,c119,c120,c124,c125,c128,c129,c130,c131,c132,c133,c134,c135,c136,c137,c138,c139,c140,c141,c142,c143,c144,c145,c146,c147,c148,c149,c150,c151,c152,c153,c154 verified;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c46,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78,c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c92,c93,c94,c95,c96,c97,c98,c99,c100,c101,c102,c103,c104,c105,c106,c107,c108,c109,c110,c111,c112,c113,c114,c115,c116,c117,c118,c119,c120,c124,c125,c128,c129,c130,c131,c132,c133,c134,c135,c136,c137,c138,c139,c140,c141,c142,c143,c144,c145,c146,c147,c148,c149,c150,c151,c152,c153,c154 verified;
   class c44,c45,c47,c48,c49,c50,c51,c52 conditional_built;
-  class c63,c118,c121,c122,c123,c126,c127 cited_built;
+  class c63,c121,c122,c123,c126,c127 cited_built;
   class p5 conditional;
   class p4,p6 new;
   class p1,p2,p3,p7,p8 external;
@@ -744,7 +744,7 @@ The results nothing else builds on, each with everything beneath it.
 - [`GermainCriterion.two_wheel_split_iff`](docs/nodes/GermainCriterion.md#two_wheel_split_iff) — proved in Lean
   - [`Sawtooth.even_split_iff_remainders_cancel`](docs/nodes/Sawtooth.md#even_split_iff_remainders_cancel) — proved in Lean
   - [`HurwitzZetaZero.hurwitz_zeta_at_zero`](docs/nodes/HurwitzZetaZero.md#hurwitz_zeta_at_zero) — proved in Lean
-- [`PillaiBrauer.pillai_sixteen`](docs/nodes/PillaiBrauer.md#pillai_sixteen) — cited
+- [`PillaiBrauer.pillai_sixteen`](docs/nodes/PillaiBrauer.md#pillai_sixteen) — proved in Lean
 - [`PillaiBrauer.pillai_witness_17`](docs/nodes/PillaiBrauer.md#pillai_witness_17) — proved in Lean
 - [`PillaiBrauer.pillai_witness_17_repeats`](docs/nodes/PillaiBrauer.md#pillai_witness_17_repeats) — proved in Lean
 - [`KanoldBound.stretch_holds_survivor`](docs/nodes/KanoldBound.md#stretch_holds_survivor) — cited
@@ -814,7 +814,6 @@ exactly the following, each recorded as such rather than claimed:
 **Published results, cited rather than proved in Lean:**
 
 - [`DudekJohnston.dudek_johnston_statement`](docs/nodes/DudekJohnston.md#dudek_johnston_statement) — Dudek and Johnston, Almost primes between all squares, arXiv:2501.18048 (2025), Theorem 1.2
-- [`PillaiBrauer.pillai_sixteen`](docs/nodes/PillaiBrauer.md#pillai_sixteen) — S. S. Pillai (1940), as stated in M. Waldschmidt's notes on Pillai's work (exact paper reference to be checked), main theorem
 - [`KanoldBound.stretch_holds_survivor`](docs/nodes/KanoldBound.md#stretch_holds_survivor) — H.-J. Kanold, Über eine zahlentheoretische Funktion von Jacobsthal, Math. Ann. 170 (1967), 314-326, the bound g(n) at most 2 to the number of prime factors of n, as quoted by Costello and Watts
 - [`MenonIdentity.menon_wheel_sum`](docs/nodes/MenonIdentity.md#menon_wheel_sum) — P. K. Menon, On the sum gcd(a-1, n) [(a, n) = 1], J. Indian Math. Soc. (N.S.) 29 (1965), 155-163, the identity, specialised to a squarefree modulus
 - [`GallagherAverage.singular_series_average_one`](docs/nodes/GallagherAverage.md#singular_series_average_one) — P. X. Gallagher, On the distribution of primes in short intervals, Mathematika 23 (1976), 4-9, the singular-series average, as restated by Kowalski, equation (1.5)
@@ -1036,7 +1035,7 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 42 | [`JacobsthalQuadratic`](docs/nodes/JacobsthalQuadratic.md) | the quadratic bound on Jacobsthal's function | outside source: proved in Lean in another project |
 | 43 | [`RoughInPrimeGaps`](docs/nodes/RoughInPrimeGaps.md) | almost every prime gap holds a survivor of the wheels below its length | outside source: proved in Lean in another project |
 | 44 | [`BonseCeiling`](docs/nodes/BonseCeiling.md) | from four wheels on, the ceiling sits inside one cycle | proved in Lean |
-| 45 | [`PillaiBrauer`](docs/nodes/PillaiBrauer.md) | runs where no member is coprime to all the others | cited from a published paper; not proved in Lean |
+| 45 | [`PillaiBrauer`](docs/nodes/PillaiBrauer.md) | runs where no member is coprime to all the others | proved in Lean |
 | 46 | [`KanoldBound`](docs/nodes/KanoldBound.md) | every stretch of 2^k numbers holds a survivor of k wheels | cited from a published paper; not proved in Lean |
 | 47 | [`MenonIdentity`](docs/nodes/MenonIdentity.md) | a gcd sum over the survivors of one cycle | cited from a published paper; not proved in Lean |
 | 48 | [`GallagherAverage`](docs/nodes/GallagherAverage.md) | the wheel correction is 1 on average | cited from a published paper; not proved in Lean |

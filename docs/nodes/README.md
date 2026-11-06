@@ -45,7 +45,7 @@
 | 42 | [`JacobsthalQuadratic`](JacobsthalQuadratic.md) | the quadratic bound on Jacobsthal's function | outside source: proved in Lean in another project |
 | 43 | [`RoughInPrimeGaps`](RoughInPrimeGaps.md) | almost every prime gap holds a survivor of the wheels below its length | outside source: proved in Lean in another project |
 | 44 | [`BonseCeiling`](BonseCeiling.md) | from four wheels on, the ceiling sits inside one cycle | proved in Lean |
-| 45 | [`PillaiBrauer`](PillaiBrauer.md) | runs where no member is coprime to all the others | cited from a published paper; not proved in Lean |
+| 45 | [`PillaiBrauer`](PillaiBrauer.md) | runs where no member is coprime to all the others | proved in Lean |
 | 46 | [`KanoldBound`](KanoldBound.md) | every stretch of 2^k numbers holds a survivor of k wheels | cited from a published paper; not proved in Lean |
 | 47 | [`MenonIdentity`](MenonIdentity.md) | a gcd sum over the survivors of one cycle | cited from a published paper; not proved in Lean |
 | 48 | [`GallagherAverage`](GallagherAverage.md) | the wheel correction is 1 on average | cited from a published paper; not proved in Lean |
