@@ -1,0 +1,34 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: BrunTwinCount.v1
+  family: BrunTwinCount
+  version: v1
+  order: 65
+  kind: paper
+  status: active
+  improves: BrunPureSieve bounds the twin survivors by inclusion-exclusion whose terms count twin
+    multiples of products of wheels; this node counts those multiples, stage 2 of Brun's theorem.
+  title: counting the twin multiples of a set of wheels exactly (Brun stage 2)
+  description: For distinct prime wheels with product d, the positions m from 1 to N where d divides m
+    times m plus 2 number N times twin_rho divided by d, off by at most twin_rho, where twin_rho is one
+    for the wheel at 2 and two for each other wheel, multiplied together. One cycle at a time, with the
+    Chinese Remainder Theorem splitting a cycle into the wheels.
+conclusions:
+- id: twin_multiples_count
+  declaration: RNS.BrunTwinCount.twin_multiples_count
+  summary: Up to N, the twin multiples of a product of distinct prime wheels number N times twin_rho
+    over the product, off by at most twin_rho.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BrunTwinCount.lean
+    declaration: RNS.BrunTwinCount.twin_multiples_count_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+sources:
+- title: Brun sieve (Wikipedia)
+  url: https://en.wikipedia.org/wiki/Brun_sieve
