@@ -537,6 +537,21 @@ themselves cannot tell one factor from two.
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
   Actions build, 2026-11-06).
 
+### 61. `TuranCycle` — Turán's sieve, exactly, on the positions 1 to N
+At each position, count the wheels dividing it (its hits). Over the positions
+1 to N the hits total the multiples of each wheel, and the squared hits total
+the multiples of the least common multiple of each ordered pair of wheels,
+both exactly. Turán's second-moment inequality, proved for any counting
+function on any finite set, then bounds the survivors, which have no hits.
+Weak (about 15,100 allowed against the true 5760 for the wheels up to 13 on
+one cycle), but the first step from exact counts to sieve bounds, with every
+ingredient exact.
+- Prior work: Turán (1934), the second-moment proof of Hardy–Ramanujan.
+- Lean: `hits_sum`, `hits_sq_sum`, `turan_inequality`, `turan_wheels`
+- Rests on: Vocabulary only
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-06).
+
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence
 are `UniformSubdivision.frozen_wheels_repeat` and `one_wheel_removed`; the
