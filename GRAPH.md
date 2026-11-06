@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 48 of 56 nodes are built, holding 154 claims: 149 proved in Lean and 5 cited from a published paper. They are joined by 62 arrows, each a Lean-checked step. Of the other 8 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 2 are new work, stated or scoped but not yet proved; 5 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 49 of 57 nodes are built, holding 157 claims: 149 proved in Lean, 3 with a proof drafted but not yet built and 5 cited from a published paper. They are joined by 62 arrows, each a Lean-checked step. Of the other 8 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 2 are new work, stated or scoped but not yet proved; 5 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -316,6 +316,11 @@ graph LR
     c153["smallest_composite_shift_semiprime_below_cube"]
     c154["semiprime_conjecture_of_cube"]
   end
+  subgraph s57["<b>60. AlmostPrimeWindow — survivors between the cutoff and its cube are primes or semiprimes</b>"]
+    c155["window_almost_prime"]
+    c156["window_composite_iff"]
+    c157["window_prime_iff_odd_factors"]
+  end
   o1{{"<i>open conjecture</i><br/>hardy_littlewood_conjecture"}}
   o2{{"<i>open conjecture</i><br/>HL_conjecture_A"}}
   o3{{"<i>open conjecture</i><br/>HL_conjecture_B"}}
@@ -417,6 +422,7 @@ graph LR
   class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c46,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78,c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c92,c93,c94,c95,c96,c97,c98,c99,c100,c101,c102,c103,c104,c105,c106,c107,c108,c109,c110,c111,c112,c113,c114,c115,c116,c117,c118,c119,c120,c122,c124,c125,c128,c129,c130,c131,c132,c133,c134,c135,c136,c137,c138,c139,c140,c141,c142,c143,c144,c145,c146,c147,c148,c149,c150,c151,c152,c153,c154 verified;
   class c44,c45,c47,c48,c49,c50,c51,c52 conditional_built;
   class c63,c121,c123,c126,c127 cited_built;
+  class c155,c156,c157 draft;
   class p5 conditional;
   class p4,p6 new;
   class p1,p2,p3,p7,p8 external;
@@ -583,6 +589,9 @@ graph LR
   click c152 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#smallest_composite_shift_floor" _blank
   click c153 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#smallest_composite_shift_semiprime_below_cube" _blank
   click c154 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#semiprime_conjecture_of_cube" _blank
+  click c155 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/AlmostPrimeWindow.md#window_almost_prime" _blank
+  click c156 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/AlmostPrimeWindow.md#window_composite_iff" _blank
+  click c157 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/AlmostPrimeWindow.md#window_prime_iff_odd_factors" _blank
 ```
 
 ## What each result rests on
@@ -793,6 +802,9 @@ The results nothing else builds on, each with everything beneath it.
 - [`FortunateCeiling.smallest_composite_shift_floor`](docs/nodes/FortunateCeiling.md#smallest_composite_shift_floor) — proved in Lean
 - [`FortunateCeiling.smallest_composite_shift_semiprime_below_cube`](docs/nodes/FortunateCeiling.md#smallest_composite_shift_semiprime_below_cube) — proved in Lean
 - [`FortunateCeiling.semiprime_conjecture_of_cube`](docs/nodes/FortunateCeiling.md#semiprime_conjecture_of_cube) — proved in Lean
+- [`AlmostPrimeWindow.window_almost_prime`](docs/nodes/AlmostPrimeWindow.md#window_almost_prime) — proof drafted, not yet built
+- [`AlmostPrimeWindow.window_composite_iff`](docs/nodes/AlmostPrimeWindow.md#window_composite_iff) — proof drafted, not yet built
+- [`AlmostPrimeWindow.window_prime_iff_odd_factors`](docs/nodes/AlmostPrimeWindow.md#window_prime_iff_odd_factors) — proof drafted, not yet built
 
 ## What the network takes on trust
 
@@ -988,6 +1000,10 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
   - [OEIS A005235, Fortunate numbers](https://oeis.org/A005235) — the sequence and the remark that a Fortunate number has no prime factor among the wheels
   - [OEIS A038771, formal-conjectures (Google DeepMind), OEIS/38771.lean](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/OEIS/38771.lean) — the two open conjectures (Greathouse and Ordowski 2015, Kamenetsky 2019) addressed here; the Dirichlet existence proof is adapted from its a_n_exists
   - [OEIS A038771](https://oeis.org/A038771) — the sequence, its values and the two conjectures
+- [`AlmostPrimeWindow`](docs/nodes/AlmostPrimeWindow.md)
+  - [Sieve theory (Wikipedia), almost primes, Chen's theorem and the parity problem](https://en.wikipedia.org/wiki/Sieve_theory) — the setting; the window is the elementary step behind sifting at the cube root
+  - [Chen's theorem (Wikipedia)](https://en.wikipedia.org/wiki/Chen%27s_theorem) — the theorem whose almost-prime conclusion this window supplies the finite half of
+  - [T. Tao, Open question - the parity problem in sieve theory (2007)](https://terrytao.wordpress.com/2007/06/05/open-question-the-parity-problem-in-sieve-theory/) — the parity problem that the third claim locates for the wheels
 
 ## Node index
 
@@ -1049,3 +1065,4 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 57 | [`Schatunowsky`](docs/nodes/Schatunowsky.md) | 30 is the largest number whose survivors are all prime | proved in Lean |
 | 58 | [`HurwitzZetaZero`](docs/nodes/HurwitzZetaZero.md) | the Hurwitz zeta function at 0 | proved in Lean |
 | 59 | [`FortunateCeiling`](docs/nodes/FortunateCeiling.md) | what lands on a prime just above the cycle (Fortune's conjecture, OEIS A038771) | proved in Lean |
+| 60 | [`AlmostPrimeWindow`](docs/nodes/AlmostPrimeWindow.md) | survivors between the cutoff and its cube are primes or semiprimes | proof drafted, not yet built |

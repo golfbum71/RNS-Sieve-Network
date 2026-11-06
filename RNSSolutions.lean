@@ -41,4 +41,5 @@ import RNSSolutions.GermainCriterion
 import RNSSolutions.HurwitzZetaZero
 import RNSSolutions.FortunateCeiling
 import RNSSolutions.MenonIdentity
+import RNSSolutions.AlmostPrimeWindow
 import RNSSolutions.Assemble
