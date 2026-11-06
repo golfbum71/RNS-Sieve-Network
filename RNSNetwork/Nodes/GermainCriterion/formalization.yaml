@@ -15,7 +15,8 @@ node:
     Corollary 1.4). Both halves are built. The "if" half is remainder arithmetic alone. The "only if"
     half is Erdős's conjecture on Lehmer's even split (Hall and Shiu 2002), reached by Germain's route
     through odd Dirichlet characters, his Theorem 1.1 for distinct prime wheels, and the nonvanishing
-    of L-functions (resting on the cited node HurwitzZetaZero).
+    of L-functions, with the Hurwitz zeta value at 0 from HurwitzZetaZero. Everything rests on Mathlib
+    alone.
   improves: LehmerSplit gives an even split when one wheel leaves remainder 1, for any number of
     wheels. For two wheels this node adds the second sufficient case (the second wheel the negative of
     the first, with the first wheel's square leaving remainder 1), which LehmerSplit does not cover.
@@ -64,6 +65,7 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.odd_primitive_weighted_sum_ne_zero_step
+    assembled: RNSSolutions/Assemble.lean (RNS.GermainCriterion.odd_primitive_weighted_sum_ne_zero_holds)
     note: Lean proof of the step from the cited Hurwitz zeta value, taken as a named hypothesis, and
       the previous claim. Built clean 2026-11-05 (standard axioms only); it stays a step, not assembled,
       until HurwitzZetaZero is proved in Lean.
@@ -96,8 +98,9 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.weighted_sum_eq_LFunction_zero_step
+    assembled: RNSSolutions/Assemble.lean (RNS.GermainCriterion.weighted_sum_eq_LFunction_zero_holds)
     note: Lean proof of the step from the cited Hurwitz zeta value, taken as a named hypothesis. Built
-      clean 2026-11-05 (standard axioms only); a step until HurwitzZetaZero is proved in Lean.
+      clean 2026-11-05 (standard axioms only); assembled with HurwitzZetaZero's Lean proof, so it rests on Mathlib alone.
   designated: lean-proof
 - id: odd_weighted_sum_ne_zero_iff
   declaration: RNS.GermainCriterion.odd_weighted_sum_ne_zero_iff
@@ -112,8 +115,9 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.odd_weighted_sum_ne_zero_iff_step
+    assembled: RNSSolutions/Assemble.lean (RNS.GermainCriterion.odd_weighted_sum_ne_zero_iff_holds)
     note: Lean proof through Mathlib's LFunction_changeLevel at s = 0, built clean 2026-11-05
-      (standard axioms only); a step until HurwitzZetaZero is proved in Lean. The underlying
+      (standard axioms only); assembled with HurwitzZetaZero's Lean proof, so it rests on Mathlib alone. The underlying
       identity was checked numerically for 76 odd characters across 17 moduli.
   designated: lean-proof
 - id: coprime_split_iff_characters
@@ -129,8 +133,9 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.coprime_split_iff_characters_step
+    assembled: RNSSolutions/Assemble.lean (RNS.GermainCriterion.coprime_split_iff_characters_holds)
     note: Lean proof by Mathlib's character orthogonality, built clean 2026-11-05 (standard axioms
-      only); a step until HurwitzZetaZero is proved in Lean. Checked numerically first in 1,827 cases (moduli 2 to 30, up to
+      only); assembled with HurwitzZetaZero's Lean proof, so it rests on Mathlib alone. Checked numerically first in 1,827 cases (moduli 2 to 30, up to
       three wheels), 500 of them even splits.
   designated: lean-proof
 - id: all_residues_split_iff_wheels
@@ -145,9 +150,9 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.all_residues_split_iff_wheels_step
+    assembled: RNSSolutions/Assemble.lean (RNS.GermainCriterion.all_residues_split_iff_wheels_holds)
     note: Lean proof from Proposition 3.1 by dividing out the common factor of the residue and k, and
-      by passing to the conductor; built clean 2026-11-05 (standard axioms only), a step until
-      HurwitzZetaZero is proved in Lean. Checked numerically
+      by passing to the conductor; built clean 2026-11-05 (standard axioms only),; assembled with HurwitzZetaZero's Lean proof, so it rests on Mathlib alone. Checked numerically
       first in 1,827 cases (moduli 2 to 30, up to three wheels), 479 of them even splits at every
       residue.
   designated: lean-proof
@@ -223,7 +228,8 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.germain_theorem_step
-    note: Lean proof built clean 2026-11-05 (standard axioms only). Survivors to remainders by Sawtooth, the dividing wheels dropped, then Corollary 3.2; a character is 0, never 1, at a wheel dividing k. A step until HurwitzZetaZero is proved in Lean. Checked numerically first in 1,834 cases, no mismatch.
+    assembled: RNSSolutions/Assemble.lean (RNS.GermainCriterion.germain_theorem_holds)
+    note: Lean proof built clean 2026-11-05 (standard axioms only). Survivors to remainders by Sawtooth, the dividing wheels dropped, then Corollary 3.2; a character is 0, never 1, at a wheel dividing k; assembled with HurwitzZetaZero's Lean proof, so it rests on Mathlib alone. Checked numerically first in 1,834 cases, no mismatch.
   designated: lean-proof
 - id: eq_one_of_odd_characters
   declaration: RNS.GermainCriterion.eq_one_of_odd_characters
@@ -249,7 +255,8 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.two_wheel_remainders_of_split_step
-    note: Lean proof built clean 2026-11-05 (standard axioms only). Germain's Corollary 1.4 proof (ii) from Corollary 3.2 and Proposition 2.1, with character separation. A step until HurwitzZetaZero is proved in Lean. Checked numerically first in 4,320 cases (wheels up to 23, 1 to 60 parts, wheels dividing k included), 446 even splits, no mismatch.
+    assembled: RNSSolutions/Assemble.lean (RNS.GermainCriterion.two_wheel_remainders_of_split_holds)
+    note: Lean proof built clean 2026-11-05 (standard axioms only). Germain's Corollary 1.4 proof (ii) from Corollary 3.2 and Proposition 2.1, with character separation; assembled with HurwitzZetaZero's Lean proof, so it rests on Mathlib alone. Checked numerically first in 4,320 cases (wheels up to 23, 1 to 60 parts, wheels dividing k included), 446 even splits, no mismatch.
   designated: lean-proof
 - id: two_wheel_split_iff
   declaration: RNS.GermainCriterion.two_wheel_split_iff
@@ -263,7 +270,8 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/GermainCriterion.lean
     declaration: RNS.GermainCriterion.two_wheel_split_iff_step
-    note: Lean proof built clean 2026-11-05 (standard axioms only). The "if" half and Erdős's conjecture together. A step until HurwitzZetaZero is proved in Lean.
+    assembled: RNSSolutions/Assemble.lean (RNS.GermainCriterion.two_wheel_split_iff_holds)
+    note: Lean proof built clean 2026-11-05 (standard axioms only). The "if" half and Erdős's conjecture together; assembled with HurwitzZetaZero's Lean proof, so it rests on Mathlib alone.
   designated: lean-proof
 sources:
 - title: J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220

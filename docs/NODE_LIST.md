@@ -449,28 +449,21 @@ the next ceiling once the wheels reach 7, and below that only 30 fits.
 
 ### 58. `HurwitzZetaZero` — the Hurwitz zeta function at 0
 For 0 < x ≤ 1 the Hurwitz zeta function at 0 equals 1/2 − x. This turns
-L-function values into finite sums over a cycle's residues, the one analytic
-input `GermainCriterion` needs beyond Mathlib. Mathlib's even part at 0 and its
-functional equation reduce it to the sawtooth's Fourier series,
-∑ sin(2πnx)/n = π(1/2 − x) for 0 < x < 1, read as Mathlib's `sinZeta x` at 1.
-The series itself is summed here by Abel's limit theorem; what is still cited
-is that Mathlib's `sinZeta x` at 1 is that sum.
+L-function values into finite sums over a cycle's residues, the analytic input
+`GermainCriterion` needs beyond Mathlib. Mathlib's even part at 0 and its
+functional equation reduce it to Mathlib's `sinZeta x` at 1. Abel summation
+and dominated convergence show that this is the sum of the sawtooth's Fourier
+series, and Abel's limit theorem sums that series to π(1/2 − x). This fills
+the case s = 0 that Mathlib's `hurwitzZeta_neg_nat` leaves as a TODO, and
+could be offered to Mathlib.
 - Prior work: Apostol, Introduction to Analytic Number Theory (1976),
-  Thm 12.13. Mathlib's `hurwitzZeta_neg_nat` covers the negative integers and
-  records s = 0 as a TODO.
-- Lean: `hurwitz_zeta_at_zero` (from the next), `sin_zeta_at_one` (from the
-  next two), `sawtooth_partial_sums` (proved: Dirichlet's test, Abel's limit
-  theorem on −log(1 − z) at z = e^(2πix), and the argument of 1 − e^(2πix)),
-  `sin_zeta_at_one_eq_series` (cited)
-- Rests on: Mathlib, and the cited claim `sin_zeta_at_one_eq_series`
-- Status: everything but `sin_zeta_at_one_eq_series` proved; `#print axioms`
-  shows only the standard three (GitHub Actions build, 2026-11-05).
-- Planned proof of `sin_zeta_at_one_eq_series`: Abel summation (Mathlib's
-  `LSeries_eq_mul_integral`) writes `sinZeta x s` for s > 1 as s times an
-  integral of the bounded partial sums; that integral is holomorphic for
-  real part above 0, so the identity theorem carries the formula to s = 1,
-  where Abel summation in reverse gives the limit of the partial sums.
-- Later, to look at: the residue theorem route. Riemann's Hankel-loop formula
+  Thm 12.13.
+- Lean: `hurwitz_zeta_at_zero`, `sin_zeta_at_one`, `sawtooth_partial_sums`,
+  `sin_zeta_at_one_eq_series`
+- Rests on: Mathlib only
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-05).
+- Later, to look at (an alternative proof): the residue theorem route. Riemann's Hankel-loop formula
   for the Hurwitz zeta function becomes, at s = 0, a loop integral of
   e^(−az)/(z(1 − e^(−z))) whose only enclosed pole, at z = 0, has residue
   1/2 − a. The residue step fits Mathlib's Cauchy integral formula on circles,
@@ -635,7 +628,7 @@ Check here before searching again. Links pinned to a commit were current on
   plus one sixth. The proof integrates the squared gap over the cycle (their
   Thm 4(v), via Franel's formula for integrals of products of sawtooth
   functions), so it needs real integration.
-- **Done (node `GermainCriterion`, 2026-11-05; standard axioms only): the "if" half for two wheels, `two_wheel_split_of_remainders`, rests on `Sawtooth`. Analytic input built the same day: L(chi, 0) != 0 for odd primitive chi (Mathlib only), and the weighted residue sum is nonzero, resting on the cited node `HurwitzZetaZero` (Apostol Thm 12.13; Mathlib stops short of s = 0). The character transform (Germain's (3.1), in remainder form, no sawtooth needed) built the same day. Germain's (3.2) for characters that are not primitive built the same day, through Mathlib's LFunction_changeLevel at s = 0. The inversion over characters (3.3) and Germain's Proposition 3.1 (residues coprime to the number of parts) built the same day, through Mathlib's character orthogonality. Cor 3.2 (every residue, wheels only) built the same day. Prop 2.1 (c), (d), (e) built the same day in remainder form ((a) and (b) concern repeated primes, which the network's cycle never has); also recorded that Germain's Theorem 1.1 as printed fails for the wheel 2 with 2 parts, where no odd character exists. Germain's Theorem 1.1 for distinct prime wheels with a wheel not dividing the number of parts built the same day in survivor form (`germain_theorem`, rests on `Sawtooth` and `HurwitzZetaZero`), by dropping the dividing wheels one at a time (`split_iff_nondividing_wheels`). The "only if" half, Erdős's conjecture (Hall-Shiu), built the same day by Cor 1.4 proof (ii) (`two_wheel_remainders_of_split`), with character separation through odd characters (`eq_one_of_odd_characters`); Cor 1.4 in full is `two_wheel_split_iff`. Both rest on `Sawtooth` and the cited node `HurwitzZetaZero`. Note: Hall-Shiu's ordering-of-residues theorem is false as stated for composite moduli (8 parts, residues 1, 3, 5); Germain's Cor 1.4 checked against 120,660 direct cases.** **Germain's exact criterion** (Germain 2005, Thm 1.1): the survivors
+- **Done (node `GermainCriterion`, 2026-11-05; standard axioms only): the "if" half for two wheels, `two_wheel_split_of_remainders`, rests on `Sawtooth`. Analytic input built the same day: L(chi, 0) != 0 for odd primitive chi (Mathlib only), and the weighted residue sum is nonzero, resting on `HurwitzZetaZero` (Apostol Thm 12.13; Mathlib stops short of s = 0, so the network proves it). The character transform (Germain's (3.1), in remainder form, no sawtooth needed) built the same day. Germain's (3.2) for characters that are not primitive built the same day, through Mathlib's LFunction_changeLevel at s = 0. The inversion over characters (3.3) and Germain's Proposition 3.1 (residues coprime to the number of parts) built the same day, through Mathlib's character orthogonality. Cor 3.2 (every residue, wheels only) built the same day. Prop 2.1 (c), (d), (e) built the same day in remainder form ((a) and (b) concern repeated primes, which the network's cycle never has); also recorded that Germain's Theorem 1.1 as printed fails for the wheel 2 with 2 parts, where no odd character exists. Germain's Theorem 1.1 for distinct prime wheels with a wheel not dividing the number of parts built the same day in survivor form (`germain_theorem`, rests on `Sawtooth` and `HurwitzZetaZero`), by dropping the dividing wheels one at a time (`split_iff_nondividing_wheels`). The "only if" half, Erdős's conjecture (Hall-Shiu), built the same day by Cor 1.4 proof (ii) (`two_wheel_remainders_of_split`), with character separation through odd characters (`eq_one_of_odd_characters`); Cor 1.4 in full is `two_wheel_split_iff`. Both rest on `Sawtooth` and `HurwitzZetaZero`, and so on Mathlib alone. Note: Hall-Shiu's ordering-of-residues theorem is false as stated for composite moduli (8 parts, residues 1, 3, 5); Germain's Cor 1.4 checked against 120,660 direct cases.** **Germain's exact criterion** (Germain 2005, Thm 1.1): the survivors
   split evenly across a given number of equal intervals exactly when every
   odd Dirichlet character for that number takes the value 1 at some wheel.
   The proof uses the nonvanishing of Dirichlet L-functions at 1; check

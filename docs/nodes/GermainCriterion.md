@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean
 
-Cut the cycle of two prime wheels into a given number of equal parts. The survivors split evenly exactly when one wheel leaves remainder 1 on division by the number of parts, or the first wheel's square leaves remainder 1 and the second wheel is the negative of the first (Germain 2005, Corollary 1.4). Both halves are built. The "if" half is remainder arithmetic alone. The "only if" half is Erdős's conjecture on Lehmer's even split (Hall and Shiu 2002), reached by Germain's route through odd Dirichlet characters, his Theorem 1.1 for distinct prime wheels, and the nonvanishing of L-functions (resting on the cited node HurwitzZetaZero).
+Cut the cycle of two prime wheels into a given number of equal parts. The survivors split evenly exactly when one wheel leaves remainder 1 on division by the number of parts, or the first wheel's square leaves remainder 1 and the second wheel is the negative of the first (Germain 2005, Corollary 1.4). Both halves are built. The "if" half is remainder arithmetic alone. The "only if" half is Erdős's conjecture on Lehmer's even split (Hall and Shiu 2002), reached by Germain's route through odd Dirichlet characters, his Theorem 1.1 for distinct prime wheels, and the nonvanishing of L-functions, with the Hurwitz zeta value at 0 from HurwitzZetaZero. Everything rests on Mathlib alone.
 
 **What it adds:** LehmerSplit gives an even split when one wheel leaves remainder 1, for any number of wheels. For two wheels this node adds the second sufficient case (the second wheel the negative of the first, with the first wheel's square leaving remainder 1), which LehmerSplit does not cover.
 
@@ -81,7 +81,7 @@ def odd_primitive_weighted_sum_ne_zero : Prop :=
 
 **Rests on:** [`HurwitzZetaZero.hurwitz_zeta_at_zero`](HurwitzZetaZero.md#hurwitz_zeta_at_zero)
 
-**Proof:** `RNS.GermainCriterion.odd_primitive_weighted_sum_ne_zero_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean)
+**Proof:** `RNS.GermainCriterion.odd_primitive_weighted_sum_ne_zero_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
 <a id="character_transform"></a>
 ### `character_transform`
@@ -124,7 +124,7 @@ def weighted_sum_eq_LFunction_zero : Prop :=
 
 **Rests on:** [`HurwitzZetaZero.hurwitz_zeta_at_zero`](HurwitzZetaZero.md#hurwitz_zeta_at_zero)
 
-**Proof:** `RNS.GermainCriterion.weighted_sum_eq_LFunction_zero_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean)
+**Proof:** `RNS.GermainCriterion.weighted_sum_eq_LFunction_zero_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
 <a id="odd_weighted_sum_ne_zero_iff"></a>
 ### `odd_weighted_sum_ne_zero_iff`
@@ -144,7 +144,7 @@ def odd_weighted_sum_ne_zero_iff : Prop :=
 
 **Rests on:** [`HurwitzZetaZero.hurwitz_zeta_at_zero`](HurwitzZetaZero.md#hurwitz_zeta_at_zero)
 
-**Proof:** `RNS.GermainCriterion.odd_weighted_sum_ne_zero_iff_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean)
+**Proof:** `RNS.GermainCriterion.odd_weighted_sum_ne_zero_iff_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
 <a id="coprime_split_iff_characters"></a>
 ### `coprime_split_iff_characters`
@@ -170,7 +170,7 @@ def coprime_split_iff_characters : Prop :=
 
 **Rests on:** [`HurwitzZetaZero.hurwitz_zeta_at_zero`](HurwitzZetaZero.md#hurwitz_zeta_at_zero)
 
-**Proof:** `RNS.GermainCriterion.coprime_split_iff_characters_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean)
+**Proof:** `RNS.GermainCriterion.coprime_split_iff_characters_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
 <a id="all_residues_split_iff_wheels"></a>
 ### `all_residues_split_iff_wheels`
@@ -193,7 +193,7 @@ def all_residues_split_iff_wheels : Prop :=
 
 **Rests on:** [`HurwitzZetaZero.hurwitz_zeta_at_zero`](HurwitzZetaZero.md#hurwitz_zeta_at_zero)
 
-**Proof:** `RNS.GermainCriterion.all_residues_split_iff_wheels_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean)
+**Proof:** `RNS.GermainCriterion.all_residues_split_iff_wheels_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
 <a id="split_add_wheel"></a>
 ### `split_add_wheel`
@@ -308,7 +308,7 @@ def germain_theorem : Prop :=
 
 **Rests on:** [`Sawtooth.even_split_iff_remainders_cancel`](Sawtooth.md#even_split_iff_remainders_cancel), [`HurwitzZetaZero.hurwitz_zeta_at_zero`](HurwitzZetaZero.md#hurwitz_zeta_at_zero)
 
-**Proof:** `RNS.GermainCriterion.germain_theorem_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean)
+**Proof:** `RNS.GermainCriterion.germain_theorem_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
 <a id="eq_one_of_odd_characters"></a>
 ### `eq_one_of_odd_characters`
@@ -350,7 +350,7 @@ def two_wheel_remainders_of_split : Prop :=
 
 **Rests on:** [`Sawtooth.even_split_iff_remainders_cancel`](Sawtooth.md#even_split_iff_remainders_cancel), [`HurwitzZetaZero.hurwitz_zeta_at_zero`](HurwitzZetaZero.md#hurwitz_zeta_at_zero)
 
-**Proof:** `RNS.GermainCriterion.two_wheel_remainders_of_split_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean)
+**Proof:** `RNS.GermainCriterion.two_wheel_remainders_of_split_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
 <a id="two_wheel_split_iff"></a>
 ### `two_wheel_split_iff`
@@ -372,7 +372,7 @@ def two_wheel_split_iff : Prop :=
 
 **Rests on:** [`Sawtooth.even_split_iff_remainders_cancel`](Sawtooth.md#even_split_iff_remainders_cancel), [`HurwitzZetaZero.hurwitz_zeta_at_zero`](HurwitzZetaZero.md#hurwitz_zeta_at_zero)
 
-**Proof:** `RNS.GermainCriterion.two_wheel_split_iff_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean)
+**Proof:** `RNS.GermainCriterion.two_wheel_split_iff_step` in [`RNSSolutions/GermainCriterion.lean`](../../RNSSolutions/GermainCriterion.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
 ## Files
 

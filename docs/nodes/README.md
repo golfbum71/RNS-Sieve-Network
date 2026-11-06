@@ -58,6 +58,6 @@
 | 55 | [`SophieGermainTheorem`](SophieGermainTheorem.md) | the first case of Fermat's Last Theorem for Sophie Germain primes | proved in Lean |
 | 56 | [`GermainAuxiliary`](GermainAuxiliary.md) | Sophie Germain's theorem with any suitable wheel | proved in Lean |
 | 57 | [`Schatunowsky`](Schatunowsky.md) | 30 is the largest number whose survivors are all prime | proved in Lean |
-| 58 | [`HurwitzZetaZero`](HurwitzZetaZero.md) | the Hurwitz zeta function at 0 | cited from a published paper; not proved in Lean |
+| 58 | [`HurwitzZetaZero`](HurwitzZetaZero.md) | the Hurwitz zeta function at 0 | proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

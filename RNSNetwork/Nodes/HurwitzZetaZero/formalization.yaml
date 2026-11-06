@@ -10,12 +10,11 @@ node:
   status: active
   title: the Hurwitz zeta function at 0
   description: For a point x with 0 < x ≤ 1, the Hurwitz zeta function at 0 equals one half minus x.
-    Proved here from one cited input, that Mathlib's sinZeta x at 1 is the sum of its series; the sum itself, the sawtooth's Fourier series, is proved here by Abel's limit theorem. The
-    even part of the Hurwitz zeta function at 0 is in Mathlib, and Mathlib's functional equation makes
-    the odd part sinZeta at 1 divided by π. Mathlib has the Hurwitz zeta values at the negative
-    integers but stops short of 0, where the matching Fourier series converges only conditionally.
-    It is the one analytic input GermainCriterion needs beyond Mathlib, and could be proved later or
-    contributed to Mathlib without changing anything downstream.
+    Proved here from Mathlib alone, filling the case s = 0 that Mathlib's hurwitzZeta_neg_nat leaves as
+    a TODO. Mathlib's even part at 0 and its functional equation reduce it to Mathlib's sinZeta x at 1.
+    That is the sum of the sawtooth's Fourier series, a conditionally convergent series. Abel summation
+    and dominated convergence show sinZeta x at 1 is the sum of its series, and Abel's limit theorem
+    sums the series to π(1/2 - x). It is the analytic input GermainCriterion needs beyond Mathlib.
 conclusions:
 - id: hurwitz_zeta_at_zero
   declaration: RNS.HurwitzZetaZero.hurwitz_zeta_at_zero
@@ -27,6 +26,7 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/HurwitzZetaZero.lean
     declaration: RNS.HurwitzZetaZero.hurwitz_zeta_at_zero_step
+    assembled: RNSSolutions/HurwitzZetaZero.lean (RNS.HurwitzZetaZero.hurwitz_zeta_at_zero_holds)
     note: Lean proof built clean 2026-11-05 (standard axioms only). From the node's cited claim sin_zeta_at_one, Mathlib's
       hurwitzZetaEven_apply_zero and the functional equation hurwitzZetaOdd_one_sub at s = 1; the case
       x = 1 needs no cited input.
@@ -46,6 +46,7 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/HurwitzZetaZero.lean
     declaration: RNS.HurwitzZetaZero.sin_zeta_at_one_step
+    assembled: RNSSolutions/HurwitzZetaZero.lean (RNS.HurwitzZetaZero.sin_zeta_at_one_holds)
     note: Lean proof built clean 2026-11-05 (standard axioms only). From sawtooth_partial_sums and the cited sin_zeta_at_one_eq_series, by uniqueness of limits.
   - id: paper
     kind: literature
@@ -67,20 +68,20 @@ conclusions:
   designated: lean-proof
 - id: sin_zeta_at_one_eq_series
   declaration: RNS.HurwitzZetaZero.sin_zeta_at_one_eq_series
-  summary: For 0 < x < 1, the partial sums of the sawtooth series tend to Mathlib's sinZeta x at 1 (cited). Mathlib has the series for sinZeta only where it converges absolutely.
+  summary: For 0 < x < 1, the partial sums of the sawtooth series tend to Mathlib's sinZeta x at 1. Mathlib has the series for sinZeta only where it converges absolutely.
   imports: []
   imports_status: none
   justifications:
-  - id: paper
-    kind: literature
-    source: T. M. Apostol, Introduction to Analytic Number Theory, Springer (1976), Chapter 11
-    locator: Dirichlet series with bounded partial sums of coefficients converge and are analytic for real part above 0 (theorem number to be checked); with the identity theorem this identifies Mathlib's sinZeta x at 1 with the series
-    note: Classical, cited. Not yet proved in Lean. Planned route Abel summation (Mathlib's LSeries_eq_mul_integral), holomorphy of the integral for real part above 0, and the identity theorem; a residue theorem route is recorded in docs/NODE_LIST.md for later.
-  designated: paper
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/HurwitzZetaZero.lean
+    declaration: RNS.HurwitzZetaZero.sin_zeta_at_one_eq_series_holds
+    note: Lean proof built clean 2026-11-05 (standard axioms only). Abel summation at s = 1 (the argument of Mathlib's LSeries_eq_mul_integral, which needs no absolute convergence) makes the partial sums tend to G(1), with G(s) the integral from 1 to infinity of the bounded partial-sum function times t^(-s-1). For real s > 1 Mathlib gives sinZeta x s = s G(s); letting s fall to 1, sinZeta is continuous (it is entire) and s G(s) is continuous by dominated convergence.
+  designated: lean-proof
 sources:
 - title: Hurwitz zeta function (Wikipedia), values at nonpositive integers
   url: https://en.wikipedia.org/wiki/Hurwitz_zeta_function
   relationship: states the value at 0 through the Bernoulli polynomial B1
 - title: Mathlib, Hurwitz zeta values (hurwitzZeta_neg_nat)
   url: https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/LSeries/HurwitzZetaValues.html
-  relationship: the Lean result for the negative integers, which this node extends to 0
+  relationship: the Lean result for the negative integers, which this node extends to 0 (the TODO in hurwitzZeta_neg_nat)

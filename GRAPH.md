@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 47 of 55 nodes are built, holding 140 claims: 132 proved in Lean and 8 cited from a published paper. They are joined by 59 arrows, each a Lean-checked step. Of the other 8 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 2 are new work, stated or scoped but not yet proved; 5 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 47 of 55 nodes are built, holding 140 claims: 133 proved in Lean and 7 cited from a published paper. They are joined by 59 arrows, each a Lean-checked step. Of the other 8 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 2 are new work, stated or scoped but not yet proved; 5 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -395,9 +395,9 @@ graph LR
   classDef draft fill:#ffffff,stroke:#1a7f37,color:#1f2328,stroke-width:2px,stroke-dasharray: 2 2;
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c46,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78,c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c92,c93,c94,c95,c96,c97,c98,c100,c101,c102,c103,c104,c105,c106,c107,c108,c109,c110,c111,c112,c113,c114,c115,c116,c117,c119,c120,c124,c125,c128,c129,c130,c131,c132,c133,c134,c135,c136,c137,c138,c139,c140 verified;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c46,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78,c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c92,c93,c94,c95,c96,c97,c98,c99,c100,c101,c102,c103,c104,c105,c106,c107,c108,c109,c110,c111,c112,c113,c114,c115,c116,c117,c119,c120,c124,c125,c128,c129,c130,c131,c132,c133,c134,c135,c136,c137,c138,c139,c140 verified;
   class c44,c45,c47,c48,c49,c50,c51,c52 conditional_built;
-  class c63,c99,c118,c121,c122,c123,c126,c127 cited_built;
+  class c63,c118,c121,c122,c123,c126,c127 cited_built;
   class p5 conditional;
   class p4,p6 new;
   class p1,p2,p3,p7,p8 external;
@@ -741,7 +741,7 @@ The results nothing else builds on, each with everything beneath it.
   - [`BonseCeiling.ceiling_inside_cycle`](docs/nodes/BonseCeiling.md#ceiling_inside_cycle) — proved in Lean
 - [`HurwitzZetaZero.sin_zeta_at_one`](docs/nodes/HurwitzZetaZero.md#sin_zeta_at_one) — proved in Lean
 - [`HurwitzZetaZero.sawtooth_partial_sums`](docs/nodes/HurwitzZetaZero.md#sawtooth_partial_sums) — proved in Lean
-- [`HurwitzZetaZero.sin_zeta_at_one_eq_series`](docs/nodes/HurwitzZetaZero.md#sin_zeta_at_one_eq_series) — cited
+- [`HurwitzZetaZero.sin_zeta_at_one_eq_series`](docs/nodes/HurwitzZetaZero.md#sin_zeta_at_one_eq_series) — proved in Lean
 
 ## What the network takes on trust
 
@@ -763,7 +763,6 @@ exactly the following, each recorded as such rather than claimed:
 **Published results, cited rather than proved in Lean:**
 
 - [`DudekJohnston.dudek_johnston_statement`](docs/nodes/DudekJohnston.md#dudek_johnston_statement) — Dudek and Johnston, Almost primes between all squares, arXiv:2501.18048 (2025), Theorem 1.2
-- [`HurwitzZetaZero.sin_zeta_at_one_eq_series`](docs/nodes/HurwitzZetaZero.md#sin_zeta_at_one_eq_series) — T. M. Apostol, Introduction to Analytic Number Theory, Springer (1976), Chapter 11, Dirichlet series with bounded partial sums of coefficients converge and are analytic for real part above 0 (theorem number to be checked); with the identity theorem this identifies Mathlib's sinZeta x at 1 with the series
 - [`PillaiBrauer.pillai_sixteen`](docs/nodes/PillaiBrauer.md#pillai_sixteen) — S. S. Pillai (1940), as stated in M. Waldschmidt's notes on Pillai's work (exact paper reference to be checked), main theorem
 - [`KanoldBound.stretch_holds_survivor`](docs/nodes/KanoldBound.md#stretch_holds_survivor) — H.-J. Kanold, Über eine zahlentheoretische Funktion von Jacobsthal, Math. Ann. 170 (1967), 314-326, the bound g(n) at most 2 to the number of prime factors of n, as quoted by Costello and Watts
 - [`MenonIdentity.menon_wheel_sum`](docs/nodes/MenonIdentity.md#menon_wheel_sum) — P. K. Menon, On the sum gcd(a-1, n) [(a, n) = 1], J. Indian Math. Soc. (N.S.) 29 (1965), 155-163, the identity, specialised to a squarefree modulus
@@ -934,7 +933,7 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
   - [H. King and V. Pambuccian, Generalized Schatunowsky theorem in a weak arithmetic (2025)](https://arxiv.org/abs/2506.08256) — the generalization (Kaneko–Nakai) for survivors of the wheels above a fixed prime
 - [`HurwitzZetaZero`](docs/nodes/HurwitzZetaZero.md)
   - [Hurwitz zeta function (Wikipedia), values at nonpositive integers](https://en.wikipedia.org/wiki/Hurwitz_zeta_function) — states the value at 0 through the Bernoulli polynomial B1
-  - [Mathlib, Hurwitz zeta values (hurwitzZeta_neg_nat)](https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/LSeries/HurwitzZetaValues.html) — the Lean result for the negative integers, which this node extends to 0
+  - [Mathlib, Hurwitz zeta values (hurwitzZeta_neg_nat)](https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/LSeries/HurwitzZetaValues.html) — the Lean result for the negative integers, which this node extends to 0 (the TODO in hurwitzZeta_neg_nat)
 
 ## Node index
 
@@ -994,4 +993,4 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 55 | [`SophieGermainTheorem`](docs/nodes/SophieGermainTheorem.md) | the first case of Fermat's Last Theorem for Sophie Germain primes | proved in Lean |
 | 56 | [`GermainAuxiliary`](docs/nodes/GermainAuxiliary.md) | Sophie Germain's theorem with any suitable wheel | proved in Lean |
 | 57 | [`Schatunowsky`](docs/nodes/Schatunowsky.md) | 30 is the largest number whose survivors are all prime | proved in Lean |
-| 58 | [`HurwitzZetaZero`](docs/nodes/HurwitzZetaZero.md) | the Hurwitz zeta function at 0 | cited from a published paper; not proved in Lean |
+| 58 | [`HurwitzZetaZero`](docs/nodes/HurwitzZetaZero.md) | the Hurwitz zeta function at 0 | proved in Lean |

@@ -15,8 +15,9 @@ import Mathlib.NumberTheory.LSeries.HurwitzZetaOdd            -- `LSeriesHasSum_
 # Proofs for HurwitzZetaZero
 
 Imports claims only, never other nodes' proofs. The value of the Hurwitz zeta
-function at 0 rests on `sin_zeta_at_one`, which rests on the node's cited claim
-`sin_zeta_at_one_eq_series`, taken as a named hypothesis.
+function at 0 rests on `sin_zeta_at_one`, which rests on `sawtooth_partial_sums`
+and `sin_zeta_at_one_eq_series`; all are proved here, from Mathlib alone, and
+chained at the end (`hurwitz_zeta_at_zero_holds`).
 
 Idea. Mathlib's Hurwitz zeta function is its even part plus its odd part. At 0
 the even part is `-1/2` at the point 0 of the circle and 0 elsewhere
