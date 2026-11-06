@@ -46,6 +46,7 @@ import RNSSolutions.BrunTwinBound
 import RNSSolutions.MertensSecond
 import RNSSolutions.BrunAnalytic
 import RNSSolutions.BrunTheorem
+import RNSSolutions.BrunTwinSum
 
 /-!
 # Assembling the network
@@ -414,3 +415,11 @@ theorem RNS.BrunTheorem.brun_theorem_of_mertens_second
   RNS.BrunTheorem.brun_theorem_step (RNS.BrunAnalytic.twin_prime_count_bound_of_mertens_second h)
 
 #print axioms RNS.BrunTheorem.brun_theorem_of_mertens_second
+
+/-- `BrunTheorem` → `BrunTwinSum`: the cited claim, now proved inside the network from the one outside
+claim `MertensSecond.mertens_second_remainder` (from PNT+). -/
+theorem RNS.BrunTwinSum.brun_sum_finite_of_mertens_second
+    (h : RNS.MertensSecond.mertens_second_remainder) : RNS.BrunTwinSum.brun_sum_finite :=
+  RNS.BrunTwinSum.brun_sum_finite_step (RNS.BrunTheorem.brun_theorem_of_mertens_second h)
+
+#print axioms RNS.BrunTwinSum.brun_sum_finite_of_mertens_second
