@@ -36,6 +36,10 @@ def twin_multiples_count : Prop :=
 
 **Proof:** `RNS.BrunTwinCount.twin_multiples_count_holds` in [`RNSSolutions/BrunTwinCount.lean`](../../RNSSolutions/BrunTwinCount.lean)
 
+## Used by
+
+- [`BrunTwinBound`](BrunTwinBound.md)
+
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/BrunTwinCount/Conclusions.lean)

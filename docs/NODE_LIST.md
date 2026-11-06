@@ -671,6 +671,21 @@ by its factorial. Proved by adding one wheel at a time.
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
   Actions build, 2026-11-06).
 
+### 67. `BrunTwinBound` — Brun's twin bound with every error term (Brun stage 4)
+Joins stages 1 to 3. The twin survivors of a set of prime wheels up to N
+are at most N times the product of one minus each wheel's twin share, plus
+N times the truncation error from stage 3, plus the total number of twin
+roots over the sets of wheels used. A wheel's twin share is one half for the
+wheel at 2 and two over the wheel otherwise. Also: a twin prime pair whose
+smaller member is at least L survives every wheel below L, so the twin prime
+pairs up to N are at most L plus the twin survivors of the wheels below L.
+- Prior work: Brun (1919).
+- Lean: `twin_sifted_bound` (step), `twin_count_le_sifted`
+- Rests on: `BrunPureSieve.twin_bonferroni_upper`, `BrunTwinCount.twin_multiples_count`,
+  `BrunTruncation.truncation_error` (arrows in `RNSSolutions/Assemble.lean`)
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-06).
+
 ### Where to look first
 
 Places already found to hold results, statements or tools these items need.

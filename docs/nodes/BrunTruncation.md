@@ -54,6 +54,10 @@ def esymm_power_bound : Prop :=
 
 **Proof:** `RNS.BrunTruncation.esymm_power_bound_holds` in [`RNSSolutions/BrunTruncation.lean`](../../RNSSolutions/BrunTruncation.lean)
 
+## Used by
+
+- [`BrunTwinBound`](BrunTwinBound.md)
+
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/BrunTruncation/Conclusions.lean)

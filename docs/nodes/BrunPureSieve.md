@@ -124,6 +124,10 @@ def twin_bonferroni_upper : Prop :=
 
 **Proof:** `RNS.BrunPureSieve.twin_bonferroni_upper_holds` in [`RNSSolutions/BrunPureSieve.lean`](../../RNSSolutions/BrunPureSieve.lean)
 
+## Used by
+
+- [`BrunTwinBound`](BrunTwinBound.md)
+
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/BrunPureSieve/Conclusions.lean)

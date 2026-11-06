@@ -15,6 +15,9 @@ import Mathlib.Tactic.NormNum
 /-!
 # Proofs for BrunTwinBound
 
+Built clean by `lake build RNSSolutions` on 2026-11-06; `#print axioms` shows only
+the standard three.
+
 Imports claims only, never other nodes' proofs. The bound is a step from
 `BrunPureSieve.twin_bonferroni_upper`, `BrunTwinCount.twin_multiples_count`
 and `BrunTruncation.truncation_error`, taken as named hypotheses; the arrows

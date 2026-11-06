@@ -27,10 +27,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BrunTwinBound.lean
     declaration: RNS.BrunTwinBound.twin_sifted_bound_step
-    note: Step drafted, not yet built; the arrow is joined in RNSSolutions/Assemble.lean.
+    note: Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-06); the step
+      takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean as
+      `twin_sifted_bound_holds`. Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: twin_count_le_sifted
   declaration: RNS.BrunTwinBound.twin_count_le_sifted
@@ -39,10 +41,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BrunTwinBound.lean
     declaration: RNS.BrunTwinBound.twin_count_le_sifted_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-06). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 sources:
 - title: Brun sieve (Wikipedia)
