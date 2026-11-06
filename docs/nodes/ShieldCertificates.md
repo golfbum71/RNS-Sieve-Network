@@ -256,6 +256,10 @@ def backward_ap_prime_run_forces_divisibility : Prop :=
 
 **Proof:** `RNS.ShieldCertificates.backward_ap_prime_run_forces_divisibility_holds` in [`RNSSolutions/ShieldCertificates.lean`](../../RNSSolutions/ShieldCertificates.lean)
 
+## Used by
+
+- [`FortunateCeiling`](FortunateCeiling.md)
+
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/ShieldCertificates/Conclusions.lean)

@@ -1,0 +1,216 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: FortunateCeiling.v1
+  family: FortunateCeiling
+  version: v1
+  order: 59
+  kind: paper
+  status: active
+  improves: ShieldCertificates gives the window (from a cutoff up to its square, prime means no wheel
+    divides); this node shows that every number which, added to the cycle, lands on a prime is
+    already wheel-free, so the window applies to it. That settles the RNS half of two open statements
+    in DeepMind's formal-conjectures (Fortune's conjecture and OEIS A038771).
+  title: what lands on a prime just above the cycle (Fortune's conjecture, OEIS A038771)
+  description: Add a number above 1 to the combined cycle of the wheels. If the sum is prime, no wheel
+    divides the number added, so it is prime below the next prime's square, a composite one is at
+    least that square, and below the next prime's cube a composite one has exactly two prime factors.
+    Applied to the Fortunate numbers this proves each is at least the next prime and prime below the
+    ceiling, so Fortune's conjecture follows from the ceiling bound; applied to OEIS A038771 it proves
+    the ceiling floor for every wheel count and Kamenetsky's two-factor conjecture below the cube.
+conclusions:
+- id: shift_avoids_wheels
+  declaration: RNS.FortunateCeiling.shift_avoids_wheels
+  summary: If a number above 1, added to the cycle of the wheels, gives a prime, no wheel divides it.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FortunateCeiling.lean
+    declaration: RNS.FortunateCeiling.shift_avoids_wheels_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: shift_prime_below_ceiling
+  declaration: RNS.FortunateCeiling.shift_prime_below_ceiling
+  summary: Such a number below the next prime's square is prime.
+  imports:
+  - ShieldCertificates.v1.window_prime_iff
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FortunateCeiling.lean
+    declaration: RNS.FortunateCeiling.shift_prime_below_ceiling_step
+    assembled: RNSSolutions/Assemble.lean (RNS.FortunateCeiling.shift_prime_below_ceiling_holds)
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: composite_shift_at_least_ceiling
+  declaration: RNS.FortunateCeiling.composite_shift_at_least_ceiling
+  summary: Such a number that is composite is at least the next prime's square.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FortunateCeiling.lean
+    declaration: RNS.FortunateCeiling.composite_shift_at_least_ceiling_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: composite_shift_semiprime_below_cube
+  declaration: RNS.FortunateCeiling.composite_shift_semiprime_below_cube
+  summary: Such a composite number below the next prime's cube is a product of exactly two primes.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FortunateCeiling.lean
+    declaration: RNS.FortunateCeiling.composite_shift_semiprime_below_cube_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: first_primes_eq_cycle
+  declaration: RNS.FortunateCeiling.first_primes_eq_cycle
+  summary: The product of the first wheels is the cycle of the wheels below the next prime.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FortunateCeiling.lean
+    declaration: RNS.FortunateCeiling.first_primes_eq_cycle_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: primorial_eq_cycle
+  declaration: RNS.FortunateCeiling.primorial_eq_cycle
+  summary: Mathlib's primorial up to a prime is the cycle of the wheels below the next prime.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FortunateCeiling.lean
+    declaration: RNS.FortunateCeiling.primorial_eq_cycle_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: fortunate_spec
+  declaration: RNS.FortunateCeiling.fortunate_spec
+  summary: The Fortunate number is above 1 and lands on a prime.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FortunateCeiling.lean
+    declaration: RNS.FortunateCeiling.fortunate_spec_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: fortunate_at_least_next_prime
+  declaration: RNS.FortunateCeiling.fortunate_at_least_next_prime
+  summary: Every Fortunate number is at least the next prime.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FortunateCeiling.lean
+    declaration: RNS.FortunateCeiling.fortunate_at_least_next_prime_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: fortunate_prime_below_ceiling
+  declaration: RNS.FortunateCeiling.fortunate_prime_below_ceiling
+  summary: A Fortunate number below the next prime's square is prime.
+  imports:
+  - ShieldCertificates.v1.window_prime_iff
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FortunateCeiling.lean
+    declaration: RNS.FortunateCeiling.fortunate_prime_below_ceiling_step
+    assembled: RNSSolutions/Assemble.lean (RNS.FortunateCeiling.fortunate_prime_below_ceiling_holds)
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: fortune_of_ceiling
+  declaration: RNS.FortunateCeiling.fortune_of_ceiling
+  summary: Fortune's conjecture holds if every Fortunate number lies below the next prime's square.
+  imports:
+  - ShieldCertificates.v1.window_prime_iff
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FortunateCeiling.lean
+    declaration: RNS.FortunateCeiling.fortune_of_ceiling_step
+    assembled: RNSSolutions/Assemble.lean (RNS.FortunateCeiling.fortune_of_ceiling_holds)
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: smallest_composite_shift_spec
+  declaration: RNS.FortunateCeiling.smallest_composite_shift_spec
+  summary: OEIS A038771 is well defined (Dirichlet's theorem gives a composite that lands on a prime).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FortunateCeiling.lean
+    declaration: RNS.FortunateCeiling.smallest_composite_shift_spec_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: smallest_composite_shift_floor
+  declaration: RNS.FortunateCeiling.smallest_composite_shift_floor
+  summary: OEIS A038771 is never below the next prime's square, for every wheel count.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FortunateCeiling.lean
+    declaration: RNS.FortunateCeiling.smallest_composite_shift_floor_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: smallest_composite_shift_semiprime_below_cube
+  declaration: RNS.FortunateCeiling.smallest_composite_shift_semiprime_below_cube
+  summary: An OEIS A038771 value below the next prime's cube is a product of exactly two primes.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FortunateCeiling.lean
+    declaration: RNS.FortunateCeiling.smallest_composite_shift_semiprime_below_cube_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: semiprime_conjecture_of_cube
+  declaration: RNS.FortunateCeiling.semiprime_conjecture_of_cube
+  summary: Kamenetsky's conjecture (every A038771 value has two prime factors) holds if every value
+    lies below the next prime's cube.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FortunateCeiling.lean
+    declaration: RNS.FortunateCeiling.semiprime_conjecture_of_cube_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+sources:
+- title: Fortune's conjecture, formal-conjectures (Google DeepMind), Wikipedia/FortuneConjecture.lean
+  url: https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/Wikipedia/FortuneConjecture.lean
+  relationship: the open statement this node reduces to the ceiling bound; same definition and indexing
+- title: OEIS A005235, Fortunate numbers
+  url: https://oeis.org/A005235
+  relationship: the sequence and the remark that a Fortunate number has no prime factor among the wheels
+- title: OEIS A038771, formal-conjectures (Google DeepMind), OEIS/38771.lean
+  url: https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/OEIS/38771.lean
+  relationship: the two open conjectures (Greathouse and Ordowski 2015, Kamenetsky 2019) addressed
+    here; the Dirichlet existence proof is adapted from its a_n_exists
+- title: OEIS A038771
+  url: https://oeis.org/A038771
+  relationship: the sequence, its values and the two conjectures
+related:
+- node: Schatunowsky
+  note: "the same ceiling argument, used there to force the wheels of a number whose survivors are all prime"
+- node: SquareRootShield
+  note: "trial division by the small wheels; the window claim used here is built on it"

@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 47 of 55 nodes are built, holding 140 claims: 133 proved in Lean and 7 cited from a published paper. They are joined by 59 arrows, each a Lean-checked step. Of the other 8 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 2 are new work, stated or scoped but not yet proved; 5 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 48 of 56 nodes are built, holding 154 claims: 133 proved in Lean, 14 with a proof drafted but not yet built and 7 cited from a published paper. They are joined by 62 arrows, each a Lean-checked step. Of the other 8 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 2 are new work, stated or scoped but not yet proved; 5 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -300,6 +300,22 @@ graph LR
     c139["thirty_survivors_all_prime"]
     c140["schatunowsky_bound"]
   end
+  subgraph s56["<b>59. FortunateCeiling — what lands on a prime just above the cycle (Fortune's conjecture, OEIS A038771)</b>"]
+    c141["shift_avoids_wheels"]
+    c142["shift_prime_below_ceiling"]
+    c143["composite_shift_at_least_ceiling"]
+    c144["composite_shift_semiprime_below_cube"]
+    c145["first_primes_eq_cycle"]
+    c146["primorial_eq_cycle"]
+    c147["fortunate_spec"]
+    c148["fortunate_at_least_next_prime"]
+    c149["fortunate_prime_below_ceiling"]
+    c150["fortune_of_ceiling"]
+    c151["smallest_composite_shift_spec"]
+    c152["smallest_composite_shift_floor"]
+    c153["smallest_composite_shift_semiprime_below_cube"]
+    c154["semiprime_conjecture_of_cube"]
+  end
   o1{{"<i>open conjecture</i><br/>hardy_littlewood_conjecture"}}
   o2{{"<i>open conjecture</i><br/>HL_conjecture_A"}}
   o3{{"<i>open conjecture</i><br/>HL_conjecture_B"}}
@@ -385,6 +401,9 @@ graph LR
   c132 ==> c137
   c135 ==> c137
   c117 ==> c140
+  c29 ==> c142
+  c29 ==> c149
+  c29 ==> c150
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
   classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
@@ -398,6 +417,7 @@ graph LR
   class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c46,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78,c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c92,c93,c94,c95,c96,c97,c98,c99,c100,c101,c102,c103,c104,c105,c106,c107,c108,c109,c110,c111,c112,c113,c114,c115,c116,c117,c119,c120,c124,c125,c128,c129,c130,c131,c132,c133,c134,c135,c136,c137,c138,c139,c140 verified;
   class c44,c45,c47,c48,c49,c50,c51,c52 conditional_built;
   class c63,c118,c121,c122,c123,c126,c127 cited_built;
+  class c141,c142,c143,c144,c145,c146,c147,c148,c149,c150,c151,c152,c153,c154 draft;
   class p5 conditional;
   class p4,p6 new;
   class p1,p2,p3,p7,p8 external;
@@ -550,6 +570,20 @@ graph LR
   click c138 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Schatunowsky.md#ceiling_forces_wheels" _blank
   click c139 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Schatunowsky.md#thirty_survivors_all_prime" _blank
   click c140 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Schatunowsky.md#schatunowsky_bound" _blank
+  click c141 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#shift_avoids_wheels" _blank
+  click c142 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#shift_prime_below_ceiling" _blank
+  click c143 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#composite_shift_at_least_ceiling" _blank
+  click c144 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#composite_shift_semiprime_below_cube" _blank
+  click c145 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#first_primes_eq_cycle" _blank
+  click c146 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#primorial_eq_cycle" _blank
+  click c147 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#fortunate_spec" _blank
+  click c148 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#fortunate_at_least_next_prime" _blank
+  click c149 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#fortunate_prime_below_ceiling" _blank
+  click c150 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#fortune_of_ceiling" _blank
+  click c151 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#smallest_composite_shift_spec" _blank
+  click c152 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#smallest_composite_shift_floor" _blank
+  click c153 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#smallest_composite_shift_semiprime_below_cube" _blank
+  click c154 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#semiprime_conjecture_of_cube" _blank
 ```
 
 ## What each result rests on
@@ -585,8 +619,6 @@ The results nothing else builds on, each with everything beneath it.
 - [`ShieldCertificates.ap_hits_wheel`](docs/nodes/ShieldCertificates.md#ap_hits_wheel) — proved in Lean
 - [`ShieldCertificates.ap_prime_run_length_lt_of_lt_start`](docs/nodes/ShieldCertificates.md#ap_prime_run_length_lt_of_lt_start) — proved in Lean
 - [`ShieldCertificates.ap_prime_run_forces_divisibility`](docs/nodes/ShieldCertificates.md#ap_prime_run_forces_divisibility) — proved in Lean
-- [`ShieldCertificates.window_prime_iff`](docs/nodes/ShieldCertificates.md#window_prime_iff) — proved in Lean
-  - [`SquareRootShield.square_root_shield`](docs/nodes/SquareRootShield.md#square_root_shield) — proved in Lean
 - [`ShieldCertificates.window_twin_iff`](docs/nodes/ShieldCertificates.md#window_twin_iff) — proved in Lean
   - [`SquareRootShield.square_root_shield`](docs/nodes/SquareRootShield.md#square_root_shield) — proved in Lean
 - [`ShieldCertificates.backward_ap_hits_wheel`](docs/nodes/ShieldCertificates.md#backward_ap_hits_wheel) — proved in Lean
@@ -742,6 +774,26 @@ The results nothing else builds on, each with everything beneath it.
 - [`HurwitzZetaZero.sin_zeta_at_one`](docs/nodes/HurwitzZetaZero.md#sin_zeta_at_one) — proved in Lean
 - [`HurwitzZetaZero.sawtooth_partial_sums`](docs/nodes/HurwitzZetaZero.md#sawtooth_partial_sums) — proved in Lean
 - [`HurwitzZetaZero.sin_zeta_at_one_eq_series`](docs/nodes/HurwitzZetaZero.md#sin_zeta_at_one_eq_series) — proved in Lean
+- [`FortunateCeiling.shift_avoids_wheels`](docs/nodes/FortunateCeiling.md#shift_avoids_wheels) — proof drafted, not yet built
+- [`FortunateCeiling.shift_prime_below_ceiling`](docs/nodes/FortunateCeiling.md#shift_prime_below_ceiling) — proof drafted, not yet built
+  - [`ShieldCertificates.window_prime_iff`](docs/nodes/ShieldCertificates.md#window_prime_iff) — proved in Lean
+    - [`SquareRootShield.square_root_shield`](docs/nodes/SquareRootShield.md#square_root_shield) — proved in Lean
+- [`FortunateCeiling.composite_shift_at_least_ceiling`](docs/nodes/FortunateCeiling.md#composite_shift_at_least_ceiling) — proof drafted, not yet built
+- [`FortunateCeiling.composite_shift_semiprime_below_cube`](docs/nodes/FortunateCeiling.md#composite_shift_semiprime_below_cube) — proof drafted, not yet built
+- [`FortunateCeiling.first_primes_eq_cycle`](docs/nodes/FortunateCeiling.md#first_primes_eq_cycle) — proof drafted, not yet built
+- [`FortunateCeiling.primorial_eq_cycle`](docs/nodes/FortunateCeiling.md#primorial_eq_cycle) — proof drafted, not yet built
+- [`FortunateCeiling.fortunate_spec`](docs/nodes/FortunateCeiling.md#fortunate_spec) — proof drafted, not yet built
+- [`FortunateCeiling.fortunate_at_least_next_prime`](docs/nodes/FortunateCeiling.md#fortunate_at_least_next_prime) — proof drafted, not yet built
+- [`FortunateCeiling.fortunate_prime_below_ceiling`](docs/nodes/FortunateCeiling.md#fortunate_prime_below_ceiling) — proof drafted, not yet built
+  - [`ShieldCertificates.window_prime_iff`](docs/nodes/ShieldCertificates.md#window_prime_iff) — proved in Lean
+    - [`SquareRootShield.square_root_shield`](docs/nodes/SquareRootShield.md#square_root_shield) — proved in Lean
+- [`FortunateCeiling.fortune_of_ceiling`](docs/nodes/FortunateCeiling.md#fortune_of_ceiling) — proof drafted, not yet built
+  - [`ShieldCertificates.window_prime_iff`](docs/nodes/ShieldCertificates.md#window_prime_iff) — proved in Lean
+    - [`SquareRootShield.square_root_shield`](docs/nodes/SquareRootShield.md#square_root_shield) — proved in Lean
+- [`FortunateCeiling.smallest_composite_shift_spec`](docs/nodes/FortunateCeiling.md#smallest_composite_shift_spec) — proof drafted, not yet built
+- [`FortunateCeiling.smallest_composite_shift_floor`](docs/nodes/FortunateCeiling.md#smallest_composite_shift_floor) — proof drafted, not yet built
+- [`FortunateCeiling.smallest_composite_shift_semiprime_below_cube`](docs/nodes/FortunateCeiling.md#smallest_composite_shift_semiprime_below_cube) — proof drafted, not yet built
+- [`FortunateCeiling.semiprime_conjecture_of_cube`](docs/nodes/FortunateCeiling.md#semiprime_conjecture_of_cube) — proof drafted, not yet built
 
 ## What the network takes on trust
 
@@ -934,6 +986,11 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 - [`HurwitzZetaZero`](docs/nodes/HurwitzZetaZero.md)
   - [Hurwitz zeta function (Wikipedia), values at nonpositive integers](https://en.wikipedia.org/wiki/Hurwitz_zeta_function) — states the value at 0 through the Bernoulli polynomial B1
   - [Mathlib, Hurwitz zeta values (hurwitzZeta_neg_nat)](https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/LSeries/HurwitzZetaValues.html) — the Lean result for the negative integers, which this node extends to 0 (the TODO in hurwitzZeta_neg_nat)
+- [`FortunateCeiling`](docs/nodes/FortunateCeiling.md)
+  - [Fortune's conjecture, formal-conjectures (Google DeepMind), Wikipedia/FortuneConjecture.lean](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/Wikipedia/FortuneConjecture.lean) — the open statement this node reduces to the ceiling bound; same definition and indexing
+  - [OEIS A005235, Fortunate numbers](https://oeis.org/A005235) — the sequence and the remark that a Fortunate number has no prime factor among the wheels
+  - [OEIS A038771, formal-conjectures (Google DeepMind), OEIS/38771.lean](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/OEIS/38771.lean) — the two open conjectures (Greathouse and Ordowski 2015, Kamenetsky 2019) addressed here; the Dirichlet existence proof is adapted from its a_n_exists
+  - [OEIS A038771](https://oeis.org/A038771) — the sequence, its values and the two conjectures
 
 ## Node index
 
@@ -994,3 +1051,4 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 56 | [`GermainAuxiliary`](docs/nodes/GermainAuxiliary.md) | Sophie Germain's theorem with any suitable wheel | proved in Lean |
 | 57 | [`Schatunowsky`](docs/nodes/Schatunowsky.md) | 30 is the largest number whose survivors are all prime | proved in Lean |
 | 58 | [`HurwitzZetaZero`](docs/nodes/HurwitzZetaZero.md) | the Hurwitz zeta function at 0 | proved in Lean |
+| 59 | [`FortunateCeiling`](docs/nodes/FortunateCeiling.md) | what lands on a prime just above the cycle (Fortune's conjecture, OEIS A038771) | proof drafted, not yet built |

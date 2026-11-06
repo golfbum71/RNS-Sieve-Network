@@ -38,6 +38,7 @@ import RNSSolutions.BonseCeiling
 import RNSSolutions.Schatunowsky
 import RNSSolutions.GermainCriterion
 import RNSSolutions.HurwitzZetaZero
+import RNSSolutions.FortunateCeiling
 
 /-!
 # Assembling the network
@@ -355,3 +356,21 @@ theorem RNS.GermainCriterion.two_wheel_split_iff_holds :
 #print axioms RNS.GermainCriterion.germain_theorem_holds
 #print axioms RNS.GermainCriterion.two_wheel_remainders_of_split_holds
 #print axioms RNS.GermainCriterion.two_wheel_split_iff_holds
+
+/-- `ShieldCertificates` → `FortunateCeiling`: below the ceiling, a shift that lands on a prime is prime. -/
+theorem RNS.FortunateCeiling.shift_prime_below_ceiling_holds :
+    RNS.FortunateCeiling.shift_prime_below_ceiling :=
+  RNS.FortunateCeiling.shift_prime_below_ceiling_step RNS.ShieldCertificates.window_prime_iff_holds
+
+/-- `ShieldCertificates` → `FortunateCeiling`: a Fortunate number below the ceiling is prime. -/
+theorem RNS.FortunateCeiling.fortunate_prime_below_ceiling_holds :
+    RNS.FortunateCeiling.fortunate_prime_below_ceiling :=
+  RNS.FortunateCeiling.fortunate_prime_below_ceiling_step RNS.ShieldCertificates.window_prime_iff_holds
+
+/-- `ShieldCertificates` → `FortunateCeiling`: Fortune's conjecture from the ceiling. -/
+theorem RNS.FortunateCeiling.fortune_of_ceiling_holds : RNS.FortunateCeiling.fortune_of_ceiling :=
+  RNS.FortunateCeiling.fortune_of_ceiling_step RNS.ShieldCertificates.window_prime_iff_holds
+
+#print axioms RNS.FortunateCeiling.shift_prime_below_ceiling_holds
+#print axioms RNS.FortunateCeiling.fortunate_prime_below_ceiling_holds
+#print axioms RNS.FortunateCeiling.fortune_of_ceiling_holds
