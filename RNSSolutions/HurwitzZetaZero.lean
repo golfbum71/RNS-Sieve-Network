@@ -20,7 +20,8 @@ the even part is `-1/2` at the point 0 of the circle and 0 elsewhere
 `sinZeta` at 1 divided by π. At `x = 1`, the point 0 of the circle, `sinZeta`
 vanishes, being odd; for `0 < x < 1` the cited claim gives `π (1/2 - x)`.
 
-Proof drafted, not yet built.
+Built clean by `lake build RNSSolutions` on 2026-11-05; `#print axioms` shows only
+the standard three.
 -/
 
 namespace RNS.HurwitzZetaZero

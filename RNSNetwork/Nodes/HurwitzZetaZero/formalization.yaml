@@ -24,10 +24,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/HurwitzZetaZero.lean
     declaration: RNS.HurwitzZetaZero.hurwitz_zeta_at_zero_step
-    note: Lean proof drafted, not yet built. From the node's cited claim sin_zeta_at_one, Mathlib's
+    note: Lean proof built clean 2026-11-05 (standard axioms only). From the node's cited claim sin_zeta_at_one, Mathlib's
       hurwitzZetaEven_apply_zero and the functional equation hurwitzZetaOdd_one_sub at s = 1; the case
       x = 1 needs no cited input.
   - id: paper

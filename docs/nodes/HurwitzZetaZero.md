@@ -4,7 +4,7 @@
 
 **Status:** cited from a published paper; not proved in Lean
 
-For a point x with 0 < x ≤ 1, the Hurwitz zeta function at 0 equals one half minus x; equivalently, the sawtooth's Fourier series converges to the sawtooth. Cited, not proved here. Mathlib has the Hurwitz zeta values at the negative integers but stops short of 0, where the matching Fourier series converges only conditionally. It is the one analytic input GermainCriterion needs beyond Mathlib, and could be proved later or contributed to Mathlib without changing anything downstream.
+For a point x with 0 < x ≤ 1, the Hurwitz zeta function at 0 equals one half minus x. Proved here from one cited input, the sawtooth's Fourier series as Mathlib's sinZeta at 1. The even part of the Hurwitz zeta function at 0 is in Mathlib, and Mathlib's functional equation makes the odd part sinZeta at 1 divided by π. Mathlib has the Hurwitz zeta values at the negative integers but stops short of 0, where the matching Fourier series converges only conditionally. It is the one analytic input GermainCriterion needs beyond Mathlib, and could be proved later or contributed to Mathlib without changing anything downstream.
 
 ## Published sources
 
@@ -18,7 +18,7 @@ Published work this node rests on or relates to; each entry says how.
 <a id="hurwitz_zeta_at_zero"></a>
 ### `hurwitz_zeta_at_zero`
 
-For 0 < x ≤ 1, the Hurwitz zeta function at 0 equals 1/2 - x (cited).
+For 0 < x ≤ 1, the Hurwitz zeta function at 0 equals 1/2 - x.
 
 ```lean
 /-- **The Hurwitz zeta function at 0.** For `0 < x ≤ 1`, Mathlib's
@@ -29,7 +29,26 @@ def hurwitz_zeta_at_zero : Prop :=
 
 **Rests on:** no other node (Mathlib and the Vocabulary only)
 
-**Justification:** cited — T. M. Apostol, Introduction to Analytic Number Theory, Springer (1976), Chapter 12, Theorem 12.13 (the Hurwitz zeta function at the nonpositive integers), case n = 0. Not proved in Lean.
+**Proof:** `RNS.HurwitzZetaZero.hurwitz_zeta_at_zero_step` in [`RNSSolutions/HurwitzZetaZero.lean`](../../RNSSolutions/HurwitzZetaZero.lean)
+
+<a id="sin_zeta_at_one"></a>
+### `sin_zeta_at_one`
+
+For 0 < x < 1, Mathlib's sinZeta x at 1 equals π(1/2 - x), the sum of the sawtooth's Fourier series (cited).
+
+```lean
+/-- **The sawtooth's Fourier series at 1** (cited). For `0 < x < 1`, Mathlib's
+`sinZeta x`, the continuation of `∑ sin(2π n x) / nˢ`, equals `π (1/2 - x)` at
+1: the series `∑ sin(2π n x) / n` sums to `π (1/2 - x)`. At 1 the series
+converges only conditionally, which is why Mathlib stops short of it. -/
+def sin_zeta_at_one : Prop :=
+  ∀ x : ℝ, 0 < x → x < 1 →
+    HurwitzZeta.sinZeta (x : UnitAddCircle) 1 = (Real.pi : ℂ) * (1 / 2 - (x : ℂ))
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Justification:** cited — A. Zygmund, Trigonometric Series, Cambridge University Press (1959), Chapter I, the Fourier series of the sawtooth, sum of sin(nt)/n equals (π - t)/2 for 0 < t < 2π (take t = 2πx). Not proved in Lean.
 
 ## Used by
 

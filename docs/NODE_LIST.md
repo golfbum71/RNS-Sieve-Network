@@ -460,7 +460,8 @@ Fourier series, ∑ sin(2πnx)/n = π(1/2 − x) for 0 < x < 1, read as Mathlib'
 - Lean: `hurwitz_zeta_at_zero` (proved from the next claim),
   `sin_zeta_at_one` (cited)
 - Rests on: Mathlib, and the cited claim `sin_zeta_at_one`
-- Status: proof of `hurwitz_zeta_at_zero` drafted, not yet built;
+- Status: `hurwitz_zeta_at_zero` proved from `sin_zeta_at_one`; `#print
+  axioms` shows only the standard three (GitHub Actions build, 2026-11-05).
   `sin_zeta_at_one` cited, not proved.
 - Planned proof of `sin_zeta_at_one`: Abel summation (Mathlib's
   `LSeries_eq_mul_integral`) and analytic continuation carry `sinZeta x` to
