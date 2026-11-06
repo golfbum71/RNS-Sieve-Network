@@ -24,10 +24,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BrunTwinCount.lean
     declaration: RNS.BrunTwinCount.twin_multiples_count_holds
-    note: Proof drafted, not yet built.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
+      2026-11-06). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 sources:
 - title: Brun sieve (Wikipedia)

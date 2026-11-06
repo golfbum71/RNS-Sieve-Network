@@ -639,6 +639,24 @@ so they fit the RNS vocabulary directly. Statements marked "checked" held
 in a numerical test (4,761 cases: wheel sets drawn from the primes up to 19,
 up to 24 equal intervals).
 
+### 65. `BrunTwinCount` — counting the twin multiples of a set of wheels (Brun stage 2)
+Take distinct prime wheels and their product. Among the positions 1 to N,
+count those where the product divides the position times the position two
+further on. In one full cycle of the product there are one such position for
+the wheel at 2 and two for every other wheel, multiplied together. So up to
+N the count is N times that number divided by the product, off by at most
+that number. The proof goes one cycle at a time: full cycles each add the
+same amount and the leftover piece adds between nothing and one cycle's worth.
+Inside a cycle the positions are the residues of the product; the Chinese
+Remainder Theorem splits them into residues of each wheel, and for one wheel
+the residue times the residue two further on is zero only at zero and at
+minus two (the same residue for the wheel at 2).
+- Prior work: Brun (1919); standard in every sieve text.
+- Lean: `twin_multiples_count` (with `twin_rho`)
+- Rests on: Vocabulary only
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub
+  Actions build, 2026-11-06).
+
 ### Where to look first
 
 Places already found to hold results, statements or tools these items need.

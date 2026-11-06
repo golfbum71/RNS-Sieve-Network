@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 55 of 60 nodes are built, holding 178 claims: 173 proved in Lean and 5 cited from a published paper. They are joined by 80 arrows, each a Lean-checked step. Of the other 5 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 1 is new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 56 of 61 nodes are built, holding 179 claims: 174 proved in Lean and 5 cited from a published paper. They are joined by 80 arrows, each a Lean-checked step. Of the other 5 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 1 is new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -345,6 +345,9 @@ graph LR
     c177["twin_share_asymptotic_classical"]
     c178["pattern_share_asymptotic"]
   end
+  subgraph s61["<b>65. BrunTwinCount — counting the twin multiples of a set of wheels exactly (Brun stage 2)</b>"]
+    c179["twin_multiples_count"]
+  end
   o1{{"<i>open conjecture</i><br/>hardy_littlewood_conjecture"}}
   o2{{"<i>open conjecture</i><br/>HL_conjecture_A"}}
   o3{{"<i>open conjecture</i><br/>HL_conjecture_B"}}
@@ -458,7 +461,7 @@ graph LR
   classDef draft fill:#ffffff,stroke:#1a7f37,color:#1f2328,stroke-width:2px,stroke-dasharray: 2 2;
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c46,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78,c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c92,c93,c94,c95,c96,c97,c98,c99,c100,c101,c102,c103,c104,c105,c106,c107,c108,c109,c110,c111,c112,c113,c114,c115,c116,c117,c118,c119,c120,c121,c122,c123,c124,c125,c126,c128,c130,c131,c134,c135,c136,c137,c138,c139,c140,c141,c142,c143,c144,c145,c146,c147,c148,c149,c150,c151,c152,c153,c154,c155,c156,c157,c158,c159,c160,c161,c162,c163,c164,c165,c166,c167,c168,c169,c170,c171,c172,c173,c174,c175,c176,c177,c178 verified;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c46,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78,c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c92,c93,c94,c95,c96,c97,c98,c99,c100,c101,c102,c103,c104,c105,c106,c107,c108,c109,c110,c111,c112,c113,c114,c115,c116,c117,c118,c119,c120,c121,c122,c123,c124,c125,c126,c128,c130,c131,c134,c135,c136,c137,c138,c139,c140,c141,c142,c143,c144,c145,c146,c147,c148,c149,c150,c151,c152,c153,c154,c155,c156,c157,c158,c159,c160,c161,c162,c163,c164,c165,c166,c167,c168,c169,c170,c171,c172,c173,c174,c175,c176,c177,c178,c179 verified;
   class c44,c45,c47,c48,c49,c50,c51,c52 conditional_built;
   class c63,c127,c129,c132,c133 cited_built;
   class p2 conditional;
@@ -648,6 +651,7 @@ graph LR
   click c176 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#odd_twin_product_eq_classical" _blank
   click c177 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic_classical" _blank
   click c178 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#pattern_share_asymptotic" _blank
+  click c179 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTwinCount.md#twin_multiples_count" _blank
 ```
 
 ## What each result rests on
@@ -907,6 +911,7 @@ The results nothing else builds on, each with everything beneath it.
   - [`MertensThird.mertens_third`](docs/nodes/MertensThird.md#mertens_third) — proved in Lean
     - [`MertensThird.mertens_third_remainder`](docs/nodes/MertensThird.md#mertens_third_remainder) — proved in Lean
     - [`MertensThird.product_identity`](docs/nodes/MertensThird.md#product_identity) — proved in Lean
+- [`BrunTwinCount.twin_multiples_count`](docs/nodes/BrunTwinCount.md#twin_multiples_count) — proved in Lean
 
 ## What the network takes on trust
 
@@ -1118,6 +1123,8 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 - [`ShareAsymptotics`](docs/nodes/ShareAsymptotics.md)
   - [Mertens' theorems (Wikipedia)](https://en.wikipedia.org/wiki/Mertens%27_theorems) — Mertens' third theorem, which gives both rates
   - [Twin prime constant (Wikipedia, Twin prime)](https://en.wikipedia.org/wiki/Twin_prime#First_Hardy%E2%80%93Littlewood_conjecture) — the odd twin product (twin-prime constant), about 0.6602
+- [`BrunTwinCount`](docs/nodes/BrunTwinCount.md)
+  - [Brun sieve (Wikipedia)](https://en.wikipedia.org/wiki/Brun_sieve)
 
 ## Node index
 
@@ -1183,3 +1190,4 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 61 | [`TuranCycle`](docs/nodes/TuranCycle.md) | Turán's sieve, exactly, on the positions 1 to N | proved in Lean |
 | 62 | [`BrunPureSieve`](docs/nodes/BrunPureSieve.md) | truncated inclusion-exclusion for the wheels (Brun's pure sieve) | proved in Lean |
 | 64 | [`ShareAsymptotics`](docs/nodes/ShareAsymptotics.md) | how fast the survivor and twin shares of the cycle shrink | proved in Lean |
+| 65 | [`BrunTwinCount`](docs/nodes/BrunTwinCount.md) | counting the twin multiples of a set of wheels exactly (Brun stage 2) | proved in Lean |
