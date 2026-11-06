@@ -150,9 +150,9 @@ private theorem survivors_card_eq (W : Finset Nat) (N : Nat) :
       Finset.card_eq_zero, Finset.filter_eq_empty_iff]
     constructor
     · rintro ⟨⟨h1, h2⟩, h3⟩
-      exact ⟨⟨by omega, h2⟩, by intro q hq; exact h3 hq⟩
+      exact ⟨⟨by omega, h2⟩, by intro q hq; first | exact h3 hq | exact h3 q hq⟩
     · rintro ⟨⟨h1, h2⟩, h3⟩
-      exact ⟨⟨by omega, h2⟩, by intro q hq; exact h3 hq⟩
+      exact ⟨⟨by omega, h2⟩, by intro q hq; first | exact h3 hq | exact h3 q hq⟩
   rw [hS, Finset.natCast_card_filter]
 
 theorem bonferroni_even_holds : bonferroni_even := by
