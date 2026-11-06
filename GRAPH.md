@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 55 of 60 nodes are built, holding 175 claims: 170 proved in Lean and 5 cited from a published paper. They are joined by 80 arrows, each a Lean-checked step. Of the other 5 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 1 is new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 55 of 60 nodes are built, holding 178 claims: 170 proved in Lean, 3 with a proof drafted but not yet built and 5 cited from a published paper. They are joined by 80 arrows, each a Lean-checked step. Of the other 5 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 1 is new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -334,13 +334,16 @@ graph LR
     c168["bonferroni_even"]
     c169["bonferroni_odd"]
     c170["legendre_exact"]
+    c171["bonferroni_even_fn"]
+    c172["bonferroni_odd_fn"]
+    c173["twin_bonferroni_upper"]
   end
   subgraph s60["<b>64. ShareAsymptotics — how fast the survivor and twin shares of the cycle shrink</b>"]
-    c171["survivor_share_asymptotic"]
-    c172["twin_share_asymptotic"]
-    c173["odd_twin_product_eq_classical"]
-    c174["twin_share_asymptotic_classical"]
-    c175["pattern_share_asymptotic"]
+    c174["survivor_share_asymptotic"]
+    c175["twin_share_asymptotic"]
+    c176["odd_twin_product_eq_classical"]
+    c177["twin_share_asymptotic_classical"]
+    c178["pattern_share_asymptotic"]
   end
   o1{{"<i>open conjecture</i><br/>hardy_littlewood_conjecture"}}
   o2{{"<i>open conjecture</i><br/>HL_conjecture_A"}}
@@ -432,19 +435,19 @@ graph LR
   c29 ==> c148
   c29 ==> c155
   c29 ==> c156
-  c10 ==> c171
-  c97 ==> c171
-  c10 ==> c172
-  c84 ==> c172
-  c85 ==> c172
-  c97 ==> c172
   c10 ==> c174
-  c84 ==> c174
-  c85 ==> c174
   c97 ==> c174
-  c14 ==> c175
-  c12 ==> c175
+  c10 ==> c175
+  c84 ==> c175
+  c85 ==> c175
   c97 ==> c175
+  c10 ==> c177
+  c84 ==> c177
+  c85 ==> c177
+  c97 ==> c177
+  c14 ==> c178
+  c12 ==> c178
+  c97 ==> c178
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
   classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
@@ -455,9 +458,10 @@ graph LR
   classDef draft fill:#ffffff,stroke:#1a7f37,color:#1f2328,stroke-width:2px,stroke-dasharray: 2 2;
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c46,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78,c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c92,c93,c94,c95,c96,c97,c98,c99,c100,c101,c102,c103,c104,c105,c106,c107,c108,c109,c110,c111,c112,c113,c114,c115,c116,c117,c118,c119,c120,c121,c122,c123,c124,c125,c126,c128,c130,c131,c134,c135,c136,c137,c138,c139,c140,c141,c142,c143,c144,c145,c146,c147,c148,c149,c150,c151,c152,c153,c154,c155,c156,c157,c158,c159,c160,c161,c162,c163,c164,c165,c166,c167,c168,c169,c170,c171,c172,c173,c174,c175 verified;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c46,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78,c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c92,c93,c94,c95,c96,c97,c98,c99,c100,c101,c102,c103,c104,c105,c106,c107,c108,c109,c110,c111,c112,c113,c114,c115,c116,c117,c118,c119,c120,c121,c122,c123,c124,c125,c126,c128,c130,c131,c134,c135,c136,c137,c138,c139,c140,c141,c142,c143,c144,c145,c146,c147,c148,c149,c150,c151,c152,c153,c154,c155,c156,c157,c158,c159,c160,c161,c162,c163,c164,c165,c166,c167,c168,c169,c170,c174,c175,c176,c177,c178 verified;
   class c44,c45,c47,c48,c49,c50,c51,c52 conditional_built;
   class c63,c127,c129,c132,c133 cited_built;
+  class c171,c172,c173 draft;
   class p2 conditional;
   class p3 new;
   class p1,p4,p5 external;
@@ -637,11 +641,14 @@ graph LR
   click c168 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#bonferroni_even" _blank
   click c169 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#bonferroni_odd" _blank
   click c170 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#legendre_exact" _blank
-  click c171 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#survivor_share_asymptotic" _blank
-  click c172 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic" _blank
-  click c173 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#odd_twin_product_eq_classical" _blank
-  click c174 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic_classical" _blank
-  click c175 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#pattern_share_asymptotic" _blank
+  click c171 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#bonferroni_even_fn" _blank
+  click c172 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#bonferroni_odd_fn" _blank
+  click c173 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#twin_bonferroni_upper" _blank
+  click c174 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#survivor_share_asymptotic" _blank
+  click c175 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic" _blank
+  click c176 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#odd_twin_product_eq_classical" _blank
+  click c177 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic_classical" _blank
+  click c178 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#pattern_share_asymptotic" _blank
 ```
 
 ## What each result rests on
@@ -859,6 +866,9 @@ The results nothing else builds on, each with everything beneath it.
 - [`BrunPureSieve.bonferroni_even`](docs/nodes/BrunPureSieve.md#bonferroni_even) — proved in Lean
 - [`BrunPureSieve.bonferroni_odd`](docs/nodes/BrunPureSieve.md#bonferroni_odd) — proved in Lean
 - [`BrunPureSieve.legendre_exact`](docs/nodes/BrunPureSieve.md#legendre_exact) — proved in Lean
+- [`BrunPureSieve.bonferroni_even_fn`](docs/nodes/BrunPureSieve.md#bonferroni_even_fn) — proof drafted, not yet built
+- [`BrunPureSieve.bonferroni_odd_fn`](docs/nodes/BrunPureSieve.md#bonferroni_odd_fn) — proof drafted, not yet built
+- [`BrunPureSieve.twin_bonferroni_upper`](docs/nodes/BrunPureSieve.md#twin_bonferroni_upper) — proof drafted, not yet built
 - [`ShareAsymptotics.survivor_share_asymptotic`](docs/nodes/ShareAsymptotics.md#survivor_share_asymptotic) — proved in Lean
   - [`SurvivorCount.general_survivor_count`](docs/nodes/SurvivorCount.md#general_survivor_count) — proved in Lean
     - [`CRT.crt_map_bijective`](docs/nodes/CRT.md#crt_map_bijective) — proved in Lean
@@ -1172,5 +1182,5 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 59 | [`FortunateCeiling`](docs/nodes/FortunateCeiling.md) | what lands on a prime just above the cycle (Fortune's conjecture, OEIS A038771) | proved in Lean |
 | 60 | [`AlmostPrimeWindow`](docs/nodes/AlmostPrimeWindow.md) | survivors between the cutoff and its cube are primes or semiprimes | proved in Lean |
 | 61 | [`TuranCycle`](docs/nodes/TuranCycle.md) | Turán's sieve, exactly, on the positions 1 to N | proved in Lean |
-| 62 | [`BrunPureSieve`](docs/nodes/BrunPureSieve.md) | truncated inclusion-exclusion for the wheels (Brun's pure sieve) | proved in Lean |
+| 62 | [`BrunPureSieve`](docs/nodes/BrunPureSieve.md) | truncated inclusion-exclusion for the wheels (Brun's pure sieve) | proof drafted, not yet built |
 | 64 | [`ShareAsymptotics`](docs/nodes/ShareAsymptotics.md) | how fast the survivor and twin shares of the cycle shrink | proved in Lean |

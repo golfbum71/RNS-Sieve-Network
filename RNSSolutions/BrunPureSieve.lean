@@ -174,8 +174,79 @@ theorem legendre_exact_holds : legendre_exact := by
   exact Finset.sum_congr rfl fun m _ =>
     point_exact (hitSet W m) t ((Finset.card_filter_le _ _).trans hWt)
 
+/-! ## Any function of the position -/
+
+/-- The wheels dividing `g m`. -/
+private def hitSetFn (W : Finset Nat) (g : Nat → Nat) (m : Nat) : Finset Nat :=
+  W.filter (fun q => q ∣ g m)
+
+private theorem prod_dvd_iff_fn (W : Finset Nat) (hW : ∀ q ∈ W, q.Prime) (g : Nat → Nat)
+    (D : Finset Nat) (hD : D ⊆ W) (m : Nat) : D.prod id ∣ g m ↔ D ⊆ hitSetFn W g m := by
+  constructor
+  · intro h q hq
+    exact Finset.mem_filter.mpr ⟨hD hq, (Finset.dvd_prod_of_mem id hq).trans h⟩
+  · intro h
+    exact Finset.prod_primes_dvd (g m) (fun a ha => (hW a (hD ha)).prime)
+      (fun a ha => (Finset.mem_filter.mp (h ha)).2)
+
+private theorem truncated_fn_eq_sum (W : Finset Nat) (hW : ∀ q ∈ W, q.Prime) (g : Nat → Nat)
+    (N t : Nat) :
+    truncated_count_fn W g N t = ∑ m ∈ Finset.Ioc 0 N,
+      ∑ D ∈ (hitSetFn W g m).powerset.filter (fun D => D.card ≤ t), (-1 : ℤ) ^ D.card := by
+  unfold truncated_count_fn
+  have h1 : ∀ D ∈ W.powerset.filter (fun D => D.card ≤ t),
+      (-1 : ℤ) ^ D.card * (((Finset.Ioc 0 N).filter (fun m => D.prod id ∣ g m)).card : ℤ) =
+        ∑ m ∈ Finset.Ioc 0 N, if D.prod id ∣ g m then (-1 : ℤ) ^ D.card else 0 := by
+    intro D _
+    rw [Finset.natCast_card_filter, Finset.mul_sum]
+    refine Finset.sum_congr rfl fun m _ => ?_
+    split_ifs <;> simp
+  rw [Finset.sum_congr rfl h1, Finset.sum_comm (s := W.powerset.filter (fun D => D.card ≤ t))]
+  refine Finset.sum_congr rfl fun m _ => ?_
+  rw [← Finset.sum_filter]
+  refine Finset.sum_congr ?_ (fun _ _ => rfl)
+  ext D
+  simp only [Finset.mem_filter, Finset.mem_powerset]
+  constructor
+  · rintro ⟨⟨hDW, hc⟩, hdvd⟩
+    exact ⟨(prod_dvd_iff_fn W hW g D hDW m).mp hdvd, hc⟩
+  · rintro ⟨hDH, hc⟩
+    have hDW : D ⊆ W := fun q hq => (Finset.mem_filter.mp (hDH hq)).1
+    exact ⟨⟨hDW, hc⟩, (prod_dvd_iff_fn W hW g D hDW m).mpr hDH⟩
+
+private theorem sifted_card_eq (W : Finset Nat) (g : Nat → Nat) (N : Nat) :
+    ((sifted W g N).card : ℤ) =
+      ∑ m ∈ Finset.Ioc 0 N, if (hitSetFn W g m).card = 0 then (1 : ℤ) else 0 := by
+  have hS : sifted W g N = (Finset.Ioc 0 N).filter (fun m => (hitSetFn W g m).card = 0) := by
+    unfold sifted
+    refine Finset.filter_congr fun m _ => ?_
+    simp only [hitSetFn, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
+    constructor
+    · intro h q hq
+      first | exact h q hq | exact h hq
+    · intro h q hq
+      first | exact h hq | exact h q hq
+  rw [hS, Finset.natCast_card_filter]
+
+theorem bonferroni_even_fn_holds : bonferroni_even_fn := by
+  intro W g N t hW ht
+  rw [sifted_card_eq, truncated_fn_eq_sum W hW]
+  exact Finset.sum_le_sum fun m _ => point_even (hitSetFn W g m) t ht
+
+theorem bonferroni_odd_fn_holds : bonferroni_odd_fn := by
+  intro W g N t hW ht
+  rw [sifted_card_eq, truncated_fn_eq_sum W hW]
+  exact Finset.sum_le_sum fun m _ => point_odd (hitSetFn W g m) t ht
+
+theorem twin_bonferroni_upper_holds : twin_bonferroni_upper := by
+  intro W N t hW ht
+  exact bonferroni_even_fn_holds W (fun n => n * (n + 2)) N t hW ht
+
 end RNS.BrunPureSieve
 
 #print axioms RNS.BrunPureSieve.bonferroni_even_holds
 #print axioms RNS.BrunPureSieve.bonferroni_odd_holds
 #print axioms RNS.BrunPureSieve.legendre_exact_holds
+#print axioms RNS.BrunPureSieve.bonferroni_even_fn_holds
+#print axioms RNS.BrunPureSieve.bonferroni_odd_fn_holds
+#print axioms RNS.BrunPureSieve.twin_bonferroni_upper_holds

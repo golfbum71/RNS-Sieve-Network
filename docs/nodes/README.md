@@ -62,7 +62,7 @@
 | 59 | [`FortunateCeiling`](FortunateCeiling.md) | what lands on a prime just above the cycle (Fortune's conjecture, OEIS A038771) | proved in Lean |
 | 60 | [`AlmostPrimeWindow`](AlmostPrimeWindow.md) | survivors between the cutoff and its cube are primes or semiprimes | proved in Lean |
 | 61 | [`TuranCycle`](TuranCycle.md) | Turán's sieve, exactly, on the positions 1 to N | proved in Lean |
-| 62 | [`BrunPureSieve`](BrunPureSieve.md) | truncated inclusion-exclusion for the wheels (Brun's pure sieve) | proved in Lean |
+| 62 | [`BrunPureSieve`](BrunPureSieve.md) | truncated inclusion-exclusion for the wheels (Brun's pure sieve) | proof drafted, not yet built |
 | 64 | [`ShareAsymptotics`](ShareAsymptotics.md) | how fast the survivor and twin shares of the cycle shrink | proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

@@ -56,6 +56,45 @@ conclusions:
     note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only,
       2026-11-06). Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
+- id: bonferroni_even_fn
+  declaration: RNS.BrunPureSieve.bonferroni_even_fn
+  summary: For any function of the position, inclusion-exclusion stopped at an even number of wheels is at
+    least the number of positions where no wheel divides the function's value.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BrunPureSieve.lean
+    declaration: RNS.BrunPureSieve.bonferroni_even_fn_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: bonferroni_odd_fn
+  declaration: RNS.BrunPureSieve.bonferroni_odd_fn
+  summary: For any function of the position, inclusion-exclusion stopped at an odd number of wheels is at
+    most that number.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BrunPureSieve.lean
+    declaration: RNS.BrunPureSieve.bonferroni_odd_fn_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
+- id: twin_bonferroni_upper
+  declaration: RNS.BrunPureSieve.twin_bonferroni_upper
+  summary: Brun's upper bound for the twin pattern - the positions n where no wheel divides n(n+2) are at
+    most inclusion-exclusion stopped at an even number of wheels.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BrunPureSieve.lean
+    declaration: RNS.BrunPureSieve.twin_bonferroni_upper_holds
+    note: Proof drafted, not yet built.
+  designated: lean-proof
 sources:
 - title: Brun sieve (Wikipedia)
   url: https://en.wikipedia.org/wiki/Brun_sieve

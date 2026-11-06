@@ -48,4 +48,39 @@ def legendre_exact : Prop :=
   ∀ (W : Finset Nat) (N t : Nat), (∀ q ∈ W, q.Prime) → W.card ≤ t →
     ((survivors_upto W N).card : ℤ) = truncated_count W N t
 
+/-! ## The same for any function of the position
+
+Brun's sieve for twin primes sifts the products `n (n + 2)`, not the positions
+themselves. The truncation inequalities hold for any function of the position:
+count the positions `m` from 1 to `N` at which no wheel divides `g m`. -/
+
+/-- The positions from 1 to `N` at which no wheel in `W` divides `g m`. -/
+def sifted (W : Finset Nat) (g : Nat → Nat) (N : Nat) : Finset Nat :=
+  (Finset.Ioc 0 N).filter (fun m => ∀ q ∈ W, ¬ q ∣ g m)
+
+/-- Inclusion–exclusion for `g`, stopped after the sets of at most `t` wheels:
+over the sets `D` of at most `t` wheels, plus or minus the number of positions
+from 1 to `N` at which the product of `D` divides `g m`. -/
+def truncated_count_fn (W : Finset Nat) (g : Nat → Nat) (N t : Nat) : ℤ :=
+  ∑ D ∈ W.powerset.filter (fun D => D.card ≤ t),
+    (-1 : ℤ) ^ D.card * (((Finset.Ioc 0 N).filter (fun m => D.prod id ∣ g m)).card : ℤ)
+
+/-- **Stopping at an even number of wheels overcounts, for any `g`.** -/
+def bonferroni_even_fn : Prop :=
+  ∀ (W : Finset Nat) (g : Nat → Nat) (N t : Nat), (∀ q ∈ W, q.Prime) → Even t →
+    ((sifted W g N).card : ℤ) ≤ truncated_count_fn W g N t
+
+/-- **Stopping at an odd number of wheels undercounts, for any `g`.** -/
+def bonferroni_odd_fn : Prop :=
+  ∀ (W : Finset Nat) (g : Nat → Nat) (N t : Nat), (∀ q ∈ W, q.Prime) → Odd t →
+    truncated_count_fn W g N t ≤ ((sifted W g N).card : ℤ)
+
+/-- **Brun's upper bound for the twin pattern.** The positions `n` from 1 to `N`
+at which no wheel divides `n (n + 2)` are at most inclusion–exclusion stopped
+at an even number of wheels. -/
+def twin_bonferroni_upper : Prop :=
+  ∀ (W : Finset Nat) (N t : Nat), (∀ q ∈ W, q.Prime) → Even t →
+    ((sifted W (fun n => n * (n + 2)) N).card : ℤ) ≤
+      truncated_count_fn W (fun n => n * (n + 2)) N t
+
 end RNS.BrunPureSieve
