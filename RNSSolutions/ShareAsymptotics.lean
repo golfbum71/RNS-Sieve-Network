@@ -20,6 +20,9 @@ import Mathlib.Tactic.NormNum
 /-!
 # Proofs for ShareAsymptotics
 
+Built clean by `lake build RNSSolutions` on 2026-11-06; `#print axioms` shows only
+the standard three.
+
 Imports claims only. Both claims are steps: from `SurvivorCount`'s
 `general_survivor_count`, `TwinShare`'s two twin-share claims, and
 `MertensThird.mertens_third`, taken as named hypotheses.

@@ -27,10 +27,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/ShareAsymptotics.lean
     declaration: RNS.ShareAsymptotics.survivor_share_asymptotic_step
-    note: Proof drafted, not yet built.
+    note: Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-06); steps
+      take their imports as named hypotheses. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 - id: twin_share_asymptotic
   declaration: RNS.ShareAsymptotics.twin_share_asymptotic
@@ -44,10 +46,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/ShareAsymptotics.lean
     declaration: RNS.ShareAsymptotics.twin_share_asymptotic_step
-    note: Proof drafted, not yet built.
+    note: Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-06); steps
+      take their imports as named hypotheses. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 - id: odd_twin_product_eq_classical
   declaration: RNS.ShareAsymptotics.odd_twin_product_eq_classical
@@ -56,10 +60,12 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/ShareAsymptotics.lean
     declaration: RNS.ShareAsymptotics.odd_twin_product_eq_classical_holds
-    note: Proof drafted, not yet built.
+    note: Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-06); steps
+      take their imports as named hypotheses. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 - id: twin_share_asymptotic_classical
   declaration: RNS.ShareAsymptotics.twin_share_asymptotic_classical
@@ -73,10 +79,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/ShareAsymptotics.lean
     declaration: RNS.ShareAsymptotics.twin_share_asymptotic_classical_step
-    note: Proof drafted, not yet built.
+    note: Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-06); steps
+      take their imports as named hypotheses. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 sources:
 - title: "Mertens' theorems (Wikipedia)"

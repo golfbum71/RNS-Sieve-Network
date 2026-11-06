@@ -590,6 +590,21 @@ Numerically 0.91 at a thousand, 1.05 at ten million.
   `prelim_decay_3` in `Wiener.lean`) that nothing in that chain uses; a
   `#print axioms` run inside PNT+ would confirm.
 
+### 64. `ShareAsymptotics` — how fast the survivor and twin shares shrink
+With the wheels up to n, the share of the cycle that survives, times log n,
+tends to e^(-γ) (about 0.5615); so `ShareBounds`' bound (at most 1/log) is
+sharp up to that factor. The twin share times log² n tends to the twin-prime
+constant times e^(-2γ) (about 0.4162). Twice the odd twin product (over the
+odd primes of 1 − 1/(p−1)²) is proved equal to `TwinConstant`'s classical
+twin-prime constant, which `TwinConstant` proves equal to the Hardy–Littlewood
+constant of the twin pattern. Numerically 0.56144 and 0.41618 at n a million.
+- Lean: `survivor_share_asymptotic`, `twin_share_asymptotic`,
+  `odd_twin_product_eq_classical`, `twin_share_asymptotic_classical`
+- Rests on: `SurvivorCount`, `TwinShare`, `MertensThird` (hence on the PNT+
+  remainder bound)
+- Status: Clean. Steps proved; `#print axioms` shows only the standard three
+  (GitHub Actions build, 2026-11-06).
+
 Not given new nodes, because the network already has them: Legendre's
 identities for the survivor count (periodicity and the one-wheel recurrence
 are `UniformSubdivision.frozen_wheels_repeat` and `one_wheel_removed`; the
