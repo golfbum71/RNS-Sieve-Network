@@ -798,7 +798,9 @@ def main():
     for n in nodes.values():
         write_node_page(n, nodes, edges)
     write_index(nodes)
-    print(f"wrote GRAPH.md and {len(nodes)} node pages")
+    import wheel  # scripts/wheel.py: the interactive wheel at docs/index.html
+    wheel.write_wheel(nodes, edges)
+    print(f"wrote GRAPH.md, {len(nodes)} node pages and docs/index.html")
 
 
 if __name__ == "__main__":

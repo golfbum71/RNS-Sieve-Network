@@ -9,6 +9,11 @@ restructures it so that nobody has to read them. Each result is a short,
 plainly stated claim; the proofs sit in a separate folder, and every
 connection between results is checked by Lean.
 
+**See it as a wheel: [golfbum71.github.io/RNS-Sieve-Network](https://golfbum71.github.io/RNS-Sieve-Network/)**
+— the whole network in one interactive picture, with the shared vocabulary at
+the centre and each family as a wedge. Click any node for its summary and
+links to its Lean. (Generated into `docs/index.html` by `scripts/graph.py`.)
+
 **Start here: [`GRAPH.md`](GRAPH.md)** — the network as a diagram, what each
 result rests on, and what (if anything) is taken on trust. Each node also has
 its own page under [`docs/nodes/`](docs/nodes/README.md).
@@ -26,7 +31,7 @@ RNSNetwork/Nodes/<Node>/
     formalization.yaml            what each claim rests on, and its evidence
 RNSSolutions/<Node>.lean          the proofs
 RNSSolutions/Assemble.lean        joins the proofs along the arrows
-scripts/graph.py                  regenerates GRAPH.md and docs/nodes/
+scripts/graph.py                  regenerates GRAPH.md, docs/nodes/ and docs/index.html (the wheel)
 docs/NODE_LIST.md                 the plain-language list of all planned nodes
 docs/NODE_STANDARDS.md            what every node must show: arrows, a plain note, sources
 ```
