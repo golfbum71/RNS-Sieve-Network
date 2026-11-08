@@ -23,10 +23,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/SmoothNumbers.lean
     declaration: RNS.SmoothNumbers.rankin_upper_holds
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: smooth_count_lower
   declaration: RNS.SmoothNumbers.smooth_count_lower
@@ -35,10 +35,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/SmoothNumbers.lean
     declaration: RNS.SmoothNumbers.smooth_count_lower_holds
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: smooth_buchstab
   declaration: RNS.SmoothNumbers.smooth_buchstab
@@ -47,10 +47,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/SmoothNumbers.lean
     declaration: RNS.SmoothNumbers.smooth_buchstab_holds
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023

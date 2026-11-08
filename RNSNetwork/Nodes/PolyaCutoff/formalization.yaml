@@ -26,10 +26,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/PolyaCutoff.lean
     declaration: RNS.PolyaCutoff.polya_cutoff_share_step
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08); recorded as noncompliant only because no Comparator receipt exists yet. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
   designated: lean-proof
 sources:
 - title: W. Banks, K. Ford and T. Tao, Large prime gaps and probabilistic models, Invent. Math. 233 (2023),

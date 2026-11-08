@@ -21,10 +21,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GallagherLocal.lean
     declaration: RNS.GallagherLocal.one_wheel_average_holds
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 sources:
 - title: K. Soundararajan, The distribution of prime numbers (lectures), arXiv:math/0606408

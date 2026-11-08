@@ -82,8 +82,8 @@ def mertens_third : Prop :=
 - [`CeilingOvershoot`](CeilingOvershoot.md)
 - [`MertensThird`](MertensThird.md)
 - [`ShareAsymptotics`](ShareAsymptotics.md)
-- [`BirdseySchay`](BirdseySchay.md)
 - [`SmallWheelSurvivors`](SmallWheelSurvivors.md)
+- [`BirdseySchay`](BirdseySchay.md)
 
 ## Files
 

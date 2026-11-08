@@ -24,10 +24,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GapConstant.lean
     declaration: RNS.GapConstant.gap_constant_eq_twin_mul_step
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08); recorded as noncompliant only because no Comparator receipt exists yet. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
   designated: lean-proof
 - id: gap_constant_classical
   declaration: RNS.GapConstant.gap_constant_classical
@@ -38,10 +38,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GapConstant.lean
     declaration: RNS.GapConstant.gap_constant_classical_step
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08); recorded as noncompliant only because no Comparator receipt exists yet. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
   designated: lean-proof
 - id: sexy_constant_eq_two_twin
   declaration: RNS.GapConstant.sexy_constant_eq_two_twin
@@ -51,10 +51,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GapConstant.lean
     declaration: RNS.GapConstant.sexy_constant_eq_two_twin_step
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08); recorded as noncompliant only because no Comparator receipt exists yet. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
   designated: lean-proof
 - id: goldbach_constant
   declaration: RNS.GapConstant.goldbach_constant
@@ -64,10 +64,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GapConstant.lean
     declaration: RNS.GapConstant.goldbach_constant_step
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08); recorded as noncompliant only because no Comparator receipt exists yet. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
   designated: lean-proof
 sources:
 - title: G. H. Hardy and J. E. Littlewood, Some problems of 'Partitio numerorum' III, Acta Math. 44 (1923),

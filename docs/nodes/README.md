@@ -70,9 +70,9 @@
 | 68 | [`MertensSecond`](MertensSecond.md) | the sum of the reciprocals of the primes (Mertens' second theorem) | proved in Lean |
 | 69 | [`BrunAnalytic`](BrunAnalytic.md) | how few twin primes there are (Brun stage 5) | proved in Lean |
 | 70 | [`BrunTheorem`](BrunTheorem.md) | the reciprocals of the twin primes have a finite sum (Brun's theorem) | proved in Lean |
-| 71 | [`GapConstant`](GapConstant.md) | the constant for any even gap | planned: new, not yet proved |
-| 72 | [`PolyaCutoff`](PolyaCutoff.md) | sifting to Polya's cutoff gives the Hardy-Littlewood constant exactly | planned: new, not yet proved |
-| 73 | [`BadWheels`](BadWheels.md) | which wheels block fewer positions for linear forms | planned: new, not yet proved |
+| 71 | [`GapConstant`](GapConstant.md) | the constant for any even gap | proved in Lean |
+| 72 | [`PolyaCutoff`](PolyaCutoff.md) | sifting to Polya's cutoff gives the Hardy-Littlewood constant exactly | proved in Lean |
+| 73 | [`BadWheels`](BadWheels.md) | which wheels block fewer positions for linear forms | proved in Lean |
 | 74 | [`BrunHooley`](BrunHooley.md) | Hooley's product of truncated sieves | planned: new, not yet proved |
 | 75 | [`PatternUpperBound`](PatternUpperBound.md) | every admissible pattern is at most its conjectured order | planned: new, not yet proved |
 | 76 | [`GapPairs`](GapPairs.md) | prime pairs at any even gap, and Goldbach pairs | planned: new, not yet proved |
@@ -82,23 +82,23 @@
 | 80 | [`RomanoffTheorem`](RomanoffTheorem.md) | a positive share of numbers are a prime plus a power of 2 | planned: new, not yet proved |
 | 81 | [`BrunTitchmarshPNT`](BrunTitchmarshPNT.md) | primes in a short window (PNT+) | outside source: proved in Lean in another project |
 | 82 | [`RailBrunTitchmarsh`](RailBrunTitchmarsh.md) | how many primes one column can hold in a window | planned: new, not yet proved |
-| 83 | [`BuchstabIdentity`](BuchstabIdentity.md) | adding one wheel, counted by the first wheel that blocks | planned: new, not yet proved |
+| 83 | [`BuchstabIdentity`](BuchstabIdentity.md) | adding one wheel, counted by the first wheel that blocks | proved in Lean |
 | 84 | [`FundamentalLemma`](FundamentalLemma.md) | the survivor count matches its share while the wheels stay small | planned: new, not yet proved |
 | 85 | [`LowerBoundSieve`](LowerBoundSieve.md) | twin columns with few prime factors | planned: new, not yet proved |
 | 86 | [`PetiteSieve`](PetiteSieve.md) | an exact asymptotic for patterns of small dimension | planned: new, not yet proved |
 | 87 | [`SelbergTwinRails`](SelbergTwinRails.md) | Selberg's bounds for the twin columns and prime pairs | planned: new, not yet proved |
 | 88 | [`ParityBarrier`](ParityBarrier.md) | Selberg's parity example | planned: new, not yet proved |
 | 89 | [`PolynomialPatterns`](PolynomialPatterns.md) | polynomial patterns: admissibility and the Bateman-Horn conjecture | planned: conditional |
-| 90 | [`SmoothNumbers`](SmoothNumbers.md) | numbers built only from the wheels | planned: new, not yet proved |
-| 91 | [`RandomRotation`](RandomRotation.md) | rotating every wheel at random | planned: new, not yet proved |
+| 90 | [`SmoothNumbers`](SmoothNumbers.md) | numbers built only from the wheels | proved in Lean |
+| 91 | [`RandomRotation`](RandomRotation.md) | rotating every wheel at random | proved in Lean |
 | 92 | [`ErdosSmallGaps`](ErdosSmallGaps.md) | some prime gaps are well below average | planned: new, not yet proved |
-| 93 | [`SmallWheelSurvivors`](SmallWheelSurvivors.md) | survivors match the share when the wheels stay below log x | planned: new, not yet proved |
+| 93 | [`SmallWheelSurvivors`](SmallWheelSurvivors.md) | survivors match the share when the wheels stay below log x | proved in Lean |
 | 94 | [`SieveDataLimits`](SieveDataLimits.md) | what the multiple counts alone can decide | planned: new, not yet proved |
-| 95 | [`LargerSieve`](LargerSieve.md) | Gallagher's larger sieve: when each wheel leaves few positions | planned: new, not yet proved |
+| 95 | [`LargerSieve`](LargerSieve.md) | Gallagher's larger sieve: when each wheel leaves few positions | proved in Lean |
 | 96 | [`ArithmeticLargeSieve`](ArithmeticLargeSieve.md) | the large sieve: many blocked positions on every wheel | planned: new, not yet proved |
 | 97 | [`Schnirelmann`](Schnirelmann.md) | every number is a sum of boundedly many primes | planned: new, not yet proved |
 | 98 | [`MaierMatrix`](MaierMatrix.md) | short windows with too many and too few primes | planned: cited from a paper |
-| 99 | [`GallagherLocal`](GallagherLocal.md) | one wheel's correction averages to 1 | planned: new, not yet proved |
-| 100 | [`ChenWeights`](ChenWeights.md) | Chen's weights for numbers with at most two prime factors | planned: new, not yet proved |
+| 99 | [`GallagherLocal`](GallagherLocal.md) | one wheel's correction averages to 1 | proved in Lean |
+| 100 | [`ChenWeights`](ChenWeights.md) | Chen's weights for numbers with at most two prime factors | proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

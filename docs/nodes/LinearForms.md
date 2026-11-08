@@ -56,7 +56,6 @@ def sophie_germain_of_LinearForms_conjecture : Prop :=
 
 ## Used by
 
-- [`BadWheels`](BadWheels.md)
 - [`GermainReciprocals`](GermainReciprocals.md)
 
 ## Files

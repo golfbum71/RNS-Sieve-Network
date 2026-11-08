@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Geoffrey Fischer
 -/
 import RNSNetwork.Vocabulary
-import Mathlib.Data.Real.Basic
+import Mathlib.Basic.Real.Basic
 
 /-!
 # RandomRotation — rotating every wheel at random

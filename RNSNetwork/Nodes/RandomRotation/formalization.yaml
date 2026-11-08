@@ -25,10 +25,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/RandomRotation.lean
     declaration: RNS.RandomRotation.rotation_is_shift_step
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08); recorded as noncompliant only because no Comparator receipt exists yet. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
   designated: lean-proof
 - id: random_rotation_survival
   declaration: RNS.RandomRotation.random_rotation_survival
@@ -38,10 +38,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/RandomRotation.lean
     declaration: RNS.RandomRotation.random_rotation_survival_step
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08); recorded as noncompliant only because no Comparator receipt exists yet. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
   designated: lean-proof
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023

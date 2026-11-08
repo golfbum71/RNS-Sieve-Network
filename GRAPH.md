@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 61 of 96 nodes are built, holding 188 claims: 184 proved in Lean and 4 cited from a published paper. They are joined by 93 arrows, each a Lean-checked step. Of the other 35 nodes, drawn dashed or purple, 2 are planned steps that will assume open conjectures; 1 is a planned citation of a published result; 28 are new work, stated or scoped but not yet proved; 4 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 71 of 96 nodes are built, holding 211 claims: 207 proved in Lean and 4 cited from a published paper. They are joined by 104 arrows, each a Lean-checked step. Of the other 25 nodes, drawn dashed or purple, 2 are planned steps that will assume open conjectures; 1 is a planned citation of a published result; 18 are new work, stated or scoped but not yet proved; 4 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -44,13 +44,13 @@ The families and how they lean on each other (thick arrow: a Lean-checked step c
 
 ```mermaid
 graph LR
-  g1["<b>Foundations: wheels, cycles and columns</b><br/>14 built, 1 planned or outside"]
-  g2["<b>Patterns, admissibility and the Hardy-Littlewood constants</b><br/>10 built, 6 planned or outside"]
+  g1["<b>Foundations: wheels, cycles and columns</b><br/>15 built, 0 planned or outside"]
+  g2["<b>Patterns, admissibility and the Hardy-Littlewood constants</b><br/>14 built, 2 planned or outside"]
   g3["<b>How survivors spread across the cycle</b><br/>11 built, 2 planned or outside"]
   g4["<b>Gaps between survivors and between primes</b><br/>9 built, 7 planned or outside"]
   g5["<b>Sophie Germain primes</b><br/>4 built, 1 planned or outside"]
-  g6["<b>Survivor shares and analytic inputs</b><br/>6 built, 2 planned or outside"]
-  g7["<b>Sieve methods: Brun, Hooley, Selberg</b><br/>7 built, 16 planned or outside"]
+  g6["<b>Survivor shares and analytic inputs</b><br/>8 built, 0 planned or outside"]
+  g7["<b>Sieve methods: Brun, Hooley, Selberg</b><br/>10 built, 13 planned or outside"]
   g1 ==> g2
   g1 ==> g4
   g1 ==> g5
@@ -60,13 +60,13 @@ graph LR
   g2 -.-> g5
   g2 ==> g6
   g2 -.-> g7
-  g6 -.-> g2
+  g6 ==> g2
   g6 -.-> g4
   g6 ==> g7
   g7 -.-> g3
   g7 -.-> g4
   g7 -.-> g5
-  g7 -.-> g6
+  g7 ==> g6
   click g1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/GRAPH.md#foundations-wheels-cycles-and-columns" _self
   click g2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/GRAPH.md#patterns-admissibility-and-the-hardy-littlewood-constants" _self
   click g3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/GRAPH.md#how-survivors-spread-across-the-cycle" _self
@@ -164,46 +164,47 @@ graph LR
     c53["semiprime_conjecture_of_cube"]
   end
   subgraph s15["<b>91. RandomRotation — rotating every wheel at random</b>"]
-    p1["<i>planned: new, not yet proved</i>"]
+    c54["rotation_is_shift"]
+    c55["random_rotation_survival"]
   end
   subgraph s16["6. SingularSeries (in Patterns, admissibility and the Hardy-Littlewood constants)"]
-    c54["local_density_factorization"]
+    c56["local_density_factorization"]
   end
   subgraph s17["18. SophieGermainWheel (in Sophie Germain primes)"]
-    c55["sophie_germain_mod_six"]
-    c56["sophie_germain_last_digit"]
+    c57["sophie_germain_mod_six"]
+    c58["sophie_germain_last_digit"]
   end
   subgraph s18["19. GapTracks (in Gaps between survivors and between primes)"]
-    c57["twin_prime_mod_six"]
-    c58["cousin_prime_mod_six"]
-    c59["prime_gap_forbidden_four_from_six_minus_one"]
-    c60["prime_gap_forbidden_two_from_six_plus_one"]
-    c61["prime_gap_same_track_of_six_dvd"]
+    c59["twin_prime_mod_six"]
+    c60["cousin_prime_mod_six"]
+    c61["prime_gap_forbidden_four_from_six_minus_one"]
+    c62["prime_gap_forbidden_two_from_six_plus_one"]
+    c63["prime_gap_same_track_of_six_dvd"]
   end
   subgraph s19["26. ShareBounds (in Survivor shares and analytic inputs)"]
-    c62["survivor_share_le_inv_log"]
-    c63["twin_share_le_two_inv_log_sq"]
+    c64["survivor_share_le_inv_log"]
+    c65["twin_share_le_two_inv_log_sq"]
   end
   subgraph s20["27. TwinShare (in Patterns, admissibility and the Hardy-Littlewood constants)"]
-    c64["twin_share_eq_prod"]
+    c66["twin_share_eq_prod"]
   end
   subgraph s21["30. BlockingRuns (in Gaps between survivors and between primes)"]
-    c65["blocked_run_is_shift"]
+    c67["blocked_run_is_shift"]
   end
   subgraph s22["69. BrunAnalytic (in Sieve methods)"]
-    c66["twin_product_bound"]
+    c68["twin_product_bound"]
   end
   subgraph s23["64. ShareAsymptotics (in Survivor shares and analytic inputs)"]
-    c67["survivor_share_asymptotic"]
-    c68["twin_share_asymptotic"]
-    c69["twin_share_asymptotic_classical"]
+    c69["survivor_share_asymptotic"]
+    c70["twin_share_asymptotic"]
+    c71["twin_share_asymptotic_classical"]
   end
   subgraph s24["82. RailBrunTitchmarsh (in Sieve methods)"]
-    p2["<i>planned: new, not yet proved</i>"]
+    p1["<i>planned: new, not yet proved</i>"]
   end
   c2 ==> c4
   c2 ==> c6
-  c6 ==> c54
+  c6 ==> c56
   c6 ==> c7
   c3 ==> c11
   c3 ==> c13
@@ -214,30 +215,30 @@ graph LR
   c3 ==> c21
   c1 ==> c29
   c1 ==> c30
-  c1 ==> c55
-  c9 ==> c56
   c1 ==> c57
-  c1 ==> c58
+  c9 ==> c58
   c1 ==> c59
   c1 ==> c60
   c1 ==> c61
-  c6 ==> c62
-  c4 ==> c63
-  c6 ==> c63
-  c4 ==> c64
+  c1 ==> c62
+  c1 ==> c63
   c6 ==> c64
-  c2 ==> c65
+  c4 ==> c65
+  c6 ==> c65
   c4 ==> c66
+  c6 ==> c66
+  c2 ==> c67
+  c4 ==> c68
   c36 ==> c39
   c20 ==> c41
   c20 ==> c48
   c20 ==> c49
-  c6 ==> c67
-  c6 ==> c68
   c6 ==> c69
+  c6 ==> c70
+  c6 ==> c71
   s1 -.-> s24
-  s2 -.-> s15
-  s4 -.-> s15
+  c2 ==> c54
+  c6 ==> c55
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
   classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
@@ -249,16 +250,15 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c44,c45,c46,c47,c48,c49,c50,c51,c52,c53 verified;
-  class p1 new;
-  class c54,c55,c56,c57,c58,c59,c60,c61,c62,c63,c64,c65,c66,c67,c68,c69,p2 stub;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c44,c45,c46,c47,c48,c49,c50,c51,c52,c53,c54,c55 verified;
+  class c56,c57,c58,c59,c60,c61,c62,c63,c64,c65,c66,c67,c68,c69,c70,c71,p1 stub;
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md#prime_gt_three_is_candidate" _blank
   click c2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CRT.md#crt_map_bijective" _blank
   click c3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SquareRootShield.md#square_root_shield" _blank
   click c4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
   click c5 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#local_survivor_count" _blank
   click c6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#general_survivor_count" _blank
-  click c54 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#local_density_factorization" _blank
+  click c56 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#local_density_factorization" _blank
   click c7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Pruning.md#valid_starting_residues_card_formula" _blank
   click c8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/WheelOrder.md#wheel_marginal_new_formula" _blank
   click c9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/WheelOrder.md#prime_gt_five_digit_ok" _blank
@@ -287,20 +287,20 @@ graph LR
   click c32 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/DirichletColumns.md#col_plus_primes_infinite" _blank
   click c33 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/DirichletColumns.md#col_minus_primes_unbounded" _blank
   click c34 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/DirichletColumns.md#col_plus_primes_unbounded" _blank
-  click c55 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainWheel.md#sophie_germain_mod_six" _blank
-  click c56 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainWheel.md#sophie_germain_last_digit" _blank
-  click c57 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#twin_prime_mod_six" _blank
-  click c58 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#cousin_prime_mod_six" _blank
-  click c59 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#prime_gap_forbidden_four_from_six_minus_one" _blank
-  click c60 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#prime_gap_forbidden_two_from_six_plus_one" _blank
-  click c61 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#prime_gap_same_track_of_six_dvd" _blank
+  click c57 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainWheel.md#sophie_germain_mod_six" _blank
+  click c58 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SophieGermainWheel.md#sophie_germain_last_digit" _blank
+  click c59 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#twin_prime_mod_six" _blank
+  click c60 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#cousin_prime_mod_six" _blank
+  click c61 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#prime_gap_forbidden_four_from_six_minus_one" _blank
+  click c62 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#prime_gap_forbidden_two_from_six_plus_one" _blank
+  click c63 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapTracks.md#prime_gap_same_track_of_six_dvd" _blank
   click c35 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ColumnAction.md#column_action" _blank
-  click c62 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md#survivor_share_le_inv_log" _blank
-  click c63 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md#twin_share_le_two_inv_log_sq" _blank
-  click c64 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinShare.md#twin_share_eq_prod" _blank
-  click c65 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BlockingRuns.md#blocked_run_is_shift" _blank
+  click c64 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md#survivor_share_le_inv_log" _blank
+  click c65 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md#twin_share_le_two_inv_log_sq" _blank
+  click c66 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinShare.md#twin_share_eq_prod" _blank
+  click c67 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BlockingRuns.md#blocked_run_is_shift" _blank
   click c36 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BonseCeiling.md#ceiling_inside_cycle" _blank
-  click c66 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunAnalytic.md#twin_product_bound" _blank
+  click c68 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunAnalytic.md#twin_product_bound" _blank
   click c37 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Schatunowsky.md#ceiling_forces_wheels" _blank
   click c38 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Schatunowsky.md#thirty_survivors_all_prime" _blank
   click c39 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Schatunowsky.md#schatunowsky_bound" _blank
@@ -318,11 +318,12 @@ graph LR
   click c51 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#smallest_composite_shift_floor" _blank
   click c52 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#smallest_composite_shift_semiprime_below_cube" _blank
   click c53 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FortunateCeiling.md#semiprime_conjecture_of_cube" _blank
-  click c67 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#survivor_share_asymptotic" _blank
-  click c68 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic" _blank
-  click c69 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic_classical" _blank
-  click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RailBrunTitchmarsh.md" _blank
-  click p1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RandomRotation.md" _blank
+  click c69 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#survivor_share_asymptotic" _blank
+  click c70 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic" _blank
+  click c71 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic_classical" _blank
+  click p1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RailBrunTitchmarsh.md" _blank
+  click c54 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RandomRotation.md#rotation_is_shift" _blank
+  click c55 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RandomRotation.md#random_rotation_survival" _blank
 ```
 
 ### Patterns, admissibility and the Hardy-Littlewood constants
@@ -374,52 +375,58 @@ graph LR
     c19["admissible_iff_primegaps"]
   end
   subgraph s12["<b>71. GapConstant — the constant for any even gap</b>"]
-    p2["<i>planned: new, not yet proved</i>"]
+    c20["gap_constant_eq_twin_mul"]
+    c21["gap_constant_classical"]
+    c22["sexy_constant_eq_two_twin"]
+    c23["goldbach_constant"]
   end
   subgraph s13["<b>72. PolyaCutoff — sifting to Polya's cutoff gives the Hardy-Littlewood constant exactly</b>"]
-    p3["<i>planned: new, not yet proved</i>"]
+    c24["polya_cutoff_share"]
   end
   subgraph s14["<b>73. BadWheels — which wheels block fewer positions for linear forms</b>"]
-    p4["<i>planned: new, not yet proved</i>"]
+    c25["blocked_le_card"]
+    c26["blocked_eq_card_iff"]
+    c27["twin_columns_bad_wheels"]
+    c28["divisors_pairwise_coprime"]
   end
   subgraph s15["<b>89. PolynomialPatterns — polynomial patterns: admissibility and the Bateman-Horn conjecture</b>"]
-    p5["<i>planned: conditional</i>"]
+    p2["<i>planned: conditional</i>"]
   end
   subgraph s16["<b>99. GallagherLocal — one wheel's correction averages to 1</b>"]
-    p6["<i>planned: new, not yet proved</i>"]
+    c29["one_wheel_average"]
   end
   subgraph s17["5. SurvivorCount (in Foundations)"]
-    c20["general_survivor_count"]
-    c21["twin_survivor_count"]
+    c30["general_survivor_count"]
+    c31["twin_survivor_count"]
   end
   subgraph s18["40. MertensThird (in Survivor shares and analytic inputs)"]
-    p7["<i>proved in Lean</i>"]
+    p3["<i>proved in Lean</i>"]
   end
   subgraph s19["41. PrimeNumberTheorem (in Survivor shares and analytic inputs)"]
-    p8["<i>proved in Lean</i>"]
+    p4["<i>proved in Lean</i>"]
   end
   subgraph s20["64. ShareAsymptotics (in Survivor shares and analytic inputs)"]
-    c22["twin_share_asymptotic"]
-    c23["twin_share_asymptotic_classical"]
-    c24["pattern_share_asymptotic"]
+    c32["twin_share_asymptotic"]
+    c33["twin_share_asymptotic_classical"]
+    c34["pattern_share_asymptotic"]
   end
   subgraph s21["75. PatternUpperBound (in Sieve methods)"]
-    p9["<i>planned: new, not yet proved</i>"]
+    p5["<i>planned: new, not yet proved</i>"]
   end
   subgraph s22["76. GapPairs (in Gaps between survivors and between primes)"]
-    p10["<i>planned: new, not yet proved</i>"]
+    p6["<i>planned: new, not yet proved</i>"]
   end
   subgraph s23["78. GermainReciprocals (in Sophie Germain primes)"]
-    p11["<i>planned: new, not yet proved</i>"]
+    p7["<i>planned: new, not yet proved</i>"]
   end
   subgraph s24["87. SelbergTwinRails (in Sieve methods)"]
-    p12["<i>planned: new, not yet proved</i>"]
+    p8["<i>planned: new, not yet proved</i>"]
   end
   o1{{"<i>open conjecture</i><br/>hardy_littlewood_conjecture"}}
   o2{{"<i>open conjecture</i><br/>HL_conjecture_A"}}
   o3{{"<i>open conjecture</i><br/>HL_conjecture_B"}}
   o4{{"<i>open conjecture</i><br/>LinearForms_conjecture"}}
-  c20 ==> c8
+  c30 ==> c8
   c6 ==> c9
   c7 ==> c10
   c2 ==> c10
@@ -427,27 +434,28 @@ graph LR
   o2 -.-> c11
   o3 -.-> c11
   o4 -.-> c13
-  c21 ==> c14
-  c20 ==> c14
+  c31 ==> c14
+  c30 ==> c14
   s7 -.-> s9
   s18 -.-> s9
   s19 -.-> s9
-  c14 ==> c22
-  c15 ==> c22
-  c14 ==> c23
-  c15 ==> c23
-  c8 ==> c24
-  c6 ==> c24
-  s2 -.-> s12
-  s3 -.-> s12
-  s20 -.-> s13
-  s6 -.-> s14
+  c14 ==> c32
+  c15 ==> c32
+  c14 ==> c33
+  c15 ==> c33
+  c8 ==> c34
+  c6 ==> c34
+  c6 ==> c20
+  c6 ==> c21
+  c9 ==> c21
+  c6 ==> c22
+  c6 ==> c23
+  c34 ==> c24
   s14 -.-> s21
   s12 -.-> s22
   s6 -.-> s23
   s3 -.-> s24
   s1 -.-> s15
-  s2 -.-> s16
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
   classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
@@ -459,19 +467,18 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c12,c14,c15,c16,c17,c19 verified;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c12,c14,c15,c16,c17,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29 verified;
   class c10,c11,c13 conditional_built;
   class c18 cited_built;
-  class p1,p5 conditional;
-  class p2,p3,p4,p6 new;
-  class c20,c21,c22,c23,c24,p7,p8,p9,p10,p11,p12 stub;
+  class p1,p2 conditional;
+  class c30,c31,c32,c33,c34,p3,p4,p5,p6,p7,p8 stub;
   class o1,o2,o3,o4 openconj;
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Admissibility.md#admissible_of_large_primes" _blank
   click c2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Admissibility.md#zero_two_admissible" _blank
   click c3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Admissibility.md#zero_two_four_not_admissible" _blank
   click c4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Admissibility.md#ap_offsets_admissible_iff" _blank
-  click c20 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#general_survivor_count" _blank
-  click c21 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
+  click c30 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#general_survivor_count" _blank
+  click c31 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
   click c5 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#delta_bound" _blank
   click c6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#factor_multipliable" _blank
   click c7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#hardy_littlewood_constant_pos" _blank
@@ -485,23 +492,29 @@ graph LR
   click c15 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinShare.md#twin_share_split" _blank
   click c16 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/InadmissibleOccurrences.md#inadmissible_occurrence_contains_prime" _blank
   click c17 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/InadmissibleOccurrences.md#gap_block_24242_unique" _blank
-  click p7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensThird.md" _blank
-  click p8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeNumberTheorem.md" _blank
+  click p3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensThird.md" _blank
+  click p4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeNumberTheorem.md" _blank
   click p1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirdseySchay.md" _blank
   click c18 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GallagherAverage.md#singular_series_average_one" _blank
   click c19 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeGapsBridge.md#admissible_iff_primegaps" _blank
-  click c22 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic" _blank
-  click c23 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic_classical" _blank
-  click c24 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#pattern_share_asymptotic" _blank
-  click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConstant.md" _blank
-  click p3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PolyaCutoff.md" _blank
-  click p4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BadWheels.md" _blank
-  click p9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PatternUpperBound.md" _blank
-  click p10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapPairs.md" _blank
-  click p11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainReciprocals.md" _blank
-  click p12 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergTwinRails.md" _blank
-  click p5 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PolynomialPatterns.md" _blank
-  click p6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GallagherLocal.md" _blank
+  click c32 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic" _blank
+  click c33 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic_classical" _blank
+  click c34 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#pattern_share_asymptotic" _blank
+  click c20 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConstant.md#gap_constant_eq_twin_mul" _blank
+  click c21 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConstant.md#gap_constant_classical" _blank
+  click c22 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConstant.md#sexy_constant_eq_two_twin" _blank
+  click c23 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConstant.md#goldbach_constant" _blank
+  click c24 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PolyaCutoff.md#polya_cutoff_share" _blank
+  click c25 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BadWheels.md#blocked_le_card" _blank
+  click c26 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BadWheels.md#blocked_eq_card_iff" _blank
+  click c27 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BadWheels.md#twin_columns_bad_wheels" _blank
+  click c28 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BadWheels.md#divisors_pairwise_coprime" _blank
+  click p5 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PatternUpperBound.md" _blank
+  click p6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapPairs.md" _blank
+  click p7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainReciprocals.md" _blank
+  click p8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergTwinRails.md" _blank
+  click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PolynomialPatterns.md" _blank
+  click c29 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GallagherLocal.md#one_wheel_average" _blank
 ```
 
 ### How survivors spread across the cycle
@@ -584,7 +597,7 @@ graph LR
     p2["<i>planned: cited from a paper</i>"]
   end
   subgraph s14["83. BuchstabIdentity (in Sieve methods)"]
-    p3["<i>planned: new, not yet proved</i>"]
+    p3["<i>proved in Lean</i>"]
   end
   c1 ==> c8
   c2 ==> c8
@@ -758,7 +771,7 @@ graph LR
     p8["<i>proved in Lean</i>"]
   end
   subgraph s20["71. GapConstant (in Patterns, admissibility and the Hardy-Littlewood constants)"]
-    p9["<i>planned: new, not yet proved</i>"]
+    p9["<i>proved in Lean</i>"]
   end
   subgraph s21["75. PatternUpperBound (in Sieve methods)"]
     p10["<i>planned: new, not yet proved</i>"]
@@ -972,54 +985,57 @@ graph LR
     c15["pattern_share_asymptotic"]
   end
   subgraph s7["<b>90. SmoothNumbers — numbers built only from the wheels</b>"]
-    p1["<i>planned: new, not yet proved</i>"]
+    c16["rankin_upper"]
+    c17["smooth_count_lower"]
+    c18["smooth_buchstab"]
   end
   subgraph s8["<b>93. SmallWheelSurvivors — survivors match the share when the wheels stay below log x</b>"]
-    p2["<i>planned: new, not yet proved</i>"]
+    c19["legendre_error"]
+    c20["small_wheel_survivors"]
   end
   subgraph s9["5. SurvivorCount (in Foundations)"]
-    c16["general_survivor_count"]
-    c17["twin_survivor_count"]
+    c21["general_survivor_count"]
+    c22["twin_survivor_count"]
   end
   subgraph s10["6. SingularSeries (in Patterns, admissibility and the Hardy-Littlewood constants)"]
-    c18["local_density_factorization"]
-    c19["factor_multipliable"]
+    c23["local_density_factorization"]
+    c24["factor_multipliable"]
   end
   subgraph s11["27. TwinShare (in Patterns, admissibility and the Hardy-Littlewood constants)"]
-    c20["twin_share_eq_prod"]
-    c21["twin_share_split"]
+    c25["twin_share_eq_prod"]
+    c26["twin_share_split"]
   end
   subgraph s12["32. BirdseySchay (in Patterns, admissibility and the Hardy-Littlewood constants)"]
-    p3["<i>planned: conditional</i>"]
+    p1["<i>planned: conditional</i>"]
   end
   subgraph s13["62. BrunPureSieve (in Sieve methods)"]
-    p4["<i>proved in Lean</i>"]
+    c27["legendre_exact"]
   end
   subgraph s14["69. BrunAnalytic (in Sieve methods)"]
-    c22["twin_product_bound"]
-    c23["twin_prime_count_bound"]
+    c28["twin_product_bound"]
+    c29["twin_prime_count_bound"]
   end
   subgraph s15["72. PolyaCutoff (in Patterns, admissibility and the Hardy-Littlewood constants)"]
-    p5["<i>planned: new, not yet proved</i>"]
+    c30["polya_cutoff_share"]
   end
   subgraph s16["75. PatternUpperBound (in Sieve methods)"]
-    p6["<i>planned: new, not yet proved</i>"]
+    p2["<i>planned: new, not yet proved</i>"]
   end
   subgraph s17["79. BrunSharp (in Sieve methods)"]
-    p7["<i>planned: new, not yet proved</i>"]
+    p3["<i>planned: new, not yet proved</i>"]
   end
   subgraph s18["87. SelbergTwinRails (in Sieve methods)"]
-    p8["<i>planned: new, not yet proved</i>"]
+    p4["<i>planned: new, not yet proved</i>"]
   end
   subgraph s19["88. ParityBarrier (in Sieve methods)"]
-    p9["<i>planned: new, not yet proved</i>"]
+    p5["<i>planned: new, not yet proved</i>"]
   end
   subgraph s20["92. ErdosSmallGaps (in Gaps between survivors and between primes)"]
-    p10["<i>planned: new, not yet proved</i>"]
+    p6["<i>planned: new, not yet proved</i>"]
   end
-  c16 ==> c1
-  c17 ==> c2
-  c16 ==> c2
+  c21 ==> c1
+  c22 ==> c2
+  c21 ==> c2
   c3 ==> c5
   c4 ==> c5
   c6 ==> c7
@@ -1028,29 +1044,30 @@ graph LR
   s2 -.-> s12
   s3 -.-> s12
   c9 ==> c10
-  c2 ==> c22
-  c10 ==> c23
-  c16 ==> c11
+  c2 ==> c28
+  c10 ==> c29
+  c21 ==> c11
   c5 ==> c11
-  c16 ==> c12
-  c20 ==> c12
   c21 ==> c12
+  c25 ==> c12
+  c26 ==> c12
   c5 ==> c12
-  c16 ==> c14
-  c20 ==> c14
   c21 ==> c14
+  c25 ==> c14
+  c26 ==> c14
   c5 ==> c14
-  c18 ==> c15
-  c19 ==> c15
+  c23 ==> c15
+  c24 ==> c15
   c5 ==> c15
-  s6 -.-> s15
+  c15 ==> c30
   s6 -.-> s16
   s6 -.-> s17
   s6 -.-> s18
   s3 -.-> s19
   s3 -.-> s20
-  s13 -.-> s8
-  s2 -.-> s8
+  c27 ==> c19
+  c19 ==> c20
+  c5 ==> c20
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
   classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
@@ -1062,42 +1079,44 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15 verified;
-  class p1,p2 new;
-  class c16,c17,c18,c19,c20,c21,c22,c23,p3,p4,p5,p6,p7,p8,p9,p10 stub;
-  click c16 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#general_survivor_count" _blank
-  click c17 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
-  click c18 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#local_density_factorization" _blank
-  click c19 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#factor_multipliable" _blank
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20 verified;
+  class c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,p1,p2,p3,p4,p5,p6 stub;
+  click c21 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#general_survivor_count" _blank
+  click c22 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
+  click c23 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#local_density_factorization" _blank
+  click c24 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#factor_multipliable" _blank
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md#survivor_share_le_inv_log" _blank
   click c2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md#twin_share_le_two_inv_log_sq" _blank
-  click c20 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinShare.md#twin_share_eq_prod" _blank
-  click c21 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinShare.md#twin_share_split" _blank
+  click c25 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinShare.md#twin_share_eq_prod" _blank
+  click c26 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinShare.md#twin_share_split" _blank
   click c3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensThird.md#mertens_third_remainder" _blank
   click c4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensThird.md#product_identity" _blank
   click c5 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensThird.md#mertens_third" _blank
   click c6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeNumberTheorem.md#pnt_equivalent" _blank
   click c7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeNumberTheorem.md#prime_number_theorem" _blank
   click c8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CeilingOvershoot.md#ceiling_overshoot" _blank
-  click p3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirdseySchay.md" _blank
-  click p4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md" _blank
+  click p1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirdseySchay.md" _blank
+  click c27 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#legendre_exact" _blank
   click c9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensSecond.md#mertens_second_remainder" _blank
   click c10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensSecond.md#prime_reciprocal_upper" _blank
-  click c22 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunAnalytic.md#twin_product_bound" _blank
-  click c23 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunAnalytic.md#twin_prime_count_bound" _blank
+  click c28 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunAnalytic.md#twin_product_bound" _blank
+  click c29 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunAnalytic.md#twin_prime_count_bound" _blank
   click c11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#survivor_share_asymptotic" _blank
   click c12 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic" _blank
   click c13 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#odd_twin_product_eq_classical" _blank
   click c14 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic_classical" _blank
   click c15 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#pattern_share_asymptotic" _blank
-  click p5 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PolyaCutoff.md" _blank
-  click p6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PatternUpperBound.md" _blank
-  click p7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunSharp.md" _blank
-  click p8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergTwinRails.md" _blank
-  click p9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ParityBarrier.md" _blank
-  click p1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmoothNumbers.md" _blank
-  click p10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ErdosSmallGaps.md" _blank
-  click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmallWheelSurvivors.md" _blank
+  click c30 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PolyaCutoff.md#polya_cutoff_share" _blank
+  click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PatternUpperBound.md" _blank
+  click p3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunSharp.md" _blank
+  click p4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergTwinRails.md" _blank
+  click p5 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ParityBarrier.md" _blank
+  click c16 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmoothNumbers.md#rankin_upper" _blank
+  click c17 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmoothNumbers.md#smooth_count_lower" _blank
+  click c18 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmoothNumbers.md#smooth_buchstab" _blank
+  click p6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ErdosSmallGaps.md" _blank
+  click c19 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmallWheelSurvivors.md#legendre_error" _blank
+  click c20 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmallWheelSurvivors.md#small_wheel_survivors" _blank
 ```
 
 ### Sieve methods: Brun, Hooley, Selberg
@@ -1154,84 +1173,87 @@ graph LR
     p6["<i>planned: new, not yet proved</i>"]
   end
   subgraph s14["<b>83. BuchstabIdentity — adding one wheel, counted by the first wheel that blocks</b>"]
-    p7["<i>planned: new, not yet proved</i>"]
+    c16["legendre_phi_recurrence"]
+    c17["buchstab_identity"]
+    c18["buchstab_product_identity"]
   end
   subgraph s15["<b>84. FundamentalLemma — the survivor count matches its share while the wheels stay small</b>"]
-    p8["<i>planned: new, not yet proved</i>"]
+    p7["<i>planned: new, not yet proved</i>"]
   end
   subgraph s16["<b>85. LowerBoundSieve — twin columns with few prime factors</b>"]
-    p9["<i>planned: new, not yet proved</i>"]
+    p8["<i>planned: new, not yet proved</i>"]
   end
   subgraph s17["<b>86. PetiteSieve — an exact asymptotic for patterns of small dimension</b>"]
-    p10["<i>planned: new, not yet proved</i>"]
+    p9["<i>planned: new, not yet proved</i>"]
   end
   subgraph s18["<b>87. SelbergTwinRails — Selberg's bounds for the twin columns and prime pairs</b>"]
-    p11["<i>planned: new, not yet proved</i>"]
+    p10["<i>planned: new, not yet proved</i>"]
   end
   subgraph s19["<b>88. ParityBarrier — Selberg's parity example</b>"]
-    p12["<i>planned: new, not yet proved</i>"]
+    p11["<i>planned: new, not yet proved</i>"]
   end
   subgraph s20["<b>94. SieveDataLimits — what the multiple counts alone can decide</b>"]
-    p13["<i>planned: new, not yet proved</i>"]
+    p12["<i>planned: new, not yet proved</i>"]
   end
   subgraph s21["<b>95. LargerSieve — Gallagher's larger sieve: when each wheel leaves few positions</b>"]
-    p14["<i>planned: new, not yet proved</i>"]
+    c19["larger_sieve"]
+    c20["larger_sieve_few"]
   end
   subgraph s22["<b>96. ArithmeticLargeSieve — the large sieve: many blocked positions on every wheel</b>"]
-    p15["<i>planned: new, not yet proved</i>"]
+    p13["<i>planned: new, not yet proved</i>"]
   end
   subgraph s23["<b>100. ChenWeights — Chen's weights for numbers with at most two prime factors</b>"]
-    p16["<i>planned: new, not yet proved</i>"]
+    c21["chen_weight_le"]
   end
   subgraph s24["1. Wheel6 (in Foundations)"]
-    p17["<i>proved in Lean</i>"]
+    p14["<i>proved in Lean</i>"]
   end
   subgraph s25["5. SurvivorCount (in Foundations)"]
-    c16["twin_survivor_count"]
+    c22["twin_survivor_count"]
   end
   subgraph s26["7. TwinConstant (in Patterns, admissibility and the Hardy-Littlewood constants)"]
-    p18["<i>proved in Lean</i>"]
+    p15["<i>proved in Lean</i>"]
   end
   subgraph s27["26. ShareBounds (in Survivor shares and analytic inputs)"]
-    c17["twin_share_le_two_inv_log_sq"]
+    c23["twin_share_le_two_inv_log_sq"]
   end
   subgraph s28["41. PrimeNumberTheorem (in Survivor shares and analytic inputs)"]
-    p19["<i>proved in Lean</i>"]
+    p16["<i>proved in Lean</i>"]
   end
   subgraph s29["68. MertensSecond (in Survivor shares and analytic inputs)"]
-    c18["prime_reciprocal_upper"]
+    c24["prime_reciprocal_upper"]
   end
   subgraph s30["64. ShareAsymptotics (in Survivor shares and analytic inputs)"]
-    p20["<i>proved in Lean</i>"]
+    p17["<i>proved in Lean</i>"]
   end
   subgraph s31["73. BadWheels (in Patterns, admissibility and the Hardy-Littlewood constants)"]
-    p21["<i>planned: new, not yet proved</i>"]
+    p18["<i>proved in Lean</i>"]
   end
   subgraph s32["76. GapPairs (in Gaps between survivors and between primes)"]
-    p22["<i>planned: new, not yet proved</i>"]
+    p19["<i>planned: new, not yet proved</i>"]
   end
   subgraph s33["78. GermainReciprocals (in Sophie Germain primes)"]
-    p23["<i>planned: new, not yet proved</i>"]
+    p20["<i>planned: new, not yet proved</i>"]
   end
   subgraph s34["92. ErdosSmallGaps (in Gaps between survivors and between primes)"]
-    p24["<i>planned: new, not yet proved</i>"]
+    p21["<i>planned: new, not yet proved</i>"]
   end
   subgraph s35["93. SmallWheelSurvivors (in Survivor shares and analytic inputs)"]
-    p25["<i>planned: new, not yet proved</i>"]
+    c25["legendre_error"]
   end
   subgraph s36["98. MaierMatrix (in How survivors spread across the cycle)"]
-    p26["<i>planned: cited from a paper</i>"]
+    p22["<i>planned: cited from a paper</i>"]
   end
   c8 ==> c10
   c9 ==> c10
   c1 ==> c10
-  c16 ==> c12
-  c17 ==> c12
+  c22 ==> c12
+  c23 ==> c12
   c10 ==> c13
   c11 ==> c13
   c2 ==> c13
   c12 ==> c13
-  c18 ==> c13
+  c24 ==> c13
   c13 ==> c14
   c14 ==> c15
   s2 -.-> s8
@@ -1255,7 +1277,7 @@ graph LR
   s30 -.-> s18
   s28 -.-> s19
   s18 -.-> s34
-  s2 -.-> s35
+  c5 ==> c25
   s14 -.-> s36
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
@@ -1268,15 +1290,15 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15 verified;
-  class p1,p2,p3,p4,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16 new;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21 verified;
+  class p1,p2,p3,p4,p6,p7,p8,p9,p10,p11,p12,p13 new;
   class p5 external;
-  class c16,c17,c18,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26 stub;
-  click p17 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md" _blank
-  click c16 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
-  click p18 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinConstant.md" _blank
-  click c17 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md#twin_share_le_two_inv_log_sq" _blank
-  click p19 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeNumberTheorem.md" _blank
+  class c22,c23,c24,c25,p14,p15,p16,p17,p18,p19,p20,p21,p22 stub;
+  click p14 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md" _blank
+  click c22 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
+  click p15 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinConstant.md" _blank
+  click c23 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md#twin_share_le_two_inv_log_sq" _blank
+  click p16 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeNumberTheorem.md" _blank
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTruncation.md#truncation_error" _blank
   click c2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTruncation.md#esymm_power_bound" _blank
   click c3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#bonferroni_even" _blank
@@ -1288,34 +1310,37 @@ graph LR
   click c9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTwinCount.md#twin_multiples_count" _blank
   click c10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTwinBound.md#twin_sifted_bound" _blank
   click c11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTwinBound.md#twin_count_le_sifted" _blank
-  click c18 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensSecond.md#prime_reciprocal_upper" _blank
+  click c24 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensSecond.md#prime_reciprocal_upper" _blank
   click c12 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunAnalytic.md#twin_product_bound" _blank
   click c13 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunAnalytic.md#twin_prime_count_bound" _blank
   click c14 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTheorem.md#brun_theorem" _blank
   click c15 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTwinSum.md#brun_sum_finite" _blank
-  click p20 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md" _blank
-  click p21 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BadWheels.md" _blank
+  click p17 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md" _blank
+  click p18 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BadWheels.md" _blank
   click p1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunHooley.md" _blank
   click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PatternUpperBound.md" _blank
-  click p22 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapPairs.md" _blank
+  click p19 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapPairs.md" _blank
   click p3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PatternReciprocals.md" _blank
-  click p23 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainReciprocals.md" _blank
+  click p20 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainReciprocals.md" _blank
   click p4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunSharp.md" _blank
   click p5 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTitchmarshPNT.md" _blank
   click p6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RailBrunTitchmarsh.md" _blank
-  click p7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BuchstabIdentity.md" _blank
-  click p8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FundamentalLemma.md" _blank
-  click p9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LowerBoundSieve.md" _blank
-  click p10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PetiteSieve.md" _blank
-  click p11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergTwinRails.md" _blank
-  click p12 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ParityBarrier.md" _blank
-  click p24 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ErdosSmallGaps.md" _blank
-  click p25 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmallWheelSurvivors.md" _blank
-  click p13 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SieveDataLimits.md" _blank
-  click p14 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LargerSieve.md" _blank
-  click p15 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ArithmeticLargeSieve.md" _blank
-  click p26 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MaierMatrix.md" _blank
-  click p16 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ChenWeights.md" _blank
+  click c16 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BuchstabIdentity.md#legendre_phi_recurrence" _blank
+  click c17 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BuchstabIdentity.md#buchstab_identity" _blank
+  click c18 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BuchstabIdentity.md#buchstab_product_identity" _blank
+  click p7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FundamentalLemma.md" _blank
+  click p8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LowerBoundSieve.md" _blank
+  click p9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PetiteSieve.md" _blank
+  click p10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergTwinRails.md" _blank
+  click p11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ParityBarrier.md" _blank
+  click p21 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ErdosSmallGaps.md" _blank
+  click c25 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmallWheelSurvivors.md#legendre_error" _blank
+  click p12 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SieveDataLimits.md" _blank
+  click c19 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LargerSieve.md#larger_sieve" _blank
+  click c20 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LargerSieve.md#larger_sieve_few" _blank
+  click p13 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ArithmeticLargeSieve.md" _blank
+  click p22 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MaierMatrix.md" _blank
+  click c21 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ChenWeights.md#chen_weight_le" _blank
 ```
 
 
@@ -1328,8 +1353,6 @@ The results nothing else builds on, each with everything beneath it.
 - [`Admissibility.ap_offsets_admissible_iff`](docs/nodes/Admissibility.md#ap_offsets_admissible_iff) — proved in Lean
 - [`SurvivorCount.local_survivor_count`](docs/nodes/SurvivorCount.md#local_survivor_count) — proved in Lean
 - [`SingularSeries.delta_bound`](docs/nodes/SingularSeries.md#delta_bound) — proved in Lean
-- [`TwinConstant.twin_prime_constant_eq_classical`](docs/nodes/TwinConstant.md#twin_prime_constant_eq_classical) — proved in Lean
-  - [`SingularSeries.factor_multipliable`](docs/nodes/SingularSeries.md#factor_multipliable) — proved in Lean
 - [`Pruning.valid_starting_residues_card_formula`](docs/nodes/Pruning.md#valid_starting_residues_card_formula) — proved in Lean
   - [`SurvivorCount.general_survivor_count`](docs/nodes/SurvivorCount.md#general_survivor_count) — proved in Lean
     - [`CRT.crt_map_bijective`](docs/nodes/CRT.md#crt_map_bijective) — proved in Lean
@@ -1546,7 +1569,6 @@ The results nothing else builds on, each with everything beneath it.
 - [`TuranCycle.turan_wheels`](docs/nodes/TuranCycle.md#turan_wheels) — proved in Lean
 - [`BrunPureSieve.bonferroni_even`](docs/nodes/BrunPureSieve.md#bonferroni_even) — proved in Lean
 - [`BrunPureSieve.bonferroni_odd`](docs/nodes/BrunPureSieve.md#bonferroni_odd) — proved in Lean
-- [`BrunPureSieve.legendre_exact`](docs/nodes/BrunPureSieve.md#legendre_exact) — proved in Lean
 - [`BrunPureSieve.bonferroni_even_fn`](docs/nodes/BrunPureSieve.md#bonferroni_even_fn) — proved in Lean
 - [`BrunPureSieve.bonferroni_odd_fn`](docs/nodes/BrunPureSieve.md#bonferroni_odd_fn) — proved in Lean
 - [`ShareAsymptotics.survivor_share_asymptotic`](docs/nodes/ShareAsymptotics.md#survivor_share_asymptotic) — proved in Lean
@@ -1580,14 +1602,50 @@ The results nothing else builds on, each with everything beneath it.
   - [`MertensThird.mertens_third`](docs/nodes/MertensThird.md#mertens_third) — proved in Lean
     - [`MertensThird.mertens_third_remainder`](docs/nodes/MertensThird.md#mertens_third_remainder) — proved in Lean
     - [`MertensThird.product_identity`](docs/nodes/MertensThird.md#product_identity) — proved in Lean
-- [`ShareAsymptotics.pattern_share_asymptotic`](docs/nodes/ShareAsymptotics.md#pattern_share_asymptotic) — proved in Lean
-  - [`SingularSeries.local_density_factorization`](docs/nodes/SingularSeries.md#local_density_factorization) — proved in Lean
-    - [`SurvivorCount.general_survivor_count`](docs/nodes/SurvivorCount.md#general_survivor_count) — proved in Lean
-      - [`CRT.crt_map_bijective`](docs/nodes/CRT.md#crt_map_bijective) — proved in Lean
+- [`GapConstant.gap_constant_eq_twin_mul`](docs/nodes/GapConstant.md#gap_constant_eq_twin_mul) — proved in Lean
   - [`SingularSeries.factor_multipliable`](docs/nodes/SingularSeries.md#factor_multipliable) — proved in Lean
+- [`GapConstant.gap_constant_classical`](docs/nodes/GapConstant.md#gap_constant_classical) — proved in Lean
+  - [`SingularSeries.factor_multipliable`](docs/nodes/SingularSeries.md#factor_multipliable) — proved in Lean
+  - [`TwinConstant.twin_prime_constant_eq_classical`](docs/nodes/TwinConstant.md#twin_prime_constant_eq_classical) — proved in Lean
+    - [`SingularSeries.factor_multipliable`](docs/nodes/SingularSeries.md#factor_multipliable) — proved in Lean
+- [`GapConstant.sexy_constant_eq_two_twin`](docs/nodes/GapConstant.md#sexy_constant_eq_two_twin) — proved in Lean
+  - [`SingularSeries.factor_multipliable`](docs/nodes/SingularSeries.md#factor_multipliable) — proved in Lean
+- [`GapConstant.goldbach_constant`](docs/nodes/GapConstant.md#goldbach_constant) — proved in Lean
+  - [`SingularSeries.factor_multipliable`](docs/nodes/SingularSeries.md#factor_multipliable) — proved in Lean
+- [`PolyaCutoff.polya_cutoff_share`](docs/nodes/PolyaCutoff.md#polya_cutoff_share) — proved in Lean
+  - [`ShareAsymptotics.pattern_share_asymptotic`](docs/nodes/ShareAsymptotics.md#pattern_share_asymptotic) — proved in Lean
+    - [`SingularSeries.local_density_factorization`](docs/nodes/SingularSeries.md#local_density_factorization) — proved in Lean
+      - [`SurvivorCount.general_survivor_count`](docs/nodes/SurvivorCount.md#general_survivor_count) — proved in Lean
+        - [`CRT.crt_map_bijective`](docs/nodes/CRT.md#crt_map_bijective) — proved in Lean
+    - [`SingularSeries.factor_multipliable`](docs/nodes/SingularSeries.md#factor_multipliable) — proved in Lean
+    - [`MertensThird.mertens_third`](docs/nodes/MertensThird.md#mertens_third) — proved in Lean
+      - [`MertensThird.mertens_third_remainder`](docs/nodes/MertensThird.md#mertens_third_remainder) — proved in Lean
+      - [`MertensThird.product_identity`](docs/nodes/MertensThird.md#product_identity) — proved in Lean
+- [`BadWheels.blocked_le_card`](docs/nodes/BadWheels.md#blocked_le_card) — proved in Lean
+- [`BadWheels.blocked_eq_card_iff`](docs/nodes/BadWheels.md#blocked_eq_card_iff) — proved in Lean
+- [`BadWheels.twin_columns_bad_wheels`](docs/nodes/BadWheels.md#twin_columns_bad_wheels) — proved in Lean
+- [`BadWheels.divisors_pairwise_coprime`](docs/nodes/BadWheels.md#divisors_pairwise_coprime) — proved in Lean
+- [`BuchstabIdentity.legendre_phi_recurrence`](docs/nodes/BuchstabIdentity.md#legendre_phi_recurrence) — proved in Lean
+- [`BuchstabIdentity.buchstab_identity`](docs/nodes/BuchstabIdentity.md#buchstab_identity) — proved in Lean
+- [`BuchstabIdentity.buchstab_product_identity`](docs/nodes/BuchstabIdentity.md#buchstab_product_identity) — proved in Lean
+- [`SmoothNumbers.rankin_upper`](docs/nodes/SmoothNumbers.md#rankin_upper) — proved in Lean
+- [`SmoothNumbers.smooth_count_lower`](docs/nodes/SmoothNumbers.md#smooth_count_lower) — proved in Lean
+- [`SmoothNumbers.smooth_buchstab`](docs/nodes/SmoothNumbers.md#smooth_buchstab) — proved in Lean
+- [`RandomRotation.rotation_is_shift`](docs/nodes/RandomRotation.md#rotation_is_shift) — proved in Lean
+  - [`CRT.crt_map_bijective`](docs/nodes/CRT.md#crt_map_bijective) — proved in Lean
+- [`RandomRotation.random_rotation_survival`](docs/nodes/RandomRotation.md#random_rotation_survival) — proved in Lean
+  - [`SurvivorCount.general_survivor_count`](docs/nodes/SurvivorCount.md#general_survivor_count) — proved in Lean
+    - [`CRT.crt_map_bijective`](docs/nodes/CRT.md#crt_map_bijective) — proved in Lean
+- [`SmallWheelSurvivors.small_wheel_survivors`](docs/nodes/SmallWheelSurvivors.md#small_wheel_survivors) — proved in Lean
+  - [`SmallWheelSurvivors.legendre_error`](docs/nodes/SmallWheelSurvivors.md#legendre_error) — proved in Lean
+    - [`BrunPureSieve.legendre_exact`](docs/nodes/BrunPureSieve.md#legendre_exact) — proved in Lean
   - [`MertensThird.mertens_third`](docs/nodes/MertensThird.md#mertens_third) — proved in Lean
     - [`MertensThird.mertens_third_remainder`](docs/nodes/MertensThird.md#mertens_third_remainder) — proved in Lean
     - [`MertensThird.product_identity`](docs/nodes/MertensThird.md#product_identity) — proved in Lean
+- [`LargerSieve.larger_sieve`](docs/nodes/LargerSieve.md#larger_sieve) — proved in Lean
+- [`LargerSieve.larger_sieve_few`](docs/nodes/LargerSieve.md#larger_sieve_few) — proved in Lean
+- [`GallagherLocal.one_wheel_average`](docs/nodes/GallagherLocal.md#one_wheel_average) — proved in Lean
+- [`ChenWeights.chen_weight_le`](docs/nodes/ChenWeights.md#chen_weight_le) — proved in Lean
 
 ## What the network takes on trust
 
@@ -1963,9 +2021,9 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 68 | [`MertensSecond`](docs/nodes/MertensSecond.md) | the sum of the reciprocals of the primes (Mertens' second theorem) | proved in Lean |
 | 69 | [`BrunAnalytic`](docs/nodes/BrunAnalytic.md) | how few twin primes there are (Brun stage 5) | proved in Lean |
 | 70 | [`BrunTheorem`](docs/nodes/BrunTheorem.md) | the reciprocals of the twin primes have a finite sum (Brun's theorem) | proved in Lean |
-| 71 | [`GapConstant`](docs/nodes/GapConstant.md) | the constant for any even gap | planned: new, not yet proved |
-| 72 | [`PolyaCutoff`](docs/nodes/PolyaCutoff.md) | sifting to Polya's cutoff gives the Hardy-Littlewood constant exactly | planned: new, not yet proved |
-| 73 | [`BadWheels`](docs/nodes/BadWheels.md) | which wheels block fewer positions for linear forms | planned: new, not yet proved |
+| 71 | [`GapConstant`](docs/nodes/GapConstant.md) | the constant for any even gap | proved in Lean |
+| 72 | [`PolyaCutoff`](docs/nodes/PolyaCutoff.md) | sifting to Polya's cutoff gives the Hardy-Littlewood constant exactly | proved in Lean |
+| 73 | [`BadWheels`](docs/nodes/BadWheels.md) | which wheels block fewer positions for linear forms | proved in Lean |
 | 74 | [`BrunHooley`](docs/nodes/BrunHooley.md) | Hooley's product of truncated sieves | planned: new, not yet proved |
 | 75 | [`PatternUpperBound`](docs/nodes/PatternUpperBound.md) | every admissible pattern is at most its conjectured order | planned: new, not yet proved |
 | 76 | [`GapPairs`](docs/nodes/GapPairs.md) | prime pairs at any even gap, and Goldbach pairs | planned: new, not yet proved |
@@ -1975,21 +2033,21 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 80 | [`RomanoffTheorem`](docs/nodes/RomanoffTheorem.md) | a positive share of numbers are a prime plus a power of 2 | planned: new, not yet proved |
 | 81 | [`BrunTitchmarshPNT`](docs/nodes/BrunTitchmarshPNT.md) | primes in a short window (PNT+) | outside source: proved in Lean in another project |
 | 82 | [`RailBrunTitchmarsh`](docs/nodes/RailBrunTitchmarsh.md) | how many primes one column can hold in a window | planned: new, not yet proved |
-| 83 | [`BuchstabIdentity`](docs/nodes/BuchstabIdentity.md) | adding one wheel, counted by the first wheel that blocks | planned: new, not yet proved |
+| 83 | [`BuchstabIdentity`](docs/nodes/BuchstabIdentity.md) | adding one wheel, counted by the first wheel that blocks | proved in Lean |
 | 84 | [`FundamentalLemma`](docs/nodes/FundamentalLemma.md) | the survivor count matches its share while the wheels stay small | planned: new, not yet proved |
 | 85 | [`LowerBoundSieve`](docs/nodes/LowerBoundSieve.md) | twin columns with few prime factors | planned: new, not yet proved |
 | 86 | [`PetiteSieve`](docs/nodes/PetiteSieve.md) | an exact asymptotic for patterns of small dimension | planned: new, not yet proved |
 | 87 | [`SelbergTwinRails`](docs/nodes/SelbergTwinRails.md) | Selberg's bounds for the twin columns and prime pairs | planned: new, not yet proved |
 | 88 | [`ParityBarrier`](docs/nodes/ParityBarrier.md) | Selberg's parity example | planned: new, not yet proved |
 | 89 | [`PolynomialPatterns`](docs/nodes/PolynomialPatterns.md) | polynomial patterns: admissibility and the Bateman-Horn conjecture | planned: conditional |
-| 90 | [`SmoothNumbers`](docs/nodes/SmoothNumbers.md) | numbers built only from the wheels | planned: new, not yet proved |
-| 91 | [`RandomRotation`](docs/nodes/RandomRotation.md) | rotating every wheel at random | planned: new, not yet proved |
+| 90 | [`SmoothNumbers`](docs/nodes/SmoothNumbers.md) | numbers built only from the wheels | proved in Lean |
+| 91 | [`RandomRotation`](docs/nodes/RandomRotation.md) | rotating every wheel at random | proved in Lean |
 | 92 | [`ErdosSmallGaps`](docs/nodes/ErdosSmallGaps.md) | some prime gaps are well below average | planned: new, not yet proved |
-| 93 | [`SmallWheelSurvivors`](docs/nodes/SmallWheelSurvivors.md) | survivors match the share when the wheels stay below log x | planned: new, not yet proved |
+| 93 | [`SmallWheelSurvivors`](docs/nodes/SmallWheelSurvivors.md) | survivors match the share when the wheels stay below log x | proved in Lean |
 | 94 | [`SieveDataLimits`](docs/nodes/SieveDataLimits.md) | what the multiple counts alone can decide | planned: new, not yet proved |
-| 95 | [`LargerSieve`](docs/nodes/LargerSieve.md) | Gallagher's larger sieve: when each wheel leaves few positions | planned: new, not yet proved |
+| 95 | [`LargerSieve`](docs/nodes/LargerSieve.md) | Gallagher's larger sieve: when each wheel leaves few positions | proved in Lean |
 | 96 | [`ArithmeticLargeSieve`](docs/nodes/ArithmeticLargeSieve.md) | the large sieve: many blocked positions on every wheel | planned: new, not yet proved |
 | 97 | [`Schnirelmann`](docs/nodes/Schnirelmann.md) | every number is a sum of boundedly many primes | planned: new, not yet proved |
 | 98 | [`MaierMatrix`](docs/nodes/MaierMatrix.md) | short windows with too many and too few primes | planned: cited from a paper |
-| 99 | [`GallagherLocal`](docs/nodes/GallagherLocal.md) | one wheel's correction averages to 1 | planned: new, not yet proved |
-| 100 | [`ChenWeights`](docs/nodes/ChenWeights.md) | Chen's weights for numbers with at most two prime factors | planned: new, not yet proved |
+| 99 | [`GallagherLocal`](docs/nodes/GallagherLocal.md) | one wheel's correction averages to 1 | proved in Lean |
+| 100 | [`ChenWeights`](docs/nodes/ChenWeights.md) | Chen's weights for numbers with at most two prime factors | proved in Lean |

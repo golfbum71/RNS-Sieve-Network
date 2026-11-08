@@ -22,10 +22,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/LargerSieve.lean
     declaration: RNS.LargerSieve.larger_sieve_holds
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: larger_sieve_few
   declaration: RNS.LargerSieve.larger_sieve_few
@@ -34,10 +34,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/LargerSieve.lean
     declaration: RNS.LargerSieve.larger_sieve_few_holds
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 sources:
 - title: A. M. Odlyzko, Sieve Methods, senior thesis, Caltech (1971)

@@ -124,9 +124,9 @@ def pattern_share_asymptotic : Prop :=
 
 ## Used by
 
+- [`PolyaCutoff`](PolyaCutoff.md)
 - [`BrunSharp`](BrunSharp.md)
 - [`PatternUpperBound`](PatternUpperBound.md)
-- [`PolyaCutoff`](PolyaCutoff.md)
 - [`SelbergTwinRails`](SelbergTwinRails.md)
 
 ## Files

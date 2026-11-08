@@ -10,10 +10,7 @@ node:
   status: active
   improves: "Admissibility asks only that every wheel block fewer positions than its size; this node counts exactly how many a pattern of linear forms blocks, and names the wheels that block fewer than one per form."
   title: which wheels block fewer positions for linear forms
-  description: 'For a pattern of linear forms, a wheel blocks at most one position per form, and it blocks
-    fewer exactly when it divides the product of the leading coefficients and of all the cross differences.
-    For the two columns 6n-1 and 6n+1 that product is 432, so the wheels 2 and 3 are the only exceptions:
-    the 6n±1 wheel is exactly the removal of the bad wheels. Ford, Theorem 2.5 (first part).'
+  description: "For a pattern of linear forms whose two coefficients share no factor, a wheel blocks at most one position per form, and it blocks fewer exactly when it divides the bad product: the leading coefficients times the cross differences over ordered pairs of distinct forms. For the two columns 6n-1 and 6n+1 (forms 6n+5 and 6n+7) that product is -5184 = -2^6 3^4, so the wheels 2 and 3 are the only exceptions: the 6n±1 wheel is exactly the removal of the bad wheels. Ford, Theorem 2.5 (first part) and Lemma 7.7."
 conclusions:
 - id: blocked_le_card
   declaration: RNS.BadWheels.blocked_le_card
@@ -22,10 +19,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BadWheels.lean
     declaration: RNS.BadWheels.blocked_le_card_holds
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: blocked_eq_card_iff
   declaration: RNS.BadWheels.blocked_eq_card_iff
@@ -34,10 +31,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BadWheels.lean
     declaration: RNS.BadWheels.blocked_eq_card_iff_holds
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: twin_columns_bad_wheels
   declaration: RNS.BadWheels.twin_columns_bad_wheels
@@ -46,10 +43,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BadWheels.lean
     declaration: RNS.BadWheels.twin_columns_bad_wheels_holds
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: divisors_pairwise_coprime
   declaration: RNS.BadWheels.divisors_pairwise_coprime
@@ -58,10 +55,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BadWheels.lean
     declaration: RNS.BadWheels.divisors_pairwise_coprime_holds
-    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-08). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
