@@ -76,6 +76,7 @@ def general_survivor_count : Prop :=
 - [`TwinShare`](TwinShare.md)
 - [`ShareAsymptotics`](ShareAsymptotics.md)
 - [`BrunAnalytic`](BrunAnalytic.md)
+- [`RandomRotation`](RandomRotation.md)
 
 ## Files
 

@@ -14,6 +14,7 @@ Published work this node rests on or relates to; each entry says how.
 
 - [G. H. Hardy and J. E. Littlewood, Some problems of 'Partitio numerorum' III, Acta Math. 44 (1923), 1-70](https://doi.org/10.1007/BF02403921) — the singular series for prime pairs at a fixed gap
 - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Section 1.8: the gap-six constant is twice the twin constant
+- [T. Tao, 254A Supplement 4: Probabilistic models and heuristics for the primes](https://terrytao.wordpress.com/2015/01/04/254a-supplement-4-probabilistic-models-and-heuristics-for-the-primes-optional/) — Exercise 12, the Goldbach constant
 
 ## Related nodes
 
@@ -26,9 +27,9 @@ Connected in content but not by an arrow (no claim here takes theirs as a hypoth
 
 **Will rest on:** [`SingularSeries`](SingularSeries.md), [`TwinConstant`](TwinConstant.md)
 
-**Planned claims:** `gap_constant_eq_twin_mul`, `sexy_constant_eq_two_twin`
+**Planned claims:** `gap_constant_eq_twin_mul`, `sexy_constant_eq_two_twin`, `goldbach_constant`
 
-**Plan:** Split the product over the primes into those dividing the gap and the rest (HasProd.mul_compl), as TwinConstant does for the wheel 2; on a dividing odd wheel the pattern blocks one position, on the rest two. The gap of six is the special case with one dividing odd wheel.
+**Plan:** Split the product over the primes into those dividing the gap and the rest (HasProd.mul_compl), as TwinConstant does for the wheel 2; on a dividing odd wheel the pattern blocks one position, on the rest two. The gap of six is the special case with one dividing odd wheel. goldbach_constant: the pattern n, N - n has the same constant with the odd primes dividing N in place of those dividing the gap.
 
 **Scope:** Tier 1: a finite rewrite of the product, the same kind of proof as twin_prime_constant_eq_classical.
 

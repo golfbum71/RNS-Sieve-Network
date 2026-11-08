@@ -83,6 +83,7 @@ def mertens_third : Prop :=
 - [`MertensThird`](MertensThird.md)
 - [`ShareAsymptotics`](ShareAsymptotics.md)
 - [`BirdseySchay`](BirdseySchay.md)
+- [`SmallWheelSurvivors`](SmallWheelSurvivors.md)
 
 ## Files
 

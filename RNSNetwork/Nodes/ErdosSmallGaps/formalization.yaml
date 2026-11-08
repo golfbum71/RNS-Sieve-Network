@@ -1,0 +1,40 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's notes Ch. 5-9 and other lecture notes): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: ErdosSmallGaps.v1
+  family: ErdosSmallGaps
+  version: v1
+  order: 92
+  kind: paper
+  status: planned
+  title: some prime gaps are well below average
+  description: If prime pairs at every even gap up to twice the logarithm obey an upper bound of B times
+    their conjectured count, then infinitely often the gap to the next prime is at most one minus one
+    over 2B times the average gap. Selberg's bound gives B = 4, so infinitely often a gap is at most 7/8
+    of the average (Erdős 1940, in this form Ford Theorem 7.1).
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - SelbergTwinRails
+  - PrimeNumberTheorem
+  claims:
+  - small_gap_step
+  - erdos_small_gaps
+  tier: 'small_gap_step: Tier 2 (counting). erdos_small_gaps: Tier 3, needs the Selberg bound uniform
+    in the gap.'
+  plan: 'Count primes in (x/2, x] two ways: each has a next prime; if all gaps were at least (1 - delta)
+    log x, the pairs at gaps up to 2 log x would exceed what the pair bound allows, using the average
+    of the gap constant (GapConstant) over even gaps.'
+sources:
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Theorem 7.1 and the remark that Theorem 4.5 gives B = 4
+related:
+- node: GapPairs
+  note: the pair bound at each gap
+- node: GapConstant
+  note: the gap constant averaged over even gaps
+- node: GallagherAverage
+  note: the same averaging of the constant

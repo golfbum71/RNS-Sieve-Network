@@ -1,0 +1,37 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's notes Ch. 5-9 and other lecture notes): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: ArithmeticLargeSieve.v1
+  family: ArithmeticLargeSieve
+  version: v1
+  order: 96
+  kind: paper
+  status: planned
+  title: 'the large sieve: many blocked positions on every wheel'
+  description: If every wheel p up to X blocks f(p) positions, the survivors in a window of length N number
+    at most (square root of N plus X) squared over Q, where Q sums, over squarefree products of the wheels
+    up to X, the product of f(p) over p minus f(p). Q is the same sum as Selberg's J. Montgomery's arithmetic
+    large sieve, from the analytic large sieve inequality.
+conclusions: []
+planned:
+  source_status: New
+  rests_on: []
+  claims:
+  - analytic_large_sieve
+  - arithmetic_large_sieve
+  tier: 'Tier 3: the analytic inequality needs exponential sums and Fourier analysis on the circle.'
+  plan: Prove the large sieve inequality for well-spaced frequencies (Gallagher's form), then Montgomery's
+    lemma relating exponential sums at fractions with denominator q to the survivor counts per residue.
+sources:
+- title: A. M. Odlyzko, Sieve Methods, senior thesis, Caltech (1971)
+  url: https://thesis.library.caltech.edu/8060/1/Odlyzko_am_1971.pdf
+  relationship: Chapter 7, Theorem 7.11 and Corollary 7.18
+- title: 'T. Tao, 254A Notes 3: The large sieve and the Bombieri-Vinogradov theorem'
+  url: https://terrytao.wordpress.com/2015/01/10/254a-notes-3-the-large-sieve-and-the-bombieri-vinogradov-theorem/
+  relationship: Proposition 6, the analytic large sieve inequality
+related:
+- node: SelbergTwinRails
+  note: the same sum appears as Selberg's J
+- node: LargerSieve
+  note: the elementary companion

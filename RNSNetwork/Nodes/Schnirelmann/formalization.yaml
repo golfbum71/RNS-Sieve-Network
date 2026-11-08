@@ -1,0 +1,31 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's notes Ch. 5-9 and other lecture notes): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: Schnirelmann.v1
+  family: Schnirelmann
+  version: v1
+  order: 97
+  kind: paper
+  status: planned
+  title: every number is a sum of boundedly many primes
+  description: There is a constant c such that every number at least 2 is a sum of at most c primes (Schnirelmann
+    1930). The input from sieves is the upper bound for Goldbach pairs; the rest is Schnirelmann density.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - GapPairs
+  claims:
+  - goldbach_pairs_second_moment
+  - schnirelmann_bounded_sum
+  tier: Tier 3.
+  plan: Cauchy-Schwarz with goldbach_pair_bound gives a positive share of even numbers as sums of two
+    primes; Schnirelmann's density theorem then bounds the number of summands.
+sources:
+- title: A. M. Odlyzko, Sieve Methods, senior thesis, Caltech (1971)
+  url: https://thesis.library.caltech.edu/8060/1/Odlyzko_am_1971.pdf
+  relationship: Theorem 3.21
+related:
+- node: RomanoffTheorem
+  note: the same second-moment argument

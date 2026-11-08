@@ -1,0 +1,45 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's notes Ch. 5-9 and other lecture notes): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: RandomRotation.v1
+  family: RandomRotation
+  version: v1
+  order: 91
+  kind: paper
+  status: planned
+  title: rotating every wheel at random
+  description: 'Turn each wheel to a position chosen uniformly at random, independently. The chance that
+    every member of a given finite set of positions survives equals the product over the wheels of one
+    minus the number of distinct positions the set occupies on that wheel over the wheel size: exactly
+    the pattern''s survivor share. By the Chinese Remainder Theorem each choice of rotations is a shift
+    of the whole cycle, so this is a count of shifts. The random-sieve model of Banks, Ford and Tao and
+    the starting point of the large-gap construction (Ford Lemma 8.4).'
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - CRT
+  - SurvivorCount
+  claims:
+  - rotation_is_shift
+  - random_rotation_survival
+  tier: 'Tier 1: finite, by CRT.'
+  plan: 'rotation_is_shift: the map from shifts of the cycle to tuples of wheel rotations is a bijection
+    (CRT). random_rotation_survival: count the shifts under which the set avoids every blocked position,
+    wheel by wheel.'
+sources:
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Lemma 8.4
+- title: W. Banks, K. Ford and T. Tao, Large prime gaps and probabilistic models, Invent. Math. 233 (2023)
+  url: https://arxiv.org/abs/1908.08613
+  relationship: 'the model: survivors of a random residue class per prime'
+- title: 'T. Tao, 254A Supplement 4: Probabilistic models and heuristics for the primes'
+  url: https://terrytao.wordpress.com/2015/01/04/254a-supplement-4-probabilistic-models-and-heuristics-for-the-primes-optional/
+  relationship: Model 10, the modified Cramér model with the small primes sieved
+related:
+- node: BlockingRuns
+  note: a setting of the wheels is a shift of the cycle; blocked runs are the worst rotations
+- node: PolyaCutoff
+  note: the Banks-Ford-Tao model sifts at Polya's cutoff

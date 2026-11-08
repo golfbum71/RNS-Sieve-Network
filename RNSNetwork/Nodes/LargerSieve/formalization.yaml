@@ -1,0 +1,37 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's notes Ch. 5-9 and other lecture notes): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: LargerSieve.v1
+  family: LargerSieve
+  version: v1
+  order: 95
+  kind: paper
+  status: planned
+  title: 'Gallagher''s larger sieve: when each wheel leaves few positions'
+  description: 'If a set of numbers in a window of length N occupies at most g(q) positions on each wheel
+    q (prime powers allowed), then its size is at most the sum of log q minus log N, over the sum of log
+    q over g(q) minus log N, whenever the denominator is positive. So when every wheel leaves at most
+    G positions open and the wheels are numerous enough, fewer than G numbers survive. Elementary: counting
+    pairs that agree on a wheel. Gallagher 1971.'
+conclusions: []
+planned:
+  source_status: New
+  rests_on: []
+  claims:
+  - larger_sieve
+  - larger_sieve_few
+  tier: 'Tier 2: finite counting plus the identity that the logs of the prime powers dividing n add up
+    to log n.'
+  plan: Count pairs of members agreeing modulo q, weighted by log of the prime for q a prime power; Cauchy-Schwarz
+    gives the lower bound in terms of g(q); the difference of two members is less than N so its prime-power
+    divisors carry total weight below log N.
+sources:
+- title: A. M. Odlyzko, Sieve Methods, senior thesis, Caltech (1971)
+  url: https://thesis.library.caltech.edu/8060/1/Odlyzko_am_1971.pdf
+  relationship: Chapter 5, Theorem 5.1 and Corollary 5.4
+related:
+- node: BrunHooley
+  note: the small sieve, for wheels that block few positions; this is for wheels that leave few
+- node: ArithmeticLargeSieve
+  note: the large sieve, the other tool for many blocked positions

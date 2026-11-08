@@ -21,8 +21,11 @@ planned:
   claims:
   - buchstab_identity
   - legendre_phi_recurrence
+  - buchstab_product_identity
   tier: 'Tier 1: exact and finite.'
-  plan: Sort each blocked position by its smallest blocking wheel above the smaller cutoff and sum.
+  plan: 'Sort each blocked position by its smallest blocking wheel above the smaller cutoff and sum. buchstab_product_identity:
+    the product of one minus each share equals one minus the sum, over each wheel, of its share times
+    the product for the smaller wheels (telescoping).'
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
   url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
@@ -30,6 +33,9 @@ sources:
 - title: Prime-counting function (Legendre's and Meissel's phi)
   url: https://en.wikipedia.org/wiki/Prime-counting_function
   relationship: the recurrence for phi(x, a)
+- title: 'T. Tao, 254A Notes 4: Some sieve theory'
+  url: https://terrytao.wordpress.com/2015/01/21/254a-notes-4-some-sieve-theory/
+  relationship: Exercise 13, the product form
 related:
 - node: WheelOrder
   note: the same first-blocker count over one whole cycle

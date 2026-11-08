@@ -57,6 +57,10 @@ def column_imbalance_bound : Prop :=
 
 **Proof:** `RNS.SpreadBounds.column_imbalance_bound_step` in [`RNSSolutions/SpreadBounds.lean`](../../RNSSolutions/SpreadBounds.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
+## Used by
+
+- [`MaierMatrix`](MaierMatrix.md)
+
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/SpreadBounds/Conclusions.lean)

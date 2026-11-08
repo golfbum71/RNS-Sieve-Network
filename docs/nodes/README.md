@@ -86,8 +86,19 @@
 | 84 | [`FundamentalLemma`](FundamentalLemma.md) | the survivor count matches its share while the wheels stay small | planned: new, not yet proved |
 | 85 | [`LowerBoundSieve`](LowerBoundSieve.md) | twin columns with few prime factors | planned: new, not yet proved |
 | 86 | [`PetiteSieve`](PetiteSieve.md) | an exact asymptotic for patterns of small dimension | planned: new, not yet proved |
-| 87 | [`SelbergTwinRails`](SelbergTwinRails.md) | Selberg's bound for the twin columns | planned: new, not yet proved |
+| 87 | [`SelbergTwinRails`](SelbergTwinRails.md) | Selberg's bounds for the twin columns and prime pairs | planned: new, not yet proved |
 | 88 | [`ParityBarrier`](ParityBarrier.md) | Selberg's parity example | planned: new, not yet proved |
 | 89 | [`PolynomialPatterns`](PolynomialPatterns.md) | polynomial patterns: admissibility and the Bateman-Horn conjecture | planned: conditional |
+| 90 | [`SmoothNumbers`](SmoothNumbers.md) | numbers built only from the wheels | planned: new, not yet proved |
+| 91 | [`RandomRotation`](RandomRotation.md) | rotating every wheel at random | planned: new, not yet proved |
+| 92 | [`ErdosSmallGaps`](ErdosSmallGaps.md) | some prime gaps are well below average | planned: new, not yet proved |
+| 93 | [`SmallWheelSurvivors`](SmallWheelSurvivors.md) | survivors match the share when the wheels stay below log x | planned: new, not yet proved |
+| 94 | [`SieveDataLimits`](SieveDataLimits.md) | what the multiple counts alone can decide | planned: new, not yet proved |
+| 95 | [`LargerSieve`](LargerSieve.md) | Gallagher's larger sieve: when each wheel leaves few positions | planned: new, not yet proved |
+| 96 | [`ArithmeticLargeSieve`](ArithmeticLargeSieve.md) | the large sieve: many blocked positions on every wheel | planned: new, not yet proved |
+| 97 | [`Schnirelmann`](Schnirelmann.md) | every number is a sum of boundedly many primes | planned: new, not yet proved |
+| 98 | [`MaierMatrix`](MaierMatrix.md) | short windows with too many and too few primes | planned: cited from a paper |
+| 99 | [`GallagherLocal`](GallagherLocal.md) | one wheel's correction averages to 1 | planned: new, not yet proved |
+| 100 | [`ChenWeights`](ChenWeights.md) | Chen's weights for numbers with at most two prime factors | planned: new, not yet proved |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

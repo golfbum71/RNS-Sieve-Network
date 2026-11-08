@@ -12,6 +12,7 @@ Published work this node rests on or relates to; each entry says how.
 
 - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Lemma 3.8
 - [Prime-counting function (Legendre's and Meissel's phi)](https://en.wikipedia.org/wiki/Prime-counting_function) — the recurrence for phi(x, a)
+- [T. Tao, 254A Notes 4: Some sieve theory](https://terrytao.wordpress.com/2015/01/21/254a-notes-4-some-sieve-theory/) — Exercise 13, the product form
 
 ## Related nodes
 
@@ -24,11 +25,11 @@ Connected in content but not by an arrow (no claim here takes theirs as a hypoth
 
 **Will rest on:** no other node
 
-**Planned claims:** `buchstab_identity`, `legendre_phi_recurrence`
+**Planned claims:** `buchstab_identity`, `legendre_phi_recurrence`, `buchstab_product_identity`
 
-**Plan:** Sort each blocked position by its smallest blocking wheel above the smaller cutoff and sum.
+**Plan:** Sort each blocked position by its smallest blocking wheel above the smaller cutoff and sum. buchstab_product_identity: the product of one minus each share equals one minus the sum, over each wheel, of its share times the product for the smaller wheels (telescoping).
 
 **Scope:** Tier 1: exact and finite.
 
-**Cited by:** [`PetiteSieve`](PetiteSieve.md)
+**Cited by:** [`PetiteSieve`](PetiteSieve.md), [`MaierMatrix`](MaierMatrix.md)
 

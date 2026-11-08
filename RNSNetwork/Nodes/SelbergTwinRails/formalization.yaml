@@ -8,12 +8,13 @@ node:
   order: 87
   kind: paper
   status: planned
-  title: Selberg's bound for the twin columns
+  title: Selberg's bounds for the twin columns and prime pairs
   description: The wheels from 5 up form a Selberg sieve problem for the twin columns, with each wheel's
     share two over the wheel; the wheels 2 and 3 must be left out, since Mathlib's sieve needs every share
     positive and the columns have share zero there. Selberg's Lambda-squared weights then give at most
     four times the twin-prime constant times N over log N squared twin pairs, four times the conjectured
-    count. Ford Theorems 4.1 and 4.5.
+    count. Ford Theorems 4.1 and 4.5. The same argument bounds pairs at any even gap and Goldbach pairs
+    by four times their conjectured counts.
   improves: The Brun nodes lose a power of log log N or of log N; this has the right order with an explicit
     constant.
 conclusions: []
@@ -25,11 +26,16 @@ planned:
   claims:
   - wheels_selberg_instance
   - selberg_twin_columns_bound
+  - selberg_gap_bound
+  - selberg_goldbach_bound
+  - survivor_reciprocal_lower
   tier: 'wheels_selberg_instance: Tier 1. selberg_twin_columns_bound: Tier 3 (needs the asymptotic for
     J, Ford Theorem 4.4).'
   plan: 'Session 1: build the SelbergSieve structure (support the positions up to N, prodPrimes the product
     of the primes from 5 to z, nu the twin share). Session 2: the sum J for h(p) = 2/(p-2) (Ford Theorem
-    4.4). Session 3: Theorem 4.5 for the gap 2.'
+    4.4). Session 3: Theorem 4.5 for the gap 2. Session 4: any even gap and Goldbach pairs (Ford Theorem
+    4.5 for general k; Heath-Brown Theorems 3.1-3.2). survivor_reciprocal_lower (Tier 1): the sum of one
+    over the survivors up to y is at least the survivor share times log y.'
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
   url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
@@ -37,6 +43,12 @@ sources:
 - title: Mathlib, Mathlib.NumberTheory.SelbergSieve
   url: https://imperialcollegelondon.github.io/FLT/docs/Mathlib/NumberTheory/SelbergSieve.html
   relationship: the sieve structure and the Lambda-squared upper bound sieve to instantiate
+- title: D. R. Heath-Brown, Lectures on sieves (Bonn 2002), arXiv:math/0209360
+  url: https://arxiv.org/abs/math/0209360
+  relationship: Theorems 3.1 and 3.2 and Corollary 3.2
+- title: A. M. Odlyzko, Sieve Methods, senior thesis, Caltech (1971)
+  url: https://thesis.library.caltech.edu/8060/1/Odlyzko_am_1971.pdf
+  relationship: Lemma 3.3
 related:
 - node: HardyLittlewood
   note: the conjectured count, one quarter of this bound

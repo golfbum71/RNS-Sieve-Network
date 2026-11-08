@@ -128,6 +128,7 @@ def twin_bonferroni_upper : Prop :=
 
 - [`BrunTwinBound`](BrunTwinBound.md)
 - [`BrunHooley`](BrunHooley.md)
+- [`SmallWheelSurvivors`](SmallWheelSurvivors.md)
 
 ## Files
 

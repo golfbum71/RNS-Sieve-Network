@@ -37,6 +37,7 @@ def crt_map_bijective : Prop :=
 
 - [`SurvivorCount`](SurvivorCount.md)
 - [`BlockingRuns`](BlockingRuns.md)
+- [`RandomRotation`](RandomRotation.md)
 
 ## Files
 

@@ -35,6 +35,10 @@ sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
   url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
   relationship: Lemmas 2.1-2.2, Theorems 2.3-2.4
+- title: 'T. Tao, 254A Notes 4: Some sieve theory'
+  url: https://terrytao.wordpress.com/2015/01/21/254a-notes-4-some-sieve-theory/
+  relationship: 'Remark 12: products of upper sieves are upper sieves; Proposition 14, the general combinatorial
+    sieve'
 related:
 - node: BrunTwinBound
   note: Brun's single truncation for the twin pattern; this sieve truncates per range

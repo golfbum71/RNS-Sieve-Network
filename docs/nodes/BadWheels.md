@@ -11,6 +11,7 @@ For a pattern of linear forms, a wheel blocks at most one position per form, and
 Published work this node rests on or relates to; each entry says how.
 
 - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Theorem 2.5, first part
+- [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Lemma 7.7
 
 ## Related nodes
 
@@ -23,9 +24,9 @@ Connected in content but not by an arrow (no claim here takes theirs as a hypoth
 
 **Will rest on:** [`LinearForms`](LinearForms.md)
 
-**Planned claims:** `blocked_le_card`, `blocked_eq_card_iff`, `twin_columns_bad_wheels`
+**Planned claims:** `blocked_le_card`, `blocked_eq_card_iff`, `twin_columns_bad_wheels`, `divisors_pairwise_coprime`
 
-**Plan:** Each form with a coefficient coprime to the wheel has exactly one root; two roots coincide exactly when the wheel divides the cross difference. The column case is a computation of the product (6, 6, 12).
+**Plan:** Each form with a coefficient coprime to the wheel has exactly one root; two roots coincide exactly when the wheel divides the cross difference. The column case is a computation of the product (6, 6, 12). divisors_pairwise_coprime (Ford Lemma 7.7): if each form is divisible by a number coprime to the bad product, those numbers are pairwise coprime; same cross-difference argument.
 
 **Scope:** Tier 1: modular arithmetic, decidable for the column case.
 

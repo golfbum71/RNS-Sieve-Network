@@ -24,10 +24,13 @@ planned:
   claims:
   - gap_constant_eq_twin_mul
   - sexy_constant_eq_two_twin
+  - goldbach_constant
   tier: 'Tier 1: a finite rewrite of the product, the same kind of proof as twin_prime_constant_eq_classical.'
-  plan: Split the product over the primes into those dividing the gap and the rest (HasProd.mul_compl),
+  plan: 'Split the product over the primes into those dividing the gap and the rest (HasProd.mul_compl),
     as TwinConstant does for the wheel 2; on a dividing odd wheel the pattern blocks one position, on
-    the rest two. The gap of six is the special case with one dividing odd wheel.
+    the rest two. The gap of six is the special case with one dividing odd wheel. goldbach_constant: the
+    pattern n, N - n has the same constant with the odd primes dividing N in place of those dividing the
+    gap.'
 sources:
 - title: G. H. Hardy and J. E. Littlewood, Some problems of 'Partitio numerorum' III, Acta Math. 44 (1923),
     1-70
@@ -36,6 +39,9 @@ sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
   url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
   relationship: 'Section 1.8: the gap-six constant is twice the twin constant'
+- title: 'T. Tao, 254A Supplement 4: Probabilistic models and heuristics for the primes'
+  url: https://terrytao.wordpress.com/2015/01/04/254a-supplement-4-probabilistic-models-and-heuristics-for-the-primes-optional/
+  relationship: Exercise 12, the Goldbach constant
 related:
 - node: GapTracks
   note: 'the column fact behind the factor 2 at the wheel 3: a gap divisible by 6 stays in one column'

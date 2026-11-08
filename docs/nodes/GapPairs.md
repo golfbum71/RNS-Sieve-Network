@@ -29,5 +29,5 @@ Connected in content but not by an arrow (no claim here takes theirs as a hypoth
 
 **Scope:** Tier 2: a specialisation of pattern_count_le.
 
-**Cited by:** [`RomanoffTheorem`](RomanoffTheorem.md)
+**Cited by:** [`RomanoffTheorem`](RomanoffTheorem.md), [`Schnirelmann`](Schnirelmann.md)
 

@@ -189,26 +189,27 @@ GROUPS = [
     ("patterns", "Patterns, admissibility and the Hardy-Littlewood constants", [
         "Admissibility", "SingularSeries", "TwinConstant", "HardyLittlewood", "HensleyRichards",
         "LinearForms", "InadmissibleOccurrences", "TwinShare", "GallagherAverage", "PrimeGapsBridge",
-        "BirdseySchay", "GapConstant", "PolyaCutoff", "BadWheels", "PolynomialPatterns"]),
+        "BirdseySchay", "GapConstant", "PolyaCutoff", "BadWheels", "PolynomialPatterns", "GallagherLocal"]),
     ("spread", "How survivors spread across the cycle", [
         "UniformSubdivision", "LehmerSplit", "SurvivorSymmetry", "SpreadBounds", "Sawtooth",
         "LehmerExcess", "GermainCriterion", "HurwitzZetaZero", "LargestGap", "MenonIdentity",
-        "RamanujanSums", "TuranCycle"]),
+        "RamanujanSums", "TuranCycle", "MaierMatrix"]),
     ("gaps", "Gaps between survivors and between primes", [
         "GapConjectures", "GapTracks", "DudekJohnston", "GapCertificate", "BlockingRuns", "KanoldBound",
         "PillaiBrauer", "JacobsthalQuadratic", "LongGaps", "RoughInPrimeGaps", "GapMoments",
-        "AlmostPrimeWindow", "GapPairs", "RomanoffTheorem", "ErdosSmallGaps"]),
+        "AlmostPrimeWindow", "GapPairs", "RomanoffTheorem", "ErdosSmallGaps", "Schnirelmann"]),
     ("germain", "Sophie Germain primes", [
         "SophieGermainWheel", "SophieGermainPowers", "SophieGermainTheorem", "GermainAuxiliary",
         "GermainReciprocals"]),
     ("shares", "Survivor shares and analytic inputs", [
         "ShareBounds", "ShareAsymptotics", "MertensThird", "MertensSecond", "PrimeNumberTheorem",
-        "CeilingOvershoot", "SmoothNumbers"]),
+        "CeilingOvershoot", "SmoothNumbers", "SmallWheelSurvivors"]),
     ("sieves", "Sieve methods: Brun, Hooley, Selberg", [
         "BrunPureSieve", "BrunTwinCount", "BrunTruncation", "BrunTwinBound", "BrunAnalytic",
         "BrunTheorem", "BrunTwinSum", "BrunSharp", "BrunHooley", "PatternUpperBound",
         "PatternReciprocals", "BuchstabIdentity", "FundamentalLemma", "LowerBoundSieve", "PetiteSieve",
-        "SelbergTwinRails", "ParityBarrier", "BrunTitchmarshPNT", "RailBrunTitchmarsh"]),
+        "SelbergTwinRails", "ParityBarrier", "BrunTitchmarshPNT", "RailBrunTitchmarsh",
+        "SieveDataLimits", "LargerSieve", "ArithmeticLargeSieve", "ChenWeights"]),
 ]
 GROUP_TITLE = {key: title for key, title, _ in GROUPS}
 GROUP_TITLE["other"] = "Other"

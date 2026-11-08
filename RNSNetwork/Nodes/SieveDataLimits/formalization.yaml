@@ -1,0 +1,36 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's notes Ch. 5-9 and other lecture notes): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: SieveDataLimits.v1
+  family: SieveDataLimits
+  version: v1
+  order: 94
+  kind: paper
+  status: planned
+  title: what the multiple counts alone can decide
+  description: 'Knowing only how many numbers each product of wheels divides pins the survivor count to
+    an interval, not a value; the best upper and lower bounds are linear programs whose duals are the
+    upper and lower sieves. Worked case: if 100 numbers have 60 even and 10 divisible by 3, the numbers
+    coprime to 6 are between 30 and 40, and both ends occur. Tao, 254A Notes 4 (Theorem 5, Exercises 4
+    and 8).'
+conclusions: []
+planned:
+  source_status: New
+  rests_on: []
+  claims:
+  - two_three_example
+  - sieve_duality
+  tier: 'two_three_example: Tier 1 (decide). sieve_duality: Tier 3 (linear-programming duality for finitely
+    many wheels).'
+  plan: 'two_three_example: the counts of the four classes mod 6 are four unknowns with three linear constraints;
+    both bounds come from nonnegativity. sieve_duality: LP duality over the 2^k divisibility patterns.'
+sources:
+- title: 'T. Tao, 254A Notes 4: Some sieve theory'
+  url: https://terrytao.wordpress.com/2015/01/21/254a-notes-4-some-sieve-theory/
+  relationship: Theorem 5 (dual sieve problem) and Exercises 4 and 8
+related:
+- node: ParityBarrier
+  note: another limit on what sieve data can decide
+- node: BrunPureSieve
+  note: the Bonferroni bounds, particular feasible sieves

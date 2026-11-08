@@ -53,6 +53,7 @@ def prime_number_theorem : Prop :=
 - [`CeilingOvershoot`](CeilingOvershoot.md)
 - [`PrimeNumberTheorem`](PrimeNumberTheorem.md)
 - [`BirdseySchay`](BirdseySchay.md)
+- [`ErdosSmallGaps`](ErdosSmallGaps.md)
 - [`ParityBarrier`](ParityBarrier.md)
 
 ## Files

@@ -13,6 +13,7 @@ Split the wheels into ranges and stop inclusion-exclusion separately in each ran
 Published work this node rests on or relates to; each entry says how.
 
 - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Lemmas 2.1-2.2, Theorems 2.3-2.4
+- [T. Tao, 254A Notes 4: Some sieve theory](https://terrytao.wordpress.com/2015/01/21/254a-notes-4-some-sieve-theory/) — Remark 12: products of upper sieves are upper sieves; Proposition 14, the general combinatorial sieve
 
 ## Related nodes
 

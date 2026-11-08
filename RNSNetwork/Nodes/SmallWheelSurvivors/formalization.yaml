@@ -1,0 +1,38 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's notes Ch. 5-9 and other lecture notes): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: SmallWheelSurvivors.v1
+  family: SmallWheelSurvivors
+  version: v1
+  order: 93
+  kind: paper
+  status: planned
+  title: survivors match the share when the wheels stay below log x
+  description: With the wheels up to about log x, the numbers up to x surviving every wheel number e to
+    minus Euler's constant times x over the logarithm of the largest wheel, asymptotically. The proof
+    is Legendre's exact identity, whose 2 to the number of wheels error terms are small in this range,
+    plus Mertens' third theorem. Heath-Brown, Corollary 1.2.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - BrunPureSieve
+  - MertensThird
+  claims:
+  - small_wheel_survivors
+  tier: Tier 2.
+  plan: legendre_exact with each remainder at most 1, so the error is at most 2 to the number of wheels,
+    at most x^(o(1)) for wheels below log x; then mertens_third for the share.
+sources:
+- title: D. R. Heath-Brown, Lectures on sieves (Bonn 2002), arXiv:math/0209360
+  url: https://arxiv.org/abs/math/0209360
+  relationship: Corollary 1.2 and Example 1
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Section 1.3, Legendre's sieve for primes
+related:
+- node: FundamentalLemma
+  note: the same conclusion for wheels up to a small power of x
+- node: CeilingOvershoot
+  note: the failure when the wheels reach the square root

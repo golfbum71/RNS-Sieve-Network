@@ -1119,3 +1119,108 @@ For polynomial patterns such as n^2 + 1, a wheel blocks the roots of the polynom
 - Open inputs: `bateman_horn_conjecture`, `sq_add_one_constant_converges`
 - Scope: poly_admissible_iff and sq_add_one_admissible: Tier 1. landau_of_bateman_horn: Tier 2.
 - Status: Planned (conditional)
+
+---
+
+## Candidates from Ford Ch. 5-9 and other lecture notes (added 2026-11-08)
+
+Planned nodes scoped from the later chapters of Ford's notes and from the other lecture
+notes listed below. Each is a dashed node on [`GRAPH.md`](../GRAPH.md). Search-only check
+for existing Lean; confirm with Loogle before starting.
+
+### 90. `SmoothNumbers` — numbers built only from the wheels
+The numbers up to x whose prime factors are all wheels up to y. Rankin's bound: their count is at most x to a power alpha times the product over the wheels of one over one minus the wheel to the minus alpha, for any alpha between 0 and 1; at alpha = 1 that product is the reciprocal of the survivor share. A lower bound counts the products of the wheels directly, and a Buchstab-type identity removes the largest wheel. Ford Chapter 5.
+- Lean (planned): `rankin_upper`, `smooth_count_lower`, `smooth_buchstab`
+- Rests on: Mathlib only
+- Scope: Tier 1: all three are finite.
+- Status: Planned
+
+### 91. `RandomRotation` — rotating every wheel at random
+Turn each wheel to a position chosen uniformly at random, independently. The chance that every member of a given finite set of positions survives equals the product over the wheels of one minus the number of distinct positions the set occupies on that wheel over the wheel size: exactly the pattern's survivor share. By the Chinese Remainder Theorem each choice of rotations is a shift of the whole cycle, so this is a count of shifts. The random-sieve model of Banks, Ford and Tao and the starting point of the large-gap construction (Ford Lemma 8.4).
+- Lean (planned): `rotation_is_shift`, `random_rotation_survival`
+- Rests on: `CRT`, `SurvivorCount`
+- Scope: Tier 1: finite, by CRT.
+- Status: Planned
+
+### 92. `ErdosSmallGaps` — some prime gaps are well below average
+If prime pairs at every even gap up to twice the logarithm obey an upper bound of B times their conjectured count, then infinitely often the gap to the next prime is at most one minus one over 2B times the average gap. Selberg's bound gives B = 4, so infinitely often a gap is at most 7/8 of the average (Erdős 1940, in this form Ford Theorem 7.1).
+- Lean (planned): `small_gap_step`, `erdos_small_gaps`
+- Rests on: `SelbergTwinRails`, `PrimeNumberTheorem`
+- Scope: small_gap_step: Tier 2 (counting). erdos_small_gaps: Tier 3, needs the Selberg bound uniform in the gap.
+- Status: Planned
+
+### 93. `SmallWheelSurvivors` — survivors match the share when the wheels stay below log x
+With the wheels up to about log x, the numbers up to x surviving every wheel number e to minus Euler's constant times x over the logarithm of the largest wheel, asymptotically. The proof is Legendre's exact identity, whose 2 to the number of wheels error terms are small in this range, plus Mertens' third theorem. Heath-Brown, Corollary 1.2.
+- Lean (planned): `small_wheel_survivors`
+- Rests on: `BrunPureSieve`, `MertensThird`
+- Scope: Tier 2.
+- Status: Planned
+
+### 94. `SieveDataLimits` — what the multiple counts alone can decide
+Knowing only how many numbers each product of wheels divides pins the survivor count to an interval, not a value; the best upper and lower bounds are linear programs whose duals are the upper and lower sieves. Worked case: if 100 numbers have 60 even and 10 divisible by 3, the numbers coprime to 6 are between 30 and 40, and both ends occur. Tao, 254A Notes 4 (Theorem 5, Exercises 4 and 8).
+- Lean (planned): `two_three_example`, `sieve_duality`
+- Rests on: Mathlib only
+- Scope: two_three_example: Tier 1 (decide). sieve_duality: Tier 3 (linear-programming duality for finitely many wheels).
+- Status: Planned
+
+### 95. `LargerSieve` — Gallagher's larger sieve: when each wheel leaves few positions
+If a set of numbers in a window of length N occupies at most g(q) positions on each wheel q (prime powers allowed), then its size is at most the sum of log q minus log N, over the sum of log q over g(q) minus log N, whenever the denominator is positive. So when every wheel leaves at most G positions open and the wheels are numerous enough, fewer than G numbers survive. Elementary: counting pairs that agree on a wheel. Gallagher 1971.
+- Lean (planned): `larger_sieve`, `larger_sieve_few`
+- Rests on: Mathlib only
+- Scope: Tier 2: finite counting plus the identity that the logs of the prime powers dividing n add up to log n.
+- Status: Planned
+
+### 96. `ArithmeticLargeSieve` — the large sieve: many blocked positions on every wheel
+If every wheel p up to X blocks f(p) positions, the survivors in a window of length N number at most (square root of N plus X) squared over Q, where Q sums, over squarefree products of the wheels up to X, the product of f(p) over p minus f(p). Q is the same sum as Selberg's J. Montgomery's arithmetic large sieve, from the analytic large sieve inequality.
+- Lean (planned): `analytic_large_sieve`, `arithmetic_large_sieve`
+- Rests on: Mathlib only
+- Scope: Tier 3: the analytic inequality needs exponential sums and Fourier analysis on the circle.
+- Status: Planned
+
+### 97. `Schnirelmann` — every number is a sum of boundedly many primes
+There is a constant c such that every number at least 2 is a sum of at most c primes (Schnirelmann 1930). The input from sieves is the upper bound for Goldbach pairs; the rest is Schnirelmann density.
+- Lean (planned): `goldbach_pairs_second_moment`, `schnirelmann_bounded_sum`
+- Rests on: `GapPairs`
+- Scope: Tier 3.
+- Status: Planned
+
+### 98. `MaierMatrix` — short windows with too many and too few primes
+Maier's matrix: rows are windows of length (log x) to a power A, columns are the positions coprime to a product P of wheels from a middle range. Counting primes by rows and by columns must agree, but the number of columns differs from the length times the share of P by a factor that oscillates (the Buchstab function minus e to minus Euler's constant). So some windows hold noticeably more primes than average and some fewer. The column count is finite and wheel-native; the prime counts in progressions modulo P are cited.
+- Lean (planned): `maier_column_identity`, `maier_irregularity`
+- Rests on: `SpreadBounds`, `BuchstabIdentity`
+- Scope: maier_column_identity: Tier 1. maier_irregularity: Tier 3, with the prime number theorem in progressions modulo P as a cited hypothesis.
+- Status: Planned (cites a published result)
+
+### 99. `GallagherLocal` — one wheel's correction averages to 1
+For a single wheel, its correction factor for a pattern of k offsets (one minus the occupied positions over the wheel, divided by one minus one over the wheel to the k), averaged over all patterns of k distinct offsets up to h, tends to 1 as h grows. This is the one-wheel step of Gallagher's theorem, which GallagherAverage currently cites.
+- Lean (planned): `one_wheel_average`
+- Rests on: `SingularSeries`
+- Scope: Tier 1-2: finite counting of how patterns fall on one wheel.
+- Status: Planned
+
+### 100. `ChenWeights` — Chen's weights for numbers with at most two prime factors
+For numbers between x to the 2/3 and x, being prime or a product of two primes is at least one, minus half the count of primes up to the cube root dividing it, minus half the count of its factorizations into three primes with only the first below the cube root, minus half the count of small primes whose square divides it. A finite inequality on factorizations; the weight Chen's theorem sieves with. Tao, Supplement 5, Lemma 11.
+- Lean (planned): `chen_weight_le`
+- Rests on: Mathlib only
+- Scope: Tier 1: a case split on how many prime factors lie below the cube root.
+- Status: Planned
+
+### Added to nodes 71-89
+- `BadWheels` gains `divisors_pairwise_coprime` (Ford Lemma 7.7).
+- `BuchstabIdentity` gains `buchstab_product_identity` (Tao, Notes 4, Exercise 13).
+- `GapConstant` gains `goldbach_constant` (Tao, Supplement 4, Exercise 12).
+- `SelbergTwinRails` gains `selberg_gap_bound`, `selberg_goldbach_bound` (Ford Thm 4.5; Heath-Brown Thms 3.1-3.2) and `survivor_reciprocal_lower` (Odlyzko Lemma 3.3).
+- `BrunHooley` cites Tao, Notes 4 (Remark 12, Proposition 14).
+
+### Read, nothing added
+Reviewed 2026-11-08 and judged outside the RNS core or already covered:
+- Ford Ch. 6 (shifted primes, Carmichael numbers, values of Euler's function): analytic, no wheel-native piece beyond the column facts already in `GapTracks`.
+- Ford Ch. 7.2-7.4 (GPY, Maynard-Tao): covered by the outside source PrimeGapsLib via `PrimeGapsBridge`. Ch. 7.5-7.7 (Heath-Brown's difference sets, repeated values of phi and sigma): not wheel-native.
+- Ford Ch. 8 (large gaps): covered by `BlockingRuns`, `LongGaps` and the new `RandomRotation`; Siegel-zero results (8.7) are outside the RNS.
+- Ford Ch. 9 (Cramér and Granville models): heuristic; the wheel-native part is `RandomRotation`. Sections 9.3-9.4 are empty in the notes.
+- Tao, Supplement 5 (linear sieve, Chen): beyond `ChenWeights` it needs Bombieri-Vinogradov and the beta sieve.
+- Soundararajan, Lecture 2 (variance, Montgomery-Soundararajan moments): needs Hardy-Littlewood with error terms; conditional and analytic.
+- Heath-Brown, Sections 4-6 (beta sieve, weighted sieve, Chen): Tier 4; revisit after `LowerBoundSieve`.
+- Green, Oxford C3.8 notes: zeta-function route to the prime number theorem; its one sieve result (Theorem 10.1) is the window bound in `BrunTitchmarshPNT`.
+- Granville, Bulletin AMS 2015, and Kedlaya, MIT 18.785 notes: Maynard-Tao expositions; covered by PrimeGapsLib. Kedlaya's Exercise 20.6.1 (the run after a primorial) is a case of `BlockingRuns`.
+- Kontorovich, Rutgers notes: Brun's theorem and the Selberg sieve; covered by the Brun nodes and `SelbergTwinRails`.

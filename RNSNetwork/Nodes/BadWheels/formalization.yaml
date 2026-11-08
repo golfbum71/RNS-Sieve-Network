@@ -22,14 +22,19 @@ planned:
   - blocked_le_card
   - blocked_eq_card_iff
   - twin_columns_bad_wheels
+  - divisors_pairwise_coprime
   tier: 'Tier 1: modular arithmetic, decidable for the column case.'
-  plan: Each form with a coefficient coprime to the wheel has exactly one root; two roots coincide exactly
+  plan: 'Each form with a coefficient coprime to the wheel has exactly one root; two roots coincide exactly
     when the wheel divides the cross difference. The column case is a computation of the product (6, 6,
-    12).
+    12). divisors_pairwise_coprime (Ford Lemma 7.7): if each form is divisible by a number coprime to
+    the bad product, those numbers are pairwise coprime; same cross-difference argument.'
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
   url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
   relationship: Theorem 2.5, first part
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Lemma 7.7
 related:
 - node: Admissibility
   note: admissibility asks that every wheel block fewer than its size; this counts how many it blocks
