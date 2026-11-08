@@ -77,14 +77,15 @@ private theorem corr_out {g : Nat} (hg0 : g ≠ 0) :
   rintro ⟨hpg, hp2⟩
   apply hp
   unfold corrSupport
-  rw [Finset.mem_preimage, Finset.mem_filter, Nat.mem_primeFactors]
-  exact ⟨⟨p.2, hpg, hg0⟩, hp2⟩
+  exact Finset.mem_preimage.mpr
+    (Finset.mem_filter.mpr ⟨Nat.mem_primeFactors.mpr ⟨p.2, hpg, hg0⟩, hp2⟩)
 
 private theorem corr_prod {g : Nat} :
     ∏ p ∈ corrSupport g, corr g (p : Nat) = odd_divisor_correction g := by
   unfold corrSupport odd_divisor_correction
-  rw [Finset.prod_preimage (Subtype.val : Nat.Primes → Nat) _ _ (corr g)
-    (fun x hx hnr => (hnr ⟨⟨x, (Nat.mem_primeFactors.mp (Finset.mem_filter.mp hx).1).1⟩, rfl⟩).elim)]
+  refine (Finset.prod_preimage (Subtype.val : Nat.Primes → Nat) _ Subtype.val_injective.injOn (corr g)
+    (fun x hx hnr => (hnr ⟨(⟨x, (Nat.mem_primeFactors.mp (Finset.mem_filter.mp hx).1).1⟩ :
+      {p : Nat // p.Prime}), rfl⟩).elim)).trans ?_
   refine Finset.prod_congr rfl (fun x hx => ?_)
   obtain ⟨hx1, hx2⟩ := Finset.mem_filter.mp hx
   unfold corr

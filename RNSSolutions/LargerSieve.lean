@@ -186,7 +186,7 @@ theorem larger_sieve_holds : larger_sieve := by
   · rw [← h0]
     linarith
   · by_contra hcon
-    push_neg at hcon
+    push Not at hcon
     have h1 : 0 < a * (a * (s2 - L) - (s1 - L)) := mul_pos hpos (by linarith)
     nlinarith
 
