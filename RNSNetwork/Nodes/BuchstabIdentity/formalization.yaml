@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: BuchstabIdentity.v1
@@ -7,25 +7,51 @@ node:
   version: v1
   order: 83
   kind: paper
-  status: planned
+  status: active
+  improves: "SurvivorCount and BrunPureSieve count the survivors of a fixed set of wheels; this node says how the count changes when wheels are added, one at a time (Legendre) or several at once (Buchstab)."
   title: adding one wheel, counted by the first wheel that blocks
   description: 'The survivors of the wheels up to a larger prime equal the survivors of the wheels up
     to a smaller one, minus, for each wheel in between, the positions it is the first to block. With the
     plain pattern this is Legendre''s recurrence for phi(x, a): bringing in the next wheel removes the
     survivors of the earlier wheels among the multiples of the new prime. Buchstab''s identity, Ford Lemma
     3.8.'
-conclusions: []
-planned:
-  source_status: New
-  rests_on: []
-  claims:
-  - buchstab_identity
-  - legendre_phi_recurrence
-  - buchstab_product_identity
-  tier: 'Tier 1: exact and finite.'
-  plan: 'Sort each blocked position by its smallest blocking wheel above the smaller cutoff and sum. buchstab_product_identity:
-    the product of one minus each share equals one minus the sum, over each wheel, of its share times
-    the product for the smaller wheels (telescoping).'
+conclusions:
+- id: legendre_phi_recurrence
+  declaration: RNS.BuchstabIdentity.legendre_phi_recurrence
+  summary: "Adding a prime wheel q removes the survivors of the earlier wheels up to N divided by q."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BuchstabIdentity.lean
+    declaration: RNS.BuchstabIdentity.legendre_phi_recurrence_holds
+    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+  designated: lean-proof
+- id: buchstab_identity
+  declaration: RNS.BuchstabIdentity.buchstab_identity
+  summary: "Survivors of old and new wheels = survivors of the old wheels minus, per new wheel, the positions it is the first new wheel to block."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BuchstabIdentity.lean
+    declaration: RNS.BuchstabIdentity.buchstab_identity_holds
+    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+  designated: lean-proof
+- id: buchstab_product_identity
+  declaration: RNS.BuchstabIdentity.buchstab_product_identity
+  summary: "The product of one minus each share is one minus the sum of each share times the product for the smaller wheels."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BuchstabIdentity.lean
+    declaration: RNS.BuchstabIdentity.buchstab_product_identity_holds
+    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+  designated: lean-proof
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
   url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
