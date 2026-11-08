@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's notes Ch. 5-9 and other lecture notes): scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: ChenWeights.v1
@@ -7,23 +7,27 @@ node:
   version: v1
   order: 100
   kind: paper
-  status: planned
+  status: active
+  improves: "AlmostPrimeWindow shows survivors below the cube of the cutoff have at most two prime factors; this node gives the weight that lets a sieve count them from below, including numbers with one wheel factor."
   title: Chen's weights for numbers with at most two prime factors
   description: For numbers between x to the 2/3 and x, being prime or a product of two primes is at least
     one, minus half the count of primes up to the cube root dividing it, minus half the count of its factorizations
     into three primes with only the first below the cube root, minus half the count of small primes whose
     square divides it. A finite inequality on factorizations; the weight Chen's theorem sieves with. Tao,
     Supplement 5, Lemma 11.
-conclusions: []
-planned:
-  source_status: New
-  rests_on: []
-  claims:
-  - chen_weight_le
-  tier: 'Tier 1: a case split on how many prime factors lie below the cube root.'
-  plan: If no prime factor is below the cube root, at most two factors exist; one small factor leaves
-    a cofactor below x^(2/3) with at most one more split; two or more small factors make the subtracted
-    terms at least 1.
+conclusions:
+- id: chen_weight_le
+  declaration: RNS.ChenWeights.chen_weight_le
+  summary: "Below the cube of the cutoff, one minus half the wheel factors, half the wheel-times-two-large-primes splittings and half the squared wheel factors is at most the indicator of having at most two prime factors."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/ChenWeights.lean
+    declaration: RNS.ChenWeights.chen_weight_le_holds
+    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+  designated: lean-proof
 sources:
 - title: 'T. Tao, 254A Supplement 5: The linear sieve and Chen''s theorem'
   url: https://terrytao.wordpress.com/2015/01/29/254a-supplement-5-the-linear-sieve-and-chens-theorem-optional/

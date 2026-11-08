@@ -57,3 +57,4 @@ import RNSSolutions.BrunAnalytic
 import RNSSolutions.BrunTheorem
 import RNSSolutions.BrunTwinSum
 import RNSSolutions.BuchstabIdentity
+import RNSSolutions.ChenWeights
