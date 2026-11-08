@@ -51,6 +51,7 @@ import RNSSolutions.RandomRotation
 import RNSSolutions.PolyaCutoff
 import RNSSolutions.MertensThird
 import RNSSolutions.ShareAsymptotics
+import RNSSolutions.GapConstant
 
 /-!
 # Assembling the network
@@ -451,3 +452,25 @@ theorem RNS.PolyaCutoff.polya_cutoff_share_of_mertens_third
       RNS.SingularSeries.factor_multipliable_holds (RNS.MertensThird.mertens_third_step h))
 
 #print axioms RNS.PolyaCutoff.polya_cutoff_share_of_mertens_third
+
+/-- `SingularSeries` → `GapConstant`: the constant for any even gap. -/
+theorem RNS.GapConstant.gap_constant_eq_twin_mul_holds : RNS.GapConstant.gap_constant_eq_twin_mul :=
+  RNS.GapConstant.gap_constant_eq_twin_mul_step RNS.SingularSeries.factor_multipliable_holds
+
+/-- `SingularSeries`, `TwinConstant` → `GapConstant`: the same with the classical twin constant. -/
+theorem RNS.GapConstant.gap_constant_classical_holds : RNS.GapConstant.gap_constant_classical :=
+  RNS.GapConstant.gap_constant_classical_step RNS.SingularSeries.factor_multipliable_holds
+    RNS.TwinConstant.twin_prime_constant_eq_classical_holds
+
+/-- `SingularSeries` → `GapConstant`: the gap of six has twice the twin constant. -/
+theorem RNS.GapConstant.sexy_constant_eq_two_twin_holds : RNS.GapConstant.sexy_constant_eq_two_twin :=
+  RNS.GapConstant.sexy_constant_eq_two_twin_step RNS.SingularSeries.factor_multipliable_holds
+
+/-- `SingularSeries` → `GapConstant`: the Goldbach constant. -/
+theorem RNS.GapConstant.goldbach_constant_holds : RNS.GapConstant.goldbach_constant :=
+  RNS.GapConstant.goldbach_constant_step RNS.SingularSeries.factor_multipliable_holds
+
+#print axioms RNS.GapConstant.gap_constant_eq_twin_mul_holds
+#print axioms RNS.GapConstant.gap_constant_classical_holds
+#print axioms RNS.GapConstant.sexy_constant_eq_two_twin_holds
+#print axioms RNS.GapConstant.goldbach_constant_holds
