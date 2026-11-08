@@ -52,6 +52,7 @@ import RNSSolutions.PolyaCutoff
 import RNSSolutions.MertensThird
 import RNSSolutions.ShareAsymptotics
 import RNSSolutions.GapConstant
+import RNSSolutions.SmallWheelSurvivors
 
 /-!
 # Assembling the network
@@ -474,3 +475,17 @@ theorem RNS.GapConstant.goldbach_constant_holds : RNS.GapConstant.goldbach_const
 #print axioms RNS.GapConstant.gap_constant_classical_holds
 #print axioms RNS.GapConstant.sexy_constant_eq_two_twin_holds
 #print axioms RNS.GapConstant.goldbach_constant_holds
+
+/-- `BrunPureSieve` → `SmallWheelSurvivors`: Legendre's error is at most 2 to the number of wheels. -/
+theorem RNS.SmallWheelSurvivors.legendre_error_holds : RNS.SmallWheelSurvivors.legendre_error :=
+  RNS.SmallWheelSurvivors.legendre_error_step RNS.BrunPureSieve.legendre_exact_holds
+
+/-- `BrunPureSieve`, `MertensThird` → `SmallWheelSurvivors`: survivors of the wheels up to log x.
+The remaining hypothesis is the outside claim `MertensThird.mertens_third_remainder` (from PNT+). -/
+theorem RNS.SmallWheelSurvivors.small_wheel_survivors_of_mertens_third
+    (h : RNS.MertensThird.mertens_third_remainder) : RNS.SmallWheelSurvivors.small_wheel_survivors :=
+  RNS.SmallWheelSurvivors.small_wheel_survivors_step RNS.SmallWheelSurvivors.legendre_error_holds
+    (RNS.MertensThird.mertens_third_step h)
+
+#print axioms RNS.SmallWheelSurvivors.legendre_error_holds
+#print axioms RNS.SmallWheelSurvivors.small_wheel_survivors_of_mertens_third
