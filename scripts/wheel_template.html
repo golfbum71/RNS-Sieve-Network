@@ -5,29 +5,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RNS Sieve Network — the wheel</title>
+<script>/*__THEME_JS__*/</script>
 <style>
-:root {
-  --bg: #ffffff; --panel: #ffffff; --ink: #1f2328; --ink2: #57606a; --ink3: #8c959f;
-  --line: #d0d7de; --line2: #eaeef2; --wedge-a: #f2f4f7; --wedge-b: #f8f9fb;
-  --edge: #8c959f; --hub: #f3f0e8; --hub-stroke: #a39e8f; --accent: #0969da;
-  --code: #f6f8fa;
-  --verified-f: #dafbe1; --verified-s: #1a7f37;
-  --amber-s: #9a6700; --cited-f: #ddf4ff; --cited-s: #0969da;
-  --new-s: #6e7781; --ext-f: #fbefff; --ext-s: #8250df; --open-f: #fff8c5;
-  --hollow: #ffffff;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0d1117; --panel: #161b22; --ink: #e6edf3; --ink2: #9198a1; --ink3: #6e7681;
-    --line: #30363d; --line2: #21262d; --wedge-a: #151b23; --wedge-b: #11161d;
-    --edge: #6e7681; --hub: #2a2720; --hub-stroke: #8b8577; --accent: #4493f8;
-    --code: #0d1117;
-    --verified-f: #123d24; --verified-s: #3fb950;
-    --amber-s: #d29922; --cited-f: #0f2d4d; --cited-s: #4493f8;
-    --new-s: #8b949e; --ext-f: #2f1f4a; --ext-s: #ab7df8; --open-f: #3b2e0a;
-    --hollow: #0d1117;
-  }
-}
+/*__THEME__*/
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink);
   font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
@@ -150,6 +130,7 @@ ul.src { padding-left: 18px; margin: 4px 0; } ul.src li { margin: 4px 0; }
   <span class="sub" id="summary"></span>
   <span class="spacer"></span>
   <input id="search" type="search" placeholder="Find a node…" aria-label="Find a node">
+  <button id="theme" type="button"></button>
   <a href="https://github.com/golfbum71/RNS-Sieve-Network">Repository</a>
   <a href="https://github.com/golfbum71/RNS-Sieve-Network/blob/main/GRAPH.md">GRAPH.md</a>
 </header>
@@ -164,7 +145,7 @@ ul.src { padding-left: 18px; margin: 4px 0; } ul.src li { margin: 4px 0; }
     <details id="legend">
       <summary>How to read the wheel</summary>
       <div id="legendrows"></div>
-      <div class="note">The centre is the shared vocabulary: the product of the wheels, the CRT map,
+      <div class="note">The center is the shared vocabulary: the product of the wheels, the CRT map,
         survivors and admissibility. A node's ring is its longest chain of arrows back to a node that
         rests on no other node, so arrows always point outward. Solid line: a Lean-checked step.
         Dashed line: a planned one. Faint spoke: a ring-1 node whose claims use the shared vocabulary.
@@ -407,7 +388,7 @@ function select(name) {
       `<li>${s.text ? esc(s.text) + ", " : ""}${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a>` : esc(s.title)}${s.how ? ` <span class="muted">— ${esc(s.how)}</span>` : ""}</li>`).join("") + `</ul>`;
   }
   h += `<h3>Open in the repository</h3><div class="links">
-    <a href="${repo}/docs/nodes/${esc(n.name)}.md" target="_blank" rel="noopener">Node page ↗</a>
+    <a href="nodes/${esc(n.name)}.html">Full node page</a>
     ${n.built ? `<a href="${repo}/RNSNetwork/Nodes/${esc(n.name)}/Conclusions.lean" target="_blank" rel="noopener">Conclusions.lean ↗</a>` : ""}
     <a href="${repo}/RNSNetwork/Nodes/${esc(n.name)}/formalization.yaml" target="_blank" rel="noopener">formalization.yaml ↗</a></div>`;
   panel.innerHTML = h;
@@ -426,7 +407,7 @@ function selectHub() {
     It covers the 6n±1 wheel, the product of the wheels (the primorial modulus), the CRT map onto the
     separate wheels, the survivors left in the cycle, and admissibility of patterns.</p>
     <p class="muted">${ring1.length} nodes rest on no other node and sit in ring 1. ${set.size} of them use these
-    definitions directly in their claims; they are the ones joined to the centre by a spoke.</p>
+    definitions directly in their claims; they are the ones joined to the center by a spoke.</p>
     <h3>Definitions (${DATA.vocab.length})</h3><div>${DATA.vocab.map(v => `<code>${esc(v)}</code>`).join(", ")}</div>
     <h3>Open in the repository</h3><div class="links">
     <a href="${repo}/RNSNetwork/Vocabulary.lean" target="_blank" rel="noopener">Vocabulary.lean ↗</a></div>`;
@@ -434,7 +415,7 @@ function selectHub() {
 }
 panel.addEventListener("click", ev => {
   const t = ev.target.closest("[data-node]");
-  if (t) { select(t.dataset.node); centreOn(t.dataset.node); }
+  if (t) { select(t.dataset.node); centerOn(t.dataset.node); }
   if (ev.target.closest(".close")) clearAll();
 });
 
@@ -450,7 +431,7 @@ search.addEventListener("keydown", ev => {
   if (ev.key !== "Enter") return;
   const q = search.value.trim().toLowerCase();
   const hit = DATA.nodes.find(n => (n.name + " " + n.label + " " + n.title).toLowerCase().includes(q));
-  if (hit) { select(hit.name); centreOn(hit.name); }
+  if (hit) { select(hit.name); centerOn(hit.name); }
 });
 document.addEventListener("keydown", ev => { if (ev.key === "Escape") { search.value = ""; clearAll(); } });
 
@@ -474,7 +455,7 @@ function zoom(f, cx, cy) {
   vb = {x: px - (px - vb.x) * k, y: py - (py - vb.y) * k, w, h: vb.h * k};
   setVB();
 }
-function centreOn(name) {
+function centerOn(name) {
   const n = byName[name]; if (!n) return;
   const [x, y] = pt(ringR(n.depth), n.angle);
   const w = Math.min(vb.w, 1400);
@@ -522,6 +503,8 @@ const built = DATA.nodes.filter(n => n.built).length;
 const claims = DATA.nodes.reduce((s, n) => s + n.claims.length, 0);
 document.getElementById("summary").textContent =
   `${DATA.nodes.length} nodes · ${built} built · ${claims} claims · ${DATA.arrows} Lean-checked arrows`;
+
+/*__THEME_TOGGLE__*/
 
 // open from a link such as …/#Wheel6
 const start = decodeURIComponent(location.hash.slice(1));

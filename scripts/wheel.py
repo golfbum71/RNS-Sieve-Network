@@ -4,13 +4,13 @@ Called by graph.py; it reuses graph.py's loading and status helpers, so the
 wheel always matches GRAPH.md and the node pages.
 
 The layout:
-  * Centre: the RNS wheel itself, i.e. RNSNetwork/Vocabulary.lean (the
+  * Center: the RNS wheel itself, i.e. RNSNetwork/Vocabulary.lean (the
     primorial modulus, the CRT map, survivors, admissibility).
   * Rings: a node's ring is the length of its longest chain of arrows back
     to a node that rests on no other node. Ring 1 holds nodes that rest on
     no other node; each arrow points outward.
   * Wedges: one wedge per family, in the order of graph.GROUPS.
-  * A faint spoke joins a ring-1 node to the centre only when its
+  * A faint spoke joins a ring-1 node to the center only when its
     Conclusions.lean actually uses a Vocabulary definition.
 
 Nothing here decides what is proved: every status comes from graph.py.
@@ -22,13 +22,35 @@ import re
 
 import graph as g
 
-R_HUB = 125          # radius of the centre disc
+R_HUB = 125          # radius of the center disc
 R_FIRST = 250        # radius of ring 1
 R_STEP = 96          # distance between rings
 MIN_ARC = 34         # smallest distance between neighbouring nodes on a ring
 WEDGE_PAD = 0.05     # radians of empty space at each side of a wedge
 
 DISPLAY = {"Wheel6": "Wheel6 (6n±1)"}
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+
+# Runs in <head> so a saved light choice applies before the page draws.
+THEME_JS = ('try { var t = localStorage.getItem("rns-theme"); '
+            'if (t) document.documentElement.dataset.theme = t; } catch (e) {}')
+
+# Wires up the button with id="theme"; dark is the default.
+THEME_TOGGLE = """(function () {
+  var b = document.getElementById("theme"), d = document.documentElement;
+  function label() { b.textContent = d.dataset.theme === "light" ? "\u263E Dark" : "\u2600 Light"; }
+  b.addEventListener("click", function () {
+    if (d.dataset.theme === "light") delete d.dataset.theme; else d.dataset.theme = "light";
+    try { localStorage.setItem("rns-theme", d.dataset.theme || "dark"); } catch (e) {}
+    label();
+  });
+  label();
+})();"""
+
+
+def theme_css():
+    return open(os.path.join(HERE, "theme.css"), encoding="utf-8").read()
 
 
 def label_lines(text):
@@ -206,7 +228,8 @@ def claim_data(n, c):
     if j and j.get("kind") != "literature" and j.get("solution"):
         decl = j.get("declaration") or ""
         proof = {"declaration": decl, "file": j.get("solution"),
-                 "line": line_of(j.get("solution"), decl.split(".")[-1], ["theorem", "lemma", "def"])}
+                 "line": line_of(j.get("solution"), decl.split(".")[-1], ["theorem", "lemma", "def"]),
+                 "assembled": bool(j.get("assembled"))}
     cite = None
     if j.get("kind") == "literature":
         cite = f"{j.get('source', '')}, {j.get('locator', '')}".strip(", ")
@@ -261,6 +284,9 @@ def node_data(n, nodes, edges, par, depth, angle, vocab_used):
         "sources": pub,
         "vocab": vocab_used,
         "built": n["built"],
+        "order": n["order"],
+        "related": [{"node": r.get("node", ""), "note": " ".join(str(r.get("note", "")).split())}
+                    for r in n["related"]],
     }
 
 
@@ -285,7 +311,13 @@ def write_wheel(nodes, edges):
         "vocab": vocab,
     }
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
-    template = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "wheel_template.html"),
-                    encoding="utf-8").read()
-    html = template.replace("/*__DATA__*/null", payload)
+    template = open(os.path.join(HERE, "wheel_template.html"), encoding="utf-8").read()
+    html = (template.replace("/*__THEME_JS__*/", THEME_JS).replace("/*__THEME__*/", theme_css())
+            .replace("/*__THEME_TOGGLE__*/", THEME_TOGGLE).replace("/*__DATA__*/null", payload))
     open(os.path.join(g.ROOT, "docs", "index.html"), "w", encoding="utf-8").write(html)
+    # GitHub Pages: serve the files as they are, without Jekyll turning the
+    # .md node pages into .html files that would clash with the ones below.
+    open(os.path.join(g.ROOT, "docs", ".nojekyll"), "w").close()
+    import node_html
+    for n in data["nodes"]:
+        node_html.write_page(n, data, nodes)

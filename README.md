@@ -11,7 +11,7 @@ connection between results is checked by Lean.
 
 **See it as a wheel: [golfbum71.github.io/RNS-Sieve-Network](https://golfbum71.github.io/RNS-Sieve-Network/)**
 — the whole network in one interactive picture, with the shared vocabulary at
-the centre and each family as a wedge. Click any node for its summary and
+the center and each family as a wedge. Click any node for its summary and
 links to its Lean. (Generated into `docs/index.html` by `scripts/graph.py`.)
 
 **Start here: [`GRAPH.md`](GRAPH.md)** — the network as a diagram, what each
