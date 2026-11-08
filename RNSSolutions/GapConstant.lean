@@ -60,13 +60,14 @@ private theorem factor_gap {g : Nat} (hg0 : g ≠ 0) (hg : Even g) (p : Nat) (hp
       have hne1 : (p : ℝ) - 1 ≠ 0 := by linarith
       have hne2 : (p : ℝ) - 2 ≠ 0 := by linarith
       norm_num
-      first | (field_simp; ring) | field_simp
+      field_simp
     · rw [if_neg hpg, if_neg (fun h => hpg h.1)]
       ring
 
 /-- The wheels where the correction is not 1. -/
 private noncomputable def corrSupport (g : Nat) : Finset Nat.Primes :=
-  (g.primeFactors.filter (fun p => p ≠ 2)).subtype Nat.Prime
+  (g.primeFactors.filter (fun p => p ≠ 2)).preimage (Subtype.val : Nat.Primes → Nat)
+    Subtype.val_injective.injOn
 
 private theorem corr_out {g : Nat} (hg0 : g ≠ 0) :
     ∀ p ∉ corrSupport g, corr g (p : Nat) = 1 := by
@@ -76,14 +77,14 @@ private theorem corr_out {g : Nat} (hg0 : g ≠ 0) :
   rintro ⟨hpg, hp2⟩
   apply hp
   unfold corrSupport
-  rw [Finset.mem_subtype, Finset.mem_filter, Nat.mem_primeFactors]
+  rw [Finset.mem_preimage, Finset.mem_filter, Nat.mem_primeFactors]
   exact ⟨⟨p.2, hpg, hg0⟩, hp2⟩
 
 private theorem corr_prod {g : Nat} :
     ∏ p ∈ corrSupport g, corr g (p : Nat) = odd_divisor_correction g := by
   unfold corrSupport odd_divisor_correction
-  rw [Finset.prod_subtype_of_mem (corr g)
-    (fun x hx => (Nat.mem_primeFactors.mp (Finset.mem_filter.mp hx).1).1)]
+  rw [Finset.prod_preimage (Subtype.val : Nat.Primes → Nat) _ _ (corr g)
+    (fun x hx hnr => (hnr ⟨⟨x, (Nat.mem_primeFactors.mp (Finset.mem_filter.mp hx).1).1⟩, rfl⟩).elim)]
   refine Finset.prod_congr rfl (fun x hx => ?_)
   obtain ⟨hx1, hx2⟩ := Finset.mem_filter.mp hx
   unfold corr
