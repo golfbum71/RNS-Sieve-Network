@@ -48,6 +48,9 @@ import RNSSolutions.BrunAnalytic
 import RNSSolutions.BrunTheorem
 import RNSSolutions.BrunTwinSum
 import RNSSolutions.RandomRotation
+import RNSSolutions.PolyaCutoff
+import RNSSolutions.MertensThird
+import RNSSolutions.ShareAsymptotics
 
 /-!
 # Assembling the network
@@ -437,3 +440,14 @@ theorem RNS.RandomRotation.random_rotation_survival_holds :
   RNS.RandomRotation.random_rotation_survival_step RNS.SurvivorCount.general_survivor_count_holds
 
 #print axioms RNS.RandomRotation.random_rotation_survival_holds
+
+/-- `ShareAsymptotics` → `PolyaCutoff`: at Pólya's cutoff the share gives the Hardy–Littlewood
+constant with no correction. The remaining hypothesis is the outside claim
+`MertensThird.mertens_third_remainder` (from PNT+), through `ShareAsymptotics`. -/
+theorem RNS.PolyaCutoff.polya_cutoff_share_of_mertens_third
+    (h : RNS.MertensThird.mertens_third_remainder) : RNS.PolyaCutoff.polya_cutoff_share :=
+  RNS.PolyaCutoff.polya_cutoff_share_step
+    (RNS.ShareAsymptotics.pattern_share_asymptotic_step RNS.SingularSeries.local_density_factorization_holds
+      RNS.SingularSeries.factor_multipliable_holds (RNS.MertensThird.mertens_third_step h))
+
+#print axioms RNS.PolyaCutoff.polya_cutoff_share_of_mertens_third
