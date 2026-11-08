@@ -62,3 +62,4 @@ import RNSNetwork.Nodes.BrunAnalytic.Conclusions
 import RNSNetwork.Nodes.BrunTheorem.Conclusions
 import RNSNetwork.Nodes.BuchstabIdentity.Conclusions
 import RNSNetwork.Nodes.ChenWeights.Conclusions
+import RNSNetwork.Nodes.SmoothNumbers.Conclusions

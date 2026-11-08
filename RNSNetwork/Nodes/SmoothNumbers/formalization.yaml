@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's notes Ch. 5-9 and other lecture notes): scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: SmoothNumbers.v1
@@ -7,25 +7,51 @@ node:
   version: v1
   order: 90
   kind: paper
-  status: planned
+  status: active
+  improves: "ShareBounds expands the reciprocal of the survivor share over the numbers built from the wheels (the alpha = 1 case); this node bounds how many such numbers lie below x, from above (Rankin) and below, and gives their recurrence."
   title: numbers built only from the wheels
   description: 'The numbers up to x whose prime factors are all wheels up to y. Rankin''s bound: their
     count is at most x to a power alpha times the product over the wheels of one over one minus the wheel
     to the minus alpha, for any alpha between 0 and 1; at alpha = 1 that product is the reciprocal of
     the survivor share. A lower bound counts the products of the wheels directly, and a Buchstab-type
     identity removes the largest wheel. Ford Chapter 5.'
-conclusions: []
-planned:
-  source_status: New
-  rests_on: []
-  claims:
-  - rankin_upper
-  - smooth_count_lower
-  - smooth_buchstab
-  tier: 'Tier 1: all three are finite.'
-  plan: 'rankin_upper: each counted number n has (x/n)^alpha >= 1; sum over all products of the wheels
-    (a finite Euler product). smooth_count_lower: products of at most floor(log x / log y) wheels with
-    repetition are distinct and at most x. smooth_buchstab: sort by largest prime factor.'
+conclusions:
+- id: rankin_upper
+  declaration: RNS.SmoothNumbers.rankin_upper
+  summary: "The smooth numbers up to x are at most x to the alpha times the product over the wheels of one over one minus the wheel to the minus alpha, for every positive alpha."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/SmoothNumbers.lean
+    declaration: RNS.SmoothNumbers.rankin_upper_holds
+    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+  designated: lean-proof
+- id: smooth_count_lower
+  declaration: RNS.SmoothNumbers.smooth_count_lower
+  summary: "If every wheel is at most y and y to the u is at most x, there are at least as many smooth numbers up to x as sets of at most u wheels."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/SmoothNumbers.lean
+    declaration: RNS.SmoothNumbers.smooth_count_lower_holds
+    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+  designated: lean-proof
+- id: smooth_buchstab
+  declaration: RNS.SmoothNumbers.smooth_buchstab
+  summary: "Adding a wheel p adds the smooth numbers (for the enlarged set) up to x divided by p."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/SmoothNumbers.lean
+    declaration: RNS.SmoothNumbers.smooth_buchstab_holds
+    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+  designated: lean-proof
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
   url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
