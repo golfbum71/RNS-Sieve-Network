@@ -75,7 +75,7 @@ private theorem roots_card_le_one {ℓ : Nat × Nat} {p : Nat} (hp : p.Prime)
 
 private theorem root_exists {a b p : Nat} (hp : p.Prime) (ha : ¬ (p : ℤ) ∣ a) :
     ∃ r < p, (p : ℤ) ∣ (a : ℤ) * r + b := by
-  haveI := Fact.mk hp
+  have := Fact.mk hp
   have ha0 : (a : ZMod p) ≠ 0 := by
     intro h
     apply ha
@@ -173,7 +173,7 @@ theorem blocked_eq_card_iff_holds : blocked_eq_card_iff := by
       intro ℓ hℓ ℓ' hℓ' hne h
       apply hndvd
       unfold bad_product
-      exact dvd_mul_of_dvd_right (dvd_trans h (Finset.dvd_prod_of_mem (fun e => cross e.1 e.2)
+      exact dvd_mul_of_dvd_right (dvd_trans h (Finset.dvd_prod_of_mem (fun e => cross e.1 e.2) (a := (ℓ, ℓ'))
         (Finset.mem_offDiag.mpr ⟨hℓ, hℓ', hne⟩))) _
     rw [Finset.card_biUnion]
     · calc ∑ ℓ ∈ L, (form_roots ℓ p).card = ∑ ℓ ∈ L, 1 :=
@@ -190,8 +190,7 @@ theorem blocked_eq_card_iff_holds : blocked_eq_card_iff := by
 theorem twin_columns_bad_wheels_holds : twin_columns_bad_wheels := by
   intro p hp
   have hcop : ∀ ℓ ∈ ({(6, 5), (6, 7)} : Finset (Nat × Nat)), Nat.Coprime ℓ.1 ℓ.2 := by decide
-  have hE : bad_product {(6, 5), (6, 7)} = -5184 := by
-    first | decide | rfl | norm_num [bad_product, cross, Finset.offDiag]
+  have hE : bad_product {(6, 5), (6, 7)} = -5184 := by decide
   have hcardL : ({(6, 5), (6, 7)} : Finset (Nat × Nat)).card = 2 := by decide
   have hle := blocked_le_card_holds _ p hp hcop
   have hiff := blocked_eq_card_iff_holds _ p hp hcop
@@ -230,7 +229,7 @@ theorem divisors_pairwise_coprime_holds : divisors_pairwise_coprime := by
   have hc : (q : ℤ) ∣ cross ℓ ℓ' := cross_of_common h1 h2
   have hE : (q : ℤ) ∣ bad_product L := by
     unfold bad_product
-    exact dvd_mul_of_dvd_right (dvd_trans hc (Finset.dvd_prod_of_mem (fun e => cross e.1 e.2)
+    exact dvd_mul_of_dvd_right (dvd_trans hc (Finset.dvd_prod_of_mem (fun e => cross e.1 e.2) (a := (ℓ, ℓ'))
       (Finset.mem_offDiag.mpr ⟨hℓ, hℓ', hne⟩))) _
   have hE' : q ∣ (bad_product L).natAbs := Int.natCast_dvd.mp hE
   have hg := Nat.dvd_gcd hq1 hE'
