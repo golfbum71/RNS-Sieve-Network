@@ -318,6 +318,8 @@ def write_wheel(nodes, edges):
     # GitHub Pages: serve the files as they are, without Jekyll turning the
     # .md node pages into .html files that would clash with the ones below.
     open(os.path.join(g.ROOT, "docs", ".nojekyll"), "w").close()
+    import wheel_svg
+    wheel_svg.write_svgs(data)
     import node_html
     for n in data["nodes"]:
         node_html.write_page(n, data, nodes)
