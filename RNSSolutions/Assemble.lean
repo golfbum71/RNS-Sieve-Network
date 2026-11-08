@@ -47,6 +47,7 @@ import RNSSolutions.MertensSecond
 import RNSSolutions.BrunAnalytic
 import RNSSolutions.BrunTheorem
 import RNSSolutions.BrunTwinSum
+import RNSSolutions.RandomRotation
 
 /-!
 # Assembling the network
@@ -423,3 +424,16 @@ theorem RNS.BrunTwinSum.brun_sum_finite_of_mertens_second
   RNS.BrunTwinSum.brun_sum_finite_step (RNS.BrunTheorem.brun_theorem_of_mertens_second h)
 
 #print axioms RNS.BrunTwinSum.brun_sum_finite_of_mertens_second
+
+/-- `CRT` → `RandomRotation`: a setting of the wheels is a shift of the cycle. -/
+theorem RNS.RandomRotation.rotation_is_shift_holds : RNS.RandomRotation.rotation_is_shift :=
+  RNS.RandomRotation.rotation_is_shift_step RNS.CRT.crt_map_bijective_holds
+
+#print axioms RNS.RandomRotation.rotation_is_shift_holds
+
+/-- `SurvivorCount` → `RandomRotation`: the survival chance under random rotations. -/
+theorem RNS.RandomRotation.random_rotation_survival_holds :
+    RNS.RandomRotation.random_rotation_survival :=
+  RNS.RandomRotation.random_rotation_survival_step RNS.SurvivorCount.general_survivor_count_holds
+
+#print axioms RNS.RandomRotation.random_rotation_survival_holds

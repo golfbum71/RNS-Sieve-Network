@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's notes Ch. 5-9 and other lecture notes): scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: RandomRotation.v1
@@ -7,7 +7,8 @@ node:
   version: v1
   order: 91
   kind: paper
-  status: planned
+  status: active
+  improves: "SurvivorCount counts the surviving positions of the cycle; this node reads that count as a probability: each setting of the wheels is one shift of the cycle (CRT), so the survival chance under random rotations is the pattern's survivor share."
   title: rotating every wheel at random
   description: 'Turn each wheel to a position chosen uniformly at random, independently. The chance that
     every member of a given finite set of positions survives equals the product over the wheels of one
@@ -15,19 +16,33 @@ node:
     the pattern''s survivor share. By the Chinese Remainder Theorem each choice of rotations is a shift
     of the whole cycle, so this is a count of shifts. The random-sieve model of Banks, Ford and Tao and
     the starting point of the large-gap construction (Ford Lemma 8.4).'
-conclusions: []
-planned:
-  source_status: New
-  rests_on:
-  - CRT
-  - SurvivorCount
-  claims:
-  - rotation_is_shift
-  - random_rotation_survival
-  tier: 'Tier 1: finite, by CRT.'
-  plan: 'rotation_is_shift: the map from shifts of the cycle to tuples of wheel rotations is a bijection
-    (CRT). random_rotation_survival: count the shifts under which the set avoids every blocked position,
-    wheel by wheel.'
+conclusions:
+- id: rotation_is_shift
+  declaration: RNS.RandomRotation.rotation_is_shift
+  summary: "Every choice of one position per active wheel is exactly one position of the combined cycle."
+  imports:
+  - CRT.v1.crt_map_bijective
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/RandomRotation.lean
+    declaration: RNS.RandomRotation.rotation_is_shift_step
+    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
+  designated: lean-proof
+- id: random_rotation_survival
+  declaration: RNS.RandomRotation.random_rotation_survival
+  summary: "Under random rotations the chance that a pattern survives is the product over the wheels of one minus w over the wheel size."
+  imports:
+  - SurvivorCount.v1.general_survivor_count
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/RandomRotation.lean
+    declaration: RNS.RandomRotation.random_rotation_survival_step
+    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
+  designated: lean-proof
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
   url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
