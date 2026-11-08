@@ -976,3 +976,146 @@ Check here before searching again. Links pinned to a commit were current on
   to the wheel at 23 (maxima 2, 3, 5, 8, 12, 18); the untwisted analogue is
   studied by Codecà and Nair 1998 and grows at a similar rate. No paper on
   the column version found so far.
+
+---
+
+## Candidates from Ford's sieve notes, Ch. 1-4 (added 2026-11-08)
+
+Planned nodes scoped from Kevin Ford's *Sieve Methods Lecture Notes* (Spring 2023,
+[PDF](https://mail.ford126.web.illinois.edu/sieve2023.pdf)), Chapters 1-4, and from the
+conjectures of Section 1.8. Each is on [`GRAPH.md`](../GRAPH.md) as a dashed node with
+its planned claims, plan and sources. Not yet in Lean; absence of Lean elsewhere was
+checked by search only, so confirm with Loogle before starting.
+
+### 71. `GapConstant` — the constant for any even gap
+For prime pairs a fixed even gap apart, the wheel-built correction constant equals the twin-prime constant times, for each odd prime dividing the gap, that prime minus one over that prime minus two. So a gap of six has exactly twice the twin constant: the wheel of size 3 blocks one position instead of two, because a gap divisible by 6 keeps both numbers in the same column. Classical (Hardy and Littlewood 1923); not yet in the network.
+- Lean (planned): `gap_constant_eq_twin_mul`, `sexy_constant_eq_two_twin`
+- Rests on: `SingularSeries`, `TwinConstant`
+- Scope: Tier 1: a finite rewrite of the product, the same kind of proof as twin_prime_constant_eq_classical.
+- Status: Planned
+
+### 72. `PolyaCutoff` — sifting to Polya's cutoff gives the Hardy-Littlewood constant exactly
+If the wheels run only up to the power one over e to Euler's constant (about 0.56) of the range, the share of the cycle surviving an admissible pattern, times the logarithm of the range to the number of offsets, tends to the pattern's Hardy-Littlewood constant. So the conjectured constant comes out of the wheels alone, with no correction. For a single offset this matches the prime number theorem, in contrast to CeilingOvershoot, where wheels up to the square root overshoot by twice e to minus Euler's constant. Pólya's observation, made rigorous by Banks, Ford and Tao.
+- Lean (planned): `polya_cutoff_share`
+- Rests on: `ShareAsymptotics`
+- Scope: Tier 1: a change of variable in pattern_share_asymptotic.
+- Status: Planned
+
+### 73. `BadWheels` — which wheels block fewer positions for linear forms
+For a pattern of linear forms, a wheel blocks at most one position per form, and it blocks fewer exactly when it divides the product of the leading coefficients and of all the cross differences. For the two columns 6n-1 and 6n+1 that product is 432, so the wheels 2 and 3 are the only exceptions: the 6n±1 wheel is exactly the removal of the bad wheels. Ford, Theorem 2.5 (first part).
+- Lean (planned): `blocked_le_card`, `blocked_eq_card_iff`, `twin_columns_bad_wheels`
+- Rests on: `LinearForms`
+- Scope: Tier 1: modular arithmetic, decidable for the column case.
+- Status: Planned
+
+### 74. `BrunHooley` — Hooley's product of truncated sieves
+Split the wheels into ranges and stop inclusion-exclusion separately in each range, early for large wheels and late for small ones; the product of these upper sieves is again an upper sieve. This gives an upper bound of the right order for any pattern and any number of wheels, needing only that each wheel's share is about the pattern size over the wheel on average. The Brun-Hooley sieve, Ford Sections 2 and 3.
+- Lean (planned): `product_upper_sieve`, `brun_hooley_bound`, `brun_hooley_order`
+- Rests on: `BrunPureSieve`, `BrunTruncation`
+- Scope: product_upper_sieve: Tier 1, finite combinatorics. brun_hooley_bound and brun_hooley_order: Tier 2.
+- Status: Planned
+
+### 75. `PatternUpperBound` — every admissible pattern is at most its conjectured order
+For an admissible pattern of linear forms, the positions up to N where every form is prime are at most a constant times the pattern's correction constant times N over the logarithm of N to the number of forms. This is the strongest unconditional statement known in the direction of the Hardy-Littlewood conjecture, and covers twins, triples, pairs at any gap and Sophie Germain pairs. Ford, Theorem 2.5.
+- Lean (planned): `pattern_count_le`
+- Rests on: `BrunHooley`, `BadWheels`, `ShareAsymptotics`
+- Scope: Tier 2.
+- Status: Planned
+
+### 76. `GapPairs` — prime pairs at any even gap, and Goldbach pairs
+Prime pairs up to N a fixed even gap apart number at most a constant times the gap over Euler's phi of the gap, times N over log N squared; pairs of primes adding to a given even number are bounded the same way. Ford, Corollary 2.6.
+- Lean (planned): `gap_pair_bound`, `goldbach_pair_bound`
+- Rests on: `PatternUpperBound`, `GapConstant`
+- Scope: Tier 2: a specialisation of pattern_count_le.
+- Status: Planned
+
+### 77. `PatternReciprocals` — reciprocal sums converge for every pattern of two or more
+For every admissible pattern with at least two members, the sum of one over the first member, over all positions where every member is prime, is finite. Brun's theorem for twins is the case of the pattern 0, 2; triples such as 0, 2, 6 and pairs at any gap follow the same way.
+- Lean (planned): `pattern_reciprocal_summable`
+- Rests on: `PatternUpperBound`
+- Scope: Tier 2: the BrunTheorem argument with the general bound.
+- Status: Planned
+
+### 78. `GermainReciprocals` — the Sophie Germain primes' reciprocals add up to a finite total
+Primes p with 2p + 1 also prime number at most a constant times N over log N squared, so the sum of their reciprocals is finite. The linear-forms case of PatternUpperBound, applied to the pair a number and twice it plus one.
+- Lean (planned): `germain_count_le`, `germain_reciprocal_summable`
+- Rests on: `PatternUpperBound`, `LinearForms`
+- Scope: Tier 2.
+- Status: Planned
+
+### 79. `BrunSharp` — Brun's twin bound with log log squared
+Twin prime pairs up to N number at most a constant times N times (log log N over log N) squared, by stopping inclusion-exclusion after about four times the logarithm of one over the twin share, with the wheels up to N to the one over 16 log log N. Ford Section 1.11.1, Brun's 1919 bound.
+- Lean (planned): `twin_count_loglog`
+- Rests on: `BrunTwinBound`, `BrunTruncation`, `ShareAsymptotics`
+- Scope: Tier 2: the same stages as BrunAnalytic with Ford's choice of parameters.
+- Status: Planned
+
+### 80. `RomanoffTheorem` — a positive share of numbers are a prime plus a power of 2
+A positive proportion of positive integers can be written as a prime plus a power of 2 (Romanoff 1934). The proof bounds the second moment with the prime-pair bound at gaps that are differences of powers of 2.
+- Lean (planned): `romanoff_positive_density`
+- Rests on: `GapPairs`
+- Scope: Tier 3: needs the average of the gap factor over differences of powers of 2.
+- Status: Planned
+
+### 81. `BrunTitchmarshPNT` — primes in a short window (PNT+)
+The number of primes in any window of a given length is at most twice the length over the logarithm of the sieve level, plus a small error, proved with the Selberg sieve in PrimeNumberTheoremAnd (primesBetween_le). Windows only, not arithmetic progressions.
+- Rests on: Mathlib only
+- Scope: Outside source.
+- Status: Planned outside source
+
+### 82. `RailBrunTitchmarsh` — how many primes one column can hold in a window
+Each column, 6n-1 or 6n+1, holds at most about the window's length over the logarithm of five sixths of that length primes in any window, uniformly in where the window sits (Brun-Titchmarsh with modulus 6, constant 2 of Montgomery and Vaughan). A first, weaker form follows at once from the window bound for all primes.
+- Lean (planned): `column_window_le_all`, `column_window_bound`
+- Rests on: `BrunTitchmarshPNT`, `Wheel6`
+- Scope: column_window_le_all: Tier 1. column_window_bound: Tier 3, a Selberg sieve for a progression.
+- Status: Planned
+
+### 83. `BuchstabIdentity` — adding one wheel, counted by the first wheel that blocks
+The survivors of the wheels up to a larger prime equal the survivors of the wheels up to a smaller one, minus, for each wheel in between, the positions it is the first to block. With the plain pattern this is Legendre's recurrence for phi(x, a): bringing in the next wheel removes the survivors of the earlier wheels among the multiples of the new prime. Buchstab's identity, Ford Lemma 3.8.
+- Lean (planned): `buchstab_identity`, `legendre_phi_recurrence`
+- Rests on: Mathlib only
+- Scope: Tier 1: exact and finite.
+- Status: Planned
+
+### 84. `FundamentalLemma` — the survivor count matches its share while the wheels stay small
+If the largest wheel is the level of distribution to the power one over a large number s, the survivors of any pattern equal the total times the survivor share, up to a relative error of e to minus s log s, plus remainders. This is why exact wheel shares predict counts for small wheels and fail at the square root. The fundamental lemma of sieve theory, Ford Theorem 3.6.
+- Lean (planned): `fundamental_lemma`
+- Rests on: `BrunHooley`
+- Scope: Tier 3.
+- Status: Planned
+
+### 85. `LowerBoundSieve` — twin columns with few prime factors
+A lower-bound sieve: with the wheels up to a small power of N, the survivors are at least a fixed positive fraction of the total times the share, minus remainders. Consequence: at least a constant times N over log N squared positions have both 6n-1 and 6n+1 with at most 7 prime factors each. Ford Theorems 3.2-3.3 and Section 1.7.2.
+- Lean (planned): `lower_sieve`, `twin_columns_almost_prime`
+- Rests on: `BrunHooley`
+- Scope: Tier 3.
+- Status: Planned
+
+### 86. `PetiteSieve` — an exact asymptotic for patterns of small dimension
+When each wheel blocks only a small share on average, the survivor count is asymptotic to the total times the share, even with the wheels up to a fixed power of the range. Proved from Buchstab's identity and the fundamental lemma. Ford Theorem 3.9.
+- Lean (planned): `petite_sieve`
+- Rests on: `BuchstabIdentity`, `FundamentalLemma`
+- Scope: Tier 3.
+- Status: Planned
+
+### 87. `SelbergTwinRails` — Selberg's bound for the twin columns
+The wheels from 5 up form a Selberg sieve problem for the twin columns, with each wheel's share two over the wheel; the wheels 2 and 3 must be left out, since Mathlib's sieve needs every share positive and the columns have share zero there. Selberg's Lambda-squared weights then give at most four times the twin-prime constant times N over log N squared twin pairs, four times the conjectured count. Ford Theorems 4.1 and 4.5.
+- Lean (planned): `wheels_selberg_instance`, `selberg_twin_columns_bound`
+- Rests on: `TwinConstant`, `ShareAsymptotics`
+- Scope: wheels_selberg_instance: Tier 1. selberg_twin_columns_bound: Tier 3 (needs the asymptotic for J, Ford Theorem 4.4).
+- Status: Planned
+
+### 88. `ParityBarrier` — Selberg's parity example
+The numbers with an even and with an odd count of prime factors have the same sieve data: the multiples of every product of wheels split evenly between the two sets, to within a vanishing error. Yet with the wheels up to the square root one set keeps only 1 and the other keeps about all the primes. So wheel densities alone cannot tell primes from products of two primes; beating parity needs an ingredient that breaks this example. Ford Sections 1.7.4 and 4.2.
+- Lean (planned): `liouville_sets_same_shares`, `liouville_sets_differ`
+- Rests on: `PrimeNumberTheorem`
+- Scope: Tier 3: needs the Liouville sum to be small compared with x, which is equivalent to the prime number theorem.
+- Status: Planned
+
+### 89. `PolynomialPatterns` — polynomial patterns: admissibility and the Bateman-Horn conjecture
+For polynomial patterns such as n^2 + 1, a wheel blocks the roots of the polynomials on that wheel, and admissibility asks that no wheel be fully blocked. Stated: the Bateman-Horn conjecture as a named hypothesis, with the step that it gives infinitely many primes of the form n^2 + 1 (Landau's fourth problem). The constant's convergence for n^2 + 1 depends on how primes split between remainders 1 and 3 on division by 4, so it also enters as a hypothesis.
+- Lean (planned): `poly_admissible_iff`, `sq_add_one_admissible`, `landau_of_bateman_horn`
+- Rests on: `Admissibility`
+- Open inputs: `bateman_horn_conjecture`, `sq_add_one_constant_converges`
+- Scope: poly_admissible_iff and sq_add_one_admissible: Tier 1. landau_of_bateman_horn: Tier 2.
+- Status: Planned (conditional)

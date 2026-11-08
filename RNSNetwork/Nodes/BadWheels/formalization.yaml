@@ -1,0 +1,37 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: BadWheels.v1
+  family: BadWheels
+  version: v1
+  order: 73
+  kind: paper
+  status: planned
+  title: which wheels block fewer positions for linear forms
+  description: 'For a pattern of linear forms, a wheel blocks at most one position per form, and it blocks
+    fewer exactly when it divides the product of the leading coefficients and of all the cross differences.
+    For the two columns 6n-1 and 6n+1 that product is 432, so the wheels 2 and 3 are the only exceptions:
+    the 6n±1 wheel is exactly the removal of the bad wheels. Ford, Theorem 2.5 (first part).'
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - LinearForms
+  claims:
+  - blocked_le_card
+  - blocked_eq_card_iff
+  - twin_columns_bad_wheels
+  tier: 'Tier 1: modular arithmetic, decidable for the column case.'
+  plan: Each form with a coefficient coprime to the wheel has exactly one root; two roots coincide exactly
+    when the wheel divides the cross difference. The column case is a computation of the product (6, 6,
+    12).
+sources:
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Theorem 2.5, first part
+related:
+- node: Admissibility
+  note: admissibility asks that every wheel block fewer than its size; this counts how many it blocks
+- node: Wheel6
+  note: the bad wheels of the two columns are exactly 2 and 3

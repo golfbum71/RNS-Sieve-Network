@@ -1,0 +1,43 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: GapConstant.v1
+  family: GapConstant
+  version: v1
+  order: 71
+  kind: paper
+  status: planned
+  title: the constant for any even gap
+  description: 'For prime pairs a fixed even gap apart, the wheel-built correction constant equals the
+    twin-prime constant times, for each odd prime dividing the gap, that prime minus one over that prime
+    minus two. So a gap of six has exactly twice the twin constant: the wheel of size 3 blocks one position
+    instead of two, because a gap divisible by 6 keeps both numbers in the same column. Classical (Hardy
+    and Littlewood 1923); not yet in the network.'
+  improves: TwinConstant covers the gap of two only; this gives every even gap.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - SingularSeries
+  - TwinConstant
+  claims:
+  - gap_constant_eq_twin_mul
+  - sexy_constant_eq_two_twin
+  tier: 'Tier 1: a finite rewrite of the product, the same kind of proof as twin_prime_constant_eq_classical.'
+  plan: Split the product over the primes into those dividing the gap and the rest (HasProd.mul_compl),
+    as TwinConstant does for the wheel 2; on a dividing odd wheel the pattern blocks one position, on
+    the rest two. The gap of six is the special case with one dividing odd wheel.
+sources:
+- title: G. H. Hardy and J. E. Littlewood, Some problems of 'Partitio numerorum' III, Acta Math. 44 (1923),
+    1-70
+  url: https://doi.org/10.1007/BF02403921
+  relationship: the singular series for prime pairs at a fixed gap
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: 'Section 1.8: the gap-six constant is twice the twin constant'
+related:
+- node: GapTracks
+  note: 'the column fact behind the factor 2 at the wheel 3: a gap divisible by 6 stays in one column'
+- node: ShareAsymptotics
+  note: the same constants appear as the limits of the pattern shares

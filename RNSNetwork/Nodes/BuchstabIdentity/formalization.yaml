@@ -1,0 +1,37 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: BuchstabIdentity.v1
+  family: BuchstabIdentity
+  version: v1
+  order: 83
+  kind: paper
+  status: planned
+  title: adding one wheel, counted by the first wheel that blocks
+  description: 'The survivors of the wheels up to a larger prime equal the survivors of the wheels up
+    to a smaller one, minus, for each wheel in between, the positions it is the first to block. With the
+    plain pattern this is Legendre''s recurrence for phi(x, a): bringing in the next wheel removes the
+    survivors of the earlier wheels among the multiples of the new prime. Buchstab''s identity, Ford Lemma
+    3.8.'
+conclusions: []
+planned:
+  source_status: New
+  rests_on: []
+  claims:
+  - buchstab_identity
+  - legendre_phi_recurrence
+  tier: 'Tier 1: exact and finite.'
+  plan: Sort each blocked position by its smallest blocking wheel above the smaller cutoff and sum.
+sources:
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Lemma 3.8
+- title: Prime-counting function (Legendre's and Meissel's phi)
+  url: https://en.wikipedia.org/wiki/Prime-counting_function
+  relationship: the recurrence for phi(x, a)
+related:
+- node: WheelOrder
+  note: the same first-blocker count over one whole cycle
+- node: SurvivorCount
+  note: the cycle form of the survivor count

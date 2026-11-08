@@ -1,0 +1,32 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: BrunTitchmarshPNT.v1
+  family: BrunTitchmarshPNT
+  version: v1
+  order: 81
+  kind: external
+  status: planned
+  title: primes in a short window (PNT+)
+  description: The number of primes in any window of a given length is at most twice the length over the
+    logarithm of the sieve level, plus a small error, proved with the Selberg sieve in PrimeNumberTheoremAnd
+    (primesBetween_le). Windows only, not arithmetic progressions.
+conclusions: []
+planned:
+  source_status: External
+  rests_on: []
+  tier: Outside source.
+  plan: Cite primesBetween_le word for word as a named hypothesis; check toolchain and axioms.
+  external:
+    project: AlexKontorovich/PrimeNumberTheoremAnd
+    url: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/main/PrimeNumberTheoremAnd/BrunTitchmarsh.lean
+    note: primesBetween x (x + y) <= 2 * y / log z + 6 * z * (1 + log z) ^ 3. No arithmetic-progression
+      version was found in Lean (search of 2026-11-08).
+sources:
+- title: PrimeNumberTheoremAnd, BrunTitchmarsh (primesBetween_le)
+  url: https://math-inc.github.io/strongpnt/docs/PrimeNumberTheoremAnd/BrunTitchmarsh.html
+  relationship: the Lean proof
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Theorem 2.7

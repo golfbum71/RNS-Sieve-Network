@@ -1,0 +1,38 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: RailBrunTitchmarsh.v1
+  family: RailBrunTitchmarsh
+  version: v1
+  order: 82
+  kind: paper
+  status: planned
+  title: how many primes one column can hold in a window
+  description: Each column, 6n-1 or 6n+1, holds at most about the window's length over the logarithm of
+    five sixths of that length primes in any window, uniformly in where the window sits (Brun-Titchmarsh
+    with modulus 6, constant 2 of Montgomery and Vaughan). A first, weaker form follows at once from the
+    window bound for all primes.
+  improves: The window bound counts both columns together; this halves it per column.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - BrunTitchmarshPNT
+  - Wheel6
+  claims:
+  - column_window_le_all
+  - column_window_bound
+  tier: 'column_window_le_all: Tier 1. column_window_bound: Tier 3, a Selberg sieve for a progression.'
+  plan: 'column_window_le_all: column primes in the window are primes in the window. column_window_bound:
+    instantiate Mathlib''s SelbergSieve on one column of the window, as PNT+ does for windows.'
+sources:
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Theorems 2.7 and 4.2
+- title: Mathlib, Mathlib.NumberTheory.SelbergSieve
+  url: https://imperialcollegelondon.github.io/FLT/docs/Mathlib/NumberTheory/SelbergSieve.html
+  relationship: the sieve structure and the Lambda-squared upper bound sieve to instantiate
+related:
+- node: GapTracks
+  note: which gaps each column allows

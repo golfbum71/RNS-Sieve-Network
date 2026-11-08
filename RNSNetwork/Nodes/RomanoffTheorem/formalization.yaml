@@ -1,0 +1,34 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: RomanoffTheorem.v1
+  family: RomanoffTheorem
+  version: v1
+  order: 80
+  kind: paper
+  status: planned
+  title: a positive share of numbers are a prime plus a power of 2
+  description: A positive proportion of positive integers can be written as a prime plus a power of 2
+    (Romanoff 1934). The proof bounds the second moment with the prime-pair bound at gaps that are differences
+    of powers of 2.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - GapPairs
+  claims:
+  - romanoff_positive_density
+  tier: 'Tier 3: needs the average of the gap factor over differences of powers of 2.'
+  plan: Cauchy-Schwarz on the representation count; the off-diagonal terms are prime pairs at gap 2^a
+    - 2^b, bounded by gap_pair_bound; then the average of the gap factor over those gaps.
+sources:
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Theorem 2.8
+- title: 'Erdős Problems #16 (references Romanoff, Math. Ann. 109 (1934), 668-678)'
+  url: https://www.erdosproblems.com/latex/16
+  relationship: the theorem and its context
+related:
+- node: GapTracks
+  note: the pair bounds at even gaps it uses

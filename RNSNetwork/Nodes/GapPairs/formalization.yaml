@@ -1,0 +1,35 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: GapPairs.v1
+  family: GapPairs
+  version: v1
+  order: 76
+  kind: paper
+  status: planned
+  title: prime pairs at any even gap, and Goldbach pairs
+  description: Prime pairs up to N a fixed even gap apart number at most a constant times the gap over
+    Euler's phi of the gap, times N over log N squared; pairs of primes adding to a given even number
+    are bounded the same way. Ford, Corollary 2.6.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - PatternUpperBound
+  - GapConstant
+  claims:
+  - gap_pair_bound
+  - goldbach_pair_bound
+  tier: 'Tier 2: a specialisation of pattern_count_le.'
+  plan: The patterns n, n + gap and n, even number - n; their bad wheels are the primes dividing the gap
+    (or the even number); the constant is bounded by GapConstant.
+sources:
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Corollary 2.6
+related:
+- node: GapTracks
+  note: which gaps each column allows
+- node: GapConjectures
+  note: the gap conjectures these upper bounds sit under

@@ -127,6 +127,7 @@ def twin_bonferroni_upper : Prop :=
 ## Used by
 
 - [`BrunTwinBound`](BrunTwinBound.md)
+- [`BrunHooley`](BrunHooley.md)
 
 ## Files
 

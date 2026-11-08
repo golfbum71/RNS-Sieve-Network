@@ -1,0 +1,32 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: GermainReciprocals.v1
+  family: GermainReciprocals
+  version: v1
+  order: 78
+  kind: paper
+  status: planned
+  title: the Sophie Germain primes' reciprocals add up to a finite total
+  description: Primes p with 2p + 1 also prime number at most a constant times N over log N squared, so
+    the sum of their reciprocals is finite. The linear-forms case of PatternUpperBound, applied to the
+    pair a number and twice it plus one.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - PatternUpperBound
+  - LinearForms
+  claims:
+  - germain_count_le
+  - germain_reciprocal_summable
+  tier: Tier 2.
+  plan: The forms n and 2n + 1 are admissible (LinearForms); their only bad wheel is 2; then partial summation.
+sources:
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Corollary 2.6, the Sophie Germain bound
+related:
+- node: SophieGermainWheel
+  note: where Sophie Germain primes can sit on the wheel

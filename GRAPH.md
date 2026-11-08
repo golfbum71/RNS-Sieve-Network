@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 61 of 66 nodes are built, holding 188 claims: 184 proved in Lean and 4 cited from a published paper. They are joined by 93 arrows, each a Lean-checked step. Of the other 5 nodes, drawn dashed or purple, 1 is a planned step that will assume an open conjecture; 1 is new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 61 of 85 nodes are built, holding 188 claims: 184 proved in Lean and 4 cited from a published paper. They are joined by 93 arrows, each a Lean-checked step. Of the other 24 nodes, drawn dashed or purple, 2 are planned steps that will assume open conjectures; 18 are new work, stated or scoped but not yet proved; 4 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -367,6 +367,63 @@ graph LR
     c187["twin_share_asymptotic_classical"]
     c188["pattern_share_asymptotic"]
   end
+  subgraph s67["<b>71. GapConstant — the constant for any even gap</b>"]
+    p6["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s68["<b>72. PolyaCutoff — sifting to Polya's cutoff gives the Hardy-Littlewood constant exactly</b>"]
+    p7["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s69["<b>73. BadWheels — which wheels block fewer positions for linear forms</b>"]
+    p8["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s70["<b>74. BrunHooley — Hooley's product of truncated sieves</b>"]
+    p9["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s71["<b>75. PatternUpperBound — every admissible pattern is at most its conjectured order</b>"]
+    p10["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s72["<b>76. GapPairs — prime pairs at any even gap, and Goldbach pairs</b>"]
+    p11["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s73["<b>77. PatternReciprocals — reciprocal sums converge for every pattern of two or more</b>"]
+    p12["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s74["<b>78. GermainReciprocals — the Sophie Germain primes' reciprocals add up to a finite total</b>"]
+    p13["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s75["<b>79. BrunSharp — Brun's twin bound with log log squared</b>"]
+    p14["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s76["<b>80. RomanoffTheorem — a positive share of numbers are a prime plus a power of 2</b>"]
+    p15["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s77["<b>81. BrunTitchmarshPNT — primes in a short window (PNT+)</b>"]
+    p16["<i>outside source: AlexKontorovich/PrimeNumberTheoremAnd</i>"]
+  end
+  subgraph s78["<b>82. RailBrunTitchmarsh — how many primes one column can hold in a window</b>"]
+    p17["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s79["<b>83. BuchstabIdentity — adding one wheel, counted by the first wheel that blocks</b>"]
+    p18["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s80["<b>84. FundamentalLemma — the survivor count matches its share while the wheels stay small</b>"]
+    p19["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s81["<b>85. LowerBoundSieve — twin columns with few prime factors</b>"]
+    p20["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s82["<b>86. PetiteSieve — an exact asymptotic for patterns of small dimension</b>"]
+    p21["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s83["<b>87. SelbergTwinRails — Selberg's bound for the twin columns</b>"]
+    p22["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s84["<b>88. ParityBarrier — Selberg's parity example</b>"]
+    p23["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s85["<b>89. PolynomialPatterns — polynomial patterns: admissibility and the Bateman-Horn conjecture</b>"]
+    p24["<i>planned: conditional</i>"]
+  end
   o1{{"<i>open conjecture</i><br/>hardy_littlewood_conjecture"}}
   o2{{"<i>open conjecture</i><br/>HL_conjecture_A"}}
   o3{{"<i>open conjecture</i><br/>HL_conjecture_B"}}
@@ -483,6 +540,34 @@ graph LR
   c14 ==> c188
   c12 ==> c188
   c97 ==> c188
+  s6 -.-> s67
+  s7 -.-> s67
+  s66 -.-> s68
+  s16 -.-> s69
+  s51 -.-> s70
+  s50 -.-> s70
+  s70 -.-> s71
+  s69 -.-> s71
+  s66 -.-> s71
+  s71 -.-> s72
+  s67 -.-> s72
+  s71 -.-> s73
+  s71 -.-> s74
+  s16 -.-> s74
+  s53 -.-> s75
+  s50 -.-> s75
+  s66 -.-> s75
+  s72 -.-> s76
+  s77 -.-> s78
+  s1 -.-> s78
+  s70 -.-> s80
+  s70 -.-> s81
+  s79 -.-> s82
+  s80 -.-> s82
+  s7 -.-> s83
+  s66 -.-> s83
+  s34 -.-> s84
+  s4 -.-> s85
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
   classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
@@ -496,9 +581,9 @@ graph LR
   class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c46,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78,c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c92,c93,c94,c95,c96,c97,c98,c99,c100,c101,c102,c103,c104,c105,c106,c107,c108,c109,c110,c111,c112,c113,c114,c115,c116,c117,c118,c119,c120,c121,c122,c123,c124,c125,c126,c128,c130,c131,c132,c133,c134,c135,c136,c137,c138,c139,c140,c141,c142,c143,c144,c145,c146,c147,c148,c150,c151,c152,c153,c154,c155,c156,c157,c158,c159,c160,c161,c162,c163,c164,c165,c166,c167,c168,c169,c170,c171,c172,c173,c174,c175,c176,c177,c178,c179,c180,c181,c182,c183,c184,c185,c186,c187,c188 verified;
   class c44,c45,c47,c48,c49,c50,c51,c52 conditional_built;
   class c63,c127,c129,c149 cited_built;
-  class p2 conditional;
-  class p3 new;
-  class p1,p4,p5 external;
+  class p2,p24 conditional;
+  class p3,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p17,p18,p19,p20,p21,p22,p23 new;
+  class p1,p4,p5,p16 external;
   class o1,o2,o3,o4,o5,o6,o7,o8 openconj;
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md#prime_gt_three_is_candidate" _blank
   click c2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CRT.md#crt_map_bijective" _blank
@@ -693,6 +778,25 @@ graph LR
   click c186 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#odd_twin_product_eq_classical" _blank
   click c187 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic_classical" _blank
   click c188 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#pattern_share_asymptotic" _blank
+  click p6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConstant.md" _blank
+  click p7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PolyaCutoff.md" _blank
+  click p8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BadWheels.md" _blank
+  click p9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunHooley.md" _blank
+  click p10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PatternUpperBound.md" _blank
+  click p11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapPairs.md" _blank
+  click p12 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PatternReciprocals.md" _blank
+  click p13 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainReciprocals.md" _blank
+  click p14 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunSharp.md" _blank
+  click p15 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RomanoffTheorem.md" _blank
+  click p16 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTitchmarshPNT.md" _blank
+  click p17 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RailBrunTitchmarsh.md" _blank
+  click p18 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BuchstabIdentity.md" _blank
+  click p19 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FundamentalLemma.md" _blank
+  click p20 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LowerBoundSieve.md" _blank
+  click p21 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PetiteSieve.md" _blank
+  click p22 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergTwinRails.md" _blank
+  click p23 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ParityBarrier.md" _blank
+  click p24 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PolynomialPatterns.md" _blank
 ```
 
 ## What each result rests on
@@ -994,8 +1098,9 @@ exactly the following, each recorded as such rather than claimed:
 - [`JacobsthalQuadratic`](docs/nodes/JacobsthalQuadratic.md) — [openai/math](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/OAI/NumberTheory/Jacobsthal/Conclusions/QuadraticBound.lean#L13) — cited by [`BlockingRuns`](docs/nodes/BlockingRuns.md)
 - [`RoughInPrimeGaps`](docs/nodes/RoughInPrimeGaps.md) — [plby/lean-proofs](https://github.com/plby/lean-proofs/blob/8822f7ddef30fadbd92e1c6ab4ed897af356af5e/src/latest/ErdosProblems/Erdos682.lean#L5018)
 - [`LongGaps`](docs/nodes/LongGaps.md) — [openai/LongGapsBetweenPrimes](https://github.com/openai/LongGapsBetweenPrimes/blob/main/LongGapsBetweenPrimes.lean)
+- [`BrunTitchmarshPNT`](docs/nodes/BrunTitchmarshPNT.md) — [AlexKontorovich/PrimeNumberTheoremAnd](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/main/PrimeNumberTheoremAnd/BrunTitchmarsh.lean) — cited by [`RailBrunTitchmarsh`](docs/nodes/RailBrunTitchmarsh.md)
 
-**Planned nodes will add:** `birdsey_schay_heuristic`
+**Planned nodes will add:** `birdsey_schay_heuristic`, `bateman_horn_conjecture`, `sq_add_one_constant_converges`
 
 ## Published sources
 
@@ -1187,6 +1292,54 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
   - [Brun's theorem (Wikipedia)](https://en.wikipedia.org/wiki/Brun%27s_theorem)
 - [`BrunTheorem`](docs/nodes/BrunTheorem.md)
   - [Brun's theorem (Wikipedia)](https://en.wikipedia.org/wiki/Brun%27s_theorem)
+- [`GapConstant`](docs/nodes/GapConstant.md)
+  - [G. H. Hardy and J. E. Littlewood, Some problems of 'Partitio numerorum' III, Acta Math. 44 (1923), 1-70](https://doi.org/10.1007/BF02403921) — the singular series for prime pairs at a fixed gap
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Section 1.8: the gap-six constant is twice the twin constant
+- [`PolyaCutoff`](docs/nodes/PolyaCutoff.md)
+  - [W. Banks, K. Ford and T. Tao, Large prime gaps and probabilistic models, Invent. Math. 233 (2023), 1471-1518](https://arxiv.org/abs/1908.08613) — the Polya cutoff and the identity for the sifted share
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Section 1.8, the identity for V(z) at z = x^(1/e^gamma)
+- [`BadWheels`](docs/nodes/BadWheels.md)
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Theorem 2.5, first part
+- [`BrunHooley`](docs/nodes/BrunHooley.md)
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Lemmas 2.1-2.2, Theorems 2.3-2.4
+- [`PatternUpperBound`](docs/nodes/PatternUpperBound.md)
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Theorem 2.5
+- [`GapPairs`](docs/nodes/GapPairs.md)
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Corollary 2.6
+- [`PatternReciprocals`](docs/nodes/PatternReciprocals.md)
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Corollary 1.8 and Theorem 2.5
+- [`GermainReciprocals`](docs/nodes/GermainReciprocals.md)
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Corollary 2.6, the Sophie Germain bound
+- [`BrunSharp`](docs/nodes/BrunSharp.md)
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Section 1.11.1 and Theorem 1.7
+- [`RomanoffTheorem`](docs/nodes/RomanoffTheorem.md)
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Theorem 2.8
+  - [Erdős Problems #16 (references Romanoff, Math. Ann. 109 (1934), 668-678)](https://www.erdosproblems.com/latex/16) — the theorem and its context
+- [`BrunTitchmarshPNT`](docs/nodes/BrunTitchmarshPNT.md)
+  - [PrimeNumberTheoremAnd, BrunTitchmarsh (primesBetween_le)](https://math-inc.github.io/strongpnt/docs/PrimeNumberTheoremAnd/BrunTitchmarsh.html) — the Lean proof
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Theorem 2.7
+- [`RailBrunTitchmarsh`](docs/nodes/RailBrunTitchmarsh.md)
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Theorems 2.7 and 4.2
+  - [Mathlib, Mathlib.NumberTheory.SelbergSieve](https://imperialcollegelondon.github.io/FLT/docs/Mathlib/NumberTheory/SelbergSieve.html) — the sieve structure and the Lambda-squared upper bound sieve to instantiate
+- [`BuchstabIdentity`](docs/nodes/BuchstabIdentity.md)
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Lemma 3.8
+  - [Prime-counting function (Legendre's and Meissel's phi)](https://en.wikipedia.org/wiki/Prime-counting_function) — the recurrence for phi(x, a)
+- [`FundamentalLemma`](docs/nodes/FundamentalLemma.md)
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Theorem 3.6
+  - [T. Tao, 254A Notes 4: Some sieve theory (2015)](https://terrytao.wordpress.com/2015/01/21/254a-notes-4-some-sieve-theory/) — an alternative account
+- [`LowerBoundSieve`](docs/nodes/LowerBoundSieve.md)
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Theorems 3.2-3.3, Section 1.7.2
+- [`PetiteSieve`](docs/nodes/PetiteSieve.md)
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Theorem 3.9
+- [`SelbergTwinRails`](docs/nodes/SelbergTwinRails.md)
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Theorems 4.1, 4.4, 4.5
+  - [Mathlib, Mathlib.NumberTheory.SelbergSieve](https://imperialcollegelondon.github.io/FLT/docs/Mathlib/NumberTheory/SelbergSieve.html) — the sieve structure and the Lambda-squared upper bound sieve to instantiate
+- [`ParityBarrier`](docs/nodes/ParityBarrier.md)
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Sections 1.7.4 and 4.2
+  - [T. Tao, 254A Notes 4: Some sieve theory (2015)](https://terrytao.wordpress.com/2015/01/21/254a-notes-4-some-sieve-theory/) — an alternative account
+- [`PolynomialPatterns`](docs/nodes/PolynomialPatterns.md)
+  - [P. T. Bateman and R. A. Horn, A heuristic asymptotic formula concerning the distribution of prime numbers, Math. Comp. 16 (1962), 363-367](https://www.ams.org/journals/mcom/1962-16-079/S0025-5718-1962-0148632-7/home.html) — states the conjecture
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Conjecture 1.1 and Theorem 3.5
 
 ## Node index
 
@@ -1258,3 +1411,22 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 68 | [`MertensSecond`](docs/nodes/MertensSecond.md) | the sum of the reciprocals of the primes (Mertens' second theorem) | proved in Lean |
 | 69 | [`BrunAnalytic`](docs/nodes/BrunAnalytic.md) | how few twin primes there are (Brun stage 5) | proved in Lean |
 | 70 | [`BrunTheorem`](docs/nodes/BrunTheorem.md) | the reciprocals of the twin primes have a finite sum (Brun's theorem) | proved in Lean |
+| 71 | [`GapConstant`](docs/nodes/GapConstant.md) | the constant for any even gap | planned: new, not yet proved |
+| 72 | [`PolyaCutoff`](docs/nodes/PolyaCutoff.md) | sifting to Polya's cutoff gives the Hardy-Littlewood constant exactly | planned: new, not yet proved |
+| 73 | [`BadWheels`](docs/nodes/BadWheels.md) | which wheels block fewer positions for linear forms | planned: new, not yet proved |
+| 74 | [`BrunHooley`](docs/nodes/BrunHooley.md) | Hooley's product of truncated sieves | planned: new, not yet proved |
+| 75 | [`PatternUpperBound`](docs/nodes/PatternUpperBound.md) | every admissible pattern is at most its conjectured order | planned: new, not yet proved |
+| 76 | [`GapPairs`](docs/nodes/GapPairs.md) | prime pairs at any even gap, and Goldbach pairs | planned: new, not yet proved |
+| 77 | [`PatternReciprocals`](docs/nodes/PatternReciprocals.md) | reciprocal sums converge for every pattern of two or more | planned: new, not yet proved |
+| 78 | [`GermainReciprocals`](docs/nodes/GermainReciprocals.md) | the Sophie Germain primes' reciprocals add up to a finite total | planned: new, not yet proved |
+| 79 | [`BrunSharp`](docs/nodes/BrunSharp.md) | Brun's twin bound with log log squared | planned: new, not yet proved |
+| 80 | [`RomanoffTheorem`](docs/nodes/RomanoffTheorem.md) | a positive share of numbers are a prime plus a power of 2 | planned: new, not yet proved |
+| 81 | [`BrunTitchmarshPNT`](docs/nodes/BrunTitchmarshPNT.md) | primes in a short window (PNT+) | outside source: proved in Lean in another project |
+| 82 | [`RailBrunTitchmarsh`](docs/nodes/RailBrunTitchmarsh.md) | how many primes one column can hold in a window | planned: new, not yet proved |
+| 83 | [`BuchstabIdentity`](docs/nodes/BuchstabIdentity.md) | adding one wheel, counted by the first wheel that blocks | planned: new, not yet proved |
+| 84 | [`FundamentalLemma`](docs/nodes/FundamentalLemma.md) | the survivor count matches its share while the wheels stay small | planned: new, not yet proved |
+| 85 | [`LowerBoundSieve`](docs/nodes/LowerBoundSieve.md) | twin columns with few prime factors | planned: new, not yet proved |
+| 86 | [`PetiteSieve`](docs/nodes/PetiteSieve.md) | an exact asymptotic for patterns of small dimension | planned: new, not yet proved |
+| 87 | [`SelbergTwinRails`](docs/nodes/SelbergTwinRails.md) | Selberg's bound for the twin columns | planned: new, not yet proved |
+| 88 | [`ParityBarrier`](docs/nodes/ParityBarrier.md) | Selberg's parity example | planned: new, not yet proved |
+| 89 | [`PolynomialPatterns`](docs/nodes/PolynomialPatterns.md) | polynomial patterns: admissibility and the Bateman-Horn conjecture | planned: conditional |

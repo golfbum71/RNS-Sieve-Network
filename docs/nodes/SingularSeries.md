@@ -93,6 +93,7 @@ def local_density_factorization : Prop :=
 - [`TwinConstant`](TwinConstant.md)
 - [`HardyLittlewood`](HardyLittlewood.md)
 - [`ShareAsymptotics`](ShareAsymptotics.md)
+- [`GapConstant`](GapConstant.md)
 
 ## Files
 

@@ -122,6 +122,13 @@ def pattern_share_asymptotic : Prop :=
 
 **Proof:** `RNS.ShareAsymptotics.pattern_share_asymptotic_step` in [`RNSSolutions/ShareAsymptotics.lean`](../../RNSSolutions/ShareAsymptotics.lean)
 
+## Used by
+
+- [`BrunSharp`](BrunSharp.md)
+- [`PatternUpperBound`](PatternUpperBound.md)
+- [`PolyaCutoff`](PolyaCutoff.md)
+- [`SelbergTwinRails`](SelbergTwinRails.md)
+
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/ShareAsymptotics/Conclusions.lean)

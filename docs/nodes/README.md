@@ -70,5 +70,24 @@
 | 68 | [`MertensSecond`](MertensSecond.md) | the sum of the reciprocals of the primes (Mertens' second theorem) | proved in Lean |
 | 69 | [`BrunAnalytic`](BrunAnalytic.md) | how few twin primes there are (Brun stage 5) | proved in Lean |
 | 70 | [`BrunTheorem`](BrunTheorem.md) | the reciprocals of the twin primes have a finite sum (Brun's theorem) | proved in Lean |
+| 71 | [`GapConstant`](GapConstant.md) | the constant for any even gap | planned: new, not yet proved |
+| 72 | [`PolyaCutoff`](PolyaCutoff.md) | sifting to Polya's cutoff gives the Hardy-Littlewood constant exactly | planned: new, not yet proved |
+| 73 | [`BadWheels`](BadWheels.md) | which wheels block fewer positions for linear forms | planned: new, not yet proved |
+| 74 | [`BrunHooley`](BrunHooley.md) | Hooley's product of truncated sieves | planned: new, not yet proved |
+| 75 | [`PatternUpperBound`](PatternUpperBound.md) | every admissible pattern is at most its conjectured order | planned: new, not yet proved |
+| 76 | [`GapPairs`](GapPairs.md) | prime pairs at any even gap, and Goldbach pairs | planned: new, not yet proved |
+| 77 | [`PatternReciprocals`](PatternReciprocals.md) | reciprocal sums converge for every pattern of two or more | planned: new, not yet proved |
+| 78 | [`GermainReciprocals`](GermainReciprocals.md) | the Sophie Germain primes' reciprocals add up to a finite total | planned: new, not yet proved |
+| 79 | [`BrunSharp`](BrunSharp.md) | Brun's twin bound with log log squared | planned: new, not yet proved |
+| 80 | [`RomanoffTheorem`](RomanoffTheorem.md) | a positive share of numbers are a prime plus a power of 2 | planned: new, not yet proved |
+| 81 | [`BrunTitchmarshPNT`](BrunTitchmarshPNT.md) | primes in a short window (PNT+) | outside source: proved in Lean in another project |
+| 82 | [`RailBrunTitchmarsh`](RailBrunTitchmarsh.md) | how many primes one column can hold in a window | planned: new, not yet proved |
+| 83 | [`BuchstabIdentity`](BuchstabIdentity.md) | adding one wheel, counted by the first wheel that blocks | planned: new, not yet proved |
+| 84 | [`FundamentalLemma`](FundamentalLemma.md) | the survivor count matches its share while the wheels stay small | planned: new, not yet proved |
+| 85 | [`LowerBoundSieve`](LowerBoundSieve.md) | twin columns with few prime factors | planned: new, not yet proved |
+| 86 | [`PetiteSieve`](PetiteSieve.md) | an exact asymptotic for patterns of small dimension | planned: new, not yet proved |
+| 87 | [`SelbergTwinRails`](SelbergTwinRails.md) | Selberg's bound for the twin columns | planned: new, not yet proved |
+| 88 | [`ParityBarrier`](ParityBarrier.md) | Selberg's parity example | planned: new, not yet proved |
+| 89 | [`PolynomialPatterns`](PolynomialPatterns.md) | polynomial patterns: admissibility and the Bateman-Horn conjecture | planned: conditional |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

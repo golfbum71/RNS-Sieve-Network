@@ -1,0 +1,35 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: BrunSharp.v1
+  family: BrunSharp
+  version: v1
+  order: 79
+  kind: paper
+  status: planned
+  title: Brun's twin bound with log log squared
+  description: Twin prime pairs up to N number at most a constant times N times (log log N over log N)
+    squared, by stopping inclusion-exclusion after about four times the logarithm of one over the twin
+    share, with the wheels up to N to the one over 16 log log N. Ford Section 1.11.1, Brun's 1919 bound.
+  improves: BrunAnalytic proves N over log N to the 3/2; this reaches Brun's own exponent, within log
+    log N squared of the truth.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - BrunTwinBound
+  - BrunTruncation
+  - ShareAsymptotics
+  claims:
+  - twin_count_loglog
+  tier: 'Tier 2: the same stages as BrunAnalytic with Ford''s choice of parameters.'
+  plan: Take the stopping point the even integer near 4 log(1/V(z)); BrunTruncation's power bound gives
+    error (e/4)^(k+1), at most V(z)^(3/2); the remainders sum to N^(1/2+o(1)).
+sources:
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Section 1.11.1 and Theorem 1.7
+related:
+- node: BrunTheorem
+  note: the reciprocal sum, already proved from the weaker bound

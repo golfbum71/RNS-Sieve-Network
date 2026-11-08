@@ -1,0 +1,43 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: PolynomialPatterns.v1
+  family: PolynomialPatterns
+  version: v1
+  order: 89
+  kind: paper
+  status: planned
+  title: 'polynomial patterns: admissibility and the Bateman-Horn conjecture'
+  description: 'For polynomial patterns such as n^2 + 1, a wheel blocks the roots of the polynomials on
+    that wheel, and admissibility asks that no wheel be fully blocked. Stated: the Bateman-Horn conjecture
+    as a named hypothesis, with the step that it gives infinitely many primes of the form n^2 + 1 (Landau''s
+    fourth problem). The constant''s convergence for n^2 + 1 depends on how primes split between remainders
+    1 and 3 on division by 4, so it also enters as a hypothesis.'
+conclusions: []
+planned:
+  source_status: Conditional
+  rests_on:
+  - Admissibility
+  claims:
+  - poly_admissible_iff
+  - sq_add_one_admissible
+  - landau_of_bateman_horn
+  tier: 'poly_admissible_iff and sq_add_one_admissible: Tier 1. landau_of_bateman_horn: Tier 2.'
+  plan: Generalise the blocked count from offsets to roots of polynomials mod each wheel; n^2 + 1 has one root on the wheel 2, none on wheels leaving remainder 3 on division by 4, and two on the rest.
+  open_inputs:
+  - bateman_horn_conjecture
+  - sq_add_one_constant_converges
+sources:
+- title: P. T. Bateman and R. A. Horn, A heuristic asymptotic formula concerning the distribution of prime
+    numbers, Math. Comp. 16 (1962), 363-367
+  url: https://www.ams.org/journals/mcom/1962-16-079/S0025-5718-1962-0148632-7/home.html
+  relationship: states the conjecture
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Conjecture 1.1 and Theorem 3.5
+related:
+- node: HardyLittlewood
+  note: the linear case
+- node: LinearForms
+  note: the linear-forms case of admissibility

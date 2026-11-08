@@ -1,0 +1,35 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: LowerBoundSieve.v1
+  family: LowerBoundSieve
+  version: v1
+  order: 85
+  kind: paper
+  status: planned
+  title: twin columns with few prime factors
+  description: 'A lower-bound sieve: with the wheels up to a small power of N, the survivors are at least
+    a fixed positive fraction of the total times the share, minus remainders. Consequence: at least a
+    constant times N over log N squared positions have both 6n-1 and 6n+1 with at most 7 prime factors
+    each. Ford Theorems 3.2-3.3 and Section 1.7.2.'
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - BrunHooley
+  claims:
+  - lower_sieve
+  - twin_columns_almost_prime
+  tier: Tier 3.
+  plan: Subtract the overshoot of the upper sieve (Lemma 3.1) and choose the ranges for dimension 2 (f(2)
+    = 7.8); twin survivors of the wheels up to N^(1/7.9) have at most 7 prime factors.
+sources:
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Theorems 3.2-3.3, Section 1.7.2
+related:
+- node: AlmostPrimeWindow
+  note: survivors in a window are primes or semiprimes
+- node: ParityBarrier
+  note: why sieving alone stops at almost-primes

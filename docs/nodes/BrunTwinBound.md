@@ -52,6 +52,7 @@ def twin_count_le_sifted : Prop :=
 ## Used by
 
 - [`BrunAnalytic`](BrunAnalytic.md)
+- [`BrunSharp`](BrunSharp.md)
 
 ## Files
 

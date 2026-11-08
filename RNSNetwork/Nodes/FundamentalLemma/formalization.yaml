@@ -1,0 +1,37 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: FundamentalLemma.v1
+  family: FundamentalLemma
+  version: v1
+  order: 84
+  kind: paper
+  status: planned
+  title: the survivor count matches its share while the wheels stay small
+  description: If the largest wheel is the level of distribution to the power one over a large number
+    s, the survivors of any pattern equal the total times the survivor share, up to a relative error of
+    e to minus s log s, plus remainders. This is why exact wheel shares predict counts for small wheels
+    and fail at the square root. The fundamental lemma of sieve theory, Ford Theorem 3.6.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - BrunHooley
+  claims:
+  - fundamental_lemma
+  tier: Tier 3.
+  plan: Upper and lower Brun-Hooley sieves with ranges theta^j and stopping points growing with s, as
+    in Ford's proof.
+sources:
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Theorem 3.6
+- title: 'T. Tao, 254A Notes 4: Some sieve theory (2015)'
+  url: https://terrytao.wordpress.com/2015/01/21/254a-notes-4-some-sieve-theory/
+  relationship: an alternative account
+related:
+- node: CeilingOvershoot
+  note: the failure at the square root that the lemma's range excludes
+- node: ShareAsymptotics
+  note: the shares it compares with

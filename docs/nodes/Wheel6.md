@@ -36,6 +36,7 @@ def prime_gt_three_is_candidate : Prop :=
 - [`ColumnStructure`](ColumnStructure.md)
 - [`SophieGermainWheel`](SophieGermainWheel.md)
 - [`GapTracks`](GapTracks.md)
+- [`RailBrunTitchmarsh`](RailBrunTitchmarsh.md)
 
 ## Files
 

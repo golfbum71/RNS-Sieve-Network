@@ -1,0 +1,39 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: PatternUpperBound.v1
+  family: PatternUpperBound
+  version: v1
+  order: 75
+  kind: paper
+  status: planned
+  title: every admissible pattern is at most its conjectured order
+  description: For an admissible pattern of linear forms, the positions up to N where every form is prime
+    are at most a constant times the pattern's correction constant times N over the logarithm of N to
+    the number of forms. This is the strongest unconditional statement known in the direction of the Hardy-Littlewood
+    conjecture, and covers twins, triples, pairs at any gap and Sophie Germain pairs. Ford, Theorem 2.5.
+  improves: BrunAnalytic bounds the twins by N over log N to the 3/2; this gives every pattern at the
+    full conjectured order.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - BrunHooley
+  - BadWheels
+  - ShareAsymptotics
+  claims:
+  - pattern_count_le
+  tier: Tier 2.
+  plan: Apply brun_hooley_order with the blocked counts of BadWheels as the wheel shares and z the square
+    root of N; the remainders are at most the blocked count, summed to N^(1/2) times a power of log N;
+    bound V(z) by the pattern constant over log z to the k with the ShareAsymptotics limit.
+sources:
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Theorem 2.5
+related:
+- node: HardyLittlewood
+  note: the conjectured asymptotic this bounds from above
+- node: BrunAnalytic
+  note: the twin case with a weaker power of the logarithm

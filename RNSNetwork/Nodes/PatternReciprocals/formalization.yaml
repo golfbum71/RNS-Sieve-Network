@@ -1,0 +1,31 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: PatternReciprocals.v1
+  family: PatternReciprocals
+  version: v1
+  order: 77
+  kind: paper
+  status: planned
+  title: reciprocal sums converge for every pattern of two or more
+  description: For every admissible pattern with at least two members, the sum of one over the first member,
+    over all positions where every member is prime, is finite. Brun's theorem for twins is the case of
+    the pattern 0, 2; triples such as 0, 2, 6 and pairs at any gap follow the same way.
+  improves: BrunTheorem covers twins only.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - PatternUpperBound
+  claims:
+  - pattern_reciprocal_summable
+  tier: 'Tier 2: the BrunTheorem argument with the general bound.'
+  plan: Partial summation of pattern_count_le, as BrunTheorem does from BrunAnalytic.
+sources:
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Corollary 1.8 and Theorem 2.5
+related:
+- node: BrunTheorem
+  note: the twin case

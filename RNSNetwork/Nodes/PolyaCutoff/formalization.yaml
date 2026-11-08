@@ -1,0 +1,43 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: PolyaCutoff.v1
+  family: PolyaCutoff
+  version: v1
+  order: 72
+  kind: paper
+  status: planned
+  title: sifting to Polya's cutoff gives the Hardy-Littlewood constant exactly
+  description: If the wheels run only up to the power one over e to Euler's constant (about 0.56) of the
+    range, the share of the cycle surviving an admissible pattern, times the logarithm of the range to
+    the number of offsets, tends to the pattern's Hardy-Littlewood constant. So the conjectured constant
+    comes out of the wheels alone, with no correction. For a single offset this matches the prime number
+    theorem, in contrast to CeilingOvershoot, where wheels up to the square root overshoot by twice e
+    to minus Euler's constant. Pólya's observation, made rigorous by Banks, Ford and Tao.
+  improves: ShareAsymptotics leaves a factor e to minus Euler's constant per offset; at this cutoff it
+    disappears.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - ShareAsymptotics
+  claims:
+  - polya_cutoff_share
+  tier: 'Tier 1: a change of variable in pattern_share_asymptotic.'
+  plan: Put the largest wheel at the range to the power e to minus Euler's constant in pattern_share_asymptotic;
+    its logarithm is e to minus Euler's constant times the logarithm of the range, so the factor e to
+    minus Euler's constant to the number of offsets cancels.
+sources:
+- title: W. Banks, K. Ford and T. Tao, Large prime gaps and probabilistic models, Invent. Math. 233 (2023),
+    1471-1518
+  url: https://arxiv.org/abs/1908.08613
+  relationship: the Polya cutoff and the identity for the sifted share
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Section 1.8, the identity for V(z) at z = x^(1/e^gamma)
+related:
+- node: CeilingOvershoot
+  note: the same share with the wheels up to the square root, where it overshoots by about 12%
+- node: HardyLittlewood
+  note: the constant the cutoff recovers

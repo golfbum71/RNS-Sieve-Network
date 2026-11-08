@@ -58,6 +58,8 @@ def esymm_power_bound : Prop :=
 
 - [`BrunTwinBound`](BrunTwinBound.md)
 - [`BrunAnalytic`](BrunAnalytic.md)
+- [`BrunHooley`](BrunHooley.md)
+- [`BrunSharp`](BrunSharp.md)
 
 ## Files
 
