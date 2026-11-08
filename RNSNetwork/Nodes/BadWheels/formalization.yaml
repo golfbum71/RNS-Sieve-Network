@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: BadWheels.v1
@@ -7,27 +7,62 @@ node:
   version: v1
   order: 73
   kind: paper
-  status: planned
+  status: active
+  improves: "Admissibility asks only that every wheel block fewer positions than its size; this node counts exactly how many a pattern of linear forms blocks, and names the wheels that block fewer than one per form."
   title: which wheels block fewer positions for linear forms
   description: 'For a pattern of linear forms, a wheel blocks at most one position per form, and it blocks
     fewer exactly when it divides the product of the leading coefficients and of all the cross differences.
     For the two columns 6n-1 and 6n+1 that product is 432, so the wheels 2 and 3 are the only exceptions:
     the 6n±1 wheel is exactly the removal of the bad wheels. Ford, Theorem 2.5 (first part).'
-conclusions: []
-planned:
-  source_status: New
-  rests_on:
-  - LinearForms
-  claims:
-  - blocked_le_card
-  - blocked_eq_card_iff
-  - twin_columns_bad_wheels
-  - divisors_pairwise_coprime
-  tier: 'Tier 1: modular arithmetic, decidable for the column case.'
-  plan: 'Each form with a coefficient coprime to the wheel has exactly one root; two roots coincide exactly
-    when the wheel divides the cross difference. The column case is a computation of the product (6, 6,
-    12). divisors_pairwise_coprime (Ford Lemma 7.7): if each form is divisible by a number coprime to
-    the bad product, those numbers are pairwise coprime; same cross-difference argument.'
+conclusions:
+- id: blocked_le_card
+  declaration: RNS.BadWheels.blocked_le_card
+  summary: "For forms whose two coefficients share no factor, a prime wheel blocks at most one position per form."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BadWheels.lean
+    declaration: RNS.BadWheels.blocked_le_card_holds
+    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+  designated: lean-proof
+- id: blocked_eq_card_iff
+  declaration: RNS.BadWheels.blocked_eq_card_iff
+  summary: "It blocks exactly one per form unless it divides the bad product (leading coefficients times cross differences)."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BadWheels.lean
+    declaration: RNS.BadWheels.blocked_eq_card_iff_holds
+    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+  designated: lean-proof
+- id: twin_columns_bad_wheels
+  declaration: RNS.BadWheels.twin_columns_bad_wheels
+  summary: "For the columns 6n-1 and 6n+1 (forms 6n+5 and 6n+7) the bad wheels are exactly 2 and 3."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BadWheels.lean
+    declaration: RNS.BadWheels.twin_columns_bad_wheels_holds
+    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+  designated: lean-proof
+- id: divisors_pairwise_coprime
+  declaration: RNS.BadWheels.divisors_pairwise_coprime
+  summary: "Divisors of the forms at one position, each coprime to the bad product, are pairwise coprime (Ford Lemma 7.7)."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BadWheels.lean
+    declaration: RNS.BadWheels.divisors_pairwise_coprime_holds
+    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+  designated: lean-proof
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
   url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
@@ -40,3 +75,5 @@ related:
   note: admissibility asks that every wheel block fewer than its size; this counts how many it blocks
 - node: Wheel6
   note: the bad wheels of the two columns are exactly 2 and 3
+- node: LinearForms
+  note: uses its encoding of a linear form as a pair (a, b); the blocked positions are those where form_blocked_at holds

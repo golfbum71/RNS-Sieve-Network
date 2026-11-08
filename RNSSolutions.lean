@@ -59,3 +59,4 @@ import RNSSolutions.BrunTwinSum
 import RNSSolutions.BuchstabIdentity
 import RNSSolutions.ChenWeights
 import RNSSolutions.SmoothNumbers
+import RNSSolutions.BadWheels
