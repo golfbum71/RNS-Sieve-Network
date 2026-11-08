@@ -67,7 +67,8 @@ theorem legendre_error_step (h : RNS.BrunPureSieve.legendre_exact) : legendre_er
   have hSR : ((survivors_upto W N).card : ℝ) =
       ∑ D ∈ W.powerset, (-1 : ℝ) ^ D.card * ((N / D.prod id : ℕ) : ℝ) := by
     have := congrArg (Int.cast : ℤ → ℝ) hS
-    push_cast at this
+    simp only [Int.cast_sum, Int.cast_mul, Int.cast_pow, Int.cast_neg, Int.cast_one,
+      Int.cast_natCast] at this
     exact this
   rw [hSR, share_expand, ← Finset.sum_sub_distrib]
   calc |∑ D ∈ W.powerset, ((-1 : ℝ) ^ D.card * ((N / D.prod id : ℕ) : ℝ) -
@@ -154,7 +155,7 @@ theorem small_wheel_survivors_step (hle : legendre_error) (hm : RNS.MertensThird
           div_le_div_of_nonneg_right (mul_le_mul_of_nonneg_right hpow (by linarith)) hxpos.le
       _ = 2 * (Real.log (x : ℝ) / (x : ℝ) ^ (1 - Real.log 2)) := by
           rw [Real.rpow_sub hxpos, Real.rpow_one]
-          first | (field_simp; ring) | field_simp
+          field_simp
   have hsum := hE.add hV
   rw [zero_add] at hsum
   refine hsum.congr' ?_

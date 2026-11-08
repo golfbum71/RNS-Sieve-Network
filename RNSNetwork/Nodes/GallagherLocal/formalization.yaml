@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's notes Ch. 5-9 and other lecture notes): scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: GallagherLocal.v1
@@ -7,22 +7,25 @@ node:
   version: v1
   order: 99
   kind: paper
-  status: planned
+  status: active
   title: one wheel's correction averages to 1
   description: For a single wheel, its correction factor for a pattern of k offsets (one minus the occupied
     positions over the wheel, divided by one minus one over the wheel to the k), averaged over all patterns
     of k distinct offsets up to h, tends to 1 as h grows. This is the one-wheel step of Gallagher's theorem,
     which GallagherAverage currently cites.
-conclusions: []
-planned:
-  source_status: New
-  rests_on:
-  - SingularSeries
-  claims:
-  - one_wheel_average
-  tier: 'Tier 1-2: finite counting of how patterns fall on one wheel.'
-  plan: Offsets up to h are nearly equidistributed modulo the wheel; the number of patterns occupying
-    exactly r positions is a Stirling-number count, and the average of the factor is 1 up to O(1/h).
+conclusions:
+- id: one_wheel_average
+  declaration: RNS.GallagherLocal.one_wheel_average
+  summary: "For one prime wheel, the correction factor averaged over all sets of k offsets below h tends to 1 as h grows."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GallagherLocal.lean
+    declaration: RNS.GallagherLocal.one_wheel_average_holds
+    note: "Lean proof drafted 2026-11-08; awaiting the GitHub build."
+  designated: lean-proof
 sources:
 - title: K. Soundararajan, The distribution of prime numbers (lectures), arXiv:math/0606408
   url: https://arxiv.org/abs/math/0606408

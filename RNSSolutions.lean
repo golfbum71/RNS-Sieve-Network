@@ -65,3 +65,4 @@ import RNSSolutions.PolyaCutoff
 import RNSSolutions.GapConstant
 import RNSSolutions.LargerSieve
 import RNSSolutions.SmallWheelSurvivors
+import RNSSolutions.GallagherLocal

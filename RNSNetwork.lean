@@ -69,3 +69,4 @@ import RNSNetwork.Nodes.PolyaCutoff.Conclusions
 import RNSNetwork.Nodes.GapConstant.Conclusions
 import RNSNetwork.Nodes.LargerSieve.Conclusions
 import RNSNetwork.Nodes.SmallWheelSurvivors.Conclusions
+import RNSNetwork.Nodes.GallagherLocal.Conclusions
