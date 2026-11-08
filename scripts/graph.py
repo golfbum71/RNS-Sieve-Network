@@ -53,6 +53,8 @@ def load_nodes():
             "improves": " ".join(str(meta.get("improves", "") or "").split()),
             # Nodes it is related to without resting on them: [{node, note}] (optional).
             "related": data.get("related") or [],
+            # Family diagram on GRAPH.md (optional; otherwise GROUPS below).
+            "group": meta.get("group"),
         }
         node["statements"] = read_statements(name) if node["built"] else {}
         nodes[name] = node
@@ -173,6 +175,61 @@ def topo_order(nodes, edges):
     return order
 
 
+# ---------------------------------------------------------------- families
+
+# GRAPH.md draws one diagram per family, because GitHub's Mermaid refuses a
+# diagram over 50,000 characters. A node's family is `node: group:` in its
+# formalization.yaml if set, otherwise this table; anything unlisted goes in
+# "Other" and graph.py warns. Order here is the order on the page.
+GROUPS = [
+    ("foundations", "Foundations: wheels, cycles and columns", [
+        "Wheel6", "CRT", "SquareRootShield", "SurvivorCount", "Pruning", "WheelOrder",
+        "ShieldCertificates", "Infinitude", "ColumnStructure", "ColumnAction", "DirichletColumns",
+        "BonseCeiling", "Schatunowsky", "FortunateCeiling", "RandomRotation"]),
+    ("patterns", "Patterns, admissibility and the Hardy-Littlewood constants", [
+        "Admissibility", "SingularSeries", "TwinConstant", "HardyLittlewood", "HensleyRichards",
+        "LinearForms", "InadmissibleOccurrences", "TwinShare", "GallagherAverage", "PrimeGapsBridge",
+        "BirdseySchay", "GapConstant", "PolyaCutoff", "BadWheels", "PolynomialPatterns"]),
+    ("spread", "How survivors spread across the cycle", [
+        "UniformSubdivision", "LehmerSplit", "SurvivorSymmetry", "SpreadBounds", "Sawtooth",
+        "LehmerExcess", "GermainCriterion", "HurwitzZetaZero", "LargestGap", "MenonIdentity",
+        "RamanujanSums", "TuranCycle"]),
+    ("gaps", "Gaps between survivors and between primes", [
+        "GapConjectures", "GapTracks", "DudekJohnston", "GapCertificate", "BlockingRuns", "KanoldBound",
+        "PillaiBrauer", "JacobsthalQuadratic", "LongGaps", "RoughInPrimeGaps", "GapMoments",
+        "AlmostPrimeWindow", "GapPairs", "RomanoffTheorem", "ErdosSmallGaps"]),
+    ("germain", "Sophie Germain primes", [
+        "SophieGermainWheel", "SophieGermainPowers", "SophieGermainTheorem", "GermainAuxiliary",
+        "GermainReciprocals"]),
+    ("shares", "Survivor shares and analytic inputs", [
+        "ShareBounds", "ShareAsymptotics", "MertensThird", "MertensSecond", "PrimeNumberTheorem",
+        "CeilingOvershoot", "SmoothNumbers"]),
+    ("sieves", "Sieve methods: Brun, Hooley, Selberg", [
+        "BrunPureSieve", "BrunTwinCount", "BrunTruncation", "BrunTwinBound", "BrunAnalytic",
+        "BrunTheorem", "BrunTwinSum", "BrunSharp", "BrunHooley", "PatternUpperBound",
+        "PatternReciprocals", "BuchstabIdentity", "FundamentalLemma", "LowerBoundSieve", "PetiteSieve",
+        "SelbergTwinRails", "ParityBarrier", "BrunTitchmarshPNT", "RailBrunTitchmarsh"]),
+]
+GROUP_TITLE = {key: title for key, title, _ in GROUPS}
+GROUP_TITLE["other"] = "Other"
+
+
+def group_of(n):
+    if n.get("group"):
+        return n["group"]
+    for key, _, names in GROUPS:
+        if n["name"] in names:
+            return key
+    return "other"
+
+
+def group_anchor(key):
+    """GitHub's heading anchor for the family's section on GRAPH.md."""
+    text = GROUP_TITLE[key].lower()
+    text = re.sub(r"[^a-z0-9 \-]", "", text)
+    return text.replace(" ", "-")
+
+
 # ---------------------------------------------------------------- status
 
 def node_kind(n):
@@ -241,10 +298,13 @@ KINDS = ["verified", "conditional_built", "cited_built", "draft", "planned", "co
 
 # ---------------------------------------------------------------- GRAPH.md
 
-def network_mermaid(nodes, order):
-    """The whole network as one diagram: one panel per node, one clickable
-    box per claim inside it, arrows from claim to claim, and open conjectures
-    as hexagons pointing at the claims that assume them."""
+def network_mermaid(nodes, order, members=None, title=""):
+    """One family's diagram: one panel per node, one clickable box per claim
+    inside it, arrows from claim to claim, and open conjectures as hexagons
+    pointing at the claims that assume them. Nodes from other families that a
+    member rests on (or that rest on a member) are drawn as grey stub panels
+    holding only the claims involved, so every arrow still appears."""
+    members = set(order) if members is None else set(members)
     lines = ["```mermaid", "graph LR"]
     opens = []
     # Mermaid on GitHub refuses diagrams over 50,000 characters, so every box
@@ -268,13 +328,37 @@ def network_mermaid(nodes, order):
 
     def O(o):
         return sid("o", o)
+
+    # Which claims of outside nodes appear, and which outside panels.
+    stub_claims, stub_panels = {}, []
     for name in order:
         n = nodes[name]
-        title = label(f"{n['order']}. {name} — {n['title']}")
-        lines.append(f'  subgraph {S(name)}["<b>{title}</b>"]')
+        for c in n["conclusions"]:
+            for ref in c.get("imports") or []:
+                src, claim = node_of(ref)
+                if (name in members) != (src in members):
+                    other, cl = (src, claim) if name in members else (name, c["id"])
+                    stub_claims.setdefault(other, [])
+                    if cl not in stub_claims[other]:
+                        stub_claims[other].append(cl)
+        for src in n["planned"].get("rests_on") or []:
+            if src in nodes and (name in members) != (src in members):
+                other = src if name in members else name
+                if other not in stub_panels:
+                    stub_panels.append(other)
+    stubs = [nm for nm in order if nm not in members and (nm in stub_claims or nm in stub_panels)]
+
+    drawn_claims = set()
+    for name in order:
+        if name not in members:
+            continue
+        n = nodes[name]
+        ttl = label(f"{n['order']}. {name} — {n['title']}")
+        lines.append(f'  subgraph {S(name)}["<b>{ttl}</b>"]')
         if n["built"]:
             for c in n["conclusions"]:
                 lines.append(f'    {C(name, c["id"])}["{c["id"]}"]')
+                drawn_claims.add((name, c["id"]))
                 for o in c.get("open_inputs") or []:
                     if o not in opens:
                         opens.append(o)
@@ -284,6 +368,18 @@ def network_mermaid(nodes, order):
         else:
             lines.append(f'    {P(name)}["<i>{status_word(n)}</i>"]')
         lines.append("  end")
+    for name in stubs:
+        n = nodes[name]
+        where = GROUP_TITLE[group_of(n)].split(":")[0]
+        ttl = label(f"{n['order']}. {name} (in {where})")
+        lines.append(f'  subgraph {S(name)}["{ttl}"]')
+        if name in stub_claims:
+            for cl in stub_claims[name]:
+                lines.append(f'    {C(name, cl)}["{cl}"]')
+                drawn_claims.add((name, cl))
+        else:
+            lines.append(f'    {P(name)}["<i>{status_word(n) if n["built"] or node_kind(n) != "external" else "outside source"}</i>"]')
+        lines.append("  end")
     for o in opens:
         lines.append(f'  {O(o)}{{{{"<i>open conjecture</i><br/>{o}"}}}}')
     for name in order:
@@ -291,14 +387,22 @@ def network_mermaid(nodes, order):
         for c in n["conclusions"]:
             for ref in c.get("imports") or []:
                 src, claim = node_of(ref)
-                lines.append(f"  {C(src, claim)} ==> {C(name, c['id'])}")
-            for o in c.get("open_inputs") or []:
-                lines.append(f"  {O(o)} -.-> {C(name, c['id'])}")
+                if (src, claim) in drawn_claims and (name, c["id"]) in drawn_claims and \
+                        (name in members or src in members):
+                    lines.append(f"  {C(src, claim)} ==> {C(name, c['id'])}")
+            if name in members:
+                for o in c.get("open_inputs") or []:
+                    lines.append(f"  {O(o)} -.-> {C(name, c['id'])}")
         for src in n["planned"].get("rests_on") or []:
-            lines.append(f"  {S(src)} -.-> {S(name)}")
+            if src in nodes and (name in members or src in members) and \
+                    (src in members or src in stubs) and (name in members or name in stubs):
+                lines.append(f"  {S(src)} -.-> {S(name)}")
     lines.append(CLASSDEFS)
+    lines.append("  classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;")
     groups = {k: [] for k in KINDS}
     for nm in order:
+        if nm not in members:
+            continue
         n = nodes[nm]
         if not n["built"]:
             groups[node_kind(n)].append(P(nm))
@@ -311,21 +415,63 @@ def network_mermaid(nodes, order):
     for cls, ids in groups.items():
         if ids:
             lines.append(f"  class {','.join(ids)} {cls};")
+    stub_ids = [C(nm, cl) for nm in stubs for cl in stub_claims.get(nm, [])] + \
+               [P(nm) for nm in stubs if nm not in stub_claims]
+    if stub_ids:
+        lines.append(f"  class {','.join(stub_ids)} stub;")
     if opens:
         lines.append(f"  class {','.join(O(o) for o in opens)} openconj;")
     for nm in order:
+        if nm not in members and nm not in stubs:
+            continue
         n = nodes[nm]
-        if n["built"]:
+        if nm in members and n["built"]:
             for c in n["conclusions"]:
                 lines.append(f'  click {C(nm, c["id"])} href "{page_url(nm, c["id"])}" _blank')
-        else:
+        elif nm in members or nm not in stub_claims:
             lines.append(f'  click {P(nm)} href "{page_url(nm)}" _blank')
+        else:
+            for cl in stub_claims[nm]:
+                lines.append(f'  click {C(nm, cl)} href "{page_url(nm, cl)}" _blank')
     lines.append("```")
     size = sum(len(line) + 1 for line in lines[1:-1])
     if size > 45000:
-        print(f"WARNING: the network diagram is {size} characters; GitHub's Mermaid "
+        print(f"WARNING: the {title or 'network'} diagram is {size} characters; GitHub's Mermaid "
               "refuses anything over 50,000 and shows 'Maximum text size in diagram "
-              "exceeded'. Shorten labels or split the diagram.")
+              "exceeded'. Move nodes to another family in GROUPS.")
+    return "\n".join(lines), size
+
+
+def overview_mermaid(nodes, order):
+    """One box per family, with the number of nodes built and planned, and an
+    arrow wherever a node in one family rests on a node in another."""
+    keys = [k for k, _, _ in GROUPS] + ["other"]
+    present = [k for k in keys if any(group_of(nodes[nm]) == k for nm in order)]
+    gid = {k: f"g{i + 1}" for i, k in enumerate(present)}
+    lines = ["```mermaid", "graph LR"]
+    for k in present:
+        mem = [nm for nm in order if group_of(nodes[nm]) == k]
+        built = sum(1 for nm in mem if nodes[nm]["built"])
+        lines.append(f'  {gid[k]}["<b>{label(GROUP_TITLE[k])}</b><br/>{built} built, '
+                     f'{len(mem) - built} planned or outside"]')
+    links = {}
+    for nm in order:
+        n = nodes[nm]
+        deps = {node_of(ref)[0] for c in n["conclusions"] for ref in c.get("imports") or []}
+        solid = set(deps)
+        deps |= {d for d in n["planned"].get("rests_on") or [] if d in nodes}
+        for d in deps:
+            a, b = group_of(nodes[d]), group_of(n)
+            if a != b:
+                key = (a, b)
+                links.setdefault(key, [0, 0])
+                links[key][0 if d in solid else 1] += 1
+    for (a, b), (built, planned) in sorted(links.items(), key=lambda kv: (present.index(kv[0][0]), present.index(kv[0][1]))):
+        arrow = "==>" if built else "-.->"
+        lines.append(f"  {gid[a]} {arrow} {gid[b]}")
+    for k in present:
+        lines.append(f'  click {gid[k]} href "{REPO_URL}/GRAPH.md#{group_anchor(k)}" _self')
+    lines.append("```")
     return "\n".join(lines)
 
 
@@ -350,6 +496,24 @@ def rests_on_tree(nodes):
         for c in nodes[name]["conclusions"]:
             if (name, c["id"]) not in imported:
                 walk(name, c["id"], 0)
+    return "\n".join(out)
+
+
+def network_sections(nodes, order):
+    out = ["The families and how they lean on each other (thick arrow: a Lean-checked "
+           "step crosses between them; dotted: only planned ones do). Click a family to "
+           "jump to its diagram. Grey panels in a family's diagram are nodes from another "
+           "family, shown so that every arrow appears.", "", overview_mermaid(nodes, order), ""]
+    unlisted = [nm for nm in order if group_of(nodes[nm]) == "other"]
+    if unlisted:
+        print("WARNING: not in any family (add to GROUPS in graph.py): " + ", ".join(unlisted))
+    for k in [k for k, _, _ in GROUPS] + ["other"]:
+        mem = [nm for nm in order if group_of(nodes[nm]) == k]
+        if not mem:
+            continue
+        diagram, _ = network_mermaid(nodes, order, mem, GROUP_TITLE[k])
+        names = ", ".join(f"[`{nm}`](docs/nodes/{nm}.md)" for nm in sorted(mem, key=lambda m: nodes[m]["order"]))
+        out += [f"### {GROUP_TITLE[k]}", "", f"Nodes: {names}.", "", diagram, ""]
     return "\n".join(out)
 
 
@@ -436,7 +600,7 @@ without opening a single proof.
 
 ## The network
 
-{network_mermaid(nodes, order)}
+{network_sections(nodes, order)}
 
 ## What each result rests on
 
@@ -521,7 +685,9 @@ def related_section(n, nodes):
 def write_node_page(n, nodes, edges):
     name = n["name"]
     md = f"# {name} — {n['title']}\n\n{GENERATED}\n\n"
-    md += f"**Status:** {status_word(n)}\n\n{n['description']}\n\n"
+    md += (f"**Status:** {status_word(n)} · **Diagram:** "
+           f"[{GROUP_TITLE[group_of(n)]}](../../GRAPH.md#{group_anchor(group_of(n))})\n\n"
+           f"{n['description']}\n\n")
     if n["improves"]:
         md += f"**What it adds:** {n['improves']}\n\n"
     md += sources_section(n)
