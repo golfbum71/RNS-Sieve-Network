@@ -15,6 +15,7 @@ Published work this node rests on or relates to; each entry says how.
 - [G. H. Hardy and J. E. Littlewood, Some problems of 'Partitio numerorum' III, Acta Math. 44 (1923), 1-70](https://doi.org/10.1007/BF02403921) — the singular series for prime pairs at a fixed gap
 - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Section 1.8: the gap-six constant is twice the twin constant
 - [T. Tao, 254A Supplement 4: Probabilistic models and heuristics for the primes](https://terrytao.wordpress.com/2015/01/04/254a-supplement-4-probabilistic-models-and-heuristics-for-the-primes-optional/) — Exercise 12, the Goldbach constant
+- [OEIS A005597, decimal expansion of the twin prime constant](https://oeis.org/A005597) — comment giving the constant for prime pairs at any even gap as twice the twin prime constant times (p - 1)/(p - 2) for each odd prime p dividing the gap
 
 ## Related nodes
 

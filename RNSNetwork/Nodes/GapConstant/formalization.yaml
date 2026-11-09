@@ -76,6 +76,9 @@ sources:
 - title: 'T. Tao, 254A Supplement 4: Probabilistic models and heuristics for the primes'
   url: https://terrytao.wordpress.com/2015/01/04/254a-supplement-4-probabilistic-models-and-heuristics-for-the-primes-optional/
   relationship: Exercise 12, the Goldbach constant
+- title: OEIS A005597, decimal expansion of the twin prime constant
+  url: https://oeis.org/A005597
+  relationship: comment giving the constant for prime pairs at any even gap as twice the twin prime constant times (p - 1)/(p - 2) for each odd prime p dividing the gap
 related:
 - node: GapTracks
   note: 'the column fact behind the factor 2 at the wheel 3: a gap divisible by 6 stays in one column'
