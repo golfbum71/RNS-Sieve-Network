@@ -30,7 +30,7 @@ private theorem bounding_sum_eq (s : SelbergSieve) :
   refine Finset.sum_congr rfl (fun l _ => ?_)
   have hg : s.toBoundingSieve.selbergTerms l =
       SelbergSieve.selbergTerms s.toBoundingSieve l := by
-    rw [BoundingSieve.selbergTerms_apply, SelbergSieve.selbergTerms_apply] <;> simp only [one_div]
+    simp only [BoundingSieve.selbergTerms_apply, SelbergSieve.selbergTerms_apply, one_div]
   rw [hg]
   first | rfl | simp only [Nat.cast_pow]
 
