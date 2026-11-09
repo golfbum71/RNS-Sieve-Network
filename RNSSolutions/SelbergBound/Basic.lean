@@ -128,7 +128,7 @@ theorem nu_eq_conv_one_div_selbergTerms (d : ℕ) (hdP : d ∣ P) :
   have hd_pos : 0 < d := Nat.pos_of_ne_zero <| ne_zero_of_dvd_ne_zero prodPrimes_ne_zero hdP
   revert hdP; revert d
   refine (ArithmeticFunction.sum_eq_iff_sum_mul_moebius_eq_on (R := ℝ)
-    (f := fun a => 1 / g a) (g := fun d => (ν d)⁻¹) {n | n ∣ P}
+    (f := fun a => 1 / g a) {n | n ∣ P}
     (fun _ _ h1 h2 => Nat.dvd_trans h1 h2)).mpr ?_
   intro l _ hlP
   have hlP' : l ∣ P := hlP
