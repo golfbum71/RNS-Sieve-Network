@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 79 of 97 nodes are built, holding 237 claims: 232 proved in Lean and 5 cited from a published paper. They are joined by 123 arrows, each a Lean-checked step. Of the other 18 nodes, drawn dashed or purple, 15 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 80 of 97 nodes are built, holding 238 claims: 232 proved in Lean, 1 with a proof drafted but not yet built and 5 cited from a published paper. They are joined by 125 arrows, each a Lean-checked step. Of the other 17 nodes, drawn dashed or purple, 14 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -50,7 +50,7 @@ graph LR
   g4["<b>Gaps between survivors and between primes</b><br/>9 built, 7 planned or outside"]
   g5["<b>Sophie Germain primes</b><br/>4 built, 1 planned or outside"]
   g6["<b>Survivor shares and analytic inputs</b><br/>8 built, 0 planned or outside"]
-  g7["<b>Sieve methods: Brun, Hooley, Selberg</b><br/>15 built, 9 planned or outside"]
+  g7["<b>Sieve methods: Brun, Hooley, Selberg</b><br/>16 built, 8 planned or outside"]
   g1 ==> g2
   g1 ==> g4
   g1 ==> g5
@@ -422,7 +422,7 @@ graph LR
     p3["<i>planned: new, not yet proved</i>"]
   end
   subgraph s23["87. SelbergTwinRails (in Sieve methods)"]
-    p4["<i>planned: new, not yet proved</i>"]
+    p4["<i>proof drafted, not yet built</i>"]
   end
   o1{{"<i>open conjecture</i><br/>hardy_littlewood_conjecture"}}
   o2{{"<i>open conjecture</i><br/>HL_conjecture_A"}}
@@ -796,7 +796,7 @@ graph LR
     p10["<i>planned: new, not yet proved</i>"]
   end
   subgraph s22["87. SelbergTwinRails (in Sieve methods)"]
-    p11["<i>planned: new, not yet proved</i>"]
+    p11["<i>proof drafted, not yet built</i>"]
   end
   o1{{"<i>open conjecture</i><br/>jacobsthal_bound_holds"}}
   o2{{"<i>open conjecture</i><br/>four_survivors_bound_holds"}}
@@ -1049,7 +1049,7 @@ graph LR
     p3["<i>planned: new, not yet proved</i>"]
   end
   subgraph s19["87. SelbergTwinRails (in Sieve methods)"]
-    p4["<i>planned: new, not yet proved</i>"]
+    p4["<i>proof drafted, not yet built</i>"]
   end
   subgraph s20["88. ParityBarrier (in Sieve methods)"]
     p5["<i>planned: new, not yet proved</i>"]
@@ -1224,78 +1224,78 @@ graph LR
   subgraph s17["<b>86. PetiteSieve — an exact asymptotic for patterns of small dimension</b>"]
     p6["<i>planned: new, not yet proved</i>"]
   end
-  subgraph s18["<b>87. SelbergTwinRails — Selberg's bounds for the twin columns and prime pairs</b>"]
+  subgraph s18["<b>101. SelbergBound — Selberg's upper bound sieve</b>"]
+    c29["bounding_sum_pos"]
+    c30["selberg_bound"]
+  end
+  subgraph s19["<b>87. SelbergTwinRails — Selberg's bounds for the twin columns and prime pairs</b>"]
+    c31["selberg_twin_columns_bound"]
+  end
+  subgraph s20["<b>88. ParityBarrier — Selberg's parity example</b>"]
     p7["<i>planned: new, not yet proved</i>"]
   end
-  subgraph s19["<b>88. ParityBarrier — Selberg's parity example</b>"]
+  subgraph s21["<b>94. SieveDataLimits — what the multiple counts alone can decide</b>"]
+    c32["two_three_bounds"]
+    c33["two_three_ends"]
+    c34["upper_sieve_bound"]
+    c35["lower_sieve_bound"]
+  end
+  subgraph s22["<b>95. LargerSieve — Gallagher's larger sieve: when each wheel leaves few positions</b>"]
+    c36["larger_sieve"]
+    c37["larger_sieve_few"]
+  end
+  subgraph s23["<b>96. ArithmeticLargeSieve — the large sieve: many blocked positions on every wheel</b>"]
     p8["<i>planned: new, not yet proved</i>"]
   end
-  subgraph s20["<b>94. SieveDataLimits — what the multiple counts alone can decide</b>"]
-    c29["two_three_bounds"]
-    c30["two_three_ends"]
-    c31["upper_sieve_bound"]
-    c32["lower_sieve_bound"]
-  end
-  subgraph s21["<b>95. LargerSieve — Gallagher's larger sieve: when each wheel leaves few positions</b>"]
-    c33["larger_sieve"]
-    c34["larger_sieve_few"]
-  end
-  subgraph s22["<b>96. ArithmeticLargeSieve — the large sieve: many blocked positions on every wheel</b>"]
-    p9["<i>planned: new, not yet proved</i>"]
-  end
-  subgraph s23["<b>100. ChenWeights — Chen's weights for numbers with at most two prime factors</b>"]
-    c35["chen_weight_le"]
-  end
-  subgraph s24["<b>101. SelbergBound — Selberg's upper bound sieve</b>"]
-    c36["bounding_sum_pos"]
-    c37["selberg_bound"]
+  subgraph s24["<b>100. ChenWeights — Chen's weights for numbers with at most two prime factors</b>"]
+    c38["chen_weight_le"]
   end
   subgraph s25["1. Wheel6 (in Foundations)"]
-    p10["<i>proved in Lean</i>"]
+    p9["<i>proved in Lean</i>"]
   end
   subgraph s26["5. SurvivorCount (in Foundations)"]
-    c38["twin_survivor_count"]
+    c39["twin_survivor_count"]
   end
   subgraph s27["7. TwinConstant (in Patterns, admissibility and the Hardy-Littlewood constants)"]
-    p11["<i>proved in Lean</i>"]
+    p10["<i>proved in Lean</i>"]
   end
   subgraph s28["26. ShareBounds (in Survivor shares and analytic inputs)"]
-    c39["twin_share_le_two_inv_log_sq"]
+    c40["twin_share_le_two_inv_log_sq"]
   end
   subgraph s29["41. PrimeNumberTheorem (in Survivor shares and analytic inputs)"]
-    p12["<i>proved in Lean</i>"]
+    p11["<i>proved in Lean</i>"]
   end
   subgraph s30["64. ShareAsymptotics (in Survivor shares and analytic inputs)"]
-    p13["<i>proved in Lean</i>"]
+    p12["<i>proved in Lean</i>"]
   end
   subgraph s31["68. MertensSecond (in Survivor shares and analytic inputs)"]
-    c40["prime_reciprocal_upper"]
+    c41["prime_reciprocal_upper"]
   end
   subgraph s32["73. BadWheels (in Patterns, admissibility and the Hardy-Littlewood constants)"]
-    p14["<i>proved in Lean</i>"]
+    p13["<i>proved in Lean</i>"]
   end
   subgraph s33["76. GapPairs (in Gaps between survivors and between primes)"]
-    p15["<i>planned: new, not yet proved</i>"]
+    p14["<i>planned: new, not yet proved</i>"]
   end
   subgraph s34["78. GermainReciprocals (in Sophie Germain primes)"]
-    p16["<i>planned: new, not yet proved</i>"]
+    p15["<i>planned: new, not yet proved</i>"]
   end
   subgraph s35["92. ErdosSmallGaps (in Gaps between survivors and between primes)"]
-    p17["<i>planned: new, not yet proved</i>"]
+    p16["<i>planned: new, not yet proved</i>"]
   end
   subgraph s36["93. SmallWheelSurvivors (in Survivor shares and analytic inputs)"]
-    c41["legendre_error"]
+    c42["legendre_error"]
   end
   c8 ==> c10
   c9 ==> c10
   c1 ==> c10
-  c38 ==> c12
   c39 ==> c12
+  c40 ==> c12
   c10 ==> c13
   c11 ==> c13
   c2 ==> c13
   c12 ==> c13
-  c40 ==> c13
+  c41 ==> c13
   c13 ==> c14
   c14 ==> c15
   c6 ==> c18
@@ -1319,11 +1319,13 @@ graph LR
   s8 -.-> s16
   s14 -.-> s17
   s15 -.-> s17
-  s27 -.-> s18
-  s30 -.-> s18
-  s29 -.-> s19
-  s18 -.-> s35
-  c5 ==> c41
+  c30 ==> c31
+  c9 ==> c31
+  s27 -.-> s19
+  s30 -.-> s19
+  s29 -.-> s20
+  s19 -.-> s35
+  c5 ==> c42
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
   classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
@@ -1335,15 +1337,16 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41 verified;
-  class p1,p2,p3,p4,p5,p6,p7,p8,p9 new;
-  class p10,p11,p12,p13,p14,p15,p16,p17 stub;
-  click p10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md" _blank
-  click c38 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
-  click p11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinConstant.md" _blank
-  click c39 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md#twin_share_le_two_inv_log_sq" _blank
-  click p12 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeNumberTheorem.md" _blank
-  click p13 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md" _blank
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42 verified;
+  class c31 draft;
+  class p1,p2,p3,p4,p5,p6,p7,p8 new;
+  class p9,p10,p11,p12,p13,p14,p15,p16 stub;
+  click p9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md" _blank
+  click c39 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
+  click p10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinConstant.md" _blank
+  click c40 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md#twin_share_le_two_inv_log_sq" _blank
+  click p11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeNumberTheorem.md" _blank
+  click p12 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md" _blank
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTruncation.md#truncation_error" _blank
   click c2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTruncation.md#esymm_power_bound" _blank
   click c3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#bonferroni_even" _blank
@@ -1355,12 +1358,12 @@ graph LR
   click c9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTwinCount.md#twin_multiples_count" _blank
   click c10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTwinBound.md#twin_sifted_bound" _blank
   click c11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTwinBound.md#twin_count_le_sifted" _blank
-  click c40 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensSecond.md#prime_reciprocal_upper" _blank
+  click c41 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensSecond.md#prime_reciprocal_upper" _blank
   click c12 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunAnalytic.md#twin_product_bound" _blank
   click c13 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunAnalytic.md#twin_prime_count_bound" _blank
   click c14 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTheorem.md#brun_theorem" _blank
   click c15 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTwinSum.md#brun_sum_finite" _blank
-  click p14 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BadWheels.md" _blank
+  click p13 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BadWheels.md" _blank
   click c16 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunHooley.md#combined_eq_product" _blank
   click c17 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunHooley.md#product_upper_sieve" _blank
   click c18 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunHooley.md#brun_hooley_bound" _blank
@@ -1369,9 +1372,9 @@ graph LR
   click c21 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunHooley.md#brun_hooley_order" _blank
   click c22 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunHooley.md#choice_product_le" _blank
   click p1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PatternUpperBound.md" _blank
-  click p15 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapPairs.md" _blank
+  click p14 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapPairs.md" _blank
   click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PatternReciprocals.md" _blank
-  click p16 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainReciprocals.md" _blank
+  click p15 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GermainReciprocals.md" _blank
   click p3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunSharp.md" _blank
   click c23 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTitchmarshPNT.md#primes_between_le" _blank
   click c24 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RailBrunTitchmarsh.md#column_window_le_all" _blank
@@ -1382,20 +1385,20 @@ graph LR
   click p4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FundamentalLemma.md" _blank
   click p5 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LowerBoundSieve.md" _blank
   click p6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PetiteSieve.md" _blank
-  click p7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergTwinRails.md" _blank
-  click p8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ParityBarrier.md" _blank
-  click p17 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ErdosSmallGaps.md" _blank
-  click c41 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmallWheelSurvivors.md#legendre_error" _blank
-  click c29 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SieveDataLimits.md#two_three_bounds" _blank
-  click c30 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SieveDataLimits.md#two_three_ends" _blank
-  click c31 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SieveDataLimits.md#upper_sieve_bound" _blank
-  click c32 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SieveDataLimits.md#lower_sieve_bound" _blank
-  click c33 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LargerSieve.md#larger_sieve" _blank
-  click c34 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LargerSieve.md#larger_sieve_few" _blank
-  click p9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ArithmeticLargeSieve.md" _blank
-  click c35 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ChenWeights.md#chen_weight_le" _blank
-  click c36 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergBound.md#bounding_sum_pos" _blank
-  click c37 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergBound.md#selberg_bound" _blank
+  click c29 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergBound.md#bounding_sum_pos" _blank
+  click c30 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergBound.md#selberg_bound" _blank
+  click c31 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergTwinRails.md#selberg_twin_columns_bound" _blank
+  click p7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ParityBarrier.md" _blank
+  click p16 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ErdosSmallGaps.md" _blank
+  click c42 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmallWheelSurvivors.md#legendre_error" _blank
+  click c32 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SieveDataLimits.md#two_three_bounds" _blank
+  click c33 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SieveDataLimits.md#two_three_ends" _blank
+  click c34 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SieveDataLimits.md#upper_sieve_bound" _blank
+  click c35 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SieveDataLimits.md#lower_sieve_bound" _blank
+  click c36 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LargerSieve.md#larger_sieve" _blank
+  click c37 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LargerSieve.md#larger_sieve_few" _blank
+  click p8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ArithmeticLargeSieve.md" _blank
+  click c38 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ChenWeights.md#chen_weight_le" _blank
 ```
 
 
@@ -1716,6 +1719,9 @@ The results nothing else builds on, each with everything beneath it.
 - [`BuchstabIdentity.legendre_phi_recurrence`](docs/nodes/BuchstabIdentity.md#legendre_phi_recurrence) — proved in Lean
 - [`BuchstabIdentity.buchstab_identity`](docs/nodes/BuchstabIdentity.md#buchstab_identity) — proved in Lean
 - [`BuchstabIdentity.buchstab_product_identity`](docs/nodes/BuchstabIdentity.md#buchstab_product_identity) — proved in Lean
+- [`SelbergTwinRails.selberg_twin_columns_bound`](docs/nodes/SelbergTwinRails.md#selberg_twin_columns_bound) — proof drafted, not yet built
+  - [`SelbergBound.selberg_bound`](docs/nodes/SelbergBound.md#selberg_bound) — proved in Lean
+  - [`BrunTwinCount.twin_multiples_count`](docs/nodes/BrunTwinCount.md#twin_multiples_count) — proved in Lean
 - [`PolynomialPatterns.poly_admissible_iff`](docs/nodes/PolynomialPatterns.md#poly_admissible_iff) — proved in Lean
 - [`PolynomialPatterns.sq_add_one_admissible`](docs/nodes/PolynomialPatterns.md#sq_add_one_admissible) — proved in Lean
 - [`PolynomialPatterns.landau_of_bateman_horn`](docs/nodes/PolynomialPatterns.md#landau_of_bateman_horn) — proved in Lean, assuming open conjecture(s)
@@ -1747,7 +1753,6 @@ The results nothing else builds on, each with everything beneath it.
 - [`GallagherLocal.one_wheel_average`](docs/nodes/GallagherLocal.md#one_wheel_average) — proved in Lean
 - [`ChenWeights.chen_weight_le`](docs/nodes/ChenWeights.md#chen_weight_le) — proved in Lean
 - [`SelbergBound.bounding_sum_pos`](docs/nodes/SelbergBound.md#bounding_sum_pos) — proved in Lean
-- [`SelbergBound.selberg_bound`](docs/nodes/SelbergBound.md#selberg_bound) — proved in Lean
 
 ## What the network takes on trust
 
@@ -2148,7 +2153,7 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 84 | [`FundamentalLemma`](docs/nodes/FundamentalLemma.md) | the survivor count matches its share while the wheels stay small | planned: new, not yet proved |
 | 85 | [`LowerBoundSieve`](docs/nodes/LowerBoundSieve.md) | twin columns with few prime factors | planned: new, not yet proved |
 | 86 | [`PetiteSieve`](docs/nodes/PetiteSieve.md) | an exact asymptotic for patterns of small dimension | planned: new, not yet proved |
-| 87 | [`SelbergTwinRails`](docs/nodes/SelbergTwinRails.md) | Selberg's bounds for the twin columns and prime pairs | planned: new, not yet proved |
+| 87 | [`SelbergTwinRails`](docs/nodes/SelbergTwinRails.md) | Selberg's bounds for the twin columns and prime pairs | proof drafted, not yet built |
 | 88 | [`ParityBarrier`](docs/nodes/ParityBarrier.md) | Selberg's parity example | planned: new, not yet proved |
 | 89 | [`PolynomialPatterns`](docs/nodes/PolynomialPatterns.md) | polynomial patterns: admissibility and the Bateman-Horn conjecture | proved in Lean; rests on open conjectures as hypotheses |
 | 90 | [`SmoothNumbers`](docs/nodes/SmoothNumbers.md) | numbers built only from the wheels | proved in Lean |

@@ -39,6 +39,7 @@ def twin_multiples_count : Prop :=
 ## Used by
 
 - [`BrunTwinBound`](BrunTwinBound.md)
+- [`SelbergTwinRails`](SelbergTwinRails.md)
 
 ## Files
 

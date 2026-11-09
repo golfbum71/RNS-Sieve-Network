@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+# Built in stages (scoped 2026-11-08 from Ford's Spring 2023 sieve notes, Ch. 1-4). See docs/NODE_LIST.md.
 
 node:
   id: SelbergTwinRails.v1
@@ -7,7 +7,7 @@ node:
   version: v1
   order: 87
   kind: paper
-  status: planned
+  status: active
   title: Selberg's bounds for the twin columns and prime pairs
   description: The wheels from 5 up form a Selberg sieve problem for the twin columns, with each wheel's
     share two over the wheel; the wheels 2 and 3 must be left out, since Mathlib's sieve needs every share
@@ -17,23 +17,38 @@ node:
     by four times their conjectured counts.
   improves: The Brun nodes lose a power of log log N or of log N; this has the right order with an explicit
     constant.
-conclusions: []
+conclusions:
+- id: selberg_twin_columns_bound
+  declaration: RNS.SelbergTwinRails.selberg_twin_columns_bound
+  summary: For any level y at least 1, the survivors of the twin columns (wheels from 5 up) among the
+    positions 1 to N number at most N over Selberg's twin sum plus the sum, over divisors d of the wheel
+    product up to y, of 6 to the number of prime factors of d.
+  imports:
+  - SelbergBound.v1.selberg_bound
+  - BrunTwinCount.v1.twin_multiples_count
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/SelbergTwinRails.lean
+    declaration: RNS.SelbergTwinRails.selberg_twin_columns_bound_step
+    note: Lean step from its imports taken as named hypotheses; not yet built.
+  designated: lean-proof
 planned:
   source_status: New
   rests_on:
   - TwinConstant
   - ShareAsymptotics
   claims:
-  - wheels_selberg_instance
-  - selberg_twin_columns_bound
+  - twin_selberg_sum_lower
+  - selberg_twin_bound
   - selberg_gap_bound
   - selberg_goldbach_bound
   - survivor_reciprocal_lower
-  tier: 'wheels_selberg_instance: Tier 1. selberg_twin_columns_bound: Tier 3 (needs the asymptotic for
-    J, Ford Theorem 4.4).'
-  plan: 'Session 1: build the SelbergSieve structure (support the positions up to N, prodPrimes the product
-    of the primes from 5 to z, nu the twin share). Session 2: the sum J for h(p) = 2/(p-2) (Ford Theorem
-    4.4). Session 3: Theorem 4.5 for the gap 2. Session 4: any even gap and Goldbach pairs (Ford Theorem
+  tier: 'twin_selberg_sum_lower: Tier 3 (Ford Theorem 4.4).'
+  plan: 'Done 2026-11-09: the sieve problem and selberg_twin_columns_bound, on SelbergBound.
+    Next: a lower bound for the twin sum of order log squared of the level (Ford Theorem 4.4), then the
+    twin bound N over log N squared. Session 3: Theorem 4.5 for the gap 2. Session 4: any even gap and Goldbach pairs (Ford Theorem
     4.5 for general k; Heath-Brown Theorems 3.1-3.2). survivor_reciprocal_lower (Tier 1): the sum of one
     over the survivors up to y is at least the survivor share times log y.'
 sources:

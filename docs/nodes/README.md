@@ -86,7 +86,7 @@
 | 84 | [`FundamentalLemma`](FundamentalLemma.md) | the survivor count matches its share while the wheels stay small | planned: new, not yet proved |
 | 85 | [`LowerBoundSieve`](LowerBoundSieve.md) | twin columns with few prime factors | planned: new, not yet proved |
 | 86 | [`PetiteSieve`](PetiteSieve.md) | an exact asymptotic for patterns of small dimension | planned: new, not yet proved |
-| 87 | [`SelbergTwinRails`](SelbergTwinRails.md) | Selberg's bounds for the twin columns and prime pairs | planned: new, not yet proved |
+| 87 | [`SelbergTwinRails`](SelbergTwinRails.md) | Selberg's bounds for the twin columns and prime pairs | proof drafted, not yet built |
 | 88 | [`ParityBarrier`](ParityBarrier.md) | Selberg's parity example | planned: new, not yet proved |
 | 89 | [`PolynomialPatterns`](PolynomialPatterns.md) | polynomial patterns: admissibility and the Bateman-Horn conjecture | proved in Lean; rests on open conjectures as hypotheses |
 | 90 | [`SmoothNumbers`](SmoothNumbers.md) | numbers built only from the wheels | proved in Lean |
