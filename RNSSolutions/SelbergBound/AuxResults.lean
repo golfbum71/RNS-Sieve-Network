@@ -8,7 +8,9 @@ Author: Arend Mellendijk
 /-
 Adapted for RNS-Sieve-Network (2026-11-09) from PrimeNumberTheoremAnd, commit 127b50e,
 `PrimeNumberTheoremAnd/Mathlib/NumberTheory/Sieve/AuxResults.lean`. Changes: imports, and the
-namespace `Aux` renamed `SelbergAux` (and the file `AuxResults`). Nothing else is meant to differ.
+namespace `Aux` renamed `SelbergAux` (and the file `AuxResults`); in
+`log_add_one_le_sum_inv` one `congr; norm_num` became `congr <;> norm_num`, because
+current Mathlib's `congr` already closes that goal. Nothing else is meant to differ.
 -/
 
 import Mathlib.Algebra.Order.Antidiag.Nat
@@ -144,7 +146,7 @@ theorem log_add_one_le_sum_inv (n : ℕ) :
        _ = ∫ x in (1:ℕ)..↑(n+1), x⁻¹ := ?_
        _ ≤ _ := ?_
   · rw[integral_inv (by simp[(show ¬ (1:ℝ) ≤ 0 by norm_num)] )]; congr; ring
-  · congr; norm_num
+  · congr <;> norm_num
   · apply AntitoneOn.integral_le_sum_Ico (by norm_num)
     apply inv_antitoneOn_Icc
     norm_num
