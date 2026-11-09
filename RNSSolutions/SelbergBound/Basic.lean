@@ -8,11 +8,11 @@ Author: Arend Mellendijk
 /-
 Adapted for RNS-Sieve-Network (2026-11-09) from PrimeNumberTheoremAnd, commit 127b50e,
 `PrimeNumberTheoremAnd/Mathlib/NumberTheory/Sieve/Basic.lean`. Changes: imports, and the
-namespace `Aux` renamed `SelbergAux`. Nothing else is meant to differ.
+namespace `Aux` renamed `SelbergAux` (and the file `AuxResults`). Nothing else is meant to differ.
 -/
 
 import Mathlib.NumberTheory.SelbergSieve
-import RNSSolutions.SelbergBound.Aux
+import RNSSolutions.SelbergBound.AuxResults
 
 noncomputable section
 
