@@ -8,7 +8,10 @@ Author: Arend Mellendijk
 /-
 Adapted for RNS-Sieve-Network (2026-11-09) from PrimeNumberTheoremAnd, commit 127b50e,
 `PrimeNumberTheoremAnd/Mathlib/NumberTheory/Sieve/Selberg.lean`. Changes: imports, and the
-namespace `Aux` renamed `SelbergAux` (and the file `AuxResults`). Nothing else is meant to differ.
+namespace `Aux` renamed `SelbergAux` (and the file `AuxResults`); in
+`selbergWeights_mul_mu_nonneg` the product is split with `mul_nonneg` and `inv_nonneg`
+instead of `div_nonneg`, which current Mathlib no longer matches against a product with an
+inverse. Nothing else is meant to differ.
 -/
 
 import Batteries.Tactic.Lemma
@@ -108,12 +111,12 @@ theorem selbergWeights_mul_mu_nonneg (d : ℕ) (hdP : d ∣ P) :
           if (d * m) ^ 2 ≤ y ∧ Coprime m d then g m else 0)
   swap
   · apply le_of_eq; ring
-  refine mul_nonneg (div_nonneg (mul_nonneg (mul_nonneg ?_ ?_) ?_) ?_) ?_
+  refine mul_nonneg (mul_nonneg (mul_nonneg (mul_nonneg ?_ ?_) ?_) ?_) ?_
   · apply sq_nonneg
   · rw [inv_nonneg]
     exact le_of_lt <| nu_pos_of_dvd_prodPrimes hdP
   · exact le_of_lt <| selbergTerms_pos _ d hdP
-  · exact s.selbergBoundingSum_nonneg
+  · exact inv_nonneg.mpr s.selbergBoundingSum_nonneg
   apply sum_nonneg; intro m hm
   split_ifs with h
   · exact le_of_lt <| selbergTerms_pos _ m (dvd_of_mem_divisors hm)
