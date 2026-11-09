@@ -804,7 +804,7 @@ private theorem six_pow_le_sq {z d : ℕ} (hd : d ∣ twin_wheel_product z) :
   push_cast
   rw [ArithmeticFunction.cardDistinctFactors_eq_card_primeFactors, ← Finset.prod_const,
     ← Finset.prod_pow]
-  refine Finset.prod_le_prod (fun _ _ => by norm_num) (fun p hp => ?_)
+  gcongr with p hp
   have h5 : (5 : ℝ) ≤ p := by
     exact_mod_cast twin_wheels_five (mem_of_prime_dvd (Nat.prime_of_mem_primeFactors hp)
       ((Nat.dvd_of_mem_primeFactors hp).trans hd))
@@ -912,13 +912,22 @@ theorem selberg_twin_bound_step
     push_cast
     ring
   -- the level t² and the cut-off t² + 1
-  have hy1 : (1 : ℝ) ≤ (t : ℝ) ^ 2 := by nlinarith
+  have hy1 : (1 : ℝ) ≤ (t : ℝ) ^ 2 := by
+    calc (1 : ℝ) = 1 * 1 := by ring
+      _ ≤ (t : ℝ) * t := mul_le_mul ht1 ht1 zero_le_one ht0.le
+      _ = (t : ℝ) ^ 2 := by ring
   have hy6 : (6 : ℝ) ^ 4 ≤ (t : ℝ) ^ 2 := by
-    have : (5184 : ℝ) ≤ t := by exact_mod_cast ht5184
-    nlinarith
+    have h5 : (5184 : ℝ) ≤ t := by exact_mod_cast ht5184
+    calc (6 : ℝ) ^ 4 ≤ 5184 * 5184 := by norm_num
+      _ ≤ (t : ℝ) * t := mul_le_mul h5 h5 (by norm_num) ht0.le
+      _ = (t : ℝ) ^ 2 := by ring
   have hyz : (t : ℝ) ^ 2 < ((t ^ 2 + 1 : ℕ) : ℝ) ^ 2 := by
     push_cast
-    nlinarith
+    calc (t : ℝ) ^ 2 < (t : ℝ) ^ 2 + 1 := by linarith
+      _ = ((t : ℝ) ^ 2 + 1) * 1 := by ring
+      _ ≤ ((t : ℝ) ^ 2 + 1) * ((t : ℝ) ^ 2 + 1) :=
+          mul_le_mul_of_nonneg_left (by linarith) (by positivity)
+      _ = ((t : ℝ) ^ 2 + 1) ^ 2 := by ring
   have hG := h_low (t ^ 2 + 1) ((t : ℝ) ^ 2) hy6 hyz
   have hsieve := h_cols N (t ^ 2 + 1) ((t : ℝ) ^ 2) hy1
   have hE := error_le (t ^ 2 + 1) t
@@ -931,7 +940,11 @@ theorem selberg_twin_bound_step
   have hu0 : 0 ≤ Real.log N / 8 := by linarith
   have hsq := mul_self_le_mul_self hu0 hu
   have hGlow : Real.log N ^ 2 / 36864 ≤ twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2) := by
-    nlinarith
+    calc Real.log N ^ 2 / 36864 = (Real.log N / 8) * (Real.log N / 8) / 576 := by ring
+      _ ≤ (Real.log ((t : ℝ) ^ 2) - 4 * Real.log 6) *
+            (Real.log ((t : ℝ) ^ 2) - 4 * Real.log 6) / 576 := by linarith [hsq]
+      _ = (Real.log ((t : ℝ) ^ 2) - 4 * Real.log 6) ^ 2 / 576 := by ring
+      _ ≤ _ := hG
   have hGpos : 0 < Real.log N ^ 2 / 36864 := by positivity
   set Q := (N : ℝ) / Real.log N ^ 2 with hQ
   have hQ0 : 0 ≤ Q := by positivity
@@ -943,17 +956,28 @@ theorem selberg_twin_bound_step
           rw [hQ]
           field_simp
   -- the error and the cut-off are at most a constant times N / log² N
-  have hL2 : Real.log N ^ 2 ≤ 64 * (t : ℝ) ^ 2 := by nlinarith
+  have hLle : Real.log N ≤ 8 * t := by linarith
+  have hL2 : Real.log N ^ 2 ≤ 64 * (t : ℝ) ^ 2 := by
+    calc Real.log N ^ 2 = Real.log N * Real.log N := by ring
+      _ ≤ (8 * t) * (8 * t) := mul_self_le_mul_self hLpos.le hLle
+      _ = 64 * (t : ℝ) ^ 2 := by ring
   have ht6 : (t : ℝ) ^ 6 ≤ 64 * Q := by
     rw [hQ, mul_div_assoc', le_div_iff₀ (by positivity)]
     have h1 : (t : ℝ) ^ 6 * Real.log N ^ 2 ≤ (t : ℝ) ^ 6 * (64 * (t : ℝ) ^ 2) :=
       mul_le_mul_of_nonneg_left hL2 (by positivity)
-    nlinarith
+    calc (t : ℝ) ^ 6 * Real.log N ^ 2 ≤ (t : ℝ) ^ 6 * (64 * (t : ℝ) ^ 2) := h1
+      _ = 64 * (t : ℝ) ^ 8 := by ring
+      _ ≤ 64 * N := by linarith
   have hz : (t : ℝ) ^ 2 + 1 ≤ 2 * (t : ℝ) ^ 6 := by
-    have h2 : (1 : ℝ) ≤ (t : ℝ) ^ 2 := hy1
-    have h4 : (1 : ℝ) ≤ (t : ℝ) ^ 4 := by nlinarith
-    have h6 := mul_le_mul_of_nonneg_left h4 (by positivity : (0 : ℝ) ≤ (t : ℝ) ^ 2)
-    nlinarith
+    have h4 : (1 : ℝ) ≤ (t : ℝ) ^ 4 := by
+      calc (1 : ℝ) = 1 * 1 := by ring
+        _ ≤ (t : ℝ) ^ 2 * (t : ℝ) ^ 2 := mul_le_mul hy1 hy1 zero_le_one (by positivity)
+        _ = (t : ℝ) ^ 4 := by ring
+    have h26 : (t : ℝ) ^ 2 ≤ (t : ℝ) ^ 6 := by
+      calc (t : ℝ) ^ 2 = (t : ℝ) ^ 2 * 1 := by ring
+        _ ≤ (t : ℝ) ^ 2 * (t : ℝ) ^ 4 := mul_le_mul_of_nonneg_left h4 (by positivity)
+        _ = (t : ℝ) ^ 6 := by ring
+    linarith
   rw [mul_div_assoc, ← hQ]
   linarith
 
