@@ -143,7 +143,9 @@ theorem brun_hooley_bound_step (hbon : RNS.BrunPureSieve.bonferroni_even_fn)
           (if ∀ q ∈ c x.1 x.2, q ∣ val n then (-1 : ℝ) ^ (c x.1 x.2).card else 0)) =
         if (∀ x ∈ I.attach, ∀ q ∈ c x.1 x.2, q ∣ val n) then
           ∏ x ∈ I.attach, (-1 : ℝ) ^ (c x.1 x.2).card else 0 :=
-      fun n _ => Finset.prod_ite_zero
+      fun n _ => by
+        rw [Finset.prod_ite_zero]
+        try (split_ifs <;> rfl)
     unfold choice_count
     rw [Finset.sum_congr rfl h1, ← Finset.sum_filter, Finset.sum_const, nsmul_eq_mul, mul_comm]
   -- the share part factors into the stopped sums of the ranges
@@ -224,5 +226,49 @@ theorem brun_hooley_bound_step (hbon : RNS.BrunPureSieve.bonferroni_even_fn)
         · exact Finset.sum_le_sum hrem
 
 #print axioms RNS.BrunHooley.brun_hooley_bound_step
+
+/-! ## The exponential form (Ford, Theorem 2.3) -/
+
+theorem product_exp_bound_holds : product_exp_bound := by
+  intro I V E hV hE
+  rw [Real.exp_sum, ← Finset.prod_mul_distrib]
+  apply Finset.prod_le_prod₀
+  · intro i hi
+    have h1 := hV i hi
+    have h2 := hE i hi
+    positivity
+  · intro i hi
+    have hv := hV i hi
+    have hv0 : V i ≠ 0 := hv.ne'
+    have h1 : 1 + E i / V i ≤ Real.exp (E i / V i) := by
+      linarith [Real.add_one_le_exp (E i / V i)]
+    calc V i + E i = V i * (1 + E i / V i) := by
+          first
+            | (field_simp; ring)
+            | field_simp
+      _ ≤ V i * Real.exp (E i / V i) := mul_le_mul_of_nonneg_left h1 hv.le
+
+theorem brun_hooley_bound_exp_step (hbound : brun_hooley_bound) : brun_hooley_bound_exp := by
+  intro I P b S val X g hb hP hX hg hg1
+  have h := hbound I P b S val X g hb hP hX hg
+  have hV : ∀ i ∈ I, 0 < ∏ q ∈ P i, (1 - g q) :=
+    fun i hi => Finset.prod_pos (fun q hq => by linarith [hg1 i hi q hq])
+  have hE : ∀ i ∈ I, 0 ≤ (∑ q ∈ P i, g q) ^ (b i + 1) / ((b i + 1).factorial : ℝ) := by
+    intro i hi
+    have hs : 0 ≤ ∑ q ∈ P i, g q := Finset.sum_nonneg (fun q hq => (hg i hi q hq).1)
+    positivity
+  have hexp : ∏ i ∈ I, (∏ q ∈ P i, (1 - g q) +
+        (∑ q ∈ P i, g q) ^ (b i + 1) / ((b i + 1).factorial : ℝ)) ≤
+      (∏ i ∈ I, ∏ q ∈ P i, (1 - g q)) *
+        Real.exp (∑ i ∈ I, ((∑ q ∈ P i, g q) ^ (b i + 1) / ((b i + 1).factorial : ℝ)) /
+          ∏ q ∈ P i, (1 - g q)) :=
+    product_exp_bound_holds I (fun i => ∏ q ∈ P i, (1 - g q))
+      (fun i => (∑ q ∈ P i, g q) ^ (b i + 1) / ((b i + 1).factorial : ℝ)) hV hE
+  have hmul := mul_le_mul_of_nonneg_left hexp hX
+  rw [← mul_assoc] at hmul
+  linarith
+
+#print axioms RNS.BrunHooley.product_exp_bound_holds
+#print axioms RNS.BrunHooley.brun_hooley_bound_exp_step
 
 end RNS.BrunHooley

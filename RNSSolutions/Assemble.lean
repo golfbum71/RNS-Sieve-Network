@@ -507,3 +507,9 @@ theorem RNS.BrunHooley.brun_hooley_bound_holds : RNS.BrunHooley.brun_hooley_boun
     RNS.BrunTruncation.truncation_error_holds RNS.BrunTruncation.esymm_power_bound_holds
 
 #print axioms RNS.BrunHooley.brun_hooley_bound_holds
+
+/-- `BrunPureSieve`, `BrunTruncation` → `BrunHooley`: the Brun–Hooley bound, exponential form. -/
+theorem RNS.BrunHooley.brun_hooley_bound_exp_holds : RNS.BrunHooley.brun_hooley_bound_exp :=
+  RNS.BrunHooley.brun_hooley_bound_exp_step RNS.BrunHooley.brun_hooley_bound_holds
+
+#print axioms RNS.BrunHooley.brun_hooley_bound_exp_holds

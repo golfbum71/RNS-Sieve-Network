@@ -7,6 +7,7 @@ import RNSNetwork.Vocabulary
 import Mathlib.Algebra.BigOperators.Ring.Finset
 import Mathlib.Data.Finset.Powerset
 import Mathlib.Data.Nat.Factorial.Basic
+import Mathlib.Analysis.SpecialFunctions.Exp
 import Mathlib.Basic.Real.Basic
 
 /-!
@@ -125,6 +126,35 @@ def brun_hooley_bound : Prop :=
     ((sifted_positions I P S val).card : ℝ) ≤
       X * ∏ i ∈ I, (∏ q ∈ P i, (1 - g q) +
         (∑ q ∈ P i, g q) ^ (b i + 1) / ((b i + 1).factorial : ℝ)) +
+      ∑ c ∈ I.pi (fun i => small_sets (P i) (b i)), |choice_remainder I S val X g c|
+
+end RNS.BrunHooley
+
+/-! ## The exponential form (Ford, Theorem 2.3) -/
+
+namespace RNS.BrunHooley
+
+/-- **Each range's error as a factor.** For positive `V i` and nonnegative
+`E i`, the product of `V i + E i` is at most the product of the `V i` times e
+to the sum of `E i / V i`. -/
+def product_exp_bound : Prop :=
+  ∀ (I : Finset ℕ) (V E : ℕ → ℝ), (∀ i ∈ I, 0 < V i) → (∀ i ∈ I, 0 ≤ E i) →
+    ∏ i ∈ I, (V i + E i) ≤ (∏ i ∈ I, V i) * Real.exp (∑ i ∈ I, E i / V i)
+
+/-- **The Brun–Hooley bound, exponential form** (Ford, Theorem 2.3). With the
+shares also below 1: the sifted positions are at most `X` times the product
+over the ranges of the products of one minus the shares, times e to the sum
+over the ranges of (total share to the power `b i + 1` over `(b i + 1)!`)
+divided by the range's product, plus the absolute remainders. -/
+def brun_hooley_bound_exp : Prop :=
+  ∀ (I : Finset ℕ) (P : ℕ → Finset ℕ) (b : ℕ → ℕ) (S : Finset ℕ) (val : ℕ → ℕ) (X : ℝ)
+    (g : ℕ → ℝ),
+    (∀ i ∈ I, Even (b i)) → (∀ i ∈ I, ∀ q ∈ P i, q.Prime) → 0 ≤ X →
+    (∀ i ∈ I, ∀ q ∈ P i, 0 ≤ g q ∧ g q ≤ 1) → (∀ i ∈ I, ∀ q ∈ P i, g q < 1) →
+    ((sifted_positions I P S val).card : ℝ) ≤
+      X * (∏ i ∈ I, ∏ q ∈ P i, (1 - g q)) *
+        Real.exp (∑ i ∈ I, ((∑ q ∈ P i, g q) ^ (b i + 1) / ((b i + 1).factorial : ℝ)) /
+          ∏ q ∈ P i, (1 - g q)) +
       ∑ c ∈ I.pi (fun i => small_sets (P i) (b i)), |choice_remainder I S val X g c|
 
 end RNS.BrunHooley
