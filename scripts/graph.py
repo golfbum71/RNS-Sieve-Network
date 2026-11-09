@@ -233,6 +233,13 @@ def group_anchor(key):
 
 # ---------------------------------------------------------------- status
 
+def claim_kind(c):
+    """Colour class of one claim of a built node."""
+    return ("cited_built" if is_cited(c) else
+            "draft" if is_draft(c) else
+            "conditional_built" if c.get("open_inputs") else "verified")
+
+
 def node_kind(n):
     """One of: verified, conditional_built, cited_built, planned, conditional, cited, new, external."""
     if n["built"]:
@@ -303,7 +310,7 @@ def network_mermaid(nodes, order, members=None, title=""):
     """One family's diagram: one panel per node, one clickable box per claim
     inside it, arrows from claim to claim, and open conjectures as hexagons
     pointing at the claims that assume them. Nodes from other families that a
-    member rests on (or that rest on a member) are drawn as grey stub panels
+    member rests on (or that rest on a member) are drawn as stub panels
     holding only the claims involved, so every arrow still appears."""
     members = set(order) if members is None else set(members)
     lines = ["```mermaid", "graph LR"]
@@ -409,15 +416,23 @@ def network_mermaid(nodes, order, members=None, title=""):
             groups[node_kind(n)].append(P(nm))
             continue
         for c in n["conclusions"]:
-            key = ("cited_built" if is_cited(c) else
-                   "draft" if is_draft(c) else
-                   "conditional_built" if c.get("open_inputs") else "verified")
-            groups[key].append(C(nm, c['id']))
+            groups[claim_kind(c)].append(C(nm, c['id']))
+    # Claims of other families keep their own status colour, so a proved claim
+    # is green wherever it is drawn; the panel title says which family it is in.
+    stub_ids = []
+    for nm in stubs:
+        n = nodes[nm]
+        for cl in stub_claims.get(nm, []):
+            c = next((c for c in n["conclusions"] if c["id"] == cl), None)
+            if n["built"] and c is not None:
+                groups[claim_kind(c)].append(C(nm, cl))
+            else:
+                stub_ids.append(C(nm, cl))
+        if nm not in stub_claims:
+            stub_ids.append(P(nm))
     for cls, ids in groups.items():
         if ids:
             lines.append(f"  class {','.join(ids)} {cls};")
-    stub_ids = [C(nm, cl) for nm in stubs for cl in stub_claims.get(nm, [])] + \
-               [P(nm) for nm in stubs if nm not in stub_claims]
     if stub_ids:
         lines.append(f"  class {','.join(stub_ids)} stub;")
     if opens:
@@ -503,8 +518,9 @@ def rests_on_tree(nodes):
 def network_sections(nodes, order):
     out = ["The families and how they lean on each other (thick arrow: a Lean-checked "
            "step crosses between them; dotted: only planned ones do). Click a family to "
-           "jump to its diagram. Grey panels in a family's diagram are nodes from another "
-           "family, shown so that every arrow appears.", "", overview_mermaid(nodes, order), ""]
+           "jump to its diagram. A panel titled \"(in …)\" in a family's diagram is a node "
+           "from another family, shown so that every arrow appears; its boxes keep their "
+           "own colours (green when proved).", "", overview_mermaid(nodes, order), ""]
     unlisted = [nm for nm in order if group_of(nodes[nm]) == "other"]
     if unlisted:
         print("WARNING: not in any family (add to GROUPS in graph.py): " + ", ".join(unlisted))

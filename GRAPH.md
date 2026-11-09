@@ -40,7 +40,7 @@ without opening a single proof.
 
 ## The network
 
-The families and how they lean on each other (thick arrow: a Lean-checked step crosses between them; dotted: only planned ones do). Click a family to jump to its diagram. Grey panels in a family's diagram are nodes from another family, shown so that every arrow appears.
+The families and how they lean on each other (thick arrow: a Lean-checked step crosses between them; dotted: only planned ones do). Click a family to jump to its diagram. A panel titled "(in …)" in a family's diagram is a node from another family, shown so that every arrow appears; its boxes keep their own colours (green when proved).
 
 ```mermaid
 graph LR
@@ -249,8 +249,8 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c44,c45,c46,c47,c48,c49,c50,c51,c52,c53,c54,c55 verified;
-  class c56,c57,c58,c59,c60,c61,c62,c63,c64,c65,c66,c67,c68,c69,c70,c71,p1 stub;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c44,c45,c46,c47,c48,c49,c50,c51,c52,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c63,c64,c65,c66,c67,c68,c69,c70,c71 verified;
+  class p1 stub;
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md#prime_gt_three_is_candidate" _blank
   click c2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CRT.md#crt_map_bijective" _blank
   click c3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SquareRootShield.md#square_root_shield" _blank
@@ -471,11 +471,11 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c12,c14,c15,c16,c17,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c32 verified;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c12,c14,c15,c16,c17,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c32,c33,c34,c35,c36,c37 verified;
   class c10,c11,c13,c31 conditional_built;
   class c18 cited_built;
   class p1 conditional;
-  class c33,c34,c35,c36,c37,p2,p3,p4,p5,p6,p7 stub;
+  class p2,p3,p4,p5,p6,p7 stub;
   class o1,o2,o3,o4,o5,o6 openconj;
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Admissibility.md#admissible_of_large_primes" _blank
   click c2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Admissibility.md#zero_two_admissible" _blank
@@ -816,12 +816,12 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c6,c7,c8,c9,c10,c11,c12,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c26,c27,c28 verified;
+  class c6,c7,c8,c9,c10,c11,c12,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c26,c27,c28,c29,c30 verified;
   class c1,c2,c3,c4,c5 conditional_built;
   class c13,c24,c25 cited_built;
   class p4,p5,p6,p7 new;
   class p1,p2,p3 external;
-  class c29,c30,p8,p9,p10,p11 stub;
+  class p8,p9,p10,p11 stub;
   class o1,o2,o3,o4 openconj;
   click c29 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md#prime_gt_three_is_candidate" _blank
   click c30 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CRT.md#crt_map_bijective" _blank
@@ -931,9 +931,9 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13 verified;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15 verified;
   class p1 new;
-  class c14,c15,p2,p3 stub;
+  class p2,p3 stub;
   click c14 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md#prime_gt_three_is_candidate" _blank
   click c15 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/WheelOrder.md#prime_gt_five_digit_ok" _blank
   click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LinearForms.md" _blank
@@ -1086,8 +1086,8 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20 verified;
-  class c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,p1,p2,p3,p4,p5,p6,p7 stub;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30 verified;
+  class p1,p2,p3,p4,p5,p6,p7 stub;
   click c21 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#general_survivor_count" _blank
   click c22 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
   click c23 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#local_density_factorization" _blank
@@ -1308,9 +1308,9 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35 verified;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39 verified;
   class p1,p2,p3,p4,p5,p6,p7,p8,p9 new;
-  class c36,c37,c38,c39,p10,p11,p12,p13,p14,p15,p16,p17 stub;
+  class p10,p11,p12,p13,p14,p15,p16,p17 stub;
   click p10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md" _blank
   click c36 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
   click p11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinConstant.md" _blank
