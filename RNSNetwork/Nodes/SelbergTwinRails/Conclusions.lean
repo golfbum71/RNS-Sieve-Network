@@ -5,6 +5,7 @@ Authors: Geoffrey Fischer
 -/
 import RNSNetwork.Vocabulary
 import Mathlib.NumberTheory.ArithmeticFunction.Misc   -- `ArithmeticFunction.cardDistinctFactors`
+import Mathlib.Analysis.SpecialFunctions.Log.Basic    -- `Real.log`
 
 /-!
 # SelbergTwinRails — Selberg's sieve on the twin columns
@@ -25,9 +26,13 @@ factors of `l` of 2 over (the prime − 2). The error 6 = 3 × 2: Selberg's weig
 contribute 3 per prime factor, and `BrunTwinCount` bounds the error of each
 divisor by 2 per prime factor.
 
-Later stages (planned): a lower bound for the twin sum of order log² of the
-level (Ford, Theorem 4.4), giving at most a constant times `N / log² N` twin
-pairs, and then the constant four times the twin-prime constant.
+Also built: a lower bound for the twin sum of order log² of the level (after
+Ford, Theorem 4.4). When the level is at least 6⁴ and below the square of the
+cut-off, the twin sum is at least (log y − 4 log 6)² / 576. The constant is
+crude; the order is the point.
+
+Later stages (planned): at most a constant times `N / log² N` twin pairs, and
+then the constant four times the twin-prime constant.
 
 Proof: `RNSSolutions/SelbergTwinRails.lean`. Rests on `SelbergBound` and
 `BrunTwinCount`. Metadata: `formalization.yaml`.
@@ -63,5 +68,12 @@ def selberg_twin_columns_bound : Prop :=
     (twin_columns_sifted N z : ℝ) ≤ (N : ℝ) / twin_selberg_sum z y +
       ∑ d ∈ Nat.divisors (twin_wheel_product z),
         if (d : ℝ) ≤ y then (6 : ℝ) ^ ArithmeticFunction.cardDistinctFactors d else 0
+
+/-- **The twin sum grows like log² of the level.** When the level `y` is at
+least 6⁴ and below the square of the cut-off `z`, Selberg's twin sum is at
+least (log y − 4 log 6)² / 576. -/
+def twin_selberg_sum_lower : Prop :=
+  ∀ (z : ℕ) (y : ℝ), (6 : ℝ) ^ 4 ≤ y → y < (z : ℝ) ^ 2 →
+    (Real.log y - 4 * Real.log 6) ^ 2 / 576 ≤ twin_selberg_sum z y
 
 end RNS.SelbergTwinRails
