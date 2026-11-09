@@ -66,3 +66,8 @@ import RNSSolutions.GapConstant
 import RNSSolutions.LargerSieve
 import RNSSolutions.SmallWheelSurvivors
 import RNSSolutions.GallagherLocal
+import RNSSolutions.SieveDataLimits
+import RNSSolutions.PolynomialPatterns
+import RNSSolutions.RailBrunTitchmarsh
+import RNSSolutions.BrunHooley
+import RNSSolutions.MaierMatrix

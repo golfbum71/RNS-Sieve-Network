@@ -53,6 +53,7 @@ import RNSSolutions.MertensThird
 import RNSSolutions.ShareAsymptotics
 import RNSSolutions.GapConstant
 import RNSSolutions.SmallWheelSurvivors
+import RNSSolutions.RailBrunTitchmarsh
 
 /-!
 # Assembling the network
@@ -489,3 +490,12 @@ theorem RNS.SmallWheelSurvivors.small_wheel_survivors_of_mertens_third
 
 #print axioms RNS.SmallWheelSurvivors.legendre_error_holds
 #print axioms RNS.SmallWheelSurvivors.small_wheel_survivors_of_mertens_third
+
+/-- `BrunTitchmarshPNT` → `RailBrunTitchmarsh`: the first bound for the primes of one column in
+a short window. The remaining hypothesis is the outside claim
+`BrunTitchmarshPNT.primes_between_le` (from PNT+). -/
+theorem RNS.RailBrunTitchmarsh.column_window_weak_of_pnt_plus
+    (h : RNS.BrunTitchmarshPNT.primes_between_le) : RNS.RailBrunTitchmarsh.column_window_weak :=
+  RNS.RailBrunTitchmarsh.column_window_weak_step h
+
+#print axioms RNS.RailBrunTitchmarsh.column_window_weak_of_pnt_plus
