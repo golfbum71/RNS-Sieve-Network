@@ -273,6 +273,69 @@ so each interval is off by the two columns' difference in the overhang.
   standard three (Geoffrey Fischer, 2026-11-04). Checked numerically
   beforehand on 3,647 cases.
 
+### 22. `LehmerSplit` — Lehmer's even split
+If one wheel leaves remainder 1 on division by a chosen number of intervals, the survivors of the cycle split evenly across that many equal intervals (endpoints rounded down). With wheels 2 and 3 frozen, each column splits evenly when a wheel leaves remainder 1 on division by the least common multiple of 6 and the number of intervals. UniformSubdivision's whole-count claim is the case of the rotating prime minus one intervals.
+- Sources: [D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf) — Theorem 4 is the whole-count form
+- Lean: `lehmer_even_split`, `lehmer_even_split_column` (proved in `RNSSolutions/LehmerSplit.lean`)
+- Rests on: `UniformSubdivision`
+- Status: Clean. Both claims proved; `#print axioms` shows only the standard three.
+
+### 23. `SurvivorSymmetry` — survivors are mirror-symmetric
+A position survives the wheels exactly when its reflection in the combined cycle survives. Counting form (Legendre's mirror for phi(x, a)): the survivors up to a point and up to its mirror point together number one full cycle's survivors.
+- Sources: [Legendre's formula (MathWorld), the identity phi(t, k) = phi(m_k) - phi(m_k - t - 1, k)](https://mathworld.wolfram.com/LegendresFormula.html) — the counting form, as Legendre's mirror identity for phi(x, a); [D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf) — Theorem 1; [G. F. Grob and M. Schmitt, Cycles and Patterns in the Sieve of Eratosthenes, arXiv:1905.03117, Theorem 2](https://arxiv.org/abs/1905.03117) — restates it
+- Lean: `survivor_reflection`, `survivor_count_reflection` (proved in `RNSSolutions/SurvivorSymmetry.lean`)
+- Rests on: Vocabulary and Mathlib only
+- Status: Clean. Both claims proved; `#print axioms` shows only the standard three (2026-11-05).
+
+### 24. `SpreadBounds` — how unevenly survivors can spread
+Any two stretches of the same length hold survivor counts differing by at most two to the number of wheels. With wheels 2 and 3 frozen, the two columns' survivor counts up to any point differ by at most two to the number of remaining wheels. Both checked numerically beforehand (4,761 cases; the column imbalance reaches 18 at the wheels up to 23, against a bound of 128).
+- Sources: [D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf) — Theorems 9 and 10, the interval form
+- Lean: `interval_spread_bound`, `column_imbalance_bound` (proved in `RNSSolutions/SpreadBounds.lean`)
+- Rests on: `Sawtooth`
+- Status: Clean. Both claims proved; `#print axioms` shows only the standard three.
+
+### 25. `ColumnAction` — how a wheel moves the columns
+Multiplying by a prime keeps the 6n-1 and 6n+1 columns in place if the prime leaves remainder 1 on division by 6, and swaps them if it leaves remainder 5. The lemma behind every column form in the network. Proved directly from remainders; ColumnStructure's columns_multiply says the same for column entries.
+- Sources: [Modular arithmetic (Wikipedia)](https://en.wikipedia.org/wiki/Modular_arithmetic) — remainders multiply, the standard fact behind how a wheel moves the columns; the column form is the network's own
+- Lean: `column_action` (proved in `RNSSolutions/ColumnAction.lean`)
+- Rests on: Vocabulary and Mathlib only
+- Status: Clean. The claim is proved; `#print axioms` shows only the standard three (2026-11-04).
+
+### 26. `ShareBounds` — the survivor share falls like one over the logarithm
+With the wheels below a bound, the surviving share of the cycle is at most one over the logarithm of the bound, and the twin share is at most twice the square of that. Checked numerically beforehand for wheels up to 200,000; the share times the logarithm approaches 0.5615, the constant in MertensThird.
+- Sources: [Mertens' theorems (Wikipedia)](https://en.wikipedia.org/wiki/Mertens%27_theorems) — Mertens' third theorem gives the limit 0.5615 that the survivor share times the logarithm approaches; [J. B. Rosser and L. Schoenfeld, Approximate formulas for some functions of prime numbers, Illinois J. Math. 6 (1962), 64-94](https://projecteuclid.org/download/pdf_1/euclid.ijm/1255631807) — a sharper explicit bound of the same kind, proved analytically; this node's bound is weaker and proved directly
+- Lean: `survivor_share_le_inv_log`, `twin_share_le_two_inv_log_sq` (proved in `RNSSolutions/ShareBounds.lean`)
+- Rests on: `SurvivorCount`
+- Status: Clean. Both claims proved; `#print axioms` shows only the standard three.
+
+### 27. `TwinShare` — the twin share of the cycle
+Among all survivors of a cycle, the twin survivors make up exactly the product over the wheels from 3 up of the wheel size minus 2 over the wheel size minus 1. That product splits into the partial twin-prime constant times the coprime share.
+- Sources: [J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220](https://arxiv.org/abs/1906.09220) — the exact share their second method uses
+- Lean: `twin_share_eq_prod`, `twin_share_split` (proved in `RNSSolutions/TwinShare.lean`)
+- Rests on: `SurvivorCount`
+- Status: Clean. Both claims proved; `#print axioms` shows only the standard three (2026-11-04).
+
+### 28. `InadmissibleOccurrences` — inadmissible patterns sit next to their blocking wheel
+If an offset pattern covers every position on some wheel, every prime occurrence of it contains that wheel's prime, so it occurs only finitely often. Corollary: the prime-gap block 2, 4, 2, 4, 2 occurs only at 5, 7, 11, 13, 17, 19. Proved directly from the definition of w; Admissibility's claims are not needed.
+- Sources: [DeepMind formal-conjectures, OeisA1223.conjecture (statement; proof hosted by Epoch AI)](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/OEIS/1223.lean) — statement this settles
+- Lean: `inadmissible_occurrence_contains_prime`, `gap_block_24242_unique` (proved in `RNSSolutions/InadmissibleOccurrences.lean`)
+- Rests on: Vocabulary and Mathlib only
+- Status: Clean. Both claims proved; `#print axioms` shows only the standard three (2026-11-04).
+
+### 29. `GapCertificate` — the Lacampagne-Selfridge counterexample
+For the wheels up to 13 (cycle 30030), the gaps between consecutive survivors take every even value up to the largest gap, 22, except 20. This refutes de Polignac's 1849 guess (every even gap up to twice the second-largest wheel occurs) and Erdős's first guess for this cycle (every even value up to the largest gap occurs; Erdős Problem 854). Erdős asked for large enough cycles, so that eventual form stays open. Every survivor gap is even.
+- Sources: [M. Ziller, On differences between consecutive numbers coprime to primorials, arXiv:2007.01808 (2020)](https://arxiv.org/abs/2007.01808) — records de Polignac's guess and tabulates the missing gaps (Table 1); this node proves the wheels-up-to-13 row; [T. F. Bloom, Erdős Problem 854](https://www.erdosproblems.com/854) — Erdős's guess and the Lacampagne-Selfridge computation at 2·3·5·7·11·13; [DeepMind formal-conjectures, Erdős Problem 854](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/854.lean) — states the problem
+- Lean: `survivor_gaps_even`, `survivor_gaps_30030_miss_20`, `survivor_gaps_30030_present`, `de_polignac_gap_guess_false`, `erdos_first_guess_fails_at_13` (proved in `RNSSolutions/GapCertificate.lean`)
+- Rests on: Vocabulary and Mathlib only
+- Status: Clean. All 5 claims proved; `#print axioms` shows only the standard three (2026-11-05).
+
+### 30. `BlockingRuns` — blocking runs and the largest survivor gap
+A setting of the wheels (one blocked position per wheel) is a shift of the ordinary sieve, by the Chinese Remainder Theorem; so a run of consecutive numbers can be blocked by some setting exactly when some gap between consecutive survivors is at least one longer. The longest blocked run is one less than the largest survivor gap (Jacobsthal's function of the cycle length). With JacobsthalQuadratic, such runs are at most a constant times the square of the number of wheels. Checked numerically beforehand for the wheels below 14 over every setting.
+- Sources: [DeepMind formal-conjectures, Erdős Problem 687 / Green's Open Problem 46](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/687.lean) — states the problem
+- Lean: `blocked_run_is_shift`, `longest_blocked_run_eq_max_gap_sub_one` (proved in `RNSSolutions/BlockingRuns.lean`)
+- Rests on: `CRT`
+- Status: Clean. Both claims proved; `#print axioms` shows only the standard three.
+
 ### 32. `BirdseySchay` — Birdsey and Schay's heuristic, as a hypothesis
 Their assumption that the wheel share of twins carries into the range below the next prime's square, with one Mertens correction, stated as a named hypothesis, together with the step showing it implies the twin-prime asymptotic.
 - Sources: [J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220](https://arxiv.org/abs/1906.09220) — the heuristic
@@ -290,6 +353,21 @@ Adding one wheel at most doubles the largest gap between the survivor count and 
 - Scope: largest_gap_add_wheel: Tier 2, multi-session. mean_square_gap: Tier 3 (moved up 2026-11-04): its proof integrates the squared gap over the cycle (Theorem 4(v), via Franel's formula) and needs real integration.
 - Plan: largest_gap_add_wheel (Codecà-Nair Theorem 1(i)): their gap counts the endpoint, matching survivors_upto, and their identity (I) is UniformSubdivision.one_wheel_removed written as a gap. Session 1: define the largest gap as a maximum over survivor positions and prove it equals their supremum over real fractions (their preliminary discussion: the gap is piecewise linear, its maximum is reached at survivor positions, and its infimum is one minus the maximum by mirror symmetry). Session 2: the inequalities (7) and (8) of their proof, by the neighbouring-survivor argument. Session 3: the case split on r that gives Theorem 1(i).
 - Status: Planned
+
+### 34. `LehmerExcess` — Lehmer's closed form for the 6n-1 type
+When every wheel leaves remainder one less than the number of intervals (for six intervals, every wheel on the 6n-1 side), the survivor count's excess over its proportional share at the end of each interval has an exact closed form, of size two to the number of wheels times the distance of the fraction from one half. The 6n-1 side of Lehmer's picture, and the natural partner to UniformSubdivision's 6n-1-side claim. Checked numerically beforehand on 1,479 cases.
+- Sources: [P. Codecà and M. Nair, Extremal values of Delta(x,N), Canad. Math. Bull. 41 (1998), 335-347](https://doi.org/10.4153/CMB-1998-046-3) — Theorem 2 and the identity in its proof (read from the paper); [D. H. Lehmer, The distribution of totatives, Canad. J. Math. 7 (1955), 347-357](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A1B6054448396406512E4ECE51DC6ADD/S0008414X00030467a.pdf/distribution_of_totatives.pdf) — Theorem 8, as recorded in the node list; not yet checked against the paper
+- Lean: `lehmer_excess_closed_form` (proved in `RNSSolutions/LehmerExcess.lean`)
+- Rests on: `Sawtooth`
+- Status: Clean. The claim is proved; `#print axioms` shows only the standard three.
+
+### 35. `GermainCriterion` — Germain's exact criterion for an even split
+Cut the cycle of two prime wheels into a given number of equal parts. The survivors split evenly exactly when one wheel leaves remainder 1 on division by the number of parts, or the first wheel's square leaves remainder 1 and the second wheel is the negative of the first (Germain 2005, Corollary 1.4). Both halves are built. The "if" half is remainder arithmetic alone. The "only if" half is Erdős's conjecture on Lehmer's even split (Hall and Shiu 2002), reached by Germain's route through odd Dirichlet characters, his Theorem 1.1 for distinct prime wheels, and the nonvanishing of L-functions, with the Hurwitz zeta value at 0 from HurwitzZetaZero. Everything rests on Mathlib alone.
+- Improves: LehmerSplit gives an even split when one wheel leaves remainder 1, for any number of wheels. For two wheels this node adds the second sufficient case (the second wheel the negative of the first, with the first wheel's square leaving remainder 1), which LehmerSplit does not cover.
+- Sources: [J. Germain, The distribution of totatives, Canad. Math. Bull. 48 (2005), 211-220](https://doi.org/10.4153/CMB-2005-019-9) — Theorem 1.1 and Corollary 1.4, both proved here (Corollary 1.4 by its proof (ii)), with the two-part exception to Theorem 1.1 recorded; [R. R. Hall and P. Shiu, The distribution of totatives, Canad. Math. Bull. 45 (2002), 109-114](https://doi.org/10.4153/CMB-2002-012-1) — proves Erdős's conjecture (the "only if" half of Corollary 1.4), reproved here by Germain's route; its ordering-of-residues theorem is false as stated for composite moduli (smallest case 8 parts with residues 1, 3, 5), though the triples its reduction produces were all fine in 8,012 checked cases
+- Lean: `two_wheel_split_of_remainders`, `odd_primitive_LFunction_zero_ne_zero`, `odd_primitive_weighted_sum_ne_zero`, `character_transform`, `weighted_sum_eq_LFunction_zero`, `odd_weighted_sum_ne_zero_iff`, `coprime_split_iff_characters`, `all_residues_split_iff_wheels`, `split_add_wheel`, `split_fewer_parts`, `split_remove_dividing_wheel`, `two_parts_exception`, `split_iff_nondividing_wheels`, `germain_theorem`, `eq_one_of_odd_characters`, `two_wheel_remainders_of_split`, `two_wheel_split_iff` (proved in `RNSSolutions/GermainCriterion.lean`)
+- Rests on: `Sawtooth`, `HurwitzZetaZero`
+- Status: Clean. All 17 claims proved; `#print axioms` shows only the standard three (2026-11-05).
 
 ### 36. `Sawtooth` — the survivor count minus its proportional share
 The survivors up to any point are a signed count over the ways of choosing
