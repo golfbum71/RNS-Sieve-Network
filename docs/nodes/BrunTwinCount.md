@@ -36,6 +36,26 @@ def twin_multiples_count : Prop :=
 
 **Proof:** `RNS.BrunTwinCount.twin_multiples_count_holds` in [`RNSSolutions/BrunTwinCount.lean`](../../RNSSolutions/BrunTwinCount.lean)
 
+<a id="shift_multiples_count"></a>
+### `shift_multiples_count`
+
+Up to N, the positions m where a product of distinct prime wheels divides m (m + c) number N times shift_rho over the product, off by at most shift_rho (one root for a wheel dividing c, two otherwise).
+
+```lean
+/-- **The multiples count at any shift.** For a set of distinct prime wheels
+with product `d` and any shift `c`, the positions `m` from 1 to `N` where `d`
+divides `m (m + c)` number `N · shift_rho / d`, off by at most `shift_rho`. -/
+def shift_multiples_count : Prop :=
+  ∀ (D : Finset Nat) (c N : Nat), (∀ p ∈ D, p.Prime) →
+    |((((Finset.Ioc 0 N).filter (fun m => D.prod id ∣ m * (m + c))).card : ℕ) : ℝ)
+        - (N : ℝ) * ((shift_rho c D : ℕ) : ℝ) / ((D.prod id : ℕ) : ℝ)|
+      ≤ ((shift_rho c D : ℕ) : ℝ)
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.BrunTwinCount.shift_multiples_count_holds` in [`RNSSolutions/BrunTwinCount.lean`](../../RNSSolutions/BrunTwinCount.lean)
+
 ## Used by
 
 - [`BrunTwinBound`](BrunTwinBound.md)

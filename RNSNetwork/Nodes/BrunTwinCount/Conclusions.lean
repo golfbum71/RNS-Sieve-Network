@@ -29,6 +29,10 @@ residues of each wheel. For one wheel, a residue times the residue two
 further on is zero only at zero and at minus two, which are the same residue
 for the wheel at 2.
 
+Also built: the same count for `m (m + c)` at any shift `c`
+(`shift_multiples_count`): one root for a wheel dividing `c`, two otherwise.
+Used by `SelbergTwinRails` for prime pairs at any gap and Goldbach pairs.
+
 Proof: `RNSSolutions/BrunTwinCount.lean`. Rests on no other node.
 Metadata: `formalization.yaml`.
 -/

@@ -83,6 +83,42 @@ def selberg_twin_bound : Prop :=
 
 **Proof:** `RNS.SelbergTwinRails.selberg_twin_bound_step` in [`RNSSolutions/SelbergTwinRails.lean`](../../RNSSolutions/SelbergTwinRails.lean)
 
+<a id="selberg_gap_bound"></a>
+### `selberg_gap_bound`
+
+For a gap h > 0 and N at least 5184^8, the prime pairs up to N at gap h number at most 40000 times the product, over the primes p from 5 up dividing h, of p/(p - 2), times N / log^2 N.
+
+```lean
+/-- **Selberg's bound at any gap.** For a gap `h > 0` and `N` at least 5184⁸,
+the prime pairs up to `N` at gap `h` number at most
+40000 · `pair_factor h` · N / log² N. -/
+def selberg_gap_bound : Prop :=
+  ∀ h N : ℕ, 0 < h → (5184 : ℝ) ^ 8 ≤ N →
+    (gap_pair_count h N : ℝ) ≤ 40000 * pair_factor h * N / Real.log N ^ 2
+```
+
+**Rests on:** [`SelbergBound.selberg_bound`](SelbergBound.md#selberg_bound), [`BrunTwinCount.shift_multiples_count`](BrunTwinCount.md#shift_multiples_count), [`SelbergTwinRails.twin_selberg_sum_lower`](SelbergTwinRails.md#twin_selberg_sum_lower)
+
+**Proof:** `RNS.SelbergTwinRails.selberg_gap_bound_step` in [`RNSSolutions/SelbergTwinRails.lean`](../../RNSSolutions/SelbergTwinRails.lean)
+
+<a id="selberg_goldbach_bound"></a>
+### `selberg_goldbach_bound`
+
+For N at least 5184^8, the ways of writing N as a sum of two primes number at most 40000 times the product, over the primes p from 5 up dividing N, of p/(p - 2), times N / log^2 N.
+
+```lean
+/-- **Selberg's bound for Goldbach pairs.** For `N` at least 5184⁸, the ways of
+writing `N` as a sum of two primes number at most
+40000 · `pair_factor N` · N / log² N. -/
+def selberg_goldbach_bound : Prop :=
+  ∀ N : ℕ, (5184 : ℝ) ^ 8 ≤ N →
+    (goldbach_count N : ℝ) ≤ 40000 * pair_factor N * N / Real.log N ^ 2
+```
+
+**Rests on:** [`SelbergBound.selberg_bound`](SelbergBound.md#selberg_bound), [`BrunTwinCount.shift_multiples_count`](BrunTwinCount.md#shift_multiples_count), [`SelbergTwinRails.twin_selberg_sum_lower`](SelbergTwinRails.md#twin_selberg_sum_lower)
+
+**Proof:** `RNS.SelbergTwinRails.selberg_goldbach_bound_step` in [`RNSSolutions/SelbergTwinRails.lean`](../../RNSSolutions/SelbergTwinRails.lean)
+
 ## Used by
 
 - [`SelbergTwinRails`](SelbergTwinRails.md)

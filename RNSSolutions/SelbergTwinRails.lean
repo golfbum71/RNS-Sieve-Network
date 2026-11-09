@@ -31,6 +31,9 @@ named hypotheses.
 `twin_selberg_sum_lower` is proved outright (Mathlib only).
 `selberg_twin_bound` is a step from `selberg_twin_columns_bound` and
 `twin_selberg_sum_lower`, taken as named hypotheses.
+`selberg_gap_bound` and `selberg_goldbach_bound` are steps from
+`SelbergBound.selberg_bound`, `BrunTwinCount.shift_multiples_count` and
+`twin_selberg_sum_lower`, taken as named hypotheses.
 
 Idea. The sieve problem: the numbers `m (m + 2)` for `m` from 1 to `N`, each
 with weight 1, total mass `N`; the wheels from 5 up to the cut-off; the share
