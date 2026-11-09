@@ -1006,11 +1006,10 @@ For a pattern of linear forms whose two coefficients share no factor, a wheel bl
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-08).
 
 ### 74. `BrunHooley` — Hooley's product of truncated sieves
-Split the wheels into ranges and stop inclusion-exclusion separately in each range, early for large wheels and late for small ones; the product of these upper sieves is again an upper sieve. This gives an upper bound of the right order for any pattern and any number of wheels, needing only that each wheel's share is about the pattern size over the wheel on average. The Brun-Hooley sieve, Ford Sections 2 and 3.
-- Lean (planned): `product_upper_sieve`, `brun_hooley_bound`, `brun_hooley_order`
-- Rests on: `BrunPureSieve`, `BrunTruncation`
-- Scope: product_upper_sieve: Tier 1, finite combinatorics. brun_hooley_bound and brun_hooley_order: Tier 2.
-- Status: Planned
+Split the wheels into ranges and stop inclusion-exclusion separately in each range, early for large wheels and late for small ones; the product of these upper sieves is again an upper sieve. This gives an upper bound of the right order for any pattern and any number of wheels, needing only that each wheel's share is about the pattern size over the wheel on average. The Brun-Hooley sieve, Ford Sections 2 and 3. As proved, differs from the plan: only the first step, Ford's Lemma 2.1, is proved: the product of upper sieves over ranges of wheels is an upper sieve, with its expansion as a sum over one choice of a set of wheels from each range. It holds for any wheels (not only primes) and ranges that need not be disjoint, and does not use BrunPureSieve or BrunTruncation, so those arrows wait for the bounds. The bounds (Ford's Theorem 2.3, the survivors at most the length times the share times e to a small error, plus remainders; and Theorem 2.4, the ranges z^(1/4^j) with stopping points 2^(j-1)) are not proved and stay planned.
+- Lean: `combined_eq_product`, `product_upper_sieve` (with `sieve_sum`, `is_upper_sieve`, `combined_sieve_sum`); still planned: `brun_hooley_bound`, `brun_hooley_order`
+- Rests on: Mathlib only (the planned bounds will rest on `BrunPureSieve`, `BrunTruncation`)
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-09). Theorems 2.3 and 2.4 still planned.
 
 ### 75. `PatternUpperBound` — every admissible pattern is at most its conjectured order
 For an admissible pattern of linear forms, the positions up to N where every form is prime are at most a constant times the pattern's correction constant times N over the logarithm of N to the number of forms. This is the strongest unconditional statement known in the direction of the Hardy-Littlewood conjecture, and covers twins, triples, pairs at any gap and Sophie Germain pairs. Ford, Theorem 2.5.
@@ -1055,17 +1054,16 @@ A positive proportion of positive integers can be written as a prime plus a powe
 - Status: Planned
 
 ### 81. `BrunTitchmarshPNT` — primes in a short window (PNT+)
-The number of primes in any window of a given length is at most twice the length over the logarithm of the sieve level, plus a small error, proved with the Selberg sieve in PrimeNumberTheoremAnd (primesBetween_le). Windows only, not arithmetic progressions.
+The number of primes in any window of a given length is at most twice the length over the logarithm of the sieve level, plus an error of the level times a power of its logarithm, proved with the Selberg sieve in PrimeNumberTheoremAnd (primesBetween_le). Windows only, not arithmetic progressions. The statement and the definition primesBetween are copied here word for word as a named hypothesis.
+- Lean (outside claim): `primes_between_le` (with `primesBetween`), word for word from PNT+ at commit 127b50e
 - Rests on: Mathlib only
-- Scope: Outside source.
-- Status: Planned outside source
+- Status: Outside source, proved in Lean in PrimeNumberTheoremAnd (no sorry, no axiom by text search); taken as a named hypothesis.
 
 ### 82. `RailBrunTitchmarsh` — how many primes one column can hold in a window
-Each column, 6n-1 or 6n+1, holds at most about the window's length over the logarithm of five sixths of that length primes in any window, uniformly in where the window sits (Brun-Titchmarsh with modulus 6, constant 2 of Montgomery and Vaughan). A first, weaker form follows at once from the window bound for all primes.
-- Lean (planned): `column_window_le_all`, `column_window_bound`
-- Rests on: `BrunTitchmarshPNT`, `Wheel6`
-- Scope: column_window_le_all: Tier 1. column_window_bound: Tier 3, a Selberg sieve for a progression.
-- Status: Planned
+Each column, 6n-1 or 6n+1, holds at most about the window's length over the logarithm of five sixths of that length primes in any window, uniformly in where the window sits (Brun-Titchmarsh with modulus 6, constant 2 of Montgomery and Vaughan). A first, weaker form follows at once from the window bound for all primes. As proved, differs from the plan: only the first, weaker form is proved: the primes of one column in a window are among the window's primes, so PNT+'s window bound (twice the length over the logarithm of the sieve level, plus an error) bounds each column. The sharper bound for one column (about the length over the logarithm of five sixths of it, a Selberg sieve for the modulus 6) is not proved and stays planned. The column is any remainder on division by 6, not only 5 and 1; Wheel6 is not used, so the planned arrow from it is not drawn.
+- Lean: `column_window_le_all`, `column_window_weak`; joined to the PNT+ outside claim as `column_window_weak_of_pnt_plus`; still planned: `column_window_bound`
+- Rests on: `BrunTitchmarshPNT`
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-09). The sharper column bound still planned.
 
 ### 83. `BuchstabIdentity` — adding one wheel, counted by the first wheel that blocks
 The survivors of the wheels up to a larger prime equal the survivors of the wheels up to a smaller one, minus, for each wheel in between, the positions it is the first to block. With the plain pattern this is Legendre's recurrence for phi(x, a): bringing in the next wheel removes the survivors of the earlier wheels among the multiples of the new prime. Buchstab's identity, Ford Lemma 3.8. As proved: matches the plan (all three claims, for any finite sets of prime wheels).
@@ -1109,12 +1107,11 @@ The numbers with an even and with an odd count of prime factors have the same si
 - Status: Planned
 
 ### 89. `PolynomialPatterns` — polynomial patterns: admissibility and the Bateman-Horn conjecture
-For polynomial patterns such as n^2 + 1, a wheel blocks the roots of the polynomials on that wheel, and admissibility asks that no wheel be fully blocked. Stated: the Bateman-Horn conjecture as a named hypothesis, with the step that it gives infinitely many primes of the form n^2 + 1 (Landau's fourth problem). The constant's convergence for n^2 + 1 depends on how primes split between remainders 1 and 3 on division by 4, so it also enters as a hypothesis.
-- Lean (planned): `poly_admissible_iff`, `sq_add_one_admissible`, `landau_of_bateman_horn`
-- Rests on: `Admissibility`
-- Open inputs: `bateman_horn_conjecture`, `sq_add_one_constant_converges`
-- Scope: poly_admissible_iff and sq_add_one_admissible: Tier 1. landau_of_bateman_horn: Tier 2.
-- Status: Planned (conditional)
+For polynomial patterns such as n^2 + 1, a wheel blocks the roots of the polynomials on that wheel, and admissibility asks that no wheel be fully blocked. Stated: the Bateman-Horn conjecture as a named hypothesis, with the step that it gives infinitely many primes of the form n^2 + 1 (Landau's fourth problem). The constant's convergence for n^2 + 1 depends on how primes split between remainders 1 and 3 on division by 4, so it also enters as a hypothesis. As proved, differs from the plan: the Bateman-Horn conjecture is stated for the single polynomial n^2 + 1 (bateman_horn_sq_add_one), not for general polynomial patterns; the general statement stays planned. The convergence of its constant (sq_add_one_constant_converges, with the limit positive) is a known theorem, not an open conjecture, but it is not proved here, so it is taken as a hypothesis as planned. The finite check needs that no prime divides every coefficient of any polynomial, and checks the wheels up to the total degree. The step does not use the Admissibility node, so the planned arrow from it is not drawn. The counts of blocked positions for n^2 + 1 on every wheel (1, none, or 2) are not stated; only the wheel 2 is needed for admissibility.
+- Lean: `poly_admissible_iff`, `sq_add_one_admissible`, `landau_of_bateman_horn` (with `poly_blocked`, `poly_admissible`, `coeffs_coprime`, `sq_add_one_count`, `sq_add_one_partial`); still planned: the general `bateman_horn_conjecture`
+- Rests on: Mathlib only
+- Open inputs: `sq_add_one_constant_converges` (a known theorem, not proved here), `bateman_horn_sq_add_one`
+- Status: Conditional. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-09); the Landau step takes the two inputs as hypotheses.
 
 ---
 
@@ -1150,11 +1147,10 @@ With the wheels up to about log x, the numbers up to x surviving every wheel num
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-08).
 
 ### 94. `SieveDataLimits` — what the multiple counts alone can decide
-Knowing only how many numbers each product of wheels divides pins the survivor count to an interval, not a value; the best upper and lower bounds are linear programs whose duals are the upper and lower sieves. Worked case: if 100 numbers have 60 even and 10 divisible by 3, the numbers coprime to 6 are between 30 and 40, and both ends occur. Tao, 254A Notes 4 (Theorem 5, Exercises 4 and 8).
-- Lean (planned): `two_three_example`, `sieve_duality`
+Knowing only how many numbers each product of wheels divides pins the survivor count to an interval, not a value; the best upper and lower bounds are linear programs whose duals are the upper and lower sieves. Worked case: if 100 numbers have 60 even and 10 divisible by 3, the numbers coprime to 6 are between 30 and 40, and both ends occur. Tao, 254A Notes 4 (Theorem 5, Exercises 4 and 8). As proved, differs from the plan: the worked case is proved in full (both bounds for every set with that data, and two explicit sets of 100 numbers reaching 30 and 40). Of the duality, only the weak half is proved: every upper sieve bounds the survivors from above and every lower sieve from below, for any wheels (not only primes) and any family of known multiple counts. The strong half, that the best sieve reaches the best possible bound (linear-programming duality), is not proved and stays planned.
+- Lean: `two_three_bounds`, `two_three_ends`, `upper_sieve_bound`, `lower_sieve_bound` (with `survive_two_three`, `multiple_count`, `survivors_in`); still planned: `sieve_duality` (strong half)
 - Rests on: Mathlib only
-- Scope: two_three_example: Tier 1 (decide). sieve_duality: Tier 3 (linear-programming duality for finitely many wheels).
-- Status: Planned
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-09). Strong duality still planned.
 
 ### 95. `LargerSieve` — Gallagher's larger sieve: when each wheel leaves few positions
 If a set of numbers in a window of length N occupies at most g(q) positions on each wheel q (prime powers allowed), then its size is at most the sum of log q minus log N, over the sum of log q over g(q) minus log N, whenever the denominator is positive. So when every wheel leaves at most G positions open and the wheels are numerous enough, fewer than G numbers survive. Elementary: counting pairs that agree on a wheel. Gallagher 1971. As proved: matches the plan, with the von Mangoldt weight (log of the prime for a prime power, 0 otherwise) on any finite set of wheel sizes.
@@ -1177,11 +1173,10 @@ There is a constant c such that every number at least 2 is a sum of at most c pr
 - Status: Planned
 
 ### 98. `MaierMatrix` — short windows with too many and too few primes
-Maier's matrix: rows are windows of length (log x) to a power A, columns are the positions coprime to a product P of wheels from a middle range. Counting primes by rows and by columns must agree, but the number of columns differs from the length times the share of P by a factor that oscillates (the Buchstab function minus e to minus Euler's constant). So some windows hold noticeably more primes than average and some fewer. The column count is finite and wheel-native; the prime counts in progressions modulo P are cited.
-- Lean (planned): `maier_column_identity`, `maier_irregularity`
-- Rests on: `SpreadBounds`, `BuchstabIdentity`
-- Scope: maier_column_identity: Tier 1. maier_irregularity: Tier 3, with the prime number theorem in progressions modulo P as a cited hypothesis.
-- Status: Planned (cites a published result)
+Maier's matrix: rows are windows of length (log x) to a power A, columns are the positions coprime to a product P of wheels from a middle range. Counting primes by rows and by columns must agree, but the number of columns differs from the length times the share of P by a factor that oscillates (the Buchstab function minus e to minus Euler's constant). So some windows hold noticeably more primes than average and some fewer. The column count is finite and wheel-native; the prime counts in progressions modulo P are cited. As proved, differs from the plan: the double count is proved, plus an added claim, maier_row_count: from the first row on, a row's prime entries are exactly the primes of its window. Maier's theorem itself (maier_irregularity) is cited from Maier 1985, not proved, as planned. The oscillation of the column count (Buchstab's identity for the wheels of a middle range, Soundararajan's Exercise 11) is not stated, so the planned arrows from SpreadBounds and BuchstabIdentity are not drawn.
+- Lean: `maier_column_identity`, `maier_row_count`; cited: `maier_irregularity` (Maier 1985, Theorem 1)
+- Rests on: Mathlib only
+- Status: Built. The double count and row count proved (standard three axioms, 2026-11-09); Maier's theorem cited from the paper, not proved in Lean.
 
 ### 99. `GallagherLocal` — one wheel's correction averages to 1
 For a single wheel, its correction factor for a pattern of k offsets (one minus the occupied positions over the wheel, divided by one minus one over the wheel to the k), averaged over all patterns of k distinct offsets up to h, tends to 1 as h grows. This is the one-wheel step of Gallagher's theorem, which GallagherAverage currently cites. As proved, differs from the plan: the offsets run below h (0 to h - 1) rather than up to h, and at least one offset is required; the proof needs only Mathlib, so the planned arrow from SingularSeries is not drawn.

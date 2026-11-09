@@ -86,7 +86,6 @@ def buchstab_product_identity : Prop :=
 
 ## Used by
 
-- [`MaierMatrix`](MaierMatrix.md)
 - [`PetiteSieve`](PetiteSieve.md)
 
 ## Files
