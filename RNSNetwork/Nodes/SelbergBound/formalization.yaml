@@ -25,10 +25,13 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/SelbergBound.lean
     declaration: RNS.SelbergBound.bounding_sum_pos_holds
-    note: Ported proof; not yet built.
+    note: Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09). The work
+      is Mellendijk's PrimeNumberTheoremAnd proof, ported to RNSSolutions/SelbergBound/ with three small
+      changes for current Mathlib, each noted in its file header. Recorded as noncompliant only because
+      no Comparator receipt exists yet.
   designated: lean-proof
 - id: selberg_bound
   declaration: RNS.SelbergBound.selberg_bound
@@ -38,10 +41,13 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/SelbergBound.lean
     declaration: RNS.SelbergBound.selberg_bound_holds
-    note: Ported proof; not yet built.
+    note: Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09). The work
+      is Mellendijk's PrimeNumberTheoremAnd proof, ported to RNSSolutions/SelbergBound/ with three small
+      changes for current Mathlib, each noted in its file header. Recorded as noncompliant only because
+      no Comparator receipt exists yet.
   designated: lean-proof
 sources:
 - title: PrimeNumberTheoremAnd, Mathlib/NumberTheory/Sieve/Selberg.lean (A. Mellendijk), selberg_bound_simple

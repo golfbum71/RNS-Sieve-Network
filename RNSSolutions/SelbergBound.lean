@@ -9,10 +9,14 @@ import RNSSolutions.SelbergBound.Selberg
 /-!
 # Proofs for SelbergBound
 
+Built clean by `lake build RNSSolutions` on 2026-11-09; `#print axioms` shows only
+the standard three.
+
 Rests on no other node. The work is in `RNSSolutions/SelbergBound/` (`Aux`,
 `Basic`, `Selberg`): Arend Mellendijk's Selberg sieve from PrimeNumberTheoremAnd
-(commit 127b50e), ported here with only the imports and one namespace name
-changed, so this repository's build checks it.
+(commit 127b50e), ported here so this repository's build checks it. Besides imports and one namespace
+name, three proof steps needed small changes for current Mathlib; each is noted in
+its file's header.
 
 The bridge: PrimeNumberTheoremAnd writes the Selberg terms with `1 / (1 - ν p)`
 where Mathlib writes `(1 - ν p)⁻¹`; the two bounding sums agree term by term.

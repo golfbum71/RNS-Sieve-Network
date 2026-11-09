@@ -1318,6 +1318,13 @@ For numbers between x to the 2/3 and x, being prime or a product of two primes i
 - Rests on: Mathlib only
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-08).
 
+### 101. `SelbergBound` — Selberg's upper bound sieve
+For a sieve problem in Mathlib's form (a weighted finite set, the product of the wheels to sift by, a multiplicative share strictly between 0 and 1 at each wheel, a total mass X, and a level), Selberg's Λ² weights give: the sifted sum is at most X over Selberg's bounding sum, plus, over the divisors d of the wheel product up to the level, 3 to the number of prime factors of d times the size of the error at d. Mathlib sets the problem up and diagonalises the main term but stops before the bound; the proof here is Arend Mellendijk's from PrimeNumberTheoremAnd (`selberg_bound_simple`), ported into `RNSSolutions/SelbergBound/` so this repository's build checks it (three small changes for current Mathlib, each noted in its file). The engine for `SelbergTwinRails`.
+- Sources: [PrimeNumberTheoremAnd, Sieve/Selberg.lean](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/Mathlib/NumberTheory/Sieve/Selberg.lean) — the Lean proof, ported; Ford, Sieve Methods, Theorem 4.1; Heath-Brown, Lectures on sieves
+- Lean: `selberg_bound`, `bounding_sum_pos`
+- Rests on: Mathlib only
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-09).
+
 ### Added to nodes 71-89
 - `BadWheels` gains `divisors_pairwise_coprime` (Ford Lemma 7.7).
 - `BuchstabIdentity` gains `buchstab_product_identity` (Tao, Notes 4, Exercise 13).

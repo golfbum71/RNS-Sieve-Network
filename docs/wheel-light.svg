@@ -235,7 +235,7 @@
 <g transform="translate(52.3,244.5)"><circle r="8" fill="#ddf4ff" stroke="#0969da" stroke-width="2"/><text transform="rotate(77.9)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">MaierMatrix</tspan></text></g>
 <g transform="translate(231.7,93.9)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(22.1)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="-0.55em">Gallagher</tspan><tspan x="15" dy="1.1em">Local</tspan></text></g>
 <g transform="translate(-26.2,-248.6)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(444.0)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="0">ChenWeights</tspan></text></g>
-<g transform="translate(-152.0,-198.4)"><circle r="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2" stroke-dasharray="2 2"/><text transform="rotate(412.5)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="0">SelbergBound</tspan></text></g>
+<g transform="translate(-152.0,-198.4)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(412.5)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="0">SelbergBound</tspan></text></g>
 <circle r="125" fill="#f3f0e8" stroke="#a39e8f" stroke-width="1.5"/>
 <text y="-26" font-size="22" font-weight="650" fill="#1f2328" text-anchor="middle">The RNS wheel</text>
 <text y="4" font-size="13" font-weight="400" fill="#57606a" text-anchor="middle">primorial modulus · CRT</text>
