@@ -92,3 +92,5 @@ related:
   note: "defines the two columns 6n-1 and 6n+1 that this node fills with infinitely many primes"
 - node: Infinitude
   note: "the weaker statement that primes never run out, without saying which column"
+- node: RailBrunTitchmarsh
+  note: "the other side for the same two progressions modulo 6: an upper bound on a column's primes in a short window, where this node says each column holds infinitely many"

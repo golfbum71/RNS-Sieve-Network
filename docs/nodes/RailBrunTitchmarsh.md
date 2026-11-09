@@ -20,6 +20,7 @@ Published work this node rests on or relates to; each entry says how.
 Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
 
 - [`GapTracks`](GapTracks.md) — which gaps each column allows
+- [`DirichletColumns`](DirichletColumns.md) — the same two progressions modulo 6: each column holds infinitely many primes, the lower-bound side of this node's upper bound
 
 ## Claims
 

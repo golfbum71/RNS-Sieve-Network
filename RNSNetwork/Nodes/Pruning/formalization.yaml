@@ -43,3 +43,8 @@ sources:
     type: "paper"
     url: "https://www.proofwiki.org/wiki/Divisibility_of_Common_Difference_of_Arithmetic_Sequence_of_Primes"
     relationship: "the condition this node starts from, classical"
+related:
+- node: Admissibility
+  note: "the Lagrange–Waring condition this node assumes is exactly admissibility of the run's offset pattern (ap_offsets_admissible_iff)"
+- node: ShieldCertificates
+  note: "ShieldCertificates forces the Lagrange–Waring condition on real prime runs, and its forward and backward certificates prove that a run found among these starting positions is prime"

@@ -4,13 +4,21 @@
 
 **Status:** proved in Lean · **Diagram:** [Foundations: wheels, cycles and columns](../../GRAPH.md#foundations-wheels-cycles-and-columns)
 
-If a set of wheels covers every prime up to the square root of the ceiling, surviving them proves primality, for single numbers, evenly spaced runs in either direction, and offset patterns. Conversely, a wheel that does not divide the spacing must block one of any run as long as the wheel itself, which caps the run length and forces the Lagrange–Waring condition on real prime runs. Between a cutoff and its square, prime means exactly "no wheel divides it."
+If a set of wheels covers every prime up to the square root of the ceiling, surviving them proves primality, for single numbers, evenly spaced runs in either direction, and offset patterns. Conversely, a wheel that does not divide the spacing must block one of any run as long as the wheel itself, which caps the run length and forces the Lagrange–Waring condition on real prime runs. Between a cutoff and its square, prime means exactly "no wheel divides it." The certificates and windows rest on SquareRootShield; the Lagrange–Waring claims for real prime runs rest on Admissibility (a prime run's offset pattern is admissible); the other obstruction claims rest on no other node.
+
+**What it adds:** Over Admissibility: the Lagrange–Waring condition there is about offset patterns; here it is forced on actual runs of primes, in both directions, and the square-root shield turns surviving the wheels into a primality certificate for each term of a run.
 
 ## Published sources
 
 Published work this node rests on or relates to; each entry says how.
 
 - [Divisibility of Common Difference of Arithmetic Sequence of Primes (ProofWiki)](https://www.proofwiki.org/wiki/Divisibility_of_Common_Difference_of_Arithmetic_Sequence_of_Primes) — the condition the run-length claims force, classical
+
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`Pruning`](Pruning.md) — Pruning counts the starting positions for a run whose spacing meets the Lagrange–Waring condition; the forward and backward certificates here prove the runs it finds are prime
 
 ## Claims
 
@@ -169,9 +177,9 @@ def ap_prime_run_forces_divisibility : Prop :=
     ∀ p, p.Prime → p ≤ k → p ∣ d
 ```
 
-**Rests on:** no other node (Mathlib and the Vocabulary only)
+**Rests on:** [`Admissibility.ap_offsets_admissible_iff`](Admissibility.md#ap_offsets_admissible_iff)
 
-**Proof:** `RNS.ShieldCertificates.ap_prime_run_forces_divisibility_holds` in [`RNSSolutions/ShieldCertificates.lean`](../../RNSSolutions/ShieldCertificates.lean)
+**Proof:** `RNS.ShieldCertificates.ap_prime_run_forces_divisibility_step` in [`RNSSolutions/ShieldCertificates.lean`](../../RNSSolutions/ShieldCertificates.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
 <a id="window_prime_iff"></a>
 ### `window_prime_iff`
@@ -252,9 +260,9 @@ def backward_ap_prime_run_forces_divisibility : Prop :=
     ∀ p, p.Prime → p ≤ count → p ∣ step
 ```
 
-**Rests on:** no other node (Mathlib and the Vocabulary only)
+**Rests on:** [`Admissibility.ap_offsets_admissible_iff`](Admissibility.md#ap_offsets_admissible_iff)
 
-**Proof:** `RNS.ShieldCertificates.backward_ap_prime_run_forces_divisibility_holds` in [`RNSSolutions/ShieldCertificates.lean`](../../RNSSolutions/ShieldCertificates.lean)
+**Proof:** `RNS.ShieldCertificates.backward_ap_prime_run_forces_divisibility_step` in [`RNSSolutions/ShieldCertificates.lean`](../../RNSSolutions/ShieldCertificates.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
 ## Used by
 

@@ -16,7 +16,15 @@ node:
     that does not divide the spacing must block one of any run as long as the
     wheel itself, which caps the run length and forces the Lagrange–Waring
     condition on real prime runs. Between a cutoff and its square, prime means
-    exactly "no wheel divides it."
+    exactly "no wheel divides it." The certificates and windows rest on
+    SquareRootShield; the Lagrange–Waring claims for real prime runs rest on
+    Admissibility (a prime run's offset pattern is admissible); the other
+    obstruction claims rest on no other node.
+  improves: >-
+    Over Admissibility: the Lagrange–Waring condition there is about offset
+    patterns; here it is forced on actual runs of primes, in both directions,
+    and the square-root shield turns surviving the wheels into a primality
+    certificate for each term of a run.
 
 conclusions:
   - id: prime_of_shield_cover
@@ -149,16 +157,20 @@ conclusions:
   - id: ap_prime_run_forces_divisibility
     declaration: RNS.ShieldCertificates.ap_prime_run_forces_divisibility
     summary: "An all-prime run starting above its length has every prime up to its length dividing the spacing."
-    imports: []
-    imports_status: none
+    imports:
+      - Admissibility.v1.ap_offsets_admissible_iff
+    imports_status: identified
     justifications:
       - id: lean-proof
         kind: lean-noncompliant
         solution: RNSSolutions/ShieldCertificates.lean
-        declaration: RNS.ShieldCertificates.ap_prime_run_forces_divisibility_holds
+        declaration: RNS.ShieldCertificates.ap_prime_run_forces_divisibility_step
+        assembled: RNSSolutions/Assemble.lean (RNS.ShieldCertificates.ap_prime_run_forces_divisibility_holds)
         note: >-
-          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only because no Comparator
-          receipt exists yet.
+          Lean proof of the step from the imported claim, taken as a named
+          hypothesis: a prime run starting above its length has an admissible
+          offset pattern, and the pattern criterion gives the divisibility.
+          Recorded as noncompliant only because no Comparator receipt exists yet.
     designated: lean-proof
   - id: window_prime_iff
     declaration: RNS.ShieldCertificates.window_prime_iff
@@ -225,16 +237,20 @@ conclusions:
   - id: backward_ap_prime_run_forces_divisibility
     declaration: RNS.ShieldCertificates.backward_ap_prime_run_forces_divisibility
     summary: "The Lagrange-Waring condition for backward runs."
-    imports: []
-    imports_status: none
+    imports:
+      - Admissibility.v1.ap_offsets_admissible_iff
+    imports_status: identified
     justifications:
       - id: lean-proof
         kind: lean-noncompliant
         solution: RNSSolutions/ShieldCertificates.lean
-        declaration: RNS.ShieldCertificates.backward_ap_prime_run_forces_divisibility_holds
+        declaration: RNS.ShieldCertificates.backward_ap_prime_run_forces_divisibility_step
+        assembled: RNSSolutions/Assemble.lean (RNS.ShieldCertificates.backward_ap_prime_run_forces_divisibility_holds)
         note: >-
-          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-04). Recorded as noncompliant only because no Comparator
-          receipt exists yet.
+          Lean proof of the step from the imported claim, taken as a named
+          hypothesis: a prime run starting above its length has an admissible
+          offset pattern, and the pattern criterion gives the divisibility.
+          Recorded as noncompliant only because no Comparator receipt exists yet.
     designated: lean-proof
 
 sources:
@@ -246,3 +262,6 @@ sources:
     type: "paper"
     url: "https://www.proofwiki.org/wiki/Divisibility_of_Common_Difference_of_Arithmetic_Sequence_of_Primes"
     relationship: "the condition the run-length claims force, classical"
+related:
+- node: Pruning
+  note: "Pruning counts the starting positions for a run whose spacing meets the Lagrange–Waring condition; the forward and backward certificates here prove the runs it finds are prime"

@@ -82,3 +82,6 @@ sources:
     type: "paper"
     url: "https://www.proofwiki.org/wiki/Divisibility_of_Common_Difference_of_Arithmetic_Sequence_of_Primes"
     relationship: "the evenly spaced case (the Lagrange-Waring condition), classical"
+related:
+- node: Pruning
+  note: "counts the starting positions for an evenly spaced run once the Lagrange–Waring condition (ap_offsets_admissible_iff) holds"
