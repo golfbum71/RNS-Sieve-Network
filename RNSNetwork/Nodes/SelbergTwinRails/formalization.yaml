@@ -36,6 +36,20 @@ conclusions:
       its imports taken as named hypotheses. Recorded as noncompliant only because no Comparator
       receipt exists yet.
   designated: lean-proof
+- id: twin_selberg_sum_lower
+  declaration: RNS.SelbergTwinRails.twin_selberg_sum_lower
+  summary: When the level y is at least 6^4 and below the square of the cut-off, Selberg's twin sum
+    is at least (log y - 4 log 6)^2 / 576, the order log^2 y of Ford's Theorem 4.4 with a crude constant.
+  imports: []           # rests on no other node
+  imports_status: none  # basis: Mathlib only
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/SelbergTwinRails.lean
+    declaration: RNS.SelbergTwinRails.twin_selberg_sum_lower_holds
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09).
+      Recorded as noncompliant only because no Comparator receipt exists yet.
+  designated: lean-proof
 planned:
   source_status: New
   rests_on:

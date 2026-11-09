@@ -14,7 +14,8 @@ import Mathlib.Tactic.FieldSimp
 import Mathlib.Tactic.Ring
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.Positivity
-import Mathlib.NumberTheory.Divisors                 -- `Nat.divisors_mul`
+import Mathlib.NumberTheory.Divisors                 -- `Nat.mem_divisors`
+import Mathlib.Tactic.Push                          -- `push Not`
 import Mathlib.NumberTheory.Harmonic.Bounds         -- `log_add_one_le_harmonic`
 import Mathlib.Analysis.SpecialFunctions.Pow.Real   -- `Real.sqrt`, `Real.log`, `Nat.floor`
 
@@ -267,8 +268,8 @@ private theorem setSum_mono {S : Finset ℕ} (hS : ∀ p ∈ S, 5 ≤ p) {M M' :
   unfold setSum
   refine Finset.sum_le_sum (fun T hT => ?_)
   by_cases h1 : ∏ p ∈ T, p ≤ M
-  · rw [if_pos h1, if_pos (h1.trans h)]
-  · rw [if_neg h1]
+  · rw [ite_eq_left h1, ite_eq_left (h1.trans h)]
+  · rw [ite_eq_right h1]
     split_ifs
     · exact setTerm_nonneg (fun p hp => hS p (Finset.mem_powerset.mp hT hp))
     · exact le_rfl
@@ -285,10 +286,10 @@ private theorem setSum_insert {S : Finset ℕ} {q : ℕ} (hq : q ∉ S) (hq0 : 0
     rw [Nat.le_div_iff_mul_le hq0, Nat.mul_comm (∏ p ∈ T, p) q]
   rw [Finset.prod_insert hqT]
   by_cases h : ∏ p ∈ T, p ≤ M / q
-  · rw [if_pos (hiff.mpr h), if_pos h]
+  · rw [ite_eq_left (hiff.mpr h), ite_eq_left h]
     unfold setTerm
     rw [Finset.prod_insert hqT]
-  · rw [if_neg (fun h' => h (hiff.mp h')), if_neg h, mul_zero]
+  · rw [ite_eq_right (fun h' => h (hiff.mp h')), ite_eq_right h, mul_zero]
 
 /-- The smooth term: 2 to the number of prime factors of `n` over `n`, when
 every prime factor of `n` lies in `S`. -/
@@ -316,13 +317,12 @@ private theorem smoothTerm_mul {S : Finset ℕ} {q m : ℕ} (hq : q.Prime) (hqS 
       ArithmeticFunction.cardFactors_apply_prime hq, Nat.add_comm]
   unfold smoothTerm
   by_cases h : m.primeFactors ⊆ S
-  · rw [if_pos (hcond.mpr h), if_pos h, hΩ, pow_succ]
+  · rw [ite_eq_left (hcond.mpr h), ite_eq_left h, hΩ, pow_succ]
     have hq' : (q : ℝ) ≠ 0 := by exact_mod_cast hq.ne_zero
     have hm' : (m : ℝ) ≠ 0 := by exact_mod_cast hm0
     push_cast
     field_simp
-    ring
-  · rw [if_neg (fun h' => h (hcond.mp h')), if_neg h, mul_zero]
+  · rw [ite_eq_right (fun h' => h (hcond.mp h')), ite_eq_right h, mul_zero]
 
 /-- The smooth sum splits at a new wheel `q`: the numbers prime to `q`, plus
 2/q times the smooth sum up to `M / q`. -/
@@ -348,8 +348,8 @@ private theorem smoothSum_insert_le {S : Finset ℕ} {q : ℕ} (hq : q ∉ S) (h
               exact h.trans (Finset.subset_insert _ _)
           unfold smoothTerm
           by_cases h : n.primeFactors ⊆ S
-          · rw [if_pos (hiff.mpr h), if_pos h]
-          · rw [if_neg (fun h' => h (hiff.mp h')), if_neg h]
+          · rw [ite_eq_left (hiff.mpr h), ite_eq_left h]
+          · rw [ite_eq_right (fun h' => h (hiff.mp h')), ite_eq_right h]
       _ ≤ ∑ n ∈ Finset.Icc 1 M, smoothTerm S n :=
           Finset.sum_le_sum_of_subset_of_nonneg (Finset.filter_subset _ _)
             (fun n _ _ => smoothTerm_nonneg S n)
@@ -465,9 +465,28 @@ private theorem card_divisors_le_two_pow (n : ℕ) (hn : n ≠ 0) :
         rw [hm]
         nlinarith [Nat.pos_of_ne_zero hm0]
       have hdiv : n.divisors.card ≤ 2 * m.divisors.card := by
-        rw [hm, Nat.divisors_mul]
-        refine (Finset.card_mul_le).trans ?_
-        rw [hp.divisors, Finset.card_pair hp.one_lt.ne]
+        have hsub : n.divisors ⊆ m.divisors ∪ m.divisors.image (fun e => n.minFac * e) := by
+          intro d hd
+          rw [Nat.mem_divisors] at hd
+          rw [Finset.mem_union, Finset.mem_image]
+          have hdm : d ∣ n.minFac * m := hm ▸ hd.1
+          by_cases hpd : n.minFac ∣ d
+          · right
+            obtain ⟨e, rfl⟩ := hpd
+            refine ⟨e, ?_, rfl⟩
+            rw [Nat.mem_divisors]
+            exact ⟨(mul_dvd_mul_iff_left hp.ne_zero).mp hdm, hm0⟩
+          · left
+            rw [Nat.mem_divisors]
+            have hc : Nat.Coprime d n.minFac := ((hp.coprime_iff_not_dvd).mpr hpd).symm
+            exact ⟨hc.dvd_of_dvd_mul_left hdm, hm0⟩
+        calc n.divisors.card
+            ≤ (m.divisors ∪ m.divisors.image (fun e => n.minFac * e)).card :=
+              Finset.card_le_card hsub
+          _ ≤ m.divisors.card + (m.divisors.image (fun e => n.minFac * e)).card :=
+              Finset.card_union_le _ _
+          _ ≤ m.divisors.card + m.divisors.card := Nat.add_le_add_left Finset.card_image_le _
+          _ = 2 * m.divisors.card := by omega
       have hΩ : ArithmeticFunction.cardFactors n = ArithmeticFunction.cardFactors m + 1 := by
         rw [hm, ArithmeticFunction.cardFactors_mul hp.ne_zero hm0,
           ArithmeticFunction.cardFactors_apply_prime hp, Nat.add_comm]
@@ -504,7 +523,8 @@ private theorem primeFactors_sub_wheels {z M n : ℕ} (hMz : M < z) (hn : n ∈ 
     omega
   have h4 : p ≠ 4 := by
     rintro rfl
-    norm_num at hpP
+    have := hpP.eq_one_or_self_of_dvd 2 (by norm_num)
+    omega
   have h5 : 5 ≤ p := by
     have := hpP.two_le
     omega
@@ -561,7 +581,7 @@ private theorem sq_le_smoothSum {z M K : ℕ} (hMz : M < z) (hKM : K * K ≤ M) 
       exact Prod.ext h1 h2
   have hτ := card_divisors_le_two_pow n (by omega)
   unfold smoothTerm
-  rw [if_pos (primeFactors_sub_wheels hMz hn)]
+  rw [ite_eq_left (primeFactors_sub_wheels hMz hn)]
   have : (fib.card : ℝ) ≤ (2 : ℝ) ^ ArithmeticFunction.cardFactors n := by
     exact_mod_cast hcard.trans hτ
   rw [div_eq_mul_one_div ((2 : ℝ) ^ _) (n : ℝ)]
@@ -634,23 +654,23 @@ private theorem twin_selberg_sum_eq (z : ℕ) (y : ℝ) (hy : 0 ≤ y) :
   unfold twin_selberg_sum setSum
   refine Finset.sum_nbij' (fun l => l.primeFactors) (fun T => ∏ p ∈ T, p) ?_ ?_ ?_ ?_ ?_
   · intro l hl
-    rw [Finset.mem_coe, Nat.mem_divisors] at hl
-    rw [Finset.mem_coe, Finset.mem_powerset]
+    rw [Nat.mem_divisors] at hl
+    rw [Finset.mem_powerset]
     intro p hp
     exact mem_of_prime_dvd (Nat.prime_of_mem_primeFactors hp)
       ((Nat.dvd_of_mem_primeFactors hp).trans hl.1)
   · intro T hT
-    rw [Finset.mem_coe, Finset.mem_powerset] at hT
-    rw [Finset.mem_coe, Nat.mem_divisors]
+    rw [Finset.mem_powerset] at hT
+    rw [Nat.mem_divisors]
     refine ⟨?_, hP0⟩
     unfold twin_wheel_product
     exact Finset.prod_dvd_prod_of_subset T (twin_wheels z) (fun p => p) hT
   · intro l hl
-    rw [Finset.mem_coe, Nat.mem_divisors] at hl
+    rw [Nat.mem_divisors] at hl
     exact Nat.prod_primeFactors_of_squarefree
       (Squarefree.squarefree_of_dvd hl.1 (product_squarefree z))
   · intro T hT
-    rw [Finset.mem_coe, Finset.mem_powerset] at hT
+    rw [Finset.mem_powerset] at hT
     exact hpf T hT
   · intro l hl
     rw [Nat.mem_divisors] at hl
@@ -664,14 +684,14 @@ private theorem twin_selberg_sum_eq (z : ℕ) (y : ℝ) (hy : 0 ≤ y) :
       constructor
       · intro h
         by_contra h'
-        push_neg at h'
+        push Not at h'
         nlinarith
       · intro h
         nlinarith
     by_cases h : (l : ℝ) ^ 2 ≤ y
-    · rw [if_pos h, if_pos (hiff.mp h)]
+    · rw [ite_eq_left h, ite_eq_left (hiff.mp h)]
       rfl
-    · rw [if_neg h, if_neg (fun h' => h (hiff.mpr h'))]
+    · rw [ite_eq_right h, ite_eq_right (fun h' => h (hiff.mpr h'))]
 
 /-- **The twin sum grows like log² of the level** (after Ford, Theorem 4.4). -/
 theorem twin_selberg_sum_lower_holds : twin_selberg_sum_lower := by
@@ -681,7 +701,7 @@ theorem twin_selberg_sum_lower_holds : twin_selberg_sum_lower := by
   set K := Nat.sqrt M with hKdef
   have hz0 : (0 : ℝ) < z := by
     by_contra h
-    push_neg at h
+    push Not at h
     have : (z : ℝ) = 0 := le_antisymm h (Nat.cast_nonneg z)
     rw [this] at hyz
     linarith
