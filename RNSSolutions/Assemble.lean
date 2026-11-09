@@ -54,6 +54,7 @@ import RNSSolutions.ShareAsymptotics
 import RNSSolutions.GapConstant
 import RNSSolutions.SmallWheelSurvivors
 import RNSSolutions.RailBrunTitchmarsh
+import RNSSolutions.BrunHooley
 
 /-!
 # Assembling the network
@@ -499,3 +500,10 @@ theorem RNS.RailBrunTitchmarsh.column_window_weak_of_pnt_plus
   RNS.RailBrunTitchmarsh.column_window_weak_step h
 
 #print axioms RNS.RailBrunTitchmarsh.column_window_weak_of_pnt_plus
+
+/-- `BrunPureSieve`, `BrunTruncation` → `BrunHooley`: the Brun–Hooley bound (Ford, Theorem 2.3). -/
+theorem RNS.BrunHooley.brun_hooley_bound_holds : RNS.BrunHooley.brun_hooley_bound :=
+  RNS.BrunHooley.brun_hooley_bound_step RNS.BrunPureSieve.bonferroni_even_fn_holds
+    RNS.BrunTruncation.truncation_error_holds RNS.BrunTruncation.esymm_power_bound_holds
+
+#print axioms RNS.BrunHooley.brun_hooley_bound_holds
