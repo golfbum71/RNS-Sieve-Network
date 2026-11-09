@@ -1354,14 +1354,18 @@ private theorem shift_core (h_sb : RNS.SelbergBound.selberg_bound)
   have hFpos : 0 < F := bad_factor_pos c z
   have hsplit : twin_selberg_sum z y ≤ F * setSum (shiftWheels c z) ⌊Real.sqrt y⌋₊ := by
     rw [twin_selberg_sum_eq z y (by linarith)]
-    have hu : twin_wheels z = badWheels c z ∪ shiftWheels c z :=
-      (Finset.filter_union_filter_neg_eq _ _).symm
+    have hu : twin_wheels z = badWheels c z ∪ shiftWheels c z := by
+      ext p
+      unfold badWheels shiftWheels
+      rw [Finset.mem_union, Finset.mem_filter, Finset.mem_filter]
+      by_cases hpc : p ∣ c <;> tauto
     rw [hu]
     refine setSum_union_le _ (fun p hp => twin_wheels_five (shiftWheels_mem hp).1) _ ?_ ?_ _
     · intro p hp
       have := (Finset.mem_filter.mp hp).1
       exact ⟨twin_wheels_prime this, twin_wheels_five this⟩
-    · exact Finset.disjoint_filter_filter_neg _ _ _
+    · exact Finset.disjoint_left.mpr (fun p h1 h2 =>
+        (Finset.mem_filter.mp h2).2 (Finset.mem_filter.mp h1).2)
   have hGW : 0 < setSum (shiftWheels c z) ⌊Real.sqrt y⌋₊ := by
     by_contra hneg
     push Not at hneg
@@ -1451,7 +1455,7 @@ private theorem one_le_frac {p : ℕ} (hp : 5 ≤ p) : (1 : ℝ) ≤ (p : ℝ) /
   linarith
 
 private theorem one_le_pair_factor (h : ℕ) : 1 ≤ pair_factor h :=
-  one_le_prod_of _ _ (fun p hp => one_le_frac (Finset.mem_filter.mp hp).2)
+  one_le_prod_of _ _ (fun _ hp => one_le_frac (Finset.mem_filter.mp hp).2)
 
 /-- The left-out factor is at most `pair_factor`. -/
 private theorem bad_le_pair_factor (h z : ℕ) (hh : h ≠ 0) :
@@ -1560,6 +1564,7 @@ private theorem goldbach_half (N : ℕ) :
     · intro n hn
       rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_filter, Finset.mem_Ioo] at hn
       rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_Ioc]
+      dsimp only
       obtain ⟨⟨⟨h0, hN⟩, hp, hq⟩, hhalf⟩ := hn
       refine ⟨⟨by omega, by omega⟩, hq, ?_⟩
       rw [Nat.sub_sub_self hN.le]
@@ -1569,7 +1574,16 @@ private theorem goldbach_half (N : ℕ) :
       have : N - a = N - b := hab
       omega
   have h3 := Finset.card_le_card h1
-  rw [← Finset.filter_card_add_filter_neg_card_eq_card (fun n => n ≤ N / 2)]
+  have hsplit : (Finset.Ioo 0 N).filter (fun n => n.Prime ∧ (N - n).Prime) ⊆
+      ((Finset.Ioo 0 N).filter (fun n => n.Prime ∧ (N - n).Prime)).filter (fun n => n ≤ N / 2) ∪
+      ((Finset.Ioo 0 N).filter (fun n => n.Prime ∧ (N - n).Prime)).filter
+        (fun n => ¬ n ≤ N / 2) := by
+    intro x hx
+    rw [Finset.mem_union, Finset.mem_filter, Finset.mem_filter]
+    by_cases h : x ≤ N / 2
+    · exact Or.inl ⟨hx, h⟩
+    · exact Or.inr ⟨hx, h⟩
+  have h4 := (Finset.card_le_card hsplit).trans (Finset.card_union_le _ _)
   omega
 
 /-- **Step:** Selberg's bound, the multiples count at any shift and the lower
