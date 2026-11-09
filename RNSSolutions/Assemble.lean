@@ -122,6 +122,19 @@ theorem RNS.ShieldCertificates.window_prime_iff_holds : RNS.ShieldCertificates.w
 theorem RNS.ShieldCertificates.window_twin_iff_holds : RNS.ShieldCertificates.window_twin_iff :=
   RNS.ShieldCertificates.window_twin_iff_step RNS.SquareRootShield.square_root_shield_holds
 
+/-- `Admissibility` → `ShieldCertificates`: Lagrange–Waring for actual prime runs, from the
+pattern criterion. -/
+theorem RNS.ShieldCertificates.ap_prime_run_forces_divisibility_holds :
+    RNS.ShieldCertificates.ap_prime_run_forces_divisibility :=
+  RNS.ShieldCertificates.ap_prime_run_forces_divisibility_step
+    RNS.Admissibility.ap_offsets_admissible_iff_holds
+
+/-- `Admissibility` → `ShieldCertificates`: Lagrange–Waring for backward prime runs. -/
+theorem RNS.ShieldCertificates.backward_ap_prime_run_forces_divisibility_holds :
+    RNS.ShieldCertificates.backward_ap_prime_run_forces_divisibility :=
+  RNS.ShieldCertificates.backward_ap_prime_run_forces_divisibility_step
+    RNS.Admissibility.ap_offsets_admissible_iff_holds
+
 /-- `Wheel6` → `ColumnStructure`. -/
 theorem RNS.ColumnStructure.col_minus_has_minus_prime_factor_holds : RNS.ColumnStructure.col_minus_has_minus_prime_factor :=
   RNS.ColumnStructure.col_minus_has_minus_prime_factor_step RNS.Wheel6.prime_gt_three_is_candidate_holds
@@ -174,6 +187,8 @@ theorem RNS.GapTracks.prime_gap_same_track_of_six_dvd_holds : RNS.GapTracks.prim
 #print axioms RNS.ShieldCertificates.tuple_prime_of_active_shield_holds
 #print axioms RNS.ShieldCertificates.window_prime_iff_holds
 #print axioms RNS.ShieldCertificates.window_twin_iff_holds
+#print axioms RNS.ShieldCertificates.ap_prime_run_forces_divisibility_holds
+#print axioms RNS.ShieldCertificates.backward_ap_prime_run_forces_divisibility_holds
 #print axioms RNS.ColumnStructure.col_minus_has_minus_prime_factor_holds
 #print axioms RNS.ColumnStructure.col_minus_composite_has_proper_minus_factor_holds
 #print axioms RNS.HardyLittlewood.twin_prime_conjecture_implies_infinite_twin_primes_holds

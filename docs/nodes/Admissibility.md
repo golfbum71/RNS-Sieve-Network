@@ -12,6 +12,12 @@ Published work this node rests on or relates to; each entry says how.
 
 - [Divisibility of Common Difference of Arithmetic Sequence of Primes (ProofWiki)](https://www.proofwiki.org/wiki/Divisibility_of_Common_Difference_of_Arithmetic_Sequence_of_Primes) — the evenly spaced case (the Lagrange-Waring condition), classical
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`Pruning`](Pruning.md) — counts the starting positions for an evenly spaced run once the Lagrange–Waring condition (ap_offsets_admissible_iff) holds
+
 ## Claims
 
 <a id="admissible_of_large_primes"></a>
@@ -85,6 +91,7 @@ def ap_offsets_admissible_iff : Prop :=
 
 ## Used by
 
+- [`ShieldCertificates`](ShieldCertificates.md)
 - [`HardyLittlewood`](HardyLittlewood.md)
 - [`BirdseySchay`](BirdseySchay.md)
 

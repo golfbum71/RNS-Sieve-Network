@@ -12,6 +12,13 @@ Published work this node rests on or relates to; each entry says how.
 
 - [Divisibility of Common Difference of Arithmetic Sequence of Primes (ProofWiki)](https://www.proofwiki.org/wiki/Divisibility_of_Common_Difference_of_Arithmetic_Sequence_of_Primes) — the condition this node starts from, classical
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`Admissibility`](Admissibility.md) — the Lagrange–Waring condition this node assumes is exactly admissibility of the run's offset pattern (ap_offsets_admissible_iff)
+- [`ShieldCertificates`](ShieldCertificates.md) — ShieldCertificates forces the Lagrange–Waring condition on real prime runs, and its forward and backward certificates prove that a run found among these starting positions is prime
+
 ## Claims
 
 <a id="valid_starting_residues_card_formula"></a>

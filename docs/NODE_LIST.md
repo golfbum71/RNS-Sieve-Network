@@ -129,7 +129,10 @@ divides it."
   `tuple_prime_of_active_shield`, `ap_hits_wheel`,
   `ap_prime_run_length_lt_of_lt_start`, `ap_prime_run_forces_divisibility`,
   `window_prime_iff`, `window_twin_iff`, and the backward versions
-- Rests on: `SquareRootShield` (no proof here uses `Admissibility`)
+- Rests on: `SquareRootShield` (the certificates and windows) and
+  `Admissibility` (`ap_prime_run_forces_divisibility` and its backward
+  version: a prime run's offset pattern is admissible, so
+  `ap_offsets_admissible_iff` gives the divisibility)
 - Status: Clean
 
 ---

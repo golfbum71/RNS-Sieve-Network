@@ -19,6 +19,7 @@ Connected in content but not by an arrow (no claim here takes theirs as a hypoth
 
 - [`Wheel6`](Wheel6.md) — defines the two columns 6n-1 and 6n+1 that this node fills with infinitely many primes
 - [`Infinitude`](Infinitude.md) — the weaker statement that primes never run out, without saying which column
+- [`RailBrunTitchmarsh`](RailBrunTitchmarsh.md) — the other side for the same two progressions modulo 6: an upper bound on a column's primes in a short window, where this node says each column holds infinitely many
 
 ## Claims
 

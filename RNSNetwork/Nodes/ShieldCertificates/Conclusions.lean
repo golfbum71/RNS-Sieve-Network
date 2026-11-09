@@ -16,9 +16,11 @@ itself; that caps the length of real prime runs and forces the
 Lagrange–Waring condition on them. Between a cutoff and its square, a number
 is prime exactly when no wheel below the cutoff divides it.
 
-Proof: `RNSSolutions/ShieldCertificates.lean`. The certificate claims assume
-`SquareRootShield.square_root_shield`; the obstruction claims rest on no
-other node. Metadata: `formalization.yaml`.
+Proof: `RNSSolutions/ShieldCertificates.lean`. The certificate and window
+claims assume `SquareRootShield.square_root_shield`; the two Lagrange–Waring
+claims for real prime runs assume `Admissibility.ap_offsets_admissible_iff`;
+the other obstruction claims rest on no other node. Metadata:
+`formalization.yaml`.
 
 Source of record: `rns_sieve_6.lean`, "Shield Certificates" sections.
 -/

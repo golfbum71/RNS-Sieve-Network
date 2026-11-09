@@ -56,3 +56,5 @@ sources:
 related:
 - node: GapTracks
   note: which gaps each column allows
+- node: DirichletColumns
+  note: "the same two progressions modulo 6: each column holds infinitely many primes, the lower-bound side of this node's upper bound"
