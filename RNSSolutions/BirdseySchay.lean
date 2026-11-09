@@ -120,7 +120,7 @@ theorem corrected_share_limit_step
       ((RNS.wheel_survivors_gen {0} (q + 1)).card : ℝ) from (h_ts (q + 1)).symm]
   rcases eq_or_ne ((RNS.wheel_survivors_gen {0} (q + 1)).card : ℝ) 0 with hB | hB
   · simp [hB]
-  · first | (field_simp; ring) | field_simp
+  · field_simp
 
 /-! ## Neighbouring primes -/
 
@@ -155,6 +155,7 @@ theorem next_prime_ratio_step (h_pnt : RNS.PrimeNumberTheorem.prime_number_theor
     refine h.congr (fun n => ?_)
     have : (n : ℝ) + 1 ≠ 0 := by positivity
     field_simp
+    ring
   -- b n = ratio × log p / log p' tends to 1
   have hb : Tendsto (fun n : ℕ => (Nat.nth Nat.Prime (n + 1) : ℝ) / Nat.nth Nat.Prime n *
       Real.log (Nat.nth Nat.Prime n) / Real.log (Nat.nth Nat.Prime (n + 1))) atTop (𝓝 1) := by
@@ -275,7 +276,7 @@ theorem twin_count_at_squares_step
       2 * Real.log (Nat.nth Nat.Prime n) := by
     rw [Nat.cast_pow, Real.log_pow]; push_cast; ring
   rw [hLx]
-  first | (field_simp; ring) | field_simp
+  field_simp
 
 /-! ## From the squares to every bound -/
 
