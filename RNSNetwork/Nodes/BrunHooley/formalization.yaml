@@ -10,7 +10,7 @@ node:
   status: active
   title: Hooley's product of truncated sieves
   improves: "BrunPureSieve stops inclusion-exclusion at one point for all wheels; this node lets each range of wheels have its own sieve and shows that the product is still an upper sieve."
-  description: "Split the wheels into ranges and stop inclusion-exclusion separately in each range, early for large wheels and late for small ones; the product of these upper sieves is again an upper sieve. This gives an upper bound of the right order for any pattern and any number of wheels, needing only that each wheel's share is about the pattern size over the wheel on average. The Brun-Hooley sieve, Ford Sections 2 and 3. As proved, differs from the plan: only the first step, Ford's Lemma 2.1, is proved: the product of upper sieves over ranges of wheels is an upper sieve, with its expansion as a sum over one choice of a set of wheels from each range. It holds for any wheels (not only primes) and ranges that need not be disjoint, and does not use BrunPureSieve or BrunTruncation, so those arrows wait for the bounds. The bounds (Ford's Theorem 2.3, the survivors at most the length times the share times e to a small error, plus remainders; and Theorem 2.4, the ranges z^(1/4^j) with stopping points 2^(j-1)) are not proved and stay planned."
+  description: "Split the wheels into ranges and stop inclusion-exclusion separately in each range, early for large wheels and late for small ones; the product of these upper sieves is again an upper sieve. This gives an upper bound of the right order for any pattern and any number of wheels, needing only that each wheel's share is about the pattern size over the wheel on average. The Brun-Hooley sieve, Ford Sections 2 and 3. As proved, differs from the plan: proved are Ford's Lemma 2.1 (the product of upper sieves is an upper sieve, with its expansion) and Theorem 2.3 in two forms: survivors at most X times the product over the ranges of (one minus the shares, multiplied out, plus the total share to the power b+1 over (b+1)!), plus the remainders of the choices of at most b wheels per range; and the same with e to the sum of each range's error over its product. Sifting is of the values of a finite set of positions, so patterns fit directly. Of Theorem 2.4 the general step is proved (brun_hooley_order): distinct even stopping points with every range's total share at most L and product at least v give the factor e^(e^L / v), whatever the number of ranges; and choice_product_le bounds the product of a choice by the product of y_i^(b_i). Still planned: the concrete ranges z^(1/4^j) with stopping points 2^(j-1) under Ford's kappa, B hypothesis (brun_hooley_ford). The remainders are stated per choice of wheels from each range, not per squarefree modulus; for disjoint ranges these agree."
   improves: BrunPureSieve stops once for all wheels and loses a log log factor; stopping per range removes
     the loss.
 conclusions:
@@ -38,17 +38,83 @@ conclusions:
     declaration: RNS.BrunHooley.product_upper_sieve_holds
     note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
+- id: brun_hooley_bound
+  declaration: RNS.BrunHooley.brun_hooley_bound
+  summary: "The Brun-Hooley bound (Ford Thm 2.3): survivors at most X times the product over the ranges of (product of one minus the shares plus total share to the b+1 over (b+1)!), plus the absolute remainders of the choices."
+  imports:
+  - BrunPureSieve.v1.bonferroni_even_fn
+  - BrunTruncation.v1.truncation_error
+  - BrunTruncation.v1.esymm_power_bound
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/BrunHooley.lean
+    declaration: RNS.BrunHooley.brun_hooley_bound_step
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09); recorded as noncompliant only because no Comparator receipt exists yet. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
+  designated: lean-proof
+- id: product_exp_bound
+  declaration: RNS.BrunHooley.product_exp_bound
+  summary: "A product of V plus E is at most the product of V times e to the sum of E over V."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/BrunHooley.lean
+    declaration: RNS.BrunHooley.product_exp_bound_holds
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09). Recorded as noncompliant only because no Comparator receipt exists yet."
+  designated: lean-proof
+- id: brun_hooley_bound_exp
+  declaration: RNS.BrunHooley.brun_hooley_bound_exp
+  summary: "The Brun-Hooley bound in exponential form: X times V times e to the sum of each range's error over its product, plus the remainders."
+  imports:
+  - BrunHooley.v1.brun_hooley_bound
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/BrunHooley.lean
+    declaration: RNS.BrunHooley.brun_hooley_bound_exp_step
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09); recorded as noncompliant only because no Comparator receipt exists yet. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
+  designated: lean-proof
+- id: brun_hooley_order
+  declaration: RNS.BrunHooley.brun_hooley_order
+  summary: "With distinct even stopping points, each range's total share at most L and product at least v, the survivors are at most X V e^(e^L / v) plus the remainders."
+  imports:
+  - BrunHooley.v1.brun_hooley_bound_exp
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/BrunHooley.lean
+    declaration: RNS.BrunHooley.brun_hooley_order_step
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09); recorded as noncompliant only because no Comparator receipt exists yet. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
+  designated: lean-proof
+- id: choice_product_le
+  declaration: RNS.BrunHooley.choice_product_le
+  summary: "A choice of at most b_i wheels from each range, each wheel at most y_i, has product at most the product of y_i^(b_i)."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/BrunHooley.lean
+    declaration: RNS.BrunHooley.choice_product_le_holds
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09). Recorded as noncompliant only because no Comparator receipt exists yet."
+  designated: lean-proof
 planned:
   source_status: New
   rests_on:
-  - BrunPureSieve
-  - BrunTruncation
+  - MertensSecond
   claims:
-  - brun_hooley_bound
-  - brun_hooley_order
-  tier: 'brun_hooley_bound and brun_hooley_order: Tier 2.'
-  plan: 'Session 2: the bound by X V e^E plus remainders (Theorem 2.3), from BrunTruncation in each range.
-    Session 3: the ranges z^(1/4^j) with stopping points 2^(j-1) (Theorem 2.4).'
+  - brun_hooley_ford
+  tier: 'Tier 2: real-power ranges and Ford''s kappa, B hypothesis.'
+  plan: 'Ford Theorem 2.4 proper: ranges (z^(1/4^j), z^(1/4^(j-1))] with stopping points 0 for the top range
+    and 2^(j-1) below, so every choice has product at most z (choice_product_le); Ford''s hypothesis prod
+    over y <= p <= w of (1 - g p)^(-1) <= (log w / log y)^kappa e^(B / log y) gives each range L = kappa
+    log 4 + 4B / log 2 and v = 4^(-kappa) e^(-4B / log 2); then brun_hooley_order gives survivors <= C(kappa,
+    B) X V(z) plus remainders over squarefree d <= z.'
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
   url: https://mail.ford126.web.illinois.edu/sieve2023.pdf

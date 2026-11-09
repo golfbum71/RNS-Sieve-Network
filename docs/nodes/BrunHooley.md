@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean · **Diagram:** [Sieve methods: Brun, Hooley, Selberg](../../GRAPH.md#sieve-methods-brun-hooley-selberg)
 
-Split the wheels into ranges and stop inclusion-exclusion separately in each range, early for large wheels and late for small ones; the product of these upper sieves is again an upper sieve. This gives an upper bound of the right order for any pattern and any number of wheels, needing only that each wheel's share is about the pattern size over the wheel on average. The Brun-Hooley sieve, Ford Sections 2 and 3. As proved, differs from the plan: only the first step, Ford's Lemma 2.1, is proved: the product of upper sieves over ranges of wheels is an upper sieve, with its expansion as a sum over one choice of a set of wheels from each range. It holds for any wheels (not only primes) and ranges that need not be disjoint, and does not use BrunPureSieve or BrunTruncation, so those arrows wait for the bounds. The bounds (Ford's Theorem 2.3, the survivors at most the length times the share times e to a small error, plus remainders; and Theorem 2.4, the ranges z^(1/4^j) with stopping points 2^(j-1)) are not proved and stay planned.
+Split the wheels into ranges and stop inclusion-exclusion separately in each range, early for large wheels and late for small ones; the product of these upper sieves is again an upper sieve. This gives an upper bound of the right order for any pattern and any number of wheels, needing only that each wheel's share is about the pattern size over the wheel on average. The Brun-Hooley sieve, Ford Sections 2 and 3. As proved, differs from the plan: proved are Ford's Lemma 2.1 (the product of upper sieves is an upper sieve, with its expansion) and Theorem 2.3 in two forms: survivors at most X times the product over the ranges of (one minus the shares, multiplied out, plus the total share to the power b+1 over (b+1)!), plus the remainders of the choices of at most b wheels per range; and the same with e to the sum of each range's error over its product. Sifting is of the values of a finite set of positions, so patterns fit directly. Of Theorem 2.4 the general step is proved (brun_hooley_order): distinct even stopping points with every range's total share at most L and product at least v give the factor e^(e^L / v), whatever the number of ranges; and choice_product_le bounds the product of a choice by the product of y_i^(b_i). Still planned: the concrete ranges z^(1/4^j) with stopping points 2^(j-1) under Ford's kappa, B hypothesis (brun_hooley_ford). The remainders are stated per choice of wheels from each range, not per squarefree modulus; for disjoint ranges these agree.
 
 **What it adds:** BrunPureSieve stops once for all wheels and loses a log log factor; stopping per range removes the loss.
 
@@ -59,8 +59,129 @@ def product_upper_sieve : Prop :=
 
 **Proof:** `RNS.BrunHooley.product_upper_sieve_holds` in [`RNSSolutions/BrunHooley.lean`](../../RNSSolutions/BrunHooley.lean)
 
+<a id="brun_hooley_bound"></a>
+### `brun_hooley_bound`
+
+The Brun-Hooley bound (Ford Thm 2.3): survivors at most X times the product over the ranges of (product of one minus the shares plus total share to the b+1 over (b+1)!), plus the absolute remainders of the choices.
+
+```lean
+/-- **The Brun–Hooley bound** (Ford, Theorem 2.3, before the exponential
+step). For prime wheels in ranges, even stopping points, `X ≥ 0` and shares
+between 0 and 1: the sifted positions are at most `X` times the product over
+the ranges of (the product of one minus the shares, plus the total share to
+the power `b i + 1` over `(b i + 1)!`), plus the absolute remainders of the
+choices of at most `b i` wheels from each range. -/
+def brun_hooley_bound : Prop :=
+  ∀ (I : Finset ℕ) (P : ℕ → Finset ℕ) (b : ℕ → ℕ) (S : Finset ℕ) (val : ℕ → ℕ) (X : ℝ)
+    (g : ℕ → ℝ),
+    (∀ i ∈ I, Even (b i)) → (∀ i ∈ I, ∀ q ∈ P i, q.Prime) → 0 ≤ X →
+    (∀ i ∈ I, ∀ q ∈ P i, 0 ≤ g q ∧ g q ≤ 1) →
+    ((sifted_positions I P S val).card : ℝ) ≤
+      X * ∏ i ∈ I, (∏ q ∈ P i, (1 - g q) +
+        (∑ q ∈ P i, g q) ^ (b i + 1) / ((b i + 1).factorial : ℝ)) +
+      ∑ c ∈ I.pi (fun i => small_sets (P i) (b i)), |choice_remainder I S val X g c|
+```
+
+**Rests on:** [`BrunPureSieve.bonferroni_even_fn`](BrunPureSieve.md#bonferroni_even_fn), [`BrunTruncation.truncation_error`](BrunTruncation.md#truncation_error), [`BrunTruncation.esymm_power_bound`](BrunTruncation.md#esymm_power_bound)
+
+**Proof:** `RNS.BrunHooley.brun_hooley_bound_step` in [`RNSSolutions/BrunHooley.lean`](../../RNSSolutions/BrunHooley.lean)
+
+<a id="product_exp_bound"></a>
+### `product_exp_bound`
+
+A product of V plus E is at most the product of V times e to the sum of E over V.
+
+```lean
+/-- **Each range's error as a factor.** For positive `V i` and nonnegative
+`E i`, the product of `V i + E i` is at most the product of the `V i` times e
+to the sum of `E i / V i`. -/
+def product_exp_bound : Prop :=
+  ∀ (I : Finset ℕ) (V E : ℕ → ℝ), (∀ i ∈ I, 0 < V i) → (∀ i ∈ I, 0 ≤ E i) →
+    ∏ i ∈ I, (V i + E i) ≤ (∏ i ∈ I, V i) * Real.exp (∑ i ∈ I, E i / V i)
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.BrunHooley.product_exp_bound_holds` in [`RNSSolutions/BrunHooley.lean`](../../RNSSolutions/BrunHooley.lean)
+
+<a id="brun_hooley_bound_exp"></a>
+### `brun_hooley_bound_exp`
+
+The Brun-Hooley bound in exponential form: X times V times e to the sum of each range's error over its product, plus the remainders.
+
+```lean
+/-- **The Brun–Hooley bound, exponential form** (Ford, Theorem 2.3). With the
+shares also below 1: the sifted positions are at most `X` times the product
+over the ranges of the products of one minus the shares, times e to the sum
+over the ranges of (total share to the power `b i + 1` over `(b i + 1)!`)
+divided by the range's product, plus the absolute remainders. -/
+def brun_hooley_bound_exp : Prop :=
+  ∀ (I : Finset ℕ) (P : ℕ → Finset ℕ) (b : ℕ → ℕ) (S : Finset ℕ) (val : ℕ → ℕ) (X : ℝ)
+    (g : ℕ → ℝ),
+    (∀ i ∈ I, Even (b i)) → (∀ i ∈ I, ∀ q ∈ P i, q.Prime) → 0 ≤ X →
+    (∀ i ∈ I, ∀ q ∈ P i, 0 ≤ g q ∧ g q ≤ 1) → (∀ i ∈ I, ∀ q ∈ P i, g q < 1) →
+    ((sifted_positions I P S val).card : ℝ) ≤
+      X * (∏ i ∈ I, ∏ q ∈ P i, (1 - g q)) *
+        Real.exp (∑ i ∈ I, ((∑ q ∈ P i, g q) ^ (b i + 1) / ((b i + 1).factorial : ℝ)) /
+          ∏ q ∈ P i, (1 - g q)) +
+      ∑ c ∈ I.pi (fun i => small_sets (P i) (b i)), |choice_remainder I S val X g c|
+```
+
+**Rests on:** [`BrunHooley.brun_hooley_bound`](BrunHooley.md#brun_hooley_bound)
+
+**Proof:** `RNS.BrunHooley.brun_hooley_bound_exp_step` in [`RNSSolutions/BrunHooley.lean`](../../RNSSolutions/BrunHooley.lean)
+
+<a id="brun_hooley_order"></a>
+### `brun_hooley_order`
+
+With distinct even stopping points, each range's total share at most L and product at least v, the survivors are at most X V e^(e^L / v) plus the remainders.
+
+```lean
+/-- **Bounded ranges.** If the stopping points are distinct even numbers, each
+range's total share is at most `L` (with `L ≥ 0`), each range's product of
+one minus the shares is at least `v > 0`, and the shares are below 1, then the
+sifted positions are at most `X` times the product over all the ranges, times
+e to the power `e ^ L / v`, plus the absolute remainders. The factor depends
+only on `L` and `v`, not on the number of ranges. -/
+def brun_hooley_order : Prop :=
+  ∀ (I : Finset ℕ) (P : ℕ → Finset ℕ) (b : ℕ → ℕ) (S : Finset ℕ) (val : ℕ → ℕ) (X : ℝ)
+    (g : ℕ → ℝ) (L v : ℝ),
+    (∀ i ∈ I, Even (b i)) → Set.InjOn b I → (∀ i ∈ I, ∀ q ∈ P i, q.Prime) → 0 ≤ X →
+    (∀ i ∈ I, ∀ q ∈ P i, 0 ≤ g q ∧ g q < 1) → 0 ≤ L → (∀ i ∈ I, ∑ q ∈ P i, g q ≤ L) →
+    0 < v → (∀ i ∈ I, v ≤ ∏ q ∈ P i, (1 - g q)) →
+    ((sifted_positions I P S val).card : ℝ) ≤
+      X * (∏ i ∈ I, ∏ q ∈ P i, (1 - g q)) * Real.exp (Real.exp L / v) +
+      ∑ c ∈ I.pi (fun i => small_sets (P i) (b i)), |choice_remainder I S val X g c|
+```
+
+**Rests on:** [`BrunHooley.brun_hooley_bound_exp`](BrunHooley.md#brun_hooley_bound_exp)
+
+**Proof:** `RNS.BrunHooley.brun_hooley_order_step` in [`RNSSolutions/BrunHooley.lean`](../../RNSSolutions/BrunHooley.lean)
+
+<a id="choice_product_le"></a>
+### `choice_product_le`
+
+A choice of at most b_i wheels from each range, each wheel at most y_i, has product at most the product of y_i^(b_i).
+
+```lean
+/-- **The size of a choice.** If every wheel of range `i` is at most `y i`
+(each `y i ≥ 1`), the product of the wheels of any choice of at most `b i`
+wheels from each range is at most the product of `y i ^ b i`: this is how
+the remainders are kept to moduli up to a set level. -/
+def choice_product_le : Prop :=
+  ∀ (I : Finset ℕ) (P : ℕ → Finset ℕ) (b y : ℕ → ℕ), (∀ i ∈ I, 1 ≤ y i) →
+    (∀ i ∈ I, ∀ q ∈ P i, q ≤ y i) →
+    ∀ c ∈ I.pi (fun i => small_sets (P i) (b i)),
+      ∏ x ∈ I.attach, ∏ q ∈ c x.1 x.2, q ≤ ∏ i ∈ I, y i ^ b i
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.BrunHooley.choice_product_le_holds` in [`RNSSolutions/BrunHooley.lean`](../../RNSSolutions/BrunHooley.lean)
+
 ## Used by
 
+- [`BrunHooley`](BrunHooley.md)
 - [`FundamentalLemma`](FundamentalLemma.md)
 - [`LowerBoundSieve`](LowerBoundSieve.md)
 - [`PatternUpperBound`](PatternUpperBound.md)

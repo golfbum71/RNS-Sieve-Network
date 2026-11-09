@@ -55,6 +55,7 @@ def prime_reciprocal_upper : Prop :=
 
 - [`MertensSecond`](MertensSecond.md)
 - [`BrunAnalytic`](BrunAnalytic.md)
+- [`BrunHooley`](BrunHooley.md)
 
 ## Files
 
