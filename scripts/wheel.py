@@ -111,7 +111,15 @@ def ring_radius(k):
 def spread_clear(desired, lo, hi, gap, blocked):
     """Like `spread`, but also keeps clear of `blocked` angle intervals (the
     labels of the ring just inside). Falls back to `spread` if it cannot."""
-    blocked = sorted(blocked)
+    # Merge overlapping intervals first: jumping out of one interval into an
+    # overlapping one could otherwise bounce between them for ever.
+    merged = []
+    for a, b in sorted(blocked):
+        if merged and a <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], b))
+        else:
+            merged.append((a, b))
+    blocked = merged
     pos, prev = [], lo - gap
     for x in desired:
         p = max(x, lo, prev + gap)

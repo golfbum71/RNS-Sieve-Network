@@ -208,7 +208,7 @@ GROUPS = [
         "BrunPureSieve", "BrunTwinCount", "BrunTruncation", "BrunTwinBound", "BrunAnalytic",
         "BrunTheorem", "BrunTwinSum", "BrunSharp", "BrunHooley", "PatternUpperBound",
         "PatternReciprocals", "BuchstabIdentity", "FundamentalLemma", "LowerBoundSieve", "PetiteSieve",
-        "SelbergTwinRails", "ParityBarrier", "BrunTitchmarshPNT", "RailBrunTitchmarsh",
+        "SelbergBound", "SelbergTwinRails", "ParityBarrier", "BrunTitchmarshPNT", "RailBrunTitchmarsh",
         "SieveDataLimits", "LargerSieve", "ArithmeticLargeSieve", "ChenWeights"]),
 ]
 GROUP_TITLE = {key: title for key, title, _ in GROUPS}

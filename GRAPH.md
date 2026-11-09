@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 78 of 96 nodes are built, holding 235 claims: 230 proved in Lean and 5 cited from a published paper. They are joined by 123 arrows, each a Lean-checked step. Of the other 18 nodes, drawn dashed or purple, 15 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 79 of 97 nodes are built, holding 237 claims: 230 proved in Lean, 2 with a proof drafted but not yet built and 5 cited from a published paper. They are joined by 123 arrows, each a Lean-checked step. Of the other 18 nodes, drawn dashed or purple, 15 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -50,7 +50,7 @@ graph LR
   g4["<b>Gaps between survivors and between primes</b><br/>9 built, 7 planned or outside"]
   g5["<b>Sophie Germain primes</b><br/>4 built, 1 planned or outside"]
   g6["<b>Survivor shares and analytic inputs</b><br/>8 built, 0 planned or outside"]
-  g7["<b>Sieve methods: Brun, Hooley, Selberg</b><br/>14 built, 9 planned or outside"]
+  g7["<b>Sieve methods: Brun, Hooley, Selberg</b><br/>15 built, 9 planned or outside"]
   g1 ==> g2
   g1 ==> g4
   g1 ==> g5
@@ -1152,7 +1152,7 @@ graph LR
 
 ### Sieve methods: Brun, Hooley, Selberg
 
-Nodes: [`BrunTwinSum`](docs/nodes/BrunTwinSum.md), [`BrunPureSieve`](docs/nodes/BrunPureSieve.md), [`BrunTwinCount`](docs/nodes/BrunTwinCount.md), [`BrunTruncation`](docs/nodes/BrunTruncation.md), [`BrunTwinBound`](docs/nodes/BrunTwinBound.md), [`BrunAnalytic`](docs/nodes/BrunAnalytic.md), [`BrunTheorem`](docs/nodes/BrunTheorem.md), [`BrunHooley`](docs/nodes/BrunHooley.md), [`PatternUpperBound`](docs/nodes/PatternUpperBound.md), [`PatternReciprocals`](docs/nodes/PatternReciprocals.md), [`BrunSharp`](docs/nodes/BrunSharp.md), [`BrunTitchmarshPNT`](docs/nodes/BrunTitchmarshPNT.md), [`RailBrunTitchmarsh`](docs/nodes/RailBrunTitchmarsh.md), [`BuchstabIdentity`](docs/nodes/BuchstabIdentity.md), [`FundamentalLemma`](docs/nodes/FundamentalLemma.md), [`LowerBoundSieve`](docs/nodes/LowerBoundSieve.md), [`PetiteSieve`](docs/nodes/PetiteSieve.md), [`SelbergTwinRails`](docs/nodes/SelbergTwinRails.md), [`ParityBarrier`](docs/nodes/ParityBarrier.md), [`SieveDataLimits`](docs/nodes/SieveDataLimits.md), [`LargerSieve`](docs/nodes/LargerSieve.md), [`ArithmeticLargeSieve`](docs/nodes/ArithmeticLargeSieve.md), [`ChenWeights`](docs/nodes/ChenWeights.md).
+Nodes: [`BrunTwinSum`](docs/nodes/BrunTwinSum.md), [`BrunPureSieve`](docs/nodes/BrunPureSieve.md), [`BrunTwinCount`](docs/nodes/BrunTwinCount.md), [`BrunTruncation`](docs/nodes/BrunTruncation.md), [`BrunTwinBound`](docs/nodes/BrunTwinBound.md), [`BrunAnalytic`](docs/nodes/BrunAnalytic.md), [`BrunTheorem`](docs/nodes/BrunTheorem.md), [`BrunHooley`](docs/nodes/BrunHooley.md), [`PatternUpperBound`](docs/nodes/PatternUpperBound.md), [`PatternReciprocals`](docs/nodes/PatternReciprocals.md), [`BrunSharp`](docs/nodes/BrunSharp.md), [`BrunTitchmarshPNT`](docs/nodes/BrunTitchmarshPNT.md), [`RailBrunTitchmarsh`](docs/nodes/RailBrunTitchmarsh.md), [`BuchstabIdentity`](docs/nodes/BuchstabIdentity.md), [`FundamentalLemma`](docs/nodes/FundamentalLemma.md), [`LowerBoundSieve`](docs/nodes/LowerBoundSieve.md), [`PetiteSieve`](docs/nodes/PetiteSieve.md), [`SelbergTwinRails`](docs/nodes/SelbergTwinRails.md), [`ParityBarrier`](docs/nodes/ParityBarrier.md), [`SieveDataLimits`](docs/nodes/SieveDataLimits.md), [`LargerSieve`](docs/nodes/LargerSieve.md), [`ArithmeticLargeSieve`](docs/nodes/ArithmeticLargeSieve.md), [`ChenWeights`](docs/nodes/ChenWeights.md), [`SelbergBound`](docs/nodes/SelbergBound.md).
 
 ```mermaid
 graph LR
@@ -1246,52 +1246,56 @@ graph LR
   subgraph s23["<b>100. ChenWeights — Chen's weights for numbers with at most two prime factors</b>"]
     c35["chen_weight_le"]
   end
-  subgraph s24["1. Wheel6 (in Foundations)"]
+  subgraph s24["<b>101. SelbergBound — Selberg's upper bound sieve</b>"]
+    c36["bounding_sum_pos"]
+    c37["selberg_bound"]
+  end
+  subgraph s25["1. Wheel6 (in Foundations)"]
     p10["<i>proved in Lean</i>"]
   end
-  subgraph s25["5. SurvivorCount (in Foundations)"]
-    c36["twin_survivor_count"]
+  subgraph s26["5. SurvivorCount (in Foundations)"]
+    c38["twin_survivor_count"]
   end
-  subgraph s26["7. TwinConstant (in Patterns, admissibility and the Hardy-Littlewood constants)"]
+  subgraph s27["7. TwinConstant (in Patterns, admissibility and the Hardy-Littlewood constants)"]
     p11["<i>proved in Lean</i>"]
   end
-  subgraph s27["26. ShareBounds (in Survivor shares and analytic inputs)"]
-    c37["twin_share_le_two_inv_log_sq"]
+  subgraph s28["26. ShareBounds (in Survivor shares and analytic inputs)"]
+    c39["twin_share_le_two_inv_log_sq"]
   end
-  subgraph s28["41. PrimeNumberTheorem (in Survivor shares and analytic inputs)"]
+  subgraph s29["41. PrimeNumberTheorem (in Survivor shares and analytic inputs)"]
     p12["<i>proved in Lean</i>"]
   end
-  subgraph s29["64. ShareAsymptotics (in Survivor shares and analytic inputs)"]
+  subgraph s30["64. ShareAsymptotics (in Survivor shares and analytic inputs)"]
     p13["<i>proved in Lean</i>"]
   end
-  subgraph s30["68. MertensSecond (in Survivor shares and analytic inputs)"]
-    c38["prime_reciprocal_upper"]
+  subgraph s31["68. MertensSecond (in Survivor shares and analytic inputs)"]
+    c40["prime_reciprocal_upper"]
   end
-  subgraph s31["73. BadWheels (in Patterns, admissibility and the Hardy-Littlewood constants)"]
+  subgraph s32["73. BadWheels (in Patterns, admissibility and the Hardy-Littlewood constants)"]
     p14["<i>proved in Lean</i>"]
   end
-  subgraph s32["76. GapPairs (in Gaps between survivors and between primes)"]
+  subgraph s33["76. GapPairs (in Gaps between survivors and between primes)"]
     p15["<i>planned: new, not yet proved</i>"]
   end
-  subgraph s33["78. GermainReciprocals (in Sophie Germain primes)"]
+  subgraph s34["78. GermainReciprocals (in Sophie Germain primes)"]
     p16["<i>planned: new, not yet proved</i>"]
   end
-  subgraph s34["92. ErdosSmallGaps (in Gaps between survivors and between primes)"]
+  subgraph s35["92. ErdosSmallGaps (in Gaps between survivors and between primes)"]
     p17["<i>planned: new, not yet proved</i>"]
   end
-  subgraph s35["93. SmallWheelSurvivors (in Survivor shares and analytic inputs)"]
-    c39["legendre_error"]
+  subgraph s36["93. SmallWheelSurvivors (in Survivor shares and analytic inputs)"]
+    c41["legendre_error"]
   end
   c8 ==> c10
   c9 ==> c10
   c1 ==> c10
-  c36 ==> c12
-  c37 ==> c12
+  c38 ==> c12
+  c39 ==> c12
   c10 ==> c13
   c11 ==> c13
   c2 ==> c13
   c12 ==> c13
-  c38 ==> c13
+  c40 ==> c13
   c13 ==> c14
   c14 ==> c15
   c6 ==> c18
@@ -1299,27 +1303,27 @@ graph LR
   c2 ==> c18
   c18 ==> c20
   c20 ==> c21
-  s30 -.-> s8
+  s31 -.-> s8
   s8 -.-> s9
-  s31 -.-> s9
-  s29 -.-> s9
-  s9 -.-> s32
-  s9 -.-> s10
+  s32 -.-> s9
+  s30 -.-> s9
   s9 -.-> s33
+  s9 -.-> s10
+  s9 -.-> s34
   s4 -.-> s11
   s1 -.-> s11
-  s29 -.-> s11
+  s30 -.-> s11
   c23 ==> c25
-  s24 -.-> s13
+  s25 -.-> s13
   s8 -.-> s15
   s8 -.-> s16
   s14 -.-> s17
   s15 -.-> s17
-  s26 -.-> s18
-  s29 -.-> s18
-  s28 -.-> s19
-  s18 -.-> s34
-  c5 ==> c39
+  s27 -.-> s18
+  s30 -.-> s18
+  s29 -.-> s19
+  s18 -.-> s35
+  c5 ==> c41
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
   classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
@@ -1331,13 +1335,14 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39 verified;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c38,c39,c40,c41 verified;
+  class c36,c37 draft;
   class p1,p2,p3,p4,p5,p6,p7,p8,p9 new;
   class p10,p11,p12,p13,p14,p15,p16,p17 stub;
   click p10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md" _blank
-  click c36 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
+  click c38 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
   click p11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinConstant.md" _blank
-  click c37 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md#twin_share_le_two_inv_log_sq" _blank
+  click c39 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md#twin_share_le_two_inv_log_sq" _blank
   click p12 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeNumberTheorem.md" _blank
   click p13 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md" _blank
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTruncation.md#truncation_error" _blank
@@ -1351,7 +1356,7 @@ graph LR
   click c9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTwinCount.md#twin_multiples_count" _blank
   click c10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTwinBound.md#twin_sifted_bound" _blank
   click c11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTwinBound.md#twin_count_le_sifted" _blank
-  click c38 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensSecond.md#prime_reciprocal_upper" _blank
+  click c40 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensSecond.md#prime_reciprocal_upper" _blank
   click c12 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunAnalytic.md#twin_product_bound" _blank
   click c13 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunAnalytic.md#twin_prime_count_bound" _blank
   click c14 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunTheorem.md#brun_theorem" _blank
@@ -1381,7 +1386,7 @@ graph LR
   click p7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergTwinRails.md" _blank
   click p8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ParityBarrier.md" _blank
   click p17 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ErdosSmallGaps.md" _blank
-  click c39 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmallWheelSurvivors.md#legendre_error" _blank
+  click c41 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmallWheelSurvivors.md#legendre_error" _blank
   click c29 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SieveDataLimits.md#two_three_bounds" _blank
   click c30 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SieveDataLimits.md#two_three_ends" _blank
   click c31 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SieveDataLimits.md#upper_sieve_bound" _blank
@@ -1390,6 +1395,8 @@ graph LR
   click c34 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LargerSieve.md#larger_sieve_few" _blank
   click p9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ArithmeticLargeSieve.md" _blank
   click c35 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ChenWeights.md#chen_weight_le" _blank
+  click c36 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergBound.md#bounding_sum_pos" _blank
+  click c37 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergBound.md#selberg_bound" _blank
 ```
 
 
@@ -1740,6 +1747,8 @@ The results nothing else builds on, each with everything beneath it.
 - [`MaierMatrix.maier_irregularity`](docs/nodes/MaierMatrix.md#maier_irregularity) — cited
 - [`GallagherLocal.one_wheel_average`](docs/nodes/GallagherLocal.md#one_wheel_average) — proved in Lean
 - [`ChenWeights.chen_weight_le`](docs/nodes/ChenWeights.md#chen_weight_le) — proved in Lean
+- [`SelbergBound.bounding_sum_pos`](docs/nodes/SelbergBound.md#bounding_sum_pos) — proof drafted, not yet built
+- [`SelbergBound.selberg_bound`](docs/nodes/SelbergBound.md#selberg_bound) — proof drafted, not yet built
 
 ## What the network takes on trust
 
@@ -2048,6 +2057,11 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
   - [K. Soundararajan, The distribution of prime numbers (lectures), arXiv:math/0606408](https://arxiv.org/abs/math/0606408) — Lecture 1, Exercise 2 and (1.10)
 - [`ChenWeights`](docs/nodes/ChenWeights.md)
   - [T. Tao, 254A Supplement 5: The linear sieve and Chen's theorem](https://terrytao.wordpress.com/2015/01/29/254a-supplement-5-the-linear-sieve-and-chens-theorem-optional/) — Lemma 11
+- [`SelbergBound`](docs/nodes/SelbergBound.md)
+  - [PrimeNumberTheoremAnd, Mathlib/NumberTheory/Sieve/Selberg.lean (A. Mellendijk), selberg_bound_simple](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/Mathlib/NumberTheory/Sieve/Selberg.lean) — the Lean proof, ported here (with AuxResults.lean and Basic.lean) with only imports and one namespace name changed
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Theorem 4.1, Selberg's sieve
+  - [D. R. Heath-Brown, Lectures on sieves (Bonn 2002), arXiv:math/0209360](https://arxiv.org/abs/math/0209360) — the treatment Mellendijk's formalization follows
+  - [Mathlib, Mathlib.NumberTheory.SelbergSieve](https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/SelbergSieve.html) — the sieve set-up, upper bound sieves, and the diagonalised main term this node builds on
 
 ## Node index
 
@@ -2149,3 +2163,4 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 98 | [`MaierMatrix`](docs/nodes/MaierMatrix.md) | short windows with too many and too few primes | cited from a published paper; not proved in Lean |
 | 99 | [`GallagherLocal`](docs/nodes/GallagherLocal.md) | one wheel's correction averages to 1 | proved in Lean |
 | 100 | [`ChenWeights`](docs/nodes/ChenWeights.md) | Chen's weights for numbers with at most two prime factors | proved in Lean |
+| 101 | [`SelbergBound`](docs/nodes/SelbergBound.md) | Selberg's upper bound sieve | proof drafted, not yet built |

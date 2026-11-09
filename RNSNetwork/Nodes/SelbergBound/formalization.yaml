@@ -1,0 +1,63 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: SelbergBound.v1
+  family: SelbergBound
+  version: v1
+  order: 101
+  kind: paper
+  status: active
+  title: Selberg's upper bound sieve
+  improves: Mathlib sets up the Selberg sieve and diagonalises its main term but stops before the
+    bound; this node completes it, so the twin columns can be bounded with the conjectured order.
+  description: For a sieve problem in Mathlib's form (weighted finite set, wheel product, multiplicative
+    density strictly between 0 and 1 at each wheel, total mass X, level), Selberg's Lambda-squared
+    weights give - the sifted sum is at most X over Selberg's bounding sum, plus, over the divisors d of
+    the wheel product up to the level, 3 to the number of prime factors of d times the size of the error
+    at d. The proof is Arend Mellendijk's from PrimeNumberTheoremAnd, ported here and checked by this
+    repository's build.
+conclusions:
+- id: bounding_sum_pos
+  declaration: RNS.SelbergBound.bounding_sum_pos
+  summary: Selberg's bounding sum is positive.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/SelbergBound.lean
+    declaration: RNS.SelbergBound.bounding_sum_pos_holds
+    note: Ported proof; not yet built.
+  designated: lean-proof
+- id: selberg_bound
+  declaration: RNS.SelbergBound.selberg_bound
+  summary: The sifted sum is at most X over Selberg's bounding sum plus the sum over divisors d up to
+    the level of 3 to the number of prime factors of d times the error at d.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/SelbergBound.lean
+    declaration: RNS.SelbergBound.selberg_bound_holds
+    note: Ported proof; not yet built.
+  designated: lean-proof
+sources:
+- title: PrimeNumberTheoremAnd, Mathlib/NumberTheory/Sieve/Selberg.lean (A. Mellendijk), selberg_bound_simple
+  url: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/Mathlib/NumberTheory/Sieve/Selberg.lean
+  relationship: the Lean proof, ported here (with AuxResults.lean and Basic.lean) with only imports and one namespace name changed
+- title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
+  url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
+  relationship: Theorem 4.1, Selberg's sieve
+- title: D. R. Heath-Brown, Lectures on sieves (Bonn 2002), arXiv:math/0209360
+  url: https://arxiv.org/abs/math/0209360
+  relationship: the treatment Mellendijk's formalization follows
+- title: Mathlib, Mathlib.NumberTheory.SelbergSieve
+  url: https://leanprover-community.github.io/mathlib4_docs/Mathlib/NumberTheory/SelbergSieve.html
+  relationship: the sieve set-up, upper bound sieves, and the diagonalised main term this node builds on
+related:
+- node: SelbergTwinRails
+  note: applies this bound to the twin columns with the wheels from 5 up
+- node: BrunTitchmarshPNT
+  note: PrimeNumberTheoremAnd's Brun-Titchmarsh bound rests on the same Selberg sieve

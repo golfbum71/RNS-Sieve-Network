@@ -100,5 +100,6 @@
 | 98 | [`MaierMatrix`](MaierMatrix.md) | short windows with too many and too few primes | cited from a published paper; not proved in Lean |
 | 99 | [`GallagherLocal`](GallagherLocal.md) | one wheel's correction averages to 1 | proved in Lean |
 | 100 | [`ChenWeights`](ChenWeights.md) | Chen's weights for numbers with at most two prime factors | proved in Lean |
+| 101 | [`SelbergBound`](SelbergBound.md) | Selberg's upper bound sieve | proof drafted, not yet built |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.
