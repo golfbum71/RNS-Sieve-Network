@@ -148,12 +148,12 @@ private theorem rem_le (N z : ℕ) (y : ℝ) (hy : 1 ≤ y)
   have hprod' : d.primeFactors.prod id = d := hprod
   have hrho : RNS.BrunTwinCount.twin_rho d.primeFactors = 2 ^ d.primeFactors.card := by
     unfold RNS.BrunTwinCount.twin_rho
-    rw [Finset.prod_congr rfl (fun p hp => if_neg (by have := (hD p hp).2; omega)),
+    rw [Finset.prod_congr rfl (fun p hp => ite_eq_right (by have := (hD p hp).2; omega)),
       Finset.prod_const]
   have hnu : twin_nu d = (2 : ℝ) ^ d.primeFactors.card / d := by
     rw [twin_nu_apply hd0, Finset.prod_div_distrib, Finset.prod_const]
     congr 1
-    exact_mod_cast hprod
+    rw [← Nat.cast_prod, hprod]
   have key := h_tc d.primeFactors N (fun p hp => (hD p hp).1)
   rw [hprod', hrho] at key
   unfold BoundingSieve.rem
@@ -191,7 +191,7 @@ private theorem bounding_eq (N z : ℕ) (y : ℝ) (hy : 1 ≤ y) :
       intro h
       rw [eq_div_iff h1] at h
       linarith
-    first | (field_simp; ring) | field_simp
+    field_simp
   rw [hg]
   rfl
 
