@@ -1579,10 +1579,10 @@ private theorem goldbach_half (N : ℕ) :
       ((Finset.Ioo 0 N).filter (fun n => n.Prime ∧ (N - n).Prime)).filter
         (fun n => ¬ n ≤ N / 2) := by
     intro x hx
-    rw [Finset.mem_union, Finset.mem_filter, Finset.mem_filter]
+    rw [Finset.mem_union]
     by_cases h : x ≤ N / 2
-    · exact Or.inl ⟨hx, h⟩
-    · exact Or.inr ⟨hx, h⟩
+    · exact Or.inl (Finset.mem_filter.mpr ⟨hx, h⟩)
+    · exact Or.inr (Finset.mem_filter.mpr ⟨hx, h⟩)
   have h4 := (Finset.card_le_card hsplit).trans (Finset.card_union_le _ _)
   omega
 

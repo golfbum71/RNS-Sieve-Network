@@ -68,6 +68,42 @@ conclusions:
       its imports taken as named hypotheses. Recorded as noncompliant only because no Comparator
       receipt exists yet.
   designated: lean-proof
+- id: selberg_gap_bound
+  declaration: RNS.SelbergTwinRails.selberg_gap_bound
+  summary: For a gap h > 0 and N at least 5184^8, the prime pairs up to N at gap h number at most
+    40000 times the product, over the primes p from 5 up dividing h, of p/(p - 2), times N / log^2 N.
+  imports:
+  - SelbergBound.v1.selberg_bound
+  - BrunTwinCount.v1.shift_multiples_count
+  - SelbergTwinRails.v1.twin_selberg_sum_lower
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/SelbergTwinRails.lean
+    declaration: RNS.SelbergTwinRails.selberg_gap_bound_step
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09), from
+      its imports taken as named hypotheses. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
+  designated: lean-proof
+- id: selberg_goldbach_bound
+  declaration: RNS.SelbergTwinRails.selberg_goldbach_bound
+  summary: For N at least 5184^8, the ways of writing N as a sum of two primes number at most 40000
+    times the product, over the primes p from 5 up dividing N, of p/(p - 2), times N / log^2 N.
+  imports:
+  - SelbergBound.v1.selberg_bound
+  - BrunTwinCount.v1.shift_multiples_count
+  - SelbergTwinRails.v1.twin_selberg_sum_lower
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/SelbergTwinRails.lean
+    declaration: RNS.SelbergTwinRails.selberg_goldbach_bound_step
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09), from
+      its imports taken as named hypotheses. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
+  designated: lean-proof
 planned:
   source_status: New
   rests_on:
