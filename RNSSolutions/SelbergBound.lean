@@ -32,7 +32,7 @@ private theorem bounding_sum_eq (s : SelbergSieve) :
       SelbergSieve.selbergTerms s.toBoundingSieve l := by
     simp only [BoundingSieve.selbergTerms_apply, SelbergSieve.selbergTerms_apply, one_div]
   rw [hg]
-  first | rfl | simp only [Nat.cast_pow]
+  first | done | rfl | simp only [Nat.cast_pow]
 
 theorem bounding_sum_pos_holds : bounding_sum_pos := by
   intro s
