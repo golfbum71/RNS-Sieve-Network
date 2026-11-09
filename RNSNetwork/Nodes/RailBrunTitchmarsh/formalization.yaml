@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: RailBrunTitchmarsh.v1
@@ -7,25 +7,45 @@ node:
   version: v1
   order: 82
   kind: paper
-  status: planned
+  status: active
   title: how many primes one column can hold in a window
-  description: Each column, 6n-1 or 6n+1, holds at most about the window's length over the logarithm of
-    five sixths of that length primes in any window, uniformly in where the window sits (Brun-Titchmarsh
-    with modulus 6, constant 2 of Montgomery and Vaughan). A first, weaker form follows at once from the
-    window bound for all primes.
+  improves: "BrunTitchmarshPNT bounds the primes of a short window; this node carries the bound to one column of the 6n±1 wheel."
+  description: "Each column, 6n-1 or 6n+1, holds at most about the window's length over the logarithm of five sixths of that length primes in any window, uniformly in where the window sits (Brun-Titchmarsh with modulus 6, constant 2 of Montgomery and Vaughan). A first, weaker form follows at once from the window bound for all primes. As proved, differs from the plan: only the first, weaker form is proved: the primes of one column in a window are among the window's primes, so PNT+'s window bound (twice the length over the logarithm of the sieve level, plus an error) bounds each column. The sharper bound for one column (about the length over the logarithm of five sixths of it, a Selberg sieve for the modulus 6) is not proved and stays planned. The column is any remainder on division by 6, not only 5 and 1; Wheel6 is not used, so the planned arrow from it is not drawn."
   improves: The window bound counts both columns together; this halves it per column.
-conclusions: []
+conclusions:
+- id: column_window_le_all
+  declaration: RNS.RailBrunTitchmarsh.column_window_le_all
+  summary: "The primes of one column in a window are at most all the primes of the window."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/RailBrunTitchmarsh.lean
+    declaration: RNS.RailBrunTitchmarsh.column_window_le_all_holds
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09). Recorded as noncompliant only because no Comparator receipt exists yet."
+  designated: lean-proof
+- id: column_window_weak
+  declaration: RNS.RailBrunTitchmarsh.column_window_weak
+  summary: "The primes of one column in a window of length y number at most 2y / log z + 6z(1 + log z)^3."
+  imports:
+  - BrunTitchmarshPNT.v1.primes_between_le
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/RailBrunTitchmarsh.lean
+    declaration: RNS.RailBrunTitchmarsh.column_window_weak_step
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09); recorded as noncompliant only because no Comparator receipt exists yet. The step takes its imports as named hypotheses, joined in RNSSolutions/Assemble.lean."
+  designated: lean-proof
 planned:
   source_status: New
   rests_on:
-  - BrunTitchmarshPNT
   - Wheel6
   claims:
-  - column_window_le_all
   - column_window_bound
-  tier: 'column_window_le_all: Tier 1. column_window_bound: Tier 3, a Selberg sieve for a progression.'
-  plan: 'column_window_le_all: column primes in the window are primes in the window. column_window_bound:
-    instantiate Mathlib''s SelbergSieve on one column of the window, as PNT+ does for windows.'
+  tier: 'column_window_bound: Tier 3, a Selberg sieve for a progression.'
+  plan: Instantiate Mathlib's SelbergSieve on one column of the window, as PNT+ does for windows.
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
   url: https://mail.ford126.web.illinois.edu/sieve2023.pdf

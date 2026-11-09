@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's notes Ch. 5-9 and other lecture notes): scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: MaierMatrix.v1
@@ -7,27 +7,47 @@ node:
   version: v1
   order: 98
   kind: paper
-  status: planned
+  status: active
   title: short windows with too many and too few primes
-  description: 'Maier''s matrix: rows are windows of length (log x) to a power A, columns are the positions
-    coprime to a product P of wheels from a middle range. Counting primes by rows and by columns must
-    agree, but the number of columns differs from the length times the share of P by a factor that oscillates
-    (the Buchstab function minus e to minus Euler''s constant). So some windows hold noticeably more primes
-    than average and some fewer. The column count is finite and wheel-native; the prime counts in progressions
-    modulo P are cited.'
-conclusions: []
-planned:
-  source_status: Cited
-  rests_on:
-  - SpreadBounds
-  - BuchstabIdentity
-  claims:
-  - maier_column_identity
-  - maier_irregularity
-  tier: 'maier_column_identity: Tier 1. maier_irregularity: Tier 3, with the prime number theorem in progressions
-    modulo P as a cited hypothesis.'
-  plan: 'maier_column_identity: double count the matrix. The oscillation of the column count comes from
-    Buchstab''s identity for wheels in a range, as in Soundararajan''s Exercise 11.'
+  improves: "UniformSubdivision and SpreadBounds compare survivor counts with their share over whole cycles; this node sets up Maier's matrix, where that comparison in short windows decides whether windows hold too many or too few primes."
+  description: "Maier's matrix: rows are windows of length (log x) to a power A, columns are the positions coprime to a product P of wheels from a middle range. Counting primes by rows and by columns must agree, but the number of columns differs from the length times the share of P by a factor that oscillates (the Buchstab function minus e to minus Euler's constant). So some windows hold noticeably more primes than average and some fewer. The column count is finite and wheel-native; the prime counts in progressions modulo P are cited. As proved, differs from the plan: the double count is proved, plus an added claim, maier_row_count: from the first row on, a row's prime entries are exactly the primes of its window. Maier's theorem itself (maier_irregularity) is cited from Maier 1985, not proved, as planned. The oscillation of the column count (Buchstab's identity for the wheels of a middle range, Soundararajan's Exercise 11) is not stated, so the planned arrows from SpreadBounds and BuchstabIdentity are not drawn."
+conclusions:
+- id: maier_column_identity
+  declaration: RNS.MaierMatrix.maier_column_identity
+  summary: "The prime entries of Maier's matrix counted by rows equal those counted by columns."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/MaierMatrix.lean
+    declaration: RNS.MaierMatrix.maier_column_identity_holds
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09). Recorded as noncompliant only because no Comparator receipt exists yet."
+  designated: lean-proof
+- id: maier_row_count
+  declaration: RNS.MaierMatrix.maier_row_count
+  summary: "From the first row on, a row's prime entries are exactly the primes of its window."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/MaierMatrix.lean
+    declaration: RNS.MaierMatrix.maier_row_count_holds
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09). Recorded as noncompliant only because no Comparator receipt exists yet."
+  designated: lean-proof
+- id: maier_irregularity
+  declaration: RNS.MaierMatrix.maier_irregularity
+  summary: "Windows of length a power above 1 of log x hold infinitely often noticeably more, and infinitely often noticeably fewer, primes than their length over log x (cited)."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: paper
+    kind: literature
+    source: "H. Maier, Primes in short intervals, Michigan Math. J. 32 (1985), 221-225"
+    locator: "Theorem 1 (limsup above 1 and liminf below 1 of the ratio)"
+    note: "Published theorem, cited. Not reproduced in Lean. Maier states it as limsup and liminf of the ratio; the margin form here follows from those."
+  designated: paper
 sources:
 - title: K. Soundararajan, The distribution of prime numbers (lectures), arXiv:math/0606408
   url: https://arxiv.org/abs/math/0606408

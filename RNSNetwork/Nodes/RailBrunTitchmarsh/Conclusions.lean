@@ -29,7 +29,7 @@ namespace RNS.RailBrunTitchmarsh
 
 /-- The primes from `a` to `b` (both ends included) in the column leaving
 remainder `r` on division by 6. -/
-def column_primes_between (r : ℕ) (a b : ℝ) : ℕ :=
+noncomputable def column_primes_between (r : ℕ) (a b : ℝ) : ℕ :=
   ((Finset.Icc (Nat.ceil a) (Nat.floor b)).filter (fun n => n.Prime ∧ n % 6 = r)).card
 
 /-- **A column holds at most the window's primes.** -/

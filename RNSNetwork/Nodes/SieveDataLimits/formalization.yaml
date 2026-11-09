@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's notes Ch. 5-9 and other lecture notes): scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: SieveDataLimits.v1
@@ -7,24 +7,68 @@ node:
   version: v1
   order: 94
   kind: paper
-  status: planned
+  status: active
   title: what the multiple counts alone can decide
-  description: 'Knowing only how many numbers each product of wheels divides pins the survivor count to
-    an interval, not a value; the best upper and lower bounds are linear programs whose duals are the
-    upper and lower sieves. Worked case: if 100 numbers have 60 even and 10 divisible by 3, the numbers
-    coprime to 6 are between 30 and 40, and both ends occur. Tao, 254A Notes 4 (Theorem 5, Exercises 4
-    and 8).'
-conclusions: []
+  improves: "BrunPureSieve gives particular upper and lower sieves (inclusion-exclusion stopped early); this node shows that every upper or lower sieve is a valid bound, and on a worked case that the multiple counts alone leave a whole interval of survivor counts."
+  description: "Knowing only how many numbers each product of wheels divides pins the survivor count to an interval, not a value; the best upper and lower bounds are linear programs whose duals are the upper and lower sieves. Worked case: if 100 numbers have 60 even and 10 divisible by 3, the numbers coprime to 6 are between 30 and 40, and both ends occur. Tao, 254A Notes 4 (Theorem 5, Exercises 4 and 8). As proved, differs from the plan: the worked case is proved in full (both bounds for every set with that data, and two explicit sets of 100 numbers reaching 30 and 40). Of the duality, only the weak half is proved: every upper sieve bounds the survivors from above and every lower sieve from below, for any wheels (not only primes) and any family of known multiple counts. The strong half, that the best sieve reaches the best possible bound (linear-programming duality), is not proved and stays planned."
+conclusions:
+- id: two_three_bounds
+  declaration: RNS.SieveDataLimits.two_three_bounds
+  summary: "If 100 numbers have 60 even and 10 divisible by 3, between 30 and 40 survive the wheels 2 and 3."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/SieveDataLimits.lean
+    declaration: RNS.SieveDataLimits.two_three_bounds_holds
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09). Recorded as noncompliant only because no Comparator receipt exists yet."
+  designated: lean-proof
+- id: two_three_ends
+  declaration: RNS.SieveDataLimits.two_three_ends
+  summary: "Sets with that data and exactly 30 survivors exist, and so do sets with exactly 40."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/SieveDataLimits.lean
+    declaration: RNS.SieveDataLimits.two_three_ends_holds
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09). Recorded as noncompliant only because no Comparator receipt exists yet."
+  designated: lean-proof
+- id: upper_sieve_bound
+  declaration: RNS.SieveDataLimits.upper_sieve_bound
+  summary: "Any upper sieve on the known multiple counts bounds the survivors from above (weak duality)."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/SieveDataLimits.lean
+    declaration: RNS.SieveDataLimits.upper_sieve_bound_holds
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09). Recorded as noncompliant only because no Comparator receipt exists yet."
+  designated: lean-proof
+- id: lower_sieve_bound
+  declaration: RNS.SieveDataLimits.lower_sieve_bound
+  summary: "Any lower sieve on the known multiple counts bounds the survivors from below (weak duality)."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/SieveDataLimits.lean
+    declaration: RNS.SieveDataLimits.lower_sieve_bound_holds
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09). Recorded as noncompliant only because no Comparator receipt exists yet."
+  designated: lean-proof
 planned:
   source_status: New
   rests_on: []
   claims:
-  - two_three_example
   - sieve_duality
-  tier: 'two_three_example: Tier 1 (decide). sieve_duality: Tier 3 (linear-programming duality for finitely
-    many wheels).'
-  plan: 'two_three_example: the counts of the four classes mod 6 are four unknowns with three linear constraints;
-    both bounds come from nonnegativity. sieve_duality: LP duality over the 2^k divisibility patterns.'
+  tier: 'sieve_duality (strong half): Tier 3, linear-programming duality for finitely many wheels (Mathlib
+    has Farkas'' lemma, ProperCone.hyperplane_separation, but no LP duality).'
+  plan: 'Strong duality over the 2^k divisibility patterns: the largest survivor count consistent with the
+    data equals the smallest upper-sieve bound.'
 sources:
 - title: 'T. Tao, 254A Notes 4: Some sieve theory'
   url: https://terrytao.wordpress.com/2015/01/21/254a-notes-4-some-sieve-theory/

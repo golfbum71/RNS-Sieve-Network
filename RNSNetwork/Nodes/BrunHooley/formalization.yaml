@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: BrunHooley.v1
@@ -7,29 +7,47 @@ node:
   version: v1
   order: 74
   kind: paper
-  status: planned
+  status: active
   title: Hooley's product of truncated sieves
-  description: Split the wheels into ranges and stop inclusion-exclusion separately in each range, early
-    for large wheels and late for small ones; the product of these upper sieves is again an upper sieve.
-    This gives an upper bound of the right order for any pattern and any number of wheels, needing only
-    that each wheel's share is about the pattern size over the wheel on average. The Brun-Hooley sieve,
-    Ford Sections 2 and 3.
+  improves: "BrunPureSieve stops inclusion-exclusion at one point for all wheels; this node lets each range of wheels have its own sieve and shows that the product is still an upper sieve."
+  description: "Split the wheels into ranges and stop inclusion-exclusion separately in each range, early for large wheels and late for small ones; the product of these upper sieves is again an upper sieve. This gives an upper bound of the right order for any pattern and any number of wheels, needing only that each wheel's share is about the pattern size over the wheel on average. The Brun-Hooley sieve, Ford Sections 2 and 3. As proved, differs from the plan: only the first step, Ford's Lemma 2.1, is proved: the product of upper sieves over ranges of wheels is an upper sieve, with its expansion as a sum over one choice of a set of wheels from each range. It holds for any wheels (not only primes) and ranges that need not be disjoint, and does not use BrunPureSieve or BrunTruncation, so those arrows wait for the bounds. The bounds (Ford's Theorem 2.3, the survivors at most the length times the share times e to a small error, plus remainders; and Theorem 2.4, the ranges z^(1/4^j) with stopping points 2^(j-1)) are not proved and stay planned."
   improves: BrunPureSieve stops once for all wheels and loses a log log factor; stopping per range removes
     the loss.
-conclusions: []
+conclusions:
+- id: combined_eq_product
+  declaration: RNS.BrunHooley.combined_eq_product
+  summary: "The combined sieve sum over one choice of a set of wheels from each range is the product of the ranges' sieve sums."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/BrunHooley.lean
+    declaration: RNS.BrunHooley.combined_eq_product_holds
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09). Recorded as noncompliant only because no Comparator receipt exists yet."
+  designated: lean-proof
+- id: product_upper_sieve
+  declaration: RNS.BrunHooley.product_upper_sieve
+  summary: "The product of upper sieves over ranges of wheels is an upper sieve for all the wheels (Ford, Lemma 2.1)."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/BrunHooley.lean
+    declaration: RNS.BrunHooley.product_upper_sieve_holds
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09). Recorded as noncompliant only because no Comparator receipt exists yet."
+  designated: lean-proof
 planned:
   source_status: New
   rests_on:
   - BrunPureSieve
   - BrunTruncation
   claims:
-  - product_upper_sieve
   - brun_hooley_bound
   - brun_hooley_order
-  tier: 'product_upper_sieve: Tier 1, finite combinatorics. brun_hooley_bound and brun_hooley_order: Tier
-    2.'
-  plan: 'Session 1: the product of upper sieves over a partition of the wheels is an upper sieve (Lemma
-    2.1). Session 2: the bound by X V e^E plus remainders (Theorem 2.3), from BrunTruncation in each range.
+  tier: 'brun_hooley_bound and brun_hooley_order: Tier 2.'
+  plan: 'Session 2: the bound by X V e^E plus remainders (Theorem 2.3), from BrunTruncation in each range.
     Session 3: the ranges z^(1/4^j) with stopping points 2^(j-1) (Theorem 2.4).'
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023

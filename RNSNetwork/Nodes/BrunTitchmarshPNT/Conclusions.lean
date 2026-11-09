@@ -27,7 +27,7 @@ namespace RNS.BrunTitchmarshPNT
 
 /-- The number of primes in the interval from `a` to `b` (both ends
 included), copied from PNT+ (`BrunTitchmarsh.primesBetween`). -/
-def primesBetween (a b : ℝ) : ℕ :=
+noncomputable def primesBetween (a b : ℝ) : ℕ :=
   (Finset.Icc (Nat.ceil a) (Nat.floor b)).filter Nat.Prime |>.card
 
 /-- **Primes in a short window** (outside source; word for word the statement

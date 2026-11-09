@@ -5,6 +5,7 @@ Authors: Geoffrey Fischer
 -/
 import RNSNetwork.Vocabulary
 import Mathlib.Algebra.Polynomial.Eval.Defs
+import Mathlib.Algebra.Polynomial.Degree.Defs
 import Mathlib.Analysis.Asymptotics.AsymptoticEquivalent
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 

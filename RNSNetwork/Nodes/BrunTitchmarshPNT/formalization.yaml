@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: BrunTitchmarshPNT.v1
@@ -7,22 +7,22 @@ node:
   version: v1
   order: 81
   kind: external
-  status: planned
+  status: active
   title: primes in a short window (PNT+)
-  description: The number of primes in any window of a given length is at most twice the length over the
-    logarithm of the sieve level, plus a small error, proved with the Selberg sieve in PrimeNumberTheoremAnd
-    (primesBetween_le). Windows only, not arithmetic progressions.
-conclusions: []
-planned:
-  source_status: External
-  rests_on: []
-  tier: Outside source.
-  plan: Cite primesBetween_le word for word as a named hypothesis; check toolchain and axioms.
-  external:
-    project: AlexKontorovich/PrimeNumberTheoremAnd
-    url: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/main/PrimeNumberTheoremAnd/BrunTitchmarsh.lean
-    note: primesBetween x (x + y) <= 2 * y / log z + 6 * z * (1 + log z) ^ 3. No arithmetic-progression
-      version was found in Lean (search of 2026-11-08).
+  description: "The number of primes in any window of a given length is at most twice the length over the logarithm of the sieve level, plus an error of the level times a power of its logarithm, proved with the Selberg sieve in PrimeNumberTheoremAnd (primesBetween_le). Windows only, not arithmetic progressions. The statement and the definition primesBetween are copied here word for word as a named hypothesis."
+conclusions:
+- id: primes_between_le
+  declaration: RNS.BrunTitchmarshPNT.primes_between_le
+  summary: "Primes in a window of length y starting at x number at most 2y / log z + 6z(1 + log z)^3 for any sieve level z > 1 (outside source; word for word PNT+ BrunTitchmarsh.primesBetween_le)."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: outside-lean
+    kind: external
+    source: "PrimeNumberTheoremAnd (PNT+), BrunTitchmarsh.primesBetween_le in PrimeNumberTheoremAnd/BrunTitchmarsh.lean, commit 127b50e33f6033e2147921167a117af96d9ba4ea (2026-10-19), Lean v4.35.0; Ford Theorem 2.7"
+    locator: "BrunTitchmarsh.primesBetween_le"
+    note: "Statement and the definition primesBetween copied word for word, with the section variables 0 < x and 0 < y written out. Checked 2026-11-09 by text search that BrunTitchmarsh.lean and its non-Mathlib imports (Mathlib/NumberTheory/Sieve/*, Mathlib/Analysis/Asymptotics/Asymptotics.lean in PNT+) contain no sorry and no axiom at that commit; not rebuilt here (toolchain differs), so #print axioms has not been run on it from this repository."
+  designated: outside-lean
 sources:
 - title: PrimeNumberTheoremAnd, BrunTitchmarsh (primesBetween_le)
   url: https://math-inc.github.io/strongpnt/docs/PrimeNumberTheoremAnd/BrunTitchmarsh.html
