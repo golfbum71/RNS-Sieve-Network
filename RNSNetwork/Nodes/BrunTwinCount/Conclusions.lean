@@ -48,4 +48,17 @@ def twin_multiples_count : Prop :=
         - (N : ℝ) * ((twin_rho D : ℕ) : ℝ) / ((D.prod id : ℕ) : ℝ)|
       ≤ ((twin_rho D : ℕ) : ℝ)
 
+/-- The number of roots of `x (x + c)` in one cycle of the product of `D`: one
+for a wheel dividing `c`, two for every other wheel, multiplied together. -/
+def shift_rho (c : Nat) (D : Finset Nat) : Nat := ∏ p ∈ D, (if p ∣ c then 1 else 2)
+
+/-- **The multiples count at any shift.** For a set of distinct prime wheels
+with product `d` and any shift `c`, the positions `m` from 1 to `N` where `d`
+divides `m (m + c)` number `N · shift_rho / d`, off by at most `shift_rho`. -/
+def shift_multiples_count : Prop :=
+  ∀ (D : Finset Nat) (c N : Nat), (∀ p ∈ D, p.Prime) →
+    |((((Finset.Ioc 0 N).filter (fun m => D.prod id ∣ m * (m + c))).card : ℕ) : ℝ)
+        - (N : ℝ) * ((shift_rho c D : ℕ) : ℝ) / ((D.prod id : ℕ) : ℝ)|
+      ≤ ((shift_rho c D : ℕ) : ℝ)
+
 end RNS.BrunTwinCount

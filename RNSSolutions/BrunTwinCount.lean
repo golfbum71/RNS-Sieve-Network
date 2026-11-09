@@ -266,6 +266,124 @@ theorem twin_multiples_count_holds : twin_multiples_count := by
   rw [hcount]
   exact hb
 
+/-! ### Any shift
+
+The same count for `m (m + c)`. For a prime wheel the roots are zero and
+minus `c`: one root when the wheel divides `c`, two otherwise. -/
+
+theorem shift_periodic (d c k : ℕ) :
+    d ∣ (d + k + 1) * (d + k + 1 + c) ↔ d ∣ (k + 1) * (k + 1 + c) := by
+  have h : (d + k + 1) * (d + k + 1 + c) = d * (d + 2 * k + 2 + c) + (k + 1) * (k + 1 + c) := by
+    ring
+  rw [h]
+  exact Nat.dvd_add_right (dvd_mul_right d _)
+
+theorem shift_period_count (d c : ℕ) (hd : 0 < d) :
+    Nat.count (fun k => d ∣ (k + 1) * (k + 1 + c)) d =
+      Nat.card {x : ZMod d // x * (x + c) = 0} := by
+  have : NeZero d := ⟨hd.ne'⟩
+  have e1 : Nat.card {x : ZMod d // x * (x + c) = 0} =
+      Nat.card {x : ZMod d // (x + 1) * (x + 1 + c) = 0} :=
+    (Nat.card_congr (Equiv.subtypeEquiv (Equiv.addRight (1 : ZMod d)) (fun x => Iff.rfl))).symm
+  rw [e1, Nat.card_eq_fintype_card, Fintype.card_subtype, Nat.count_eq_card_filter_range]
+  apply Finset.card_nbij' (fun k : ℕ => (k : ZMod d)) (fun x : ZMod d => x.val)
+  · intro k hk
+    rw [Finset.mem_coe, Finset.mem_filter] at hk
+    rw [Finset.mem_coe, Finset.mem_filter]
+    refine ⟨Finset.mem_univ _, ?_⟩
+    have h := (ZMod.natCast_eq_zero_iff ((k + 1) * (k + 1 + c)) d).mpr hk.2
+    simp only [Nat.cast_mul, Nat.cast_add, Nat.cast_one] at h
+    exact h
+  · intro x hx
+    rw [Finset.mem_coe, Finset.mem_filter] at hx
+    rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_range]
+    refine ⟨ZMod.val_lt x, ?_⟩
+    show d ∣ (x.val + 1) * (x.val + 1 + c)
+    rw [← ZMod.natCast_eq_zero_iff]
+    simp only [Nat.cast_mul, Nat.cast_add, Nat.cast_one, ZMod.natCast_zmod_val]
+    exact hx.2
+  · intro k hk
+    rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_range] at hk
+    show ((k : ZMod d)).val = k
+    rw [ZMod.val_natCast, Nat.mod_eq_of_lt hk.1]
+  · intro x _
+    show ((x.val : ℕ) : ZMod d) = x
+    exact ZMod.natCast_zmod_val x
+
+theorem shift_roots_mul (m n c : ℕ) (h : m.Coprime n) :
+    Nat.card {x : ZMod (m * n) // x * (x + c) = 0} =
+      Nat.card {x : ZMod m // x * (x + c) = 0} * Nat.card {x : ZMod n // x * (x + c) = 0} := by
+  let e := ZMod.chineseRemainder h
+  rw [← Nat.card_prod]
+  apply Nat.card_congr
+  refine (Equiv.subtypeEquiv e.toEquiv
+    (q := fun y : ZMod m × ZMod n => y.1 * (y.1 + c) = 0 ∧ y.2 * (y.2 + c) = 0) ?_).trans
+    (Equiv.subtypeProdEquivProd (p := fun a : ZMod m => a * (a + c) = 0)
+      (q := fun b : ZMod n => b * (b + c) = 0))
+  intro x
+  have hx : e (x * (x + c)) = e x * (e x + c) := by
+    rw [map_mul, map_add, map_natCast]
+  show x * (x + c) = 0 ↔ (e x).1 * ((e x).1 + c) = 0 ∧ (e x).2 * ((e x).2 + c) = 0
+  rw [← e.injective.eq_iff, map_zero, hx, Prod.ext_iff]
+  simp
+
+theorem shift_roots_one (c : ℕ) : Nat.card {x : ZMod 1 // x * (x + c) = 0} = 1 := by
+  haveI : Subsingleton (ZMod 1) := ZMod.subsingleton_iff.mpr rfl
+  rw [Nat.card_congr (Equiv.subtypeUnivEquiv (fun x => Subsingleton.elim _ _)), Nat.card_zmod]
+
+theorem shift_roots_prime (p c : ℕ) (hp : p.Prime) :
+    Nat.card {x : ZMod p // x * (x + c) = 0} = if p ∣ c then 1 else 2 := by
+  haveI := Fact.mk hp
+  haveI : NeZero p := ⟨hp.ne_zero⟩
+  rw [Nat.card_eq_fintype_card, Fintype.card_subtype]
+  have hset : (Finset.univ.filter (fun x : ZMod p => x * (x + c) = 0)) = {0, -(c : ZMod p)} := by
+    ext x
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and, Finset.mem_insert,
+      Finset.mem_singleton, mul_eq_zero, add_eq_zero_iff_eq_neg]
+  rw [hset]
+  split_ifs with hpc
+  · have hc : (c : ZMod p) = 0 := (ZMod.natCast_eq_zero_iff c p).mpr hpc
+    rw [hc, neg_zero]
+    simp
+  · have hne : (0 : ZMod p) ≠ -(c : ZMod p) := by
+      intro h
+      rw [eq_comm, neg_eq_zero, ZMod.natCast_eq_zero_iff] at h
+      exact hpc h
+    exact Finset.card_pair_eq_two_iff.mpr hne
+
+theorem shift_roots_prod (D : Finset ℕ) (c : ℕ) (hD : ∀ p ∈ D, p.Prime) :
+    Nat.card {x : ZMod (D.prod id) // x * (x + c) = 0} = shift_rho c D := by
+  induction D using Finset.induction_on with
+  | empty =>
+    rw [Finset.prod_empty, shift_roots_one]
+    simp [shift_rho]
+  | insert a s ha ih =>
+    have haP : a.Prime := hD a (Finset.mem_insert_self a s)
+    have hsP : ∀ q ∈ s, q.Prime := fun q hq => hD q (Finset.mem_insert_of_mem hq)
+    have hprod : (insert a s).prod id = a * s.prod id := Finset.prod_insert ha
+    have hcop : a.Coprime (s.prod id) := by
+      apply Nat.Coprime.prod_right
+      intro q hq
+      have hqa : a ≠ q := fun h => ha (by rw [h]; exact hq)
+      exact (Nat.coprime_primes haP (hsP q hq)).mpr hqa
+    rw [hprod, shift_roots_mul a (s.prod id) c hcop, shift_roots_prime a c haP, ih hsP]
+    simp only [shift_rho, Finset.prod_insert ha]
+
+theorem shift_multiples_count_holds : shift_multiples_count := by
+  intro D c N hD
+  have hd : 0 < D.prod id := Finset.prod_pos (fun p hp => (hD p hp).pos)
+  have hcount : ((Finset.Ioc 0 N).filter (fun m => D.prod id ∣ m * (m + c))).card
+      = Nat.count (fun k => D.prod id ∣ (k + 1) * (k + 1 + c)) N :=
+    ioc_count_eq (fun m => D.prod id ∣ m * (m + c)) N
+  have hper := shift_period_count (D.prod id) c hd
+  rw [shift_roots_prod D c hD] at hper
+  have hb := count_bound_real (fun k => D.prod id ∣ (k + 1) * (k + 1 + c)) (D.prod id) hd
+    (fun k => shift_periodic (D.prod id) c k) N
+  rw [hper] at hb
+  rw [hcount]
+  exact hb
+
 end RNS.BrunTwinCount
 
 #print axioms RNS.BrunTwinCount.twin_multiples_count_holds
+#print axioms RNS.BrunTwinCount.shift_multiples_count_holds

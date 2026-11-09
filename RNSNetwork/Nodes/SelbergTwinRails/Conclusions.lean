@@ -36,6 +36,10 @@ Also built: Selberg's bound for twin primes in order. From `N` at least 5184⁸
 on, the twin prime pairs up to `N` number at most 40000 N / log² N: take the
 level t² and the cut-off t² + 1, with t the eighth root of `N` rounded down.
 
+Also built: the same at any gap `h` and for Goldbach pairs. The wheels
+dividing `h` (or the even number) are left out of the sieve, and the bound
+picks up the product, over those wheels, of p over (p − 2).
+
 Later stage (planned): the constant four times the twin-prime constant.
 
 Proof: `RNSSolutions/SelbergTwinRails.lean`. Rests on `SelbergBound` and
@@ -86,5 +90,34 @@ prime pairs whose smaller member is at most `N` number at most
 def selberg_twin_bound : Prop :=
   ∀ N : ℕ, (5184 : ℝ) ^ 8 ≤ N →
     (RNS.BrunTwinBound.twin_prime_count N : ℝ) ≤ 40000 * N / Real.log N ^ 2
+
+/-- The prime pairs up to `N` at gap `h`: the `n` from 1 to `N` with `n` and
+`n + h` both prime. -/
+def gap_pair_count (h N : ℕ) : ℕ :=
+  ((Finset.Ioc 0 N).filter (fun n => n.Prime ∧ (n + h).Prime)).card
+
+/-- The Goldbach pairs of `N`: the `n` between 0 and `N` with `n` and `N − n`
+both prime (each pair counted in both orders). -/
+def goldbach_count (N : ℕ) : ℕ :=
+  ((Finset.Ioo 0 N).filter (fun n => n.Prime ∧ (N - n).Prime)).card
+
+/-- The factor for the wheels dividing `h`: the product, over the primes from 5
+up dividing `h`, of p over (p − 2). -/
+noncomputable def pair_factor (h : ℕ) : ℝ :=
+  ∏ p ∈ h.primeFactors.filter (fun p => 5 ≤ p), (p : ℝ) / ((p : ℝ) - 2)
+
+/-- **Selberg's bound at any gap.** For a gap `h > 0` and `N` at least 5184⁸,
+the prime pairs up to `N` at gap `h` number at most
+40000 · `pair_factor h` · N / log² N. -/
+def selberg_gap_bound : Prop :=
+  ∀ h N : ℕ, 0 < h → (5184 : ℝ) ^ 8 ≤ N →
+    (gap_pair_count h N : ℝ) ≤ 40000 * pair_factor h * N / Real.log N ^ 2
+
+/-- **Selberg's bound for Goldbach pairs.** For `N` at least 5184⁸, the ways of
+writing `N` as a sum of two primes number at most
+40000 · `pair_factor N` · N / log² N. -/
+def selberg_goldbach_bound : Prop :=
+  ∀ N : ℕ, (5184 : ℝ) ^ 8 ≤ N →
+    (goldbach_count N : ℝ) ≤ 40000 * pair_factor N * N / Real.log N ^ 2
 
 end RNS.SelbergTwinRails

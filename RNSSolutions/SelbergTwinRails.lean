@@ -984,8 +984,726 @@ theorem selberg_twin_bound_step
   rw [mul_div_assoc, ← hQ]
   linarith
 
+/-! ## Prime pairs at any gap, and Goldbach pairs
+
+The same sieve on `m (m + c)` for a shift `c`, with the wheels dividing `c`
+left out (there a wheel blocks only one position of its cycle). Leaving them
+out costs at most the product, over those wheels, of 1 + 2/(p − 2) =
+p/(p − 2): splitting the sets of wheels by the left-out part shows the full
+twin sum is at most that product times the sum without them. Goldbach pairs
+of `N` are the shift `c = (Q − 1) N`, with `Q` the product of the wheels not
+dividing `N`: then `m + c` and `N − m` have the same wheels as factors.
+-/
+
+/-- The parameters of the twin bound: `t` the eighth root of `N` rounded down,
+the level t², the cut-off t² + 1. -/
+private theorem twin_parameters (h_low : twin_selberg_sum_lower) (N : ℕ)
+    (hN : (5184 : ℝ) ^ 8 ≤ N) :
+    ∃ t : ℕ, 5184 ≤ t ∧ t ^ 8 ≤ N ∧ 0 < Real.log N ∧ (1 : ℝ) ≤ (t : ℝ) ^ 2 ∧
+      Real.log N ^ 2 / 36864 ≤ twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2) ∧
+      (t : ℝ) ^ 6 ≤ 64 * ((N : ℝ) / Real.log N ^ 2) ∧
+      (t : ℝ) ^ 2 + 1 ≤ 2 * (t : ℝ) ^ 6 := by
+  obtain ⟨t, hlo, hhi⟩ := eighth_root N
+  have hN8 : (5184 : ℕ) ^ 8 ≤ N := by exact_mod_cast hN
+  have ht5184 : 5184 ≤ t := by
+    by_contra h
+    have h' : t + 1 ≤ 5184 := by omega
+    have : (t + 1) ^ 8 ≤ 5184 ^ 8 := Nat.pow_le_pow_left h' 8
+    exact absurd (lt_of_lt_of_le hhi this) (not_lt.mpr hN8)
+  have ht1 : (1 : ℝ) ≤ t := by exact_mod_cast (show 1 ≤ t by omega)
+  have ht0 : (0 : ℝ) < t := by linarith
+  have hNpos : (0 : ℝ) < N := lt_of_lt_of_le (by positivity) hN
+  have hloR : (t : ℝ) ^ 8 ≤ N := by exact_mod_cast hlo
+  have hhiR : (N : ℝ) < ((t : ℝ) + 1) ^ 8 := by exact_mod_cast hhi
+  -- logarithms
+  have hLt : Real.log N < 8 * Real.log ((t : ℝ) + 1) := by
+    have := Real.log_lt_log hNpos hhiR
+    rw [Real.log_pow] at this
+    push_cast at this
+    linarith
+  have hL5184 : 8 * Real.log 5184 ≤ Real.log N := by
+    have := Real.log_le_log (by positivity) hN
+    rw [Real.log_pow] at this
+    push_cast at this
+    linarith
+  have hlog5184 : Real.log 5184 = 2 * Real.log 2 + 4 * Real.log 6 := by
+    rw [show (5184 : ℝ) = 2 ^ 2 * 6 ^ 4 by norm_num, Real.log_mul (by norm_num) (by norm_num),
+      Real.log_pow, Real.log_pow]
+    push_cast
+    ring
+  have hlog2 : 0 < Real.log 2 := Real.log_pos (by norm_num)
+  have hlog6 : 0 < Real.log 6 := Real.log_pos (by norm_num)
+  have hLpos : 0 < Real.log N := by linarith
+  have hlogt1 : Real.log ((t : ℝ) + 1) ≤ Real.log 2 + Real.log t := by
+    rw [← Real.log_mul (by norm_num) ht0.ne']
+    exact Real.log_le_log (by positivity) (by linarith)
+  have hlogt1' : Real.log ((t : ℝ) + 1) ≤ t := by
+    have := Real.log_le_sub_one_of_pos (show (0 : ℝ) < (t : ℝ) + 1 by positivity)
+    linarith
+  have hlt2 : Real.log ((t : ℝ) ^ 2) = 2 * Real.log t := by
+    rw [Real.log_pow]
+    push_cast
+    ring
+  -- the level t² and the cut-off t² + 1
+  have hy1 : (1 : ℝ) ≤ (t : ℝ) ^ 2 := by
+    calc (1 : ℝ) = 1 * 1 := by ring
+      _ ≤ (t : ℝ) * t := mul_le_mul ht1 ht1 zero_le_one ht0.le
+      _ = (t : ℝ) ^ 2 := by ring
+  have hy6 : (6 : ℝ) ^ 4 ≤ (t : ℝ) ^ 2 := by
+    have h5 : (5184 : ℝ) ≤ t := by exact_mod_cast ht5184
+    calc (6 : ℝ) ^ 4 ≤ 5184 * 5184 := by norm_num
+      _ ≤ (t : ℝ) * t := mul_le_mul h5 h5 (by norm_num) ht0.le
+      _ = (t : ℝ) ^ 2 := by ring
+  have hyz : (t : ℝ) ^ 2 < ((t ^ 2 + 1 : ℕ) : ℝ) ^ 2 := by
+    push_cast
+    calc (t : ℝ) ^ 2 < (t : ℝ) ^ 2 + 1 := by linarith
+      _ = ((t : ℝ) ^ 2 + 1) * 1 := by ring
+      _ ≤ ((t : ℝ) ^ 2 + 1) * ((t : ℝ) ^ 2 + 1) :=
+          mul_le_mul_of_nonneg_left (by linarith) (by positivity)
+      _ = ((t : ℝ) ^ 2 + 1) ^ 2 := by ring
+  have hG := h_low (t ^ 2 + 1) ((t : ℝ) ^ 2) hy6 hyz
+  have hu : Real.log N / 8 ≤ Real.log ((t : ℝ) ^ 2) - 4 * Real.log 6 := by linarith
+  have hu0 : 0 ≤ Real.log N / 8 := by linarith
+  have hsq := mul_self_le_mul_self hu0 hu
+  have hGlow : Real.log N ^ 2 / 36864 ≤ twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2) := by
+    calc Real.log N ^ 2 / 36864 = (Real.log N / 8) * (Real.log N / 8) / 576 := by ring
+      _ ≤ (Real.log ((t : ℝ) ^ 2) - 4 * Real.log 6) *
+            (Real.log ((t : ℝ) ^ 2) - 4 * Real.log 6) / 576 := by linarith [hsq]
+      _ = (Real.log ((t : ℝ) ^ 2) - 4 * Real.log 6) ^ 2 / 576 := by ring
+      _ ≤ _ := hG
+  set Q := (N : ℝ) / Real.log N ^ 2 with hQ
+  have hLle : Real.log N ≤ 8 * t := by linarith
+  have hL2 : Real.log N ^ 2 ≤ 64 * (t : ℝ) ^ 2 := by
+    calc Real.log N ^ 2 = Real.log N * Real.log N := by ring
+      _ ≤ (8 * t) * (8 * t) := mul_self_le_mul_self hLpos.le hLle
+      _ = 64 * (t : ℝ) ^ 2 := by ring
+  have ht6 : (t : ℝ) ^ 6 ≤ 64 * Q := by
+    rw [hQ, mul_div_assoc', le_div_iff₀ (by positivity)]
+    have h1 : (t : ℝ) ^ 6 * Real.log N ^ 2 ≤ (t : ℝ) ^ 6 * (64 * (t : ℝ) ^ 2) :=
+      mul_le_mul_of_nonneg_left hL2 (by positivity)
+    calc (t : ℝ) ^ 6 * Real.log N ^ 2 ≤ (t : ℝ) ^ 6 * (64 * (t : ℝ) ^ 2) := h1
+      _ = 64 * (t : ℝ) ^ 8 := by ring
+      _ ≤ 64 * N := by linarith
+  have hz : (t : ℝ) ^ 2 + 1 ≤ 2 * (t : ℝ) ^ 6 := by
+    have h4 : (1 : ℝ) ≤ (t : ℝ) ^ 4 := by
+      calc (1 : ℝ) = 1 * 1 := by ring
+        _ ≤ (t : ℝ) ^ 2 * (t : ℝ) ^ 2 := mul_le_mul hy1 hy1 zero_le_one (by positivity)
+        _ = (t : ℝ) ^ 4 := by ring
+    have h26 : (t : ℝ) ^ 2 ≤ (t : ℝ) ^ 6 := by
+      calc (t : ℝ) ^ 2 = (t : ℝ) ^ 2 * 1 := by ring
+        _ ≤ (t : ℝ) ^ 2 * (t : ℝ) ^ 4 := mul_le_mul_of_nonneg_left h4 (by positivity)
+        _ = (t : ℝ) ^ 6 := by ring
+    linarith
+  exact ⟨t, ht5184, hlo, hLpos, hy1, hGlow, ht6, hz⟩
+
+/-- The wheels from 5 up to `z` that do not divide `c`. -/
+private def shiftWheels (c z : ℕ) : Finset ℕ := (twin_wheels z).filter (fun p => ¬ p ∣ c)
+
+/-- The wheels from 5 up to `z` that divide `c`. -/
+private def badWheels (c z : ℕ) : Finset ℕ := (twin_wheels z).filter (fun p => p ∣ c)
+
+private theorem shiftWheels_mem {c z p : ℕ} (hp : p ∈ shiftWheels c z) :
+    p ∈ twin_wheels z ∧ ¬ p ∣ c := Finset.mem_filter.mp hp
+
+private theorem shiftWheels_prime {c z p : ℕ} (hp : p ∈ shiftWheels c z) : p.Prime :=
+  twin_wheels_prime (shiftWheels_mem hp).1
+
+private theorem prod_squarefree_of_primes (S : Finset ℕ) (hS : ∀ p ∈ S, p.Prime) :
+    Squarefree (∏ p ∈ S, p) := by
+  refine Finset.squarefree_prod_of_pairwise_isCoprime (fun a ha b hb hab => ?_)
+    (fun p hp => (hS p hp).prime.squarefree)
+  exact Nat.coprime_iff_isRelPrime.mp
+    ((Nat.coprime_primes (hS a (Finset.mem_coe.mp ha)) (hS b (Finset.mem_coe.mp hb))).mpr hab)
+
+private theorem mem_of_prime_dvd_prod {S : Finset ℕ} (hS : ∀ p ∈ S, p.Prime) {p : ℕ}
+    (hp : p.Prime) (h : p ∣ ∏ q ∈ S, q) : p ∈ S := by
+  obtain ⟨q, hq, hpq⟩ := (Prime.dvd_finsetProd_iff hp.prime (fun q => q)).mp h
+  rwa [(Nat.prime_dvd_prime_iff_eq hp (hS q hq)).mp hpq]
+
+/-- The shifted columns as a Selberg sieve problem. -/
+private noncomputable def shift_sieve (c X z : ℕ) (y : ℝ) (hy : 1 ≤ y) : SelbergSieve where
+  support := (Finset.Ioc 0 X).image (fun m => m * (m + c))
+  prodPrimes := ∏ p ∈ shiftWheels c z, p
+  prodPrimes_squarefree := prod_squarefree_of_primes _ (fun p hp => shiftWheels_prime hp)
+  weights := fun _ => 1
+  weights_nonneg := fun _ => zero_le_one
+  totalMass := X
+  nu := twin_nu
+  nu_mult := ArithmeticFunction.IsMultiplicative.prodPrimeFactors _
+  nu_pos_of_prime := fun p hp _ => by
+    rw [twin_nu_prime hp]
+    have : (0 : ℝ) < p := by exact_mod_cast hp.pos
+    exact div_pos two_pos this
+  nu_lt_one_of_prime := fun p hp hpd => by
+    rw [twin_nu_prime hp]
+    have h5 : (5 : ℝ) ≤ p := by
+      exact_mod_cast twin_wheels_five (shiftWheels_mem
+        (mem_of_prime_dvd_prod (fun q hq => shiftWheels_prime hq) hp hpd)).1
+    rw [div_lt_one (by linarith)]
+    linarith
+  level := y
+  one_le_level := hy
+
+private theorem shift_map_injective (c : ℕ) : Function.Injective (fun m : ℕ => m * (m + c)) := by
+  intro a b h
+  simp only at h
+  rcases lt_trichotomy a b with hab | hab | hab
+  · exact absurd h (mul_lt_mul'' hab (by omega) (Nat.zero_le _) (Nat.zero_le _)).ne
+  · exact hab
+  · exact absurd h (mul_lt_mul'' hab (by omega) (Nat.zero_le _) (Nat.zero_le _)).ne'
+
+private theorem shift_card_image_filter (c X : ℕ) (q : ℕ → Prop) [DecidablePred q] :
+    (((Finset.Ioc 0 X).image (fun m => m * (m + c))).filter q).card =
+      ((Finset.Ioc 0 X).filter (fun m => q (m * (m + c)))).card := by
+  rw [Finset.filter_image, Finset.card_image_of_injective _ (shift_map_injective c)]
+
+private theorem shift_sifted_eq (c X z : ℕ) (y : ℝ) (hy : 1 ≤ y) :
+    BoundingSieve.siftedSum (s := (shift_sieve c X z y hy).toBoundingSieve) =
+      (((Finset.Ioc 0 X).filter
+        (fun m => Nat.Coprime (∏ p ∈ shiftWheels c z, p) (m * (m + c)))).card : ℝ) := by
+  unfold BoundingSieve.siftedSum
+  show (∑ d ∈ (Finset.Ioc 0 X).image (fun m => m * (m + c)),
+      if Nat.Coprime (∏ p ∈ shiftWheels c z, p) d then (1 : ℝ) else 0) = _
+  rw [Finset.sum_boole, shift_card_image_filter]
+
+private theorem shift_multSum_eq (c X z : ℕ) (y : ℝ) (hy : 1 ≤ y) (d : ℕ) :
+    BoundingSieve.multSum (s := (shift_sieve c X z y hy).toBoundingSieve) d =
+      (((Finset.Ioc 0 X).filter (fun m => d ∣ m * (m + c))).card : ℝ) := by
+  unfold BoundingSieve.multSum
+  show (∑ n ∈ (Finset.Ioc 0 X).image (fun m => m * (m + c)),
+      if d ∣ n then (1 : ℝ) else 0) = _
+  rw [Finset.sum_boole, shift_card_image_filter]
+
+private theorem shift_rem_le (c X z : ℕ) (y : ℝ) (hy : 1 ≤ y)
+    (h_sc : RNS.BrunTwinCount.shift_multiples_count)
+    {d : ℕ} (hd : d ∣ ∏ p ∈ shiftWheels c z, p) :
+    |BoundingSieve.rem (s := (shift_sieve c X z y hy).toBoundingSieve) d| ≤
+      (2 : ℝ) ^ ArithmeticFunction.cardDistinctFactors d := by
+  have hsq : Squarefree d := Squarefree.squarefree_of_dvd hd
+    (prod_squarefree_of_primes _ (fun p hp => shiftWheels_prime hp))
+  have hd0 : d ≠ 0 := hsq.ne_zero
+  have hD : ∀ p ∈ d.primeFactors, p.Prime ∧ ¬ p ∣ c := fun p hp =>
+    ⟨Nat.prime_of_mem_primeFactors hp,
+      (shiftWheels_mem (mem_of_prime_dvd_prod (fun q hq => shiftWheels_prime hq)
+        (Nat.prime_of_mem_primeFactors hp) ((Nat.dvd_of_mem_primeFactors hp).trans hd))).2⟩
+  have hprod : ∏ p ∈ d.primeFactors, p = d := Nat.prod_primeFactors_of_squarefree hsq
+  have hprod' : d.primeFactors.prod id = d := hprod
+  have hrho : RNS.BrunTwinCount.shift_rho c d.primeFactors = 2 ^ d.primeFactors.card := by
+    unfold RNS.BrunTwinCount.shift_rho
+    rw [Finset.prod_congr rfl (fun p hp => ite_eq_right (hD p hp).2), Finset.prod_const]
+  have hnu : twin_nu d = (2 : ℝ) ^ d.primeFactors.card / d := by
+    rw [twin_nu_apply hd0, Finset.prod_div_distrib, Finset.prod_const]
+    congr 1
+    rw [← Nat.cast_prod, hprod]
+  have key := h_sc d.primeFactors c X (fun p hp => (hD p hp).1)
+  rw [hprod', hrho] at key
+  unfold BoundingSieve.rem
+  rw [shift_multSum_eq]
+  show |(_ : ℝ) - twin_nu d * X| ≤ _
+  rw [hnu, ArithmeticFunction.cardDistinctFactors_eq_card_primeFactors]
+  push_cast at key ⊢
+  calc _ = |(((Finset.Ioc 0 X).filter (fun m => d ∣ m * (m + c))).card : ℝ) -
+        (X : ℝ) * 2 ^ d.primeFactors.card / d| := by congr 1; ring
+    _ ≤ _ := key
+
+private theorem shift_bounding_eq (c X z : ℕ) (y : ℝ) (hy : 1 ≤ y) :
+    RNS.SelbergBound.bounding_sum (shift_sieve c X z y hy) =
+      ∑ l ∈ Nat.divisors (∏ p ∈ shiftWheels c z, p),
+        if (l : ℝ) ^ 2 ≤ y then ∏ p ∈ l.primeFactors, (2 : ℝ) / ((p : ℝ) - 2) else 0 := by
+  unfold RNS.SelbergBound.bounding_sum
+  refine Finset.sum_congr rfl (fun l hl => ?_)
+  have hld : l ∣ ∏ p ∈ shiftWheels c z, p := Nat.dvd_of_mem_divisors hl
+  have hl0 : l ≠ 0 := Nat.ne_of_gt (Nat.pos_of_mem_divisors hl)
+  have hg : (shift_sieve c X z y hy).toBoundingSieve.selbergTerms l =
+      ∏ p ∈ l.primeFactors, (2 : ℝ) / ((p : ℝ) - 2) := by
+    rw [BoundingSieve.selbergTerms_apply]
+    show twin_nu l * ∏ p ∈ l.primeFactors, (1 - twin_nu p)⁻¹ = _
+    rw [twin_nu_apply hl0, ← Finset.prod_mul_distrib]
+    refine Finset.prod_congr rfl (fun p hp => ?_)
+    have hpP := Nat.prime_of_mem_primeFactors hp
+    have h5 : (5 : ℝ) ≤ p := by
+      exact_mod_cast twin_wheels_five (shiftWheels_mem (mem_of_prime_dvd_prod
+        (fun q hq => shiftWheels_prime hq) hpP ((Nat.dvd_of_mem_primeFactors hp).trans hld))).1
+    rw [twin_nu_prime hpP]
+    have h1 : (p : ℝ) ≠ 0 := by linarith
+    have h2 : (p : ℝ) - 2 ≠ 0 := by linarith
+    have h3 : (1 : ℝ) - 2 / p ≠ 0 := by
+      rw [sub_ne_zero]
+      intro h
+      rw [eq_div_iff h1] at h
+      linarith
+    field_simp
+  rw [hg]
+  rfl
+
+/-- A divisor sum over a set of wheels from 5 up, as a sum over sets of wheels. -/
+private theorem divisor_sum_eq_setSum (S : Finset ℕ) (hS : ∀ p ∈ S, p.Prime) (y : ℝ)
+    (hy : 0 ≤ y) :
+    (∑ l ∈ Nat.divisors (∏ p ∈ S, p),
+      if (l : ℝ) ^ 2 ≤ y then ∏ p ∈ l.primeFactors, (2 : ℝ) / ((p : ℝ) - 2) else 0) =
+      setSum S ⌊Real.sqrt y⌋₊ := by
+  have hpf : ∀ T ⊆ S, (∏ p ∈ T, p).primeFactors = T := by
+    intro T hT
+    have hTP : ∀ p ∈ T, p.Prime := fun p hp => hS p (hT hp)
+    have h0 : ∏ p ∈ T, p ≠ 0 := Finset.prod_ne_zero_iff.mpr (fun p hp => (hTP p hp).ne_zero)
+    ext p
+    rw [Nat.mem_primeFactors]
+    constructor
+    · rintro ⟨hp, hdvd, _⟩
+      obtain ⟨q, hq, hpq⟩ := (Prime.dvd_finsetProd_iff hp.prime (fun q => q)).mp hdvd
+      rwa [(Nat.prime_dvd_prime_iff_eq hp (hTP q hq)).mp hpq]
+    · intro hp
+      exact ⟨hTP p hp, Finset.dvd_prod_of_mem _ hp, h0⟩
+  have hP0 : ∏ p ∈ S, p ≠ 0 := Finset.prod_ne_zero_iff.mpr (fun p hp => (hS p hp).ne_zero)
+  have hsqS := prod_squarefree_of_primes S hS
+  unfold setSum
+  refine Finset.sum_nbij' (fun l => l.primeFactors) (fun T => ∏ p ∈ T, p) ?_ ?_ ?_ ?_ ?_
+  · intro l hl
+    rw [Nat.mem_divisors] at hl
+    rw [Finset.mem_powerset]
+    intro p hp
+    exact mem_of_prime_dvd_prod hS (Nat.prime_of_mem_primeFactors hp)
+      ((Nat.dvd_of_mem_primeFactors hp).trans hl.1)
+  · intro T hT
+    rw [Finset.mem_powerset] at hT
+    rw [Nat.mem_divisors]
+    exact ⟨Finset.prod_dvd_prod_of_subset T S (fun p => p) hT, hP0⟩
+  · intro l hl
+    rw [Nat.mem_divisors] at hl
+    exact Nat.prod_primeFactors_of_squarefree (Squarefree.squarefree_of_dvd hl.1 hsqS)
+  · intro T hT
+    rw [Finset.mem_powerset] at hT
+    exact hpf T hT
+  · intro l hl
+    rw [Nat.mem_divisors] at hl
+    have hsq : Squarefree l := Squarefree.squarefree_of_dvd hl.1 hsqS
+    rw [Nat.prod_primeFactors_of_squarefree hsq]
+    have hiff : (l : ℝ) ^ 2 ≤ y ↔ l ≤ ⌊Real.sqrt y⌋₊ := by
+      rw [Nat.le_floor_iff (Real.sqrt_nonneg y)]
+      have hl0 : (0 : ℝ) ≤ l := Nat.cast_nonneg l
+      have hs := Real.sq_sqrt hy
+      have hs0 := Real.sqrt_nonneg y
+      constructor
+      · intro h
+        by_contra h'
+        push Not at h'
+        nlinarith
+      · intro h
+        nlinarith
+    by_cases h : (l : ℝ) ^ 2 ≤ y
+    · rw [ite_eq_left h, ite_eq_left (hiff.mp h)]
+      rfl
+    · rw [ite_eq_right h, ite_eq_right (fun h' => h (hiff.mpr h'))]
+
+/-- Leaving out the wheels `A` costs at most the product of 1 + 2/(p − 2). -/
+private theorem setSum_union_le (B : Finset ℕ) (hB : ∀ p ∈ B, 5 ≤ p) (A : Finset ℕ) :
+    (∀ p ∈ A, p.Prime ∧ 5 ≤ p) → Disjoint A B → ∀ M,
+      setSum (A ∪ B) M ≤ (∏ p ∈ A, (1 + 2 / ((p : ℝ) - 2))) * setSum B M := by
+  refine Finset.induction_on A ?_ ?_
+  · intro _ _ M
+    rw [Finset.empty_union, Finset.prod_empty, one_mul]
+  · intro q A hq ih hA hdisj M
+    have hqB : q ∉ B := Finset.disjoint_left.mp hdisj (Finset.mem_insert_self q A)
+    have hdisj' : Disjoint A B := Finset.disjoint_of_subset_left (Finset.subset_insert q A) hdisj
+    have hA' : ∀ p ∈ A, p.Prime ∧ 5 ≤ p := fun p hp => hA p (Finset.mem_insert_of_mem hp)
+    have hqP := hA q (Finset.mem_insert_self q A)
+    have hqAB : q ∉ A ∪ B := by
+      rw [Finset.mem_union]
+      rintro (h | h)
+      · exact hq h
+      · exact hqB h
+    have hq5 : (5 : ℝ) ≤ q := by exact_mod_cast hqP.2
+    have hg0 : 0 ≤ 2 / ((q : ℝ) - 2) := div_nonneg (by norm_num) (by linarith)
+    have hP0 : 0 ≤ ∏ p ∈ A, (1 + 2 / ((p : ℝ) - 2)) := by
+      refine Finset.prod_nonneg (fun p hp => ?_)
+      have h5 : (5 : ℝ) ≤ p := by exact_mod_cast (hA' p hp).2
+      have : 0 ≤ 2 / ((p : ℝ) - 2) := div_nonneg (by norm_num) (by linarith)
+      linarith
+    rw [Finset.insert_union, setSum_insert hqAB hqP.1.pos, Finset.prod_insert hq]
+    calc setSum (A ∪ B) M + 2 / ((q : ℝ) - 2) * setSum (A ∪ B) (M / q)
+        ≤ (∏ p ∈ A, (1 + 2 / ((p : ℝ) - 2))) * setSum B M +
+            2 / ((q : ℝ) - 2) * ((∏ p ∈ A, (1 + 2 / ((p : ℝ) - 2))) * setSum B (M / q)) :=
+          add_le_add (ih hA' hdisj' M) (mul_le_mul_of_nonneg_left (ih hA' hdisj' (M / q)) hg0)
+      _ ≤ (∏ p ∈ A, (1 + 2 / ((p : ℝ) - 2))) * setSum B M +
+            2 / ((q : ℝ) - 2) * ((∏ p ∈ A, (1 + 2 / ((p : ℝ) - 2))) * setSum B M) :=
+          add_le_add le_rfl (mul_le_mul_of_nonneg_left
+            (mul_le_mul_of_nonneg_left (setSum_mono hB (Nat.div_le_self _ _)) hP0) hg0)
+      _ = (1 + 2 / ((q : ℝ) - 2)) * (∏ p ∈ A, (1 + 2 / ((p : ℝ) - 2))) * setSum B M := by ring
+
+/-- The factor for the left-out wheels is positive. -/
+private theorem bad_factor_pos (c z : ℕ) : 0 < ∏ p ∈ badWheels c z, (1 + 2 / ((p : ℝ) - 2)) := by
+  refine Finset.prod_pos (fun p hp => ?_)
+  have h5 : (5 : ℝ) ≤ p := by exact_mod_cast twin_wheels_five (Finset.mem_filter.mp hp).1
+  have : 0 ≤ 2 / ((p : ℝ) - 2) := div_nonneg (by norm_num) (by linarith)
+  linarith
+
+/-- **The shifted sieve.** The survivors of `m (m + c)` among 1 to `X` number at
+most the left-out factor times `X` over the twin sum, plus the error. -/
+private theorem shift_core (h_sb : RNS.SelbergBound.selberg_bound)
+    (h_sc : RNS.BrunTwinCount.shift_multiples_count) (c X z : ℕ) (y : ℝ) (hy : 1 ≤ y)
+    (hG : 0 < twin_selberg_sum z y) :
+    (((Finset.Ioc 0 X).filter
+        (fun m => Nat.Coprime (∏ p ∈ shiftWheels c z, p) (m * (m + c)))).card : ℝ) ≤
+      (∏ p ∈ badWheels c z, (1 + 2 / ((p : ℝ) - 2))) * X / twin_selberg_sum z y +
+        ∑ d ∈ Nat.divisors (∏ p ∈ shiftWheels c z, p),
+          if (d : ℝ) ≤ y then (6 : ℝ) ^ ArithmeticFunction.cardDistinctFactors d else 0 := by
+  have hW : ∀ p ∈ shiftWheels c z, p.Prime := fun p hp => shiftWheels_prime hp
+  have h := h_sb (shift_sieve c X z y hy)
+  rw [shift_sifted_eq, shift_bounding_eq, divisor_sum_eq_setSum _ hW y (by linarith)] at h
+  set F := ∏ p ∈ badWheels c z, (1 + 2 / ((p : ℝ) - 2)) with hF
+  have hFpos : 0 < F := bad_factor_pos c z
+  have hsplit : twin_selberg_sum z y ≤ F * setSum (shiftWheels c z) ⌊Real.sqrt y⌋₊ := by
+    rw [twin_selberg_sum_eq z y (by linarith)]
+    have hu : twin_wheels z = badWheels c z ∪ shiftWheels c z :=
+      (Finset.filter_union_filter_neg_eq _ _).symm
+    rw [hu]
+    refine setSum_union_le _ (fun p hp => twin_wheels_five (shiftWheels_mem hp).1) _ ?_ ?_ _
+    · intro p hp
+      have := (Finset.mem_filter.mp hp).1
+      exact ⟨twin_wheels_prime this, twin_wheels_five this⟩
+    · exact Finset.disjoint_filter_filter_neg _ _ _
+  have hGW : 0 < setSum (shiftWheels c z) ⌊Real.sqrt y⌋₊ := by
+    by_contra hneg
+    push Not at hneg
+    have : F * setSum (shiftWheels c z) ⌊Real.sqrt y⌋₊ ≤ 0 :=
+      mul_nonpos_of_nonneg_of_nonpos hFpos.le hneg
+    linarith
+  have hmain : (X : ℝ) / setSum (shiftWheels c z) ⌊Real.sqrt y⌋₊ ≤ F * X / twin_selberg_sum z y := by
+    calc (X : ℝ) / setSum (shiftWheels c z) ⌊Real.sqrt y⌋₊
+        = F * X / (F * setSum (shiftWheels c z) ⌊Real.sqrt y⌋₊) := by
+          field_simp
+      _ ≤ F * X / twin_selberg_sum z y :=
+          div_le_div_of_nonneg_left (by positivity) hG hsplit
+  refine h.trans (add_le_add hmain (Finset.sum_le_sum (fun d hd => ?_)))
+  show (if (d : ℝ) ≤ y then (3 : ℝ) ^ ArithmeticFunction.cardDistinctFactors d *
+      |BoundingSieve.rem (s := (shift_sieve c X z y hy).toBoundingSieve) d| else 0) ≤
+    if (d : ℝ) ≤ y then (6 : ℝ) ^ ArithmeticFunction.cardDistinctFactors d else 0
+  split_ifs with hdy
+  · have hr := shift_rem_le c X z y hy h_sc (Nat.dvd_of_mem_divisors hd)
+    calc (3 : ℝ) ^ ArithmeticFunction.cardDistinctFactors d *
+          |BoundingSieve.rem (s := (shift_sieve c X z y hy).toBoundingSieve) d|
+        ≤ (3 : ℝ) ^ ArithmeticFunction.cardDistinctFactors d *
+          (2 : ℝ) ^ ArithmeticFunction.cardDistinctFactors d :=
+          mul_le_mul_of_nonneg_left hr (by positivity)
+      _ = (6 : ℝ) ^ ArithmeticFunction.cardDistinctFactors d := by
+          rw [← mul_pow]; norm_num
+  · exact le_rfl
+
+/-- The error over any set of wheels from 5 up, at level t², is at most t⁶. -/
+private theorem error_le_of (S : Finset ℕ) (hS : ∀ p ∈ S, p.Prime ∧ 5 ≤ p) (t : ℕ) :
+    (∑ d ∈ Nat.divisors (∏ p ∈ S, p),
+      if (d : ℝ) ≤ (t : ℝ) ^ 2 then (6 : ℝ) ^ ArithmeticFunction.cardDistinctFactors d else 0)
+      ≤ (t : ℝ) ^ 6 := by
+  have hsix : ∀ d ∈ Nat.divisors (∏ p ∈ S, p),
+      (6 : ℝ) ^ ArithmeticFunction.cardDistinctFactors d ≤ (d : ℝ) ^ 2 := by
+    intro d hd
+    have hdd := (Nat.mem_divisors.mp hd).1
+    have hsq : Squarefree d := Squarefree.squarefree_of_dvd hdd
+      (prod_squarefree_of_primes S (fun p hp => (hS p hp).1))
+    have hprod : ∏ p ∈ d.primeFactors, p = d := Nat.prod_primeFactors_of_squarefree hsq
+    conv_rhs => rw [← hprod]
+    push_cast
+    rw [ArithmeticFunction.cardDistinctFactors_eq_card_primeFactors, ← Finset.prod_const,
+      ← Finset.prod_pow]
+    gcongr with p hp
+    have h5 : (5 : ℝ) ≤ p := by
+      exact_mod_cast (hS p (mem_of_prime_dvd_prod (fun q hq => (hS q hq).1)
+        (Nat.prime_of_mem_primeFactors hp) ((Nat.dvd_of_mem_primeFactors hp).trans hdd))).2
+    nlinarith
+  calc _ ≤ ∑ d ∈ Nat.divisors (∏ p ∈ S, p),
+        if d ∈ Finset.Icc 1 (t ^ 2) then (t : ℝ) ^ 4 else 0 := by
+        refine Finset.sum_le_sum (fun d hd => ?_)
+        have hd1 : 1 ≤ d := Nat.pos_of_mem_divisors hd
+        by_cases h : (d : ℝ) ≤ (t : ℝ) ^ 2
+        · have hdt : d ≤ t ^ 2 := by exact_mod_cast h
+          rw [ite_eq_left h, ite_eq_left (Finset.mem_Icc.mpr ⟨hd1, hdt⟩)]
+          have hd0 : (0 : ℝ) ≤ d := Nat.cast_nonneg d
+          calc (6 : ℝ) ^ ArithmeticFunction.cardDistinctFactors d ≤ (d : ℝ) ^ 2 := hsix d hd
+            _ ≤ ((t : ℝ) ^ 2) ^ 2 := by nlinarith
+            _ = (t : ℝ) ^ 4 := by ring
+        · rw [ite_eq_right h]
+          split_ifs
+          · positivity
+          · exact le_rfl
+    _ = ∑ d ∈ Nat.divisors (∏ p ∈ S, p) ∩ Finset.Icc 1 (t ^ 2), (t : ℝ) ^ 4 :=
+        Finset.sum_ite_mem _ _ _
+    _ ≤ ∑ d ∈ Finset.Icc 1 (t ^ 2), (t : ℝ) ^ 4 :=
+        Finset.sum_le_sum_of_subset_of_nonneg Finset.inter_subset_right
+          (fun _ _ _ => by positivity)
+    _ = (t : ℝ) ^ 6 := by
+        rw [Finset.sum_const, Nat.card_Icc, Nat.add_sub_cancel, nsmul_eq_mul]
+        push_cast
+        ring
+
+private theorem one_le_prod_of (s : Finset ℕ) (f : ℕ → ℝ) :
+    (∀ p ∈ s, 1 ≤ f p) → 1 ≤ ∏ p ∈ s, f p := by
+  refine Finset.induction_on s ?_ ?_
+  · intro _
+    rw [Finset.prod_empty]
+  · intro a s ha ih h
+    rw [Finset.prod_insert ha]
+    exact one_le_mul_of_one_le_of_one_le (h a (Finset.mem_insert_self a s))
+      (ih (fun p hp => h p (Finset.mem_insert_of_mem hp)))
+
+private theorem one_le_frac {p : ℕ} (hp : 5 ≤ p) : (1 : ℝ) ≤ (p : ℝ) / ((p : ℝ) - 2) := by
+  have h5 : (5 : ℝ) ≤ p := by exact_mod_cast hp
+  rw [le_div_iff₀ (by linarith)]
+  linarith
+
+private theorem one_le_pair_factor (h : ℕ) : 1 ≤ pair_factor h :=
+  one_le_prod_of _ _ (fun p hp => one_le_frac (Finset.mem_filter.mp hp).2)
+
+/-- The left-out factor is at most `pair_factor`. -/
+private theorem bad_le_pair_factor (h z : ℕ) (hh : h ≠ 0) :
+    ∏ p ∈ badWheels h z, (1 + 2 / ((p : ℝ) - 2)) ≤ pair_factor h := by
+  have hsub : badWheels h z ⊆ h.primeFactors.filter (fun p => 5 ≤ p) := by
+    intro p hp
+    obtain ⟨hw, hph⟩ := Finset.mem_filter.mp hp
+    rw [Finset.mem_filter, Nat.mem_primeFactors]
+    exact ⟨⟨twin_wheels_prime hw, hph, hh⟩, twin_wheels_five hw⟩
+  have heq : ∏ p ∈ badWheels h z, (1 + 2 / ((p : ℝ) - 2)) =
+      ∏ p ∈ badWheels h z, (p : ℝ) / ((p : ℝ) - 2) := by
+    refine Finset.prod_congr rfl (fun p hp => ?_)
+    have h5 : (5 : ℝ) ≤ p := by exact_mod_cast twin_wheels_five (Finset.mem_filter.mp hp).1
+    have h2 : (p : ℝ) - 2 ≠ 0 := by linarith
+    field_simp
+    ring
+  rw [heq]
+  unfold pair_factor
+  rw [← Finset.prod_sdiff hsub]
+  have h1 : 1 ≤ ∏ p ∈ h.primeFactors.filter (fun p => 5 ≤ p) \ badWheels h z,
+      (p : ℝ) / ((p : ℝ) - 2) :=
+    one_le_prod_of _ _ (fun p hp => one_le_frac (Finset.mem_filter.mp (Finset.mem_sdiff.mp hp).1).2)
+  have h0 : 0 ≤ ∏ p ∈ badWheels h z, (p : ℝ) / ((p : ℝ) - 2) :=
+    Finset.prod_nonneg (fun p hp => (zero_le_one.trans (one_le_frac
+      (twin_wheels_five (Finset.mem_filter.mp hp).1))))
+  nlinarith
+
+/-- Prime pairs at gap `h` from the cut-off up survive the shifted sieve. -/
+private theorem gap_count_le (h N z : ℕ) :
+    gap_pair_count h N ≤ z + ((Finset.Ioc 0 N).filter
+      (fun m => Nat.Coprime (∏ p ∈ shiftWheels h z, p) (m * (m + h)))).card := by
+  unfold gap_pair_count
+  have hW : ∀ p ∈ shiftWheels h z, p.Prime := fun p hp => shiftWheels_prime hp
+  have hsub : (Finset.Ioc 0 N).filter (fun n => n.Prime ∧ (n + h).Prime) ⊆
+      Finset.range z ∪ (Finset.Ioc 0 N).filter
+        (fun m => Nat.Coprime (∏ p ∈ shiftWheels h z, p) (m * (m + h))) := by
+    intro n hn
+    obtain ⟨hnN, hp, hp2⟩ := Finset.mem_filter.mp hn
+    rw [Finset.mem_union, Finset.mem_range, Finset.mem_filter]
+    by_cases hnz : n < z
+    · exact Or.inl hnz
+    · right
+      refine ⟨hnN, Nat.Coprime.mul_right ?_ ?_⟩
+      · refine ((hp.coprime_iff_not_dvd).mpr (fun hd => hnz ?_)).symm
+        exact (mem_twin_wheels.mp (shiftWheels_mem (mem_of_prime_dvd_prod hW hp hd)).1).2.1
+      · refine ((hp2.coprime_iff_not_dvd).mpr (fun hd => hnz ?_)).symm
+        have := (mem_twin_wheels.mp (shiftWheels_mem (mem_of_prime_dvd_prod hW hp2 hd)).1).2.1
+        omega
+  refine (Finset.card_le_card hsub).trans ((Finset.card_union_le _ _).trans ?_)
+  rw [Finset.card_range]
+
+/-- **Step:** Selberg's bound, the multiples count at any shift and the lower
+bound for the twin sum give Selberg's bound at any gap. -/
+theorem selberg_gap_bound_step (h_sb : RNS.SelbergBound.selberg_bound)
+    (h_sc : RNS.BrunTwinCount.shift_multiples_count) (h_low : twin_selberg_sum_lower) :
+    selberg_gap_bound := by
+  intro h N hh hN
+  obtain ⟨t, _, _, hLpos, hy1, hGlow, ht6, hz⟩ := twin_parameters h_low N hN
+  have hNpos : (0 : ℝ) < N := lt_of_lt_of_le (by positivity) hN
+  set Q := (N : ℝ) / Real.log N ^ 2 with hQ
+  have hQ0 : 0 ≤ Q := by positivity
+  have hGpos : 0 < twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2) :=
+    lt_of_lt_of_le (by positivity) hGlow
+  have hcore := shift_core h_sb h_sc h N (t ^ 2 + 1) ((t : ℝ) ^ 2) hy1 hGpos
+  have hE := error_le_of (shiftWheels h (t ^ 2 + 1))
+    (fun p hp => ⟨shiftWheels_prime hp, twin_wheels_five (shiftWheels_mem hp).1⟩) t
+  have hcount : (gap_pair_count h N : ℝ) ≤ (t : ℝ) ^ 2 + 1 + (((Finset.Ioc 0 N).filter
+      (fun m => Nat.Coprime (∏ p ∈ shiftWheels h (t ^ 2 + 1), p) (m * (m + h)))).card : ℝ) := by
+    have := gap_count_le h N (t ^ 2 + 1)
+    exact_mod_cast this
+  have hdivG : (N : ℝ) / twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2) ≤ 36864 * Q := by
+    have hpos : 0 < Real.log N ^ 2 / 36864 := by positivity
+    calc (N : ℝ) / twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2)
+        ≤ (N : ℝ) / (Real.log N ^ 2 / 36864) := div_le_div_of_nonneg_left hNpos.le hpos hGlow
+      _ = 36864 * Q := by rw [hQ]; field_simp
+  have hF := bad_le_pair_factor h (t ^ 2 + 1) (by omega)
+  have hF1 := one_le_pair_factor h
+  have hmain : (∏ p ∈ badWheels h (t ^ 2 + 1), (1 + 2 / ((p : ℝ) - 2))) * N /
+      twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2) ≤ 36864 * (pair_factor h * Q) := by
+    rw [mul_div_assoc]
+    calc (∏ p ∈ badWheels h (t ^ 2 + 1), (1 + 2 / ((p : ℝ) - 2))) *
+          ((N : ℝ) / twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2))
+        ≤ pair_factor h * (36864 * Q) :=
+          mul_le_mul hF hdivG (div_nonneg hNpos.le hGpos.le) (by linarith)
+      _ = 36864 * (pair_factor h * Q) := by ring
+  have hPQ : Q ≤ pair_factor h * Q := le_mul_of_one_le_left hQ0 hF1
+  rw [show 40000 * pair_factor h * (N : ℝ) / Real.log N ^ 2 = 40000 * (pair_factor h * Q) by
+    rw [hQ]; ring]
+  linarith
+
+/-- Goldbach pairs: each pair is counted from its smaller member, at most twice. -/
+private theorem goldbach_half (N : ℕ) :
+    goldbach_count N ≤
+      2 * ((Finset.Ioc 0 (N / 2)).filter (fun m => m.Prime ∧ (N - m).Prime)).card := by
+  unfold goldbach_count
+  have h1 : ((Finset.Ioo 0 N).filter (fun n => n.Prime ∧ (N - n).Prime)).filter
+      (fun n => n ≤ N / 2) ⊆ (Finset.Ioc 0 (N / 2)).filter (fun m => m.Prime ∧ (N - m).Prime) := by
+    intro n hn
+    rw [Finset.mem_filter, Finset.mem_filter, Finset.mem_Ioo] at hn
+    rw [Finset.mem_filter, Finset.mem_Ioc]
+    exact ⟨⟨hn.1.1.1, hn.2⟩, hn.1.2⟩
+  have h2 : (((Finset.Ioo 0 N).filter (fun n => n.Prime ∧ (N - n).Prime)).filter
+      (fun n => ¬ n ≤ N / 2)).card ≤
+      ((Finset.Ioc 0 (N / 2)).filter (fun m => m.Prime ∧ (N - m).Prime)).card := by
+    refine Finset.card_le_card_of_injOn (fun n => N - n) ?_ ?_
+    · intro n hn
+      rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_filter, Finset.mem_Ioo] at hn
+      rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_Ioc]
+      obtain ⟨⟨⟨h0, hN⟩, hp, hq⟩, hhalf⟩ := hn
+      refine ⟨⟨by omega, by omega⟩, hq, ?_⟩
+      rw [Nat.sub_sub_self hN.le]
+      exact hp
+    · intro a ha b hb hab
+      rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_filter, Finset.mem_Ioo] at ha hb
+      have : N - a = N - b := hab
+      omega
+  have h3 := Finset.card_le_card h1
+  rw [← Finset.filter_card_add_filter_neg_card_eq_card (fun n => n ≤ N / 2)]
+  omega
+
+/-- **Step:** Selberg's bound, the multiples count at any shift and the lower
+bound for the twin sum give Selberg's bound for Goldbach pairs. -/
+theorem selberg_goldbach_bound_step (h_sb : RNS.SelbergBound.selberg_bound)
+    (h_sc : RNS.BrunTwinCount.shift_multiples_count) (h_low : twin_selberg_sum_lower) :
+    selberg_goldbach_bound := by
+  intro N hN
+  obtain ⟨t, ht5184, hlo, hLpos, hy1, hGlow, ht6, hz⟩ := twin_parameters h_low N hN
+  have hNpos : (0 : ℝ) < N := lt_of_lt_of_le (by positivity) hN
+  have hN0 : N ≠ 0 := by
+    rintro rfl
+    simp at hNpos
+  -- the cut-off is at most N / 2
+  have hzN : 2 * (t ^ 2 + 1) ≤ N := by
+    have h6 : 2 ^ 6 ≤ t ^ 6 := Nat.pow_le_pow_left (by omega) 6
+    have h1 : 1 ≤ t ^ 2 := Nat.one_le_pow _ _ (by omega)
+    have h48 : 4 * t ^ 2 ≤ t ^ 8 := by
+      calc 4 * t ^ 2 ≤ t ^ 6 * t ^ 2 := Nat.mul_le_mul_right _ (by norm_num at h6 ⊢; omega)
+        _ = t ^ 8 := by ring
+    omega
+  -- the shift
+  obtain ⟨Qp, hQp⟩ : ∃ Qp, Qp = ∏ p ∈ shiftWheels N (t ^ 2 + 1), p := ⟨_, rfl⟩
+  have hQp1 : 1 ≤ Qp := by
+    rw [hQp]
+    exact Finset.prod_pos (fun p hp => (shiftWheels_prime hp).pos)
+  obtain ⟨c, hc⟩ : ∃ c, c = (Qp - 1) * N := ⟨_, rfl⟩
+  have hiff : ∀ p ∈ twin_wheels (t ^ 2 + 1), p ∣ c ↔ p ∣ N := by
+    intro p hp
+    have hpP := twin_wheels_prime hp
+    constructor
+    · intro hpc
+      rw [hc] at hpc
+      rcases (Nat.Prime.dvd_mul hpP).mp hpc with h1 | h1
+      · by_contra hpN
+        have hmem : p ∈ shiftWheels N (t ^ 2 + 1) := Finset.mem_filter.mpr ⟨hp, hpN⟩
+        have hpQ : p ∣ Qp := by
+          rw [hQp]
+          exact Finset.dvd_prod_of_mem (fun q => q) hmem
+        have h2 : p ∣ Qp - 1 + 1 := by
+          rw [show Qp - 1 + 1 = Qp by omega]
+          exact hpQ
+        have h3 : p ∣ 1 := (Nat.dvd_add_right h1).mp h2
+        exact hpP.one_lt.ne' (Nat.dvd_one.mp h3)
+      · exact h1
+    · intro hpN
+      rw [hc]
+      exact Dvd.dvd.mul_left hpN _
+  have hWc : shiftWheels c (t ^ 2 + 1) = shiftWheels N (t ^ 2 + 1) := by
+    unfold shiftWheels
+    exact Finset.filter_congr (fun p hp => not_congr (hiff p hp))
+  have hBc : badWheels c (t ^ 2 + 1) = badWheels N (t ^ 2 + 1) := by
+    unfold badWheels
+    exact Finset.filter_congr (fun p hp => hiff p hp)
+  -- Goldbach pairs from the cut-off up survive the shifted sieve
+  have hW : ∀ p ∈ shiftWheels N (t ^ 2 + 1), p.Prime := fun p hp => shiftWheels_prime hp
+  have hsurv : ((Finset.Ioc 0 (N / 2)).filter (fun m => m.Prime ∧ (N - m).Prime)).card ≤
+      (t ^ 2 + 1) + ((Finset.Ioc 0 (N / 2)).filter
+        (fun m => Nat.Coprime (∏ p ∈ shiftWheels N (t ^ 2 + 1), p) (m * (m + c)))).card := by
+    have hsub : (Finset.Ioc 0 (N / 2)).filter (fun m => m.Prime ∧ (N - m).Prime) ⊆
+        Finset.range (t ^ 2 + 1) ∪ (Finset.Ioc 0 (N / 2)).filter
+          (fun m => Nat.Coprime (∏ p ∈ shiftWheels N (t ^ 2 + 1), p) (m * (m + c))) := by
+      intro n hn
+      obtain ⟨hnN, hp, hq⟩ := Finset.mem_filter.mp hn
+      have hnN' := Finset.mem_Ioc.mp hnN
+      rw [Finset.mem_union, Finset.mem_range, Finset.mem_filter]
+      by_cases hnz : n < t ^ 2 + 1
+      · exact Or.inl hnz
+      · right
+        refine ⟨hnN, Nat.Coprime.mul_right ?_ ?_⟩
+        · refine ((hp.coprime_iff_not_dvd).mpr (fun hd => hnz ?_)).symm
+          exact (mem_twin_wheels.mp (shiftWheels_mem (mem_of_prime_dvd_prod hW hp hd)).1).2.1
+        · refine Nat.Coprime.prod_left (fun p hp' => ?_)
+          have hpP := shiftWheels_prime hp'
+          refine (hpP.coprime_iff_not_dvd).mpr (fun hpd => ?_)
+          have hpQ : p ∣ Qp := by
+            rw [hQp]
+            exact Finset.dvd_prod_of_mem (fun q => q) hp'
+          have hid : n + c + (N - n) = Qp * N := by
+            obtain ⟨k, hk⟩ : ∃ k, Qp = k + 1 := ⟨Qp - 1, by omega⟩
+            rw [hc, hk, Nat.add_sub_cancel]
+            have hnle : n ≤ N := by omega
+            calc n + k * N + (N - n) = k * N + (n + (N - n)) := by ring
+              _ = k * N + N := by rw [Nat.add_sub_of_le hnle]
+              _ = (k + 1) * N := by ring
+          have h1 : p ∣ n + c + (N - n) := by
+            rw [hid]
+            exact Dvd.dvd.mul_right hpQ N
+          have h2 : p ∣ N - n := (Nat.dvd_add_right hpd).mp h1
+          have h3 : p = N - n := (Nat.prime_dvd_prime_iff_eq hpP hq).mp h2
+          have h4 := (mem_twin_wheels.mp (shiftWheels_mem hp').1).2.1
+          omega
+    refine (Finset.card_le_card hsub).trans ((Finset.card_union_le _ _).trans ?_)
+    rw [Finset.card_range]
+  set Q := (N : ℝ) / Real.log N ^ 2 with hQ
+  have hQ0 : 0 ≤ Q := by positivity
+  have hGpos : 0 < twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2) :=
+    lt_of_lt_of_le (by positivity) hGlow
+  have hcore := shift_core h_sb h_sc c (N / 2) (t ^ 2 + 1) ((t : ℝ) ^ 2) hy1 hGpos
+  rw [hWc, hBc] at hcore
+  have hE := error_le_of (shiftWheels N (t ^ 2 + 1))
+    (fun p hp => ⟨shiftWheels_prime hp, twin_wheels_five (shiftWheels_mem hp).1⟩) t
+  have hcount : (goldbach_count N : ℝ) ≤ 2 * ((t : ℝ) ^ 2 + 1 + (((Finset.Ioc 0 (N / 2)).filter
+      (fun m => Nat.Coprime (∏ p ∈ shiftWheels N (t ^ 2 + 1), p) (m * (m + c)))).card : ℝ)) := by
+    have := (goldbach_half N).trans (Nat.mul_le_mul_left 2 hsurv)
+    exact_mod_cast this
+  have hX : ((N / 2 : ℕ) : ℝ) ≤ (N : ℝ) / 2 := Nat.cast_div_le
+  have hdivG : ((N / 2 : ℕ) : ℝ) / twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2) ≤ 18432 * Q := by
+    have hpos : 0 < Real.log N ^ 2 / 36864 := by positivity
+    calc ((N / 2 : ℕ) : ℝ) / twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2)
+        ≤ ((N : ℝ) / 2) / twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2) :=
+          div_le_div_of_nonneg_right hX hGpos.le
+      _ ≤ ((N : ℝ) / 2) / (Real.log N ^ 2 / 36864) :=
+          div_le_div_of_nonneg_left (by positivity) hpos hGlow
+      _ = 18432 * Q := by rw [hQ]; field_simp; ring
+  have hF := bad_le_pair_factor N (t ^ 2 + 1) hN0
+  have hF1 := one_le_pair_factor N
+  have hmain : (∏ p ∈ badWheels N (t ^ 2 + 1), (1 + 2 / ((p : ℝ) - 2))) * ((N / 2 : ℕ) : ℝ) /
+      twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2) ≤ 18432 * (pair_factor N * Q) := by
+    rw [mul_div_assoc]
+    calc (∏ p ∈ badWheels N (t ^ 2 + 1), (1 + 2 / ((p : ℝ) - 2))) *
+          (((N / 2 : ℕ) : ℝ) / twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2))
+        ≤ pair_factor N * (18432 * Q) :=
+          mul_le_mul hF hdivG (div_nonneg (Nat.cast_nonneg _) hGpos.le) (by linarith)
+      _ = 18432 * (pair_factor N * Q) := by ring
+  have hPQ : Q ≤ pair_factor N * Q := le_mul_of_one_le_left hQ0 hF1
+  rw [show 40000 * pair_factor N * (N : ℝ) / Real.log N ^ 2 = 40000 * (pair_factor N * Q) by
+    rw [hQ]; ring]
+  linarith
+
 end RNS.SelbergTwinRails
 
 #print axioms RNS.SelbergTwinRails.selberg_twin_columns_bound_step
 #print axioms RNS.SelbergTwinRails.twin_selberg_sum_lower_holds
 #print axioms RNS.SelbergTwinRails.selberg_twin_bound_step
+#print axioms RNS.SelbergTwinRails.selberg_gap_bound_step
+#print axioms RNS.SelbergTwinRails.selberg_goldbach_bound_step
