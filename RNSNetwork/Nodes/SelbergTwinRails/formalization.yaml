@@ -50,6 +50,24 @@ conclusions:
     note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09).
       Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
+- id: selberg_twin_bound
+  declaration: RNS.SelbergTwinRails.selberg_twin_bound
+  summary: From N at least 5184^8 on, the twin prime pairs up to N number at most 40000 N / log^2 N
+    (level t^2, cut-off t^2 + 1, t the eighth root of N rounded down). The right order, against
+    Brun's N / log^(3/2) N; the constant is crude.
+  imports:
+  - SelbergTwinRails.v1.selberg_twin_columns_bound
+  - SelbergTwinRails.v1.twin_selberg_sum_lower
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/SelbergTwinRails.lean
+    declaration: RNS.SelbergTwinRails.selberg_twin_bound_step
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09), from
+      its imports taken as named hypotheses. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
+  designated: lean-proof
 planned:
   source_status: New
   rests_on:

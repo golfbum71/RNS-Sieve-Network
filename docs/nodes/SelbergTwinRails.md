@@ -65,8 +65,27 @@ def twin_selberg_sum_lower : Prop :=
 
 **Proof:** `RNS.SelbergTwinRails.twin_selberg_sum_lower_holds` in [`RNSSolutions/SelbergTwinRails.lean`](../../RNSSolutions/SelbergTwinRails.lean)
 
+<a id="selberg_twin_bound"></a>
+### `selberg_twin_bound`
+
+From N at least 5184^8 on, the twin prime pairs up to N number at most 40000 N / log^2 N (level t^2, cut-off t^2 + 1, t the eighth root of N rounded down). The right order, against Brun's N / log^(3/2) N; the constant is crude.
+
+```lean
+/-- **Selberg's bound for twin primes.** From `N` at least 5184⁸ on, the twin
+prime pairs whose smaller member is at most `N` number at most
+40000 N / log² N. -/
+def selberg_twin_bound : Prop :=
+  ∀ N : ℕ, (5184 : ℝ) ^ 8 ≤ N →
+    (RNS.BrunTwinBound.twin_prime_count N : ℝ) ≤ 40000 * N / Real.log N ^ 2
+```
+
+**Rests on:** [`SelbergTwinRails.selberg_twin_columns_bound`](SelbergTwinRails.md#selberg_twin_columns_bound), [`SelbergTwinRails.twin_selberg_sum_lower`](SelbergTwinRails.md#twin_selberg_sum_lower)
+
+**Proof:** `RNS.SelbergTwinRails.selberg_twin_bound_step` in [`RNSSolutions/SelbergTwinRails.lean`](../../RNSSolutions/SelbergTwinRails.lean)
+
 ## Used by
 
+- [`SelbergTwinRails`](SelbergTwinRails.md)
 - [`ErdosSmallGaps`](ErdosSmallGaps.md)
 
 ## Files
