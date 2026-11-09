@@ -47,6 +47,24 @@ def selberg_twin_columns_bound : Prop :=
 
 **Proof:** `RNS.SelbergTwinRails.selberg_twin_columns_bound_step` in [`RNSSolutions/SelbergTwinRails.lean`](../../RNSSolutions/SelbergTwinRails.lean)
 
+<a id="twin_selberg_sum_lower"></a>
+### `twin_selberg_sum_lower`
+
+When the level y is at least 6^4 and below the square of the cut-off, Selberg's twin sum is at least (log y - 4 log 6)^2 / 576, the order log^2 y of Ford's Theorem 4.4 with a crude constant.
+
+```lean
+/-- **The twin sum grows like log² of the level.** When the level `y` is at
+least 6⁴ and below the square of the cut-off `z`, Selberg's twin sum is at
+least (log y − 4 log 6)² / 576. -/
+def twin_selberg_sum_lower : Prop :=
+  ∀ (z : ℕ) (y : ℝ), (6 : ℝ) ^ 4 ≤ y → y < (z : ℝ) ^ 2 →
+    (Real.log y - 4 * Real.log 6) ^ 2 / 576 ≤ twin_selberg_sum z y
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.SelbergTwinRails.twin_selberg_sum_lower_holds` in [`RNSSolutions/SelbergTwinRails.lean`](../../RNSSolutions/SelbergTwinRails.lean)
+
 ## Used by
 
 - [`ErdosSmallGaps`](ErdosSmallGaps.md)
