@@ -71,7 +71,8 @@ private theorem prime_count_nth (n : ℕ) :
   have h1 : Nat.count Nat.Prime (Nat.nth Nat.Prime n) = n :=
     Nat.count_nth_of_infinite Nat.infinite_setOfPred_prime n
   show Nat.count Nat.Prime (Nat.nth Nat.Prime n + 1) = n + 1
-  rw [Nat.count_succ, h1, if_pos (Nat.prime_nth_prime n)]
+  rw [Nat.count_succ, h1]
+  simp [Nat.prime_nth_prime n]
 
 private theorem nth_prime_two_le (n : ℕ) : 2 ≤ Nat.nth Nat.Prime n :=
   (Nat.prime_nth_prime n).two_le
@@ -153,14 +154,14 @@ theorem next_prime_ratio_step (h_pnt : RNS.PrimeNumberTheorem.prime_number_theor
     rw [add_zero] at h
     refine h.congr (fun n => ?_)
     have : (n : ℝ) + 1 ≠ 0 := by positivity
-    first | (field_simp; ring) | field_simp
+    field_simp
   -- b n = ratio × log p / log p' tends to 1
   have hb : Tendsto (fun n : ℕ => (Nat.nth Nat.Prime (n + 1) : ℝ) / Nat.nth Nat.Prime n *
       Real.log (Nat.nth Nat.Prime n) / Real.log (Nat.nth Nat.Prime (n + 1))) atTop (𝓝 1) := by
     have h := (ha.div ha1 one_ne_zero).mul hfrac
     rw [div_one, mul_one] at h
     refine h.congr (fun n => ?_)
-    simp only [Pi.mul_apply, Pi.div_apply]
+    simp only [Pi.div_apply]
     have h0 : (Nat.nth Nat.Prime n : ℝ) ≠ 0 := by linarith [hP n]
     have h0' : (Nat.nth Nat.Prime (n + 1) : ℝ) ≠ 0 := by linarith [hP (n + 1)]
     have hl : Real.log (Nat.nth Nat.Prime n) ≠ 0 := (hLpos n).ne'
@@ -214,8 +215,9 @@ theorem next_prime_ratio_step (h_pnt : RNS.PrimeNumberTheorem.prime_number_theor
       nlinarith [h3, hbL]
     have hform : r * L / L' * (1 + (r * L / L' - 1) / (L - r * L / L')) =
         r * L / L' * (L - 1) / (L - r * L / L') := by
-      have : L - r * L / L' ≠ 0 := hn.ne'
-      field_simp
+      have hD : L - r * L / L' ≠ 0 := hn.ne'
+      rw [one_add_div hD, ← mul_div_assoc]
+      congr 1
       ring
     rw [hform, le_div_iff₀ hn]
     exact hkey
@@ -266,8 +268,8 @@ theorem twin_count_at_squares_step
   have hp2 : (2 : ℝ) ≤ Nat.nth Nat.Prime n := by exact_mod_cast nth_prime_two_le n
   have hLp : Real.log (Nat.nth Nat.Prime n) ≠ 0 := (Real.log_pos (by linarith)).ne'
   have hX : ((Nat.nth Nat.Prime n ^ 2 : ℕ) : ℝ) ≠ 0 := by
-    have : (0 : ℝ) < ((Nat.nth Nat.Prime n ^ 2 : ℕ) : ℝ) := by positivity
-    exact this.ne'
+    have : 0 < Nat.nth Nat.Prime n ^ 2 := pow_pos (Nat.prime_nth_prime n).pos 2
+    exact_mod_cast this.ne'
   have hKn := hK.ne'
   have hLx : Real.log ((Nat.nth Nat.Prime n ^ 2 : ℕ) : ℝ) =
       2 * Real.log (Nat.nth Nat.Prime n) := by
@@ -340,7 +342,7 @@ private theorem sandwich (K : ℝ) (hK : 0 < K) (c : ℕ → ℝ) (hc : Monotone
       have := hapos.ne'
       have : (s (last_index s N + 1) : ℝ) ≠ 0 := by linarith
       have := hK.ne'
-      first | (field_simp; ring) | field_simp
+      field_simp
     rw [hform]
     unfold nratio
     apply div_le_div₀ (mul_nonneg (hc0 N) (sq_nonneg _))
@@ -367,7 +369,7 @@ private theorem sandwich (K : ℝ) (hK : 0 < K) (c : ℕ → ℝ) (hc : Monotone
       have := hapos.ne'
       have := hbpos.ne'
       have := hK.ne'
-      first | (field_simp; ring) | field_simp
+      field_simp
     rw [hform]
     unfold nratio
     apply div_le_div₀ (mul_nonneg (hc0 _) (sq_nonneg _))
