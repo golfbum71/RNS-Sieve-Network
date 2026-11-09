@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 80 of 97 nodes are built, holding 238 claims: 232 proved in Lean, 1 with a proof drafted but not yet built and 5 cited from a published paper. They are joined by 125 arrows, each a Lean-checked step. Of the other 17 nodes, drawn dashed or purple, 14 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 80 of 97 nodes are built, holding 238 claims: 233 proved in Lean and 5 cited from a published paper. They are joined by 125 arrows, each a Lean-checked step. Of the other 17 nodes, drawn dashed or purple, 14 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -422,7 +422,7 @@ graph LR
     p3["<i>planned: new, not yet proved</i>"]
   end
   subgraph s23["87. SelbergTwinRails (in Sieve methods)"]
-    p4["<i>proof drafted, not yet built</i>"]
+    p4["<i>proved in Lean</i>"]
   end
   o1{{"<i>open conjecture</i><br/>hardy_littlewood_conjecture"}}
   o2{{"<i>open conjecture</i><br/>HL_conjecture_A"}}
@@ -796,7 +796,7 @@ graph LR
     p10["<i>planned: new, not yet proved</i>"]
   end
   subgraph s22["87. SelbergTwinRails (in Sieve methods)"]
-    p11["<i>proof drafted, not yet built</i>"]
+    p11["<i>proved in Lean</i>"]
   end
   o1{{"<i>open conjecture</i><br/>jacobsthal_bound_holds"}}
   o2{{"<i>open conjecture</i><br/>four_survivors_bound_holds"}}
@@ -1049,7 +1049,7 @@ graph LR
     p3["<i>planned: new, not yet proved</i>"]
   end
   subgraph s19["87. SelbergTwinRails (in Sieve methods)"]
-    p4["<i>proof drafted, not yet built</i>"]
+    p4["<i>proved in Lean</i>"]
   end
   subgraph s20["88. ParityBarrier (in Sieve methods)"]
     p5["<i>planned: new, not yet proved</i>"]
@@ -1337,8 +1337,7 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42 verified;
-  class c31 draft;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42 verified;
   class p1,p2,p3,p4,p5,p6,p7,p8 new;
   class p9,p10,p11,p12,p13,p14,p15,p16 stub;
   click p9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md" _blank
@@ -1719,7 +1718,7 @@ The results nothing else builds on, each with everything beneath it.
 - [`BuchstabIdentity.legendre_phi_recurrence`](docs/nodes/BuchstabIdentity.md#legendre_phi_recurrence) — proved in Lean
 - [`BuchstabIdentity.buchstab_identity`](docs/nodes/BuchstabIdentity.md#buchstab_identity) — proved in Lean
 - [`BuchstabIdentity.buchstab_product_identity`](docs/nodes/BuchstabIdentity.md#buchstab_product_identity) — proved in Lean
-- [`SelbergTwinRails.selberg_twin_columns_bound`](docs/nodes/SelbergTwinRails.md#selberg_twin_columns_bound) — proof drafted, not yet built
+- [`SelbergTwinRails.selberg_twin_columns_bound`](docs/nodes/SelbergTwinRails.md#selberg_twin_columns_bound) — proved in Lean
   - [`SelbergBound.selberg_bound`](docs/nodes/SelbergBound.md#selberg_bound) — proved in Lean
   - [`BrunTwinCount.twin_multiples_count`](docs/nodes/BrunTwinCount.md#twin_multiples_count) — proved in Lean
 - [`PolynomialPatterns.poly_admissible_iff`](docs/nodes/PolynomialPatterns.md#poly_admissible_iff) — proved in Lean
@@ -2153,7 +2152,7 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 84 | [`FundamentalLemma`](docs/nodes/FundamentalLemma.md) | the survivor count matches its share while the wheels stay small | planned: new, not yet proved |
 | 85 | [`LowerBoundSieve`](docs/nodes/LowerBoundSieve.md) | twin columns with few prime factors | planned: new, not yet proved |
 | 86 | [`PetiteSieve`](docs/nodes/PetiteSieve.md) | an exact asymptotic for patterns of small dimension | planned: new, not yet proved |
-| 87 | [`SelbergTwinRails`](docs/nodes/SelbergTwinRails.md) | Selberg's bounds for the twin columns and prime pairs | proof drafted, not yet built |
+| 87 | [`SelbergTwinRails`](docs/nodes/SelbergTwinRails.md) | Selberg's bounds for the twin columns and prime pairs | proved in Lean |
 | 88 | [`ParityBarrier`](docs/nodes/ParityBarrier.md) | Selberg's parity example | planned: new, not yet proved |
 | 89 | [`PolynomialPatterns`](docs/nodes/PolynomialPatterns.md) | polynomial patterns: admissibility and the Bateman-Horn conjecture | proved in Lean; rests on open conjectures as hypotheses |
 | 90 | [`SmoothNumbers`](docs/nodes/SmoothNumbers.md) | numbers built only from the wheels | proved in Lean |

@@ -15,7 +15,7 @@ wheels as a factor. Each wheel blocks two positions of its cycle, so its share
 is 2 over the wheel; the wheels 2 and 3 are left out, because there the twin
 columns are already fixed (`GapTracks`) and a share must stay below 1.
 
-Stage 1 (this file so far): the wheels form a Selberg sieve problem, and
+Built so far: the wheels form a Selberg sieve problem, and
 Selberg's bound (`SelbergBound`) gives, for any level at least 1: the
 survivors among the positions 1 to `N` number at most `N` over Selberg's twin
 sum, plus, over the divisors of the wheel product up to the level, 6 to the

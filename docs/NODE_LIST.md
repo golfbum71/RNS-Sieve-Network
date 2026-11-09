@@ -1221,11 +1221,10 @@ When each wheel blocks only a small share on average, the survivor count is asym
 - Status: Planned
 
 ### 87. `SelbergTwinRails` — Selberg's bound for the twin columns
-The wheels from 5 up form a Selberg sieve problem for the twin columns, with each wheel's share two over the wheel; the wheels 2 and 3 must be left out, since Mathlib's sieve needs every share positive and the columns have share zero there. Selberg's Lambda-squared weights then give at most four times the twin-prime constant times N over log N squared twin pairs, four times the conjectured count. Ford Theorems 4.1 and 4.5.
-- Lean (planned): `wheels_selberg_instance`, `selberg_twin_columns_bound`
-- Rests on: `TwinConstant`, `ShareAsymptotics`
-- Scope: wheels_selberg_instance: Tier 1. selberg_twin_columns_bound: Tier 3 (needs the asymptotic for J, Ford Theorem 4.4).
-- Status: Planned
+The wheels from 5 up form a Selberg sieve problem for the twin columns: the numbers m(m + 2) for m from 1 to N, each wheel's share 2 over the wheel; the wheels 2 and 3 are left out, since the sieve needs every share strictly between 0 and 1. Built (2026-11-09): for any level y at least 1, the survivors of the twin columns among 1 to N number at most N over Selberg's twin sum (over the divisors l of the wheel product with l² at most y, the product of 2/(p − 2) over the prime factors of l), plus, over the divisors d up to y, 6 to the number of prime factors of d. The 6 is Selberg's 3 per prime factor times `BrunTwinCount`'s error of 2 per prime factor. Next: the twin sum is at least a constant times log² y (Ford Theorem 4.4), giving at most a constant times N / log² N twin pairs; then the constant four times the twin-prime constant (Ford Theorem 4.5).
+- Lean: `selberg_twin_columns_bound`; planned `twin_selberg_sum_lower`, `selberg_twin_bound`, `selberg_gap_bound`, `selberg_goldbach_bound`
+- Rests on: `SelbergBound`, `BrunTwinCount` (built); planned also `TwinConstant`, `ShareAsymptotics`
+- Status: Partly built. `selberg_twin_columns_bound` proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-09). The rest planned.
 
 ### 88. `ParityBarrier` — Selberg's parity example
 The numbers with an even and with an odd count of prime factors have the same sieve data: the multiples of every product of wheels split evenly between the two sets, to within a vanishing error. Yet with the wheels up to the square root one set keeps only 1 and the other keeps about all the primes. So wheel densities alone cannot tell primes from products of two primes; beating parity needs an ingredient that breaks this example. Ford Sections 1.7.4 and 4.2.

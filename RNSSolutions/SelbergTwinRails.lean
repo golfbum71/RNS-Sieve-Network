@@ -18,6 +18,9 @@ import Mathlib.Tactic.Positivity
 /-!
 # Proofs for SelbergTwinRails
 
+Built clean by `lake build RNSSolutions` on 2026-11-09; `#print axioms` shows only
+the standard three.
+
 Imports claims only. `selberg_twin_columns_bound` is a step from
 `SelbergBound.selberg_bound` and `BrunTwinCount.twin_multiples_count`, taken as
 named hypotheses.

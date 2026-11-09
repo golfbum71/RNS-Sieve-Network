@@ -29,10 +29,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/SelbergTwinRails.lean
     declaration: RNS.SelbergTwinRails.selberg_twin_columns_bound_step
-    note: Lean step from its imports taken as named hypotheses; not yet built.
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09), from
+      its imports taken as named hypotheses. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 planned:
   source_status: New
