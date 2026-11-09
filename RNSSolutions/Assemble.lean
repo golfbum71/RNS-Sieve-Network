@@ -513,3 +513,9 @@ theorem RNS.BrunHooley.brun_hooley_bound_exp_holds : RNS.BrunHooley.brun_hooley_
   RNS.BrunHooley.brun_hooley_bound_exp_step RNS.BrunHooley.brun_hooley_bound_holds
 
 #print axioms RNS.BrunHooley.brun_hooley_bound_exp_holds
+
+/-- `BrunPureSieve`, `BrunTruncation` → `BrunHooley`: bounded ranges give a bounded factor. -/
+theorem RNS.BrunHooley.brun_hooley_order_holds : RNS.BrunHooley.brun_hooley_order :=
+  RNS.BrunHooley.brun_hooley_order_step RNS.BrunHooley.brun_hooley_bound_exp_holds
+
+#print axioms RNS.BrunHooley.brun_hooley_order_holds

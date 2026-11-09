@@ -271,4 +271,78 @@ theorem brun_hooley_bound_exp_step (hbound : brun_hooley_bound) : brun_hooley_bo
 #print axioms RNS.BrunHooley.product_exp_bound_holds
 #print axioms RNS.BrunHooley.brun_hooley_bound_exp_step
 
+/-! ## Bounded ranges give a bounded factor
+
+Idea. Each range's term in the exponent is at most `L ^ (b i + 1) / (b i + 1)!`
+divided by `v`. The stopping points are distinct, so these are distinct terms
+of the series for `e ^ L`, whose partial sums are at most `e ^ L`. -/
+
+theorem brun_hooley_order_step (hexp : brun_hooley_bound_exp) : brun_hooley_order := by
+  intro I P b S val X g L v hb hinj hP hX hg hL hLs hv hvV
+  have hg' : ∀ i ∈ I, ∀ q ∈ P i, 0 ≤ g q ∧ g q ≤ 1 :=
+    fun i hi q hq => ⟨(hg i hi q hq).1, (hg i hi q hq).2.le⟩
+  have h := hexp I P b S val X g hb hP hX hg' (fun i hi q hq => (hg i hi q hq).2)
+  have hVpos : 0 ≤ ∏ i ∈ I, ∏ q ∈ P i, (1 - g q) :=
+    Finset.prod_nonneg (fun i hi => Finset.prod_nonneg (fun q hq => by linarith [(hg i hi q hq).2]))
+  have hterm : ∀ i ∈ I, ((∑ q ∈ P i, g q) ^ (b i + 1) / ((b i + 1).factorial : ℝ)) /
+      ∏ q ∈ P i, (1 - g q) ≤ (L ^ (b i + 1) / ((b i + 1).factorial : ℝ)) / v := by
+    intro i hi
+    have hs : 0 ≤ ∑ q ∈ P i, g q := Finset.sum_nonneg (fun q hq => (hg i hi q hq).1)
+    have hf : (0 : ℝ) < ((b i + 1).factorial : ℝ) := by exact_mod_cast Nat.factorial_pos _
+    have hE0 : 0 ≤ (∑ q ∈ P i, g q) ^ (b i + 1) / ((b i + 1).factorial : ℝ) :=
+      div_nonneg (pow_nonneg hs _) hf.le
+    have h1 : (∑ q ∈ P i, g q) ^ (b i + 1) / ((b i + 1).factorial : ℝ) ≤
+        L ^ (b i + 1) / ((b i + 1).factorial : ℝ) :=
+      div_le_div_of_nonneg_right (pow_le_pow_left₀ hs (hLs i hi) _) hf.le
+    calc ((∑ q ∈ P i, g q) ^ (b i + 1) / ((b i + 1).factorial : ℝ)) / ∏ q ∈ P i, (1 - g q)
+        ≤ ((∑ q ∈ P i, g q) ^ (b i + 1) / ((b i + 1).factorial : ℝ)) / v :=
+          div_le_div_of_nonneg_left hE0 hv (hvV i hi)
+      _ ≤ (L ^ (b i + 1) / ((b i + 1).factorial : ℝ)) / v := div_le_div_of_nonneg_right h1 hv.le
+  have hsum : ∑ i ∈ I, L ^ (b i + 1) / ((b i + 1).factorial : ℝ) ≤ Real.exp L := by
+    have himg : ∑ i ∈ I, L ^ (b i + 1) / ((b i + 1).factorial : ℝ) =
+        ∑ k ∈ I.image (fun i => b i + 1), L ^ k / (k.factorial : ℝ) := by
+      rw [Finset.sum_image]
+      intro i hi j hj hij
+      exact hinj hi hj (by simpa using hij)
+    rw [himg]
+    have hM : I.image (fun i => b i + 1) ⊆
+        Finset.range ((I.image (fun i => b i + 1)).sup id + 1) :=
+      fun k hk => Finset.mem_range.mpr (Nat.lt_succ_of_le (Finset.le_sup (f := id) hk))
+    calc ∑ k ∈ I.image (fun i => b i + 1), L ^ k / (k.factorial : ℝ)
+        ≤ ∑ k ∈ Finset.range ((I.image (fun i => b i + 1)).sup id + 1),
+            L ^ k / (k.factorial : ℝ) :=
+          Finset.sum_le_sum_of_subset_of_nonneg hM
+            (fun k _ _ => div_nonneg (pow_nonneg hL _) (Nat.cast_nonneg _))
+      _ ≤ Real.exp L := Real.sum_le_exp_of_nonneg hL _
+  have hexpo : ∑ i ∈ I, ((∑ q ∈ P i, g q) ^ (b i + 1) / ((b i + 1).factorial : ℝ)) /
+      ∏ q ∈ P i, (1 - g q) ≤ Real.exp L / v := by
+    calc ∑ i ∈ I, ((∑ q ∈ P i, g q) ^ (b i + 1) / ((b i + 1).factorial : ℝ)) /
+          ∏ q ∈ P i, (1 - g q)
+        ≤ ∑ i ∈ I, (L ^ (b i + 1) / ((b i + 1).factorial : ℝ)) / v := Finset.sum_le_sum hterm
+      _ = (∑ i ∈ I, L ^ (b i + 1) / ((b i + 1).factorial : ℝ)) / v := by rw [Finset.sum_div]
+      _ ≤ Real.exp L / v := div_le_div_of_nonneg_right hsum hv.le
+  have hmono : X * (∏ i ∈ I, ∏ q ∈ P i, (1 - g q)) *
+        Real.exp (∑ i ∈ I, ((∑ q ∈ P i, g q) ^ (b i + 1) / ((b i + 1).factorial : ℝ)) /
+          ∏ q ∈ P i, (1 - g q)) ≤
+      X * (∏ i ∈ I, ∏ q ∈ P i, (1 - g q)) * Real.exp (Real.exp L / v) :=
+    mul_le_mul_of_nonneg_left (Real.exp_le_exp.mpr hexpo) (mul_nonneg hX hVpos)
+  linarith
+
+theorem choice_product_le_holds : choice_product_le := by
+  intro I P b y hy hP c hc
+  rw [Finset.mem_pi] at hc
+  calc ∏ x ∈ I.attach, ∏ q ∈ c x.1 x.2, q ≤ ∏ x ∈ I.attach, y x.1 ^ b x.1 := by
+        apply Finset.prod_le_prod₀ (fun _ _ => Nat.zero_le _)
+        intro x _
+        have hcx := hc x.1 x.2
+        unfold small_sets at hcx
+        rw [Finset.mem_filter, Finset.mem_powerset] at hcx
+        calc ∏ q ∈ c x.1 x.2, q ≤ y x.1 ^ (c x.1 x.2).card :=
+              Finset.prod_le_pow_card _ _ _ (fun q hq => hP x.1 x.2 q (hcx.1 hq))
+          _ ≤ y x.1 ^ b x.1 := Nat.pow_le_pow_right (hy x.1 x.2) hcx.2
+    _ = ∏ i ∈ I, y i ^ b i := Finset.prod_attach I (fun i => y i ^ b i)
+
+#print axioms RNS.BrunHooley.brun_hooley_order_step
+#print axioms RNS.BrunHooley.choice_product_le_holds
+
 end RNS.BrunHooley

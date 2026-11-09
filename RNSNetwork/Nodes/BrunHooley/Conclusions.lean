@@ -158,3 +158,35 @@ def brun_hooley_bound_exp : Prop :=
       ∑ c ∈ I.pi (fun i => small_sets (P i) (b i)), |choice_remainder I S val X g c|
 
 end RNS.BrunHooley
+
+/-! ## Bounded ranges give a bounded factor (the general step of Ford, Theorem 2.4) -/
+
+namespace RNS.BrunHooley
+
+/-- **Bounded ranges.** If the stopping points are distinct even numbers, each
+range's total share is at most `L` (with `L ≥ 0`), each range's product of
+one minus the shares is at least `v > 0`, and the shares are below 1, then the
+sifted positions are at most `X` times the product over all the ranges, times
+e to the power `e ^ L / v`, plus the absolute remainders. The factor depends
+only on `L` and `v`, not on the number of ranges. -/
+def brun_hooley_order : Prop :=
+  ∀ (I : Finset ℕ) (P : ℕ → Finset ℕ) (b : ℕ → ℕ) (S : Finset ℕ) (val : ℕ → ℕ) (X : ℝ)
+    (g : ℕ → ℝ) (L v : ℝ),
+    (∀ i ∈ I, Even (b i)) → Set.InjOn b I → (∀ i ∈ I, ∀ q ∈ P i, q.Prime) → 0 ≤ X →
+    (∀ i ∈ I, ∀ q ∈ P i, 0 ≤ g q ∧ g q < 1) → 0 ≤ L → (∀ i ∈ I, ∑ q ∈ P i, g q ≤ L) →
+    0 < v → (∀ i ∈ I, v ≤ ∏ q ∈ P i, (1 - g q)) →
+    ((sifted_positions I P S val).card : ℝ) ≤
+      X * (∏ i ∈ I, ∏ q ∈ P i, (1 - g q)) * Real.exp (Real.exp L / v) +
+      ∑ c ∈ I.pi (fun i => small_sets (P i) (b i)), |choice_remainder I S val X g c|
+
+/-- **The size of a choice.** If every wheel of range `i` is at most `y i`
+(each `y i ≥ 1`), the product of the wheels of any choice of at most `b i`
+wheels from each range is at most the product of `y i ^ b i`: this is how
+the remainders are kept to moduli up to a set level. -/
+def choice_product_le : Prop :=
+  ∀ (I : Finset ℕ) (P : ℕ → Finset ℕ) (b y : ℕ → ℕ), (∀ i ∈ I, 1 ≤ y i) →
+    (∀ i ∈ I, ∀ q ∈ P i, q ≤ y i) →
+    ∀ c ∈ I.pi (fun i => small_sets (P i) (b i)),
+      ∏ x ∈ I.attach, ∏ q ∈ c x.1 x.2, q ≤ ∏ i ∈ I, y i ^ b i
+
+end RNS.BrunHooley
