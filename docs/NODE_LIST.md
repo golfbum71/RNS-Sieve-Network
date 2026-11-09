@@ -273,6 +273,24 @@ so each interval is off by the two columns' difference in the overhang.
   standard three (Geoffrey Fischer, 2026-11-04). Checked numerically
   beforehand on 3,647 cases.
 
+### 32. `BirdseySchay` — Birdsey and Schay's heuristic, as a hypothesis
+Their assumption that the wheel share of twins carries into the range below the next prime's square, with one Mertens correction, stated as a named hypothesis, together with the step showing it implies the twin-prime asymptotic.
+- Sources: [J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220](https://arxiv.org/abs/1906.09220) — the heuristic
+- Lean (planned): `birdsey_schay_implies_twin_asymptotic`
+- Rests on: `TwinShare`, `MertensThird`, `PrimeNumberTheorem`
+- Open inputs: `birdsey_schay_heuristic`
+- Scope: Tier 3: needs the two outside sources as hypotheses.
+- Status: Planned (conditional)
+
+### 33. `LargestGap` — the largest gap from the proportional share
+Adding one wheel at most doubles the largest gap between the survivor count and its proportional share, minus one over the new prime; and the average squared gap over the survivor positions has an exact formula.
+- Sources: [P. Codecà and M. Nair, Extremal values of Delta(x,N), Canad. Math. Bull. 41 (1998), 335-347](https://doi.org/10.4153/CMB-1998-046-3) — Theorem 1(i); Theorem 3(i) for the mean square (read from the paper)
+- Lean (planned): `largest_gap_add_wheel`, `mean_square_gap`
+- Rests on: `Sawtooth`, `UniformSubdivision`
+- Scope: largest_gap_add_wheel: Tier 2, multi-session. mean_square_gap: Tier 3 (moved up 2026-11-04): its proof integrates the squared gap over the cycle (Theorem 4(v), via Franel's formula) and needs real integration.
+- Plan: largest_gap_add_wheel (Codecà-Nair Theorem 1(i)): their gap counts the endpoint, matching survivors_upto, and their identity (I) is UniformSubdivision.one_wheel_removed written as a gap. Session 1: define the largest gap as a maximum over survivor positions and prove it equals their supremum over real fractions (their preliminary discussion: the gap is piecewise linear, its maximum is reached at survivor positions, and its infimum is one minus the maximum by mirror symmetry). Session 2: the inequalities (7) and (8) of their proof, by the neighbouring-survivor argument. Session 3: the case split on r that gives Theorem 1(i).
+- Status: Planned
+
 ### 36. `Sawtooth` — the survivor count minus its proportional share
 The survivors up to any point are a signed count over the ways of choosing
 some of the wheels: the bound divided by the product of the chosen wheels,
@@ -292,6 +310,22 @@ the remainders cancel.
   standard three (Geoffrey Fischer, 2026-11-04). Checked numerically beforehand on
   16,065 cases (wheels from 2 to 13, up to 14 intervals, fractions past the
   end of the cycle included).
+
+### 42. `JacobsthalQuadratic` — the quadratic bound on Jacobsthal's function (outside source)
+Every run of consecutive integers longer than a constant times the square of k contains a number coprime to any given number with at most k prime factors. Proved in Lean by OpenAI (September 2026); solves Erdős Problem 970.
+- Sources: [OpenAI math, Jacobsthal quadratic bound (Lean)](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/OAI/NumberTheory/Jacobsthal/Conclusions/QuadraticBound.lean#L13) — the outside Lean proof this node cites; [T. F. Bloom, Erdős Problem 970](https://www.erdosproblems.com/970) — the problem the quadratic bound solves
+- Outside proof: openai/math, [QuadraticBound.lean#L13](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/OAI/NumberTheory/Jacobsthal/Conclusions/QuadraticBound.lean#L13). Listed as solved in DeepMind's formal-conjectures (ErdosProblems/970.lean), which links this proof. Check its toolchain and axioms before citing.
+- Rests on: Mathlib only
+- Scope: Outside source.
+- Status: Planned outside source
+
+### 43. `RoughInPrimeGaps` — almost every prime gap holds a survivor of the wheels below its length (outside source)
+Almost every gap between consecutive primes contains a number whose smallest prime factor is at least the gap's length: a survivor of every wheel smaller than the gap. Proved unconditionally by Gafni and Tao, answering Erdős Problem 682; proved in Lean in plby/lean-proofs.
+- Sources: [A. Gafni and T. Tao, Rough numbers between consecutive primes, arXiv:2508.06463 (2025)](https://arxiv.org/abs/2508.06463) — the proof; [DeepMind formal-conjectures, Erdős Problem 682](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/682.lean) — the Lean statement
+- Outside proof: plby/lean-proofs, [Erdos682.lean#L5018](https://github.com/plby/lean-proofs/blob/8822f7ddef30fadbd92e1c6ab4ed897af356af5e/src/latest/ErdosProblems/Erdos682.lean#L5018). The statement is erdos_682 in DeepMind's formal-conjectures (ErdosProblems/682.lean), which links this proof and marks it solved. The same entry links a Lean proof of a counterexample built on the 30030 cycle (erdos_682.variants.dickson_counterexample). Check toolchain and axioms before citing.
+- Rests on: Mathlib only
+- Scope: Outside source.
+- Status: Planned outside source
 
 ### 44. `BonseCeiling` — from four wheels on, the ceiling sits inside one cycle
 For every prime from 11 on, its square (the ceiling of the wheels below it)
@@ -364,8 +398,12 @@ Hardy-Littlewood constant tends to 1 as h grows.
 - Status: Cited (2026-11-05).
 
 ### 49. `LongGaps` — blocked runs become long prime gaps (outside source)
-OpenAI's Lean proof of an improved Rankin-type lower bound for the largest
-prime gap. Planned as an outside-source node cited from `BlockingRuns`.
+Blocking a run with one residue class per wheel and shifting it by the Chinese Remainder Theorem to a start where every member is composite gives long gaps between primes. OpenAI proved in Lean that the largest prime gap below X is at least a constant times log X (log log X)^2 log log log log X / (log log log X)^2, improving Rankin. The bounds of Westzynthius, Erdős and Rankin would follow as short corollaries.
+- Sources: [OpenAI, Improved long gaps between primes (2026)](https://cdn.openai.com/pdf/51126fac-1b68-4128-9666-c908bcc16033/long_gaps.pdf) — the theorem and its Lean proof; [T. F. Bloom, Erdős Problem 4 (erdosproblems.com)](https://www.erdosproblems.com/4) — explains how covering a run with one class per wheel gives long prime gaps
+- Outside proof: openai/LongGapsBetweenPrimes, [LongGapsBetweenPrimes.lean](https://github.com/openai/LongGapsBetweenPrimes/blob/main/LongGapsBetweenPrimes.lean). Unreviewed AI-attributed preprint with a complete Lean proof; check its toolchain and axioms before citing. The natural link here is from BlockingRuns.
+- Rests on: Mathlib only
+- Scope: Outside source.
+- Status: Planned outside source
 
 ### 50. `PrimeGapsBridge` — the network's admissibility is PrimeGapsLib's
 The network's admissibility (fewer occupied positions than the wheel size)
