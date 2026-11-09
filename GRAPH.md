@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 78 of 96 nodes are built, holding 235 claims: 226 proved in Lean, 4 with a proof drafted but not yet built and 5 cited from a published paper. They are joined by 123 arrows, each a Lean-checked step. Of the other 18 nodes, drawn dashed or purple, 15 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 78 of 96 nodes are built, holding 235 claims: 230 proved in Lean and 5 cited from a published paper. They are joined by 123 arrows, each a Lean-checked step. Of the other 18 nodes, drawn dashed or purple, 15 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -485,10 +485,9 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c12,c14,c15,c16,c17,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c36,c37,c38,c39,c40,c41,c42,c43 verified;
-  class c10,c11,c13,c35 conditional_built;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c12,c14,c15,c16,c17,c18,c19,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c36,c37,c38,c39,c40,c41,c42,c43 verified;
+  class c10,c11,c13,c20,c21,c35 conditional_built;
   class c22 cited_built;
-  class c18,c19,c20,c21 draft;
   class p1,p2,p3,p4 stub;
   class o1,o2,o3,o4,o5,o6,o7 openconj;
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Admissibility.md#admissible_of_large_primes" _blank
@@ -1107,8 +1106,8 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c30,c31,c32,c33 verified;
-  class c27,c28,c29 draft;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c30,c31,c32,c33 verified;
+  class c29 conditional_built;
   class p1,p2,p3,p4,p5,p6 stub;
   click c21 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#general_survivor_count" _blank
   click c22 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
@@ -1512,11 +1511,11 @@ The results nothing else builds on, each with everything beneath it.
     - [`MertensThird.product_identity`](docs/nodes/MertensThird.md#product_identity) — proved in Lean
   - [`PrimeNumberTheorem.prime_number_theorem`](docs/nodes/PrimeNumberTheorem.md#prime_number_theorem) — proved in Lean
     - [`PrimeNumberTheorem.pnt_equivalent`](docs/nodes/PrimeNumberTheorem.md#pnt_equivalent) — proved in Lean
-- [`BirdseySchay.birdsey_schay_implies_twin_asymptotic`](docs/nodes/BirdseySchay.md#birdsey_schay_implies_twin_asymptotic) — proof drafted, not yet built
+- [`BirdseySchay.birdsey_schay_implies_twin_asymptotic`](docs/nodes/BirdseySchay.md#birdsey_schay_implies_twin_asymptotic) — proved in Lean, assuming open conjecture(s)
   - `birdsey_schay_heuristic` — open conjecture, taken as a hypothesis
-  - [`BirdseySchay.twin_count_at_squares`](docs/nodes/BirdseySchay.md#twin_count_at_squares) — proof drafted, not yet built
+  - [`BirdseySchay.twin_count_at_squares`](docs/nodes/BirdseySchay.md#twin_count_at_squares) — proved in Lean, assuming open conjecture(s)
     - `birdsey_schay_heuristic` — open conjecture, taken as a hypothesis
-    - [`BirdseySchay.corrected_share_limit`](docs/nodes/BirdseySchay.md#corrected_share_limit) — proof drafted, not yet built
+    - [`BirdseySchay.corrected_share_limit`](docs/nodes/BirdseySchay.md#corrected_share_limit) — proved in Lean
       - [`TwinShare.twin_share_eq_prod`](docs/nodes/TwinShare.md#twin_share_eq_prod) — proved in Lean
         - [`SurvivorCount.twin_survivor_count`](docs/nodes/SurvivorCount.md#twin_survivor_count) — proved in Lean
           - [`CRT.crt_map_bijective`](docs/nodes/CRT.md#crt_map_bijective) — proved in Lean
@@ -1546,7 +1545,7 @@ The results nothing else builds on, each with everything beneath it.
       - [`SingularSeries.factor_multipliable`](docs/nodes/SingularSeries.md#factor_multipliable) — proved in Lean
     - [`SingularSeries.hardy_littlewood_constant_pos`](docs/nodes/SingularSeries.md#hardy_littlewood_constant_pos) — proved in Lean
     - [`Admissibility.zero_two_admissible`](docs/nodes/Admissibility.md#zero_two_admissible) — proved in Lean
-  - [`BirdseySchay.next_prime_ratio`](docs/nodes/BirdseySchay.md#next_prime_ratio) — proof drafted, not yet built
+  - [`BirdseySchay.next_prime_ratio`](docs/nodes/BirdseySchay.md#next_prime_ratio) — proved in Lean
     - [`PrimeNumberTheorem.prime_number_theorem`](docs/nodes/PrimeNumberTheorem.md#prime_number_theorem) — proved in Lean
       - [`PrimeNumberTheorem.pnt_equivalent`](docs/nodes/PrimeNumberTheorem.md#pnt_equivalent) — proved in Lean
   - [`SingularSeries.hardy_littlewood_constant_pos`](docs/nodes/SingularSeries.md#hardy_littlewood_constant_pos) — proved in Lean
@@ -2085,7 +2084,7 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 29 | [`GapCertificate`](docs/nodes/GapCertificate.md) | the Lacampagne-Selfridge counterexample | proved in Lean |
 | 30 | [`BlockingRuns`](docs/nodes/BlockingRuns.md) | blocking runs and the largest survivor gap | proved in Lean |
 | 31 | [`CeilingOvershoot`](docs/nodes/CeilingOvershoot.md) | the wheel product overshoots the primes by about 12% | proved in Lean |
-| 32 | [`BirdseySchay`](docs/nodes/BirdseySchay.md) | the twin share carried below the ceiling | proof drafted, not yet built |
+| 32 | [`BirdseySchay`](docs/nodes/BirdseySchay.md) | the twin share carried below the ceiling | proved in Lean; rests on open conjectures as hypotheses |
 | 33 | [`LargestGap`](docs/nodes/LargestGap.md) | the largest gap from the proportional share | planned: new, not yet proved |
 | 34 | [`LehmerExcess`](docs/nodes/LehmerExcess.md) | Lehmer's closed form for the 6n-1 type | proved in Lean |
 | 35 | [`GermainCriterion`](docs/nodes/GermainCriterion.md) | Germain's exact criterion for an even split | proved in Lean |

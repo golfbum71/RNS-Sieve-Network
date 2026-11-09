@@ -32,10 +32,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BirdseySchay.lean
     declaration: RNS.BirdseySchay.corrected_share_limit_step
-    note: Lean step from its imports taken as named hypotheses; not yet built.
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09), from
+      its imports taken as named hypotheses. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 - id: next_prime_ratio
   declaration: RNS.BirdseySchay.next_prime_ratio
@@ -45,10 +47,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BirdseySchay.lean
     declaration: RNS.BirdseySchay.next_prime_ratio_step
-    note: Lean step from its imports taken as named hypotheses; not yet built.
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09), from
+      its imports taken as named hypotheses. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 - id: twin_count_at_squares
   declaration: RNS.BirdseySchay.twin_count_at_squares
@@ -64,10 +68,12 @@ conclusions:
   open_inputs: ["birdsey_schay_heuristic"]  # open: hypothesis of the claim, never claimed
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BirdseySchay.lean
     declaration: RNS.BirdseySchay.twin_count_at_squares_step
-    note: Lean step from its imports taken as named hypotheses; not yet built.
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09), from
+      its imports taken as named hypotheses. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 - id: birdsey_schay_implies_twin_asymptotic
   declaration: RNS.BirdseySchay.birdsey_schay_implies_twin_asymptotic
@@ -81,10 +87,12 @@ conclusions:
   open_inputs: ["birdsey_schay_heuristic"]  # open: hypothesis of the claim, never claimed
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BirdseySchay.lean
     declaration: RNS.BirdseySchay.birdsey_schay_implies_twin_asymptotic_step
-    note: Lean step from its imports taken as named hypotheses; not yet built.
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-09), from
+      its imports taken as named hypotheses. Recorded as noncompliant only because no Comparator
+      receipt exists yet.
   designated: lean-proof
 sources:
 - title: J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220 (2019)

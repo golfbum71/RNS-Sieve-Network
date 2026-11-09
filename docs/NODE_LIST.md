@@ -336,14 +336,26 @@ A setting of the wheels (one blocked position per wheel) is a shift of the ordin
 - Rests on: `CRT`
 - Status: Clean. Both claims proved; `#print axioms` shows only the standard three.
 
-### 32. `BirdseySchay` — Birdsey and Schay's heuristic, as a hypothesis
-Their assumption that the wheel share of twins carries into the range below the next prime's square, with one Mertens correction, stated as a named hypothesis, together with the step showing it implies the twin-prime asymptotic.
-- Sources: [J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220](https://arxiv.org/abs/1906.09220) — the heuristic
-- Lean (planned): `birdsey_schay_implies_twin_asymptotic`
-- Rests on: `TwinShare`, `MertensThird`, `PrimeNumberTheorem`
+### 32. `BirdseySchay` — the twin share carried below the ceiling
+Birdsey and Schay's heuristic: the twin pairs below a prime's square are about
+e^γ/2 times the twin share for the wheels up to that prime (the product of
+(wheel − 2)/(wheel − 1), wheels from 3 up) times the number of primes below the
+square. The heuristic is open and stated only as the hypothesis of two claims.
+Proved without it: the corrected share times log q tends to half the twin-prime
+constant (`corrected_share_limit`, from `TwinShare` and `ShareAsymptotics`), and
+neighbouring primes have ratio tending to 1 (`next_prime_ratio`, from the prime
+number theorem). Proved from it: the twin count is Hardy and Littlewood's
+prediction at the prime squares (`twin_count_at_squares`) and then at every
+bound (`birdsey_schay_implies_twin_asymptotic`), by squeezing each bound
+between neighbouring prime squares. So the single Mertens correction lands
+exactly on Hardy and Littlewood's constant. Numerically, below 9973²: 438,192
+twin pairs against the heuristic's 410,353 (ratio 1.068) and the plain
+Hardy–Littlewood term's 387,236 (ratio 1.132).
+- Sources: [J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220](https://arxiv.org/abs/1906.09220) — the heuristic (Eq. 14) and Eq. 16; [OEIS A005597](https://oeis.org/A005597) — the twin-prime constant
+- Lean: `corrected_share_limit`, `next_prime_ratio`, `twin_count_at_squares`, `birdsey_schay_implies_twin_asymptotic`
+- Rests on: `TwinShare`, `ShareAsymptotics`, `PrimeNumberTheorem`, `TwinConstant`, `SingularSeries`, `Admissibility`
 - Open inputs: `birdsey_schay_heuristic`
-- Scope: Tier 3: needs the two outside sources as hypotheses.
-- Status: Planned (conditional)
+- Status: Built clean 2026-11-09 (standard axioms only); conditional on the heuristic for the last two claims
 
 ### 33. `LargestGap` — the largest gap from the proportional share
 Adding one wheel at most doubles the largest gap between the survivor count and its proportional share, minus one over the new prime; and the average squared gap over the survivor positions has an exact formula.

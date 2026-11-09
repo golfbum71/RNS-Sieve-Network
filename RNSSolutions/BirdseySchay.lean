@@ -28,8 +28,12 @@ import Mathlib.Tactic.Positivity
 /-!
 # Proofs for BirdseySchay
 
+Built clean by `lake build RNSSolutions` on 2026-11-09; `#print axioms` shows only
+the standard three.
+
 Imports claims only. Every claim is a step from other nodes' claims, taken as
-named hypotheses.
+named hypotheses. The heuristic itself is never assumed outside the two claims
+that state it as their hypothesis.
 
 Idea.
 * `corrected_share_limit`: the twin share among survivors is the twin share of
@@ -169,7 +173,7 @@ theorem next_prime_ratio_step (h_pnt : RNS.PrimeNumberTheorem.prime_number_theor
     have hl' : Real.log (Nat.nth Nat.Prime (n + 1)) ≠ 0 := (hLpos (n + 1)).ne'
     have hn1 : (n : ℝ) + 1 ≠ 0 := by positivity
     have hn2 : (n : ℝ) + 2 ≠ 0 := by positivity
-    first | (field_simp; ring) | field_simp
+    field_simp
   -- the upper bound b (1 + (b − 1)/(log p − b)) tends to 1
   have hLt : Tendsto (fun n => Real.log (Nat.nth Nat.Prime n)) atTop atTop :=
     Real.tendsto_log_atTop.comp htend

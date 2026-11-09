@@ -35,7 +35,7 @@
 | 29 | [`GapCertificate`](GapCertificate.md) | the Lacampagne-Selfridge counterexample | proved in Lean |
 | 30 | [`BlockingRuns`](BlockingRuns.md) | blocking runs and the largest survivor gap | proved in Lean |
 | 31 | [`CeilingOvershoot`](CeilingOvershoot.md) | the wheel product overshoots the primes by about 12% | proved in Lean |
-| 32 | [`BirdseySchay`](BirdseySchay.md) | the twin share carried below the ceiling | proof drafted, not yet built |
+| 32 | [`BirdseySchay`](BirdseySchay.md) | the twin share carried below the ceiling | proved in Lean; rests on open conjectures as hypotheses |
 | 33 | [`LargestGap`](LargestGap.md) | the largest gap from the proportional share | planned: new, not yet proved |
 | 34 | [`LehmerExcess`](LehmerExcess.md) | Lehmer's closed form for the 6n-1 type | proved in Lean |
 | 35 | [`GermainCriterion`](GermainCriterion.md) | Germain's exact criterion for an even split | proved in Lean |
