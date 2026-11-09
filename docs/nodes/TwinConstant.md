@@ -34,6 +34,7 @@ def twin_prime_constant_eq_classical : Prop :=
 
 ## Used by
 
+- [`BirdseySchay`](BirdseySchay.md)
 - [`GapConstant`](GapConstant.md)
 - [`SelbergTwinRails`](SelbergTwinRails.md)
 

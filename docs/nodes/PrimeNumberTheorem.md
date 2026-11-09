@@ -51,8 +51,8 @@ def prime_number_theorem : Prop :=
 ## Used by
 
 - [`CeilingOvershoot`](CeilingOvershoot.md)
-- [`PrimeNumberTheorem`](PrimeNumberTheorem.md)
 - [`BirdseySchay`](BirdseySchay.md)
+- [`PrimeNumberTheorem`](PrimeNumberTheorem.md)
 - [`ErdosSmallGaps`](ErdosSmallGaps.md)
 - [`ParityBarrier`](ParityBarrier.md)
 

@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node: scoped, no Lean yet. See docs/NODE_LIST.md.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
 
 node:
   id: BirdseySchay.v1
@@ -7,24 +7,96 @@ node:
   version: v1
   order: 32
   kind: paper
-  status: planned
-  title: Birdsey and Schay's heuristic, as a hypothesis
-  description: Their assumption that the wheel share of twins carries into the range below
-    the next prime's square, with one Mertens correction, stated as a named hypothesis, together
-    with the step showing it implies the twin-prime asymptotic.
-conclusions: []
-planned:
-  source_status: Conditional
-  rests_on:
-  - TwinShare
-  - MertensThird
-  - PrimeNumberTheorem
-  claims:
-  - birdsey_schay_implies_twin_asymptotic
-  tier: 'Tier 3: needs the two outside sources as hypotheses.'
-  open_inputs:
-  - birdsey_schay_heuristic
+  status: active
+  title: the twin share carried below the ceiling
+  improves: ShareAsymptotics gives the twin share of the whole cycle; this node shows that carrying it
+    to the primes below the next prime's square with Birdsey and Schay's single Mertens correction,
+    e to the Euler constant over 2, lands exactly on the Hardy-Littlewood count for twins.
+  description: Birdsey and Schay's heuristic says the twin pairs below a prime's square are about e to
+    the Euler constant over 2, times the twin share for the wheels up to that prime (the product of
+    (wheel - 2)/(wheel - 1)), times the number of primes below the square. The heuristic is open and
+    never claimed. Proved without it - the corrected share times the log tends to half the twin-prime
+    constant, and neighbouring primes have ratio tending to 1. Proved from it - the twin count is the
+    Hardy-Littlewood prediction at the prime squares and then at every bound, so the heuristic implies
+    the Hardy-Littlewood conjecture for twins. Numerically, below the square of 9973 there are 438,192
+    twin pairs against the heuristic's 410,353 (ratio 1.068).
+conclusions:
+- id: corrected_share_limit
+  declaration: RNS.BirdseySchay.corrected_share_limit
+  summary: The twin share for the wheels up to q, times e to the Euler constant over 2, times log q,
+    tends to half the twin-prime constant.
+  imports:
+  - TwinShare.v1.twin_share_eq_prod
+  - ShareAsymptotics.v1.survivor_share_asymptotic
+  - ShareAsymptotics.v1.twin_share_asymptotic_classical
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BirdseySchay.lean
+    declaration: RNS.BirdseySchay.corrected_share_limit_step
+    note: Lean step from its imports taken as named hypotheses; not yet built.
+  designated: lean-proof
+- id: next_prime_ratio
+  declaration: RNS.BirdseySchay.next_prime_ratio
+  summary: The ratio of neighbouring primes tends to 1.
+  imports:
+  - PrimeNumberTheorem.v1.prime_number_theorem
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BirdseySchay.lean
+    declaration: RNS.BirdseySchay.next_prime_ratio_step
+    note: Lean step from its imports taken as named hypotheses; not yet built.
+  designated: lean-proof
+- id: twin_count_at_squares
+  declaration: RNS.BirdseySchay.twin_count_at_squares
+  summary: If the heuristic holds, the twin pairs below a prime's square are asymptotically the
+    Hardy-Littlewood prediction there.
+  imports:
+  - BirdseySchay.v1.corrected_share_limit
+  - PrimeNumberTheorem.v1.prime_number_theorem
+  - TwinConstant.v1.twin_prime_constant_eq_classical
+  - SingularSeries.v1.hardy_littlewood_constant_pos
+  - Admissibility.v1.zero_two_admissible
+  imports_status: identified
+  open_inputs: ["birdsey_schay_heuristic"]  # open: hypothesis of the claim, never claimed
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BirdseySchay.lean
+    declaration: RNS.BirdseySchay.twin_count_at_squares_step
+    note: Lean step from its imports taken as named hypotheses; not yet built.
+  designated: lean-proof
+- id: birdsey_schay_implies_twin_asymptotic
+  declaration: RNS.BirdseySchay.birdsey_schay_implies_twin_asymptotic
+  summary: If the heuristic holds, the Hardy-Littlewood conjecture holds for the twin pattern.
+  imports:
+  - BirdseySchay.v1.twin_count_at_squares
+  - BirdseySchay.v1.next_prime_ratio
+  - SingularSeries.v1.hardy_littlewood_constant_pos
+  - Admissibility.v1.zero_two_admissible
+  imports_status: identified
+  open_inputs: ["birdsey_schay_heuristic"]  # open: hypothesis of the claim, never claimed
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BirdseySchay.lean
+    declaration: RNS.BirdseySchay.birdsey_schay_implies_twin_asymptotic_step
+    note: Lean step from its imports taken as named hypotheses; not yet built.
+  designated: lean-proof
 sources:
-- title: J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220
+- title: J. S. Birdsey and G. Schay, A Sieve for Twin Primes, arXiv:1906.09220 (2019)
   url: https://arxiv.org/abs/1906.09220
-  relationship: the heuristic
+  relationship: the heuristic (their second method, Eq. 14) and its agreement with Hardy-Littlewood (Eq. 16)
+- title: OEIS A005597, decimal expansion of the twin prime constant
+  url: https://oeis.org/A005597
+  relationship: the twin-prime constant and Cohen's form of the conjectured twin count
+related:
+- node: HardyLittlewood
+  note: the conjecture the heuristic implies, for the twin pattern
+- node: ShareAsymptotics
+  note: the twin share of the whole cycle, which the heuristic carries below the ceiling
+- node: CeilingOvershoot
+  note: the same Mertens factor for plain survivors below the ceiling

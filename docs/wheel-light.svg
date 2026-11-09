@@ -57,7 +57,8 @@
 <line x1="119.1" y1="38.1" x2="229.5" y2="73.4" stroke="#a39e8f" opacity=".35"/>
 <line x1="19.6" y1="123.5" x2="37.7" y2="238.0" stroke="#a39e8f" opacity=".35"/>
 <line x1="114.1" y1="51.1" x2="219.9" y2="98.6" stroke="#a39e8f" opacity=".35"/>
-<path d="M222.6,-113.8 C350.8,-179.4 369.6,-136.5 504.7,-186.3" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
+<path d="M222.6,-113.8 C393.5,-201.2 395.2,-197.9 566.9,-283.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
+<path d="M222.6,-113.8 C350.8,-179.4 360.3,-159.5 491.9,-217.8" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M245.1,49.1 C433.4,86.9 -303.1,-321.7 -434.7,-461.5" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
 <path d="M193.7,-158.0 C230.9,-188.4 240.7,-175.6 279.5,-203.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M-395.8,-364.4 C-431.1,-396.9 -431.1,-396.9 -466.4,-429.5" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
@@ -81,7 +82,7 @@
 <path d="M53.9,-244.1 C74.6,-337.9 78.6,-337.0 100.4,-430.5" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M53.9,-244.1 C64.2,-291.0 79.9,-287.1 92.7,-333.3" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M-347.2,-273.5 C-384.9,-303.2 -336.5,-356.2 -369.5,-391.0" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
-<path d="M566.9,-283.9 C609.8,-305.4 0.9,682.0 0.9,730.0" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
+<path d="M587.0,-239.5 C631.5,-257.6 0.9,682.0 0.9,730.0" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
 <path d="M0.9,730.0 C1.0,778.0 -16.6,777.8 -17.6,825.8" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
 <path d="M0.9,730.0 C1.0,778.0 -48.6,776.5 -51.6,824.4" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
 <path d="M141.8,205.9 C169.0,245.4 126.3,269.9 146.6,313.4" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
@@ -89,14 +90,13 @@
 <path d="M242.3,-61.6 C474.9,-120.8 -486.3,60.1 -724.5,89.5" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
 <path d="M-247.5,-35.2 C-390.1,-55.5 -289.8,-266.9 -395.8,-364.4" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M-247.5,-35.2 C-295.0,-42.0 -241.7,-174.3 -280.6,-202.4" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
-<path d="M-249.9,-8.0 C-393.8,-12.5 346.9,-186.7 473.7,-255.0" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
 <path d="M-249.9,-8.0 C-297.8,-9.5 -296.9,-26.0 -344.7,-30.1" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M-249.9,-8.0 C-393.8,-12.5 -360.6,-158.8 -492.3,-216.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M-249.9,-8.0 C-297.8,-9.5 -284.3,-89.4 -330.1,-103.8" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M-434.7,-461.5 C-467.6,-496.4 0.9,682.0 0.9,730.0" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
 <path d="M-434.7,-461.5 C-467.6,-496.4 -676.9,83.6 -724.5,89.5" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
 <path d="M-434.7,-461.5 C-467.6,-496.4 -454.8,-508.2 -486.8,-544.0" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
-<path d="M-242.2,-62.0 C-381.7,-97.8 346.9,-186.7 473.7,-255.0" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
+<path d="M-242.2,-62.0 C-428.2,-109.7 395.2,-197.9 566.9,-283.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M-242.2,-62.0 C-288.7,-73.9 -296.9,-26.0 -344.7,-30.1" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M-242.2,-62.0 C-474.7,-121.6 -440.7,214.3 -656.5,319.3" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
 <path d="M-242.2,-62.0 C-288.7,-73.9 -259.4,-146.8 -301.1,-170.4" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
@@ -105,6 +105,7 @@
 <path d="M163.8,188.8 C195.3,225.1 155.5,254.2 180.6,295.1" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M163.8,188.8 C195.3,225.1 182.9,235.3 212.3,273.2" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M-31.7,-633.2 C-34.1,-681.1 -613.3,298.3 -656.5,319.3" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
+<path d="M-492.3,-216.9 C-536.3,-236.3 524.0,-262.4 566.9,-283.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M-492.3,-216.9 C-536.3,-236.3 -466.8,-354.2 -505.0,-383.3" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
 <path d="M-492.3,-216.9 C-536.3,-236.3 -401.8,-426.5 -434.7,-461.5" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
 <path d="M-492.3,-216.9 C-536.3,-236.3 506.0,-295.5 547.5,-319.7" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
@@ -112,9 +113,10 @@
 <path d="M-404.5,-178.2 C-448.4,-197.5 -360.5,-331.9 -395.8,-364.4" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M129.3,-320.9 C147.2,-365.5 162.5,-358.9 182.3,-402.6" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M381.7,-222.9 C464.6,-271.3 481.0,-240.9 566.9,-283.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
-<path d="M381.7,-222.9 C423.1,-247.1 459.7,-169.7 504.7,-186.3" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
-<path d="M381.7,-222.9 C423.1,-247.1 -448.4,-197.5 -492.3,-216.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
+<path d="M381.7,-222.9 C464.6,-271.3 498.1,-203.2 587.0,-239.5" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M381.7,-222.9 C423.1,-247.1 448.0,-198.4 491.9,-217.8" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
+<path d="M381.7,-222.9 C423.1,-247.1 -448.4,-197.5 -492.3,-216.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
+<path d="M381.7,-222.9 C423.1,-247.1 431.5,-232.2 473.7,-255.0" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M-243.0,58.9 C-289.6,70.2 -290.7,65.4 -337.6,75.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M-243.0,58.9 C-289.6,70.2 -282.9,93.6 -328.5,108.7" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M80.7,-236.6 C96.2,-282.0 111.3,-276.4 129.3,-320.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
@@ -125,9 +127,10 @@
 <path d="M92.7,-333.3 C105.6,-379.6 -360.6,-158.8 -404.5,-178.2" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M92.7,-333.3 C105.6,-379.6 340.2,-198.7 381.7,-222.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M92.7,-333.3 C105.6,-379.6 354.5,-172.0 397.7,-192.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
-<path d="M491.9,-217.8 C535.8,-237.3 524.0,-262.4 566.9,-283.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
-<path d="M491.9,-217.8 C535.8,-237.3 -29.3,-585.3 -31.7,-633.2" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
-<path d="M397.7,-192.9 C440.9,-213.9 431.5,-232.2 473.7,-255.0" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
+<path d="M473.7,-255.0 C516.0,-277.7 524.0,-262.4 566.9,-283.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
+<path d="M473.7,-255.0 C516.0,-277.7 542.6,-221.4 587.0,-239.5" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
+<path d="M473.7,-255.0 C516.0,-277.7 -29.3,-585.3 -31.7,-633.2" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
+<path d="M397.7,-192.9 C484.1,-234.8 481.0,-240.9 566.9,-283.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M397.7,-192.9 C440.9,-213.9 -448.4,-197.5 -492.3,-216.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
 <path d="M201.6,147.9 C240.3,176.3 207.9,213.5 241.4,247.9" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
 <path d="M201.6,147.9 C240.3,176.3 230.4,189.0 267.5,219.5" fill="none" stroke="#8c959f" stroke-width="1.3" opacity="0.55"/>
@@ -142,14 +145,14 @@
 <g transform="translate(222.6,-113.8)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(-27.1)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">Admissibility</tspan></text></g>
 <g transform="translate(92.7,-333.3)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(-74.5)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">SurvivorCount</tspan></text></g>
 <g transform="translate(381.7,-222.9)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(-30.3)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="-0.55em">Singular</tspan><tspan x="15" dy="1.1em">Series</tspan></text></g>
-<g transform="translate(491.9,-217.8)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(-23.9)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">TwinConstant</tspan></text></g>
+<g transform="translate(473.7,-255.0)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(-28.3)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">TwinConstant</tspan></text></g>
 <g transform="translate(136.4,-420.4)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(-72.0)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">Pruning</tspan></text></g>
 <g transform="translate(106.6,-226.2)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(-64.8)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">WheelOrder</tspan></text></g>
 <g transform="translate(129.3,-320.9)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(-68.1)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="-0.55em">Shield</tspan><tspan x="15" dy="1.1em">Certificates</tspan></text></g>
 <g transform="translate(131.1,-212.9)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(-58.4)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">Infinitude</tspan></text></g>
 <g transform="translate(55.1,-341.6)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(-80.8)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="-0.55em">Column</tspan><tspan x="15" dy="1.1em">Structure</tspan></text></g>
 <g transform="translate(174.9,-178.6)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(-45.6)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="-0.55em">Dirichlet</tspan><tspan x="15" dy="1.1em">Columns</tspan></text></g>
-<g transform="translate(504.7,-186.3)"><circle r="8" fill="#dafbe1" stroke="#9a6700" stroke-width="3"/><text transform="rotate(-20.3)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="-0.55em">Hardy</tspan><tspan x="15" dy="1.1em">Littlewood</tspan></text></g>
+<g transform="translate(491.9,-217.8)"><circle r="8" fill="#dafbe1" stroke="#9a6700" stroke-width="3"/><text transform="rotate(-23.9)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="-0.55em">Hardy</tspan><tspan x="15" dy="1.1em">Littlewood</tspan></text></g>
 <g transform="translate(233.9,-88.3)"><circle r="8" fill="#dafbe1" stroke="#9a6700" stroke-width="3"/><text transform="rotate(-20.7)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="-0.55em">Hensley</tspan><tspan x="15" dy="1.1em">Richards</tspan></text></g>
 <g transform="translate(242.3,-61.6)"><circle r="8" fill="#dafbe1" stroke="#9a6700" stroke-width="3"/><text transform="rotate(-14.3)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">LinearForms</tspan></text></g>
 <g transform="translate(-13.7,249.6)"><circle r="8" fill="#dafbe1" stroke="#9a6700" stroke-width="3"/><text transform="rotate(273.1)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="-0.55em">Gap</tspan><tspan x="-15" dy="1.1em">Conjectures</tspan></text></g>
@@ -167,7 +170,7 @@
 <g transform="translate(-68.7,240.4)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(286.0)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="-0.55em">Gap</tspan><tspan x="-15" dy="1.1em">Certificate</tspan></text></g>
 <g transform="translate(-311.2,151.3)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(334.1)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="0">BlockingRuns</tspan></text></g>
 <g transform="translate(-344.7,-30.1)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(365.0)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="-0.55em">Ceiling</tspan><tspan x="-15" dy="1.1em">Overshoot</tspan></text></g>
-<g transform="translate(473.7,-255.0)"><circle r="8" fill="#ffffff" stroke="#9a6700" stroke-width="2" stroke-dasharray="3 2"/><text transform="rotate(-28.3)" font-size="13" fill="#57606a" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">BirdseySchay</tspan></text></g>
+<g transform="translate(566.9,-283.9)"><circle r="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2" stroke-dasharray="2 2"/><text transform="rotate(-26.6)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">BirdseySchay</tspan></text></g>
 <g transform="translate(241.4,247.9)"><circle r="8" fill="#ffffff" stroke="#6e7781" stroke-width="2" stroke-dasharray="3 2"/><text transform="rotate(45.8)" font-size="13" fill="#57606a" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">LargestGap</tspan></text></g>
 <g transform="translate(180.6,295.1)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(58.5)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">LehmerExcess</tspan></text></g>
 <g transform="translate(146.6,313.4)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(64.9)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="-0.55em">Germain</tspan><tspan x="15" dy="1.1em">Criterion</tspan></text></g>
@@ -202,7 +205,7 @@
 <g transform="translate(-247.5,-35.2)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(368.1)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="0">MertensSecond</tspan></text></g>
 <g transform="translate(-395.8,-364.4)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(402.6)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="0">BrunAnalytic</tspan></text></g>
 <g transform="translate(-466.4,-429.5)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(402.6)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="0">BrunTheorem</tspan></text></g>
-<g transform="translate(566.9,-283.9)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(-26.6)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">GapConstant</tspan></text></g>
+<g transform="translate(587.0,-239.5)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(-22.2)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">GapConstant</tspan></text></g>
 <g transform="translate(547.5,-319.7)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(-30.3)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">PolyaCutoff</tspan></text></g>
 <g transform="translate(245.1,49.1)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(11.3)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="0">BadWheels</tspan></text></g>
 <g transform="translate(-280.6,-202.4)"><circle r="8" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/><text transform="rotate(395.8)" font-size="13" fill="#1f2328" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="0">BrunHooley</tspan></text></g>
