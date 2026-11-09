@@ -48,7 +48,7 @@ open Classical in
 /-- The positions on the wheel of size `p` blocked by the polynomial pattern
 `F`: the remainders where some polynomial of `F` is divisible by `p`. -/
 noncomputable def poly_blocked (F : Finset ℤ[X]) (p : ℕ) : Finset ℕ :=
-  (Finset.range p).filter (fun r => ∃ f ∈ F, (p : ℤ) ∣ f.eval (r : ℤ))
+  (Finset.range p).filter (fun r : ℕ => ∃ f ∈ F, (p : ℤ) ∣ f.eval (r : ℤ))
 
 /-- A polynomial pattern is admissible when no prime wheel is fully blocked. -/
 def poly_admissible (F : Finset ℤ[X]) : Prop :=

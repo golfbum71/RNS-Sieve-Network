@@ -33,7 +33,7 @@ open Polynomial Filter Topology Asymptotics
 open Classical in
 /-- One polynomial blocks at most its degree in positions on a prime wheel. -/
 private theorem blocked_one_le (f : ℤ[X]) (p : ℕ) (hp : p.Prime) (hf : coeffs_coprime f) :
-    ((Finset.range p).filter (fun r => (p : ℤ) ∣ f.eval (r : ℤ))).card ≤ f.natDegree := by
+    ((Finset.range p).filter (fun r : ℕ => (p : ℤ) ∣ f.eval (r : ℤ))).card ≤ f.natDegree := by
   haveI := Fact.mk hp
   have hg : f.map (Int.castRingHom (ZMod p)) ≠ 0 := by
     intro h0
@@ -42,7 +42,7 @@ private theorem blocked_one_le (f : ℤ[X]) (p : ℕ) (hp : p.Prime) (hf : coeff
     have h1 : (f.map (Int.castRingHom (ZMod p))).coeff i = 0 := by rw [h0, coeff_zero]
     rw [coeff_map, eq_intCast, ZMod.intCast_zmod_eq_zero_iff_dvd] at h1
     exact h1
-  calc ((Finset.range p).filter (fun r => (p : ℤ) ∣ f.eval (r : ℤ))).card
+  calc ((Finset.range p).filter (fun r : ℕ => (p : ℤ) ∣ f.eval (r : ℤ))).card
       ≤ (f.map (Int.castRingHom (ZMod p))).roots.toFinset.card := by
         apply Finset.card_le_card_of_injOn (fun r : ℕ => (r : ZMod p))
         · intro r hr
@@ -71,14 +71,14 @@ theorem poly_admissible_iff_holds : poly_admissible_iff := by
     · exact h p hp hle
     · calc (poly_blocked F p).card
           ≤ (F.biUnion (fun f => (Finset.range p).filter
-              (fun r => (p : ℤ) ∣ f.eval (r : ℤ)))).card := by
+              (fun r : ℕ => (p : ℤ) ∣ f.eval (r : ℤ)))).card := by
             apply Finset.card_le_card
             intro r hr
             unfold poly_blocked at hr
             rw [Finset.mem_filter] at hr
             obtain ⟨hr1, f, hfF, hdvd⟩ := hr
             exact Finset.mem_biUnion.mpr ⟨f, hfF, Finset.mem_filter.mpr ⟨hr1, hdvd⟩⟩
-        _ ≤ ∑ f ∈ F, ((Finset.range p).filter (fun r => (p : ℤ) ∣ f.eval (r : ℤ))).card :=
+        _ ≤ ∑ f ∈ F, ((Finset.range p).filter (fun r : ℕ => (p : ℤ) ∣ f.eval (r : ℤ))).card :=
             Finset.card_biUnion_le
         _ ≤ ∑ f ∈ F, f.natDegree :=
             Finset.sum_le_sum (fun f hf => blocked_one_le f p hp (hF f hf))

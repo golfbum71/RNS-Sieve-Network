@@ -36,7 +36,12 @@ theorem two_three_bounds_holds : two_three_bounds := by
   have h3 : (A.filter (fun a => 2 ∣ a ∨ 3 ∣ a)).card +
       (A.filter (fun a => ¬ (2 ∣ a ∨ 3 ∣ a))).card = A.card :=
     Finset.card_filter_add_card_filter_not _
-  rw [Finset.filter_or] at h3
+  have h5 : A.filter (fun a => 2 ∣ a ∨ 3 ∣ a) =
+      A.filter (fun a => 2 ∣ a) ∪ A.filter (fun a => 3 ∣ a) := by
+    ext a
+    simp only [Finset.mem_filter, Finset.mem_union]
+    tauto
+  rw [h5] at h3
   have h4 : A.filter (fun a => ¬ (2 ∣ a ∨ 3 ∣ a)) = survive_two_three A :=
     Finset.filter_congr (fun a _ => not_or)
   rw [h4] at h3
