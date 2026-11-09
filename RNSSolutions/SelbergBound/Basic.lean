@@ -8,7 +8,10 @@ Author: Arend Mellendijk
 /-
 Adapted for RNS-Sieve-Network (2026-11-09) from PrimeNumberTheoremAnd, commit 127b50e,
 `PrimeNumberTheoremAnd/Mathlib/NumberTheory/Sieve/Basic.lean`. Changes: imports, and the
-namespace `Aux` renamed `SelbergAux` (and the file `AuxResults`). Nothing else is meant to differ.
+namespace `Aux` renamed `SelbergAux` (and the file `AuxResults`); in
+`nu_eq_conv_one_div_selbergTerms` the set for Moebius inversion is given explicitly, because
+in current Mathlib `Set` is a structure and `apply` no longer infers it. Nothing else is
+meant to differ.
 -/
 
 import Mathlib.NumberTheory.SelbergSieve
@@ -124,13 +127,16 @@ theorem nu_eq_conv_one_div_selbergTerms (d : ℕ) (hdP : d ∣ P) :
   rw [←sum_filter, Nat.divisors_filter_dvd_of_dvd prodPrimes_ne_zero hdP]
   have hd_pos : 0 < d := Nat.pos_of_ne_zero <| ne_zero_of_dvd_ne_zero prodPrimes_ne_zero hdP
   revert hdP; revert d
-  apply (ArithmeticFunction.sum_eq_iff_sum_mul_moebius_eq_on _ (fun _ _ => Nat.dvd_trans)).mpr
+  refine (ArithmeticFunction.sum_eq_iff_sum_mul_moebius_eq_on (R := ℝ)
+    (f := fun a => 1 / g a) (g := fun d => (ν d)⁻¹) {n | n ∣ P}
+    (fun _ _ h1 h2 => Nat.dvd_trans h1 h2)).mpr ?_
   intro l _ hlP
+  have hlP' : l ∣ P := hlP
   rw [sum_divisorsAntidiagonal' (f:=fun x y => (μ <| x) * (ν y)⁻¹) (n:=l)]
   apply symm
   exact one_div_selbergTerms_eq_conv_moebius_nu _ l
-    (Squarefree.squarefree_of_dvd hlP s.prodPrimes_squarefree)
-    (_root_.ne_of_gt <| nu_pos_of_dvd_prodPrimes hlP)
+    (Squarefree.squarefree_of_dvd hlP' s.prodPrimes_squarefree)
+    (_root_.ne_of_gt <| nu_pos_of_dvd_prodPrimes hlP')
 
 theorem conv_selbergTerms_eq_selbergTerms_mul_nu {d : ℕ} (hd : d ∣ P) :
     (∑ l ∈ divisors P, if l ∣ d then g l else 0) = g d * (ν d)⁻¹ := by
