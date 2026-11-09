@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Geoffrey Fischer
 -/
 import RNSNetwork.Vocabulary
+import RNSNetwork.Nodes.BrunTwinBound.Conclusions   -- `twin_prime_count`
 import Mathlib.NumberTheory.ArithmeticFunction.Misc   -- `ArithmeticFunction.cardDistinctFactors`
 import Mathlib.Analysis.SpecialFunctions.Log.Basic    -- `Real.log`
 
@@ -31,8 +32,11 @@ Ford, Theorem 4.4). When the level is at least 6⁴ and below the square of the
 cut-off, the twin sum is at least (log y − 4 log 6)² / 576. The constant is
 crude; the order is the point.
 
-Later stages (planned): at most a constant times `N / log² N` twin pairs, and
-then the constant four times the twin-prime constant.
+Also built: Selberg's bound for twin primes in order. From `N` at least 5184⁸
+on, the twin prime pairs up to `N` number at most 40000 N / log² N: take the
+level t² and the cut-off t² + 1, with t the eighth root of `N` rounded down.
+
+Later stage (planned): the constant four times the twin-prime constant.
 
 Proof: `RNSSolutions/SelbergTwinRails.lean`. Rests on `SelbergBound` and
 `BrunTwinCount`. Metadata: `formalization.yaml`.
@@ -75,5 +79,12 @@ least (log y − 4 log 6)² / 576. -/
 def twin_selberg_sum_lower : Prop :=
   ∀ (z : ℕ) (y : ℝ), (6 : ℝ) ^ 4 ≤ y → y < (z : ℝ) ^ 2 →
     (Real.log y - 4 * Real.log 6) ^ 2 / 576 ≤ twin_selberg_sum z y
+
+/-- **Selberg's bound for twin primes.** From `N` at least 5184⁸ on, the twin
+prime pairs whose smaller member is at most `N` number at most
+40000 N / log² N. -/
+def selberg_twin_bound : Prop :=
+  ∀ N : ℕ, (5184 : ℝ) ^ 8 ≤ N →
+    (RNS.BrunTwinBound.twin_prime_count N : ℝ) ≤ 40000 * N / Real.log N ^ 2
 
 end RNS.SelbergTwinRails

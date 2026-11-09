@@ -762,7 +762,203 @@ theorem twin_selberg_sum_lower_holds : twin_selberg_sum_lower := by
     _ ≤ smoothSum (twin_wheels z) M := hsmooth
     _ ≤ setSum (twin_wheels z) M := hset
 
+/-! ## At most a constant times N / log² N twin primes
+
+Take `t` the eighth root of `N` rounded down, the level t² and the cut-off
+t² + 1. Twin primes from the cut-off up survive the twin columns, so they
+number at most the cut-off plus the survivors. The survivors are at most `N`
+over the twin sum plus the error; the twin sum is at least log² N / 36864 once
+`N` is at least 5184⁸, and each error term 6 to the number of prime factors of
+`d` is at most d² (every wheel is at least 5, and 6 ≤ 5²), so the error is at
+most t⁶. Since log N ≤ 8 t, t⁶ is at most 64 N / log² N.
+-/
+
+private theorem twin_count_le (N z : ℕ) :
+    RNS.BrunTwinBound.twin_prime_count N ≤ z + twin_columns_sifted N z := by
+  unfold RNS.BrunTwinBound.twin_prime_count twin_columns_sifted
+  have hsub : (Finset.Ioc 0 N).filter (fun n => n.Prime ∧ (n + 2).Prime) ⊆
+      Finset.range z ∪ (Finset.Ioc 0 N).filter
+        (fun m => Nat.Coprime (twin_wheel_product z) (m * (m + 2))) := by
+    intro n hn
+    obtain ⟨hnN, hp, hp2⟩ := Finset.mem_filter.mp hn
+    rw [Finset.mem_union, Finset.mem_range, Finset.mem_filter]
+    by_cases hnz : n < z
+    · exact Or.inl hnz
+    · right
+      refine ⟨hnN, Nat.Coprime.mul_right ?_ ?_⟩
+      · refine ((hp.coprime_iff_not_dvd).mpr (fun h => hnz ?_)).symm
+        exact (mem_twin_wheels.mp (mem_of_prime_dvd hp h)).2.1
+      · refine ((hp2.coprime_iff_not_dvd).mpr (fun h => hnz ?_)).symm
+        have := (mem_twin_wheels.mp (mem_of_prime_dvd hp2 h)).2.1
+        omega
+  refine (Finset.card_le_card hsub).trans ((Finset.card_union_le _ _).trans ?_)
+  rw [Finset.card_range]
+
+/-- 6 to the number of prime factors of a divisor of the wheel product is at
+most its square. -/
+private theorem six_pow_le_sq {z d : ℕ} (hd : d ∣ twin_wheel_product z) :
+    (6 : ℝ) ^ ArithmeticFunction.cardDistinctFactors d ≤ (d : ℝ) ^ 2 := by
+  have hsq : Squarefree d := Squarefree.squarefree_of_dvd hd (product_squarefree z)
+  have hprod : ∏ p ∈ d.primeFactors, p = d := Nat.prod_primeFactors_of_squarefree hsq
+  conv_rhs => rw [← hprod]
+  push_cast
+  rw [ArithmeticFunction.cardDistinctFactors_eq_card_primeFactors, ← Finset.prod_const,
+    ← Finset.prod_pow]
+  refine Finset.prod_le_prod (fun _ _ => by norm_num) (fun p hp => ?_)
+  have h5 : (5 : ℝ) ≤ p := by
+    exact_mod_cast twin_wheels_five (mem_of_prime_dvd (Nat.prime_of_mem_primeFactors hp)
+      ((Nat.dvd_of_mem_primeFactors hp).trans hd))
+  nlinarith
+
+/-- The error at level t² is at most t⁶. -/
+private theorem error_le (z t : ℕ) :
+    (∑ d ∈ Nat.divisors (twin_wheel_product z),
+      if (d : ℝ) ≤ (t : ℝ) ^ 2 then (6 : ℝ) ^ ArithmeticFunction.cardDistinctFactors d else 0)
+      ≤ (t : ℝ) ^ 6 := by
+  calc _ ≤ ∑ d ∈ Nat.divisors (twin_wheel_product z),
+        if d ∈ Finset.Icc 1 (t ^ 2) then (t : ℝ) ^ 4 else 0 := by
+        refine Finset.sum_le_sum (fun d hd => ?_)
+        have hd' := Nat.mem_divisors.mp hd
+        have hd1 : 1 ≤ d := Nat.pos_of_mem_divisors hd
+        by_cases h : (d : ℝ) ≤ (t : ℝ) ^ 2
+        · have hdt : d ≤ t ^ 2 := by exact_mod_cast h
+          rw [ite_eq_left h, ite_eq_left (Finset.mem_Icc.mpr ⟨hd1, hdt⟩)]
+          have hd0 : (0 : ℝ) ≤ d := Nat.cast_nonneg d
+          calc (6 : ℝ) ^ ArithmeticFunction.cardDistinctFactors d ≤ (d : ℝ) ^ 2 :=
+                six_pow_le_sq hd'.1
+            _ ≤ ((t : ℝ) ^ 2) ^ 2 := by nlinarith
+            _ = (t : ℝ) ^ 4 := by ring
+        · rw [ite_eq_right h]
+          split_ifs
+          · positivity
+          · exact le_rfl
+    _ = ∑ d ∈ Nat.divisors (twin_wheel_product z) ∩ Finset.Icc 1 (t ^ 2), (t : ℝ) ^ 4 :=
+        Finset.sum_ite_mem _ _ _
+    _ ≤ ∑ d ∈ Finset.Icc 1 (t ^ 2), (t : ℝ) ^ 4 :=
+        Finset.sum_le_sum_of_subset_of_nonneg Finset.inter_subset_right
+          (fun _ _ _ => by positivity)
+    _ = (t : ℝ) ^ 6 := by
+        rw [Finset.sum_const, Nat.card_Icc, Nat.add_sub_cancel, nsmul_eq_mul]
+        push_cast
+        ring
+
+/-- The eighth root of `N`, rounded down. -/
+private theorem eighth_root (N : ℕ) : ∃ t : ℕ, t ^ 8 ≤ N ∧ N < (t + 1) ^ 8 := by
+  obtain ⟨a, h3, h3'⟩ : ∃ a, a * a ≤ N ∧ N < (a + 1) * (a + 1) :=
+    ⟨Nat.sqrt N, Nat.sqrt_le N, Nat.lt_succ_sqrt N⟩
+  obtain ⟨b, h2, h2'⟩ : ∃ b, b * b ≤ a ∧ a < (b + 1) * (b + 1) :=
+    ⟨Nat.sqrt a, Nat.sqrt_le a, Nat.lt_succ_sqrt a⟩
+  obtain ⟨t, h1, h1'⟩ : ∃ t, t * t ≤ b ∧ b < (t + 1) * (t + 1) :=
+    ⟨Nat.sqrt b, Nat.sqrt_le b, Nat.lt_succ_sqrt b⟩
+  refine ⟨t, ?_, ?_⟩
+  · have h4 : (t * t) * (t * t) ≤ a := (Nat.mul_le_mul h1 h1).trans h2
+    calc t ^ 8 = ((t * t) * (t * t)) * ((t * t) * (t * t)) := by ring
+      _ ≤ a * a := Nat.mul_le_mul h4 h4
+      _ ≤ N := h3
+  · have h1'' : b + 1 ≤ (t + 1) * (t + 1) := h1'
+    have h2'' : a + 1 ≤ (b + 1) * (b + 1) := h2'
+    have h4 : a + 1 ≤ ((t + 1) * (t + 1)) * ((t + 1) * (t + 1)) :=
+      h2''.trans (Nat.mul_le_mul h1'' h1'')
+    calc N < (a + 1) * (a + 1) := h3'
+      _ ≤ (((t + 1) * (t + 1)) * ((t + 1) * (t + 1))) *
+            (((t + 1) * (t + 1)) * ((t + 1) * (t + 1))) := Nat.mul_le_mul h4 h4
+      _ = (t + 1) ^ 8 := by ring
+
+/-- **Step:** the bound for the twin columns and the lower bound for the twin
+sum give Selberg's bound for twin primes. -/
+theorem selberg_twin_bound_step
+    (h_cols : selberg_twin_columns_bound) (h_low : twin_selberg_sum_lower) :
+    selberg_twin_bound := by
+  intro N hN
+  obtain ⟨t, hlo, hhi⟩ := eighth_root N
+  have hN8 : (5184 : ℕ) ^ 8 ≤ N := by exact_mod_cast hN
+  have ht5184 : 5184 ≤ t := by
+    by_contra h
+    have h' : t + 1 ≤ 5184 := by omega
+    have : (t + 1) ^ 8 ≤ 5184 ^ 8 := Nat.pow_le_pow_left h' 8
+    exact absurd (lt_of_lt_of_le hhi this) (not_lt.mpr hN8)
+  have ht1 : (1 : ℝ) ≤ t := by exact_mod_cast (show 1 ≤ t by omega)
+  have ht0 : (0 : ℝ) < t := by linarith
+  have hNpos : (0 : ℝ) < N := lt_of_lt_of_le (by positivity) hN
+  have hloR : (t : ℝ) ^ 8 ≤ N := by exact_mod_cast hlo
+  have hhiR : (N : ℝ) < ((t : ℝ) + 1) ^ 8 := by exact_mod_cast hhi
+  -- logarithms
+  have hLt : Real.log N < 8 * Real.log ((t : ℝ) + 1) := by
+    have := Real.log_lt_log hNpos hhiR
+    rw [Real.log_pow] at this
+    push_cast at this
+    linarith
+  have hL5184 : 8 * Real.log 5184 ≤ Real.log N := by
+    have := Real.log_le_log (by positivity) hN
+    rw [Real.log_pow] at this
+    push_cast at this
+    linarith
+  have hlog5184 : Real.log 5184 = 2 * Real.log 2 + 4 * Real.log 6 := by
+    rw [show (5184 : ℝ) = 2 ^ 2 * 6 ^ 4 by norm_num, Real.log_mul (by norm_num) (by norm_num),
+      Real.log_pow, Real.log_pow]
+    push_cast
+    ring
+  have hlog2 : 0 < Real.log 2 := Real.log_pos (by norm_num)
+  have hlog6 : 0 < Real.log 6 := Real.log_pos (by norm_num)
+  have hLpos : 0 < Real.log N := by linarith
+  have hlogt1 : Real.log ((t : ℝ) + 1) ≤ Real.log 2 + Real.log t := by
+    rw [← Real.log_mul (by norm_num) ht0.ne']
+    exact Real.log_le_log (by positivity) (by linarith)
+  have hlogt1' : Real.log ((t : ℝ) + 1) ≤ t := by
+    have := Real.log_le_sub_one_of_pos (show (0 : ℝ) < (t : ℝ) + 1 by positivity)
+    linarith
+  have hlt2 : Real.log ((t : ℝ) ^ 2) = 2 * Real.log t := by
+    rw [Real.log_pow]
+    push_cast
+    ring
+  -- the level t² and the cut-off t² + 1
+  have hy1 : (1 : ℝ) ≤ (t : ℝ) ^ 2 := by nlinarith
+  have hy6 : (6 : ℝ) ^ 4 ≤ (t : ℝ) ^ 2 := by
+    have : (5184 : ℝ) ≤ t := by exact_mod_cast ht5184
+    nlinarith
+  have hyz : (t : ℝ) ^ 2 < ((t ^ 2 + 1 : ℕ) : ℝ) ^ 2 := by
+    push_cast
+    nlinarith
+  have hG := h_low (t ^ 2 + 1) ((t : ℝ) ^ 2) hy6 hyz
+  have hsieve := h_cols N (t ^ 2 + 1) ((t : ℝ) ^ 2) hy1
+  have hE := error_le (t ^ 2 + 1) t
+  have hcount : (RNS.BrunTwinBound.twin_prime_count N : ℝ) ≤
+      (t : ℝ) ^ 2 + 1 + (twin_columns_sifted N (t ^ 2 + 1) : ℝ) := by
+    have := twin_count_le N (t ^ 2 + 1)
+    exact_mod_cast this
+  -- the twin sum is at least log² N / 36864
+  have hu : Real.log N / 8 ≤ Real.log ((t : ℝ) ^ 2) - 4 * Real.log 6 := by linarith
+  have hu0 : 0 ≤ Real.log N / 8 := by linarith
+  have hsq := mul_self_le_mul_self hu0 hu
+  have hGlow : Real.log N ^ 2 / 36864 ≤ twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2) := by
+    nlinarith
+  have hGpos : 0 < Real.log N ^ 2 / 36864 := by positivity
+  set Q := (N : ℝ) / Real.log N ^ 2 with hQ
+  have hQ0 : 0 ≤ Q := by positivity
+  have hdivG : (N : ℝ) / twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2) ≤ 36864 * Q := by
+    calc (N : ℝ) / twin_selberg_sum (t ^ 2 + 1) ((t : ℝ) ^ 2)
+        ≤ (N : ℝ) / (Real.log N ^ 2 / 36864) :=
+          div_le_div_of_nonneg_left hNpos.le hGpos hGlow
+      _ = 36864 * Q := by
+          rw [hQ]
+          field_simp
+  -- the error and the cut-off are at most a constant times N / log² N
+  have hL2 : Real.log N ^ 2 ≤ 64 * (t : ℝ) ^ 2 := by nlinarith
+  have ht6 : (t : ℝ) ^ 6 ≤ 64 * Q := by
+    rw [hQ, mul_div_assoc', le_div_iff₀ (by positivity)]
+    have h1 : (t : ℝ) ^ 6 * Real.log N ^ 2 ≤ (t : ℝ) ^ 6 * (64 * (t : ℝ) ^ 2) :=
+      mul_le_mul_of_nonneg_left hL2 (by positivity)
+    nlinarith
+  have hz : (t : ℝ) ^ 2 + 1 ≤ 2 * (t : ℝ) ^ 6 := by
+    have h2 : (1 : ℝ) ≤ (t : ℝ) ^ 2 := hy1
+    have h4 : (1 : ℝ) ≤ (t : ℝ) ^ 4 := by nlinarith
+    have h6 := mul_le_mul_of_nonneg_left h4 (by positivity : (0 : ℝ) ≤ (t : ℝ) ^ 2)
+    nlinarith
+  rw [mul_div_assoc, ← hQ]
+  linarith
+
 end RNS.SelbergTwinRails
 
 #print axioms RNS.SelbergTwinRails.selberg_twin_columns_bound_step
 #print axioms RNS.SelbergTwinRails.twin_selberg_sum_lower_holds
+#print axioms RNS.SelbergTwinRails.selberg_twin_bound_step
