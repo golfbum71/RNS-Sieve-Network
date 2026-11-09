@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean · **Diagram:** [Patterns, admissibility and the Hardy-Littlewood constants](../../GRAPH.md#patterns-admissibility-and-the-hardy-littlewood-constants)
 
-For prime pairs a fixed even gap apart, the wheel-built correction constant equals the twin-prime constant times, for each odd prime dividing the gap, that prime minus one over that prime minus two. So a gap of six has exactly twice the twin constant: the wheel of size 3 blocks one position instead of two, because a gap divisible by 6 keeps both numbers in the same column. Classical (Hardy and Littlewood 1923); not yet in the network.
+For prime pairs a fixed even gap apart, the wheel-built correction constant equals the twin-prime constant times, for each odd prime dividing the gap, that prime minus one over that prime minus two. So a gap of six has exactly twice the twin constant: the wheel of size 3 blocks one position instead of two, because a gap divisible by 6 keeps both numbers in the same column. Classical (Hardy and Littlewood 1923); not yet in the network. As proved: matches the plan, plus one added claim, gap_constant_classical, giving the same result in terms of the classical twin constant.
 
 **What it adds:** TwinConstant covers the gap of two only; this gives every even gap.
 

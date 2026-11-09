@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean · **Diagram:** [Survivor shares and analytic inputs](../../GRAPH.md#survivor-shares-and-analytic-inputs)
 
-With the wheels up to about log x, the numbers up to x surviving every wheel number e to minus Euler's constant times x over the logarithm of the largest wheel, asymptotically. The proof is Legendre's exact identity, whose 2 to the number of wheels error terms are small in this range, plus Mertens' third theorem. Heath-Brown, Corollary 1.2.
+With the wheels up to about log x, the numbers up to x surviving every wheel number e to minus Euler's constant times x over the logarithm of the largest wheel, asymptotically. The proof is Legendre's exact identity, whose 2 to the number of wheels error terms are small in this range, plus Mertens' third theorem. Heath-Brown, Corollary 1.2. As proved, differs from the plan: the wheels are the primes up to the integer part of log x, and the limit is stated with log log x in place of the logarithm of the largest wheel (the same limit, since that wheel is about log x). Legendre's error bound (at most 2 to the number of wheels) is added as its own claim, legendre_error.
 
 ## Published sources
 

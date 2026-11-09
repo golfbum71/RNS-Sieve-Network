@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean · **Diagram:** [Patterns, admissibility and the Hardy-Littlewood constants](../../GRAPH.md#patterns-admissibility-and-the-hardy-littlewood-constants)
 
-If the wheels run only up to the power one over e to Euler's constant (about 0.56) of the range, the share of the cycle surviving an admissible pattern, times the logarithm of the range to the number of offsets, tends to the pattern's Hardy-Littlewood constant. So the conjectured constant comes out of the wheels alone, with no correction. For a single offset this matches the prime number theorem, in contrast to CeilingOvershoot, where wheels up to the square root overshoot by twice e to minus Euler's constant. Pólya's observation, made rigorous by Banks, Ford and Tao.
+If the wheels run only up to the power one over e to Euler's constant (about 0.56) of the range, the share of the cycle surviving an admissible pattern, times the logarithm of the range to the number of offsets, tends to the pattern's Hardy-Littlewood constant. So the conjectured constant comes out of the wheels alone, with no correction. For a single offset this matches the prime number theorem, in contrast to CeilingOvershoot, where wheels up to the square root overshoot by twice e to minus Euler's constant. Pólya's observation, made rigorous by Banks, Ford and Tao. As proved: matches the plan, for every nonempty admissible pattern, with the wheels up to the integer part of x to the power e to minus Euler's constant; joined to the PNT+ outside claim for Mertens' third theorem in Assemble.
 
 **What it adds:** ShareAsymptotics leaves a factor e to minus Euler's constant per offset; at this cutoff it disappears.
 

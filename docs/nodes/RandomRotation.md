@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean · **Diagram:** [Foundations: wheels, cycles and columns](../../GRAPH.md#foundations-wheels-cycles-and-columns)
 
-Turn each wheel to a position chosen uniformly at random, independently. The chance that every member of a given finite set of positions survives equals the product over the wheels of one minus the number of distinct positions the set occupies on that wheel over the wheel size: exactly the pattern's survivor share. By the Chinese Remainder Theorem each choice of rotations is a shift of the whole cycle, so this is a count of shifts. The random-sieve model of Banks, Ford and Tao and the starting point of the large-gap construction (Ford Lemma 8.4).
+Turn each wheel to a position chosen uniformly at random, independently. The chance that every member of a given finite set of positions survives equals the product over the wheels of one minus the number of distinct positions the set occupies on that wheel over the wheel size: exactly the pattern's survivor share. By the Chinese Remainder Theorem each choice of rotations is a shift of the whole cycle, so this is a count of shifts. The random-sieve model of Banks, Ford and Tao and the starting point of the large-gap construction (Ford Lemma 8.4). As proved: matches the plan; the survival share is stated for the wheels below the limit, as the share of the cycle surviving the pattern.
 
 **What it adds:** SurvivorCount counts the surviving positions of the cycle; this node reads that count as a probability: each setting of the wheels is one shift of the cycle (CRT), so the survival chance under random rotations is the pattern's survivor share.
 

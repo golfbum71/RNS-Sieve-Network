@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean · **Diagram:** [Sieve methods: Brun, Hooley, Selberg](../../GRAPH.md#sieve-methods-brun-hooley-selberg)
 
-The survivors of the wheels up to a larger prime equal the survivors of the wheels up to a smaller one, minus, for each wheel in between, the positions it is the first to block. With the plain pattern this is Legendre's recurrence for phi(x, a): bringing in the next wheel removes the survivors of the earlier wheels among the multiples of the new prime. Buchstab's identity, Ford Lemma 3.8.
+The survivors of the wheels up to a larger prime equal the survivors of the wheels up to a smaller one, minus, for each wheel in between, the positions it is the first to block. With the plain pattern this is Legendre's recurrence for phi(x, a): bringing in the next wheel removes the survivors of the earlier wheels among the multiples of the new prime. Buchstab's identity, Ford Lemma 3.8. As proved: matches the plan (all three claims, for any finite sets of prime wheels).
 
 **What it adds:** SurvivorCount and BrunPureSieve count the survivors of a fixed set of wheels; this node says how the count changes when wheels are added, one at a time (Legendre) or several at once (Buchstab).
 

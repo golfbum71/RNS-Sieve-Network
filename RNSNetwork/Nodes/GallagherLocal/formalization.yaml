@@ -9,10 +9,7 @@ node:
   kind: paper
   status: active
   title: one wheel's correction averages to 1
-  description: For a single wheel, its correction factor for a pattern of k offsets (one minus the occupied
-    positions over the wheel, divided by one minus one over the wheel to the k), averaged over all patterns
-    of k distinct offsets up to h, tends to 1 as h grows. This is the one-wheel step of Gallagher's theorem,
-    which GallagherAverage currently cites.
+  description: "For a single wheel, its correction factor for a pattern of k offsets (one minus the occupied positions over the wheel, divided by one minus one over the wheel to the k), averaged over all patterns of k distinct offsets up to h, tends to 1 as h grows. This is the one-wheel step of Gallagher's theorem, which GallagherAverage currently cites. As proved, differs from the plan: the offsets run below h (0 to h - 1) rather than up to h, and at least one offset is required; the proof needs only Mathlib, so the planned arrow from SingularSeries is not drawn."
 conclusions:
 - id: one_wheel_average
   declaration: RNS.GallagherLocal.one_wheel_average

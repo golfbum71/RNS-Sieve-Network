@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean · **Diagram:** [Sieve methods: Brun, Hooley, Selberg](../../GRAPH.md#sieve-methods-brun-hooley-selberg)
 
-For numbers between x to the 2/3 and x, being prime or a product of two primes is at least one, minus half the count of primes up to the cube root dividing it, minus half the count of its factorizations into three primes with only the first below the cube root, minus half the count of small primes whose square divides it. A finite inequality on factorizations; the weight Chen's theorem sieves with. Tao, Supplement 5, Lemma 11.
+For numbers between x to the 2/3 and x, being prime or a product of two primes is at least one, minus half the count of primes up to the cube root dividing it, minus half the count of its factorizations into three primes with only the first below the cube root, minus half the count of small primes whose square divides it. A finite inequality on factorizations; the weight Chen's theorem sieves with. Tao, Supplement 5, Lemma 11. As proved, differs from the plan: stated with a cutoff y in place of the cube root of x (wheels are the primes below y), and for every number from 1 up to just below y cubed, a wider range than Tao's numbers between x to the 2/3 and x; the weight is at most 1 when the number has at most two prime factors and at most 0 otherwise.
 
 **What it adds:** AlmostPrimeWindow shows survivors below the cube of the cutoff have at most two prime factors; this node gives the weight that lets a sieve count them from below, including numbers with one wheel factor.
 

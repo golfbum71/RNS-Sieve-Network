@@ -988,19 +988,19 @@ its planned claims, plan and sources. Not yet in Lean; absence of Lean elsewhere
 checked by search only, so confirm with Loogle before starting.
 
 ### 71. `GapConstant` — the constant for any even gap
-For prime pairs a fixed even gap apart, the wheel-built correction constant equals the twin-prime constant times, for each odd prime dividing the gap, that prime minus one over that prime minus two. So a gap of six has exactly twice the twin constant: the wheel of size 3 blocks one position instead of two, because a gap divisible by 6 keeps both numbers in the same column. Classical (Hardy and Littlewood 1923); not yet in the network.
+For prime pairs a fixed even gap apart, the wheel-built correction constant equals the twin-prime constant times, for each odd prime dividing the gap, that prime minus one over that prime minus two. So a gap of six has exactly twice the twin constant: the wheel of size 3 blocks one position instead of two, because a gap divisible by 6 keeps both numbers in the same column. Classical (Hardy and Littlewood 1923); not yet in the network. As proved: matches the plan, plus one added claim, gap_constant_classical, giving the same result in terms of the classical twin constant.
 - Lean: `gap_constant_eq_twin_mul`, `gap_constant_classical`, `sexy_constant_eq_two_twin`, `goldbach_constant` (with `odd_divisor_correction`, `goldbach_constant_of`)
 - Rests on: `SingularSeries`, `TwinConstant`
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-08).
 
 ### 72. `PolyaCutoff` — sifting to Polya's cutoff gives the Hardy-Littlewood constant exactly
-If the wheels run only up to the power one over e to Euler's constant (about 0.56) of the range, the share of the cycle surviving an admissible pattern, times the logarithm of the range to the number of offsets, tends to the pattern's Hardy-Littlewood constant. So the conjectured constant comes out of the wheels alone, with no correction. For a single offset this matches the prime number theorem, in contrast to CeilingOvershoot, where wheels up to the square root overshoot by twice e to minus Euler's constant. Pólya's observation, made rigorous by Banks, Ford and Tao.
+If the wheels run only up to the power one over e to Euler's constant (about 0.56) of the range, the share of the cycle surviving an admissible pattern, times the logarithm of the range to the number of offsets, tends to the pattern's Hardy-Littlewood constant. So the conjectured constant comes out of the wheels alone, with no correction. For a single offset this matches the prime number theorem, in contrast to CeilingOvershoot, where wheels up to the square root overshoot by twice e to minus Euler's constant. Pólya's observation, made rigorous by Banks, Ford and Tao. As proved: matches the plan, for every nonempty admissible pattern, with the wheels up to the integer part of x to the power e to minus Euler's constant; joined to the PNT+ outside claim for Mertens' third theorem in Assemble.
 - Lean: `polya_cutoff_share`; joined to the PNT+ outside claim as `polya_cutoff_share_of_mertens_third`
 - Rests on: `ShareAsymptotics`
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-08).
 
 ### 73. `BadWheels` — which wheels block fewer positions for linear forms
-For a pattern of linear forms whose two coefficients share no factor, a wheel blocks at most one position per form, and it blocks fewer exactly when it divides the bad product: the leading coefficients times the cross differences over ordered pairs of distinct forms. For the two columns 6n-1 and 6n+1 (forms 6n+5 and 6n+7) that product is -5184 = -2^6 3^4, so the wheels 2 and 3 are the only exceptions: the 6n±1 wheel is exactly the removal of the bad wheels. Ford, Theorem 2.5 (first part) and Lemma 7.7.
+For a pattern of linear forms whose two coefficients share no factor, a wheel blocks at most one position per form, and it blocks fewer exactly when it divides the bad product: the leading coefficients times the cross differences over ordered pairs of distinct forms. For the two columns 6n-1 and 6n+1 (forms 6n+5 and 6n+7) that product is -5184 = -2^6 3^4, so the wheels 2 and 3 are the only exceptions: the 6n±1 wheel is exactly the removal of the bad wheels. Ford, Theorem 2.5 (first part) and Lemma 7.7. As proved, differs from the plan: each form's two coefficients must share no factor (an added hypothesis); the bad product of the two columns is -5184, not 432 as first planned (the conclusion, wheels 2 and 3 only, is unchanged); and no claim of LinearForms is imported, only its encoding of a form as a pair of numbers, so the planned arrow from LinearForms is not drawn.
 - Lean: `blocked_le_card`, `blocked_eq_card_iff`, `twin_columns_bad_wheels`, `divisors_pairwise_coprime` (with `blocked`, `form_roots`, `cross`, `bad_product`)
 - Rests on: Vocabulary and the form encoding of `LinearForms` (no claim imported)
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-08).
@@ -1068,7 +1068,7 @@ Each column, 6n-1 or 6n+1, holds at most about the window's length over the loga
 - Status: Planned
 
 ### 83. `BuchstabIdentity` — adding one wheel, counted by the first wheel that blocks
-The survivors of the wheels up to a larger prime equal the survivors of the wheels up to a smaller one, minus, for each wheel in between, the positions it is the first to block. With the plain pattern this is Legendre's recurrence for phi(x, a): bringing in the next wheel removes the survivors of the earlier wheels among the multiples of the new prime. Buchstab's identity, Ford Lemma 3.8.
+The survivors of the wheels up to a larger prime equal the survivors of the wheels up to a smaller one, minus, for each wheel in between, the positions it is the first to block. With the plain pattern this is Legendre's recurrence for phi(x, a): bringing in the next wheel removes the survivors of the earlier wheels among the multiples of the new prime. Buchstab's identity, Ford Lemma 3.8. As proved: matches the plan (all three claims, for any finite sets of prime wheels).
 - Lean: `legendre_phi_recurrence`, `buchstab_identity`, `buchstab_product_identity`
 - Rests on: Mathlib only
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-08).
@@ -1125,13 +1125,13 @@ notes listed below. Each is a dashed node on [`GRAPH.md`](../GRAPH.md). Search-o
 for existing Lean; confirm with Loogle before starting.
 
 ### 90. `SmoothNumbers` — numbers built only from the wheels
-The numbers up to x whose prime factors are all wheels up to y. Rankin's bound: their count is at most x to a power alpha times the product over the wheels of one over one minus the wheel to the minus alpha, for any alpha between 0 and 1; at alpha = 1 that product is the reciprocal of the survivor share. A lower bound counts the products of the wheels directly, and a Buchstab-type identity removes the largest wheel. Ford Chapter 5.
+The numbers up to x whose prime factors are all wheels up to y. Rankin's bound: their count is at most x to a power alpha times the product over the wheels of one over one minus the wheel to the minus alpha, for any alpha between 0 and 1; at alpha = 1 that product is the reciprocal of the survivor share. A lower bound counts the products of the wheels directly, and a Buchstab-type identity removes the largest wheel. Ford Chapter 5. As proved, differs from the plan: the wheels may be any finite set of primes, not only all primes up to y. Rankin's bound holds for every positive alpha, not only alpha between 0 and 1. The lower bound is weaker than Ford's: it counts only products of distinct wheels, at most u of them where y to the u is at most x, whereas Ford counts products with repetition.
 - Lean: `rankin_upper`, `smooth_count_lower` (products of at most u distinct wheels), `smooth_buchstab` (with `smooth_upto`)
 - Rests on: Mathlib only
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-08).
 
 ### 91. `RandomRotation` — rotating every wheel at random
-Turn each wheel to a position chosen uniformly at random, independently. The chance that every member of a given finite set of positions survives equals the product over the wheels of one minus the number of distinct positions the set occupies on that wheel over the wheel size: exactly the pattern's survivor share. By the Chinese Remainder Theorem each choice of rotations is a shift of the whole cycle, so this is a count of shifts. The random-sieve model of Banks, Ford and Tao and the starting point of the large-gap construction (Ford Lemma 8.4).
+Turn each wheel to a position chosen uniformly at random, independently. The chance that every member of a given finite set of positions survives equals the product over the wheels of one minus the number of distinct positions the set occupies on that wheel over the wheel size: exactly the pattern's survivor share. By the Chinese Remainder Theorem each choice of rotations is a shift of the whole cycle, so this is a count of shifts. The random-sieve model of Banks, Ford and Tao and the starting point of the large-gap construction (Ford Lemma 8.4). As proved: matches the plan; the survival share is stated for the wheels below the limit, as the share of the cycle surviving the pattern.
 - Lean: `rotation_is_shift`, `random_rotation_survival`
 - Rests on: `CRT`, `SurvivorCount`
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-08).
@@ -1144,7 +1144,7 @@ If prime pairs at every even gap up to twice the logarithm obey an upper bound o
 - Status: Planned
 
 ### 93. `SmallWheelSurvivors` — survivors match the share when the wheels stay below log x
-With the wheels up to about log x, the numbers up to x surviving every wheel number e to minus Euler's constant times x over the logarithm of the largest wheel, asymptotically. The proof is Legendre's exact identity, whose 2 to the number of wheels error terms are small in this range, plus Mertens' third theorem. Heath-Brown, Corollary 1.2.
+With the wheels up to about log x, the numbers up to x surviving every wheel number e to minus Euler's constant times x over the logarithm of the largest wheel, asymptotically. The proof is Legendre's exact identity, whose 2 to the number of wheels error terms are small in this range, plus Mertens' third theorem. Heath-Brown, Corollary 1.2. As proved, differs from the plan: the wheels are the primes up to the integer part of log x, and the limit is stated with log log x in place of the logarithm of the largest wheel (the same limit, since that wheel is about log x). Legendre's error bound (at most 2 to the number of wheels) is added as its own claim, legendre_error.
 - Lean: `legendre_error`, `small_wheel_survivors`; joined to the PNT+ outside claim as `small_wheel_survivors_of_mertens_third`
 - Rests on: `BrunPureSieve`, `MertensThird`
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-08).
@@ -1157,7 +1157,7 @@ Knowing only how many numbers each product of wheels divides pins the survivor c
 - Status: Planned
 
 ### 95. `LargerSieve` — Gallagher's larger sieve: when each wheel leaves few positions
-If a set of numbers in a window of length N occupies at most g(q) positions on each wheel q (prime powers allowed), then its size is at most the sum of log q minus log N, over the sum of log q over g(q) minus log N, whenever the denominator is positive. So when every wheel leaves at most G positions open and the wheels are numerous enough, fewer than G numbers survive. Elementary: counting pairs that agree on a wheel. Gallagher 1971.
+If a set of numbers in a window of length N occupies at most g(q) positions on each wheel q (prime powers allowed), then its size is at most the sum of log q minus log N, over the sum of log q over g(q) minus log N, whenever the denominator is positive. So when every wheel leaves at most G positions open and the wheels are numerous enough, fewer than G numbers survive. Elementary: counting pairs that agree on a wheel. Gallagher 1971. As proved: matches the plan, with the von Mangoldt weight (log of the prime for a prime power, 0 otherwise) on any finite set of wheel sizes.
 - Lean: `larger_sieve`, `larger_sieve_few` (with `classes`)
 - Rests on: Mathlib only
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-08).
@@ -1184,13 +1184,13 @@ Maier's matrix: rows are windows of length (log x) to a power A, columns are the
 - Status: Planned (cites a published result)
 
 ### 99. `GallagherLocal` — one wheel's correction averages to 1
-For a single wheel, its correction factor for a pattern of k offsets (one minus the occupied positions over the wheel, divided by one minus one over the wheel to the k), averaged over all patterns of k distinct offsets up to h, tends to 1 as h grows. This is the one-wheel step of Gallagher's theorem, which GallagherAverage currently cites.
+For a single wheel, its correction factor for a pattern of k offsets (one minus the occupied positions over the wheel, divided by one minus one over the wheel to the k), averaged over all patterns of k distinct offsets up to h, tends to 1 as h grows. This is the one-wheel step of Gallagher's theorem, which GallagherAverage currently cites. As proved, differs from the plan: the offsets run below h (0 to h - 1) rather than up to h, and at least one offset is required; the proof needs only Mathlib, so the planned arrow from SingularSeries is not drawn.
 - Lean: `one_wheel_average` (with `one_wheel_factor`)
 - Rests on: Mathlib only (uses the vocabulary's blocked count `w`)
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-08).
 
 ### 100. `ChenWeights` — Chen's weights for numbers with at most two prime factors
-For numbers between x to the 2/3 and x, being prime or a product of two primes is at least one, minus half the count of primes up to the cube root dividing it, minus half the count of its factorizations into three primes with only the first below the cube root, minus half the count of small primes whose square divides it. A finite inequality on factorizations; the weight Chen's theorem sieves with. Tao, Supplement 5, Lemma 11.
+For numbers between x to the 2/3 and x, being prime or a product of two primes is at least one, minus half the count of primes up to the cube root dividing it, minus half the count of its factorizations into three primes with only the first below the cube root, minus half the count of small primes whose square divides it. A finite inequality on factorizations; the weight Chen's theorem sieves with. Tao, Supplement 5, Lemma 11. As proved, differs from the plan: stated with a cutoff y in place of the cube root of x (wheels are the primes below y), and for every number from 1 up to just below y cubed, a wider range than Tao's numbers between x to the 2/3 and x; the weight is at most 1 when the number has at most two prime factors and at most 0 otherwise.
 - Lean: `chen_weight_le` (with `small_factors`, `small_square_factors`, `chen_triples`); stated for every number from 1 up to just below the cube of the cutoff
 - Rests on: Mathlib only
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-08).

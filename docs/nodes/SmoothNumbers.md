@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean · **Diagram:** [Survivor shares and analytic inputs](../../GRAPH.md#survivor-shares-and-analytic-inputs)
 
-The numbers up to x whose prime factors are all wheels up to y. Rankin's bound: their count is at most x to a power alpha times the product over the wheels of one over one minus the wheel to the minus alpha, for any alpha between 0 and 1; at alpha = 1 that product is the reciprocal of the survivor share. A lower bound counts the products of the wheels directly, and a Buchstab-type identity removes the largest wheel. Ford Chapter 5.
+The numbers up to x whose prime factors are all wheels up to y. Rankin's bound: their count is at most x to a power alpha times the product over the wheels of one over one minus the wheel to the minus alpha, for any alpha between 0 and 1; at alpha = 1 that product is the reciprocal of the survivor share. A lower bound counts the products of the wheels directly, and a Buchstab-type identity removes the largest wheel. Ford Chapter 5. As proved, differs from the plan: the wheels may be any finite set of primes, not only all primes up to y. Rankin's bound holds for every positive alpha, not only alpha between 0 and 1. The lower bound is weaker than Ford's: it counts only products of distinct wheels, at most u of them where y to the u is at most x, whereas Ford counts products with repetition.
 
 **What it adds:** ShareBounds expands the reciprocal of the survivor share over the numbers built from the wheels (the alpha = 1 case); this node bounds how many such numbers lie below x, from above (Rankin) and below, and gives their recurrence.
 

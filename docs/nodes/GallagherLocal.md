@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean · **Diagram:** [Patterns, admissibility and the Hardy-Littlewood constants](../../GRAPH.md#patterns-admissibility-and-the-hardy-littlewood-constants)
 
-For a single wheel, its correction factor for a pattern of k offsets (one minus the occupied positions over the wheel, divided by one minus one over the wheel to the k), averaged over all patterns of k distinct offsets up to h, tends to 1 as h grows. This is the one-wheel step of Gallagher's theorem, which GallagherAverage currently cites.
+For a single wheel, its correction factor for a pattern of k offsets (one minus the occupied positions over the wheel, divided by one minus one over the wheel to the k), averaged over all patterns of k distinct offsets up to h, tends to 1 as h grows. This is the one-wheel step of Gallagher's theorem, which GallagherAverage currently cites. As proved, differs from the plan: the offsets run below h (0 to h - 1) rather than up to h, and at least one offset is required; the proof needs only Mathlib, so the planned arrow from SingularSeries is not drawn.
 
 ## Published sources
 

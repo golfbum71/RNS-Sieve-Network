@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean · **Diagram:** [Sieve methods: Brun, Hooley, Selberg](../../GRAPH.md#sieve-methods-brun-hooley-selberg)
 
-If a set of numbers in a window of length N occupies at most g(q) positions on each wheel q (prime powers allowed), then its size is at most the sum of log q minus log N, over the sum of log q over g(q) minus log N, whenever the denominator is positive. So when every wheel leaves at most G positions open and the wheels are numerous enough, fewer than G numbers survive. Elementary: counting pairs that agree on a wheel. Gallagher 1971.
+If a set of numbers in a window of length N occupies at most g(q) positions on each wheel q (prime powers allowed), then its size is at most the sum of log q minus log N, over the sum of log q over g(q) minus log N, whenever the denominator is positive. So when every wheel leaves at most G positions open and the wheels are numerous enough, fewer than G numbers survive. Elementary: counting pairs that agree on a wheel. Gallagher 1971. As proved: matches the plan, with the von Mangoldt weight (log of the prime for a prime power, 0 otherwise) on any finite set of wheel sizes.
 
 ## Published sources
 
