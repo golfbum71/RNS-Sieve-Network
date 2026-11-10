@@ -74,3 +74,4 @@ import RNSSolutions.MaierMatrix
 import RNSSolutions.BirdseySchay
 import RNSSolutions.SelbergBound
 import RNSSolutions.SelbergTwinRails
+import RNSSolutions.PigeonholeWheel

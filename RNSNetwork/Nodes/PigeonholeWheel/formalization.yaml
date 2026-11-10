@@ -1,0 +1,109 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: PigeonholeWheel.v1
+  family: PigeonholeWheel
+  version: v1
+  order: 102
+  kind: paper
+  status: active
+  group: foundations
+  title: "one pigeon per wheel"
+  improves: >-
+    A third proof that the primes never run out, next to the two in
+    Infinitude: it builds no special number (Euclid) and counts no
+    square-free parts, but follows the wheels one at a time, showing by
+    pigeonhole that each new wheel closes exactly one copy of every survivor
+    and leaves the rest open.
+  description: >-
+    When a new wheel joins, each position that survived the earlier wheels
+    has one copy in the longer cycle for every slot of the new wheel. No two
+    copies share a slot, so by the pigeonhole principle every slot receives
+    exactly one copy: one copy is closed and the others, one fewer than the
+    wheel size, stay open. Starting from the two open positions of wheels 2
+    and 3 (the 6n+1 and 6n-1 positions), two survivors are carried through
+    every further wheel; if every prime were a wheel, only position 1 would
+    be open, so the primes never run out. The per-wheel statement is the
+    Chinese Remainder Theorem seen one wheel at a time; the infinitude proof
+    is a known variant of Euclid's, related to the proofs through Euler's
+    totient function.
+
+conclusions:
+  - id: one_closed_copy
+    declaration: RNS.PigeonholeWheel.one_closed_copy
+    summary: "For a new wheel not dividing the product of the earlier wheels, exactly one copy of any position lands on the blocked slot."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/PigeonholeWheel.lean
+        declaration: RNS.PigeonholeWheel.one_closed_copy_holds
+        note: >-
+          Checked on Comparator Live (standard axioms only, 2026-11-09);
+          awaiting the repository build.
+    designated: lean-proof
+  - id: open_copies
+    declaration: RNS.PigeonholeWheel.open_copies
+    summary: "The copies left open on the new wheel number exactly one fewer than the wheel size."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/PigeonholeWheel.lean
+        declaration: RNS.PigeonholeWheel.open_copies_holds
+        note: >-
+          Written; awaiting the repository build.
+    designated: lean-proof
+  - id: two_survivors_persist
+    declaration: RNS.PigeonholeWheel.two_survivors_persist
+    summary: "For any wheels of size at least 5, the cycle of 6 times their product has two different positions open on every wheel, including 2 and 3."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/PigeonholeWheel.lean
+        declaration: RNS.PigeonholeWheel.two_survivors_persist_holds
+        note: >-
+          Written; awaiting the repository build.
+    designated: lean-proof
+  - id: pigeonhole_primes_unbounded
+    declaration: RNS.PigeonholeWheel.pigeonhole_primes_unbounded
+    summary: "Above every bound there is a prime: two survivors cannot both sit on the one safe position."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/PigeonholeWheel.lean
+        declaration: RNS.PigeonholeWheel.pigeonhole_primes_unbounded_holds
+        note: >-
+          Written; awaiting the repository build.
+    designated: lean-proof
+
+sources:
+  - title: "Euclid, Elements, Book IX, Proposition 20 (D. E. Joyce's edition)"
+    type: "paper"
+    url: "https://mathcs.clarku.edu/~djoyce/elements/bookIX/propIX20.html"
+    relationship: "the theorem proved; this node's argument is a counting variant of Euclid's"
+  - title: "R. Meštrović, Euclid's theorem on the infinitude of primes: a historical survey of its proofs (300 B.C.-2022)"
+    type: "paper"
+    url: "https://arxiv.org/abs/1202.3670"
+    relationship: "surveys the published proofs, including those through Euler's totient function, to which this survivor-counting proof is related"
+  - title: "Chinese remainder theorem (Wikipedia)"
+    type: "paper"
+    url: "https://en.wikipedia.org/wiki/Chinese_remainder_theorem"
+    relationship: "the per-wheel statement is the Chinese Remainder Theorem for one new modulus, proved here by pigeonhole"
+
+related:
+  - node: Infinitude
+    note: "the same theorem, by Euclid's argument and by square-free counting"
+  - node: CRT
+    note: "one_closed_copy is the CRT bijection seen one wheel at a time"
+  - node: WheelOrder
+    note: "with no later wheels, its marginal count says each new wheel closes as many positions as there were earlier survivors: one pigeon per survivor, counted in bulk"
+  - node: SurvivorCount
+    note: "the exact survivor count (the product of each wheel size minus one) that the open copies build up wheel by wheel"

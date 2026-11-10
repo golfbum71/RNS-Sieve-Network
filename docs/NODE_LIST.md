@@ -1324,6 +1324,13 @@ For a sieve problem in Mathlib's form (a weighted finite set, the product of the
 - Rests on: Mathlib only
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-09).
 
+### 102. `PigeonholeWheel` — one pigeon per wheel
+When a new wheel joins, each surviving position has one copy in the longer cycle for every slot of the new wheel. No two copies share a slot, so by pigeonhole every slot receives exactly one copy: one copy is closed (the pigeon) and the others, one fewer than the wheel size, stay open (the holes). Starting from the two open positions of wheels 2 and 3 (the 6n+1 and 6n-1 positions), two survivors are carried through every further wheel; if every prime were a wheel only position 1 would be open, so the primes never run out. A third proof of the theorem in `Infinitude`, related to the proofs through Euler's totient function.
+- Sources: [Euclid, Elements IX.20](https://mathcs.clarku.edu/~djoyce/elements/bookIX/propIX20.html); [Meštrović, survey of the proofs](https://arxiv.org/abs/1202.3670)
+- Lean: `one_closed_copy`, `open_copies`, `two_survivors_persist`, `pigeonhole_primes_unbounded` (with `lift_slot`, `survives`)
+- Rests on: Vocabulary only
+- Status: Drafted. The one-pigeon lemmas checked on Comparator Live (standard three axioms, 2026-11-09); awaiting the repository build.
+
 ### Added to nodes 71-89
 - `BadWheels` gains `divisors_pairwise_coprime` (Ford Lemma 7.7).
 - `BuchstabIdentity` gains `buchstab_product_identity` (Tao, Notes 4, Exercise 13).
