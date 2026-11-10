@@ -238,7 +238,7 @@
 <g transform="translate(224.0,111.0)"><circle r="8" fill="#123d24" stroke="#3fb950" stroke-width="2"/><text transform="rotate(26.4)" font-size="13" fill="#e6edf3" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="-0.55em">Gallagher</tspan><tspan x="15" dy="1.1em">Local</tspan></text></g>
 <g transform="translate(-25.9,-248.7)"><circle r="8" fill="#123d24" stroke="#3fb950" stroke-width="2"/><text transform="rotate(444.1)" font-size="13" fill="#e6edf3" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="0">ChenWeights</tspan></text></g>
 <g transform="translate(-149.8,-200.2)"><circle r="8" fill="#123d24" stroke="#3fb950" stroke-width="2"/><text transform="rotate(413.2)" font-size="13" fill="#e6edf3" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="0">SelbergBound</tspan></text></g>
-<g transform="translate(205.3,-142.7)"><circle r="8" fill="#0d1117" stroke="#3fb950" stroke-width="2" stroke-dasharray="2 2"/><text transform="rotate(-34.8)" font-size="13" fill="#e6edf3" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="-0.55em">Pigeonhole</tspan><tspan x="15" dy="1.1em">Wheel</tspan></text></g>
+<g transform="translate(205.3,-142.7)"><circle r="8" fill="#123d24" stroke="#3fb950" stroke-width="2"/><text transform="rotate(-34.8)" font-size="13" fill="#e6edf3" dominant-baseline="central" text-anchor="start"><tspan x="15" dy="-0.55em">Pigeonhole</tspan><tspan x="15" dy="1.1em">Wheel</tspan></text></g>
 <circle r="125" fill="#2a2720" stroke="#8b8577" stroke-width="1.5"/>
 <text y="-26" font-size="22" font-weight="650" fill="#e6edf3" text-anchor="middle">The RNS wheel</text>
 <text y="4" font-size="13" font-weight="400" fill="#9198a1" text-anchor="middle">primorial modulus · CRT</text>

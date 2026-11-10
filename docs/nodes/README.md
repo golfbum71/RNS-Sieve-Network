@@ -101,6 +101,6 @@
 | 99 | [`GallagherLocal`](GallagherLocal.md) | one wheel's correction averages to 1 | proved in Lean |
 | 100 | [`ChenWeights`](ChenWeights.md) | Chen's weights for numbers with at most two prime factors | proved in Lean |
 | 101 | [`SelbergBound`](SelbergBound.md) | Selberg's upper bound sieve | proved in Lean |
-| 102 | [`PigeonholeWheel`](PigeonholeWheel.md) | one pigeon per wheel | proof drafted, not yet built |
+| 102 | [`PigeonholeWheel`](PigeonholeWheel.md) | one pigeon per wheel | proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

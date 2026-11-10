@@ -37,12 +37,12 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/PigeonholeWheel.lean
         declaration: RNS.PigeonholeWheel.one_closed_copy_holds
         note: >-
-          Checked on Comparator Live (standard axioms only, 2026-11-09);
-          awaiting the repository build.
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-10). Recorded as noncompliant only because no Comparator
+          receipt exists yet.
     designated: lean-proof
   - id: open_copies
     declaration: RNS.PigeonholeWheel.open_copies
@@ -51,11 +51,12 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/PigeonholeWheel.lean
         declaration: RNS.PigeonholeWheel.open_copies_holds
         note: >-
-          Written; awaiting the repository build.
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-10). Recorded as noncompliant only because no Comparator
+          receipt exists yet.
     designated: lean-proof
   - id: two_survivors_persist
     declaration: RNS.PigeonholeWheel.two_survivors_persist
@@ -64,11 +65,12 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/PigeonholeWheel.lean
         declaration: RNS.PigeonholeWheel.two_survivors_persist_holds
         note: >-
-          Written; awaiting the repository build.
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-10). Recorded as noncompliant only because no Comparator
+          receipt exists yet.
     designated: lean-proof
   - id: pigeonhole_primes_unbounded
     declaration: RNS.PigeonholeWheel.pigeonhole_primes_unbounded
@@ -77,11 +79,12 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/PigeonholeWheel.lean
         declaration: RNS.PigeonholeWheel.pigeonhole_primes_unbounded_holds
         note: >-
-          Written; awaiting the repository build.
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-10). Recorded as noncompliant only because no Comparator
+          receipt exists yet.
     designated: lean-proof
 
 sources:

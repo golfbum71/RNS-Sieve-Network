@@ -1329,7 +1329,7 @@ When a new wheel joins, each surviving position has one copy in the longer cycle
 - Sources: [Euclid, Elements IX.20](https://mathcs.clarku.edu/~djoyce/elements/bookIX/propIX20.html); [Meštrović, survey of the proofs](https://arxiv.org/abs/1202.3670)
 - Lean: `one_closed_copy`, `open_copies`, `two_survivors_persist`, `pigeonhole_primes_unbounded` (with `lift_slot`, `survives`)
 - Rests on: Vocabulary only
-- Status: Drafted. The one-pigeon lemmas checked on Comparator Live (standard three axioms, 2026-11-09); awaiting the repository build.
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-10).
 
 ### Added to nodes 71-89
 - `BadWheels` gains `divisors_pairwise_coprime` (Ford Lemma 7.7).
