@@ -43,6 +43,7 @@ RNSSolutions/Assemble.lean        joins the proofs along the arrows
 scripts/graph.py                  regenerates GRAPH.md, docs/nodes/ and docs/index.html (the wheel)
 docs/NODE_LIST.md                 the plain-language list of all planned nodes
 docs/NODE_STANDARDS.md            what every node must show: arrows, a plain note, sources
+docs/BROCARD_NOTES.md             Brocard's conjecture in wheel terms, and the known method behind each idea
 ```
 
 **Every arrow is its own theorem.** A proof file imports other nodes' claims,

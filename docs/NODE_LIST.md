@@ -209,6 +209,10 @@ routes.
   `jacobsthal_bound_holds`, `four_survivors_bound_holds`,
   `oppermann_bound_holds`, `oppermann_conjecture`
 - Status: Conditional, Clean
+- Notes: [`BROCARD_NOTES.md`](BROCARD_NOTES.md) records the Brocard window
+  worked in wheel terms (2026-11-11) and the known method behind each idea:
+  the grid is Legendre's sieve, lone marks are Buchstab's identity, the
+  medium-wheel split is the factor-shape split of Harman's sieve.
 
 ---
 

@@ -14,6 +14,8 @@ Published work this node rests on or relates to; each entry says how.
 - [Brocard's conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Brocard%27s_conjecture) — states the conjecture this node derives from a survivor bound
 - [Oppermann's conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Oppermann%27s_conjecture) — states the conjecture this node derives from a survivor bound
 - [Andrica's conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Andrica%27s_conjecture) — states the conjecture this node derives from Oppermann's
+- [Brocard's conjecture in wheel terms (docs/BROCARD_NOTES.md)](https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/BROCARD_NOTES.md) — project notes on the Brocard window; records which of its ideas are Legendre's sieve, Buchstab's identity and the factor-shape split of Harman's sieve
+- [R. C. Baker, G. Harman, J. Pintz, The difference between consecutive primes, II (2001)](https://doi.org/10.1112/plms/83.3.532) — the published record for primes in short windows (the 0.525 power), which falls short of a Brocard window (the 0.5 power)
 
 ## Related nodes
 
@@ -22,6 +24,10 @@ Connected in content but not by an arrow (no claim here takes theirs as a hypoth
 - [`DudekJohnston`](DudekJohnston.md) — the proven near-prime version of Legendre's conjecture
 - [`KanoldBound`](KanoldBound.md) — a proven survivor-gap bound of the kind these conjectures need, though far too weak to give them
 - [`BlockingRuns`](BlockingRuns.md) — the largest survivor gap, the quantity the named survivor bounds control
+- [`BrunPureSieve`](BrunPureSieve.md) — the Brocard grid of wheels and slots, counted by its zeros, is Legendre's sieve; this node holds the alternating sum and its early-stopping inequalities (see docs/BROCARD_NOTES.md)
+- [`BuchstabIdentity`](BuchstabIdentity.md) — lone marks in the Brocard window are Buchstab's identity (leftover slots = primes + one-wheel labels + two-wheel labels)
+- [`AlmostPrimeWindow`](AlmostPrimeWindow.md) — the two-factor case of the split of leftover slots by factor shape (the split Harman's sieve uses)
+- [`ShieldCertificates`](ShieldCertificates.md) — zero means prime below the next prime's square, the starting fact of the Brocard window picture
 
 ## Claims
 

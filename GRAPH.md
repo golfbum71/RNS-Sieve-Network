@@ -1878,6 +1878,8 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
   - [Brocard's conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Brocard%27s_conjecture) — states the conjecture this node derives from a survivor bound
   - [Oppermann's conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Oppermann%27s_conjecture) — states the conjecture this node derives from a survivor bound
   - [Andrica's conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Andrica%27s_conjecture) — states the conjecture this node derives from Oppermann's
+  - [Brocard's conjecture in wheel terms (docs/BROCARD_NOTES.md)](https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/BROCARD_NOTES.md) — project notes on the Brocard window; records which of its ideas are Legendre's sieve, Buchstab's identity and the factor-shape split of Harman's sieve
+  - [R. C. Baker, G. Harman, J. Pintz, The difference between consecutive primes, II (2001)](https://doi.org/10.1112/plms/83.3.532) — the published record for primes in short windows (the 0.525 power), which falls short of a Brocard window (the 0.5 power)
 - [`SophieGermainWheel`](docs/nodes/SophieGermainWheel.md)
   - [Safe and Sophie Germain primes (Wikipedia)](https://en.wikipedia.org/wiki/Safe_and_Sophie_Germain_primes) — states that a Sophie Germain prime above 3 leaves remainder 2 on division by 3, and remainder 3, 9 or 11 on division by 20; this node's column and last-digit claims follow from those
 - [`GapTracks`](docs/nodes/GapTracks.md)
