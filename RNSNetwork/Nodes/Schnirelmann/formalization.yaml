@@ -42,10 +42,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/Schnirelmann.lean
         declaration: RNS.Schnirelmann.goldbach_first_moment_holds
-        note: "Draft: Lean proof written, not yet built."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: pair_factor_second_moment
     declaration: RNS.Schnirelmann.pair_factor_second_moment
@@ -54,10 +54,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/Schnirelmann.lean
         declaration: RNS.Schnirelmann.pair_factor_second_moment_holds
-        note: "Draft: Lean proof written, not yet built."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: goldbach_second_moment
     declaration: RNS.Schnirelmann.goldbach_second_moment
@@ -68,10 +68,10 @@ conclusions:
     imports_status: identified
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/Schnirelmann.lean
         declaration: RNS.Schnirelmann.goldbach_second_moment_step
-        note: "Draft: Lean step written, not yet built."
+        note: "Complete Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: prime_pair_sums_density
     declaration: RNS.Schnirelmann.prime_pair_sums_density
@@ -82,10 +82,10 @@ conclusions:
     imports_status: identified
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/Schnirelmann.lean
         declaration: RNS.Schnirelmann.prime_pair_sums_density_step
-        note: "Draft: Lean step written, not yet built."
+        note: "Complete Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: schnirelmann_inequality
     declaration: RNS.Schnirelmann.schnirelmann_inequality
@@ -94,10 +94,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/Schnirelmann.lean
         declaration: RNS.Schnirelmann.schnirelmann_inequality_holds
-        note: "Draft: Lean proof written, not yet built."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: schnirelmann_basis
     declaration: RNS.Schnirelmann.schnirelmann_basis
@@ -107,10 +107,10 @@ conclusions:
     imports_status: identified
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/Schnirelmann.lean
         declaration: RNS.Schnirelmann.schnirelmann_basis_step
-        note: "Draft: Lean step written, not yet built."
+        note: "Complete Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: schnirelmann_bounded_sum
     declaration: RNS.Schnirelmann.schnirelmann_bounded_sum
@@ -121,10 +121,10 @@ conclusions:
     imports_status: identified
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/Schnirelmann.lean
         declaration: RNS.Schnirelmann.schnirelmann_bounded_sum_step
-        note: "Draft: Lean step written, not yet built."
+        note: "Complete Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 sources:
 - title: A. M. Odlyzko, Sieve Methods, senior thesis, Caltech (1971)

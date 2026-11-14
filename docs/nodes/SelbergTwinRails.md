@@ -123,6 +123,7 @@ def selberg_goldbach_bound : Prop :=
 
 - [`GapPairs`](GapPairs.md)
 - [`SelbergTwinRails`](SelbergTwinRails.md)
+- [`Schnirelmann`](Schnirelmann.md)
 - [`ErdosSmallGaps`](ErdosSmallGaps.md)
 
 ## Files

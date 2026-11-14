@@ -133,7 +133,6 @@ def goldbach_pair_bound_totient : Prop :=
 
 - [`GapPairs`](GapPairs.md)
 - [`RomanoffTheorem`](RomanoffTheorem.md)
-- [`Schnirelmann`](Schnirelmann.md)
 
 ## Files
 

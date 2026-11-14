@@ -9,9 +9,7 @@ import RNSNetwork.Nodes.Schnirelmann.Conclusions
 /-!
 # Proofs for Schnirelmann
 
-Draft (2026-11-14): not yet built.
-
-Imports claims only.
+Imports claims only. Built clean on GitHub (standard axioms only, 2026-11-14).
 
 * `goldbach_first_moment`: a pair of primes up to `N` is a Goldbach pair of
   its sum, which is at most `2 * N` (Mathlib only).

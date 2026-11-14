@@ -96,7 +96,7 @@
 | 94 | [`SieveDataLimits`](SieveDataLimits.md) | what the multiple counts alone can decide | proved in Lean |
 | 95 | [`LargerSieve`](LargerSieve.md) | Gallagher's larger sieve: when each wheel leaves few positions | proved in Lean |
 | 96 | [`ArithmeticLargeSieve`](ArithmeticLargeSieve.md) | the large sieve: many blocked positions on every wheel | planned: new, not yet proved |
-| 97 | [`Schnirelmann`](Schnirelmann.md) | every number is a sum of boundedly many primes | planned: new, not yet proved |
+| 97 | [`Schnirelmann`](Schnirelmann.md) | every number is a sum of boundedly many primes | proved in Lean |
 | 98 | [`MaierMatrix`](MaierMatrix.md) | short windows with too many and too few primes | cited from a published paper; not proved in Lean |
 | 99 | [`GallagherLocal`](GallagherLocal.md) | one wheel's correction averages to 1 | proved in Lean |
 | 100 | [`ChenWeights`](ChenWeights.md) | Chen's weights for numbers with at most two prime factors | proved in Lean |
