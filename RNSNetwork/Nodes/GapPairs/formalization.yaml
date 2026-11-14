@@ -19,10 +19,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GapPairs.lean
     declaration: RNS.GapPairs.pair_factor_le_correction_holds
-    note: "Draft: Lean proof written, not yet built."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: correction_le_totient_ratio_sq
   declaration: RNS.GapPairs.correction_le_totient_ratio_sq
@@ -31,10 +31,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GapPairs.lean
     declaration: RNS.GapPairs.correction_le_totient_ratio_sq_holds
-    note: "Draft: Lean proof written, not yet built."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: gap_pair_bound
   declaration: RNS.GapPairs.gap_pair_bound
@@ -45,10 +45,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GapPairs.lean
     declaration: RNS.GapPairs.gap_pair_bound_step
-    note: "Draft: Lean step written, not yet built."
+    note: "Complete Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: goldbach_pair_bound
   declaration: RNS.GapPairs.goldbach_pair_bound
@@ -59,10 +59,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GapPairs.lean
     declaration: RNS.GapPairs.goldbach_pair_bound_step
-    note: "Draft: Lean step written, not yet built."
+    note: "Complete Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: gap_pair_bound_totient
   declaration: RNS.GapPairs.gap_pair_bound_totient
@@ -74,10 +74,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GapPairs.lean
     declaration: RNS.GapPairs.gap_pair_bound_totient_step
-    note: "Draft: Lean step written, not yet built."
+    note: "Complete Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: goldbach_pair_bound_totient
   declaration: RNS.GapPairs.goldbach_pair_bound_totient
@@ -89,10 +89,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GapPairs.lean
     declaration: RNS.GapPairs.goldbach_pair_bound_totient_step
-    note: "Draft: Lean step written, not yet built."
+    note: "Complete Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023

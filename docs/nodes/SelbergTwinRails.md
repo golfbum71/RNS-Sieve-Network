@@ -121,6 +121,7 @@ def selberg_goldbach_bound : Prop :=
 
 ## Used by
 
+- [`GapPairs`](GapPairs.md)
 - [`SelbergTwinRails`](SelbergTwinRails.md)
 - [`ErdosSmallGaps`](ErdosSmallGaps.md)
 

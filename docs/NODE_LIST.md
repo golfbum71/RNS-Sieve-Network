@@ -1150,12 +1150,11 @@ For an admissible pattern of linear forms, the positions up to N where every for
 - Scope: Tier 2.
 - Status: Planned
 
-### 76. `GapPairs` — prime pairs at any even gap, and Goldbach pairs
-Prime pairs up to N a fixed even gap apart number at most a constant times the gap over Euler's phi of the gap, times N over log N squared; pairs of primes adding to a given even number are bounded the same way. Ford, Corollary 2.6.
-- Lean (planned): `gap_pair_bound`, `goldbach_pair_bound`
-- Rests on: `PatternUpperBound`, `GapConstant`
-- Scope: Tier 2: a specialisation of pattern_count_le.
-- Status: Planned
+### 76. `GapPairs` — prime pairs at any gap, and Goldbach pairs, by the gap's own constant
+Prime pairs up to N a fixed gap apart, and the ways of writing a number as a sum of two primes, number at most 40000 N over log N squared, times the gap's own correction from GapConstant, times the gap over Euler's phi of the gap; in terms of the totient alone, 40000 N over log N squared times the cube of the gap over its totient. After Ford, Corollary 2.6. As proved, differs from the plan: the node rests on SelbergTwinRails, not on PatternUpperBound, and Ford's corollary has the first power of the gap over its totient where this has the correction times the first power (at most the cube). The first-power form is still planned (PatternUpperBound).
+- Lean: `pair_factor_le_correction`, `correction_le_totient_ratio_sq`, `gap_pair_bound`, `goldbach_pair_bound`, `gap_pair_bound_totient`, `goldbach_pair_bound_totient` (with `totient_ratio`)
+- Rests on: `SelbergTwinRails`
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-14). Ford's first-power form still planned.
 
 ### 77. `PatternReciprocals` — reciprocal sums converge for every pattern of two or more
 For every admissible pattern with at least two members, the sum of one over the first member, over all positions where every member is prime, is finite. Brun's theorem for twins is the case of the pattern 0, 2; triples such as 0, 2, 6 and pairs at any gap follow the same way.

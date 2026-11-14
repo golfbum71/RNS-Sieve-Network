@@ -94,10 +94,6 @@ def goldbach_constant : Prop :=
 
 **Proof:** `RNS.GapConstant.goldbach_constant_step` in [`RNSSolutions/GapConstant.lean`](../../RNSSolutions/GapConstant.lean)
 
-## Used by
-
-- [`GapPairs`](GapPairs.md)
-
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/GapConstant/Conclusions.lean)

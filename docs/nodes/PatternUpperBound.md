@@ -31,5 +31,5 @@ Connected in content but not by an arrow (no claim here takes theirs as a hypoth
 
 **Scope:** Tier 2.
 
-**Cited by:** [`GapPairs`](GapPairs.md), [`PatternReciprocals`](PatternReciprocals.md), [`GermainReciprocals`](GermainReciprocals.md)
+**Cited by:** [`PatternReciprocals`](PatternReciprocals.md), [`GermainReciprocals`](GermainReciprocals.md)
 

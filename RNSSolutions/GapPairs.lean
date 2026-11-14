@@ -14,7 +14,7 @@ import Mathlib.Tactic.Ring
 /-!
 # Proofs for GapPairs
 
-Draft (2026-11-14): not yet built.
+Built clean on GitHub (standard axioms only, 2026-11-14).
 
 Imports claims only. `pair_factor_le_correction` and
 `correction_le_totient_ratio_sq` are proved outright (Mathlib only): a number
