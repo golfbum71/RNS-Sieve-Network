@@ -103,6 +103,6 @@
 | 101 | [`SelbergBound`](SelbergBound.md) | Selberg's upper bound sieve | proved in Lean |
 | 102 | [`PigeonholeWheel`](PigeonholeWheel.md) | one pigeon per wheel | proved in Lean |
 | 103 | [`BrocardWindow`](BrocardWindow.md) | where every wheel's marks fall between two prime squares | proved in Lean |
-| 104 | [`BrocardPrediction`](BrocardPrediction.md) | the cycling-only count of primes between two prime squares | planned: new, not yet proved |
+| 104 | [`BrocardPrediction`](BrocardPrediction.md) | the cycling-only count of primes between two prime squares | proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

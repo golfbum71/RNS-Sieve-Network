@@ -180,8 +180,10 @@ and 41 (by less than a twentieth of one prime); from 59 on it is always low,
 and above 100,000 it is 86 to 89 percent of the true count. This is a test,
 not a proof. That the true count stays near the prediction in every window
 is open; a guaranteed floor of any fixed fraction would give Brocard's
-conjecture from an explicit base prime on. Planned as
-[`BrocardPrediction`](nodes/BrocardPrediction.md).
+conjecture from an explicit base prime on. The exact count per wheel, the
+link from those counts to the primes of the window, and the closed form are
+checked in Lean in [`BrocardPrediction`](nodes/BrocardPrediction.md); the
+size of the prediction is still planned there.
 
 **Where wheel counting stops.** A shared-slot count is forced only when the
 product of the wheels is well below the window length. For the large wheels

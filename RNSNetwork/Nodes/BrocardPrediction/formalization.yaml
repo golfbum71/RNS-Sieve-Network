@@ -56,10 +56,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/BrocardPrediction.lean
         declaration: RNS.BrocardPrediction.window_exact_count_holds
-        note: "Draft: Lean proof written, not yet built."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: window_prime_count
     declaration: RNS.BrocardPrediction.window_prime_count
@@ -68,10 +68,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/BrocardPrediction.lean
         declaration: RNS.BrocardPrediction.window_prime_count_holds
-        note: "Draft: Lean proof written, not yet built."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: cycling_blocked_closed_form
     declaration: RNS.BrocardPrediction.cycling_blocked_closed_form
@@ -80,10 +80,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/BrocardPrediction.lean
         declaration: RNS.BrocardPrediction.cycling_blocked_closed_form_holds
-        note: "Draft: Lean proof written, not yet built."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: twin_prediction_closed_form
     declaration: RNS.BrocardPrediction.twin_prediction_closed_form
@@ -93,10 +93,10 @@ conclusions:
     imports_status: identified
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/BrocardPrediction.lean
         declaration: RNS.BrocardPrediction.twin_prediction_closed_form_step
-        note: "Draft: Lean step written, not yet built."
+        note: "Complete Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 planned:
   source_status: New

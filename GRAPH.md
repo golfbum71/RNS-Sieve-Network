@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 83 of 100 nodes are built, holding 260 claims: 255 proved in Lean and 5 cited from a published paper. They are joined by 143 arrows, each a Lean-checked step. Of the other 17 nodes, drawn dashed or purple, 14 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 84 of 100 nodes are built, holding 264 claims: 259 proved in Lean and 5 cited from a published paper. They are joined by 144 arrows, each a Lean-checked step. Of the other 16 nodes, drawn dashed or purple, 13 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -47,7 +47,7 @@ graph LR
   g1["<b>Foundations: wheels, cycles and columns</b><br/>16 built, 0 planned or outside"]
   g2["<b>Patterns, admissibility and the Hardy-Littlewood constants</b><br/>16 built, 0 planned or outside"]
   g3["<b>How survivors spread across the cycle</b><br/>12 built, 1 planned or outside"]
-  g4["<b>Gaps between survivors and between primes</b><br/>11 built, 7 planned or outside"]
+  g4["<b>Gaps between survivors and between primes</b><br/>12 built, 6 planned or outside"]
   g5["<b>Sophie Germain primes</b><br/>4 built, 1 planned or outside"]
   g6["<b>Survivor shares and analytic inputs</b><br/>8 built, 0 planned or outside"]
   g7["<b>Sieve methods: Brun, Hooley, Selberg</b><br/>16 built, 8 planned or outside"]
@@ -799,20 +799,23 @@ graph LR
     c41["middle_wheel_row"]
   end
   subgraph s18["<b>104. BrocardPrediction — the cycling-only count of primes between two prime squares</b>"]
-    p7["<i>planned: new, not yet proved</i>"]
+    c42["window_exact_count"]
+    c43["window_prime_count"]
+    c44["cycling_blocked_closed_form"]
+    c45["twin_prediction_closed_form"]
   end
   subgraph s19["1. Wheel6 (in Foundations)"]
-    c42["prime_gt_three_is_candidate"]
+    c46["prime_gt_three_is_candidate"]
   end
   subgraph s20["2. CRT (in Foundations)"]
-    c43["crt_map_bijective"]
+    c47["crt_map_bijective"]
   end
   subgraph s21["41. PrimeNumberTheorem (in Survivor shares and analytic inputs)"]
-    p8["<i>proved in Lean</i>"]
+    p7["<i>proved in Lean</i>"]
   end
   subgraph s22["87. SelbergTwinRails (in Sieve methods)"]
-    c44["selberg_gap_bound"]
-    c45["selberg_goldbach_bound"]
+    c48["selberg_gap_bound"]
+    c49["selberg_goldbach_bound"]
   end
   o1{{"<i>open conjecture</i><br/>jacobsthal_bound_holds"}}
   o2{{"<i>open conjecture</i><br/>four_survivors_bound_holds"}}
@@ -823,29 +826,29 @@ graph LR
   o3 -.-> c3
   o4 -.-> c4
   o4 -.-> c5
-  c42 ==> c6
-  c42 ==> c7
-  c42 ==> c10
-  c42 ==> c11
-  c42 ==> c12
-  c43 ==> c19
+  c46 ==> c6
+  c46 ==> c7
+  c46 ==> c10
+  c46 ==> c11
+  c46 ==> c12
+  c47 ==> c19
   c19 ==> c20
   s5 -.-> s6
-  c44 ==> c31
+  c48 ==> c31
   c29 ==> c31
-  c45 ==> c32
+  c49 ==> c32
   c29 ==> c32
-  c44 ==> c33
+  c48 ==> c33
   c29 ==> c33
   c30 ==> c33
-  c45 ==> c34
+  c49 ==> c34
   c29 ==> c34
   c30 ==> c34
   s13 -.-> s14
   s22 -.-> s15
   s21 -.-> s15
   s13 -.-> s16
-  s17 -.-> s18
+  c44 ==> c45
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
   classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
@@ -857,15 +860,15 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c6,c7,c8,c9,c10,c11,c12,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c44,c45 verified;
+  class c6,c7,c8,c9,c10,c11,c12,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c44,c45,c46,c47,c48,c49 verified;
   class c1,c2,c3,c4,c5 conditional_built;
   class c13,c24,c25 cited_built;
-  class p4,p5,p6,p7 new;
+  class p4,p5,p6 new;
   class p1,p2,p3 external;
-  class p8 stub;
+  class p7 stub;
   class o1,o2,o3,o4 openconj;
-  click c42 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md#prime_gt_three_is_candidate" _blank
-  click c43 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CRT.md#crt_map_bijective" _blank
+  click c46 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md#prime_gt_three_is_candidate" _blank
+  click c47 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CRT.md#crt_map_bijective" _blank
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConjectures.md#legendre_of_jacobsthal" _blank
   click c2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConjectures.md#brocard_of_four_survivors" _blank
   click c3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConjectures.md#oppermann_of_bound" _blank
@@ -887,7 +890,7 @@ graph LR
   click p1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/JacobsthalQuadratic.md" _blank
   click c19 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BlockingRuns.md#blocked_run_is_shift" _blank
   click c20 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BlockingRuns.md#longest_blocked_run_eq_max_gap_sub_one" _blank
-  click p8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeNumberTheorem.md" _blank
+  click p7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PrimeNumberTheorem.md" _blank
   click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/RoughInPrimeGaps.md" _blank
   click c21 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PillaiBrauer.md#pillai_sixteen" _blank
   click c22 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PillaiBrauer.md#pillai_witness_17" _blank
@@ -898,8 +901,8 @@ graph LR
   click c26 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/AlmostPrimeWindow.md#window_almost_prime" _blank
   click c27 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/AlmostPrimeWindow.md#window_composite_iff" _blank
   click c28 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/AlmostPrimeWindow.md#window_prime_iff_odd_factors" _blank
-  click c44 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergTwinRails.md#selberg_gap_bound" _blank
-  click c45 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergTwinRails.md#selberg_goldbach_bound" _blank
+  click c48 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergTwinRails.md#selberg_gap_bound" _blank
+  click c49 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergTwinRails.md#selberg_goldbach_bound" _blank
   click c29 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapPairs.md#pair_factor_le_correction" _blank
   click c30 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapPairs.md#correction_le_totient_ratio_sq" _blank
   click c31 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapPairs.md#gap_pair_bound" _blank
@@ -916,7 +919,10 @@ graph LR
   click c39 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardWindow.md#no_collision_large_product" _blank
   click c40 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardWindow.md#large_wheel_row" _blank
   click c41 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardWindow.md#middle_wheel_row" _blank
-  click p7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardPrediction.md" _blank
+  click c42 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardPrediction.md#window_exact_count" _blank
+  click c43 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardPrediction.md#window_prime_count" _blank
+  click c44 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardPrediction.md#cycling_blocked_closed_form" _blank
+  click c45 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardPrediction.md#twin_prediction_closed_form" _blank
 ```
 
 ### Sophie Germain primes
@@ -1855,6 +1861,10 @@ The results nothing else builds on, each with everything beneath it.
 - [`BrocardWindow.no_collision_large_product`](docs/nodes/BrocardWindow.md#no_collision_large_product) — proved in Lean
 - [`BrocardWindow.large_wheel_row`](docs/nodes/BrocardWindow.md#large_wheel_row) — proved in Lean
 - [`BrocardWindow.middle_wheel_row`](docs/nodes/BrocardWindow.md#middle_wheel_row) — proved in Lean
+- [`BrocardPrediction.window_exact_count`](docs/nodes/BrocardPrediction.md#window_exact_count) — proved in Lean
+- [`BrocardPrediction.window_prime_count`](docs/nodes/BrocardPrediction.md#window_prime_count) — proved in Lean
+- [`BrocardPrediction.twin_prediction_closed_form`](docs/nodes/BrocardPrediction.md#twin_prediction_closed_form) — proved in Lean
+  - [`BrocardPrediction.cycling_blocked_closed_form`](docs/nodes/BrocardPrediction.md#cycling_blocked_closed_form) — proved in Lean
 
 ## What the network takes on trust
 
@@ -2290,4 +2300,4 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 101 | [`SelbergBound`](docs/nodes/SelbergBound.md) | Selberg's upper bound sieve | proved in Lean |
 | 102 | [`PigeonholeWheel`](docs/nodes/PigeonholeWheel.md) | one pigeon per wheel | proved in Lean |
 | 103 | [`BrocardWindow`](docs/nodes/BrocardWindow.md) | where every wheel's marks fall between two prime squares | proved in Lean |
-| 104 | [`BrocardPrediction`](docs/nodes/BrocardPrediction.md) | the cycling-only count of primes between two prime squares | planned: new, not yet proved |
+| 104 | [`BrocardPrediction`](docs/nodes/BrocardPrediction.md) | the cycling-only count of primes between two prime squares | proved in Lean |

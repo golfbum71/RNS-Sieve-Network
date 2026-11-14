@@ -9,9 +9,8 @@ import RNSNetwork.Nodes.BrocardPrediction.Conclusions
 /-!
 # Proofs for BrocardPrediction
 
-Draft (2026-11-14): not yet built.
-
-Rests on no other node (Mathlib only).
+Rests on no other node (Mathlib only). Built clean on GitHub (standard axioms
+only, 2026-11-14).
 
 * `window_exact_count`: for one slot, the alternating sum over the sets of
   smaller wheels whose product divides it is 1 when no smaller wheel divides
@@ -94,8 +93,8 @@ private theorem alt_indicator (S : Finset ℕ) (hS : ∀ r ∈ S, r.Prime) (m : 
         exact Finset.prod_primes_dvd m (fun r hr => (hS r (hDS hr)).prime)
           (fun r hr => (Finset.mem_filter.mp (h' hr)).2)
     by_cases hc : (∏ r ∈ D, r) ∣ m
-    · rw [if_pos hc, if_pos (hiff.mp hc), mul_one]
-    · rw [if_neg hc, if_neg (fun h => hc (hiff.mpr h)), mul_zero]
+    · rw [ite_eq_left hc, ite_eq_left (hiff.mp hc), mul_one]
+    · rw [ite_eq_right hc, ite_eq_right (fun h => hc (hiff.mpr h)), mul_zero]
   have h2 : S.powerset.filter (fun D => D ∈ (S.filter (fun r => r ∣ m)).powerset)
       = (S.filter (fun r => r ∣ m)).powerset := by
     ext D
@@ -105,7 +104,7 @@ private theorem alt_indicator (S : Finset ℕ) (hS : ∀ r ∈ S, r.Prime) (m : 
   by_cases hc : ∀ r ∈ S, ¬ r ∣ m
   · have he : S.filter (fun r => r ∣ m) = ∅ :=
       Finset.filter_eq_empty_iff.mpr (fun r hr => hc r hr)
-    rw [if_pos hc, if_pos he]
+    rw [ite_eq_left hc, ite_eq_left he]
   · have hne : ¬ S.filter (fun r => r ∣ m) = ∅ := by
       intro he
       apply hc
@@ -113,7 +112,7 @@ private theorem alt_indicator (S : Finset ℕ) (hS : ∀ r ∈ S, r.Prime) (m : 
       have hmem : r ∈ S.filter (fun r => r ∣ m) := Finset.mem_filter.mpr ⟨hr, hd⟩
       rw [he] at hmem
       exact absurd hmem (Finset.notMem_empty r)
-    rw [if_neg hc, if_neg hne]
+    rw [ite_eq_right hc, ite_eq_right hne]
 
 /-- Legendre's count for any finite set of numbers and any set of prime wheels. -/
 private theorem sifted_card (X S : Finset ℕ) (hS : ∀ r ∈ S, r.Prime) :
@@ -496,7 +495,7 @@ private theorem split_side (p L : ℕ) (hp3 : 3 ≤ p) (hpL : p ≤ L) (hL5 : L 
     have hI' := Finset.mem_Ioc.mp hI
     have hps : ∏ x ∈ ({r} : Finset ℕ), x = r := Finset.prod_singleton (fun x => x) r
     unfold wt
-    rw [hps, if_pos hI'.2, Finset.card_singleton, pow_one]
+    rw [hps, ite_eq_left hI'.2, Finset.card_singleton, pow_one]
     ring
   have hB : ∑ s ∈ (wheels_below (L + 1)).powerset.filter
         (fun s => ¬ s ⊆ wheels_below (p + 1)), wt L s
@@ -559,7 +558,7 @@ private theorem split_side (p L : ℕ) (hp3 : 3 ≤ p) (hpL : p ≤ L) (hL5 : L 
           rw [← hprod]
           omega
         unfold wt
-        exact if_neg hgt
+        exact ite_eq_right hgt
     rw [← himg]
     exact Finset.sum_image (fun a _ b _ hab => Finset.singleton_injective hab)
   have hU : ∑ r ∈ (Finset.Ioc p L).filter Nat.Prime, wt L {r}
@@ -585,9 +584,9 @@ theorem cycling_blocked_closed_form_holds : cycling_blocked_closed_form := by
     unfold wt
     rw [hins, Finset.card_insert_of_notMem hqD]
     by_cases hc : q * (∏ r ∈ D, r) ≤ L
-    · simp only [if_pos hc]
+    · simp only [ite_eq_left hc]
       ring
-    · simp only [if_neg hc, neg_zero]
+    · simp only [ite_eq_right hc, neg_zero]
   have hfil : ∀ q ∈ wheels_below (p + 1),
       wheels_below q = (wheels_below (p + 1)).filter (fun r => r < q) := by
     intro q hq
@@ -616,7 +615,7 @@ theorem cycling_blocked_closed_form_holds : cycling_blocked_closed_form := by
     have hpe : ∏ r ∈ (∅ : Finset ℕ), r = 1 := Finset.prod_empty
     have h1L : (1 : ℕ) ≤ L := by omega
     unfold wt
-    rw [hpe, if_pos h1L, Finset.card_empty, pow_zero, Nat.cast_one]
+    rw [hpe, ite_eq_left h1L, Finset.card_empty, pow_zero, Nat.cast_one]
     ring
   have h1 : cycling_blocked p L
       = (L : ℝ) / 3 - ∑ s ∈ (wheels_below (p + 1)).powerset, wt L s := by
