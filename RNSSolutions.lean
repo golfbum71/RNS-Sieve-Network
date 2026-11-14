@@ -75,3 +75,4 @@ import RNSSolutions.BirdseySchay
 import RNSSolutions.SelbergBound
 import RNSSolutions.SelbergTwinRails
 import RNSSolutions.PigeonholeWheel
+import RNSSolutions.BrocardWindow

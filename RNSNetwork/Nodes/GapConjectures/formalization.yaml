@@ -127,5 +127,7 @@ related:
   note: "lone marks in the Brocard window are Buchstab's identity (leftover slots = primes + one-wheel labels + two-wheel labels)"
 - node: AlmostPrimeWindow
   note: "the two-factor case of the split of leftover slots by factor shape (the split Harman's sieve uses)"
+- node: BrocardWindow
+  note: "the exact position of every wheel's marks in the Brocard window, the rule for two wheels sharing a slot, and the row rules for large and middle wheels"
 - node: ShieldCertificates
   note: "zero means prime below the next prime's square, the starting fact of the Brocard window picture"

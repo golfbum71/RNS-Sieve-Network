@@ -1,0 +1,162 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# See docs/NODE_LIST.md for the plain-language list of all nodes.
+
+node:
+  id: BrocardWindow.v1
+  family: BrocardWindow
+  version: v1
+  order: 103
+  kind: paper
+  status: active
+  title: "where every wheel's marks fall between two prime squares"
+  improves: >-
+    GapConjectures states Brocard's conjecture and docs/BROCARD_NOTES.md
+    describes the window in words; this node gives the exact position of
+    every mark a wheel makes in the window, the exact rule for two wheels
+    sharing a slot, and the row rules behind the small, middle and large
+    wheel kinds, as checked statements. It proves nothing about how many
+    primes the window holds.
+  description: >-
+    The window is the numbers strictly between a base prime's square and the
+    next prime's square. A wheel at a given distance below the base prime
+    marks the window at steps 1, 2, 3 and so on, and each mark is the square
+    of the base prime plus the step, minus the square of the distance plus
+    the step: a difference of two squares (Fermat's factorization identity).
+    The mark is inside the window exactly when twice the step times the wheel
+    lies between the distance squared and the distance squared plus the
+    window length. Two different wheels share a slot only at a multiple of
+    their product, with a remaining factor of at least 5, so two wheels whose
+    product is at least a fifth of the next prime's square never share a
+    slot. A wheel whose cube reaches the next prime's square makes a new mark
+    only when its row is prime; one whose fourth power reaches it, only when
+    its row is a prime or a product of two primes. These are Legendre's and
+    Buchstab's bookkeeping in the window's own coordinates; the arrangement
+    by distance and step is original to this project (Geoffrey Fischer,
+    2026-11-14), the identities are classical.
+
+conclusions:
+  - id: mark_formula
+    declaration: RNS.BrocardWindow.mark_formula
+    summary: "The wheel times its row, plus the half-gap squared, is the center squared (the mark is a difference of two squares)."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/BrocardWindow.lean
+        declaration: RNS.BrocardWindow.mark_formula_holds
+        note: >-
+          Draft Lean proof, not yet built.
+    designated: lean-proof
+  - id: mark_in_window_iff
+    declaration: RNS.BrocardWindow.mark_in_window_iff
+    summary: "The mark lies inside the window exactly when twice the step times the wheel is strictly between the distance squared and the distance squared plus the window length."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/BrocardWindow.lean
+        declaration: RNS.BrocardWindow.mark_in_window_iff_holds
+        note: >-
+          Draft Lean proof, not yet built.
+    designated: lean-proof
+  - id: collision_product
+    declaration: RNS.BrocardWindow.collision_product
+    summary: "A slot marked by two different wheels is a multiple of their product."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/BrocardWindow.lean
+        declaration: RNS.BrocardWindow.collision_product_holds
+        note: >-
+          Draft Lean proof, not yet built.
+    designated: lean-proof
+  - id: collision_cofactor
+    declaration: RNS.BrocardWindow.collision_cofactor
+    summary: "When two wheels share a slot above the base prime's square, the remaining factor is at least 5."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/BrocardWindow.lean
+        declaration: RNS.BrocardWindow.collision_cofactor_holds
+        note: >-
+          Draft Lean proof, not yet built.
+    designated: lean-proof
+  - id: no_collision_large_product
+    declaration: RNS.BrocardWindow.no_collision_large_product
+    summary: "Two wheels whose product is at least a fifth of the next prime's square share no slot in the window."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/BrocardWindow.lean
+        declaration: RNS.BrocardWindow.no_collision_large_product_holds
+        note: >-
+          Draft Lean proof, not yet built.
+    designated: lean-proof
+  - id: large_wheel_row
+    declaration: RNS.BrocardWindow.large_wheel_row
+    summary: "For a wheel whose cube reaches the next prime's square, a row made of two factors each at least the wheel puts the mark outside the window."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/BrocardWindow.lean
+        declaration: RNS.BrocardWindow.large_wheel_row_holds
+        note: >-
+          Draft Lean proof, not yet built.
+    designated: lean-proof
+  - id: middle_wheel_row
+    declaration: RNS.BrocardWindow.middle_wheel_row
+    summary: "For a wheel whose fourth power reaches the next prime's square, a row made of three factors each at least the wheel puts the mark outside the window."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/BrocardWindow.lean
+        declaration: RNS.BrocardWindow.middle_wheel_row_holds
+        note: >-
+          Draft Lean proof, not yet built.
+    designated: lean-proof
+
+sources:
+  - title: "Brocard's conjecture (Wikipedia)"
+    type: "paper"
+    url: "https://en.wikipedia.org/wiki/Brocard%27s_conjecture"
+    relationship: "the open conjecture whose window this node describes; nothing here proves it"
+  - title: "Fermat's factorization method (Wikipedia)"
+    type: "paper"
+    url: "https://en.wikipedia.org/wiki/Fermat%27s_factorization_method"
+    relationship: "the difference-of-two-squares identity behind the mark formula"
+  - title: "Legendre sieve (Wikipedia)"
+    type: "paper"
+    url: "https://en.wikipedia.org/wiki/Legendre_sieve"
+    relationship: "counting each composite under its prime factors; the collision rule is one term of Legendre's formula"
+  - title: "K. Ford, Sieve Methods Lecture Notes, Spring 2023"
+    type: "paper"
+    url: "https://mail.ford126.web.illinois.edu/sieve2023.pdf"
+    relationship: "Lemma 3.8 (Buchstab's identity): the row rules are its factor-shape split in the window"
+  - title: "R. C. Baker, G. Harman, J. Pintz, The difference between consecutive primes, II"
+    type: "paper"
+    url: "https://doi.org/10.1112/plms/83.3.532"
+    relationship: "the best published result on primes in short windows; it stops short of a Brocard window"
+
+related:
+  - node: GapConjectures
+    note: "states Brocard's conjecture; this node describes its window"
+  - node: BuchstabIdentity
+    note: "counting each blocked slot under its smallest wheel, which the row rules refine"
+  - node: AlmostPrimeWindow
+    note: "the same split by number of prime factors, stated from a cutoff up to its cube"
+  - node: BrunPureSieve
+    note: "the alternating count over sets of wheels; the collision rule gives its terms for one window"
+  - node: ParityBarrier
+    note: "a large wheel's new marks are products of two primes, the shape wheel counting cannot tell from a prime"

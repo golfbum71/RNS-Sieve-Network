@@ -80,3 +80,4 @@ import RNSNetwork.Nodes.BirdseySchay.Conclusions
 import RNSNetwork.Nodes.SelbergBound.Conclusions
 import RNSNetwork.Nodes.SelbergTwinRails.Conclusions
 import RNSNetwork.Nodes.PigeonholeWheel.Conclusions
+import RNSNetwork.Nodes.BrocardWindow.Conclusions
