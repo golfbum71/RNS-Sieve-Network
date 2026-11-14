@@ -58,6 +58,7 @@ import RNSSolutions.BrunHooley
 import RNSSolutions.SelbergBound
 import RNSSolutions.SelbergTwinRails
 import RNSSolutions.GapPairs
+import RNSSolutions.BrocardPrediction
 
 /-!
 # Assembling the network
@@ -574,3 +575,11 @@ theorem RNS.GapPairs.goldbach_pair_bound_totient_holds : RNS.GapPairs.goldbach_p
 #print axioms RNS.GapPairs.goldbach_pair_bound_holds
 #print axioms RNS.GapPairs.gap_pair_bound_totient_holds
 #print axioms RNS.GapPairs.goldbach_pair_bound_totient_holds
+
+/-- `BrocardPrediction`: the twin prediction's closed form, from the closed form of the cycling-only count. -/
+theorem RNS.BrocardPrediction.twin_prediction_closed_form_holds :
+    RNS.BrocardPrediction.twin_prediction_closed_form :=
+  RNS.BrocardPrediction.twin_prediction_closed_form_step
+    RNS.BrocardPrediction.cycling_blocked_closed_form_holds
+
+#print axioms RNS.BrocardPrediction.twin_prediction_closed_form_holds
