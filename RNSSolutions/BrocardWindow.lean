@@ -9,7 +9,8 @@ import RNSNetwork.Nodes.BrocardWindow.Conclusions
 /-!
 # Proofs for BrocardWindow
 
-Rests on no other node. Draft: not yet built.
+Rests on no other node. Built clean on GitHub (standard axioms only,
+2026-11-14).
 
 The mark formula is the difference of two squares. The window condition is
 the same identity moved across an inequality. The collision rule is: two

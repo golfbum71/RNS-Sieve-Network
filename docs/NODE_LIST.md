@@ -1335,6 +1335,13 @@ When a new wheel joins, each surviving position has one copy in the longer cycle
 - Rests on: Vocabulary only
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-10).
 
+### 103. `BrocardWindow` — where every wheel's marks fall between two prime squares
+The window is the numbers strictly between a base prime's square and the next prime's square. A wheel at a given distance below the base prime marks the window at steps 1, 2, 3 and so on; each mark is the square of the base prime plus the step, minus the square of the distance plus the step (a difference of two squares). The mark is inside the window exactly when twice the step times the wheel lies between the distance squared and the distance squared plus the window length. Two different wheels share a slot only at a multiple of their product with a remaining factor of at least 5, so two wheels whose product is at least a fifth of the next prime's square never share a slot. A wheel whose cube reaches the next prime's square makes a new mark only when its row is prime; one whose fourth power reaches it, only when its row is a prime or a product of two primes. Nothing here proves Brocard's conjecture; the arrangement by distance and step is original (2026-11-14), the identities are classical.
+- Sources: [Brocard's conjecture](https://en.wikipedia.org/wiki/Brocard%27s_conjecture); [Fermat's factorization method](https://en.wikipedia.org/wiki/Fermat%27s_factorization_method); [Legendre sieve](https://en.wikipedia.org/wiki/Legendre_sieve); Ford, Sieve Methods, Lemma 3.8; [Baker, Harman, Pintz (2001)](https://doi.org/10.1112/plms/83.3.532)
+- Lean: `mark_formula`, `mark_in_window_iff`, `collision_product`, `collision_cofactor`, `no_collision_large_product`, `large_wheel_row`, `middle_wheel_row`
+- Rests on: Mathlib only
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-14).
+
 ### Added to nodes 71-89
 - `BadWheels` gains `divisors_pairwise_coprime` (Ford Lemma 7.7).
 - `BuchstabIdentity` gains `buchstab_product_identity` (Tao, Notes 4, Exercise 13).

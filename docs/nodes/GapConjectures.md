@@ -27,6 +27,7 @@ Connected in content but not by an arrow (no claim here takes theirs as a hypoth
 - [`BrunPureSieve`](BrunPureSieve.md) — the Brocard grid of wheels and slots, counted by its zeros, is Legendre's sieve; this node holds the alternating sum and its early-stopping inequalities (see docs/BROCARD_NOTES.md)
 - [`BuchstabIdentity`](BuchstabIdentity.md) — lone marks in the Brocard window are Buchstab's identity (leftover slots = primes + one-wheel labels + two-wheel labels)
 - [`AlmostPrimeWindow`](AlmostPrimeWindow.md) — the two-factor case of the split of leftover slots by factor shape (the split Harman's sieve uses)
+- [`BrocardWindow`](BrocardWindow.md) — the exact position of every wheel's marks in the Brocard window, the rule for two wheels sharing a slot, and the row rules for large and middle wheels
 - [`ShieldCertificates`](ShieldCertificates.md) — zero means prime below the next prime's square, the starting fact of the Brocard window picture
 
 ## Claims

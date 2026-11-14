@@ -42,11 +42,12 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/BrocardWindow.lean
         declaration: RNS.BrocardWindow.mark_formula_holds
         note: >-
-          Draft Lean proof, not yet built.
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator
+          receipt exists yet.
     designated: lean-proof
   - id: mark_in_window_iff
     declaration: RNS.BrocardWindow.mark_in_window_iff
@@ -55,11 +56,12 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/BrocardWindow.lean
         declaration: RNS.BrocardWindow.mark_in_window_iff_holds
         note: >-
-          Draft Lean proof, not yet built.
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator
+          receipt exists yet.
     designated: lean-proof
   - id: collision_product
     declaration: RNS.BrocardWindow.collision_product
@@ -68,11 +70,12 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/BrocardWindow.lean
         declaration: RNS.BrocardWindow.collision_product_holds
         note: >-
-          Draft Lean proof, not yet built.
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator
+          receipt exists yet.
     designated: lean-proof
   - id: collision_cofactor
     declaration: RNS.BrocardWindow.collision_cofactor
@@ -81,11 +84,12 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/BrocardWindow.lean
         declaration: RNS.BrocardWindow.collision_cofactor_holds
         note: >-
-          Draft Lean proof, not yet built.
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator
+          receipt exists yet.
     designated: lean-proof
   - id: no_collision_large_product
     declaration: RNS.BrocardWindow.no_collision_large_product
@@ -94,11 +98,12 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/BrocardWindow.lean
         declaration: RNS.BrocardWindow.no_collision_large_product_holds
         note: >-
-          Draft Lean proof, not yet built.
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator
+          receipt exists yet.
     designated: lean-proof
   - id: large_wheel_row
     declaration: RNS.BrocardWindow.large_wheel_row
@@ -107,11 +112,12 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/BrocardWindow.lean
         declaration: RNS.BrocardWindow.large_wheel_row_holds
         note: >-
-          Draft Lean proof, not yet built.
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator
+          receipt exists yet.
     designated: lean-proof
   - id: middle_wheel_row
     declaration: RNS.BrocardWindow.middle_wheel_row
@@ -120,11 +126,12 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/BrocardWindow.lean
         declaration: RNS.BrocardWindow.middle_wheel_row_holds
         note: >-
-          Draft Lean proof, not yet built.
+          Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-14). Recorded as noncompliant only because no Comparator
+          receipt exists yet.
     designated: lean-proof
 
 sources:

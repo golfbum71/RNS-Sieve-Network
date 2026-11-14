@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 81 of 98 nodes are built, holding 247 claims: 242 proved in Lean and 5 cited from a published paper. They are joined by 133 arrows, each a Lean-checked step. Of the other 17 nodes, drawn dashed or purple, 14 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 82 of 99 nodes are built, holding 254 claims: 249 proved in Lean and 5 cited from a published paper. They are joined by 133 arrows, each a Lean-checked step. Of the other 17 nodes, drawn dashed or purple, 14 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -47,7 +47,7 @@ graph LR
   g1["<b>Foundations: wheels, cycles and columns</b><br/>16 built, 0 planned or outside"]
   g2["<b>Patterns, admissibility and the Hardy-Littlewood constants</b><br/>16 built, 0 planned or outside"]
   g3["<b>How survivors spread across the cycle</b><br/>12 built, 1 planned or outside"]
-  g4["<b>Gaps between survivors and between primes</b><br/>9 built, 7 planned or outside"]
+  g4["<b>Gaps between survivors and between primes</b><br/>10 built, 7 planned or outside"]
   g5["<b>Sophie Germain primes</b><br/>4 built, 1 planned or outside"]
   g6["<b>Survivor shares and analytic inputs</b><br/>8 built, 0 planned or outside"]
   g7["<b>Sieve methods: Brun, Hooley, Selberg</b><br/>16 built, 8 planned or outside"]
@@ -719,7 +719,7 @@ graph LR
 
 ### Gaps between survivors and between primes
 
-Nodes: [`GapConjectures`](docs/nodes/GapConjectures.md), [`GapTracks`](docs/nodes/GapTracks.md), [`DudekJohnston`](docs/nodes/DudekJohnston.md), [`GapCertificate`](docs/nodes/GapCertificate.md), [`BlockingRuns`](docs/nodes/BlockingRuns.md), [`JacobsthalQuadratic`](docs/nodes/JacobsthalQuadratic.md), [`RoughInPrimeGaps`](docs/nodes/RoughInPrimeGaps.md), [`PillaiBrauer`](docs/nodes/PillaiBrauer.md), [`KanoldBound`](docs/nodes/KanoldBound.md), [`LongGaps`](docs/nodes/LongGaps.md), [`GapMoments`](docs/nodes/GapMoments.md), [`AlmostPrimeWindow`](docs/nodes/AlmostPrimeWindow.md), [`GapPairs`](docs/nodes/GapPairs.md), [`RomanoffTheorem`](docs/nodes/RomanoffTheorem.md), [`ErdosSmallGaps`](docs/nodes/ErdosSmallGaps.md), [`Schnirelmann`](docs/nodes/Schnirelmann.md).
+Nodes: [`GapConjectures`](docs/nodes/GapConjectures.md), [`GapTracks`](docs/nodes/GapTracks.md), [`DudekJohnston`](docs/nodes/DudekJohnston.md), [`GapCertificate`](docs/nodes/GapCertificate.md), [`BlockingRuns`](docs/nodes/BlockingRuns.md), [`JacobsthalQuadratic`](docs/nodes/JacobsthalQuadratic.md), [`RoughInPrimeGaps`](docs/nodes/RoughInPrimeGaps.md), [`PillaiBrauer`](docs/nodes/PillaiBrauer.md), [`KanoldBound`](docs/nodes/KanoldBound.md), [`LongGaps`](docs/nodes/LongGaps.md), [`GapMoments`](docs/nodes/GapMoments.md), [`AlmostPrimeWindow`](docs/nodes/AlmostPrimeWindow.md), [`GapPairs`](docs/nodes/GapPairs.md), [`RomanoffTheorem`](docs/nodes/RomanoffTheorem.md), [`ErdosSmallGaps`](docs/nodes/ErdosSmallGaps.md), [`Schnirelmann`](docs/nodes/Schnirelmann.md), [`BrocardWindow`](docs/nodes/BrocardWindow.md).
 
 ```mermaid
 graph LR
@@ -790,22 +790,31 @@ graph LR
   subgraph s16["<b>97. Schnirelmann — every number is a sum of boundedly many primes</b>"]
     p7["<i>planned: new, not yet proved</i>"]
   end
-  subgraph s17["1. Wheel6 (in Foundations)"]
-    c29["prime_gt_three_is_candidate"]
+  subgraph s17["<b>103. BrocardWindow — where every wheel's marks fall between two prime squares</b>"]
+    c29["mark_formula"]
+    c30["mark_in_window_iff"]
+    c31["collision_product"]
+    c32["collision_cofactor"]
+    c33["no_collision_large_product"]
+    c34["large_wheel_row"]
+    c35["middle_wheel_row"]
   end
-  subgraph s18["2. CRT (in Foundations)"]
-    c30["crt_map_bijective"]
+  subgraph s18["1. Wheel6 (in Foundations)"]
+    c36["prime_gt_three_is_candidate"]
   end
-  subgraph s19["41. PrimeNumberTheorem (in Survivor shares and analytic inputs)"]
+  subgraph s19["2. CRT (in Foundations)"]
+    c37["crt_map_bijective"]
+  end
+  subgraph s20["41. PrimeNumberTheorem (in Survivor shares and analytic inputs)"]
     p8["<i>proved in Lean</i>"]
   end
-  subgraph s20["71. GapConstant (in Patterns, admissibility and the Hardy-Littlewood constants)"]
+  subgraph s21["71. GapConstant (in Patterns, admissibility and the Hardy-Littlewood constants)"]
     p9["<i>proved in Lean</i>"]
   end
-  subgraph s21["75. PatternUpperBound (in Sieve methods)"]
+  subgraph s22["75. PatternUpperBound (in Sieve methods)"]
     p10["<i>planned: new, not yet proved</i>"]
   end
-  subgraph s22["87. SelbergTwinRails (in Sieve methods)"]
+  subgraph s23["87. SelbergTwinRails (in Sieve methods)"]
     p11["<i>proved in Lean</i>"]
   end
   o1{{"<i>open conjecture</i><br/>jacobsthal_bound_holds"}}
@@ -817,19 +826,19 @@ graph LR
   o3 -.-> c3
   o4 -.-> c4
   o4 -.-> c5
-  c29 ==> c6
-  c29 ==> c7
-  c29 ==> c10
-  c29 ==> c11
-  c29 ==> c12
-  c30 ==> c19
+  c36 ==> c6
+  c36 ==> c7
+  c36 ==> c10
+  c36 ==> c11
+  c36 ==> c12
+  c37 ==> c19
   c19 ==> c20
   s5 -.-> s6
+  s22 -.-> s13
   s21 -.-> s13
-  s20 -.-> s13
   s13 -.-> s14
-  s22 -.-> s15
-  s19 -.-> s15
+  s23 -.-> s15
+  s20 -.-> s15
   s13 -.-> s16
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
@@ -842,15 +851,15 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c6,c7,c8,c9,c10,c11,c12,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c26,c27,c28,c29,c30 verified;
+  class c6,c7,c8,c9,c10,c11,c12,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37 verified;
   class c1,c2,c3,c4,c5 conditional_built;
   class c13,c24,c25 cited_built;
   class p4,p5,p6,p7 new;
   class p1,p2,p3 external;
   class p8,p9,p10,p11 stub;
   class o1,o2,o3,o4 openconj;
-  click c29 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md#prime_gt_three_is_candidate" _blank
-  click c30 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CRT.md#crt_map_bijective" _blank
+  click c36 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md#prime_gt_three_is_candidate" _blank
+  click c37 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CRT.md#crt_map_bijective" _blank
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConjectures.md#legendre_of_jacobsthal" _blank
   click c2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConjectures.md#brocard_of_four_survivors" _blank
   click c3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/GapConjectures.md#oppermann_of_bound" _blank
@@ -890,6 +899,13 @@ graph LR
   click p11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergTwinRails.md" _blank
   click p6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ErdosSmallGaps.md" _blank
   click p7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Schnirelmann.md" _blank
+  click c29 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardWindow.md#mark_formula" _blank
+  click c30 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardWindow.md#mark_in_window_iff" _blank
+  click c31 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardWindow.md#collision_product" _blank
+  click c32 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardWindow.md#collision_cofactor" _blank
+  click c33 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardWindow.md#no_collision_large_product" _blank
+  click c34 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardWindow.md#large_wheel_row" _blank
+  click c35 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardWindow.md#middle_wheel_row" _blank
 ```
 
 ### Sophie Germain primes
@@ -1794,6 +1810,13 @@ The results nothing else builds on, each with everything beneath it.
 - [`PigeonholeWheel.open_copies`](docs/nodes/PigeonholeWheel.md#open_copies) — proved in Lean
 - [`PigeonholeWheel.two_survivors_persist`](docs/nodes/PigeonholeWheel.md#two_survivors_persist) — proved in Lean
 - [`PigeonholeWheel.pigeonhole_primes_unbounded`](docs/nodes/PigeonholeWheel.md#pigeonhole_primes_unbounded) — proved in Lean
+- [`BrocardWindow.mark_formula`](docs/nodes/BrocardWindow.md#mark_formula) — proved in Lean
+- [`BrocardWindow.mark_in_window_iff`](docs/nodes/BrocardWindow.md#mark_in_window_iff) — proved in Lean
+- [`BrocardWindow.collision_product`](docs/nodes/BrocardWindow.md#collision_product) — proved in Lean
+- [`BrocardWindow.collision_cofactor`](docs/nodes/BrocardWindow.md#collision_cofactor) — proved in Lean
+- [`BrocardWindow.no_collision_large_product`](docs/nodes/BrocardWindow.md#no_collision_large_product) — proved in Lean
+- [`BrocardWindow.large_wheel_row`](docs/nodes/BrocardWindow.md#large_wheel_row) — proved in Lean
+- [`BrocardWindow.middle_wheel_row`](docs/nodes/BrocardWindow.md#middle_wheel_row) — proved in Lean
 
 ## What the network takes on trust
 
@@ -2113,6 +2136,12 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
   - [Euclid, Elements, Book IX, Proposition 20 (D. E. Joyce's edition)](https://mathcs.clarku.edu/~djoyce/elements/bookIX/propIX20.html) — the theorem proved; this node's argument is a counting variant of Euclid's
   - [R. Meštrović, Euclid's theorem on the infinitude of primes: a historical survey of its proofs (300 B.C.-2022)](https://arxiv.org/abs/1202.3670) — surveys the published proofs, including those through Euler's totient function, to which this survivor-counting proof is related
   - [Chinese remainder theorem (Wikipedia)](https://en.wikipedia.org/wiki/Chinese_remainder_theorem) — the per-wheel statement is the Chinese Remainder Theorem for one new modulus, proved here by pigeonhole
+- [`BrocardWindow`](docs/nodes/BrocardWindow.md)
+  - [Brocard's conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Brocard%27s_conjecture) — the open conjecture whose window this node describes; nothing here proves it
+  - [Fermat's factorization method (Wikipedia)](https://en.wikipedia.org/wiki/Fermat%27s_factorization_method) — the difference-of-two-squares identity behind the mark formula
+  - [Legendre sieve (Wikipedia)](https://en.wikipedia.org/wiki/Legendre_sieve) — counting each composite under its prime factors; the collision rule is one term of Legendre's formula
+  - [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Lemma 3.8 (Buchstab's identity): the row rules are its factor-shape split in the window
+  - [R. C. Baker, G. Harman, J. Pintz, The difference between consecutive primes, II](https://doi.org/10.1112/plms/83.3.532) — the best published result on primes in short windows; it stops short of a Brocard window
 
 ## Node index
 
@@ -2216,3 +2245,4 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 100 | [`ChenWeights`](docs/nodes/ChenWeights.md) | Chen's weights for numbers with at most two prime factors | proved in Lean |
 | 101 | [`SelbergBound`](docs/nodes/SelbergBound.md) | Selberg's upper bound sieve | proved in Lean |
 | 102 | [`PigeonholeWheel`](docs/nodes/PigeonholeWheel.md) | one pigeon per wheel | proved in Lean |
+| 103 | [`BrocardWindow`](docs/nodes/BrocardWindow.md) | where every wheel's marks fall between two prime squares | proved in Lean |
