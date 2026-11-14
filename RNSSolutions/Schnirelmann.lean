@@ -579,6 +579,7 @@ private theorem schn_ineq_aux {A B : Set ℕ} [DecidablePred (· ∈ A)] [Decida
   nlinarith [mul_le_mul_of_nonneg_left hα (sub_nonneg.mpr hβ1)]
 
 theorem schnirelmann_inequality_holds : schnirelmann_inequality := by
+  classical
   intro A B hA hB
   exact schn_ineq_aux hA hB
 
