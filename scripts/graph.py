@@ -197,7 +197,7 @@ GROUPS = [
     ("gaps", "Gaps between survivors and between primes", [
         "GapConjectures", "GapTracks", "DudekJohnston", "GapCertificate", "BlockingRuns", "KanoldBound",
         "PillaiBrauer", "JacobsthalQuadratic", "LongGaps", "RoughInPrimeGaps", "GapMoments",
-        "AlmostPrimeWindow", "BrocardWindow", "GapPairs", "RomanoffTheorem", "ErdosSmallGaps", "Schnirelmann"]),
+        "AlmostPrimeWindow", "BrocardWindow", "BrocardPrediction", "GapPairs", "RomanoffTheorem", "ErdosSmallGaps", "Schnirelmann"]),
     ("germain", "Sophie Germain primes", [
         "SophieGermainWheel", "SophieGermainPowers", "SophieGermainTheorem", "GermainAuxiliary",
         "GermainReciprocals"]),

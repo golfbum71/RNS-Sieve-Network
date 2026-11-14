@@ -153,6 +153,10 @@ def middle_wheel_row : Prop :=
 
 **Proof:** `RNS.BrocardWindow.middle_wheel_row_holds` in [`RNSSolutions/BrocardWindow.lean`](../../RNSSolutions/BrocardWindow.lean)
 
+## Used by
+
+- [`BrocardPrediction`](BrocardPrediction.md)
+
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/BrocardWindow/Conclusions.lean)

@@ -1,0 +1,74 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-14, from the Brocard window session): scoped, no Lean yet. See docs/NODE_LIST.md and docs/BROCARD_NOTES.md.
+
+node:
+  id: BrocardPrediction.v1
+  family: BrocardPrediction
+  version: v1
+  order: 104
+  kind: paper
+  status: planned
+  title: "the cycling-only count of primes between two prime squares"
+  description: >-
+    Three statements about the window between a base prime's square and the
+    next prime's square, built on the collision rule of BrocardWindow. First,
+    the exact count: the slots a wheel is the first to block equal an
+    alternating sum, over products of distinct smaller wheels, of the number
+    of shared slots (Legendre's formula in collision-rule form). Second, the
+    cycling-only prediction: replace each shared-slot count by its forced
+    value (window length over three times the product) and drop every product
+    longer than the window; for twin primes the sum collapses to a third of
+    the window length times the sum of the reciprocals of the primes between
+    the base prime and the window length, plus a Möbius sum over the numbers
+    up to the window length not divisible by 2 or 3, minus one. Third, the
+    size of that prediction, with explicit constants. None of this bounds the
+    true number of primes in the window: that the true count stays near the
+    prediction in every window is open, and is Brocard's conjecture in
+    another form. The prediction and its closed form are original to this
+    project (Geoffrey Fischer, 2026-11-14); the size uses published explicit
+    estimates.
+conclusions: []
+planned:
+  source_status: New
+  rests_on:
+  - BrocardWindow
+  claims:
+  - window_exact_count
+  - cycling_prediction_closed_form
+  - cycling_prediction_size
+  tier: "Tier 2 for the exact count and the closed form (finite sums and a telescoping rearrangement); Tier 3 for the size (needs explicit Mertens and Möbius-sum estimates as outside claims)."
+  plan: >-
+    State the shared-slot count from BrocardWindow's collision rule and prove
+    the exact count by inclusion-exclusion (BrunPureSieve carried all the
+    way). Define the prediction as a finite sum over wheels and products of
+    smaller wheels, and prove the closed form by matching each term to a
+    squarefree number up to the window length. For the size, take the
+    Rosser-Schoenfeld bound on the sum of prime reciprocals and Ramaré's
+    bound on the Möbius sum as named outside claims. The assembly of the
+    constants (session record of 2026-11-14) has not been independently
+    reviewed and must be re-derived before it is stated in Lean.
+sources:
+- title: "Legendre sieve (Wikipedia)"
+  url: https://en.wikipedia.org/wiki/Legendre_sieve
+  relationship: "the exact count is Legendre's formula for one window"
+- title: "J. B. Rosser and L. Schoenfeld, Approximate formulas for some functions of prime numbers, Illinois J. Math. 6 (1962)"
+  url: https://projecteuclid.org/download/pdf_1/euclid.ijm/1255631807
+  relationship: "Theorem 5, the sum of prime reciprocals with an explicit error, used for the size"
+- title: "H. A. Helfgott, The ternary Goldbach problem (arXiv 1501.05438)"
+  url: https://arxiv.org/abs/1501.05438
+  relationship: "equation (2.21) records Ramaré's explicit bound on the sum of mu(n)/n, used for the size"
+- title: "O. Ramaré and S. Zuniga-Alterman, From explicit estimates for the primes to explicit estimates for the Möbius function II (arXiv 2408.05969)"
+  url: https://arxiv.org/abs/2408.05969
+  relationship: "a sharper bound on the same Möbius sum, which would narrow the size statement"
+- title: "R. C. Baker, G. Harman, J. Pintz, The difference between consecutive primes, II"
+  url: https://doi.org/10.1112/plms/83.3.532
+  relationship: "the published floor for primes in slightly longer windows; the open side of this node is the same kind of floor for a Brocard window"
+related:
+- node: BrunPureSieve
+  note: "the alternating count and its early-stopping inequalities; the prediction is a different truncation (by cycle length, not by number of wheels)"
+- node: MertensSecond
+  note: "the sum of prime reciprocals that the closed form reduces to"
+- node: GapConjectures
+  note: "states Brocard's conjecture, which this prediction estimates but does not prove"
+- node: ParityBarrier
+  note: "why wheel counting alone cannot turn the prediction into a guaranteed floor"

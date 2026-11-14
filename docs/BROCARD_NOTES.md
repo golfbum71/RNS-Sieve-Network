@@ -140,6 +140,59 @@ alone cannot separate the pieces.
   ceiling from partner-range lengths alone stops working near base prime
   2,000). Whether a ceiling that uses the positions can work is not known.
 
+## The window in formulas (2026-11-14)
+
+On 2026-11-14 the window was worked through again, starting from Geoffrey
+Fischer's multiplication-table picture: once the square is fixed, every mark
+in the window is a wheel times a row, and the rows are numbers that came
+before the window.
+
+**The mark formula.** A wheel at a given distance below the base prime marks
+the window at steps 1, 2, 3 and so on. Each mark is the square of (base prime
+plus step) minus the square of (distance plus step). The mark is inside the
+window exactly when twice the step times the wheel lies strictly between the
+distance squared and the distance squared plus the window length. Standard
+name: the difference of two squares (Fermat's factorization identity).
+
+**The collision rule.** Two different wheels share a slot only at a multiple
+of their product, and the remaining factor is at least 5. So two wheels whose
+product is at least a fifth of the next prime's square never share a slot.
+Standard name: one term of Legendre's formula.
+
+**Three levels of wheel**, counting each blocked slot under its smallest
+wheel. *Large* (cube at least the next prime's square): a mark is new exactly
+when its row is prime. *Middle* (above the square root of the next prime,
+cube below its square): new exactly when the row is a prime or a product of
+two primes each at least the wheel. *Small* (up to the square root of the
+next prime): the rest. Standard name: Buchstab's identity with the
+factor-shape split of item 3 above, now with exact cutoffs.
+
+These three are checked in Lean in
+[`BrocardWindow`](nodes/BrocardWindow.md).
+
+**The cycling-only prediction.** Keep only the shared-slot terms whose cycle
+fits inside the window, each at its forced value. For twin primes the sum
+collapses to a third of the window length times the sum of the reciprocals of
+the primes between the base prime and the window length (plus a small Möbius
+sum, minus one). Tested on all 2,992 twin windows with base prime from 11 to
+300,000: the prediction exceeded the true count of primes only at bases 29
+and 41 (by less than a twentieth of one prime); from 59 on it is always low,
+and above 100,000 it is 86 to 89 percent of the true count. This is a test,
+not a proof. That the true count stays near the prediction in every window
+is open; a guaranteed floor of any fixed fraction would give Brocard's
+conjecture from an explicit base prime on. Planned as
+[`BrocardPrediction`](nodes/BrocardPrediction.md).
+
+**Where wheel counting stops.** A shared-slot count is forced only when the
+product of the wheels is well below the window length. For the large wheels
+near the base prime nothing is forced: asking whether a mark is wasted is the
+same as asking whether its row is prime (the parity barrier,
+[`ParityBarrier`](nodes/ParityBarrier.md)).
+
+The arrangement by distance and step and the cycling-only prediction are
+original to this project (Geoffrey Fischer, 2026-11-14); the identities and
+the explicit estimates behind the prediction's size are not.
+
 ## Working rule recorded with these notes
 
 When an idea is explored: test it on its own terms first and say whether it
@@ -160,6 +213,16 @@ work has been found".
 - R. Li, "The number of primes in short intervals and numerical calculations
   for Harman's sieve" (preprint), <https://arxiv.org/abs/2308.04458>
 - Brocard's conjecture: <https://en.wikipedia.org/wiki/Brocard%27s_conjecture>
+- Fermat's factorization method:
+  <https://en.wikipedia.org/wiki/Fermat%27s_factorization_method>
+- J. B. Rosser, L. Schoenfeld, "Approximate formulas for some functions of
+  prime numbers", Illinois J. Math. 6 (1962) 64–94 (Theorem 5).
+- O. Ramaré's explicit bound on the sum of μ(n)/n, as recorded in H. A.
+  Helfgott, "The ternary Goldbach problem", <https://arxiv.org/abs/1501.05438>,
+  equation (2.21).
+- O. Ramaré, S. Zuniga-Alterman, "From explicit estimates for the primes to
+  explicit estimates for the Möbius function II",
+  <https://arxiv.org/abs/2408.05969>
 
 The window picture, the wheel and slot kinds, the labels and Step B are
 original to this project (Geoffrey Fischer, 2026-11-11); the three methods

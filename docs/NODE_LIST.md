@@ -1342,6 +1342,14 @@ The window is the numbers strictly between a base prime's square and the next pr
 - Rests on: Mathlib only
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-14).
 
+### 104. `BrocardPrediction` — the cycling-only count of primes between two prime squares
+Three statements about the window between a base prime's square and the next prime's square, built on the collision rule of `BrocardWindow`: the exact count of the slots each wheel is the first to block (Legendre's formula in collision-rule form); the cycling-only prediction, which for twin primes collapses to a third of the window length times the sum of the reciprocals of the primes between the base prime and the window length, plus a Möbius sum, minus one; and the size of that prediction with explicit constants. Tested against all 2,992 twin windows with base prime from 11 to 300,000: the prediction is below the true count of primes from base 59 on (see `BROCARD_NOTES.md`). That the true count stays near the prediction in every window is open.
+- Sources: [Legendre sieve](https://en.wikipedia.org/wiki/Legendre_sieve); Rosser and Schoenfeld (1962), Theorem 5; Ramaré's bound as recorded in [Helfgott, arXiv 1501.05438](https://arxiv.org/abs/1501.05438); [Ramaré and Zuniga-Alterman, arXiv 2408.05969](https://arxiv.org/abs/2408.05969)
+- Lean (planned): `window_exact_count`, `cycling_prediction_closed_form`, `cycling_prediction_size`
+- Rests on: `BrocardWindow`
+- Scope: Tier 2 for the exact count and the closed form; Tier 3 for the size (explicit Mertens and Möbius-sum estimates as outside claims). The constants in the size statement have not been independently reviewed.
+- Status: Planned
+
 ### Added to nodes 71-89
 - `BadWheels` gains `divisors_pairwise_coprime` (Ford Lemma 7.7).
 - `BuchstabIdentity` gains `buchstab_product_identity` (Tao, Notes 4, Exercise 13).
