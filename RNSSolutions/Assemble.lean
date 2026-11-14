@@ -55,6 +55,9 @@ import RNSSolutions.GapConstant
 import RNSSolutions.SmallWheelSurvivors
 import RNSSolutions.RailBrunTitchmarsh
 import RNSSolutions.BrunHooley
+import RNSSolutions.SelbergBound
+import RNSSolutions.SelbergTwinRails
+import RNSSolutions.GapPairs
 
 /-!
 # Assembling the network
@@ -519,3 +522,55 @@ theorem RNS.BrunHooley.brun_hooley_order_holds : RNS.BrunHooley.brun_hooley_orde
   RNS.BrunHooley.brun_hooley_order_step RNS.BrunHooley.brun_hooley_bound_exp_holds
 
 #print axioms RNS.BrunHooley.brun_hooley_order_holds
+
+/-- `SelbergBound`, `BrunTwinCount` → `SelbergTwinRails`: Selberg's bound for the twin columns. -/
+theorem RNS.SelbergTwinRails.selberg_twin_columns_bound_holds :
+    RNS.SelbergTwinRails.selberg_twin_columns_bound :=
+  RNS.SelbergTwinRails.selberg_twin_columns_bound_step RNS.SelbergBound.selberg_bound_holds
+    RNS.BrunTwinCount.twin_multiples_count_holds
+
+/-- `SelbergTwinRails` → `SelbergTwinRails`: Selberg's bound for twin primes. -/
+theorem RNS.SelbergTwinRails.selberg_twin_bound_holds : RNS.SelbergTwinRails.selberg_twin_bound :=
+  RNS.SelbergTwinRails.selberg_twin_bound_step RNS.SelbergTwinRails.selberg_twin_columns_bound_holds
+    RNS.SelbergTwinRails.twin_selberg_sum_lower_holds
+
+/-- `SelbergBound`, `BrunTwinCount` → `SelbergTwinRails`: Selberg's bound at any gap. -/
+theorem RNS.SelbergTwinRails.selberg_gap_bound_holds : RNS.SelbergTwinRails.selberg_gap_bound :=
+  RNS.SelbergTwinRails.selberg_gap_bound_step RNS.SelbergBound.selberg_bound_holds
+    RNS.BrunTwinCount.shift_multiples_count_holds RNS.SelbergTwinRails.twin_selberg_sum_lower_holds
+
+/-- `SelbergBound`, `BrunTwinCount` → `SelbergTwinRails`: Selberg's bound for Goldbach pairs. -/
+theorem RNS.SelbergTwinRails.selberg_goldbach_bound_holds :
+    RNS.SelbergTwinRails.selberg_goldbach_bound :=
+  RNS.SelbergTwinRails.selberg_goldbach_bound_step RNS.SelbergBound.selberg_bound_holds
+    RNS.BrunTwinCount.shift_multiples_count_holds RNS.SelbergTwinRails.twin_selberg_sum_lower_holds
+
+#print axioms RNS.SelbergTwinRails.selberg_twin_columns_bound_holds
+#print axioms RNS.SelbergTwinRails.selberg_twin_bound_holds
+#print axioms RNS.SelbergTwinRails.selberg_gap_bound_holds
+#print axioms RNS.SelbergTwinRails.selberg_goldbach_bound_holds
+
+/-- `SelbergTwinRails` → `GapPairs`: prime pairs at any gap, by the gap's own constant. -/
+theorem RNS.GapPairs.gap_pair_bound_holds : RNS.GapPairs.gap_pair_bound :=
+  RNS.GapPairs.gap_pair_bound_step RNS.SelbergTwinRails.selberg_gap_bound_holds
+    RNS.GapPairs.pair_factor_le_correction_holds
+
+/-- `SelbergTwinRails` → `GapPairs`: Goldbach pairs, by the number's own constant. -/
+theorem RNS.GapPairs.goldbach_pair_bound_holds : RNS.GapPairs.goldbach_pair_bound :=
+  RNS.GapPairs.goldbach_pair_bound_step RNS.SelbergTwinRails.selberg_goldbach_bound_holds
+    RNS.GapPairs.pair_factor_le_correction_holds
+
+/-- `SelbergTwinRails` → `GapPairs`: prime pairs at any gap, by the totient alone. -/
+theorem RNS.GapPairs.gap_pair_bound_totient_holds : RNS.GapPairs.gap_pair_bound_totient :=
+  RNS.GapPairs.gap_pair_bound_totient_step RNS.SelbergTwinRails.selberg_gap_bound_holds
+    RNS.GapPairs.pair_factor_le_correction_holds RNS.GapPairs.correction_le_totient_ratio_sq_holds
+
+/-- `SelbergTwinRails` → `GapPairs`: Goldbach pairs, by the totient alone. -/
+theorem RNS.GapPairs.goldbach_pair_bound_totient_holds : RNS.GapPairs.goldbach_pair_bound_totient :=
+  RNS.GapPairs.goldbach_pair_bound_totient_step RNS.SelbergTwinRails.selberg_goldbach_bound_holds
+    RNS.GapPairs.pair_factor_le_correction_holds RNS.GapPairs.correction_le_totient_ratio_sq_holds
+
+#print axioms RNS.GapPairs.gap_pair_bound_holds
+#print axioms RNS.GapPairs.goldbach_pair_bound_holds
+#print axioms RNS.GapPairs.gap_pair_bound_totient_holds
+#print axioms RNS.GapPairs.goldbach_pair_bound_totient_holds

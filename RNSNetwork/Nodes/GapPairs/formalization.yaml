@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+# Scoped 2026-11-08 from Ford's Spring 2023 sieve notes, Ch. 1-4; built 2026-11-14 on SelbergTwinRails. See docs/NODE_LIST.md.
 
 node:
   id: GapPairs.v1
@@ -7,28 +7,102 @@ node:
   version: v1
   order: 76
   kind: paper
-  status: planned
-  title: prime pairs at any even gap, and Goldbach pairs
-  description: Prime pairs up to N a fixed even gap apart number at most a constant times the gap over
-    Euler's phi of the gap, times N over log N squared; pairs of primes adding to a given even number
-    are bounded the same way. Ford, Corollary 2.6.
-conclusions: []
-planned:
-  source_status: New
-  rests_on:
-  - PatternUpperBound
-  - GapConstant
-  claims:
-  - gap_pair_bound
-  - goldbach_pair_bound
-  tier: 'Tier 2: a specialisation of pattern_count_le.'
-  plan: The patterns n, n + gap and n, even number - n; their bad wheels are the primes dividing the gap
-    (or the even number); the constant is bounded by GapConstant.
+  status: active
+  title: prime pairs at any gap, and Goldbach pairs, by the gap's own constant
+  description: "Prime pairs up to N a fixed gap apart, and the ways of writing a number as a sum of two primes, number at most 40000 N over log N squared, times the gap's own correction from GapConstant (the product, over the odd wheels dividing the gap, of the wheel minus 1 over the wheel minus 2), times one extra factor: the gap over Euler's phi of the gap. In terms of the totient alone the bound is 40000 N over log N squared times the cube of the gap over its totient. After Ford, Corollary 2.6. As proved, differs from the plan: the node rests on SelbergTwinRails, not on PatternUpperBound, and Ford's corollary has the first power of the gap over its totient where this has the correction times the first power (at most the cube). The loss comes from SelbergTwinRails leaving the wheels that divide the gap out of the sieve; the first-power form is still planned and needs those wheels kept in (PatternUpperBound)."
+  improves: "SelbergTwinRails states its bound with its own factor (the wheels from 5 up dividing the gap, each as the wheel over the wheel minus 2). This node compares that factor with the conjectured correction of GapConstant and with the gap over its totient, the forms used in the literature and by the nodes downstream (Schnirelmann, RomanoffTheorem)."
+conclusions:
+- id: pair_factor_le_correction
+  declaration: RNS.GapPairs.pair_factor_le_correction
+  summary: "For a positive number, the factor of SelbergTwinRails is at most the correction of GapConstant times the number over its totient."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GapPairs.lean
+    declaration: RNS.GapPairs.pair_factor_le_correction_holds
+    note: "Draft: Lean proof written, not yet built."
+  designated: lean-proof
+- id: correction_le_totient_ratio_sq
+  declaration: RNS.GapPairs.correction_le_totient_ratio_sq
+  summary: "For a positive number, the correction of GapConstant is at most the square of the number over its totient."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GapPairs.lean
+    declaration: RNS.GapPairs.correction_le_totient_ratio_sq_holds
+    note: "Draft: Lean proof written, not yet built."
+  designated: lean-proof
+- id: gap_pair_bound
+  declaration: RNS.GapPairs.gap_pair_bound
+  summary: "For a gap h > 0 and N at least 5184^8, the prime pairs up to N at gap h number at most 40000 times the gap's correction times the gap over its totient, times N / log^2 N."
+  imports:
+  - SelbergTwinRails.v1.selberg_gap_bound
+  - GapPairs.v1.pair_factor_le_correction
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GapPairs.lean
+    declaration: RNS.GapPairs.gap_pair_bound_step
+    note: "Draft: Lean step written, not yet built."
+  designated: lean-proof
+- id: goldbach_pair_bound
+  declaration: RNS.GapPairs.goldbach_pair_bound
+  summary: "For N at least 5184^8, the ways of writing N as a sum of two primes number at most 40000 times the correction of N times N over its totient, times N / log^2 N."
+  imports:
+  - SelbergTwinRails.v1.selberg_goldbach_bound
+  - GapPairs.v1.pair_factor_le_correction
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GapPairs.lean
+    declaration: RNS.GapPairs.goldbach_pair_bound_step
+    note: "Draft: Lean step written, not yet built."
+  designated: lean-proof
+- id: gap_pair_bound_totient
+  declaration: RNS.GapPairs.gap_pair_bound_totient
+  summary: "The prime pairs up to N at gap h number at most 40000 times the cube of the gap over its totient, times N / log^2 N."
+  imports:
+  - SelbergTwinRails.v1.selberg_gap_bound
+  - GapPairs.v1.pair_factor_le_correction
+  - GapPairs.v1.correction_le_totient_ratio_sq
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GapPairs.lean
+    declaration: RNS.GapPairs.gap_pair_bound_totient_step
+    note: "Draft: Lean step written, not yet built."
+  designated: lean-proof
+- id: goldbach_pair_bound_totient
+  declaration: RNS.GapPairs.goldbach_pair_bound_totient
+  summary: "The ways of writing N as a sum of two primes number at most 40000 times the cube of N over its totient, times N / log^2 N."
+  imports:
+  - SelbergTwinRails.v1.selberg_goldbach_bound
+  - GapPairs.v1.pair_factor_le_correction
+  - GapPairs.v1.correction_le_totient_ratio_sq
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GapPairs.lean
+    declaration: RNS.GapPairs.goldbach_pair_bound_totient_step
+    note: "Draft: Lean step written, not yet built."
+  designated: lean-proof
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
   url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
-  relationship: Corollary 2.6
+  relationship: Corollary 2.6, which has the first power of the gap over its totient; this node proves a weaker form (the correction times the first power, at most the cube)
 related:
+- node: GapConstant
+  note: uses its correction for the odd wheels dividing the gap (the definition only; no claim of GapConstant is taken as a hypothesis)
+- node: PatternUpperBound
+  note: planned; keeping the wheels that divide the gap in the sieve would give Ford's first-power form
 - node: GapTracks
   note: which gaps each column allows
 - node: GapConjectures
