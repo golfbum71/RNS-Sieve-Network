@@ -59,6 +59,7 @@ import RNSSolutions.SelbergBound
 import RNSSolutions.SelbergTwinRails
 import RNSSolutions.GapPairs
 import RNSSolutions.BrocardPrediction
+import RNSSolutions.Schnirelmann
 
 /-!
 # Assembling the network
@@ -583,3 +584,27 @@ theorem RNS.BrocardPrediction.twin_prediction_closed_form_holds :
     RNS.BrocardPrediction.cycling_blocked_closed_form_holds
 
 #print axioms RNS.BrocardPrediction.twin_prediction_closed_form_holds
+
+/-- `SelbergTwinRails` → `Schnirelmann`: the second moment of the Goldbach pairs. -/
+theorem RNS.Schnirelmann.goldbach_second_moment_holds : RNS.Schnirelmann.goldbach_second_moment :=
+  RNS.Schnirelmann.goldbach_second_moment_step RNS.SelbergTwinRails.selberg_goldbach_bound_holds
+    RNS.Schnirelmann.pair_factor_second_moment_holds
+
+/-- `Schnirelmann`: a positive share of numbers are sums of two primes. -/
+theorem RNS.Schnirelmann.prime_pair_sums_density_holds : RNS.Schnirelmann.prime_pair_sums_density :=
+  RNS.Schnirelmann.prime_pair_sums_density_step RNS.Schnirelmann.goldbach_first_moment_holds
+    RNS.Schnirelmann.goldbach_second_moment_holds
+
+/-- `Schnirelmann`: the basis theorem from Schnirelmann's inequality. -/
+theorem RNS.Schnirelmann.schnirelmann_basis_holds : RNS.Schnirelmann.schnirelmann_basis :=
+  RNS.Schnirelmann.schnirelmann_basis_step RNS.Schnirelmann.schnirelmann_inequality_holds
+
+/-- `Schnirelmann`: every number from 2 on is a sum of boundedly many primes. -/
+theorem RNS.Schnirelmann.schnirelmann_bounded_sum_holds : RNS.Schnirelmann.schnirelmann_bounded_sum :=
+  RNS.Schnirelmann.schnirelmann_bounded_sum_step RNS.Schnirelmann.prime_pair_sums_density_holds
+    RNS.Schnirelmann.schnirelmann_basis_holds
+
+#print axioms RNS.Schnirelmann.goldbach_second_moment_holds
+#print axioms RNS.Schnirelmann.prime_pair_sums_density_holds
+#print axioms RNS.Schnirelmann.schnirelmann_basis_holds
+#print axioms RNS.Schnirelmann.schnirelmann_bounded_sum_holds

@@ -83,3 +83,4 @@ import RNSNetwork.Nodes.PigeonholeWheel.Conclusions
 import RNSNetwork.Nodes.BrocardWindow.Conclusions
 import RNSNetwork.Nodes.GapPairs.Conclusions
 import RNSNetwork.Nodes.BrocardPrediction.Conclusions
+import RNSNetwork.Nodes.Schnirelmann.Conclusions

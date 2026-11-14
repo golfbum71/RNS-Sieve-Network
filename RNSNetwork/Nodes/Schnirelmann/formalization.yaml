@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's notes Ch. 5-9 and other lecture notes): scoped, no Lean yet. See docs/NODE_LIST.md.
+# Scoped 2026-11-08 from Ford's notes Ch. 5-9 and other lecture notes; built 2026-11-14 on SelbergTwinRails. See docs/NODE_LIST.md.
 
 node:
   id: Schnirelmann.v1
@@ -7,25 +7,142 @@ node:
   version: v1
   order: 97
   kind: paper
-  status: planned
+  status: active
   title: every number is a sum of boundedly many primes
-  description: There is a constant c such that every number at least 2 is a sum of at most c primes (Schnirelmann
-    1930). The input from sieves is the upper bound for Goldbach pairs; the rest is Schnirelmann density.
-conclusions: []
-planned:
-  source_status: New
-  rests_on:
-  - GapPairs
-  claims:
-  - goldbach_pairs_second_moment
-  - schnirelmann_bounded_sum
-  tier: Tier 3.
-  plan: Cauchy-Schwarz with goldbach_pair_bound gives a positive share of even numbers as sums of two
-    primes; Schnirelmann's density theorem then bounds the number of summands.
+  improves: >-
+    SelbergTwinRails bounds the Goldbach pairs of one number. This node adds
+    that bound up over all numbers and turns it into a statement about every
+    number: a fixed number of primes is enough to reach each one.
+  description: >-
+    There is a number c such that every number from 2 on is a sum of at most
+    c primes (Schnirelmann 1930). The wheels enter through one input: Selberg's
+    upper bound for the Goldbach pairs of a number, which carries a factor
+    for the wheels from 5 up that divide the number. That factor does not pile
+    up on average: its square, added over the numbers up to N, is at most a
+    constant times N. So the squares of the Goldbach pair counts up to N total
+    at most a constant times N cubed over the fourth power of log N, while the
+    counts themselves total at least the square of the number of primes up to
+    half of N. By the Cauchy-Schwarz inequality and Chebyshev's lower bound
+    for the number of primes, a positive share of numbers are sums of two
+    primes. Schnirelmann's inequality (the density of a sumset is at least the
+    sum of the densities minus their product) and his basis theorem then give
+    a fixed number of summands. As proved, differs from the plan. The node
+    rests on SelbergTwinRails, not on GapPairs: the factor of SelbergTwinRails
+    is the one averaged, which avoids the totient. The constant c is not made
+    explicit (it comes from an existence statement). Chebyshev's bound is
+    taken from Mathlib. Schnirelmann's inequality and basis theorem are proved
+    here because Mathlib has the density and the case of total density at
+    least one but not the inequality.
+
+conclusions:
+  - id: goldbach_first_moment
+    declaration: RNS.Schnirelmann.goldbach_first_moment
+    summary: "The Goldbach pair counts of the numbers from 0 to twice N total at least the square of the number of primes up to N."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/Schnirelmann.lean
+        declaration: RNS.Schnirelmann.goldbach_first_moment_holds
+        note: "Draft: Lean proof written, not yet built."
+    designated: lean-proof
+  - id: pair_factor_second_moment
+    declaration: RNS.Schnirelmann.pair_factor_second_moment
+    summary: "There is a constant such that the squares of the Selberg factor of the numbers from 1 to N total at most the constant times N, for every N."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/Schnirelmann.lean
+        declaration: RNS.Schnirelmann.pair_factor_second_moment_holds
+        note: "Draft: Lean proof written, not yet built."
+    designated: lean-proof
+  - id: goldbach_second_moment
+    declaration: RNS.Schnirelmann.goldbach_second_moment
+    summary: "From some point on, the squares of the Goldbach pair counts of the numbers up to N, added up and multiplied by the fourth power of log N, are at most a constant times the cube of N."
+    imports:
+      - SelbergTwinRails.v1.selberg_goldbach_bound
+      - Schnirelmann.v1.pair_factor_second_moment
+    imports_status: identified
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/Schnirelmann.lean
+        declaration: RNS.Schnirelmann.goldbach_second_moment_step
+        note: "Draft: Lean step written, not yet built."
+    designated: lean-proof
+  - id: prime_pair_sums_density
+    declaration: RNS.Schnirelmann.prime_pair_sums_density
+    summary: "The set of numbers that are 0, 1 or a sum of two primes has positive Schnirelmann density."
+    imports:
+      - Schnirelmann.v1.goldbach_first_moment
+      - Schnirelmann.v1.goldbach_second_moment
+    imports_status: identified
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/Schnirelmann.lean
+        declaration: RNS.Schnirelmann.prime_pair_sums_density_step
+        note: "Draft: Lean step written, not yet built."
+    designated: lean-proof
+  - id: schnirelmann_inequality
+    declaration: RNS.Schnirelmann.schnirelmann_inequality
+    summary: "For two sets of numbers containing 0, the Schnirelmann density of the sumset is at least the sum of the two densities minus their product."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/Schnirelmann.lean
+        declaration: RNS.Schnirelmann.schnirelmann_inequality_holds
+        note: "Draft: Lean proof written, not yet built."
+    designated: lean-proof
+  - id: schnirelmann_basis
+    declaration: RNS.Schnirelmann.schnirelmann_basis
+    summary: "A set of numbers containing 0 with positive Schnirelmann density reaches every number with some fixed number of summands."
+    imports:
+      - Schnirelmann.v1.schnirelmann_inequality
+    imports_status: identified
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/Schnirelmann.lean
+        declaration: RNS.Schnirelmann.schnirelmann_basis_step
+        note: "Draft: Lean step written, not yet built."
+    designated: lean-proof
+  - id: schnirelmann_bounded_sum
+    declaration: RNS.Schnirelmann.schnirelmann_bounded_sum
+    summary: "There is a number c such that every number from 2 on is the sum of at most c primes."
+    imports:
+      - Schnirelmann.v1.prime_pair_sums_density
+      - Schnirelmann.v1.schnirelmann_basis
+    imports_status: identified
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/Schnirelmann.lean
+        declaration: RNS.Schnirelmann.schnirelmann_bounded_sum_step
+        note: "Draft: Lean step written, not yet built."
+    designated: lean-proof
 sources:
 - title: A. M. Odlyzko, Sieve Methods, senior thesis, Caltech (1971)
   url: https://thesis.library.caltech.edu/8060/1/Odlyzko_am_1971.pdf
-  relationship: Theorem 3.21
+  relationship: Theorem 3.21; this node follows the same route (sieve upper bound for Goldbach pairs, second moment, Schnirelmann density)
+- title: Schnirelmann density (Wikipedia)
+  url: https://en.wikipedia.org/wiki/Schnirelmann_density
+  relationship: states Schnirelmann's inequality, the basis theorem and Schnirelmann's theorem, which this node proves
+- title: Mathlib, Combinatorics/Schnirelmann.lean
+  url: https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/Combinatorics/Schnirelmann.lean
+  relationship: the definition of Schnirelmann density and the case of total density at least one, used here
+- title: Mathlib, NumberTheory/Chebyshev.lean
+  url: https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/NumberTheory/Chebyshev.lean
+  relationship: Chebyshev's lower bound for the number of primes, used here
 related:
+- node: GapPairs
+  note: the same Selberg bound for Goldbach pairs compared with the totient; not used here, because the factor of SelbergTwinRails is averaged directly
 - node: RomanoffTheorem
   note: the same second-moment argument
+- node: GapConjectures
+  note: Goldbach's conjecture would give three summands; this node gives a fixed number without it
