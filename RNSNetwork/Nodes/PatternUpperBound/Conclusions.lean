@@ -114,8 +114,8 @@ most the product of the blocked counts. -/
 def pattern_multiples_count : Prop :=
   ∀ (L : Finset (ℕ × ℕ)) (D : Finset ℕ) (N : ℕ), (∀ p ∈ D, p.Prime) →
     |(((Finset.Ioc 0 N).filter (fun m => D.prod id ∣ pattern_value L m)).card : ℝ)
-        - (N : ℝ) * (pattern_rho L D : ℝ) / (D.prod id : ℝ)|
-      ≤ (pattern_rho L D : ℝ)
+        - (N : ℝ) * ((pattern_rho L D : ℕ) : ℝ) / ((D.prod id : ℕ) : ℝ)|
+      ≤ ((pattern_rho L D : ℕ) : ℝ)
 
 /-- **Selberg's bound for the pattern.** For a nonempty pattern of primitive
 forms and any level `y` at least 1, the survivors among the positions 1 to `N`
