@@ -436,7 +436,7 @@ theorem setSumW_replace (g h : ℕ → ℝ) (S : Finset ℕ) :
   induction S using Finset.induction_on with
   | empty =>
     intro _ M
-    simp
+    simp [setSumW]
   | insert q S hq ih =>
     intro hS M
     have hS' : ∀ p ∈ S, 0 < p ∧ 0 ≤ g p ∧ g p ≤ h p :=
@@ -793,7 +793,7 @@ theorem fiber_le (Q K j m : ℕ) (hm : 1 ≤ m) :
       (j : ℝ) ^ ArithmeticFunction.cardFactors (m / x.1) =
       ∑ a ∈ ((oneMod Q K ×ˢ oneMod Q (K ^ j)).filter (fun x => x.1 * x.2 = m)).image
         (fun x => x.1), (j : ℝ) ^ ArithmeticFunction.cardFactors (m / a) :=
-    (Finset.sum_image hinj).symm
+    (Finset.sum_image (f := fun a => (j : ℝ) ^ ArithmeticFunction.cardFactors (m / a)) hinj).symm
   have hsub : ((oneMod Q K ×ˢ oneMod Q (K ^ j)).filter (fun x => x.1 * x.2 = m)).image
       (fun x => x.1) ⊆ m.divisors := by
     intro a ha
@@ -895,7 +895,7 @@ theorem log_le_sum_oneMod (Q K : ℕ) (hQ : 0 < Q) :
     push_cast
     rw [div_div]
     have hi : (0 : ℝ) ≤ i := Nat.cast_nonneg i
-    apply one_div_le_one_div_of_le (mul_pos (by positivity) hQR)
+    apply one_div_le_one_div_of_le (by positivity)
     have : (1 : ℝ) ≤ Q := by exact_mod_cast hQ
     nlinarith
   have h3 : Real.log ((J : ℝ) + 1) ≤ ∑ i ∈ Finset.range J, (1 : ℝ) / ((i : ℝ) + 1) := by
@@ -995,6 +995,7 @@ theorem pattern_selberg_sum_eq (L : Finset (ℕ × ℕ)) (z : ℕ) (y : ℝ) (hy
       rfl
     · rw [ite_eq_right h, ite_eq_right (fun h' => h (hiff.mpr h'))]
 
+set_option maxHeartbeats 1000000 in
 theorem pattern_selberg_sum_lower_step (h_le : blocked_le_card) (h_eq : blocked_eq_card_iff) :
     pattern_selberg_sum_lower := by
   intro k hk
@@ -1161,7 +1162,7 @@ theorem pattern_selberg_sum_lower_step (h_le : blocked_le_card) (h_eq : blocked_
           div_le_div_of_nonneg_right (hlq.trans hKlog) (by positivity)
       _ ≤ _ := hlog
   have hL0 : 0 ≤ Real.log y / (4 * k * Q) := div_nonneg hlogy0 hkQ.le
-  have hLk : (Real.log y / (4 * k * Q)) ^ k ≤ (∑ a ∈ oneMod Q K, (1 : ℝ) / a) ^ k :=
+  have hLpow : (Real.log y / (4 * k * Q)) ^ k ≤ (∑ a ∈ oneMod Q K, (1 : ℝ) / a) ^ k :=
     pow_le_pow_left₀ hL0 hL1 k
   -- the bad factor
   have hratio : ∀ p ∈ S, 1 + kw k p = (1 + gw L p) * (((p : ℝ) - blocked_count L p) /
@@ -1241,7 +1242,7 @@ theorem pattern_selberg_sum_lower_step (h_le : blocked_le_card) (h_eq : blocked_
   calc 1 / (4 * k * Q : ℝ) ^ k * Real.log y ^ k = (Real.log y / (4 * k * Q)) ^ k := by
         rw [div_pow]
         ring
-    _ ≤ (∑ a ∈ oneMod Q K, (1 : ℝ) / a) ^ k := hLk
+    _ ≤ (∑ a ∈ oneMod Q K, (1 : ℝ) / a) ^ k := hLpow
     _ ≤ ∑ n ∈ oneMod Q (K ^ k), (k : ℝ) ^ ArithmeticFunction.cardFactors n / n := hpow
     _ ≤ smoothSumK k S M := hsm
     _ ≤ setSumW (kw k) S M := hsmooth
@@ -1468,7 +1469,7 @@ theorem err_pow_le_sq {L : Finset (ℕ × ℕ)} {z d : ℕ} (hd : d ∣ pattern_
   push_cast
   rw [ArithmeticFunction.cardDistinctFactors_eq_card_primeFactors, ← Finset.prod_const,
     ← Finset.prod_pow]
-  apply Finset.prod_le_prod
+  apply Finset.prod_le_prod₀
   · intro p _
     positivity
   · intro p hp
@@ -1526,6 +1527,7 @@ theorem bad_factor_one_le {L : Finset (ℕ × ℕ)} (hL : primitive_forms L)
   rw [le_div_iff₀ (by linarith)]
   linarith
 
+set_option maxHeartbeats 1000000 in
 theorem pattern_count_le_step (h_sieve : pattern_sieve_bound) (h_low : pattern_selberg_sum_lower)
     (h_le : blocked_le_card) : pattern_count_le := by
   intro k hk
@@ -1665,7 +1667,8 @@ theorem pattern_count_le_step (h_sieve : pattern_sieve_bound) (h_low : pattern_s
   have hz : (t : ℝ) ^ 2 + 1 ≤ 2 * (t : ℝ) ^ 6 := by
     have h4 : (1 : ℝ) ≤ (t : ℝ) ^ 4 := one_le_pow₀ ht1
     have h26 : (t : ℝ) ^ 2 ≤ (t : ℝ) ^ 6 := pow_le_pow_right₀ ht1 (by norm_num)
-    nlinarith
+    have h16 : (1 : ℝ) ≤ (t : ℝ) ^ 6 := one_le_pow₀ ht1
+    linarith
   have hfin : (pattern_count L N : ℝ) ≤ 3 * ((m : ℝ) ^ k * N / P) +
       (m : ℝ) ^ k / c * bad_factor L * N / P := by
     linarith

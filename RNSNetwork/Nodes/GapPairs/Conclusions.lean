@@ -82,3 +82,37 @@ def goldbach_pair_bound_totient : Prop :=
     (goldbach_count N : ℝ) ≤ 40000 * totient_ratio N ^ 3 * N / Real.log N ^ 2
 
 end RNS.GapPairs
+
+/-! ## Ford's first-power form (added 2026-11-15, from `PatternUpperBound`)
+
+`PatternUpperBound` keeps the wheels dividing the gap in the sieve, each at its
+smaller share (one blocked position instead of two). The pair at gap `h` then
+carries only its bad factor, which is at most the gap's own correction; and the
+correction is at most twice the gap over its totient. -/
+
+namespace RNS.GapPairs
+
+open RNS.SelbergTwinRails RNS.GapConstant
+
+/-- **Prime pairs at any gap, by the gap's own correction alone.** There are a
+constant and a start such that for every gap `h > 0` and `N` from the start,
+the prime pairs up to `N` at gap `h` number at most the constant times the
+gap's correction times N / log² N. -/
+def gap_pair_bound_ford : Prop :=
+  ∃ C N₀ : ℝ, ∀ h N : ℕ, 0 < h → N₀ ≤ (N : ℝ) →
+    (gap_pair_count h N : ℝ) ≤ C * odd_divisor_correction h * N / Real.log N ^ 2
+
+/-- **The correction against the totient, first power.** For `h > 0`, the
+correction of `GapConstant` is at most twice `h` over its totient. -/
+def correction_le_two_totient_ratio : Prop :=
+  ∀ h : ℕ, 0 < h → odd_divisor_correction h ≤ 2 * totient_ratio h
+
+/-- **Prime pairs at any gap, Ford's form** (Ford, Corollary 2.6). There are a
+constant and a start such that for every gap `h > 0` and `N` from the start,
+the prime pairs up to `N` at gap `h` number at most the constant times the gap
+over its totient times N / log² N. -/
+def gap_pair_bound_ford_totient : Prop :=
+  ∃ C N₀ : ℝ, ∀ h N : ℕ, 0 < h → N₀ ≤ (N : ℝ) →
+    (gap_pair_count h N : ℝ) ≤ C * totient_ratio h * N / Real.log N ^ 2
+
+end RNS.GapPairs
