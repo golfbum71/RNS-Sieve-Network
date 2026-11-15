@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+# Scoped 2026-11-08 from Ford's Spring 2023 sieve notes, Ch. 1-4; built 2026-11-15 on SelbergBound and BadWheels. See docs/NODE_LIST.md.
 
 node:
   id: PatternUpperBound.v1
@@ -7,33 +7,79 @@ node:
   version: v1
   order: 75
   kind: paper
-  status: planned
-  title: every admissible pattern is at most its conjectured order
-  description: For an admissible pattern of linear forms, the positions up to N where every form is prime
-    are at most a constant times the pattern's correction constant times N over the logarithm of N to
-    the number of forms. This is the strongest unconditional statement known in the direction of the Hardy-Littlewood
-    conjecture, and covers twins, triples, pairs at any gap and Sophie Germain pairs. Ford, Theorem 2.5.
-  improves: BrunAnalytic bounds the twins by N over log N to the 3/2; this gives every pattern at the
-    full conjectured order.
-conclusions: []
-planned:
-  source_status: New
-  rests_on:
-  - BrunHooley
-  - BadWheels
-  - ShareAsymptotics
-  claims:
-  - pattern_count_le
-  tier: Tier 2.
-  plan: Apply brun_hooley_order with the blocked counts of BadWheels as the wheel shares and z the square
-    root of N; the remainders are at most the blocked count, summed to N^(1/2) times a power of log N;
-    bound V(z) by the pattern constant over log z to the k with the ShareAsymptotics limit.
+  status: active
+  title: every pattern of linear forms is at most its conjectured order
+  description: "For a pattern of primitive linear forms (each form a times the position plus b, with a at least 1 and a, b sharing no factor), the positions up to N where every form is prime number at most a constant depending only on the number of forms, times the bad factor, times N over the logarithm of N to the power of the number of forms. The bad factor is the product, over the wheels larger than the number of forms that divide the bad product of BadWheels, of (the wheel minus the positions it blocks) over (the wheel minus the number of forms); for a prime pair at gap h it is the gap's own correction (the product over the odd wheels dividing h of the wheel minus 1 over the wheel minus 2), and for the Sophie Germain pair (n and 2n + 1) it is 1. The proof is Selberg's sieve with every wheel above the number of forms kept in, each at its own share (positions blocked over the wheel), the bad wheels included at their smaller share. The node proves the four stages: the count of positions where a product of wheels divides the product of the forms (Chinese Remainder Theorem), Selberg's bound for the pattern, the lower bound for Selberg's pattern sum (of the order of log of the level to the power of the number of forms, divided by the bad factor), and the count. Ford, Theorem 2.5. As proved, differs from the plan: Selberg's sieve (SelbergBound) in place of the Brun-Hooley sieve; the singular series is replaced by the product of its bad-wheel factors (enough for every use downstream); the constant is not given as a number in the statement; and admissibility is not assumed (an inadmissible pattern has finitely many fitting positions and satisfies the bound anyway)."
+  improves: "BrunAnalytic bounds the twins by N over log N to the 3/2, and SelbergTwinRails bounds pairs at a gap by leaving the wheels dividing the gap out of the sieve, which costs a factor of up to the gap over its totient. This node covers every pattern of linear forms at the full conjectured power of the logarithm, and keeps the wheels dividing the gap in the sieve, so a pair at gap h carries only the gap's own correction."
+conclusions:
+- id: pattern_multiples_count
+  declaration: RNS.PatternUpperBound.pattern_multiples_count
+  summary: "For any set of prime wheels, the positions 1 to N where their product divides the product of the forms number N times the product of their blocked counts over their product, off by at most that product of blocked counts."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/PatternUpperBound.lean
+    declaration: RNS.PatternUpperBound.pattern_multiples_count_holds
+    note: "Lean proof, not yet built."
+  designated: lean-proof
+- id: pattern_sieve_bound
+  declaration: RNS.PatternUpperBound.pattern_sieve_bound
+  summary: "For a nonempty pattern of primitive forms and any level at least 1, the survivors among the positions 1 to N number at most N over Selberg's pattern sum, plus, over the divisors d of the wheel product up to the level, 3k to the number of prime factors of d (k the number of forms)."
+  imports:
+  - SelbergBound.v1.selberg_bound
+  - PatternUpperBound.v1.pattern_multiples_count
+  - BadWheels.v1.blocked_le_card
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/PatternUpperBound.lean
+    declaration: RNS.PatternUpperBound.pattern_sieve_bound_step
+    note: "Lean step, not yet built."
+  designated: lean-proof
+- id: pattern_selberg_sum_lower
+  declaration: RNS.PatternUpperBound.pattern_selberg_sum_lower
+  summary: "For every number of forms k at least 1 there are a constant c > 0 and a starting level, depending only on k, such that for every pattern of k primitive forms and every level from the start up to the square of the cut-off, c times log^k of the level is at most the bad factor times Selberg's pattern sum."
+  imports:
+  - BadWheels.v1.blocked_le_card
+  - BadWheels.v1.blocked_eq_card_iff
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/PatternUpperBound.lean
+    declaration: RNS.PatternUpperBound.pattern_selberg_sum_lower_step
+    note: "Lean step, not yet built."
+  designated: lean-proof
+- id: pattern_count_le
+  declaration: RNS.PatternUpperBound.pattern_count_le
+  summary: "For every number of forms k at least 1 there are a constant and a start, depending only on k, such that for every pattern of k primitive forms the positions up to N where every form is prime number at most the constant times the bad factor times N / log^k N."
+  imports:
+  - PatternUpperBound.v1.pattern_sieve_bound
+  - PatternUpperBound.v1.pattern_selberg_sum_lower
+  - BadWheels.v1.blocked_le_card
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/PatternUpperBound.lean
+    declaration: RNS.PatternUpperBound.pattern_count_le_step
+    note: "Lean step, not yet built."
+  designated: lean-proof
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
   url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
-  relationship: Theorem 2.5
+  relationship: Theorem 2.5 (the statement; proved here by Selberg's sieve) and Theorem 4.4 (the lower bound for Selberg's sum, here for any number of forms)
 related:
 - node: HardyLittlewood
   note: the conjectured asymptotic this bounds from above
 - node: BrunAnalytic
   note: the twin case with a weaker power of the logarithm
+- node: SelbergTwinRails
+  note: the same sieve for the two twin columns, with the wheels dividing a gap left out
+- node: LinearForms
+  note: the encoding of a form as a pair of numbers
+- node: GapConstant
+  note: the bad factor of a pair at gap h is its correction

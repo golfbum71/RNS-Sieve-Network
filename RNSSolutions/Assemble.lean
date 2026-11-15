@@ -61,6 +61,7 @@ import RNSSolutions.GapPairs
 import RNSSolutions.BrocardPrediction
 import RNSSolutions.Schnirelmann
 import RNSSolutions.PatternReciprocals
+import RNSSolutions.PatternUpperBound
 
 /-!
 # Assembling the network
@@ -624,3 +625,25 @@ theorem RNS.PatternReciprocals.pattern_reciprocal_summable_holds :
 
 #print axioms RNS.PatternReciprocals.pattern_count_bound_holds
 #print axioms RNS.PatternReciprocals.pattern_reciprocal_summable_holds
+
+/-- `SelbergBound`, `BadWheels` → `PatternUpperBound`: Selberg's bound for any pattern of linear forms. -/
+theorem RNS.PatternUpperBound.pattern_sieve_bound_holds :
+    RNS.PatternUpperBound.pattern_sieve_bound :=
+  RNS.PatternUpperBound.pattern_sieve_bound_step RNS.SelbergBound.selberg_bound_holds
+    RNS.PatternUpperBound.pattern_multiples_count_holds RNS.BadWheels.blocked_le_card_holds
+
+/-- `BadWheels` → `PatternUpperBound`: the pattern sum grows like log^k of the level. -/
+theorem RNS.PatternUpperBound.pattern_selberg_sum_lower_holds :
+    RNS.PatternUpperBound.pattern_selberg_sum_lower :=
+  RNS.PatternUpperBound.pattern_selberg_sum_lower_step RNS.BadWheels.blocked_le_card_holds
+    RNS.BadWheels.blocked_eq_card_iff_holds
+
+/-- `PatternUpperBound`: every pattern of linear forms is at most its conjectured order. -/
+theorem RNS.PatternUpperBound.pattern_count_le_holds :
+    RNS.PatternUpperBound.pattern_count_le :=
+  RNS.PatternUpperBound.pattern_count_le_step RNS.PatternUpperBound.pattern_sieve_bound_holds
+    RNS.PatternUpperBound.pattern_selberg_sum_lower_holds RNS.BadWheels.blocked_le_card_holds
+
+#print axioms RNS.PatternUpperBound.pattern_sieve_bound_holds
+#print axioms RNS.PatternUpperBound.pattern_selberg_sum_lower_holds
+#print axioms RNS.PatternUpperBound.pattern_count_le_holds

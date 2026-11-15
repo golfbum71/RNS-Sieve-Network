@@ -85,3 +85,4 @@ import RNSNetwork.Nodes.GapPairs.Conclusions
 import RNSNetwork.Nodes.BrocardPrediction.Conclusions
 import RNSNetwork.Nodes.Schnirelmann.Conclusions
 import RNSNetwork.Nodes.PatternReciprocals.Conclusions
+import RNSNetwork.Nodes.PatternUpperBound.Conclusions

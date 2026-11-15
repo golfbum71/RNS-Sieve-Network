@@ -80,3 +80,4 @@ import RNSSolutions.GapPairs
 import RNSSolutions.BrocardPrediction
 import RNSSolutions.Schnirelmann
 import RNSSolutions.PatternReciprocals
+import RNSSolutions.PatternUpperBound
