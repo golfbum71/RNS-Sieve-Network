@@ -62,6 +62,7 @@ import RNSSolutions.BrocardPrediction
 import RNSSolutions.Schnirelmann
 import RNSSolutions.PatternReciprocals
 import RNSSolutions.PatternUpperBound
+import RNSSolutions.BadWheels
 
 /-!
 # Assembling the network
