@@ -79,3 +79,4 @@ import RNSSolutions.BrocardWindow
 import RNSSolutions.GapPairs
 import RNSSolutions.BrocardPrediction
 import RNSSolutions.Schnirelmann
+import RNSSolutions.PatternReciprocals

@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+# Scoped 2026-11-08 from Ford's Spring 2023 sieve notes, Ch. 1-4; built 2026-11-15 on GapPairs. See docs/NODE_LIST.md.
 
 node:
   id: PatternReciprocals.v1
@@ -7,25 +7,58 @@ node:
   version: v1
   order: 77
   kind: paper
-  status: planned
+  status: active
   title: reciprocal sums converge for every pattern of two or more
-  description: For every admissible pattern with at least two members, the sum of one over the first member,
-    over all positions where every member is prime, is finite. Brun's theorem for twins is the case of
-    the pattern 0, 2; triples such as 0, 2, 6 and pairs at any gap follow the same way.
-  improves: BrunTheorem covers twins only.
-conclusions: []
-planned:
-  source_status: New
-  rests_on:
-  - PatternUpperBound
-  claims:
-  - pattern_reciprocal_summable
-  tier: 'Tier 2: the BrunTheorem argument with the general bound.'
-  plan: Partial summation of pattern_count_le, as BrunTheorem does from BrunAnalytic.
+  description: "For every pattern of two or more offsets, the reciprocals of the positions where the position plus every offset is prime add up to a finite total. Brun's theorem for twins is the case of the pattern 0, 2; triples such as 0, 2, 6, quadruples such as 0, 2, 6, 8 and pairs at any gap are covered too. The node first proves a general fact: if the positions with some property, up to any point past a start, number at most a constant times that point over the square of its logarithm, then their reciprocals add up to a finite total (the stretch from one power of 2 to the next adds at most a constant over the square of the exponent). A position fitting a pattern with two different offsets puts a prime pair at the gap between them, so GapPairs gives the count. As proved, differs from the plan: the node rests on GapPairs, not on PatternUpperBound, since the pair bound already has the square of the logarithm that convergence needs; and the pattern need not be admissible (an inadmissible pattern has only finitely many positions, and the statement holds for it too)."
+  improves: "BrunTheorem covers twins only, from BrunAnalytic's bound with the logarithm to the power 3/2. This node covers every pattern of two or more, and its general fact can be reused for any count bound of the same shape (GermainReciprocals uses it)."
+conclusions:
+- id: summable_of_count_bound
+  declaration: RNS.PatternReciprocals.summable_of_count_bound
+  summary: "If, from some start on, the positions with a property up to N number at most a constant times N / log^2 N, then the reciprocals of those positions add up to a finite total."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/PatternReciprocals.lean
+    declaration: RNS.PatternReciprocals.summable_of_count_bound_holds
+    note: "Lean proof, not yet built."
+  designated: lean-proof
+- id: pattern_count_bound
+  declaration: RNS.PatternReciprocals.pattern_count_bound
+  summary: "For every pattern of two or more offsets, the positions up to N fitting it number at most a constant (depending on the pattern) times N / log^2 N from some start on."
+  imports:
+  - GapPairs.v1.gap_pair_bound_totient
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/PatternReciprocals.lean
+    declaration: RNS.PatternReciprocals.pattern_count_bound_step
+    note: "Lean step, not yet built."
+  designated: lean-proof
+- id: pattern_reciprocal_summable
+  declaration: RNS.PatternReciprocals.pattern_reciprocal_summable
+  summary: "For every pattern of two or more offsets, the reciprocals of the positions fitting it add up to a finite total."
+  imports:
+  - PatternReciprocals.v1.summable_of_count_bound
+  - PatternReciprocals.v1.pattern_count_bound
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/PatternReciprocals.lean
+    declaration: RNS.PatternReciprocals.pattern_reciprocal_summable_step
+    note: "Lean step, not yet built."
+  designated: lean-proof
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
   url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
-  relationship: Corollary 1.8 and Theorem 2.5
+  relationship: Corollary 1.8 (Brun's theorem) and Theorem 2.5, whose consequence for patterns this node proves by Brun's stretch argument
 related:
 - node: BrunTheorem
-  note: the twin case
+  note: the twin case, by the same stretch argument
+- node: PatternUpperBound
+  note: the bound for every pattern at its full conjectured order; not needed here
+- node: GermainReciprocals
+  note: reuses the general fact for the Sophie Germain pairs

@@ -60,6 +60,7 @@ import RNSSolutions.SelbergTwinRails
 import RNSSolutions.GapPairs
 import RNSSolutions.BrocardPrediction
 import RNSSolutions.Schnirelmann
+import RNSSolutions.PatternReciprocals
 
 /-!
 # Assembling the network
@@ -608,3 +609,18 @@ theorem RNS.Schnirelmann.schnirelmann_bounded_sum_holds : RNS.Schnirelmann.schni
 #print axioms RNS.Schnirelmann.prime_pair_sums_density_holds
 #print axioms RNS.Schnirelmann.schnirelmann_basis_holds
 #print axioms RNS.Schnirelmann.schnirelmann_bounded_sum_holds
+
+/-- `GapPairs` → `PatternReciprocals`: every pattern of two or more, at most a constant times N / log² N. -/
+theorem RNS.PatternReciprocals.pattern_count_bound_holds :
+    RNS.PatternReciprocals.pattern_count_bound :=
+  RNS.PatternReciprocals.pattern_count_bound_step RNS.GapPairs.gap_pair_bound_totient_holds
+
+/-- `PatternReciprocals`: reciprocal sums converge for every pattern of two or more. -/
+theorem RNS.PatternReciprocals.pattern_reciprocal_summable_holds :
+    RNS.PatternReciprocals.pattern_reciprocal_summable :=
+  RNS.PatternReciprocals.pattern_reciprocal_summable_step
+    RNS.PatternReciprocals.summable_of_count_bound_holds
+    RNS.PatternReciprocals.pattern_count_bound_holds
+
+#print axioms RNS.PatternReciprocals.pattern_count_bound_holds
+#print axioms RNS.PatternReciprocals.pattern_reciprocal_summable_holds
