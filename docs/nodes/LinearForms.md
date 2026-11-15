@@ -54,10 +54,6 @@ def sophie_germain_of_LinearForms_conjecture : Prop :=
 
 **Proof:** `RNS.LinearForms.sophie_germain_of_LinearForms_conjecture_holds` in [`RNSSolutions/LinearForms.lean`](../../RNSSolutions/LinearForms.lean)
 
-## Used by
-
-- [`GermainReciprocals`](GermainReciprocals.md)
-
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/LinearForms/Conclusions.lean)

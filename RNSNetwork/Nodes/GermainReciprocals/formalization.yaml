@@ -22,10 +22,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainReciprocals.lean
     declaration: RNS.GermainReciprocals.germain_count_le_step
-    note: "Lean step, not yet built."
+    note: "Complete Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-15). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: germain_reciprocal_summable
   declaration: RNS.GermainReciprocals.germain_reciprocal_summable
@@ -36,10 +36,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/GermainReciprocals.lean
     declaration: RNS.GermainReciprocals.germain_reciprocal_summable_step
-    note: "Lean step, not yet built."
+    note: "Complete Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-15). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023

@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean · **Diagram:** [Gaps between survivors and between primes](../../GRAPH.md#gaps-between-survivors-and-between-primes)
 
-Prime pairs up to N a fixed gap apart, and the ways of writing a number as a sum of two primes, number at most 40000 N over log N squared, times the gap's own correction from GapConstant (the product, over the odd wheels dividing the gap, of the wheel minus 1 over the wheel minus 2), times one extra factor: the gap over Euler's phi of the gap. In terms of the totient alone the bound is 40000 N over log N squared times the cube of the gap over its totient. After Ford, Corollary 2.6. As proved, differs from the plan: the node rests on SelbergTwinRails, not on PatternUpperBound, and Ford's corollary has the first power of the gap over its totient where this has the correction times the first power (at most the cube). The loss comes from SelbergTwinRails leaving the wheels that divide the gap out of the sieve; the first-power form is still planned and needs those wheels kept in (PatternUpperBound).
+Prime pairs up to N a fixed gap apart, and the ways of writing a number as a sum of two primes, number at most 40000 N over log N squared, times the gap's own correction from GapConstant (the product, over the odd wheels dividing the gap, of the wheel minus 1 over the wheel minus 2), times one extra factor: the gap over Euler's phi of the gap. In terms of the totient alone the bound is 40000 N over log N squared times the cube of the gap over its totient. These first claims rest on SelbergTwinRails, which leaves the wheels dividing the gap out of the sieve. Added 2026-11-15 from PatternUpperBound, which keeps those wheels in at their smaller share: the pairs at gap h number at most a fixed constant times the gap's correction alone times N over log N squared, and since the correction is at most twice the gap over its totient (a product that telescopes below 2), at most a fixed constant times the gap over its totient times N over log N squared: Ford's Corollary 2.6. The Goldbach pairs keep the earlier form (their forms n and N minus n have a negative coefficient, outside the encoding of PatternUpperBound).
 
 **What it adds:** SelbergTwinRails states its bound with its own factor (the wheels from 5 up dividing the gap, each as the wheel over the wheel minus 2). This node compares that factor with the conjectured correction of GapConstant and with the gap over its totient, the forms used in the literature and by the nodes downstream (Schnirelmann, RomanoffTheorem).
 
@@ -12,14 +12,13 @@ Prime pairs up to N a fixed gap apart, and the ways of writing a number as a sum
 
 Published work this node rests on or relates to; each entry says how.
 
-- [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Corollary 2.6, which has the first power of the gap over its totient; this node proves a weaker form (the correction times the first power, at most the cube)
+- [K. Ford, Sieve Methods Lecture Notes, Spring 2023](https://mail.ford126.web.illinois.edu/sieve2023.pdf) — Corollary 2.6, the first power of the gap over its totient (gap_pair_bound_ford_totient); the earlier claims prove weaker forms with fixed constants
 
 ## Related nodes
 
 Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
 
 - [`GapConstant`](GapConstant.md) — uses its correction for the odd wheels dividing the gap (the definition only; no claim of GapConstant is taken as a hypothesis)
-- [`PatternUpperBound`](PatternUpperBound.md) — planned; keeping the wheels that divide the gap in the sieve would give Ford's first-power form
 - [`GapTracks`](GapTracks.md) — which gaps each column allows
 - [`GapConjectures`](GapConjectures.md) — the gap conjectures these upper bounds sit under
 
@@ -128,6 +127,60 @@ def goldbach_pair_bound_totient : Prop :=
 **Rests on:** [`SelbergTwinRails.selberg_goldbach_bound`](SelbergTwinRails.md#selberg_goldbach_bound), [`GapPairs.pair_factor_le_correction`](GapPairs.md#pair_factor_le_correction), [`GapPairs.correction_le_totient_ratio_sq`](GapPairs.md#correction_le_totient_ratio_sq)
 
 **Proof:** `RNS.GapPairs.goldbach_pair_bound_totient_step` in [`RNSSolutions/GapPairs.lean`](../../RNSSolutions/GapPairs.lean)
+
+<a id="gap_pair_bound_ford"></a>
+### `gap_pair_bound_ford`
+
+There are a constant and a start such that for every gap h > 0 and N from the start, the prime pairs up to N at gap h number at most the constant times the gap's own correction times N / log^2 N.
+
+```lean
+/-- **Prime pairs at any gap, by the gap's own correction alone.** There are a
+constant and a start such that for every gap `h > 0` and `N` from the start,
+the prime pairs up to `N` at gap `h` number at most the constant times the
+gap's correction times N / log² N. -/
+def gap_pair_bound_ford : Prop :=
+  ∃ C N₀ : ℝ, ∀ h N : ℕ, 0 < h → N₀ ≤ (N : ℝ) →
+    (gap_pair_count h N : ℝ) ≤ C * odd_divisor_correction h * N / Real.log N ^ 2
+```
+
+**Rests on:** [`PatternUpperBound.pattern_count_le`](PatternUpperBound.md#pattern_count_le), [`BadWheels.blocked_le_card`](BadWheels.md#blocked_le_card), [`BadWheels.blocked_eq_card_iff`](BadWheels.md#blocked_eq_card_iff)
+
+**Proof:** `RNS.GapPairs.gap_pair_bound_ford_step` in [`RNSSolutions/GapPairs.lean`](../../RNSSolutions/GapPairs.lean)
+
+<a id="correction_le_two_totient_ratio"></a>
+### `correction_le_two_totient_ratio`
+
+For a positive number, the correction of GapConstant is at most twice the number over its totient.
+
+```lean
+/-- **The correction against the totient, first power.** For `h > 0`, the
+correction of `GapConstant` is at most twice `h` over its totient. -/
+def correction_le_two_totient_ratio : Prop :=
+  ∀ h : ℕ, 0 < h → odd_divisor_correction h ≤ 2 * totient_ratio h
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.GapPairs.correction_le_two_totient_ratio_holds` in [`RNSSolutions/GapPairs.lean`](../../RNSSolutions/GapPairs.lean)
+
+<a id="gap_pair_bound_ford_totient"></a>
+### `gap_pair_bound_ford_totient`
+
+Ford's form: there are a constant and a start such that for every gap h > 0 and N from the start, the prime pairs up to N at gap h number at most the constant times the gap over its totient times N / log^2 N.
+
+```lean
+/-- **Prime pairs at any gap, Ford's form** (Ford, Corollary 2.6). There are a
+constant and a start such that for every gap `h > 0` and `N` from the start,
+the prime pairs up to `N` at gap `h` number at most the constant times the gap
+over its totient times N / log² N. -/
+def gap_pair_bound_ford_totient : Prop :=
+  ∃ C N₀ : ℝ, ∀ h N : ℕ, 0 < h → N₀ ≤ (N : ℝ) →
+    (gap_pair_count h N : ℝ) ≤ C * totient_ratio h * N / Real.log N ^ 2
+```
+
+**Rests on:** [`GapPairs.gap_pair_bound_ford`](GapPairs.md#gap_pair_bound_ford), [`GapPairs.correction_le_two_totient_ratio`](GapPairs.md#correction_le_two_totient_ratio)
+
+**Proof:** `RNS.GapPairs.gap_pair_bound_ford_totient_step` in [`RNSSolutions/GapPairs.lean`](../../RNSSolutions/GapPairs.lean)
 
 ## Used by
 

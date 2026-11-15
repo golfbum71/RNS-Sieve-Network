@@ -127,7 +127,6 @@ def pattern_share_asymptotic : Prop :=
 - [`BirdseySchay`](BirdseySchay.md)
 - [`PolyaCutoff`](PolyaCutoff.md)
 - [`BrunSharp`](BrunSharp.md)
-- [`PatternUpperBound`](PatternUpperBound.md)
 - [`SelbergTwinRails`](SelbergTwinRails.md)
 
 ## Files

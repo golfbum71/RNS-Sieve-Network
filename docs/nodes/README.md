@@ -74,10 +74,10 @@
 | 72 | [`PolyaCutoff`](PolyaCutoff.md) | sifting to Polya's cutoff gives the Hardy-Littlewood constant exactly | proved in Lean |
 | 73 | [`BadWheels`](BadWheels.md) | which wheels block fewer positions for linear forms | proved in Lean |
 | 74 | [`BrunHooley`](BrunHooley.md) | Hooley's product of truncated sieves | proved in Lean |
-| 75 | [`PatternUpperBound`](PatternUpperBound.md) | every admissible pattern is at most its conjectured order | planned: new, not yet proved |
+| 75 | [`PatternUpperBound`](PatternUpperBound.md) | every pattern of linear forms is at most its conjectured order | proved in Lean |
 | 76 | [`GapPairs`](GapPairs.md) | prime pairs at any gap, and Goldbach pairs, by the gap's own constant | proved in Lean |
 | 77 | [`PatternReciprocals`](PatternReciprocals.md) | reciprocal sums converge for every pattern of two or more | proved in Lean |
-| 78 | [`GermainReciprocals`](GermainReciprocals.md) | the Sophie Germain primes' reciprocals add up to a finite total | planned: new, not yet proved |
+| 78 | [`GermainReciprocals`](GermainReciprocals.md) | the Sophie Germain primes' reciprocals add up to a finite total | proved in Lean |
 | 79 | [`BrunSharp`](BrunSharp.md) | Brun's twin bound with log log squared | planned: new, not yet proved |
 | 80 | [`RomanoffTheorem`](RomanoffTheorem.md) | a positive share of numbers are a prime plus a power of 2 | planned: new, not yet proved |
 | 81 | [`BrunTitchmarshPNT`](BrunTitchmarshPNT.md) | primes in a short window (PNT+) | proved in Lean |

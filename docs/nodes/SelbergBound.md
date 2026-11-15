@@ -68,6 +68,7 @@ def selberg_bound : Prop :=
 
 ## Used by
 
+- [`PatternUpperBound`](PatternUpperBound.md)
 - [`SelbergTwinRails`](SelbergTwinRails.md)
 
 ## Files

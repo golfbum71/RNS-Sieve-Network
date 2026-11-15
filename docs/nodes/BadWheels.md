@@ -96,6 +96,8 @@ def divisors_pairwise_coprime : Prop :=
 ## Used by
 
 - [`PatternUpperBound`](PatternUpperBound.md)
+- [`GapPairs`](GapPairs.md)
+- [`GermainReciprocals`](GermainReciprocals.md)
 
 ## Files
 

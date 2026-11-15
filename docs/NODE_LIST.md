@@ -1143,18 +1143,18 @@ Split the wheels into ranges and stop inclusion-exclusion separately in each ran
 - Rests on: `BrunPureSieve` (`bonferroni_even_fn`), `BrunTruncation` (`truncation_error`, `esymm_power_bound`)
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-09). Ford's concrete Theorem 2.4 still planned.
 
-### 75. `PatternUpperBound` — every admissible pattern is at most its conjectured order
-For an admissible pattern of linear forms, the positions up to N where every form is prime are at most a constant times the pattern's correction constant times N over the logarithm of N to the number of forms. This is the strongest unconditional statement known in the direction of the Hardy-Littlewood conjecture, and covers twins, triples, pairs at any gap and Sophie Germain pairs. Ford, Theorem 2.5.
-- Lean (planned): `pattern_count_le`
-- Rests on: `BrunHooley`, `BadWheels`, `ShareAsymptotics`
-- Scope: Tier 2.
-- Status: Planned
+### 75. `PatternUpperBound` — every pattern of linear forms is at most its conjectured order
+For a pattern of primitive linear forms, the positions up to N where every form is prime number at most a constant depending only on the number of forms, times the bad factor, times N over the logarithm of N to the number of forms. The bad factor is the product, over the wheels larger than the number of forms that divide the bad product, of (the wheel minus the positions it blocks) over (the wheel minus the number of forms): for a pair at gap h it is the gap's own correction, for the Sophie Germain pair it is 1. Covers twins, triples, pairs at any gap and Sophie Germain pairs. Ford, Theorem 2.5. As proved, differs from the plan: Selberg's sieve (SelbergBound) in place of the Brun-Hooley sieve, with every wheel above the number of forms kept in at its own share; the singular series is replaced by its bad-wheel factors; the constant is not given as a number; admissibility is not assumed. The lower bound for Selberg's sum (Ford's Theorem 4.4) is proved for any number of forms.
+- Lean: `pattern_multiples_count`, `pattern_sieve_bound`, `pattern_selberg_sum_lower`, `pattern_count_le` (with `pattern_value`, `blocked_count`, `pattern_rho`, `primitive_forms`, `pattern_wheels`, `pattern_wheel_product`, `pattern_sifted`, `pattern_selberg_sum`, `bad_factor`, `pattern_count`)
+- Rests on: `SelbergBound`, `BadWheels`
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-15).
 
 ### 76. `GapPairs` — prime pairs at any gap, and Goldbach pairs, by the gap's own constant
 Prime pairs up to N a fixed gap apart, and the ways of writing a number as a sum of two primes, number at most 40000 N over log N squared, times the gap's own correction from GapConstant, times the gap over Euler's phi of the gap; in terms of the totient alone, 40000 N over log N squared times the cube of the gap over its totient. After Ford, Corollary 2.6. As proved, differs from the plan: the node rests on SelbergTwinRails, not on PatternUpperBound, and Ford's corollary has the first power of the gap over its totient where this has the correction times the first power (at most the cube). The first-power form is still planned (PatternUpperBound).
 - Lean: `pair_factor_le_correction`, `correction_le_totient_ratio_sq`, `gap_pair_bound`, `goldbach_pair_bound`, `gap_pair_bound_totient`, `goldbach_pair_bound_totient` (with `totient_ratio`)
 - Rests on: `SelbergTwinRails`
-- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-14). Ford's first-power form still planned.
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-14).
+- Added 2026-11-15: `gap_pair_bound_ford` (the gap's correction alone, from `PatternUpperBound`), `correction_le_two_totient_ratio` (the correction is at most twice the gap over its totient), `gap_pair_bound_ford_totient` (Ford's Corollary 2.6, the first power of the gap over its totient). Clean (GitHub Actions build, 2026-11-15). Goldbach pairs keep the earlier form: their forms have a negative coefficient.
 
 ### 77. `PatternReciprocals` — reciprocal sums converge for every pattern of two or more
 For every pattern of two or more offsets, the reciprocals of the positions where the position plus every offset is prime add up to a finite total. Brun's theorem for twins is the case of the pattern 0, 2; triples such as 0, 2, 6 and pairs at any gap are covered too. First a general fact: if the positions with some property, up to any point past a start, number at most a constant times that point over the square of its logarithm, their reciprocals add up to a finite total. As proved, differs from the plan: the node rests on GapPairs, not on PatternUpperBound (the pair bound already has the square of the logarithm), and the pattern need not be admissible.
@@ -1163,11 +1163,10 @@ For every pattern of two or more offsets, the reciprocals of the positions where
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-15).
 
 ### 78. `GermainReciprocals` — the Sophie Germain primes' reciprocals add up to a finite total
-Primes p with 2p + 1 also prime number at most a constant times N over log N squared, so the sum of their reciprocals is finite. The linear-forms case of PatternUpperBound, applied to the pair a number and twice it plus one.
-- Lean (planned): `germain_count_le`, `germain_reciprocal_summable`
-- Rests on: `PatternUpperBound`, `LinearForms`
-- Scope: Tier 2.
-- Status: Planned
+Primes p with 2p + 1 also prime number at most a constant times N over log N squared from some start on, so the sum of their reciprocals is finite. The pattern of the forms n and 2n + 1: every odd wheel blocks two different positions (0, and half of the wheel minus one), so the bad factor of PatternUpperBound is 1; the sum then follows from the general fact of PatternReciprocals. As proved, differs from the plan: no arrow from LinearForms (the pattern is written directly in BadWheels' encoding).
+- Lean: `germain_count_le`, `germain_reciprocal_summable` (with `germain`)
+- Rests on: `PatternUpperBound`, `BadWheels`, `PatternReciprocals`
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-15).
 
 ### 79. `BrunSharp` — Brun's twin bound with log log squared
 Twin prime pairs up to N number at most a constant times N times (log log N over log N) squared, by stopping inclusion-exclusion after about four times the logarithm of one over the twin share, with the wheels up to N to the one over 16 log log N. Ford Section 1.11.1, Brun's 1919 bound.

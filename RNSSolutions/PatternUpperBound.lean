@@ -32,6 +32,8 @@ import Mathlib.Tactic.Push
 /-!
 # Proofs for PatternUpperBound
 
+Built clean on GitHub (standard axioms only, 2026-11-15).
+
 Imports claims only. `pattern_multiples_count` is proved outright (Mathlib only).
 `pattern_sieve_bound` is a step from `SelbergBound.selberg_bound`,
 `pattern_multiples_count` and `BadWheels.blocked_le_card`;

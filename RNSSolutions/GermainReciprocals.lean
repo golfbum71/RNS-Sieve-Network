@@ -11,6 +11,8 @@ import Mathlib.Tactic.NormNum
 /-!
 # Proofs for GermainReciprocals
 
+Built clean on GitHub (standard axioms only, 2026-11-15).
+
 Imports claims only. `germain_count_le` is a step from
 `PatternUpperBound.pattern_count_le` and `BadWheels.blocked_le_card` /
 `blocked_eq_card_iff`; `germain_reciprocal_summable` a step from it and

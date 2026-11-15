@@ -184,7 +184,6 @@ def choice_product_le : Prop :=
 - [`BrunHooley`](BrunHooley.md)
 - [`FundamentalLemma`](FundamentalLemma.md)
 - [`LowerBoundSieve`](LowerBoundSieve.md)
-- [`PatternUpperBound`](PatternUpperBound.md)
 
 ## Files
 

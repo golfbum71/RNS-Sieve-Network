@@ -82,6 +82,7 @@ def pattern_reciprocal_summable : Prop :=
 ## Used by
 
 - [`PatternReciprocals`](PatternReciprocals.md)
+- [`GermainReciprocals`](GermainReciprocals.md)
 
 ## Files
 
