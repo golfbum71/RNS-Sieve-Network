@@ -132,6 +132,7 @@ def goldbach_pair_bound_totient : Prop :=
 ## Used by
 
 - [`GapPairs`](GapPairs.md)
+- [`PatternReciprocals`](PatternReciprocals.md)
 - [`RomanoffTheorem`](RomanoffTheorem.md)
 
 ## Files

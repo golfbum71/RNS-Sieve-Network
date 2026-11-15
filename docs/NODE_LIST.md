@@ -1157,11 +1157,10 @@ Prime pairs up to N a fixed gap apart, and the ways of writing a number as a sum
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-14). Ford's first-power form still planned.
 
 ### 77. `PatternReciprocals` — reciprocal sums converge for every pattern of two or more
-For every admissible pattern with at least two members, the sum of one over the first member, over all positions where every member is prime, is finite. Brun's theorem for twins is the case of the pattern 0, 2; triples such as 0, 2, 6 and pairs at any gap follow the same way.
-- Lean (planned): `pattern_reciprocal_summable`
-- Rests on: `PatternUpperBound`
-- Scope: Tier 2: the BrunTheorem argument with the general bound.
-- Status: Planned
+For every pattern of two or more offsets, the reciprocals of the positions where the position plus every offset is prime add up to a finite total. Brun's theorem for twins is the case of the pattern 0, 2; triples such as 0, 2, 6 and pairs at any gap are covered too. First a general fact: if the positions with some property, up to any point past a start, number at most a constant times that point over the square of its logarithm, their reciprocals add up to a finite total. As proved, differs from the plan: the node rests on GapPairs, not on PatternUpperBound (the pair bound already has the square of the logarithm), and the pattern need not be admissible.
+- Lean: `summable_of_count_bound`, `pattern_count_bound`, `pattern_reciprocal_summable` (with `position_count`, `reciprocal_of`, `fits`)
+- Rests on: `GapPairs`
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-15).
 
 ### 78. `GermainReciprocals` — the Sophie Germain primes' reciprocals add up to a finite total
 Primes p with 2p + 1 also prime number at most a constant times N over log N squared, so the sum of their reciprocals is finite. The linear-forms case of PatternUpperBound, applied to the pair a number and twice it plus one.

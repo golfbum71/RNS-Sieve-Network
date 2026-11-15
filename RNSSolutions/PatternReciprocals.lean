@@ -19,6 +19,8 @@ import Mathlib.Tactic.NormNum
 /-!
 # Proofs for PatternReciprocals
 
+Built clean on GitHub (standard axioms only, 2026-11-15).
+
 Imports claims only. `summable_of_count_bound` is proved outright (Mathlib only),
 by the stretch argument of `BrunTheorem`: the sum up to `2ᴷ` is the sum of the
 stretches from `2ᵏ` to `2ᵏ⁺¹`; a stretch adds at most one over `2ᵏ` per position
