@@ -86,3 +86,4 @@ import RNSNetwork.Nodes.BrocardPrediction.Conclusions
 import RNSNetwork.Nodes.Schnirelmann.Conclusions
 import RNSNetwork.Nodes.PatternReciprocals.Conclusions
 import RNSNetwork.Nodes.PatternUpperBound.Conclusions
+import RNSNetwork.Nodes.GermainReciprocals.Conclusions

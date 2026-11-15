@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-08, from Ford's Spring 2023 sieve notes, Ch. 1-4): scoped, no Lean yet. See docs/NODE_LIST.md.
+# Scoped 2026-11-08 from Ford's Spring 2023 sieve notes, Ch. 1-4; built 2026-11-15 on PatternUpperBound. See docs/NODE_LIST.md.
 
 node:
   id: GermainReciprocals.v1
@@ -7,22 +7,40 @@ node:
   version: v1
   order: 78
   kind: paper
-  status: planned
+  status: active
   title: the Sophie Germain primes' reciprocals add up to a finite total
-  description: Primes p with 2p + 1 also prime number at most a constant times N over log N squared, so
-    the sum of their reciprocals is finite. The linear-forms case of PatternUpperBound, applied to the
-    pair a number and twice it plus one.
-conclusions: []
-planned:
-  source_status: New
-  rests_on:
-  - PatternUpperBound
-  - LinearForms
-  claims:
-  - germain_count_le
-  - germain_reciprocal_summable
-  tier: Tier 2.
-  plan: The forms n and 2n + 1 are admissible (LinearForms); their only bad wheel is 2; then partial summation.
+  description: "Primes p with 2p + 1 also prime number at most a constant times N over log N squared from some start on, so the sum of their reciprocals is finite. The Sophie Germain pair is the pattern of the two linear forms n and 2n + 1; on every wheel from 3 up they block two different positions (0, and half of the wheel minus one), so no odd wheel is bad and the bad factor of PatternUpperBound is 1. The reciprocal sum then follows from the general fact of PatternReciprocals. As proved, differs from the plan: no arrow from LinearForms is drawn (the pattern is written directly in the encoding of BadWheels, which LinearForms shares)."
+  improves: "SophieGermainWheel says where Sophie Germain primes can sit on the wheel; this node bounds how many there are and shows their reciprocals add up to a finite total."
+conclusions:
+- id: germain_count_le
+  declaration: RNS.GermainReciprocals.germain_count_le
+  summary: "From some start on, the Sophie Germain primes up to N number at most a constant times N / log^2 N."
+  imports:
+  - PatternUpperBound.v1.pattern_count_le
+  - BadWheels.v1.blocked_le_card
+  - BadWheels.v1.blocked_eq_card_iff
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainReciprocals.lean
+    declaration: RNS.GermainReciprocals.germain_count_le_step
+    note: "Lean step, not yet built."
+  designated: lean-proof
+- id: germain_reciprocal_summable
+  declaration: RNS.GermainReciprocals.germain_reciprocal_summable
+  summary: "The reciprocals of the Sophie Germain primes add up to a finite total."
+  imports:
+  - PatternReciprocals.v1.summable_of_count_bound
+  - GermainReciprocals.v1.germain_count_le
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/GermainReciprocals.lean
+    declaration: RNS.GermainReciprocals.germain_reciprocal_summable_step
+    note: "Lean step, not yet built."
+  designated: lean-proof
 sources:
 - title: K. Ford, Sieve Methods Lecture Notes, Spring 2023
   url: https://mail.ford126.web.illinois.edu/sieve2023.pdf
@@ -30,3 +48,7 @@ sources:
 related:
 - node: SophieGermainWheel
   note: where Sophie Germain primes can sit on the wheel
+- node: SophieGermainTheorem
+  note: Sophie Germain primes in the conditional Hardy-Littlewood setting
+- node: LinearForms
+  note: the same encoding of a form as a pair of numbers

@@ -63,6 +63,7 @@ import RNSSolutions.Schnirelmann
 import RNSSolutions.PatternReciprocals
 import RNSSolutions.PatternUpperBound
 import RNSSolutions.BadWheels
+import RNSSolutions.GermainReciprocals
 
 /-!
 # Assembling the network
@@ -648,3 +649,31 @@ theorem RNS.PatternUpperBound.pattern_count_le_holds :
 #print axioms RNS.PatternUpperBound.pattern_sieve_bound_holds
 #print axioms RNS.PatternUpperBound.pattern_selberg_sum_lower_holds
 #print axioms RNS.PatternUpperBound.pattern_count_le_holds
+
+/-- `PatternUpperBound`, `BadWheels` → `GermainReciprocals`: the Sophie Germain count. -/
+theorem RNS.GermainReciprocals.germain_count_le_holds :
+    RNS.GermainReciprocals.germain_count_le :=
+  RNS.GermainReciprocals.germain_count_le_step RNS.PatternUpperBound.pattern_count_le_holds
+    RNS.BadWheels.blocked_le_card_holds RNS.BadWheels.blocked_eq_card_iff_holds
+
+/-- `PatternReciprocals` → `GermainReciprocals`: the Sophie Germain reciprocals add up. -/
+theorem RNS.GermainReciprocals.germain_reciprocal_summable_holds :
+    RNS.GermainReciprocals.germain_reciprocal_summable :=
+  RNS.GermainReciprocals.germain_reciprocal_summable_step
+    RNS.PatternReciprocals.summable_of_count_bound_holds
+    RNS.GermainReciprocals.germain_count_le_holds
+
+/-- `PatternUpperBound`, `BadWheels` → `GapPairs`: pairs at any gap by the gap's own correction. -/
+theorem RNS.GapPairs.gap_pair_bound_ford_holds : RNS.GapPairs.gap_pair_bound_ford :=
+  RNS.GapPairs.gap_pair_bound_ford_step RNS.PatternUpperBound.pattern_count_le_holds
+    RNS.BadWheels.blocked_le_card_holds RNS.BadWheels.blocked_eq_card_iff_holds
+
+/-- `GapPairs`: pairs at any gap by the gap over its totient, Ford's form. -/
+theorem RNS.GapPairs.gap_pair_bound_ford_totient_holds : RNS.GapPairs.gap_pair_bound_ford_totient :=
+  RNS.GapPairs.gap_pair_bound_ford_totient_step RNS.GapPairs.gap_pair_bound_ford_holds
+    RNS.GapPairs.correction_le_two_totient_ratio_holds
+
+#print axioms RNS.GermainReciprocals.germain_count_le_holds
+#print axioms RNS.GermainReciprocals.germain_reciprocal_summable_holds
+#print axioms RNS.GapPairs.gap_pair_bound_ford_holds
+#print axioms RNS.GapPairs.gap_pair_bound_ford_totient_holds
