@@ -213,10 +213,11 @@ theorem fits_count_le (H : Finset ℕ) {u v : ℕ} (hu : u ∈ H) (hv : v ∈ H)
   · intro n hn
     have hn' := Finset.mem_filter.mp hn
     rw [Finset.mem_coe, Finset.mem_filter, Finset.mem_Ioc]
-    have hI := Finset.mem_Ioc.mp hn'.1
-    have hpu := hn'.2 u hu
-    have hpv := hn'.2 v hv
+    obtain ⟨hI1, hI2⟩ := Finset.mem_Ioc.mp hn'.1
+    have hpu : (n + u).Prime := hn'.2 u hu
+    have hpv : (n + v).Prime := hn'.2 v hv
     have he : n + u + (v - u) = n + v := by omega
+    show (0 < n + u ∧ n + u ≤ N + u) ∧ (n + u).Prime ∧ (n + u + (v - u)).Prime
     refine ⟨⟨by omega, by omega⟩, hpu, ?_⟩
     rw [he]
     exact hpv
