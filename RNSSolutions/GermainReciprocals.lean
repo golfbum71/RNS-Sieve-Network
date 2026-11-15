@@ -93,9 +93,8 @@ theorem germain_count_eq (N : ℕ) :
     RNS.PatternReciprocals.position_count germain N = pattern_count germain_forms N := by
   unfold RNS.PatternReciprocals.position_count pattern_count
   apply congrArg Finset.card
-  apply Finset.filter_congr
-  intro n _
-  simp [germain, germain_forms]
+  ext n
+  simp [Finset.mem_filter, germain, germain_forms]
 
 theorem germain_count_le_step (h_count : pattern_count_le) (h_le : blocked_le_card)
     (h_eq : blocked_eq_card_iff) : germain_count_le := by
