@@ -203,7 +203,8 @@ GROUPS = [
         "GermainReciprocals"]),
     ("shares", "Survivor shares and analytic inputs", [
         "ShareBounds", "ShareAsymptotics", "MertensThird", "MertensSecond", "PrimeNumberTheorem",
-        "CeilingOvershoot", "SmoothNumbers", "SmallWheelSurvivors"]),
+        "CeilingOvershoot", "SmoothNumbers", "SmallWheelSurvivors", "EulerFactorZeros",
+        "OrbitalTrace"]),
     ("sieves", "Sieve methods: Brun, Hooley, Selberg", [
         "BrunPureSieve", "BrunTwinCount", "BrunTruncation", "BrunTwinBound", "BrunAnalytic",
         "BrunTheorem", "BrunTwinSum", "BrunSharp", "BrunHooley", "PatternUpperBound",

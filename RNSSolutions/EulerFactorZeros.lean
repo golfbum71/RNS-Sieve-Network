@@ -31,6 +31,9 @@ A common zero. A common zero is a whole multiple of `2πi / log p` and of
 `2πi / log q`; clearing the denominators gives two whole multiples of `log p`
 and `log q` that agree, so both are zero, and the zero is `s = 0`
 (`euler_factor_common_zero_step`, from the two claims above).
+
+Built clean by `lake build RNSSolutions` on 2026-11-21; `#print axioms` shows only
+the standard three.
 -/
 
 namespace RNS.EulerFactorZeros

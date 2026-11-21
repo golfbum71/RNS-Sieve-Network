@@ -104,5 +104,7 @@
 | 102 | [`PigeonholeWheel`](PigeonholeWheel.md) | one pigeon per wheel | proved in Lean |
 | 103 | [`BrocardWindow`](BrocardWindow.md) | where every wheel's marks fall between two prime squares | proved in Lean |
 | 104 | [`BrocardPrediction`](BrocardPrediction.md) | the cycling-only count of primes between two prime squares | proved in Lean |
+| 105 | [`EulerFactorZeros`](EulerFactorZeros.md) | one wheel's Euler factor, and why two wheels never share a zero | proved in Lean |
+| 106 | [`OrbitalTrace`](OrbitalTrace.md) | the trace on one wheel's loop, and why it vanishes below the wheel | proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

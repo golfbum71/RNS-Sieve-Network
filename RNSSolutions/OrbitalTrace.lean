@@ -27,6 +27,9 @@ transform at a whole number `m` is the Fourier transform of `ψ` at
 The vanishing: every whole power of `γ` is at most 1 (power zero or below) or
 at least `γ` (power one or above), so `φ` is zero at all of them
 (`orbital_trace_vanishes_step`).
+
+Built clean by `lake build RNSSolutions` on 2026-11-21; `#print axioms` shows only
+the standard three.
 -/
 
 open scoped FourierTransform SchwartzMap

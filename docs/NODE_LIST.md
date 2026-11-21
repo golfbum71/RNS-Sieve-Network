@@ -1346,6 +1346,18 @@ The window is the numbers strictly between a base prime's square and the next pr
 - Rests on: Mathlib only
 - Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-14). The size of the prediction still planned.
 
+### 105. `EulerFactorZeros` — one wheel's Euler factor, and why two wheels never share a zero
+Each prime wheel's Euler factor, one minus the prime to the power minus s, vanishes exactly at the whole multiples of 2πi over the logarithm of the prime: the wheel's period on the logarithmic scale. No whole multiple of the logarithm of one prime equals a whole multiple of the logarithm of another, except zero (unique factorization, the analytic face of the Chinese Remainder Theorem), so two different wheels' Euler factors share only the zero at s = 0. The case of the rationals of Theorem 1.7.1.1 (1) and (3) in A. M. Masullo, *The Music of the Primes* (preprint, 2026).
+- Lean: `euler_factor_zeros_holds`, `log_periods_independent_holds`, `euler_factor_common_zero_holds` (`RNSSolutions/EulerFactorZeros.lean`)
+- Rests on: Mathlib only (related: `CRT`, `OrbitalTrace`)
+- Status: Clean (GitHub Actions build, 2026-11-21)
+
+### 106. `OrbitalTrace` — the trace on one wheel's loop, and why it vanishes below the wheel
+Scaling by a number above 1 (for a prime wheel, the prime) turns the positive numbers into a loop. The trace of a test function on the loop, the sum of its Mellin transform at the evenly spaced points 2πi m over the loop's length, equals the loop's length times the sum of the test function at every power of the scaling number (Poisson summation, rescaled from Mathlib's loop of length 1). So a test function vanishing outside the open interval from 1 to the scaling number has trace zero. Stated in the logarithmic coordinate, where the Mellin transform is a Fourier transform, for test functions whose logarithmic form is a Schwartz function. The toy example of §1.2.8 in Masullo's preprint, his model for why all but finitely many orbital traces vanish.
+- Lean: `orbital_trace_poisson_holds`, `orbital_trace_vanishes_holds` (`RNSSolutions/OrbitalTrace.lean`)
+- Rests on: Mathlib only (related: `EulerFactorZeros`)
+- Status: Clean (GitHub Actions build, 2026-11-21)
+
 ### Added to nodes 71-89
 - `BadWheels` gains `divisors_pairwise_coprime` (Ford Lemma 7.7).
 - `BuchstabIdentity` gains `buchstab_product_identity` (Tao, Notes 4, Exercise 13).

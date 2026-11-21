@@ -19,10 +19,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/OrbitalTrace.lean
     declaration: RNS.OrbitalTrace.orbital_trace_poisson_holds
-    note: "Mathlib's Poisson summation for Schwartz functions (SchwartzMap.tsum_eq_tsum_fourier) applied to the test function stretched by the loop's length, with the change of variables in the Fourier integral (Measure.integral_comp_mul_left)."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-21). Recorded as noncompliant only because no Comparator receipt exists yet. Mathlib's Poisson summation for Schwartz functions (SchwartzMap.tsum_eq_tsum_fourier) applied to the test function stretched by the loop's length, with the change of variables in the Fourier integral (Measure.integral_comp_mul_left)."
   - id: paper
     kind: literature
     source: "A. M. Masullo, The Music of the Primes (preprint, 2026)"
@@ -36,11 +36,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/OrbitalTrace.lean
     declaration: RNS.OrbitalTrace.orbital_trace_vanishes_step
     assembled: RNSSolutions/OrbitalTrace.lean (RNS.OrbitalTrace.orbital_trace_vanishes_holds)
-    note: "From the node's own claim orbital_trace_poisson: every whole power of the scaling number is at most 1 or at least the scaling number itself."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-21). Recorded as noncompliant only because no Comparator receipt exists yet. From the node's own claim orbital_trace_poisson: every whole power of the scaling number is at most 1 or at least the scaling number itself."
   designated: lean-proof
 related:
 - node: EulerFactorZeros

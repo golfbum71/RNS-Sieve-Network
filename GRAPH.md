@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 88 of 100 nodes are built, holding 283 claims: 278 proved in Lean and 5 cited from a published paper. They are joined by 172 arrows, each a Lean-checked step. Of the other 12 nodes, drawn dashed or purple, 9 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 90 of 102 nodes are built, holding 288 claims: 283 proved in Lean and 5 cited from a published paper. They are joined by 172 arrows, each a Lean-checked step. Of the other 12 nodes, drawn dashed or purple, 9 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -49,7 +49,7 @@ graph LR
   g3["<b>How survivors spread across the cycle</b><br/>12 built, 1 planned or outside"]
   g4["<b>Gaps between survivors and between primes</b><br/>13 built, 5 planned or outside"]
   g5["<b>Sophie Germain primes</b><br/>5 built, 0 planned or outside"]
-  g6["<b>Survivor shares and analytic inputs</b><br/>8 built, 0 planned or outside"]
+  g6["<b>Survivor shares and analytic inputs</b><br/>10 built, 0 planned or outside"]
   g7["<b>Sieve methods: Brun, Hooley, Selberg</b><br/>18 built, 6 planned or outside"]
   g1 ==> g2
   g1 ==> g4
@@ -1084,7 +1084,7 @@ graph LR
 
 ### Survivor shares and analytic inputs
 
-Nodes: [`ShareBounds`](docs/nodes/ShareBounds.md), [`CeilingOvershoot`](docs/nodes/CeilingOvershoot.md), [`MertensThird`](docs/nodes/MertensThird.md), [`PrimeNumberTheorem`](docs/nodes/PrimeNumberTheorem.md), [`ShareAsymptotics`](docs/nodes/ShareAsymptotics.md), [`MertensSecond`](docs/nodes/MertensSecond.md), [`SmoothNumbers`](docs/nodes/SmoothNumbers.md), [`SmallWheelSurvivors`](docs/nodes/SmallWheelSurvivors.md).
+Nodes: [`ShareBounds`](docs/nodes/ShareBounds.md), [`CeilingOvershoot`](docs/nodes/CeilingOvershoot.md), [`MertensThird`](docs/nodes/MertensThird.md), [`PrimeNumberTheorem`](docs/nodes/PrimeNumberTheorem.md), [`ShareAsymptotics`](docs/nodes/ShareAsymptotics.md), [`MertensSecond`](docs/nodes/MertensSecond.md), [`SmoothNumbers`](docs/nodes/SmoothNumbers.md), [`SmallWheelSurvivors`](docs/nodes/SmallWheelSurvivors.md), [`EulerFactorZeros`](docs/nodes/EulerFactorZeros.md), [`OrbitalTrace`](docs/nodes/OrbitalTrace.md).
 
 ```mermaid
 graph LR
@@ -1124,83 +1124,92 @@ graph LR
     c19["legendre_error"]
     c20["small_wheel_survivors"]
   end
-  subgraph s9["5. SurvivorCount (in Foundations)"]
-    c21["general_survivor_count"]
-    c22["twin_survivor_count"]
+  subgraph s9["<b>105. EulerFactorZeros — one wheel's Euler factor, and why two wheels never share a zero</b>"]
+    c21["euler_factor_zeros"]
+    c22["log_periods_independent"]
+    c23["euler_factor_common_zero"]
   end
-  subgraph s10["6. SingularSeries (in Patterns, admissibility and the Hardy-Littlewood constants)"]
-    c23["local_density_factorization"]
-    c24["factor_multipliable"]
+  subgraph s10["<b>106. OrbitalTrace — the trace on one wheel's loop, and why it vanishes below the wheel</b>"]
+    c24["orbital_trace_poisson"]
+    c25["orbital_trace_vanishes"]
   end
-  subgraph s11["27. TwinShare (in Patterns, admissibility and the Hardy-Littlewood constants)"]
-    c25["twin_share_eq_prod"]
-    c26["twin_share_split"]
+  subgraph s11["5. SurvivorCount (in Foundations)"]
+    c26["general_survivor_count"]
+    c27["twin_survivor_count"]
   end
-  subgraph s12["32. BirdseySchay (in Patterns, admissibility and the Hardy-Littlewood constants)"]
-    c27["corrected_share_limit"]
-    c28["next_prime_ratio"]
-    c29["twin_count_at_squares"]
+  subgraph s12["6. SingularSeries (in Patterns, admissibility and the Hardy-Littlewood constants)"]
+    c28["local_density_factorization"]
+    c29["factor_multipliable"]
   end
-  subgraph s13["62. BrunPureSieve (in Sieve methods)"]
-    c30["legendre_exact"]
+  subgraph s13["27. TwinShare (in Patterns, admissibility and the Hardy-Littlewood constants)"]
+    c30["twin_share_eq_prod"]
+    c31["twin_share_split"]
   end
-  subgraph s14["69. BrunAnalytic (in Sieve methods)"]
-    c31["twin_product_bound"]
-    c32["twin_prime_count_bound"]
+  subgraph s14["32. BirdseySchay (in Patterns, admissibility and the Hardy-Littlewood constants)"]
+    c32["corrected_share_limit"]
+    c33["next_prime_ratio"]
+    c34["twin_count_at_squares"]
   end
-  subgraph s15["72. PolyaCutoff (in Patterns, admissibility and the Hardy-Littlewood constants)"]
-    c33["polya_cutoff_share"]
+  subgraph s15["62. BrunPureSieve (in Sieve methods)"]
+    c35["legendre_exact"]
   end
-  subgraph s16["74. BrunHooley (in Sieve methods)"]
+  subgraph s16["69. BrunAnalytic (in Sieve methods)"]
+    c36["twin_product_bound"]
+    c37["twin_prime_count_bound"]
+  end
+  subgraph s17["72. PolyaCutoff (in Patterns, admissibility and the Hardy-Littlewood constants)"]
+    c38["polya_cutoff_share"]
+  end
+  subgraph s18["74. BrunHooley (in Sieve methods)"]
     p1["<i>proved in Lean</i>"]
   end
-  subgraph s17["87. SelbergTwinRails (in Sieve methods)"]
+  subgraph s19["87. SelbergTwinRails (in Sieve methods)"]
     p2["<i>proved in Lean</i>"]
   end
-  subgraph s18["79. BrunSharp (in Sieve methods)"]
+  subgraph s20["79. BrunSharp (in Sieve methods)"]
     p3["<i>planned: new, not yet proved</i>"]
   end
-  subgraph s19["88. ParityBarrier (in Sieve methods)"]
+  subgraph s21["88. ParityBarrier (in Sieve methods)"]
     p4["<i>planned: new, not yet proved</i>"]
   end
-  subgraph s20["92. ErdosSmallGaps (in Gaps between survivors and between primes)"]
+  subgraph s22["92. ErdosSmallGaps (in Gaps between survivors and between primes)"]
     p5["<i>planned: new, not yet proved</i>"]
   end
-  c21 ==> c1
-  c22 ==> c2
-  c21 ==> c2
+  c26 ==> c1
+  c27 ==> c2
+  c26 ==> c2
   c3 ==> c5
   c4 ==> c5
   c6 ==> c7
   c5 ==> c8
   c7 ==> c8
-  c21 ==> c9
+  c26 ==> c9
   c5 ==> c9
-  c21 ==> c10
-  c25 ==> c10
   c26 ==> c10
+  c30 ==> c10
+  c31 ==> c10
   c5 ==> c10
-  c21 ==> c12
-  c25 ==> c12
   c26 ==> c12
+  c30 ==> c12
+  c31 ==> c12
   c5 ==> c12
-  c23 ==> c13
-  c24 ==> c13
+  c28 ==> c13
+  c29 ==> c13
   c5 ==> c13
-  c9 ==> c27
-  c12 ==> c27
-  c7 ==> c28
-  c7 ==> c29
+  c9 ==> c32
+  c12 ==> c32
+  c7 ==> c33
+  c7 ==> c34
   c14 ==> c15
-  c2 ==> c31
-  c15 ==> c32
-  c13 ==> c33
-  s6 -.-> s16
-  s5 -.-> s17
-  s5 -.-> s18
-  s3 -.-> s19
-  s3 -.-> s20
-  c30 ==> c19
+  c2 ==> c36
+  c15 ==> c37
+  c13 ==> c38
+  s6 -.-> s18
+  s5 -.-> s19
+  s5 -.-> s20
+  s3 -.-> s21
+  s3 -.-> s22
+  c35 ==> c19
   c19 ==> c20
   c5 ==> c20
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
@@ -1214,17 +1223,17 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c30,c31,c32,c33 verified;
-  class c29 conditional_built;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c35,c36,c37,c38 verified;
+  class c34 conditional_built;
   class p1,p2,p3,p4,p5 stub;
-  click c21 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#general_survivor_count" _blank
-  click c22 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
-  click c23 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#local_density_factorization" _blank
-  click c24 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#factor_multipliable" _blank
+  click c26 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#general_survivor_count" _blank
+  click c27 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SurvivorCount.md#twin_survivor_count" _blank
+  click c28 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#local_density_factorization" _blank
+  click c29 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SingularSeries.md#factor_multipliable" _blank
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md#survivor_share_le_inv_log" _blank
   click c2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareBounds.md#twin_share_le_two_inv_log_sq" _blank
-  click c25 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinShare.md#twin_share_eq_prod" _blank
-  click c26 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinShare.md#twin_share_split" _blank
+  click c30 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinShare.md#twin_share_eq_prod" _blank
+  click c31 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TwinShare.md#twin_share_split" _blank
   click c3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensThird.md#mertens_third_remainder" _blank
   click c4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensThird.md#product_identity" _blank
   click c5 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensThird.md#mertens_third" _blank
@@ -1236,15 +1245,15 @@ graph LR
   click c11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#odd_twin_product_eq_classical" _blank
   click c12 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#twin_share_asymptotic_classical" _blank
   click c13 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ShareAsymptotics.md#pattern_share_asymptotic" _blank
-  click c27 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirdseySchay.md#corrected_share_limit" _blank
-  click c28 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirdseySchay.md#next_prime_ratio" _blank
-  click c29 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirdseySchay.md#twin_count_at_squares" _blank
-  click c30 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#legendre_exact" _blank
+  click c32 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirdseySchay.md#corrected_share_limit" _blank
+  click c33 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirdseySchay.md#next_prime_ratio" _blank
+  click c34 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirdseySchay.md#twin_count_at_squares" _blank
+  click c35 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunPureSieve.md#legendre_exact" _blank
   click c14 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensSecond.md#mertens_second_remainder" _blank
   click c15 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/MertensSecond.md#prime_reciprocal_upper" _blank
-  click c31 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunAnalytic.md#twin_product_bound" _blank
-  click c32 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunAnalytic.md#twin_prime_count_bound" _blank
-  click c33 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PolyaCutoff.md#polya_cutoff_share" _blank
+  click c36 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunAnalytic.md#twin_product_bound" _blank
+  click c37 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunAnalytic.md#twin_prime_count_bound" _blank
+  click c38 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PolyaCutoff.md#polya_cutoff_share" _blank
   click p1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunHooley.md" _blank
   click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SelbergTwinRails.md" _blank
   click p3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrunSharp.md" _blank
@@ -1255,6 +1264,11 @@ graph LR
   click p5 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ErdosSmallGaps.md" _blank
   click c19 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmallWheelSurvivors.md#legendre_error" _blank
   click c20 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmallWheelSurvivors.md#small_wheel_survivors" _blank
+  click c21 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/EulerFactorZeros.md#euler_factor_zeros" _blank
+  click c22 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/EulerFactorZeros.md#log_periods_independent" _blank
+  click c23 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/EulerFactorZeros.md#euler_factor_common_zero" _blank
+  click c24 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/OrbitalTrace.md#orbital_trace_poisson" _blank
+  click c25 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/OrbitalTrace.md#orbital_trace_vanishes" _blank
 ```
 
 ### Sieve methods: Brun, Hooley, Selberg
@@ -1999,6 +2013,11 @@ The results nothing else builds on, each with everything beneath it.
 - [`BrocardPrediction.window_prime_count`](docs/nodes/BrocardPrediction.md#window_prime_count) — proved in Lean
 - [`BrocardPrediction.twin_prediction_closed_form`](docs/nodes/BrocardPrediction.md#twin_prediction_closed_form) — proved in Lean
   - [`BrocardPrediction.cycling_blocked_closed_form`](docs/nodes/BrocardPrediction.md#cycling_blocked_closed_form) — proved in Lean
+- [`EulerFactorZeros.euler_factor_zeros`](docs/nodes/EulerFactorZeros.md#euler_factor_zeros) — proved in Lean
+- [`EulerFactorZeros.log_periods_independent`](docs/nodes/EulerFactorZeros.md#log_periods_independent) — proved in Lean
+- [`EulerFactorZeros.euler_factor_common_zero`](docs/nodes/EulerFactorZeros.md#euler_factor_common_zero) — proved in Lean
+- [`OrbitalTrace.orbital_trace_poisson`](docs/nodes/OrbitalTrace.md#orbital_trace_poisson) — proved in Lean
+- [`OrbitalTrace.orbital_trace_vanishes`](docs/nodes/OrbitalTrace.md#orbital_trace_vanishes) — proved in Lean
 
 ## What the network takes on trust
 
@@ -2333,6 +2352,14 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
   - [H. A. Helfgott, The ternary Goldbach problem (arXiv 1501.05438)](https://arxiv.org/abs/1501.05438) — equation (2.21) records Ramaré's explicit bound on the sum of mu(n)/n, used for the size
   - [O. Ramaré and S. Zuniga-Alterman, From explicit estimates for the primes to explicit estimates for the Möbius function II (arXiv 2408.05969)](https://arxiv.org/abs/2408.05969) — a sharper bound on the same Möbius sum, which would narrow the size statement
   - [R. C. Baker, G. Harman, J. Pintz, The difference between consecutive primes, II](https://doi.org/10.1112/plms/83.3.532) — the published floor for primes in slightly longer windows; the open side of this node is the same kind of floor for a Brocard window
+- [`EulerFactorZeros`](docs/nodes/EulerFactorZeros.md)
+  - [Fundamental theorem of arithmetic (Wikipedia)](https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic) — unique factorization, which makes a power of one prime never a power of another
+  - [Euler product (Wikipedia)](https://en.wikipedia.org/wiki/Euler_product) — the Euler factors 1 - p^(-s) whose zeros this node describes
+  - A. M. Masullo, The Music of the Primes (preprint, 2026) — Theorem 1.7.1.1 (1) and (3) in the case of the rationals; this node proves that case
+- [`OrbitalTrace`](docs/nodes/OrbitalTrace.md)
+  - [Poisson summation formula (Wikipedia)](https://en.wikipedia.org/wiki/Poisson_summation_formula) — the classical formula this node applies on a loop of any length
+  - [Mathlib, Poisson's summation formula (SchwartzMap.tsum_eq_tsum_fourier)](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Analysis/Fourier/PoissonSummation.html) — the Lean result for the loop of length 1, which this node rescales
+  - A. M. Masullo, The Music of the Primes (preprint, 2026) — the toy example of §1.2.8; this node proves it
 
 ## Node index
 
@@ -2438,3 +2465,5 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 102 | [`PigeonholeWheel`](docs/nodes/PigeonholeWheel.md) | one pigeon per wheel | proved in Lean |
 | 103 | [`BrocardWindow`](docs/nodes/BrocardWindow.md) | where every wheel's marks fall between two prime squares | proved in Lean |
 | 104 | [`BrocardPrediction`](docs/nodes/BrocardPrediction.md) | the cycling-only count of primes between two prime squares | proved in Lean |
+| 105 | [`EulerFactorZeros`](docs/nodes/EulerFactorZeros.md) | one wheel's Euler factor, and why two wheels never share a zero | proved in Lean |
+| 106 | [`OrbitalTrace`](docs/nodes/OrbitalTrace.md) | the trace on one wheel's loop, and why it vanishes below the wheel | proved in Lean |
