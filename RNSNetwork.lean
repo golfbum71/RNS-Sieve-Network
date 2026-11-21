@@ -87,3 +87,5 @@ import RNSNetwork.Nodes.Schnirelmann.Conclusions
 import RNSNetwork.Nodes.PatternReciprocals.Conclusions
 import RNSNetwork.Nodes.PatternUpperBound.Conclusions
 import RNSNetwork.Nodes.GermainReciprocals.Conclusions
+import RNSNetwork.Nodes.EulerFactorZeros.Conclusions
+import RNSNetwork.Nodes.OrbitalTrace.Conclusions

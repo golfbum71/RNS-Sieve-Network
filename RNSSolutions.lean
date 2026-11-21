@@ -82,3 +82,5 @@ import RNSSolutions.Schnirelmann
 import RNSSolutions.PatternReciprocals
 import RNSSolutions.PatternUpperBound
 import RNSSolutions.GermainReciprocals
+import RNSSolutions.EulerFactorZeros
+import RNSSolutions.OrbitalTrace

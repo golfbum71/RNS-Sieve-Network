@@ -1,0 +1,70 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Added 2026-11-21 from Masullo's preprint "The Music of the Primes" (Theorem 1.7.1.1), read with an eye to the RNS. See docs/NODE_LIST.md.
+
+node:
+  id: EulerFactorZeros.v1
+  family: EulerFactorZeros
+  version: v1
+  order: 105
+  kind: paper
+  status: active
+  title: one wheel's Euler factor, and why two wheels never share a zero
+  description: "Each prime wheel has an Euler factor, one minus the prime to the power minus s. Its zeros are evenly spaced up the imaginary axis, one every 2π over the logarithm of the prime: the wheel's own period on the logarithmic scale. The periods of two different prime wheels never line up (no whole multiple of the logarithm of one prime equals a whole multiple of the logarithm of another, except zero), which is unique factorization, the same fact that makes the wheels independent in the Chinese Remainder Theorem. So the Euler factors of two different wheels share exactly one zero, at s = 0. This is the case of the rational numbers of Theorem 1.7.1.1 (1) and (3) in Masullo's preprint, where it is used to choose the topologies for his trace formula; it is a classical fact, not new here."
+  improves: "CRT says the wheels are independent as remainders; this node gives the same independence on the analytic side, as the zeros of the wheels' Euler factors."
+conclusions:
+- id: euler_factor_zeros
+  declaration: RNS.EulerFactorZeros.euler_factor_zeros
+  summary: "For a prime p, the Euler factor 1 - p^(-s) vanishes exactly at the whole multiples of 2πi / log p."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/EulerFactorZeros.lean
+    declaration: RNS.EulerFactorZeros.euler_factor_zeros_holds
+    note: "From Mathlib's Complex.exp_eq_one_iff: p^(-s) is the exponential of -s log p, which equals 1 exactly at the whole multiples of 2πi."
+  designated: lean-proof
+- id: log_periods_independent
+  declaration: RNS.EulerFactorZeros.log_periods_independent
+  summary: "For different primes p and q, a whole multiple of log p equals a whole multiple of log q only when both multiples are zero."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/EulerFactorZeros.lean
+    declaration: RNS.EulerFactorZeros.log_periods_independent_holds
+    note: "Taking sizes turns the equation into a power of p equal to a power of q; a nonzero power of p would make p divide q."
+  designated: lean-proof
+- id: euler_factor_common_zero
+  declaration: RNS.EulerFactorZeros.euler_factor_common_zero
+  summary: "For different primes p and q, the only common zero of 1 - p^(-s) and 1 - q^(-s) is s = 0."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/EulerFactorZeros.lean
+    declaration: RNS.EulerFactorZeros.euler_factor_common_zero_step
+    assembled: RNSSolutions/EulerFactorZeros.lean (RNS.EulerFactorZeros.euler_factor_common_zero_holds)
+    note: "From the node's own claims euler_factor_zeros and log_periods_independent: clearing denominators in the two descriptions of a common zero gives two whole multiples of log p and log q that agree."
+  - id: paper
+    kind: literature
+    source: "A. M. Masullo, The Music of the Primes (preprint, 2026)"
+    locator: "Theorem 1.7.1.1 (1) and (3), the case of the rational numbers"
+    note: "Stated there for local Euler factors of Hecke characters over any number field; this node is the trivial character over the rationals."
+  designated: lean-proof
+related:
+- node: CRT
+  note: "the same independence of the wheels, on the remainder side; here it appears as the incommensurable periods log p and log q"
+- node: OrbitalTrace
+  note: "the zeros of one wheel's Euler factor are the eigenvalue points of the trace on that wheel's loop"
+sources:
+- title: "Fundamental theorem of arithmetic (Wikipedia)"
+  url: "https://en.wikipedia.org/wiki/Fundamental_theorem_of_arithmetic"
+  relationship: "unique factorization, which makes a power of one prime never a power of another"
+- title: "Euler product (Wikipedia)"
+  url: "https://en.wikipedia.org/wiki/Euler_product"
+  relationship: "the Euler factors 1 - p^(-s) whose zeros this node describes"
+- title: "A. M. Masullo, The Music of the Primes (preprint, 2026)"
+  relationship: "Theorem 1.7.1.1 (1) and (3) in the case of the rationals; this node proves that case"

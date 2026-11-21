@@ -1,0 +1,56 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Added 2026-11-21 from Masullo's preprint "The Music of the Primes" (the toy example of §1.2.8), read with an eye to the RNS. See docs/NODE_LIST.md.
+
+node:
+  id: OrbitalTrace.v1
+  family: OrbitalTrace
+  version: v1
+  order: 106
+  kind: paper
+  status: active
+  title: the trace on one wheel's loop, and why it vanishes below the wheel
+  description: "Scaling by a number above 1 (for a prime wheel, the prime) turns the positive numbers into a loop whose length is that number's logarithm. A test function acts on the loop by multiplicative convolution; its trace is the sum of its eigenvalues, the Mellin transform of the test function at the evenly spaced points 2πi m over the length of the loop, the same points as the zeros of the wheel's Euler factor. Poisson summation turns that sum into the length of the loop times the sum of the test function at every power of the scaling number. So a test function that vanishes outside the open interval from 1 to the scaling number has trace zero: no power lies strictly between. For a prime wheel, a test function that lives below the prime's own scale never sees that wheel. This is the toy example of §1.2.8 of Masullo's preprint, the model for why all but finitely many of his orbital traces vanish; Poisson summation is classical and comes from Mathlib."
+  improves: "EulerFactorZeros describes the zeros of one wheel's Euler factor; this node uses them as the eigenvalue points of a trace and shows the trace sees only the powers of the wheel's prime."
+conclusions:
+- id: orbital_trace_poisson
+  declaration: RNS.OrbitalTrace.orbital_trace_poisson
+  summary: "For a scaling number above 1 and a test function whose logarithmic form is a Schwartz function, the sum of its Fourier transform at the whole numbers divided by the loop's length equals the loop's length times the sum of the test function at every power of the scaling number."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/OrbitalTrace.lean
+    declaration: RNS.OrbitalTrace.orbital_trace_poisson_holds
+    note: "Mathlib's Poisson summation for Schwartz functions (SchwartzMap.tsum_eq_tsum_fourier) applied to the test function stretched by the loop's length, with the change of variables in the Fourier integral (Measure.integral_comp_mul_left)."
+  - id: paper
+    kind: literature
+    source: "A. M. Masullo, The Music of the Primes (preprint, 2026)"
+    locator: "§1.2.8, the toy example on the loop of the positive numbers modulo the powers of γ"
+    note: "There the eigenvalue sum is written with the Mellin transform; here it is the Fourier transform of the test function in the logarithmic coordinate, the same numbers."
+  designated: lean-proof
+- id: orbital_trace_vanishes
+  declaration: RNS.OrbitalTrace.orbital_trace_vanishes
+  summary: "If the test function also vanishes outside the open interval from 1 to the scaling number, the sum of the eigenvalues is zero."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/OrbitalTrace.lean
+    declaration: RNS.OrbitalTrace.orbital_trace_vanishes_step
+    assembled: RNSSolutions/OrbitalTrace.lean (RNS.OrbitalTrace.orbital_trace_vanishes_holds)
+    note: "From the node's own claim orbital_trace_poisson: every whole power of the scaling number is at most 1 or at least the scaling number itself."
+  designated: lean-proof
+related:
+- node: EulerFactorZeros
+  note: "the eigenvalue points of this trace, for a prime wheel, are the zeros of that wheel's Euler factor"
+sources:
+- title: "Poisson summation formula (Wikipedia)"
+  url: "https://en.wikipedia.org/wiki/Poisson_summation_formula"
+  relationship: "the classical formula this node applies on a loop of any length"
+- title: "Mathlib, Poisson's summation formula (SchwartzMap.tsum_eq_tsum_fourier)"
+  url: "https://leanprover-community.github.io/mathlib4_docs/Mathlib/Analysis/Fourier/PoissonSummation.html"
+  relationship: "the Lean result for the loop of length 1, which this node rescales"
+- title: "A. M. Masullo, The Music of the Primes (preprint, 2026)"
+  relationship: "the toy example of §1.2.8; this node proves it"
