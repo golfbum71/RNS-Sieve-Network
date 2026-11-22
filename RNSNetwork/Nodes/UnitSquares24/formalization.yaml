@@ -1,0 +1,51 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Added 2026-11-22 (Tier 1 of the Hasse/Weil/Deligne-Ribet comparison). See docs/NODE_LIST.md.
+
+node:
+  id: UnitSquares24.v1
+  family: UnitSquares24
+  version: v1
+  order: 107
+  kind: paper
+  status: active
+  group: onewheel
+  title: "24 is the largest cycle on which every open position squares to 1"
+  description: "On the cycle of a given length, call a position open when it shares no factor with the length. Every open position squares to 1 on the cycle exactly when the length divides 24. So every prime from 5 on squares to one more than a multiple of 24. In number-field language this says the number w₂ of the rational numbers is 24 (the largest cycle whose units all have order dividing 2, the Carmichael function dividing 2); it is the same 24 that appears in the Birch–Tate formula (node BirchTateRational). A classical fact, not new here."
+conclusions:
+- id: units_square_one_iff
+  declaration: RNS.UnitSquares24.units_square_one_iff
+  summary: "For a cycle length other than 0, every unit of the cycle squares to 1 exactly when the length divides 24."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/UnitSquares24.lean
+    declaration: RNS.UnitSquares24.units_square_one_iff_holds
+    note: "Draft Lean proof written 2026-11-22; not yet built."
+  designated: lean-proof
+- id: prime_sq_mod_24
+  declaration: RNS.UnitSquares24.prime_sq_mod_24
+  summary: "Every prime from 5 on squares to one more than a multiple of 24."
+  imports:
+  - UnitSquares24.v1.units_square_one_iff
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/UnitSquares24.lean
+    declaration: RNS.UnitSquares24.prime_sq_mod_24_step
+    note: "Draft Lean proof written 2026-11-22; not yet built."
+  designated: lean-proof
+sources:
+- title: Carmichael function (Wikipedia)
+  url: https://en.wikipedia.org/wiki/Carmichael_function
+  relationship: "the exponent of the group of open positions; it divides 2 exactly for the divisors of 24"
+- title: "J. Hurrelbrink, Birch–Tate conjecture, Encyclopedia of Mathematics"
+  url: https://encyclopediaofmath.org/wiki/Birch–Tate_conjecture
+  relationship: "states w₂ of the rationals is 24"
+related:
+- node: CRT
+  note: "the units of a divisor all come from units of the larger cycle, the same reduction the combined cycle uses"
+- node: BrocardWindowLength
+  note: "uses the prime-square fact to show every Brocard window is a multiple of 24"

@@ -1,0 +1,38 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Added 2026-11-22 (Tier 2). Cited; a Lean proof by Stepanov's method is future work. See docs/NODE_LIST.md.
+
+node:
+  id: StepanovWeil.v1
+  family: StepanovWeil
+  version: v1
+  order: 111
+  kind: paper
+  status: active
+  group: onewheel
+  title: "the square-root bound for the residue character of any pattern"
+  description: "On an odd prime wheel, take an offset pattern whose members sit on different positions of the wheel and multiply a position's distances from all of them. The quadratic character of that product, added around the wheel, has square at most (the number of offsets minus 1) squared times the wheel size: a sum of wheel-size many terms of size 1 cancels down to about the square root of the wheel size. This is Weil's bound (1948) for the curve y² = the product; Stepanov (1969) found an elementary proof with an auxiliary polynomial that vanishes to high order. Cited, not proved in Lean; Stepanov's method is the route to a Lean proof, since it needs no algebraic geometry."
+conclusions:
+- id: weil_pattern_bound
+  declaration: RNS.StepanovWeil.weil_pattern_bound
+  summary: "On an odd prime wheel, for a pattern of at least one offset with no two on the same position, the squared character sum of the product of distances is at most (pattern size − 1)² times the wheel size (cited)."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: paper
+    kind: literature
+    source: "A. Weil, Sur les courbes algébriques et les variétés qui s'en déduisent (1948); elementary proof by S. A. Stepanov (1969), in the form of W. M. Schmidt, Equations over Finite Fields (1976)"
+    locator: "the bound on the character sum of a polynomial with distinct roots, by the degree minus 1 times the square root of the field size"
+    note: "Published theorem, cited. Not reproduced in Lean. Checked numerically on 2026-11-22 for every pattern of up to 3 offsets (4 for wheels below 40) on every odd prime wheel below 120."
+  designated: paper
+sources:
+- title: "S. Kopparty, The Weil bounds, Topics in Finite Fields (Rutgers, 2013)"
+  url: https://sites.math.rutgers.edu/~sk1233/courses/finitefields-F13/weil.pdf
+  relationship: "states the bound and proves special cases by Stepanov's method"
+- title: "Finite Fields: Root Sets, Frobenius, and Algebraic Structure, §18.23 (arXiv:2610.36727)"
+  url: https://arxiv.org/abs/2610.36727
+  relationship: "Weil bounds for polynomial character sums by Stepanov's method; a possible blueprint for a Lean proof"
+related:
+- node: QuadraticCharSum
+  note: "the exact two-offset case, where the sum is −1"
+- node: Admissibility
+  note: "the same offset patterns; the condition that no two offsets share a position is the pattern having its full count of blocked positions on the wheel"

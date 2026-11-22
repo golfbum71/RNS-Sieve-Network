@@ -197,14 +197,17 @@ GROUPS = [
     ("gaps", "Gaps between survivors and between primes", [
         "GapConjectures", "GapTracks", "DudekJohnston", "GapCertificate", "BlockingRuns", "KanoldBound",
         "PillaiBrauer", "JacobsthalQuadratic", "LongGaps", "RoughInPrimeGaps", "GapMoments",
-        "AlmostPrimeWindow", "BrocardWindow", "BrocardPrediction", "GapPairs", "RomanoffTheorem", "ErdosSmallGaps", "Schnirelmann"]),
+        "AlmostPrimeWindow", "BrocardWindow", "BrocardPrediction", "GapPairs", "RomanoffTheorem", "ErdosSmallGaps", "Schnirelmann",
+        "BrocardWindowLength"]),
     ("germain", "Sophie Germain primes", [
         "SophieGermainWheel", "SophieGermainPowers", "SophieGermainTheorem", "GermainAuxiliary",
         "GermainReciprocals"]),
     ("shares", "Survivor shares and analytic inputs", [
         "ShareBounds", "ShareAsymptotics", "MertensThird", "MertensSecond", "PrimeNumberTheorem",
         "CeilingOvershoot", "SmoothNumbers", "SmallWheelSurvivors", "EulerFactorZeros",
-        "OrbitalTrace"]),
+        "OrbitalTrace", "VonKochBound"]),
+    ("onewheel", "One wheel at a time: squares, characters and the number 24", [
+        "UnitSquares24", "QuadraticCharSum", "HasseCurve", "StepanovWeil", "BirchTateRational"]),
     ("sieves", "Sieve methods: Brun, Hooley, Selberg", [
         "BrunPureSieve", "BrunTwinCount", "BrunTruncation", "BrunTwinBound", "BrunAnalytic",
         "BrunTheorem", "BrunTwinSum", "BrunSharp", "BrunHooley", "PatternUpperBound",

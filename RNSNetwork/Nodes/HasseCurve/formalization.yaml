@@ -1,0 +1,63 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Added 2026-11-22 (Tier 2). See docs/NODE_LIST.md.
+
+node:
+  id: HasseCurve.v1
+  family: HasseCurve
+  version: v1
+  order: 110
+  kind: paper
+  status: active
+  group: onewheel
+  title: "three consecutive positions, and Hasse's bound for y² = x³ − x"
+  description: "On an odd prime wheel, multiply three consecutive positions together and ask whether the product is a square. Shifted by one, that product is x³ − x, so its quadratic character counts the points of the elliptic curve y² = x³ − x on the wheel. When the wheel size leaves remainder 3 on dividing by 4, the character sum is exactly 0 and the curve has exactly the wheel size many points (the supersingular case), proved here. On every odd prime wheel the squared character sum is at most four times the wheel size: Hasse's theorem (1933) for this curve, here a step from Weil's bound for the pattern 0, 1, 2 (StepanovWeil, cited), so conditional on that citation."
+  improves: "StepanovWeil bounds any pattern; this node is the three-offset pattern of consecutive positions, with the exact count in the supersingular case."
+conclusions:
+- id: three_consecutive_sum_zero
+  declaration: RNS.HasseCurve.three_consecutive_sum_zero
+  summary: "On a prime wheel of size 3 more than a multiple of 4, the character of the product of three consecutive positions adds up to 0."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/HasseCurve.lean
+    declaration: RNS.HasseCurve.three_consecutive_sum_zero_holds
+    note: "Draft Lean proof written 2026-11-22; not yet built."
+  designated: lean-proof
+- id: three_consecutive_point_count
+  declaration: RNS.HasseCurve.three_consecutive_point_count
+  summary: "On a prime wheel of size 3 more than a multiple of 4, the curve y² = x(x + 1)(x + 2) has exactly the wheel size many points."
+  imports:
+  - HasseCurve.v1.three_consecutive_sum_zero
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/HasseCurve.lean
+    declaration: RNS.HasseCurve.three_consecutive_point_count_step
+    note: "Draft Lean proof written 2026-11-22; not yet built."
+  designated: lean-proof
+- id: hasse_bound
+  declaration: RNS.HasseCurve.hasse_bound
+  summary: "On every odd prime wheel, the squared character sum of the product of three consecutive positions is at most four times the wheel size (from the cited Weil bound)."
+  imports:
+  - StepanovWeil.v1.weil_pattern_bound
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/HasseCurve.lean
+    declaration: RNS.HasseCurve.hasse_bound_step
+    note: "Draft Lean step written 2026-11-22; not yet built. The step takes the cited claim StepanovWeil.weil_pattern_bound as a named hypothesis."
+  designated: lean-proof
+sources:
+- title: "Hasse's theorem on elliptic curves (Wikipedia)"
+  url: https://en.wikipedia.org/wiki/Hasse%27s_theorem_on_elliptic_curves
+  relationship: "the bound, of which hasse_bound is the case of the curve y² = x³ − x"
+- title: "A. Sutherland, 18.783 Elliptic Curves, Lecture 7: point counting (MIT, 2025)"
+  url: https://math.mit.edu/classes/18.783/2025/LectureNotes7.pdf
+  relationship: "Hasse's theorem and the point count through the quadratic character"
+related:
+- node: QuadraticCharSum
+  note: "the same character sum for two offsets instead of three"

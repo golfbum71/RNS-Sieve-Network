@@ -1,0 +1,64 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Added 2026-11-22 (Tier 2). See docs/NODE_LIST.md.
+
+node:
+  id: QuadraticCharSum.v1
+  family: QuadraticCharSum
+  version: v1
+  order: 109
+  kind: paper
+  status: active
+  group: onewheel
+  title: "on one wheel, the residue character of a pair pattern adds up to −1"
+  description: "On a prime wheel, give each position +1 if it is a nonzero square, −1 if it is not a square, and 0 at 0 (the quadratic character). For two offsets, multiply a position's distances from them and add the character of the product around the wheel: the total is −1 when the offsets sit on different positions of the wheel, and the wheel size minus 1 when they coincide. The same −1 holds for any quadratic whose discriminant is not 0, split or not. This is the exact degree-two case of the square-root bounds of Hasse and Weil (nodes HasseCurve, StepanovWeil); the proof goes through Mathlib's Jacobi sums. A classical fact, not new here."
+conclusions:
+- id: pair_char_sum_distinct
+  declaration: RNS.QuadraticCharSum.pair_char_sum_distinct
+  summary: "On an odd prime wheel, the character of the product of the distances to two different offsets adds up to −1."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/QuadraticCharSum.lean
+    declaration: RNS.QuadraticCharSum.pair_char_sum_distinct_holds
+    note: "Draft Lean proof written 2026-11-22; not yet built."
+  designated: lean-proof
+- id: pair_char_sum_equal
+  declaration: RNS.QuadraticCharSum.pair_char_sum_equal
+  summary: "On any prime wheel, the character of the squared distance to one offset adds up to the wheel size minus 1."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/QuadraticCharSum.lean
+    declaration: RNS.QuadraticCharSum.pair_char_sum_equal_holds
+    note: "Draft Lean proof written 2026-11-22; not yet built."
+  designated: lean-proof
+- id: quadratic_char_sum
+  declaration: RNS.QuadraticCharSum.quadratic_char_sum
+  summary: "On an odd prime wheel, the character of a quadratic with nonzero discriminant adds up to −1."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/QuadraticCharSum.lean
+    declaration: RNS.QuadraticCharSum.quadratic_char_sum_holds
+    note: "Draft Lean proof written 2026-11-22; not yet built."
+  designated: lean-proof
+sources:
+- title: "S. Kopparty, The Weil bounds, Topics in Finite Fields (Rutgers, 2013)"
+  url: https://sites.math.rutgers.edu/~sk1233/courses/finitefields-F13/weil.pdf
+  relationship: "the quadratic-character sums and their bounds; this node is the exact degree-two case"
+- title: Jacobi sum (Wikipedia)
+  url: https://en.wikipedia.org/wiki/Jacobi_sum
+  relationship: "the Jacobi sum of the quadratic character with itself, used in the proof"
+related:
+- node: StepanovWeil
+  note: "the square-root bound for any number of offsets; this node is the exact two-offset case"
+- node: SurvivorCount
+  note: "the same wheel and the same offset pattern, counted by blocked positions instead of by the character"
+- node: PolynomialPatterns
+  note: "quadratic patterns such as the square plus one, counted wheel by wheel"

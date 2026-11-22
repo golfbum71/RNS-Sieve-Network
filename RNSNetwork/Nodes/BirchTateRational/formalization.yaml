@@ -1,0 +1,51 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Added 2026-11-22 (Tier 3). See docs/NODE_LIST.md.
+
+node:
+  id: BirchTateRational.v1
+  family: BirchTateRational
+  version: v1
+  order: 113
+  kind: paper
+  status: active
+  group: onewheel
+  title: "24 times ζ(−1) is −2"
+  description: "The Riemann zeta function at −1 is −1/12 (from Mathlib's Bernoulli values). The largest cycle on which every open position squares to 1 is 24 (UnitSquares24), and 24 times ζ(−1) is −2. This is the numerical side of the Birch–Tate formula for the rational numbers: the order of K₂ of the integers, 2, equals the size of w₂ times ζ(−1). K₂ is not in Mathlib, so only the numbers are stated. Deligne and Ribet (1980) proved that w₂ times ζ(−1) is a whole number for every totally real field; this node is the rational case of that, in numbers. Classical; the link from the wheel side (open positions squaring to 1) is the point here."
+  improves: "UnitSquares24 finds the 24 on the wheels; this node shows it is the same 24 that clears the denominator of ζ(−1)."
+conclusions:
+- id: zeta_neg_one
+  declaration: RNS.BirchTateRational.zeta_neg_one
+  summary: "ζ(−1) = −1/12."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BirchTateRational.lean
+    declaration: RNS.BirchTateRational.zeta_neg_one_holds
+    note: "Draft Lean proof written 2026-11-22; not yet built."
+  designated: lean-proof
+- id: w2_times_zeta
+  declaration: RNS.BirchTateRational.w2_times_zeta
+  summary: "The largest cycle length on which every open position squares to 1 is 24, and it times ζ(−1) is −2."
+  imports:
+  - UnitSquares24.v1.units_square_one_iff
+  - BirchTateRational.v1.zeta_neg_one
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BirchTateRational.lean
+    declaration: RNS.BirchTateRational.w2_times_zeta_step
+    note: "Draft Lean proof written 2026-11-22; not yet built."
+  designated: lean-proof
+sources:
+- title: "J. Hurrelbrink, Birch–Tate conjecture, Encyclopedia of Mathematics"
+  url: https://encyclopediaofmath.org/wiki/Birch–Tate_conjecture
+  relationship: "states the formula and its numerical example for the rationals: w₂ = 24, ζ(−1) = −1/12, K₂ of the integers of order 2"
+- title: "P. Deligne and K. Ribet, Values of abelian L-functions at negative integers over totally real fields, Invent. Math. 59 (1980), 227-286"
+  url: https://doi.org/10.1007/BF01453237
+  relationship: "the integrality of w₂ times ζ(−1) for totally real fields, of which this is the rational case in numbers"
+related:
+- node: HurwitzZetaZero
+  note: "another special value of a zeta function on the network"

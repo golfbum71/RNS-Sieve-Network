@@ -6,6 +6,7 @@ Authors: Geoffrey Fischer
 import RNSNetwork.Vocabulary
 import Mathlib.NumberTheory.LSeries.RiemannZeta
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
+import Mathlib.NumberTheory.PrimeCounting
 
 /-!
 # VonKochBound — the Riemann hypothesis as an error term, against the Brocard window

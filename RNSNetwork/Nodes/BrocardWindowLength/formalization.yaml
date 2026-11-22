@@ -1,0 +1,52 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Added 2026-11-22 (Tier 1). See docs/NODE_LIST.md.
+
+node:
+  id: BrocardWindowLength.v1
+  family: BrocardWindowLength
+  version: v1
+  order: 108
+  kind: paper
+  status: active
+  title: "the window between two prime squares is a multiple of 24"
+  description: "For primes from 5 on, the distance from the smaller prime's square to the larger prime's square is a multiple of 24, because each square is one more than a multiple of 24 (UnitSquares24). For primes from 3 on, that distance is at least four times the smaller prime plus 4, because the larger prime is at least the smaller plus 2. For consecutive primes this is the length of the window of Brocard's conjecture. Elementary; the 24 is the point of Geo's mod-24 thread on Brocard windows. It says nothing yet about how the wheels block the window."
+  improves: "BrocardWindow gives where each wheel's marks fall inside the window; this node gives the window's own length: a multiple of 24 and at least four times the base prime plus 4."
+conclusions:
+- id: window_length_mod_24
+  declaration: RNS.BrocardWindowLength.window_length_mod_24
+  summary: "For primes from 5 on, the larger square minus the smaller square is divisible by 24."
+  imports:
+  - UnitSquares24.v1.prime_sq_mod_24
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BrocardWindowLength.lean
+    declaration: RNS.BrocardWindowLength.window_length_mod_24_step
+    note: "Draft Lean proof written 2026-11-22; not yet built."
+  designated: lean-proof
+- id: window_length_lower
+  declaration: RNS.BrocardWindowLength.window_length_lower
+  summary: "For primes from 3 on, the larger square minus the smaller square is at least four times the smaller prime plus 4."
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/BrocardWindowLength.lean
+    declaration: RNS.BrocardWindowLength.window_length_lower_holds
+    note: "Draft Lean proof written 2026-11-22; not yet built."
+  designated: lean-proof
+sources:
+- title: "Brocard's conjecture (Wikipedia)"
+  url: "https://en.wikipedia.org/wiki/Brocard%27s_conjecture"
+  relationship: "the window between consecutive prime squares that this node measures"
+related:
+- node: BrocardWindow
+  note: "where every wheel's marks fall inside the same window"
+- node: BrocardPrediction
+  note: "the predicted number of primes in the window"
+- node: GapConjectures
+  note: "Brocard's conjecture itself, and the four-survivor bound on windows of length four times the prime plus 4"
+- node: VonKochBound
+  note: "compares the window length with the error term the Riemann hypothesis would give"
