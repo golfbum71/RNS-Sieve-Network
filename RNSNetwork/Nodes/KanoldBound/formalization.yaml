@@ -34,10 +34,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/KanoldBound.lean
     declaration: RNS.KanoldBound.progression_holds_survivor_holds
-    note: "Draft Lean proof written 2026-11-22; not yet built."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-22). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: add_wheel_stretch
   declaration: RNS.KanoldBound.add_wheel_stretch
@@ -47,10 +47,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/KanoldBound.lean
     declaration: RNS.KanoldBound.add_wheel_stretch_step
-    note: "Draft Lean step written 2026-11-22; not yet built."
+    note: "Complete Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-22); the step takes its import as a named hypothesis. Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 sources:
 - title: "H.-J. Kanold, An upper bound for Jacobsthal's function (attempted English translation of the 1967 paper)"

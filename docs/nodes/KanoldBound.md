@@ -4,12 +4,15 @@
 
 **Status:** cited from a published paper; not proved in Lean · **Diagram:** [Gaps between survivors and between primes](../../GRAPH.md#gaps-between-survivors-and-between-primes)
 
-For any k prime wheels, every stretch of two to the k consecutive numbers contains a survivor; so the largest survivor gap is at most two to the number of wheels. Kanold's explicit bound on Jacobsthal's function, cited. Weaker than JacobsthalQuadratic for many wheels, but with no hidden constant, so it can be evaluated for any concrete set of frozen wheels.
+For any k prime wheels, every stretch of two to the k consecutive numbers contains a survivor; so the largest survivor gap is at most two to the number of wheels. Kanold's explicit bound on Jacobsthal's function, cited. Weaker than JacobsthalQuadratic for many wheels, but with no hidden constant, so it can be evaluated for any concrete set of frozen wheels. Kanold's proof splits into cases by the size of the wheels and uses Rosser's explicit prime estimates for the large ones; its one wheel-native step is proved here: a progression whose step no wheel divides behaves like a stretch of consecutive numbers, and adding a prime wheel to a set whose survivors come at least once in every stretch of a given length makes them come at least once in every stretch of the new wheel times (that length minus 1), plus 2.
+
+**What it adds:** Adds the proved add-a-wheel step (Kanold's Lemma 4, prime case) beside the cited bound; with the wheel 2 it says adding 2 to odd wheels at most doubles the largest survivor gap plus one.
 
 ## Published sources
 
 Published work this node rests on or relates to; each entry says how.
 
+- [H.-J. Kanold, An upper bound for Jacobsthal's function (attempted English translation of the 1967 paper)](https://allaboutprimes.blogspot.com) — Lemma 4 (product bound), whose prime case add_wheel_stretch proves; the case split of Theorem 4 that the cited bound rests on
 - [H.-J. Kanold, Über eine zahlentheoretische Funktion von Jacobsthal, Math. Ann. 170 (1967), 314-326](https://doi.org/10.1007/BF01350607) — the bound, cited
 - [F. Costello and P. Watts, A short note on Jacobsthal's function (arXiv:1306.1064)](https://arxiv.org/abs/1306.1064) — quotes Kanold's bound and compares it with Stevens' and Iwaniec's
 
@@ -40,6 +43,50 @@ def stretch_holds_survivor : Prop :=
 **Rests on:** no other node (Mathlib and the Vocabulary only)
 
 **Justification:** cited — H.-J. Kanold, Über eine zahlentheoretische Funktion von Jacobsthal, Math. Ann. 170 (1967), 314-326, the bound g(n) at most 2 to the number of prime factors of n, as quoted by Costello and Watts. Not proved in Lean.
+
+<a id="progression_holds_survivor"></a>
+### `progression_holds_survivor`
+
+If every stretch of a given length holds a survivor of some prime wheels, so does every progression of that many terms whose step no wheel divides.
+
+```lean
+/-- **Progressions.** If every stretch of `L` consecutive numbers holds a
+survivor of the prime wheels `W`, so does every progression of `L` terms whose
+step no wheel of `W` divides. -/
+def progression_holds_survivor : Prop :=
+  ∀ (W : Finset ℕ), (∀ q ∈ W, q.Prime) → ∀ L : ℕ,
+    (∀ x : ℕ, ∃ i < L, ∀ q ∈ W, ¬ q ∣ x + i) →
+    ∀ a d : ℕ, (∀ q ∈ W, ¬ q ∣ d) → ∃ i < L, ∀ q ∈ W, ¬ q ∣ a + i * d
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.KanoldBound.progression_holds_survivor_holds` in [`RNSSolutions/KanoldBound.lean`](../../RNSSolutions/KanoldBound.lean)
+
+<a id="add_wheel_stretch"></a>
+### `add_wheel_stretch`
+
+If every stretch of a given length holds a survivor of some prime wheels, then with one more prime wheel every stretch of the new wheel times (that length minus 1), plus 2, holds a survivor.
+
+```lean
+/-- **Adding a wheel** (Kanold's Lemma 4, prime case). If every stretch of `L`
+consecutive numbers holds a survivor of the prime wheels `W`, then for a new
+prime wheel `r`, every stretch of `r` times (`L` − 1), plus 2, consecutive
+numbers holds a survivor of `W` with `r` added. -/
+def add_wheel_stretch : Prop :=
+  ∀ (W : Finset ℕ), (∀ q ∈ W, q.Prime) → ∀ L : ℕ,
+    (∀ x : ℕ, ∃ i < L, ∀ q ∈ W, ¬ q ∣ x + i) →
+    ∀ r : ℕ, r.Prime → r ∉ W →
+      ∀ x : ℕ, ∃ i < r * (L - 1) + 2, ∀ q ∈ insert r W, ¬ q ∣ x + i
+```
+
+**Rests on:** [`KanoldBound.progression_holds_survivor`](KanoldBound.md#progression_holds_survivor)
+
+**Proof:** `RNS.KanoldBound.add_wheel_stretch_step` in [`RNSSolutions/KanoldBound.lean`](../../RNSSolutions/KanoldBound.lean)
+
+## Used by
+
+- [`KanoldBound`](KanoldBound.md)
 
 ## Files
 

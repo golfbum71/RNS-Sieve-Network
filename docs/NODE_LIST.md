@@ -1409,6 +1409,7 @@ Von Koch (1901): on the Riemann hypothesis, the prime count is within a constant
 
 ### Added 2026-11-22 to existing nodes
 - `GapConjectures` gains `brocard_of_oppermann`: Oppermann's conjecture gives Brocard's (four primes, one from each of Oppermann's intervals at the smaller prime, the next number and the one after). Proved; Oppermann stays an open hypothesis.
+- `KanoldBound` gains `progression_holds_survivor` and `add_wheel_stretch` (Kanold's Lemma 4, prime case): a progression whose step no wheel divides holds a survivor as often as consecutive stretches do, and one more prime wheel turns a guaranteed survivor in every stretch of a given length into one in every stretch of the new wheel times (that length minus 1), plus 2. Proved (2026-11-22). Kanold's bound itself stays cited: his proof needs Rosser's explicit prime estimates for the large wheels.
 - Already in the network, so no new node: the local survivor counts and their product over the combined cycle (`SurvivorCount`); the Jacobsthal function as the largest survivor gap (`BlockingRuns`), its exact value for the wheels up to 13 (`GapCertificate`) and Kanold's bound of two to the number of wheels (`KanoldBound`, cited, still to be proved).
 
 ### Added to nodes 71-89

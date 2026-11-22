@@ -9,7 +9,7 @@ import Mathlib.Tactic
 /-!
 # Proofs for KanoldBound
 
-Draft, 2026-11-22. Kanold's bound itself (`stretch_holds_survivor`) stays cited.
+Built clean by `lake build RNSSolutions` on 2026-11-22 (standard axioms only). Kanold's bound itself (`stretch_holds_survivor`) stays cited.
 
 Progressions: multiply the progression by an inverse of its step on the
 combined cycle of the wheels. That turns it into a stretch of consecutive
