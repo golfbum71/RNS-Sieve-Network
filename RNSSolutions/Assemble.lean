@@ -67,6 +67,7 @@ import RNSSolutions.GermainReciprocals
 import RNSSolutions.UnitSquares24
 import RNSSolutions.BrocardWindowLength
 import RNSSolutions.HasseCurve
+import RNSSolutions.QuadraticCharSum
 import RNSSolutions.BirchTateRational
 
 /-!
@@ -707,3 +708,18 @@ theorem RNS.BirchTateRational.w2_times_zeta_holds : RNS.BirchTateRational.w2_tim
 #print axioms RNS.HasseCurve.three_consecutive_point_count_holds
 #print axioms RNS.HasseCurve.hasse_bound_of_weil
 #print axioms RNS.BirchTateRational.w2_times_zeta_holds
+
+/-- `QuadraticCharSum` → `HasseCurve`: the second moment of Jacobsthal's sums. -/
+theorem RNS.HasseCurve.jacobsthal_second_moment_holds : RNS.HasseCurve.jacobsthal_second_moment :=
+  RNS.HasseCurve.jacobsthal_second_moment_step RNS.QuadraticCharSum.pair_char_sum_distinct_holds
+    RNS.QuadraticCharSum.pair_char_sum_equal_holds
+
+/-- `HasseCurve`: Hasse's bound for three consecutive positions, unconditionally, from
+Jacobsthal's sums (no input from Weil). -/
+theorem RNS.HasseCurve.hasse_bound_holds : RNS.HasseCurve.hasse_bound :=
+  RNS.HasseCurve.hasse_bound_of_moment_step RNS.HasseCurve.jacobsthal_twist_holds
+    RNS.HasseCurve.jacobsthal_second_moment_holds
+
+#print axioms RNS.HasseCurve.jacobsthal_second_moment_holds
+#print axioms RNS.HasseCurve.hasse_bound_holds
+

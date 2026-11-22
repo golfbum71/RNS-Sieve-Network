@@ -50,3 +50,36 @@ def hasse_bound : Prop :=
     (∑ x : ZMod p, quadraticChar (ZMod p) (x * (x + 1) * (x + 2))) ^ 2 ≤ 4 * (p : ℤ)
 
 end RNS.HasseCurve
+
+/-! ## Hasse's bound without Weil: Jacobsthal's sums (added 2026-11-22)
+
+Jacobsthal (1907) twisted the curve: for each position `n` of the wheel, add up
+the character of the cube of a position minus `n` times the position. Turning
+the wheel by a nonzero factor multiplies `n` by a square and the sum by a
+sign; adding the squares of all the twisted sums uses only the two-offset sums
+of `QuadraticCharSum`. That bounds the untwisted sum by the square root of four
+times the wheel size, with no input from Weil. -/
+
+namespace RNS.HasseCurve
+
+/-- **Jacobsthal's sum** for the twisted curve y² = x³ − n·x: the quadratic
+character of the cube of a position minus `n` times the position, added around
+the wheel. -/
+def jacobsthal_sum (p : ℕ) [Fact p.Prime] (n : ZMod p) : ℤ :=
+  ∑ x : ZMod p, quadraticChar (ZMod p) (x ^ 3 - n * x)
+
+/-- **Twisting by a square.** Multiplying the twist by the square of a nonzero
+position multiplies Jacobsthal's sum by that position's character. -/
+def jacobsthal_twist : Prop :=
+  ∀ (p : ℕ) [Fact p.Prime], ∀ n t : ZMod p, t ≠ 0 →
+    jacobsthal_sum p (n * t ^ 2) = quadraticChar (ZMod p) t * jacobsthal_sum p n
+
+/-- **The second moment.** On an odd prime wheel, the squares of Jacobsthal's
+sums over all twists add up to the wheel size times the wheel size minus 1
+times (1 plus the character of −1). -/
+def jacobsthal_second_moment : Prop :=
+  ∀ (p : ℕ) [Fact p.Prime], p ≠ 2 →
+    ∑ n : ZMod p, jacobsthal_sum p n ^ 2 =
+      (p : ℤ) * ((p : ℤ) - 1) * (1 + quadraticChar (ZMod p) (-1))
+
+end RNS.HasseCurve
