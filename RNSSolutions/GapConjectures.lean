@@ -397,3 +397,50 @@ end RNS.GapConjectures
 #print axioms RNS.GapConjectures.oppermann_of_bound_holds
 #print axioms RNS.GapConjectures.andrica_of_oppermann_holds
 #print axioms RNS.GapConjectures.legendre_of_oppermann_holds
+
+namespace RNS.GapConjectures
+
+/-! ## Part 6: Brocard from Oppermann (added 2026-11-22, draft) -/
+
+/-- Oppermann at the smaller prime (above its square), at the next number (on
+both sides of its square) and at the one after (below its square) gives four
+primes, in order, inside the window between the two prime squares. -/
+theorem brocard_of_oppermann_holds : brocard_of_oppermann := by
+  unfold brocard_of_oppermann brocard_conjecture
+  intro H p q hpq hp3
+  obtain ⟨hp, hq, hlt, -⟩ := hpq
+  have hpo : p % 2 = 1 := by rcases hp.eq_two_or_odd with h | h <;> omega
+  have hqo : q % 2 = 1 := by rcases hq.eq_two_or_odd with h | h <;> omega
+  have hq2 : p + 2 ≤ q := by omega
+  have hsq : (p + 2) ^ 2 ≤ q ^ 2 := Nat.pow_le_pow_left hq2 2
+  obtain ⟨-, ⟨r1, hr1, hr1a, hr1b⟩⟩ := H p (by omega)
+  obtain ⟨⟨r2, hr2, hr2a, hr2b⟩, ⟨r3, hr3, hr3a, hr3b⟩⟩ := H (p + 1) (by omega)
+  obtain ⟨⟨r4, hr4, hr4a, hr4b⟩, -⟩ := H (p + 2) (by omega)
+  have e1 : (p + 1) ^ 2 = p ^ 2 + 2 * p + 1 := by ring
+  have e2 : (p + 2) ^ 2 = p ^ 2 + 4 * p + 4 := by ring
+  rw [e1] at hr2a hr2b hr3a hr3b
+  rw [e2] at hr4a hr4b hsq
+  generalize p ^ 2 = X at *
+  generalize q ^ 2 = Y at *
+  have hsub : ({r1, r2, r3, r4} : Finset ℕ) ⊆ (Finset.Ico X Y).filter Nat.Prime := by
+    intro x hx
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+    rw [Finset.mem_filter, Finset.mem_Ico]
+    rcases hx with rfl | rfl | rfl | rfl
+    · exact ⟨⟨by omega, by omega⟩, hr1⟩
+    · exact ⟨⟨by omega, by omega⟩, hr2⟩
+    · exact ⟨⟨by omega, by omega⟩, hr3⟩
+    · exact ⟨⟨by omega, by omega⟩, hr4⟩
+  have hcard : ({r1, r2, r3, r4} : Finset ℕ).card = 4 := by
+    rw [Finset.card_insert_of_notMem (a := r1) (s := {r2, r3, r4})
+        (by simp only [Finset.mem_insert, Finset.mem_singleton]; omega),
+      Finset.card_insert_of_notMem (a := r2) (s := {r3, r4})
+        (by simp only [Finset.mem_insert, Finset.mem_singleton]; omega),
+      Finset.card_pair (a := r3) (b := r4) (by omega)]
+  have := Finset.card_le_card hsub
+  rw [hcard] at this
+  exact this
+
+end RNS.GapConjectures
+
+#print axioms RNS.GapConjectures.brocard_of_oppermann_holds

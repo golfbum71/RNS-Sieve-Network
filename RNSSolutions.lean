@@ -84,3 +84,9 @@ import RNSSolutions.PatternUpperBound
 import RNSSolutions.GermainReciprocals
 import RNSSolutions.EulerFactorZeros
 import RNSSolutions.OrbitalTrace
+import RNSSolutions.UnitSquares24
+import RNSSolutions.BrocardWindowLength
+import RNSSolutions.QuadraticCharSum
+import RNSSolutions.HasseCurve
+import RNSSolutions.VonKochBound
+import RNSSolutions.BirchTateRational

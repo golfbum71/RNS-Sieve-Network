@@ -64,6 +64,10 @@ import RNSSolutions.PatternReciprocals
 import RNSSolutions.PatternUpperBound
 import RNSSolutions.BadWheels
 import RNSSolutions.GermainReciprocals
+import RNSSolutions.UnitSquares24
+import RNSSolutions.BrocardWindowLength
+import RNSSolutions.HasseCurve
+import RNSSolutions.BirchTateRational
 
 /-!
 # Assembling the network
@@ -677,3 +681,29 @@ theorem RNS.GapPairs.gap_pair_bound_ford_totient_holds : RNS.GapPairs.gap_pair_b
 #print axioms RNS.GermainReciprocals.germain_reciprocal_summable_holds
 #print axioms RNS.GapPairs.gap_pair_bound_ford_holds
 #print axioms RNS.GapPairs.gap_pair_bound_ford_totient_holds
+
+/-- `UnitSquares24` → `BrocardWindowLength`: the window between two prime squares is a multiple of 24. -/
+theorem RNS.BrocardWindowLength.window_length_mod_24_holds :
+    RNS.BrocardWindowLength.window_length_mod_24 :=
+  RNS.BrocardWindowLength.window_length_mod_24_step RNS.UnitSquares24.prime_sq_mod_24_holds
+
+/-- `HasseCurve`: the supersingular count from the supersingular sum. -/
+theorem RNS.HasseCurve.three_consecutive_point_count_holds :
+    RNS.HasseCurve.three_consecutive_point_count :=
+  RNS.HasseCurve.three_consecutive_point_count_step RNS.HasseCurve.three_consecutive_sum_zero_holds
+
+/-- `StepanovWeil` → `HasseCurve`: Hasse's bound for three consecutive positions. Conditional:
+the one remaining hypothesis is the cited claim `StepanovWeil.weil_pattern_bound`. -/
+theorem RNS.HasseCurve.hasse_bound_of_weil (h : RNS.StepanovWeil.weil_pattern_bound) :
+    RNS.HasseCurve.hasse_bound :=
+  RNS.HasseCurve.hasse_bound_step h
+
+/-- `UnitSquares24` → `BirchTateRational`: w₂ of the rationals is 24, and 24 times ζ(−1) is −2. -/
+theorem RNS.BirchTateRational.w2_times_zeta_holds : RNS.BirchTateRational.w2_times_zeta :=
+  RNS.BirchTateRational.w2_times_zeta_step RNS.UnitSquares24.units_square_one_iff_holds
+    RNS.BirchTateRational.zeta_neg_one_holds
+
+#print axioms RNS.BrocardWindowLength.window_length_mod_24_holds
+#print axioms RNS.HasseCurve.three_consecutive_point_count_holds
+#print axioms RNS.HasseCurve.hasse_bound_of_weil
+#print axioms RNS.BirchTateRational.w2_times_zeta_holds

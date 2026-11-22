@@ -93,3 +93,13 @@ def legendre_of_oppermann : Prop :=
   oppermann_conjecture → legendre_conjecture
 
 end RNS.GapConjectures
+
+namespace RNS.GapConjectures
+
+/-- **Oppermann gives Brocard.** Between the squares of two consecutive primes
+from 3 on, Oppermann's four intervals (one above the smaller square, two
+around the next square, one below the square after) each hold a prime. -/
+def brocard_of_oppermann : Prop :=
+  oppermann_conjecture → brocard_conjecture
+
+end RNS.GapConjectures
