@@ -60,8 +60,7 @@ theorem add_wheel_stretch_step (h : progression_holds_survivor) : add_wheel_stre
   obtain ⟨s, hs0, hs⟩ : ∃ s, s ≤ 1 ∧ ¬ r ∣ x + s := by
     by_cases h0 : r ∣ x
     · refine ⟨1, le_rfl, fun h1 => ?_⟩
-      have h01 := Nat.dvd_sub' h1 h0
-      rw [Nat.add_sub_cancel_left] at h01
+      have h01 : r ∣ 1 := (Nat.dvd_add_iff_right h0).mpr h1
       exact hr.one_lt.ne' (Nat.dvd_one.mp h01)
     · exact ⟨0, Nat.zero_le _, by simpa using h0⟩
   have hd : ∀ q ∈ W, ¬ q ∣ r := by
@@ -78,10 +77,8 @@ theorem add_wheel_stretch_step (h : progression_holds_survivor) : add_wheel_stre
     rcases hq with hqr | hq
     · rw [hqr]
       intro hdiv
-      rw [← add_assoc] at hdiv
-      have hxs := Nat.dvd_sub' hdiv (dvd_mul_left r i)
-      rw [Nat.add_sub_cancel] at hxs
-      exact hs hxs
+      rw [← add_assoc, add_comm] at hdiv
+      exact hs ((Nat.dvd_add_iff_right (dvd_mul_left r i)).mpr hdiv)
     · rw [← add_assoc]
       exact hsurv q hq
 
