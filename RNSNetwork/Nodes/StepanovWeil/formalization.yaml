@@ -34,5 +34,7 @@ sources:
 related:
 - node: QuadraticCharSum
   note: "the exact two-offset case, where the sum is −1"
+- node: HasseCurve
+  note: "Hasse's bound for three consecutive offsets, the three-offset case; proved there by Jacobsthal's method without this citation"
 - node: Admissibility
   note: "the same offset patterns; the condition that no two offsets share a position is the pattern having its full count of blocked positions on the wheel"

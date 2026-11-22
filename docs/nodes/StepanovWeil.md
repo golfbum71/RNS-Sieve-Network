@@ -18,6 +18,7 @@ Published work this node rests on or relates to; each entry says how.
 Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
 
 - [`QuadraticCharSum`](QuadraticCharSum.md) — the exact two-offset case, where the sum is −1
+- [`HasseCurve`](HasseCurve.md) — Hasse's bound for three consecutive offsets, the three-offset case; proved there by Jacobsthal's method without this citation
 - [`Admissibility`](Admissibility.md) — the same offset patterns; the condition that no two offsets share a position is the pattern having its full count of blocked positions on the wheel
 
 ## Claims
@@ -41,10 +42,6 @@ def weil_pattern_bound : Prop :=
 **Rests on:** no other node (Mathlib and the Vocabulary only)
 
 **Justification:** cited — A. Weil, Sur les courbes algébriques et les variétés qui s'en déduisent (1948); elementary proof by S. A. Stepanov (1969), in the form of W. M. Schmidt, Equations over Finite Fields (1976), the bound on the character sum of a polynomial with distinct roots, by the degree minus 1 times the square root of the field size. Not proved in Lean.
-
-## Used by
-
-- [`HasseCurve`](HasseCurve.md)
 
 ## Files
 

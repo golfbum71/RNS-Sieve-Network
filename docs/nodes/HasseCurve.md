@@ -4,9 +4,9 @@
 
 **Status:** proved in Lean · **Diagram:** [One wheel at a time: squares, characters and the number 24](../../GRAPH.md#one-wheel-at-a-time-squares-characters-and-the-number-24)
 
-On an odd prime wheel, multiply three consecutive positions together and ask whether the product is a square. Shifted by one, that product is x³ − x, so its quadratic character counts the points of the elliptic curve y² = x³ − x on the wheel. When the wheel size leaves remainder 3 on dividing by 4, the character sum is exactly 0 and the curve has exactly the wheel size many points (the supersingular case), proved here. On every odd prime wheel the squared character sum is at most four times the wheel size: Hasse's theorem (1933) for this curve, here a step from Weil's bound for the pattern 0, 1, 2 (StepanovWeil, cited), so conditional on that citation.
+On an odd prime wheel, multiply three consecutive positions together and ask whether the product is a square. Shifted by one, that product is x³ − x, so its quadratic character counts the points of the elliptic curve y² = x³ − x on the wheel. When the wheel size leaves remainder 3 on dividing by 4, the character sum is exactly 0 and the curve has exactly the wheel size many points (the supersingular case). On every odd prime wheel the squared character sum is at most four times the wheel size: Hasse's theorem (1933) for this curve, proved unconditionally by Jacobsthal's method (1907): twist the curve by every position of the wheel, add the squares of the twisted sums using only the two-offset sums of QuadraticCharSum, and compare with the twists by squares. The same Jacobsthal also gave the Jacobsthal function of the survivor gaps.
 
-**What it adds:** StepanovWeil bounds any pattern; this node is the three-offset pattern of consecutive positions, with the exact count in the supersingular case.
+**What it adds:** QuadraticCharSum settles two offsets exactly; this node uses it to bound three consecutive offsets with Hasse's sharp constant, with no input from Weil. An earlier version took Hasse's bound from the cited Weil bound; that step is kept as a second justification.
 
 ## Published sources
 
@@ -14,12 +14,14 @@ Published work this node rests on or relates to; each entry says how.
 
 - [Hasse's theorem on elliptic curves (Wikipedia)](https://en.wikipedia.org/wiki/Hasse%27s_theorem_on_elliptic_curves) — the bound, of which hasse_bound is the case of the curve y² = x³ − x
 - [A. Sutherland, 18.783 Elliptic Curves, Lecture 7: point counting (MIT, 2025)](https://math.mit.edu/classes/18.783/2025/LectureNotes7.pdf) — Hasse's theorem and the point count through the quadratic character
+- [Paley and the Paley graphs, §3 Jacobsthal and sums of squares (arXiv:1702.00285)](https://arxiv.org/abs/1702.00285) — Jacobsthal's 1907 sums for y² = x³ − n x, whose method the Hasse bound here follows
+- [Jacobsthal identity for Q(√−2) (arXiv:1110.5815)](https://arxiv.org/abs/1110.5815) — states Jacobsthal's identity and notes its elementary proofs
 
 ## Related nodes
 
 Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
 
-- [`QuadraticCharSum`](QuadraticCharSum.md) — the same character sum for two offsets instead of three
+- [`StepanovWeil`](StepanovWeil.md) — the general square-root bound; the earlier, now secondary, route to Hasse's bound here
 
 ## Claims
 
@@ -61,10 +63,46 @@ def three_consecutive_point_count : Prop :=
 
 **Proof:** `RNS.HasseCurve.three_consecutive_point_count_step` in [`RNSSolutions/HasseCurve.lean`](../../RNSSolutions/HasseCurve.lean)
 
+<a id="jacobsthal_twist"></a>
+### `jacobsthal_twist`
+
+Multiplying the twist by the square of a nonzero position multiplies Jacobsthal's sum by that position's character.
+
+```lean
+/-- **Twisting by a square.** Multiplying the twist by the square of a nonzero
+position multiplies Jacobsthal's sum by that position's character. -/
+def jacobsthal_twist : Prop :=
+  ∀ (p : ℕ) [Fact p.Prime], ∀ n t : ZMod p, t ≠ 0 →
+    jacobsthal_sum p (n * t ^ 2) = quadraticChar (ZMod p) t * jacobsthal_sum p n
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.HasseCurve.jacobsthal_twist_holds` in [`RNSSolutions/HasseCurve.lean`](../../RNSSolutions/HasseCurve.lean)
+
+<a id="jacobsthal_second_moment"></a>
+### `jacobsthal_second_moment`
+
+On an odd prime wheel, the squares of Jacobsthal's sums over all twists add up to the wheel size times the wheel size minus 1 times (1 plus the character of −1).
+
+```lean
+/-- **The second moment.** On an odd prime wheel, the squares of Jacobsthal's
+sums over all twists add up to the wheel size times the wheel size minus 1
+times (1 plus the character of −1). -/
+def jacobsthal_second_moment : Prop :=
+  ∀ (p : ℕ) [Fact p.Prime], p ≠ 2 →
+    ∑ n : ZMod p, jacobsthal_sum p n ^ 2 =
+      (p : ℤ) * ((p : ℤ) - 1) * (1 + quadraticChar (ZMod p) (-1))
+```
+
+**Rests on:** [`QuadraticCharSum.pair_char_sum_distinct`](QuadraticCharSum.md#pair_char_sum_distinct), [`QuadraticCharSum.pair_char_sum_equal`](QuadraticCharSum.md#pair_char_sum_equal)
+
+**Proof:** `RNS.HasseCurve.jacobsthal_second_moment_step` in [`RNSSolutions/HasseCurve.lean`](../../RNSSolutions/HasseCurve.lean)
+
 <a id="hasse_bound"></a>
 ### `hasse_bound`
 
-On every odd prime wheel, the squared character sum of the product of three consecutive positions is at most four times the wheel size (from the cited Weil bound).
+On every odd prime wheel, the squared character sum of the product of three consecutive positions is at most four times the wheel size.
 
 ```lean
 /-- **Hasse's bound.** On every odd prime wheel, the square of the character
@@ -75,9 +113,9 @@ def hasse_bound : Prop :=
     (∑ x : ZMod p, quadraticChar (ZMod p) (x * (x + 1) * (x + 2))) ^ 2 ≤ 4 * (p : ℤ)
 ```
 
-**Rests on:** [`StepanovWeil.weil_pattern_bound`](StepanovWeil.md#weil_pattern_bound)
+**Rests on:** [`HasseCurve.jacobsthal_twist`](HasseCurve.md#jacobsthal_twist), [`HasseCurve.jacobsthal_second_moment`](HasseCurve.md#jacobsthal_second_moment)
 
-**Proof:** `RNS.HasseCurve.hasse_bound_step` in [`RNSSolutions/HasseCurve.lean`](../../RNSSolutions/HasseCurve.lean)
+**Proof:** `RNS.HasseCurve.hasse_bound_of_moment_step` in [`RNSSolutions/HasseCurve.lean`](../../RNSSolutions/HasseCurve.lean)
 
 ## Used by
 

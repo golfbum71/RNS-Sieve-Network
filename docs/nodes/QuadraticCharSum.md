@@ -75,6 +75,10 @@ def quadratic_char_sum : Prop :=
 
 **Proof:** `RNS.QuadraticCharSum.quadratic_char_sum_holds` in [`RNSSolutions/QuadraticCharSum.lean`](../../RNSSolutions/QuadraticCharSum.lean)
 
+## Used by
+
+- [`HasseCurve`](HasseCurve.md)
+
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/QuadraticCharSum/Conclusions.lean)

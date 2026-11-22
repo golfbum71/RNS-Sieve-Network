@@ -1380,11 +1380,11 @@ On an odd prime wheel, the quadratic character of the product of a position's di
 - Status: Clean (GitHub Actions build, 2026-11-22)
 
 ### 110. `HasseCurve` — three consecutive positions, and Hasse's bound for y² = x³ − x
-The product of three consecutive positions is x³ − x after a shift, so its character counts the points of y² = x³ − x on the wheel. Proved: on wheels of size 3 more than a multiple of 4 the character sum is 0 and the curve has exactly the wheel size many points. Hasse's bound (squared sum at most four times the wheel size, every odd prime wheel) is a Lean step from the cited Weil bound, so it is conditional on that citation.
-- Sources: [Hasse's theorem on elliptic curves](https://en.wikipedia.org/wiki/Hasse%27s_theorem_on_elliptic_curves); [Sutherland, MIT 18.783 Lecture 7](https://math.mit.edu/classes/18.783/2025/LectureNotes7.pdf)
-- Lean: `three_consecutive_sum_zero_holds`, `three_consecutive_point_count` (assembled), `hasse_bound_of_weil` (conditional on `StepanovWeil.weil_pattern_bound`)
-- Rests on: `StepanovWeil` (cited)
-- Status: Clean (GitHub Actions build, 2026-11-22); Hasse's bound conditional on the cited Weil bound.
+The product of three consecutive positions is x³ − x after a shift, so its character counts the points of y² = x³ − x on the wheel. On wheels of size 3 more than a multiple of 4 the character sum is 0 and the curve has exactly the wheel size many points. On every odd prime wheel the squared sum is at most four times the wheel size (Hasse, 1933), proved without Weil by Jacobsthal's method (1907): twisting by a square multiplies Jacobsthal's sum by a sign; the squares of all twisted sums add up to the wheel size times (the wheel size minus 1) times (1 plus the character of −1), from the two-offset sums of `QuadraticCharSum`; the twists by squares carry at most twice that. The earlier step from the cited Weil bound is kept as a second justification.
+- Sources: [Hasse's theorem on elliptic curves](https://en.wikipedia.org/wiki/Hasse%27s_theorem_on_elliptic_curves); [Sutherland, MIT 18.783 Lecture 7](https://math.mit.edu/classes/18.783/2025/LectureNotes7.pdf); [Paley and the Paley graphs, §3 (arXiv:1702.00285)](https://arxiv.org/abs/1702.00285); [Jacobsthal identity for Q(√−2) (arXiv:1110.5815)](https://arxiv.org/abs/1110.5815)
+- Lean: `three_consecutive_sum_zero_holds`, `three_consecutive_point_count` (assembled), `jacobsthal_twist_holds`, `jacobsthal_second_moment` (assembled), `hasse_bound_holds` (assembled); also `hasse_bound_of_weil` (the older route, conditional on the cited Weil bound)
+- Rests on: `QuadraticCharSum` (related: `StepanovWeil`)
+- Status: Clean (GitHub Actions build, 2026-11-22). Hasse's bound for this curve is now unconditional.
 
 ### 111. `StepanovWeil` — the square-root bound for the residue character of any pattern (cited)
 For an offset pattern with no two members on the same position of an odd prime wheel, the squared character sum of the product of distances is at most (pattern size − 1)² times the wheel size. Weil (1948); elementary proof by Stepanov (1969), in Schmidt's form. Cited, not proved in Lean; a Lean proof by Stepanov's method is the future work. Checked numerically on 2026-11-22 (every pattern of up to 3 offsets, 4 below 40, on every odd prime wheel below 120).

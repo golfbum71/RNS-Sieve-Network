@@ -98,7 +98,7 @@ end RNS.HasseCurve
 #print axioms RNS.HasseCurve.three_consecutive_point_count_step
 #print axioms RNS.HasseCurve.hasse_bound_step
 
-/-! ## Hasse's bound from Jacobsthal's sums (added 2026-11-22, draft)
+/-! ## Hasse's bound from Jacobsthal's sums (added 2026-11-22, built clean, standard axioms only)
 
 The twist by a square comes from turning the wheel by the nonzero factor. For
 the second moment, the square of a twisted sum is a double sum over two

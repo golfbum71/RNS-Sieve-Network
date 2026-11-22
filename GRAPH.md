@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 97 of 109 nodes are built, holding 304 claims: 297 proved in Lean and 7 cited from a published paper. They are joined by 178 arrows, each a Lean-checked step. Of the other 12 nodes, drawn dashed or purple, 9 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 97 of 109 nodes are built, holding 306 claims: 299 proved in Lean and 7 cited from a published paper. They are joined by 181 arrows, each a Lean-checked step. Of the other 12 nodes, drawn dashed or purple, 9 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -1313,27 +1313,32 @@ graph LR
     c4["pair_char_sum_equal"]
     c5["quadratic_char_sum"]
   end
-  subgraph s3["<b>111. StepanovWeil — the square-root bound for the residue character of any pattern</b>"]
-    c6["weil_pattern_bound"]
+  subgraph s3["<b>110. HasseCurve — three consecutive positions, and Hasse's bound for y² = x³ − x</b>"]
+    c6["three_consecutive_sum_zero"]
+    c7["three_consecutive_point_count"]
+    c8["jacobsthal_twist"]
+    c9["jacobsthal_second_moment"]
+    c10["hasse_bound"]
   end
-  subgraph s4["<b>110. HasseCurve — three consecutive positions, and Hasse's bound for y² = x³ − x</b>"]
-    c7["three_consecutive_sum_zero"]
-    c8["three_consecutive_point_count"]
-    c9["hasse_bound"]
+  subgraph s4["<b>111. StepanovWeil — the square-root bound for the residue character of any pattern</b>"]
+    c11["weil_pattern_bound"]
   end
   subgraph s5["<b>113. BirchTateRational — 24 times ζ(−1) is −2</b>"]
-    c10["zeta_neg_one"]
-    c11["w2_times_zeta"]
+    c12["zeta_neg_one"]
+    c13["w2_times_zeta"]
   end
   subgraph s6["108. BrocardWindowLength (in Gaps between survivors and between primes)"]
-    c12["window_length_mod_24"]
+    c14["window_length_mod_24"]
   end
   c1 ==> c2
-  c2 ==> c12
-  c7 ==> c8
-  c6 ==> c9
-  c1 ==> c11
-  c10 ==> c11
+  c2 ==> c14
+  c6 ==> c7
+  c3 ==> c9
+  c4 ==> c9
+  c8 ==> c10
+  c9 ==> c10
+  c1 ==> c13
+  c12 ==> c13
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
   classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
@@ -1345,20 +1350,22 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c7,c8,c9,c10,c11,c12 verified;
-  class c6 cited_built;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c12,c13,c14 verified;
+  class c11 cited_built;
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/UnitSquares24.md#units_square_one_iff" _blank
   click c2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/UnitSquares24.md#prime_sq_mod_24" _blank
-  click c12 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardWindowLength.md#window_length_mod_24" _blank
+  click c14 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BrocardWindowLength.md#window_length_mod_24" _blank
   click c3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/QuadraticCharSum.md#pair_char_sum_distinct" _blank
   click c4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/QuadraticCharSum.md#pair_char_sum_equal" _blank
   click c5 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/QuadraticCharSum.md#quadratic_char_sum" _blank
-  click c6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/StepanovWeil.md#weil_pattern_bound" _blank
-  click c7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HasseCurve.md#three_consecutive_sum_zero" _blank
-  click c8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HasseCurve.md#three_consecutive_point_count" _blank
-  click c9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HasseCurve.md#hasse_bound" _blank
-  click c10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirchTateRational.md#zeta_neg_one" _blank
-  click c11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirchTateRational.md#w2_times_zeta" _blank
+  click c6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HasseCurve.md#three_consecutive_sum_zero" _blank
+  click c7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HasseCurve.md#three_consecutive_point_count" _blank
+  click c8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HasseCurve.md#jacobsthal_twist" _blank
+  click c9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HasseCurve.md#jacobsthal_second_moment" _blank
+  click c10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/HasseCurve.md#hasse_bound" _blank
+  click c11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/StepanovWeil.md#weil_pattern_bound" _blank
+  click c12 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirchTateRational.md#zeta_neg_one" _blank
+  click c13 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/BirchTateRational.md#w2_times_zeta" _blank
 ```
 
 ### Sieve methods: Brun, Hooley, Selberg
@@ -2114,13 +2121,15 @@ The results nothing else builds on, each with everything beneath it.
   - [`UnitSquares24.prime_sq_mod_24`](docs/nodes/UnitSquares24.md#prime_sq_mod_24) — proved in Lean
     - [`UnitSquares24.units_square_one_iff`](docs/nodes/UnitSquares24.md#units_square_one_iff) — proved in Lean
 - [`BrocardWindowLength.window_length_lower`](docs/nodes/BrocardWindowLength.md#window_length_lower) — proved in Lean
-- [`QuadraticCharSum.pair_char_sum_distinct`](docs/nodes/QuadraticCharSum.md#pair_char_sum_distinct) — proved in Lean
-- [`QuadraticCharSum.pair_char_sum_equal`](docs/nodes/QuadraticCharSum.md#pair_char_sum_equal) — proved in Lean
 - [`QuadraticCharSum.quadratic_char_sum`](docs/nodes/QuadraticCharSum.md#quadratic_char_sum) — proved in Lean
 - [`HasseCurve.three_consecutive_point_count`](docs/nodes/HasseCurve.md#three_consecutive_point_count) — proved in Lean
   - [`HasseCurve.three_consecutive_sum_zero`](docs/nodes/HasseCurve.md#three_consecutive_sum_zero) — proved in Lean
 - [`HasseCurve.hasse_bound`](docs/nodes/HasseCurve.md#hasse_bound) — proved in Lean
-  - [`StepanovWeil.weil_pattern_bound`](docs/nodes/StepanovWeil.md#weil_pattern_bound) — cited
+  - [`HasseCurve.jacobsthal_twist`](docs/nodes/HasseCurve.md#jacobsthal_twist) — proved in Lean
+  - [`HasseCurve.jacobsthal_second_moment`](docs/nodes/HasseCurve.md#jacobsthal_second_moment) — proved in Lean
+    - [`QuadraticCharSum.pair_char_sum_distinct`](docs/nodes/QuadraticCharSum.md#pair_char_sum_distinct) — proved in Lean
+    - [`QuadraticCharSum.pair_char_sum_equal`](docs/nodes/QuadraticCharSum.md#pair_char_sum_equal) — proved in Lean
+- [`StepanovWeil.weil_pattern_bound`](docs/nodes/StepanovWeil.md#weil_pattern_bound) — cited
 - [`VonKochBound.von_koch_bound`](docs/nodes/VonKochBound.md#von_koch_bound) — cited
   - `riemann_hypothesis` — open conjecture, taken as a hypothesis
 - [`VonKochBound.error_exceeds_window`](docs/nodes/VonKochBound.md#error_exceeds_window) — proved in Lean
@@ -2483,6 +2492,8 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 - [`HasseCurve`](docs/nodes/HasseCurve.md)
   - [Hasse's theorem on elliptic curves (Wikipedia)](https://en.wikipedia.org/wiki/Hasse%27s_theorem_on_elliptic_curves) — the bound, of which hasse_bound is the case of the curve y² = x³ − x
   - [A. Sutherland, 18.783 Elliptic Curves, Lecture 7: point counting (MIT, 2025)](https://math.mit.edu/classes/18.783/2025/LectureNotes7.pdf) — Hasse's theorem and the point count through the quadratic character
+  - [Paley and the Paley graphs, §3 Jacobsthal and sums of squares (arXiv:1702.00285)](https://arxiv.org/abs/1702.00285) — Jacobsthal's 1907 sums for y² = x³ − n x, whose method the Hasse bound here follows
+  - [Jacobsthal identity for Q(√−2) (arXiv:1110.5815)](https://arxiv.org/abs/1110.5815) — states Jacobsthal's identity and notes its elementary proofs
 - [`StepanovWeil`](docs/nodes/StepanovWeil.md)
   - [S. Kopparty, The Weil bounds, Topics in Finite Fields (Rutgers, 2013)](https://sites.math.rutgers.edu/~sk1233/courses/finitefields-F13/weil.pdf) — states the bound and proves special cases by Stepanov's method
   - [Finite Fields: Root Sets, Frobenius, and Algebraic Structure, §18.23 (arXiv:2610.36727)](https://arxiv.org/abs/2610.36727) — Weil bounds for polynomial character sums by Stepanov's method; a possible blueprint for a Lean proof
