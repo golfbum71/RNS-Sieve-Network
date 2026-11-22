@@ -90,3 +90,4 @@ import RNSSolutions.QuadraticCharSum
 import RNSSolutions.HasseCurve
 import RNSSolutions.VonKochBound
 import RNSSolutions.BirchTateRational
+import RNSSolutions.KanoldBound
