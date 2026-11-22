@@ -9,7 +9,8 @@ import Mathlib.Tactic
 /-!
 # Proofs for VonKochBound
 
-Draft, 2026-11-22. Von Koch's bound itself is cited, not proved. The size
+Built clean by `lake build RNSSolutions` on 2026-11-22; `#print axioms` shows only
+`propext`, `Classical.choice`, `Quot.sound`. Von Koch's bound itself is cited, not proved. The size
 comparison: past e⁴ the logarithm exceeds 4.
 -/
 

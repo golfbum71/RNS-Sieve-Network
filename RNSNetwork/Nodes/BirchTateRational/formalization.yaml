@@ -20,10 +20,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BirchTateRational.lean
     declaration: RNS.BirchTateRational.zeta_neg_one_holds
-    note: "Draft Lean proof written 2026-11-22; not yet built."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-22). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: w2_times_zeta
   declaration: RNS.BirchTateRational.w2_times_zeta
@@ -34,10 +34,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/BirchTateRational.lean
     declaration: RNS.BirchTateRational.w2_times_zeta_step
-    note: "Draft Lean proof written 2026-11-22; not yet built."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-22). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 sources:
 - title: "J. Hurrelbrink, Birch–Tate conjecture, Encyclopedia of Mathematics"

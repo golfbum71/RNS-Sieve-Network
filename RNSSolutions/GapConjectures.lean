@@ -400,7 +400,7 @@ end RNS.GapConjectures
 
 namespace RNS.GapConjectures
 
-/-! ## Part 6: Brocard from Oppermann (added 2026-11-22, draft) -/
+/-! ## Part 6: Brocard from Oppermann (added 2026-11-22, built clean) -/
 
 /-- Oppermann at the smaller prime (above its square), at the next number (on
 both sides of its square) and at the one after (below its square) gives four

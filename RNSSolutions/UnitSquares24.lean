@@ -9,7 +9,8 @@ import Mathlib.Tactic
 /-!
 # Proofs for UnitSquares24
 
-Draft, 2026-11-22.
+Built clean by `lake build RNSSolutions` on 2026-11-22; `#print axioms` shows only
+`propext`, `Classical.choice`, `Quot.sound`.
 
 Divisors of 24: every unit of the cycle of 24 squares to 1 (a finite check),
 and the units of a divisor all come from units of 24

@@ -10,7 +10,8 @@ import Mathlib.Tactic
 /-!
 # Proofs for BrocardWindowLength
 
-Draft, 2026-11-22.
+Built clean by `lake build RNSSolutions` on 2026-11-22; `#print axioms` shows only
+`propext`, `Classical.choice`, `Quot.sound`.
 
 Both squares leave remainder 1 on the cycle of 24
 (`UnitSquares24.prime_sq_mod_24`, taken as a named hypothesis), so their

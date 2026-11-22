@@ -11,7 +11,8 @@ import Mathlib.Tactic
 /-!
 # Proofs for BirchTateRational
 
-Draft, 2026-11-22.
+Built clean by `lake build RNSSolutions` on 2026-11-22; `#print axioms` shows only
+`propext`, `Classical.choice`, `Quot.sound`.
 
 ζ(−1) from Mathlib's value of zeta at negative whole numbers through the
 Bernoulli numbers (`riemannZeta_neg_nat_eq_bernoulli`, Bernoulli 2 = 1/6). The

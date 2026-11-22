@@ -106,5 +106,12 @@
 | 104 | [`BrocardPrediction`](BrocardPrediction.md) | the cycling-only count of primes between two prime squares | proved in Lean |
 | 105 | [`EulerFactorZeros`](EulerFactorZeros.md) | one wheel's Euler factor, and why two wheels never share a zero | proved in Lean |
 | 106 | [`OrbitalTrace`](OrbitalTrace.md) | the trace on one wheel's loop, and why it vanishes below the wheel | proved in Lean |
+| 107 | [`UnitSquares24`](UnitSquares24.md) | 24 is the largest cycle on which every open position squares to 1 | proved in Lean |
+| 108 | [`BrocardWindowLength`](BrocardWindowLength.md) | the window between two prime squares is a multiple of 24 | proved in Lean |
+| 109 | [`QuadraticCharSum`](QuadraticCharSum.md) | on one wheel, the residue character of a pair pattern adds up to −1 | proved in Lean |
+| 110 | [`HasseCurve`](HasseCurve.md) | three consecutive positions, and Hasse's bound for y² = x³ − x | proved in Lean |
+| 111 | [`StepanovWeil`](StepanovWeil.md) | the square-root bound for the residue character of any pattern | cited from a published paper; not proved in Lean |
+| 112 | [`VonKochBound`](VonKochBound.md) | the Riemann hypothesis as an error term, against the Brocard window | cited from a published paper; not proved in Lean |
+| 113 | [`BirchTateRational`](BirchTateRational.md) | 24 times ζ(−1) is −2 | proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

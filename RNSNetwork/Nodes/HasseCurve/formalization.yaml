@@ -20,10 +20,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/HasseCurve.lean
     declaration: RNS.HasseCurve.three_consecutive_sum_zero_holds
-    note: "Draft Lean proof written 2026-11-22; not yet built."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-22). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: three_consecutive_point_count
   declaration: RNS.HasseCurve.three_consecutive_point_count
@@ -33,10 +33,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/HasseCurve.lean
     declaration: RNS.HasseCurve.three_consecutive_point_count_step
-    note: "Draft Lean proof written 2026-11-22; not yet built."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-22). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: hasse_bound
   declaration: RNS.HasseCurve.hasse_bound
@@ -46,10 +46,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/HasseCurve.lean
     declaration: RNS.HasseCurve.hasse_bound_step
-    note: "Draft Lean step written 2026-11-22; not yet built. The step takes the cited claim StepanovWeil.weil_pattern_bound as a named hypothesis."
+    note: "Complete Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-22); it takes the cited claim StepanovWeil.weil_pattern_bound as a named hypothesis, so Hasse's bound here is conditional on that citation. Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 sources:
 - title: "Hasse's theorem on elliptic curves (Wikipedia)"

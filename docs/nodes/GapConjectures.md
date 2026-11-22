@@ -117,6 +117,25 @@ def legendre_of_oppermann : Prop :=
 
 **Proof:** `RNS.GapConjectures.legendre_of_oppermann_holds` in [`RNSSolutions/GapConjectures.lean`](../../RNSSolutions/GapConjectures.lean)
 
+<a id="brocard_of_oppermann"></a>
+### `brocard_of_oppermann`
+
+Oppermann's conjecture gives Brocard's: its four intervals around the squares of the smaller prime, the next number and the one after each hold a prime inside the window.
+
+```lean
+/-- **Oppermann gives Brocard.** Between the squares of two consecutive primes
+from 3 on, Oppermann's four intervals (one above the smaller square, two
+around the next square, one below the square after) each hold a prime. -/
+def brocard_of_oppermann : Prop :=
+  oppermann_conjecture → brocard_conjecture
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Open conjectures in its hypotheses (assumed, never claimed):** `oppermann_conjecture`
+
+**Proof:** `RNS.GapConjectures.brocard_of_oppermann_holds` in [`RNSSolutions/GapConjectures.lean`](../../RNSSolutions/GapConjectures.lean)
+
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/GapConjectures/Conclusions.lean)

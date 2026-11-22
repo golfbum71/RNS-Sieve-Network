@@ -19,10 +19,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/UnitSquares24.lean
     declaration: RNS.UnitSquares24.units_square_one_iff_holds
-    note: "Draft Lean proof written 2026-11-22; not yet built."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-22). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: prime_sq_mod_24
   declaration: RNS.UnitSquares24.prime_sq_mod_24
@@ -32,10 +32,10 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/UnitSquares24.lean
     declaration: RNS.UnitSquares24.prime_sq_mod_24_step
-    note: "Draft Lean proof written 2026-11-22; not yet built."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-22). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 sources:
 - title: Carmichael function (Wikipedia)

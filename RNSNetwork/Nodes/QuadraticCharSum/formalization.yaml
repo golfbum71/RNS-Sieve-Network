@@ -19,10 +19,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/QuadraticCharSum.lean
     declaration: RNS.QuadraticCharSum.pair_char_sum_distinct_holds
-    note: "Draft Lean proof written 2026-11-22; not yet built."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-22). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: pair_char_sum_equal
   declaration: RNS.QuadraticCharSum.pair_char_sum_equal
@@ -31,10 +31,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/QuadraticCharSum.lean
     declaration: RNS.QuadraticCharSum.pair_char_sum_equal_holds
-    note: "Draft Lean proof written 2026-11-22; not yet built."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-22). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 - id: quadratic_char_sum
   declaration: RNS.QuadraticCharSum.quadratic_char_sum
@@ -43,10 +43,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/QuadraticCharSum.lean
     declaration: RNS.QuadraticCharSum.quadratic_char_sum_holds
-    note: "Draft Lean proof written 2026-11-22; not yet built."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-22). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 sources:
 - title: "S. Kopparty, The Weil bounds, Topics in Finite Fields (Rutgers, 2013)"

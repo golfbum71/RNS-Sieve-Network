@@ -10,7 +10,8 @@ import Mathlib.Tactic
 /-!
 # Proofs for QuadraticCharSum
 
-Draft, 2026-11-22.
+Built clean by `lake build RNSSolutions` on 2026-11-22; `#print axioms` shows only
+`propext`, `Classical.choice`, `Quot.sound`.
 
 Over any finite field of odd characteristic. For a nonzero step: scaling by
 the step turns the sum into the one for step 1; turning the wheel backwards

@@ -1358,6 +1358,59 @@ Scaling by a number above 1 (for a prime wheel, the prime) turns the positive nu
 - Rests on: Mathlib only (related: `EulerFactorZeros`)
 - Status: Clean (GitHub Actions build, 2026-11-21)
 
+### 107. `UnitSquares24` — 24 is the largest cycle on which every open position squares to 1
+On a cycle of a given length, every open position (one sharing no factor with the length) squares to 1 exactly when the length divides 24; so every prime from 5 on squares to one more than a multiple of 24. In number-field language, w₂ of the rationals is 24. Classical.
+- Sources: [Carmichael function](https://en.wikipedia.org/wiki/Carmichael_function); [Birch–Tate conjecture, Encyclopedia of Mathematics](https://encyclopediaofmath.org/wiki/Birch–Tate_conjecture)
+- Lean: `units_square_one_iff_holds`, `prime_sq_mod_24_holds` (`RNSSolutions/UnitSquares24.lean`)
+- Rests on: Mathlib only (related: `CRT`, `BrocardWindowLength`)
+- Status: Clean (GitHub Actions build, 2026-11-22)
+
+### 108. `BrocardWindowLength` — the window between two prime squares is a multiple of 24
+For primes from 5 on, the larger square minus the smaller is a multiple of 24; for primes from 3 on, it is at least four times the smaller prime plus 4. For consecutive primes this is the Brocard window. Elementary; it measures the window and says nothing yet about how the wheels block it.
+- Sources: [Brocard's conjecture](https://en.wikipedia.org/wiki/Brocard%27s_conjecture)
+- Lean: `window_length_mod_24` (step, assembled), `window_length_lower_holds` (`RNSSolutions/BrocardWindowLength.lean`)
+- Rests on: `UnitSquares24`
+- Status: Clean (GitHub Actions build, 2026-11-22)
+
+### 109. `QuadraticCharSum` — on one wheel, the residue character of a pair pattern adds up to −1
+On an odd prime wheel, the quadratic character of the product of a position's distances to two different offsets adds up to −1 around the wheel; to the wheel size minus 1 when the offsets coincide; and to −1 for any quadratic with nonzero discriminant. The exact degree-two case of Hasse and Weil, proved through Mathlib's Jacobi sums. Classical.
+- Sources: [Kopparty, The Weil bounds (Rutgers notes)](https://sites.math.rutgers.edu/~sk1233/courses/finitefields-F13/weil.pdf); [Jacobi sum](https://en.wikipedia.org/wiki/Jacobi_sum)
+- Lean: `pair_char_sum_distinct_holds`, `pair_char_sum_equal_holds`, `quadratic_char_sum_holds` (`RNSSolutions/QuadraticCharSum.lean`)
+- Rests on: Mathlib only (related: `StepanovWeil`, `SurvivorCount`, `PolynomialPatterns`)
+- Status: Clean (GitHub Actions build, 2026-11-22)
+
+### 110. `HasseCurve` — three consecutive positions, and Hasse's bound for y² = x³ − x
+The product of three consecutive positions is x³ − x after a shift, so its character counts the points of y² = x³ − x on the wheel. Proved: on wheels of size 3 more than a multiple of 4 the character sum is 0 and the curve has exactly the wheel size many points. Hasse's bound (squared sum at most four times the wheel size, every odd prime wheel) is a Lean step from the cited Weil bound, so it is conditional on that citation.
+- Sources: [Hasse's theorem on elliptic curves](https://en.wikipedia.org/wiki/Hasse%27s_theorem_on_elliptic_curves); [Sutherland, MIT 18.783 Lecture 7](https://math.mit.edu/classes/18.783/2025/LectureNotes7.pdf)
+- Lean: `three_consecutive_sum_zero_holds`, `three_consecutive_point_count` (assembled), `hasse_bound_of_weil` (conditional on `StepanovWeil.weil_pattern_bound`)
+- Rests on: `StepanovWeil` (cited)
+- Status: Clean (GitHub Actions build, 2026-11-22); Hasse's bound conditional on the cited Weil bound.
+
+### 111. `StepanovWeil` — the square-root bound for the residue character of any pattern (cited)
+For an offset pattern with no two members on the same position of an odd prime wheel, the squared character sum of the product of distances is at most (pattern size − 1)² times the wheel size. Weil (1948); elementary proof by Stepanov (1969), in Schmidt's form. Cited, not proved in Lean; a Lean proof by Stepanov's method is the future work. Checked numerically on 2026-11-22 (every pattern of up to 3 offsets, 4 below 40, on every odd prime wheel below 120).
+- Sources: [Kopparty, The Weil bounds](https://sites.math.rutgers.edu/~sk1233/courses/finitefields-F13/weil.pdf); [arXiv 2610.36727, §18.23](https://arxiv.org/abs/2610.36727)
+- Lean: `weil_pattern_bound` (statement only)
+- Rests on: nothing (cited)
+- Status: Cited.
+
+### 112. `VonKochBound` — the Riemann hypothesis as an error term, against the Brocard window
+Von Koch (1901): on the Riemann hypothesis, the prime count is within a constant times √x log x of the logarithmic integral (cited; the hypothesis is never claimed). Proved: past e⁴, √x log x exceeds four times √x, the guaranteed Brocard window length in the same units. This compares sizes only; it does not show that the Riemann hypothesis fails to imply Brocard.
+- Sources: [Riemann hypothesis](https://en.wikipedia.org/wiki/Riemann_hypothesis); von Koch, Acta Math. 24 (1901)
+- Lean: `von_koch_bound` (cited), `error_exceeds_window_holds` (`RNSSolutions/VonKochBound.lean`)
+- Rests on: nothing (related: `PrimeNumberTheorem`, `BrocardWindowLength`, `GapConjectures`)
+- Status: Size comparison clean (2026-11-22); von Koch's bound cited.
+
+### 113. `BirchTateRational` — 24 times ζ(−1) is −2
+ζ(−1) = −1/12 from Mathlib's Bernoulli values; the largest cycle on which every open position squares to 1 is 24 (`UnitSquares24`); and 24 times ζ(−1) is −2, the numerical side of the Birch–Tate formula for the rationals (K₂ of the integers has order 2; K₂ is not in Mathlib, so only the numbers are stated). The rational case, in numbers, of Deligne and Ribet's integrality of w₂ times ζ(−1).
+- Sources: [Birch–Tate conjecture, Encyclopedia of Mathematics](https://encyclopediaofmath.org/wiki/Birch–Tate_conjecture); [Deligne and Ribet, Invent. Math. 59 (1980)](https://doi.org/10.1007/BF01453237)
+- Lean: `zeta_neg_one_holds`, `w2_times_zeta` (assembled)
+- Rests on: `UnitSquares24`
+- Status: Clean (GitHub Actions build, 2026-11-22)
+
+### Added 2026-11-22 to existing nodes
+- `GapConjectures` gains `brocard_of_oppermann`: Oppermann's conjecture gives Brocard's (four primes, one from each of Oppermann's intervals at the smaller prime, the next number and the one after). Proved; Oppermann stays an open hypothesis.
+- Already in the network, so no new node: the local survivor counts and their product over the combined cycle (`SurvivorCount`); the Jacobsthal function as the largest survivor gap (`BlockingRuns`), its exact value for the wheels up to 13 (`GapCertificate`) and Kanold's bound of two to the number of wheels (`KanoldBound`, cited, still to be proved).
+
 ### Added to nodes 71-89
 - `BadWheels` gains `divisors_pairwise_coprime` (Ford Lemma 7.7).
 - `BuchstabIdentity` gains `buchstab_product_identity` (Tao, Notes 4, Exercise 13).

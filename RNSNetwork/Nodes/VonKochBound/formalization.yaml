@@ -31,10 +31,10 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/VonKochBound.lean
     declaration: RNS.VonKochBound.error_exceeds_window_holds
-    note: "Draft Lean proof written 2026-11-22; not yet built."
+    note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-22). Recorded as noncompliant only because no Comparator receipt exists yet."
   designated: lean-proof
 sources:
 - title: Riemann hypothesis (Wikipedia), section on the distribution of prime numbers

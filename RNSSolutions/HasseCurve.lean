@@ -10,7 +10,8 @@ import Mathlib.Tactic
 /-!
 # Proofs for HasseCurve
 
-Draft, 2026-11-22.
+Built clean by `lake build RNSSolutions` on 2026-11-22; `#print axioms` shows only
+`propext`, `Classical.choice`, `Quot.sound`.
 
 Shifted by one, the product of three consecutive positions is
 (y − 1) · y · (y + 1), an odd function of y. When the wheel size leaves
