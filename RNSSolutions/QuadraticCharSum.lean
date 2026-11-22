@@ -39,8 +39,9 @@ theorem sum_mul_add_eq (hF : ringChar F ≠ 2) {d : F} (hd : d ≠ 0) :
     symm
     refine Fintype.sum_equiv (Equiv.mulLeft₀ d hd) _ _ (fun t => ?_)
     simp only [Equiv.mulLeft₀_apply]
-    rw [show d * t * (d * t + d) = d ^ 2 * (t * (t + 1)) by ring, map_mul,
-      quadraticChar_sq_one' hd, one_mul]
+    rw [show d * t * (d * t + d) = d ^ 2 * (t * (t + 1)) by ring,
+      map_mul (quadraticChar F) (d ^ 2) (t * (t + 1)), quadraticChar_sq_one' hd, one_mul,
+      map_mul]
   have h2 : ∑ t : F, quadraticChar F (t * (t + 1)) =
       quadraticChar F (-1) * jacobiSum (quadraticChar F) (quadraticChar F) := by
     rw [jacobiSum, Finset.mul_sum]
@@ -69,7 +70,8 @@ theorem sq_sum (a : F) :
     intro y
     by_cases hy : y = 0
     · simp [hy]
-    · rw [if_neg hy, sub_zero, ← sq, quadraticChar_sq_one' hy]
+    · simp only [hy, ↓reduceIte, sub_zero]
+      rw [← sq, quadraticChar_sq_one' hy]
   simp [h2, Finset.sum_sub_distrib]
 
 /-- A sum over squares, as a sum over all positions weighted by the number of
@@ -101,7 +103,6 @@ theorem quad_sum (hF : ringChar F ≠ 2) {b c : F} (hdisc : b ^ 2 - 4 * c ≠ 0)
     ext y
     simp
   have hfib := sum_sq_fiber (fun z : F => quadraticChar F (z - (b ^ 2 - 4 * c)))
-  simp only at hfib
   rw [h1, hfib]
   simp_rw [hcount, add_mul, one_mul, Finset.sum_add_distrib]
   have hshift : ∑ z : F, quadraticChar F (z - (b ^ 2 - 4 * c)) = ∑ z : F, quadraticChar F z :=
