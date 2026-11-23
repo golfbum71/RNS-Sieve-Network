@@ -61,3 +61,6 @@ sources:
 - title: DeepMind formal-conjectures, Erdős Problem 687 / Green's Open Problem 46
   url: https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/687.lean
   relationship: states the problem
+related:
+- node: JacobsthalTightness
+  note: "Jacobsthal's problem decides which lonely-runner speed sets are tight"

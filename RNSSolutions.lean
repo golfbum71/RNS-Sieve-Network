@@ -95,3 +95,5 @@ import RNSSolutions.PileUpLock
 import RNSSolutions.SmallDivisorPulse
 import RNSSolutions.TeamShift
 import RNSSolutions.ResidueReduction
+import RNSSolutions.ModulusLift
+import RNSSolutions.FieldSizeTimes

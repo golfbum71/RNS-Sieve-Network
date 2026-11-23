@@ -60,3 +60,5 @@ related:
   note: "the residue method behind every record from eight runners on"
 - node: PileUpLock
   note: "frees some runners directly; the conjecture is about all of them"
+- node: LonelyConnections
+  note: "the conjecture under other names: view-obstruction, zonotope covering radius, flows, distance graphs"

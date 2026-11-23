@@ -28,3 +28,6 @@ sources:
 - title: "T. F. Bloom, Erdős Problem 970"
   url: "https://www.erdosproblems.com/970"
   relationship: "the problem the quadratic bound solves"
+related:
+- node: JacobsthalTightness
+  note: "Jacobsthal's problem decides which lonely-runner speed sets are tight"

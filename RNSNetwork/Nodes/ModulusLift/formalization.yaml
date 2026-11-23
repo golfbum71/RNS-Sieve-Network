@@ -1,0 +1,96 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Lonely Runner family, added 2026-11-23. See docs/NODE_LIST.md.
+
+node:
+  id: ModulusLift.v1
+  family: ModulusLift
+  version: v1
+  order: 123
+  kind: paper
+  status: active
+  group: lonely
+  title: a check passed at one cycle carries up to every multiple of it
+  description: 'A list of speeds is good at a denominator when some time with that denominator is lonely.
+    A good time with one denominator is also good with any multiple of it (stretch the numerator by the
+    same factor), and whether a list is good depends only on the speeds'' remainders. So a list whose
+    remainders were good at a smaller cycle never needs checking at a larger cycle built on it (bad_lists_lift);
+    a list whose all-but-one share a factor with the smaller cycle still shares it with the larger one
+    (proper_lifts). This is the same climb as rotating one more wheel into the combined cycle. Trakulthongchai
+    2026, Definition 6 and Lemma 7: the sieve on the modulus that took the record to nine and ten runners.
+    Uses only the vocabulary of PileUpLock.'
+conclusions:
+- id: far_scale
+  declaration: RNS.ModulusLift.far_scale
+  summary: The point c times y of a lap cut into c times d parts is the same place as the point y of a
+    lap cut into d parts.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/ModulusLift.lean
+    declaration: RNS.ModulusLift.far_scale_holds
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
+- id: good_lifts
+  declaration: RNS.ModulusLift.good_lifts
+  summary: A list good at a denominator is good at every multiple of it.
+  imports:
+  - ModulusLift.v1.far_scale
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/ModulusLift.lean
+    declaration: RNS.ModulusLift.good_lifts_step
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
+- id: good_residues
+  declaration: RNS.ModulusLift.good_residues
+  summary: Whether a list is good at a denominator depends only on the speeds' remainders for it.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/ModulusLift.lean
+    declaration: RNS.ModulusLift.good_residues_holds
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
+- id: bad_lists_lift
+  declaration: RNS.ModulusLift.bad_lists_lift
+  summary: If a list's remainders for a cycle are good, so are its remainders for every multiple of that
+    cycle (Trakulthongchai's Lemma 7).
+  imports:
+  - ModulusLift.v1.good_lifts
+  - ModulusLift.v1.good_residues
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/ModulusLift.lean
+    declaration: RNS.ModulusLift.bad_lists_lift_step
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
+- id: proper_lifts
+  declaration: RNS.ModulusLift.proper_lifts
+  summary: A number sharing a factor with a cycle shares one with every multiple of the cycle.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/ModulusLift.lean
+    declaration: RNS.ModulusLift.proper_lifts_holds
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
+sources:
+- title: T. Trakulthongchai, Nine and ten lonely runners, Electron. J. Combin. 33(2) (2026) P2.46, arXiv
+    2511.22427
+  url: https://arxiv.org/abs/2511.22427
+  relationship: Definition 6 and Lemma 7, the modulus sieve this node proves
+related:
+- node: ResidueReduction
+  note: the check this sieve speeds up; Trakulthongchai climbs the modulus up to the number of runners
+- node: CRT
+  note: a larger cycle built on a smaller one, as when one more wheel rotates in

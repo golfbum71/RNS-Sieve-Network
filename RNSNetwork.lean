@@ -100,3 +100,5 @@ import RNSNetwork.Nodes.PileUpLock.Conclusions
 import RNSNetwork.Nodes.SmallDivisorPulse.Conclusions
 import RNSNetwork.Nodes.TeamShift.Conclusions
 import RNSNetwork.Nodes.ResidueReduction.Conclusions
+import RNSNetwork.Nodes.ModulusLift.Conclusions
+import RNSNetwork.Nodes.FieldSizeTimes.Conclusions

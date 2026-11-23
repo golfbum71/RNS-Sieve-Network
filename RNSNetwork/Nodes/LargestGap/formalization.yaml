@@ -35,3 +35,6 @@ sources:
 - title: P. Codecà and M. Nair, Extremal values of Delta(x,N), Canad. Math. Bull. 41 (1998), 335-347
   url: https://doi.org/10.4153/CMB-1998-046-3
   relationship: Theorem 1(i); Theorem 3(i) for the mean square (read from the paper)
+related:
+- node: JacobsthalTightness
+  note: "Jacobsthal's problem decides which lonely-runner speed sets are tight"

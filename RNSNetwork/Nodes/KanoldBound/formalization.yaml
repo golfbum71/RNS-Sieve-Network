@@ -70,3 +70,5 @@ related:
   note: "a much sharper bound for many wheels, but with a constant that cannot be evaluated"
 - node: GapCertificate
   note: "the exact gaps for the wheels up to 13 (largest 22, against Kanold's 64)"
+- node: JacobsthalTightness
+  note: "Jacobsthal's problem decides which lonely-runner speed sets are tight"

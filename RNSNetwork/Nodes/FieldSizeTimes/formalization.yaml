@@ -1,0 +1,76 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Lonely Runner family, added 2026-11-23. See docs/NODE_LIST.md.
+
+node:
+  id: FieldSizeTimes.v1
+  family: FieldSizeTimes
+  version: v1
+  order: 124
+  kind: paper
+  status: active
+  group: lonely
+  title: times with the number of runners as denominator
+  description: 'With the number of runners as the denominator, the track is cut into that many equal parts,
+    and one part is exactly the loneliness distance. So at such a time a runner is far enough exactly
+    when it is not at the start (field_size_far_iff), and the runner standing still is lonely exactly
+    when no speed times the numerator is a multiple of the number of runners (field_size_lonely_iff).
+    When the number of runners is prime, the consecutive speeds 1 up to one less than it are lonely at
+    such a time exactly when the numerator is not a multiple of the number of runners (consecutive_prime_field):
+    the tight cases, one runner per fence post. The easy half of Sungkawichai and Trakulthongchai''s Remark
+    3.2, the reason their method needs a prime number of runners. Not proved here: that these are the
+    only lonely times of the consecutive speeds, and their polynomial method over the remainders for a
+    prime (Proposition 4.1).'
+conclusions:
+- id: field_size_far_iff
+  declaration: RNS.FieldSizeTimes.field_size_far_iff
+  summary: With as many parts to the lap as runners, a point is far enough from the start exactly when
+    it is not at the start.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FieldSizeTimes.lean
+    declaration: RNS.FieldSizeTimes.field_size_far_iff_holds
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
+- id: field_size_lonely_iff
+  declaration: RNS.FieldSizeTimes.field_size_lonely_iff
+  summary: The runner standing still is lonely at a time with the number of runners as denominator exactly
+    when no speed times the numerator is a multiple of the number of runners.
+  imports:
+  - FieldSizeTimes.v1.field_size_far_iff
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FieldSizeTimes.lean
+    declaration: RNS.FieldSizeTimes.field_size_lonely_iff_step
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
+- id: consecutive_prime_field
+  declaration: RNS.FieldSizeTimes.consecutive_prime_field
+  summary: If the number of runners is prime, the consecutive speeds are lonely at a numerator over the
+    number of runners exactly when the numerator is not a multiple of it.
+  imports:
+  - FieldSizeTimes.v1.field_size_lonely_iff
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/FieldSizeTimes.lean
+    declaration: RNS.FieldSizeTimes.consecutive_prime_field_step
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
+sources:
+- title: T. Sungkawichai and T. Trakulthongchai, Eleven, twelve, and thirteen lonely runners, arXiv 2604.23906
+  url: https://arxiv.org/abs/2604.23906
+  relationship: Remark 3.2 (easy half proved here); Proposition 4.1 not proved
+- title: L. Goddyn and E. B. Wong, Tight instances of the lonely runner, Integers 6 (2006) A38
+  url: https://www.sfu.ca/~goddyn/Papers/063tight_lonely_runner.tex.txt
+  relationship: the consecutive speeds are the basic tight instance
+related:
+- node: SmallDivisorPulse
+  note: the same kind of time, one over a number; here the number is the number of runners
+- node: JacobsthalTightness
+  note: which speed sets are tight, and why that waits on Jacobsthal's problem
