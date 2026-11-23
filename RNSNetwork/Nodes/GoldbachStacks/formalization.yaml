@@ -21,7 +21,10 @@ node:
     Goldbach's conjecture itself stays open. Also proved: at the wheel of size 3
     every stack above height 1 leaves remainder 0 or 2, never 1, and at any
     single wheel the surviving stacks, taken in pairs, reach every remainder,
-    so no one wheel can force a gap.
+    so no one wheel can force a gap. Resting on CRT, the same holds for the
+    combined cycle of all the wheels below any bound at once: the good pairs
+    chosen wheel by wheel join into one pair for the whole cycle. What stays
+    open is one actual range of targets, shorter than the cycle.
 
 conclusions:
   - id: goldbach_iff_odd_goldbach
@@ -96,8 +99,29 @@ conclusions:
         declaration: RNS.GoldbachStacks.wheel_no_gap_holds
         note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
+  - id: wheels_no_gap
+    declaration: RNS.GoldbachStacks.wheels_no_gap
+    summary: "For the combined cycle of all the wheels below any bound, every target position is the sum of two positions whose stacks survive every one of those wheels, so no finite set of wheels forces a gap."
+    imports:
+      - CRT.v1.crt_map_bijective
+    imports_status: identified
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/GoldbachStacks.lean
+        declaration: RNS.GoldbachStacks.wheels_no_gap_step
+        assembled: RNSSolutions/Assemble.lean (RNS.GoldbachStacks.wheels_no_gap_holds)
+        note: "Complete Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23). Recorded as noncompliant only because no Comparator receipt exists yet."
+    designated: lean-proof
 
 sources:
+  - title: "Hardy and Littlewood, Some problems of Partitio Numerorum III (Acta Math. 44, 1923)"
+    url: https://doi.org/10.1007/BF02403921
+    relationship: >-
+      their Goldbach constant (singular series) is positive for every even
+      number, the counting form of the fact that no finite set of wheels blocks
+      a sum of two primes; the single-wheel and combined-cycle claims here state
+      that fact without counting, in the stack picture
   - title: Goldbach's conjecture (Wikipedia)
     url: https://en.wikipedia.org/wiki/Goldbach%27s_conjecture
     relationship: states the conjecture whose equivalent forms this node proves; the stack and frontier forms are original

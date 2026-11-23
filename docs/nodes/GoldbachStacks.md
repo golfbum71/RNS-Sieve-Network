@@ -4,12 +4,13 @@
 
 **Status:** proved in Lean · **Diagram:** [Gaps between survivors and between primes](../../GRAPH.md#gaps-between-survivors-and-between-primes)
 
-Original to this project. Each odd prime is a stack two wide with one point sticking up (3 is height 1, 5 height 2, 7 height 3, 11 height 5). Two stacks put together make twice their total height plus 2, so building every pair of stacks reaches the target heights. Proved here: the stacks never leave a gap exactly when Goldbach's conjecture holds, and so does the frontier form (as the stacks arrive in order, every target up to a new stack's height is already built from the stacks before it). These are equivalences only; Goldbach's conjecture itself stays open. Also proved: at the wheel of size 3 every stack above height 1 leaves remainder 0 or 2, never 1, and at any single wheel the surviving stacks, taken in pairs, reach every remainder, so no one wheel can force a gap.
+Original to this project. Each odd prime is a stack two wide with one point sticking up (3 is height 1, 5 height 2, 7 height 3, 11 height 5). Two stacks put together make twice their total height plus 2, so building every pair of stacks reaches the target heights. Proved here: the stacks never leave a gap exactly when Goldbach's conjecture holds, and so does the frontier form (as the stacks arrive in order, every target up to a new stack's height is already built from the stacks before it). These are equivalences only; Goldbach's conjecture itself stays open. Also proved: at the wheel of size 3 every stack above height 1 leaves remainder 0 or 2, never 1, and at any single wheel the surviving stacks, taken in pairs, reach every remainder, so no one wheel can force a gap. Resting on CRT, the same holds for the combined cycle of all the wheels below any bound at once: the good pairs chosen wheel by wheel join into one pair for the whole cycle. What stays open is one actual range of targets, shorter than the cycle.
 
 ## Published sources
 
 Published work this node rests on or relates to; each entry says how.
 
+- [Hardy and Littlewood, Some problems of Partitio Numerorum III (Acta Math. 44, 1923)](https://doi.org/10.1007/BF02403921) — their Goldbach constant (singular series) is positive for every even number, the counting form of the fact that no finite set of wheels blocks a sum of two primes; the single-wheel and combined-cycle claims here state that fact without counting, in the stack picture
 - [Goldbach's conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Goldbach%27s_conjecture) — states the conjecture whose equivalent forms this node proves; the stack and frontier forms are original
 
 ## Related nodes
@@ -118,6 +119,29 @@ def wheel_no_gap : Prop :=
 **Rests on:** no other node (Mathlib and the Vocabulary only)
 
 **Proof:** `RNS.GoldbachStacks.wheel_no_gap_holds` in [`RNSSolutions/GoldbachStacks.lean`](../../RNSSolutions/GoldbachStacks.lean)
+
+<a id="wheels_no_gap"></a>
+### `wheels_no_gap`
+
+For the combined cycle of all the wheels below any bound, every target position is the sum of two positions whose stacks survive every one of those wheels, so no finite set of wheels forces a gap.
+
+```lean
+/-- **No combined cycle forces a gap.** For every bound and every target
+position `r` of the combined cycle of the wheels below that bound, there are
+two positions `a` and `b` of the cycle whose stacks survive every one of those
+wheels (on each wheel, twice the height plus 1 is not on the blocked
+position) and whose sum is `r`. -/
+def wheels_no_gap : Prop :=
+  ∀ limit : ℕ, ∀ r : ZMod (primorial_modulus limit),
+    ∃ a b : ZMod (primorial_modulus limit),
+      (∀ q : active_primes limit,
+        2 * crt_map limit a q + 1 ≠ 0 ∧ 2 * crt_map limit b q + 1 ≠ 0) ∧
+      a + b = r
+```
+
+**Rests on:** [`CRT.crt_map_bijective`](CRT.md#crt_map_bijective)
+
+**Proof:** `RNS.GoldbachStacks.wheels_no_gap_step` in [`RNSSolutions/GoldbachStacks.lean`](../../RNSSolutions/GoldbachStacks.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
 
 ## Files
 

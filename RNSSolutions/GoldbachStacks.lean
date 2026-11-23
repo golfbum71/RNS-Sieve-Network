@@ -194,7 +194,7 @@ end RNS.GoldbachStacks
 #print axioms RNS.GoldbachStacks.stack_mod_three_holds
 #print axioms RNS.GoldbachStacks.wheel_no_gap_holds
 
-/-! ## All the wheels of a cycle at once (added 2026-11-23, draft)
+/-! ## All the wheels of a cycle at once (added 2026-11-23, built clean, standard axioms)
 
 Rests on `CRT`: its claim that the combined cycle matches the individual
 wheels exactly is taken as the hypothesis `hcrt`. -/
