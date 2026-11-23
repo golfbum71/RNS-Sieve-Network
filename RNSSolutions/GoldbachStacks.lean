@@ -230,7 +230,7 @@ end RNS.GoldbachStacks
 
 #print axioms RNS.GoldbachStacks.wheels_no_gap_step
 
-/-! ## The open part, stated exactly (added 2026-11-23, draft)
+/-! ## The open part, stated exactly (added 2026-11-23, built clean, standard axioms)
 
 Only the equivalences are proved; `window_no_gap` itself is open. -/
 

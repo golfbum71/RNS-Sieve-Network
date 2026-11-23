@@ -23,8 +23,13 @@ node:
     single wheel the surviving stacks, taken in pairs, reach every remainder,
     so no one wheel can force a gap. Resting on CRT, the same holds for the
     combined cycle of all the wheels below any bound at once: the good pairs
-    chosen wheel by wheel join into one pair for the whole cycle. What stays
-    open is one actual range of targets, shorter than the cycle.
+    chosen wheel by wheel join into one pair for the whole cycle. The open part
+    is stated exactly as the window statement (window_no_gap, never claimed):
+    every target is two heights, from 1 up to one less than the target, whose
+    stacks survive every wheel up to the square root of twice the target plus 1.
+    That range is far shorter than the combined cycle of those wheels, which is
+    why the combined-cycle result does not reach it; the window statement is
+    proved equivalent to the stack picture and to Goldbach's conjecture.
 
 conclusions:
   - id: goldbach_iff_odd_goldbach
@@ -112,6 +117,30 @@ conclusions:
         declaration: RNS.GoldbachStacks.wheels_no_gap_step
         assembled: RNSSolutions/Assemble.lean (RNS.GoldbachStacks.wheels_no_gap_holds)
         note: "Complete Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23). Recorded as noncompliant only because no Comparator receipt exists yet."
+    designated: lean-proof
+  - id: window_no_gap_iff_no_gap
+    declaration: RNS.GoldbachStacks.window_no_gap_iff_no_gap
+    summary: "The window statement (open: every target is two heights whose stacks survive every wheel up to the square root of twice the target plus 1) holds exactly when the stacks never leave a gap."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/GoldbachStacks.lean
+        declaration: RNS.GoldbachStacks.window_no_gap_iff_no_gap_holds
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23). Recorded as noncompliant only because no Comparator receipt exists yet."
+    designated: lean-proof
+  - id: window_no_gap_iff_goldbach
+    declaration: RNS.GoldbachStacks.window_no_gap_iff_goldbach
+    summary: "The window statement holds exactly when every even number above 2 is a sum of two primes; the window statement itself is open and not claimed."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/GoldbachStacks.lean
+        declaration: RNS.GoldbachStacks.window_no_gap_iff_goldbach_holds
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
 sources:

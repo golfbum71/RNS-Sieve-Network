@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean · **Diagram:** [Gaps between survivors and between primes](../../GRAPH.md#gaps-between-survivors-and-between-primes)
 
-Original to this project. Each odd prime is a stack two wide with one point sticking up (3 is height 1, 5 height 2, 7 height 3, 11 height 5). Two stacks put together make twice their total height plus 2, so building every pair of stacks reaches the target heights. Proved here: the stacks never leave a gap exactly when Goldbach's conjecture holds, and so does the frontier form (as the stacks arrive in order, every target up to a new stack's height is already built from the stacks before it). These are equivalences only; Goldbach's conjecture itself stays open. Also proved: at the wheel of size 3 every stack above height 1 leaves remainder 0 or 2, never 1, and at any single wheel the surviving stacks, taken in pairs, reach every remainder, so no one wheel can force a gap. Resting on CRT, the same holds for the combined cycle of all the wheels below any bound at once: the good pairs chosen wheel by wheel join into one pair for the whole cycle. What stays open is one actual range of targets, shorter than the cycle.
+Original to this project. Each odd prime is a stack two wide with one point sticking up (3 is height 1, 5 height 2, 7 height 3, 11 height 5). Two stacks put together make twice their total height plus 2, so building every pair of stacks reaches the target heights. Proved here: the stacks never leave a gap exactly when Goldbach's conjecture holds, and so does the frontier form (as the stacks arrive in order, every target up to a new stack's height is already built from the stacks before it). These are equivalences only; Goldbach's conjecture itself stays open. Also proved: at the wheel of size 3 every stack above height 1 leaves remainder 0 or 2, never 1, and at any single wheel the surviving stacks, taken in pairs, reach every remainder, so no one wheel can force a gap. Resting on CRT, the same holds for the combined cycle of all the wheels below any bound at once: the good pairs chosen wheel by wheel join into one pair for the whole cycle. The open part is stated exactly as the window statement (window_no_gap, never claimed): every target is two heights, from 1 up to one less than the target, whose stacks survive every wheel up to the square root of twice the target plus 1. That range is far shorter than the combined cycle of those wheels, which is why the combined-cycle result does not reach it; the window statement is proved equivalent to the stack picture and to Goldbach's conjecture.
 
 ## Published sources
 
@@ -142,6 +142,36 @@ def wheels_no_gap : Prop :=
 **Rests on:** [`CRT.crt_map_bijective`](CRT.md#crt_map_bijective)
 
 **Proof:** `RNS.GoldbachStacks.wheels_no_gap_step` in [`RNSSolutions/GoldbachStacks.lean`](../../RNSSolutions/GoldbachStacks.lean); joined to its inputs in [`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)
+
+<a id="window_no_gap_iff_no_gap"></a>
+### `window_no_gap_iff_no_gap`
+
+The window statement (open: every target is two heights whose stacks survive every wheel up to the square root of twice the target plus 1) holds exactly when the stacks never leave a gap.
+
+```lean
+/-- **The window is exactly the stack picture.** The window statement holds
+exactly when the stacks never leave a gap. -/
+def window_no_gap_iff_no_gap : Prop := window_no_gap ↔ no_gap
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.GoldbachStacks.window_no_gap_iff_no_gap_holds` in [`RNSSolutions/GoldbachStacks.lean`](../../RNSSolutions/GoldbachStacks.lean)
+
+<a id="window_no_gap_iff_goldbach"></a>
+### `window_no_gap_iff_goldbach`
+
+The window statement holds exactly when every even number above 2 is a sum of two primes; the window statement itself is open and not claimed.
+
+```lean
+/-- **The window is exactly Goldbach's conjecture.** The window statement
+holds exactly when every even number above 2 is a sum of two primes. -/
+def window_no_gap_iff_goldbach : Prop := window_no_gap ↔ goldbach
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.GoldbachStacks.window_no_gap_iff_goldbach_holds` in [`RNSSolutions/GoldbachStacks.lean`](../../RNSSolutions/GoldbachStacks.lean)
 
 ## Files
 
