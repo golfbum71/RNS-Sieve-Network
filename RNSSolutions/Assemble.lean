@@ -752,3 +752,9 @@ theorem RNS.TightFromBlockedRun.several_acceleration_tight_holds :
   RNS.TightFromBlockedRun.several_acceleration_tight_step RNS.FieldSizeTimes.field_size_far_iff_holds
 
 #print axioms RNS.TightFromBlockedRun.several_acceleration_tight_holds
+
+/-- `CRT` → `GoldbachStacks`: no combined cycle of wheels forces a gap. -/
+theorem RNS.GoldbachStacks.wheels_no_gap_holds : RNS.GoldbachStacks.wheels_no_gap :=
+  RNS.GoldbachStacks.wheels_no_gap_step RNS.CRT.crt_map_bijective_holds
+
+#print axioms RNS.GoldbachStacks.wheels_no_gap_holds

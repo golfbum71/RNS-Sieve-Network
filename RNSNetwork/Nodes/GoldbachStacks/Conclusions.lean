@@ -108,3 +108,26 @@ def wheel_no_gap : Prop :=
     ∃ a b : ZMod q, 2 * a + 1 ≠ 0 ∧ 2 * b + 1 ≠ 0 ∧ a + b = r
 
 end RNS.GoldbachStacks
+
+/-! ## All the wheels of a cycle at once (added 2026-11-23)
+
+The combined cycle of the wheels below a bound (its length is the
+primorial) reads each position as one position on every wheel. Choosing a
+good pair of heights on each wheel separately and joining the choices through
+the Chinese Remainder Theorem gives one pair for the whole cycle. -/
+
+namespace RNS.GoldbachStacks
+
+/-- **No combined cycle forces a gap.** For every bound and every target
+position `r` of the combined cycle of the wheels below that bound, there are
+two positions `a` and `b` of the cycle whose stacks survive every one of those
+wheels (on each wheel, twice the height plus 1 is not on the blocked
+position) and whose sum is `r`. -/
+def wheels_no_gap : Prop :=
+  ∀ limit : ℕ, ∀ r : ZMod (primorial_modulus limit),
+    ∃ a b : ZMod (primorial_modulus limit),
+      (∀ q : active_primes limit,
+        2 * crt_map limit a q + 1 ≠ 0 ∧ 2 * crt_map limit b q + 1 ≠ 0) ∧
+      a + b = r
+
+end RNS.GoldbachStacks

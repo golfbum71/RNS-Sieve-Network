@@ -10,6 +10,7 @@ import Mathlib.Tactic.NormNum.Prime      -- `norm_num` proving small numbers pri
 import Mathlib.Algebra.Field.ZMod        -- remainders modulo a prime form a field
 import Mathlib.Data.Finset.Card          -- `Finset.exists_mem_notMem_of_card_lt_card`
 import RNSNetwork.Nodes.GoldbachStacks.Conclusions
+import RNSNetwork.Nodes.CRT.Conclusions   -- `crt_map_bijective`, taken as a hypothesis
 
 /-!
 # Proofs for GoldbachStacks
@@ -192,3 +193,39 @@ end RNS.GoldbachStacks
 
 #print axioms RNS.GoldbachStacks.stack_mod_three_holds
 #print axioms RNS.GoldbachStacks.wheel_no_gap_holds
+
+/-! ## All the wheels of a cycle at once (added 2026-11-23, draft)
+
+Rests on `CRT`: its claim that the combined cycle matches the individual
+wheels exactly is taken as the hypothesis `hcrt`. -/
+
+namespace RNS.GoldbachStacks
+
+theorem wheels_no_gap_step (hcrt : RNS.CRT.crt_map_bijective) : wheels_no_gap := by
+  unfold wheels_no_gap
+  intro limit r
+  have hw := wheel_no_gap_holds
+  unfold wheel_no_gap at hw
+  have hq : ∀ q : active_primes limit, (q : ℕ).Prime := by
+    intro q
+    have h := q.2
+    unfold active_primes at h
+    exact (Finset.mem_filter.mp h).2
+  -- a good pair on each wheel separately
+  choose f g hf using fun q : active_primes limit => hw q (hq q) (crt_map limit r q)
+  -- one position of the combined cycle with the chosen first height on every wheel
+  obtain ⟨a, ha⟩ := (hcrt limit).2 f
+  refine ⟨a, r - a, fun q => ⟨?_, ?_⟩, by ring⟩
+  · rw [ha]
+    exact (hf q).1
+  · have hsub : crt_map limit (r - a) q = crt_map limit r q - crt_map limit a q := by
+      simp only [crt_map, map_sub]
+    have hg : crt_map limit r q - f q = g q := by
+      rw [← (hf q).2.2]
+      ring
+    rw [hsub, ha, hg]
+    exact (hf q).2.1
+
+end RNS.GoldbachStacks
+
+#print axioms RNS.GoldbachStacks.wheels_no_gap_step
