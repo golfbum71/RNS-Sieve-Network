@@ -122,5 +122,9 @@
 | 120 | [`TeamShift`](TeamShift.md) | a team sharing a factor: shift the clock, the team stays put, the last runner moves | proved in Lean; rests on open conjectures as hypotheses |
 | 121 | [`ResidueReduction`](ResidueReduction.md) | only the remainders matter: a residue sieve for the lonely runner | proved in Lean; rests on open conjectures as hypotheses |
 | 122 | [`LonelyRecords`](LonelyRecords.md) | the Lonely Runner Conjecture and its proved cases, up to fifteen runners (cited) | planned: cited from a paper |
+| 123 | [`ModulusLift`](ModulusLift.md) | a check passed at one cycle carries up to every multiple of it | proved in Lean |
+| 124 | [`FieldSizeTimes`](FieldSizeTimes.md) | times with the number of runners as denominator | proved in Lean |
+| 125 | [`LonelyConnections`](LonelyConnections.md) | the Lonely Runner under other names (cited) | planned: cited from a paper |
+| 126 | [`JacobsthalTightness`](JacobsthalTightness.md) | tight lonely runners wait on Jacobsthal's problem (cited) | planned: cited from a paper |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

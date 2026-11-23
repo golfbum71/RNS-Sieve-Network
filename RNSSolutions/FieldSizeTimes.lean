@@ -10,7 +10,8 @@ import Mathlib.Data.Nat.Prime.Int
 /-!
 # Proofs for FieldSizeTimes
 
-Draft (2026-11-23).
+Built clean by `lake build RNSSolutions` on 2026-11-23; `#print axioms` shows only
+`propext`, `Classical.choice`, `Quot.sound`.
 
 With `N` parts and the bound one part, being far means the remainder is from 1
 to `N - 1`, i.e. not 0. For consecutive speeds and a prime number of runners, a

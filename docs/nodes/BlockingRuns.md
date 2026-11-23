@@ -12,6 +12,12 @@ Published work this node rests on or relates to; each entry says how.
 
 - [DeepMind formal-conjectures, Erdős Problem 687 / Green's Open Problem 46](https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/687.lean) — states the problem
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`JacobsthalTightness`](JacobsthalTightness.md) — Jacobsthal's problem decides which lonely-runner speed sets are tight
+
 ## Claims
 
 <a id="blocked_run_is_shift"></a>

@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 101 of 118 nodes are built, holding 318 claims: 311 proved in Lean and 7 cited from a published paper. They are joined by 186 arrows, each a Lean-checked step. Of the other 17 nodes, drawn dashed or purple, 1 is proved in the original source files but not yet restated here; 4 are planned citations of published results; 9 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 103 of 122 nodes are built, holding 326 claims: 319 proved in Lean and 7 cited from a published paper. They are joined by 191 arrows, each a Lean-checked step. Of the other 19 nodes, drawn dashed or purple, 1 is proved in the original source files but not yet restated here; 6 are planned citations of published results; 9 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -53,7 +53,7 @@ graph LR
   g7["<b>One wheel at a time: squares, characters and the number 24</b><br/>5 built, 0 planned or outside"]
   g8["<b>Sieve methods: Brun, Hooley, Selberg</b><br/>18 built, 6 planned or outside"]
   g9["<b>Primes in the columns of large cycles: level of distribution and Elliott-Halberstam</b><br/>0 built, 4 planned or outside"]
-  g10["<b>The Lonely Runner: pile-ups, shifts and residue sieves</b><br/>4 built, 1 planned or outside"]
+  g10["<b>The Lonely Runner: pile-ups, shifts and residue sieves</b><br/>6 built, 3 planned or outside"]
   g1 ==> g2
   g1 ==> g4
   g1 ==> g5
@@ -1725,7 +1725,7 @@ graph LR
 
 ### The Lonely Runner: pile-ups, shifts and residue sieves
 
-Nodes: [`PileUpLock`](docs/nodes/PileUpLock.md), [`SmallDivisorPulse`](docs/nodes/SmallDivisorPulse.md), [`TeamShift`](docs/nodes/TeamShift.md), [`ResidueReduction`](docs/nodes/ResidueReduction.md), [`LonelyRecords`](docs/nodes/LonelyRecords.md).
+Nodes: [`PileUpLock`](docs/nodes/PileUpLock.md), [`SmallDivisorPulse`](docs/nodes/SmallDivisorPulse.md), [`TeamShift`](docs/nodes/TeamShift.md), [`ResidueReduction`](docs/nodes/ResidueReduction.md), [`LonelyRecords`](docs/nodes/LonelyRecords.md), [`ModulusLift`](docs/nodes/ModulusLift.md), [`FieldSizeTimes`](docs/nodes/FieldSizeTimes.md), [`LonelyConnections`](docs/nodes/LonelyConnections.md), [`JacobsthalTightness`](docs/nodes/JacobsthalTightness.md).
 
 ```mermaid
 graph LR
@@ -1750,6 +1750,24 @@ graph LR
   subgraph s5["<b>122. LonelyRecords — the Lonely Runner Conjecture and its proved cases, up to fifteen runners (cited)</b>"]
     p1["<i>planned: cited from a paper</i>"]
   end
+  subgraph s6["<b>123. ModulusLift — a check passed at one cycle carries up to every multiple of it</b>"]
+    c11["far_scale"]
+    c12["good_lifts"]
+    c13["good_residues"]
+    c14["bad_lists_lift"]
+    c15["proper_lifts"]
+  end
+  subgraph s7["<b>124. FieldSizeTimes — times with the number of runners as denominator</b>"]
+    c16["field_size_far_iff"]
+    c17["field_size_lonely_iff"]
+    c18["consecutive_prime_field"]
+  end
+  subgraph s8["<b>125. LonelyConnections — the Lonely Runner under other names (cited)</b>"]
+    p2["<i>planned: cited from a paper</i>"]
+  end
+  subgraph s9["<b>126. JacobsthalTightness — tight lonely runners wait on Jacobsthal's problem (cited)</b>"]
+    p3["<i>planned: cited from a paper</i>"]
+  end
   o1{{"<i>open conjecture</i><br/>lonely_runner_upto"}}
   c3 ==> c4
   c5 ==> c6
@@ -1757,6 +1775,11 @@ graph LR
   o1 -.-> c8
   c7 ==> c10
   o1 -.-> c10
+  c11 ==> c12
+  c12 ==> c14
+  c13 ==> c14
+  c16 ==> c17
+  c17 ==> c18
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
   classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
@@ -1768,9 +1791,9 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c9 verified;
+  class c1,c2,c3,c4,c5,c6,c7,c9,c11,c12,c13,c14,c15,c16,c17,c18 verified;
   class c8,c10 conditional_built;
-  class p1 cited;
+  class p1,p2,p3 cited;
   class o1 openconj;
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PileUpLock.md#pack_together_iff" _blank
   click c2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PileUpLock.md#locked_never_separated" _blank
@@ -1783,6 +1806,16 @@ graph LR
   click c9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ResidueReduction.md#far_mod" _blank
   click c10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ResidueReduction.md#residue_check_forces_divisor" _blank
   click p1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LonelyRecords.md" _blank
+  click c11 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ModulusLift.md#far_scale" _blank
+  click c12 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ModulusLift.md#good_lifts" _blank
+  click c13 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ModulusLift.md#good_residues" _blank
+  click c14 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ModulusLift.md#bad_lists_lift" _blank
+  click c15 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ModulusLift.md#proper_lifts" _blank
+  click c16 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FieldSizeTimes.md#field_size_far_iff" _blank
+  click c17 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FieldSizeTimes.md#field_size_lonely_iff" _blank
+  click c18 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/FieldSizeTimes.md#consecutive_prime_field" _blank
+  click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LonelyConnections.md" _blank
+  click p3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/JacobsthalTightness.md" _blank
 ```
 
 
@@ -2261,6 +2294,14 @@ The results nothing else builds on, each with everything beneath it.
 - [`ResidueReduction.residue_check_forces_divisor`](docs/nodes/ResidueReduction.md#residue_check_forces_divisor) — proved in Lean, assuming open conjecture(s)
   - `lonely_runner_upto` — open conjecture, taken as a hypothesis
   - [`TeamShift.team_shift`](docs/nodes/TeamShift.md#team_shift) — proved in Lean
+- [`ModulusLift.bad_lists_lift`](docs/nodes/ModulusLift.md#bad_lists_lift) — proved in Lean
+  - [`ModulusLift.good_lifts`](docs/nodes/ModulusLift.md#good_lifts) — proved in Lean
+    - [`ModulusLift.far_scale`](docs/nodes/ModulusLift.md#far_scale) — proved in Lean
+  - [`ModulusLift.good_residues`](docs/nodes/ModulusLift.md#good_residues) — proved in Lean
+- [`ModulusLift.proper_lifts`](docs/nodes/ModulusLift.md#proper_lifts) — proved in Lean
+- [`FieldSizeTimes.consecutive_prime_field`](docs/nodes/FieldSizeTimes.md#consecutive_prime_field) — proved in Lean
+  - [`FieldSizeTimes.field_size_lonely_iff`](docs/nodes/FieldSizeTimes.md#field_size_lonely_iff) — proved in Lean
+    - [`FieldSizeTimes.field_size_far_iff`](docs/nodes/FieldSizeTimes.md#field_size_far_iff) — proved in Lean
 
 ## What the network takes on trust
 
@@ -2676,6 +2717,22 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
   - [T. Sungkawichai and T. Trakulthongchai, Eleven, twelve, and thirteen lonely runners, arXiv 2604.23906](https://arxiv.org/abs/2604.23906) — eleven to thirteen runners; cited as lonely_eleven_to_thirteen
   - [J. Allikvere, Fourteen and fifteen lonely runners, arXiv 2609.02604 (preprint)](https://arxiv.org/abs/2609.02604) — fourteen and fifteen runners, unrefereed; cited as lonely_fourteen_fifteen
   - [T. Tao, Some remarks on the lonely runner conjecture, arXiv 1701.02048](https://arxiv.org/abs/1701.02048) — each case reduces to a finite check; cited as tao_finite_check
+- [`ModulusLift`](docs/nodes/ModulusLift.md)
+  - [T. Trakulthongchai, Nine and ten lonely runners, Electron. J. Combin. 33(2) (2026) P2.46, arXiv 2511.22427](https://arxiv.org/abs/2511.22427) — Definition 6 and Lemma 7, the modulus sieve this node proves
+- [`FieldSizeTimes`](docs/nodes/FieldSizeTimes.md)
+  - [T. Sungkawichai and T. Trakulthongchai, Eleven, twelve, and thirteen lonely runners, arXiv 2604.23906](https://arxiv.org/abs/2604.23906) — Remark 3.2 (easy half proved here); Proposition 4.1 not proved
+  - [L. Goddyn and E. B. Wong, Tight instances of the lonely runner, Integers 6 (2006) A38](https://www.sfu.ca/~goddyn/Papers/063tight_lonely_runner.tex.txt) — the consecutive speeds are the basic tight instance
+- [`LonelyConnections`](docs/nodes/LonelyConnections.md)
+  - [G. Perarnau and O. Serra, The Lonely Runner Conjecture turns 60, arXiv 2409.20160 (survey)](https://arxiv.org/abs/2409.20160) — Section 3 (connections) and Section 10 (variants): the statements cited here
+  - [T. W. Cusick, View-obstruction problems, Aequationes Math. 9 (1973) 165-170](https://doi.org/10.1007/BF01832623) — the view-obstruction form
+  - [M. Henze and R. D. Malikiosis, On the covering radius of lattice zonotopes and its relation to view-obstructions and the lonely runner conjecture, Aequationes Math. 91 (2017) 331-352, arXiv 1609.01939](https://arxiv.org/abs/1609.01939) — the zonotope covering-radius form
+  - [M. Beck, S. Hoşten and M. Schymura, Lonely Runner polyhedra, Integers 19 (2019) A29, arXiv 1606.01783](https://arxiv.org/abs/1606.01783) — the polyhedral criterion
+  - [W. Bienia, L. Goddyn, P. Gvozdjak, A. Sebő and M. Tarsi, Flows, view obstructions, and the lonely runner, J. Combin. Theory Ser. B 72 (1998) 1-9](https://doi.org/10.1006/jctb.1997.1770) — the flows implication and the runner formulation
+  - [M. Blanco, F. Criado and F. Santos, Coloopless and cosimple zonotopes, and the Lonely Runner Conjectures, arXiv 2603.24784](https://arxiv.org/abs/2603.24784) — counterexamples to the shifted version from five moving runners
+- [`JacobsthalTightness`](docs/nodes/JacobsthalTightness.md)
+  - [G. Perarnau and O. Serra, The Lonely Runner Conjecture turns 60, arXiv 2409.20160 (survey)](https://arxiv.org/abs/2409.20160) — Section 4 (tight instances, Jacobsthal problem) and Section 8.2 (Bohman and Peng, coprime mappings)
+  - [L. Goddyn and E. B. Wong, Tight instances of the lonely runner, Integers 6 (2006) A38](https://www.sfu.ca/~goddyn/Papers/063tight_lonely_runner.tex.txt) — constructions of tight instances by speeding up runners
+  - [Tight instances of the Lonely Runner Conjecture, one-entry modifications and the growth of speeds, arXiv 2608.13599](https://arxiv.org/abs/2608.13599) — restates Goddyn and Wong's theorem (accelerated runners give tight sets under a shared-factor condition) and studies the growth of speeds
 
 ## Node index
 
@@ -2799,3 +2856,7 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 120 | [`TeamShift`](docs/nodes/TeamShift.md) | a team sharing a factor: shift the clock, the team stays put, the last runner moves | proved in Lean; rests on open conjectures as hypotheses |
 | 121 | [`ResidueReduction`](docs/nodes/ResidueReduction.md) | only the remainders matter: a residue sieve for the lonely runner | proved in Lean; rests on open conjectures as hypotheses |
 | 122 | [`LonelyRecords`](docs/nodes/LonelyRecords.md) | the Lonely Runner Conjecture and its proved cases, up to fifteen runners (cited) | planned: cited from a paper |
+| 123 | [`ModulusLift`](docs/nodes/ModulusLift.md) | a check passed at one cycle carries up to every multiple of it | proved in Lean |
+| 124 | [`FieldSizeTimes`](docs/nodes/FieldSizeTimes.md) | times with the number of runners as denominator | proved in Lean |
+| 125 | [`LonelyConnections`](docs/nodes/LonelyConnections.md) | the Lonely Runner under other names (cited) | planned: cited from a paper |
+| 126 | [`JacobsthalTightness`](docs/nodes/JacobsthalTightness.md) | tight lonely runners wait on Jacobsthal's problem (cited) | planned: cited from a paper |

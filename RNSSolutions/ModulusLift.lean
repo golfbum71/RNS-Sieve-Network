@@ -9,7 +9,8 @@ import Mathlib.Tactic
 /-!
 # Proofs for ModulusLift
 
-Draft (2026-11-23).
+Built clean by `lake build RNSSolutions` on 2026-11-23; `#print axioms` shows only
+`propext`, `Classical.choice`, `Quot.sound`.
 
 The remainder of `c * y` for `c * d` is `c` times the remainder of `y` for `d`,
 so both distances from the start scale by `c`. A good time `t / d` is the time

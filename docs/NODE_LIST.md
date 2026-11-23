@@ -1521,3 +1521,32 @@ The conjecture (Wills 1967, Cusick 1973) as an open hypothesis in formal-conject
 - Lean (planned): `lonely_runner_conjecture` (open hypothesis), `lonely_up_to_seven`, `lonely_eight`, `lonely_nine_ten`, `lonely_eleven_to_thirteen`, `lonely_fourteen_fifteen`, `tao_finite_check`
 - Rests on: nothing (related: `ResidueReduction`, `PileUpLock`)
 - Status: Planned (cited, with one open hypothesis)
+
+### 123. `ModulusLift` — a check passed at one cycle carries up to every multiple of it
+A list of speeds good at a denominator is good at every multiple of it; being good depends only on the remainders; so lists whose remainders were good at a smaller cycle never need checking at a larger cycle built on it, and a shared factor with the smaller cycle carries up. Trakulthongchai 2026, Definition 6 and Lemma 7: the modulus sieve behind nine and ten runners. The same climb as rotating one more wheel into the combined cycle.
+- Sources: [Trakulthongchai, Nine and ten lonely runners, Electron. J. Combin. 33(2) P2.46, arXiv 2511.22427](https://arxiv.org/abs/2511.22427)
+- Lean: `far_scale`, `good_lifts`, `good_residues`, `bad_lists_lift`, `proper_lifts` (with `good_at`; vocabulary from `PileUpLock`)
+- Rests on: nothing (related: `ResidueReduction`, `CRT`)
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-23).
+
+### 124. `FieldSizeTimes` — times with the number of runners as denominator
+With the number of runners as denominator, one part of the lap is exactly the loneliness distance, so a runner is far enough exactly when it is not at the start, and the runner standing still is lonely exactly when no speed times the numerator is a multiple of the number of runners. For a prime number of runners, the consecutive speeds are lonely at such a time exactly when the numerator is not a multiple of it. The easy half of Sungkawichai and Trakulthongchai's Remark 3.2. Not proved: that these are the only lonely times of the consecutive speeds, and their polynomial method (Proposition 4.1).
+- Sources: [Sungkawichai and Trakulthongchai, arXiv 2604.23906](https://arxiv.org/abs/2604.23906); [Goddyn and Wong, Tight instances of the lonely runner, Integers 6 (2006) A38](https://www.sfu.ca/~goddyn/Papers/063tight_lonely_runner.tex.txt)
+- Lean: `field_size_far_iff`, `field_size_lonely_iff`, `consecutive_prime_field`; still planned: Proposition 4.1
+- Rests on: nothing (related: `SmallDivisorPulse`, `JacobsthalTightness`)
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-23).
+
+### 125. `LonelyConnections` — the Lonely Runner under other names (cited)
+Equivalent forms: Wills' Diophantine approximation (with Kronecker's reduction from real to whole-number speeds), Cusick's view-obstruction problem and billiard trajectories, the covering radius of lattice zonotopes (Henze-Malikiosis), the Lonely Runner polyhedra (Beck-Hoşten-Schymura). One-way: the conjecture implies a nowhere-zero flow statement (Bienia et al.) and colouring bounds for distance graphs; coprime mappings give the conjecture for small speeds. The shifted version is false from five moving runners (Blanco-Criado-Santos 2026).
+- Sources: [Perarnau and Serra, survey, arXiv 2409.20160](https://arxiv.org/abs/2409.20160); [Cusick 1973](https://doi.org/10.1007/BF01832623); [Henze and Malikiosis, arXiv 1609.01939](https://arxiv.org/abs/1609.01939); [Beck, Hoşten and Schymura, arXiv 1606.01783](https://arxiv.org/abs/1606.01783); [Bienia et al. 1998](https://doi.org/10.1006/jctb.1997.1770); [Blanco, Criado and Santos, arXiv 2603.24784](https://arxiv.org/abs/2603.24784)
+- Lean (planned): `kronecker_real_to_integer`, `view_obstruction_equiv`, `zonotope_covering_equiv`, `lr_implies_flows`, `lr_implies_distance_graphs`, `coprime_mappings_small_speeds`, `shifted_lr_false`
+- Rests on: nothing (related: `LonelyRecords`, `JacobsthalTightness`)
+- Status: Planned (cited)
+
+### 126. `JacobsthalTightness` — tight lonely runners wait on Jacobsthal's problem (cited)
+Tight speed sets (best loneliness exactly one over the number of runners) can be built by speeding up consecutive runners when every number in a stretch shares a factor with a given number: Jacobsthal's problem, the longest run of blocked positions in one wheel cycle. Erdős' long blocked runs give tight sets; Pomerance showed a range of speeds gives no tight set; the survey says closing the gap, and Tao's question about speeds up to twice the field size, need better Jacobsthal bounds. Links the Lonely Runner family to `BlockingRuns`, `LargestGap`, `KanoldBound` and `JacobsthalQuadratic`.
+- Sources: [Perarnau and Serra, survey, Sections 4 and 8.2, arXiv 2409.20160](https://arxiv.org/abs/2409.20160); [Goddyn and Wong 2006](https://www.sfu.ca/~goddyn/Papers/063tight_lonely_runner.tex.txt); [arXiv 2608.13599](https://arxiv.org/abs/2608.13599)
+- Lean (planned): `tight_from_blocking_runs`, `pomerance_not_tight`, `bohman_peng_small_speeds`
+- Rests on: nothing (related: `BlockingRuns`, `LargestGap`, `KanoldBound`, `JacobsthalQuadratic`, `FieldSizeTimes`)
+- Status: Planned (cited); the tight-set construction from a blocked run is the candidate for a wheel-native proof
+

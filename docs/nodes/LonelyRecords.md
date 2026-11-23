@@ -26,6 +26,7 @@ Connected in content but not by an arrow (no claim here takes theirs as a hypoth
 
 - [`ResidueReduction`](ResidueReduction.md) — the residue method behind every record from eight runners on
 - [`PileUpLock`](PileUpLock.md) — frees some runners directly; the conjecture is about all of them
+- [`LonelyConnections`](LonelyConnections.md) — the conjecture under other names: view-obstruction, zonotope covering radius, flows, distance graphs
 
 ## Planned
 

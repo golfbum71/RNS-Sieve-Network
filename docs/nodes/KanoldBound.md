@@ -23,6 +23,7 @@ Connected in content but not by an arrow (no claim here takes theirs as a hypoth
 - [`BlockingRuns`](BlockingRuns.md) — the largest survivor gap that this node bounds by two to the number of wheels
 - [`JacobsthalQuadratic`](JacobsthalQuadratic.md) — a much sharper bound for many wheels, but with a constant that cannot be evaluated
 - [`GapCertificate`](GapCertificate.md) — the exact gaps for the wheels up to 13 (largest 22, against Kanold's 64)
+- [`JacobsthalTightness`](JacobsthalTightness.md) — Jacobsthal's problem decides which lonely-runner speed sets are tight
 
 ## Claims
 

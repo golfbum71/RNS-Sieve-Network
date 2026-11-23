@@ -12,6 +12,12 @@ Published work this node rests on or relates to; each entry says how.
 
 - [P. Codecà and M. Nair, Extremal values of Delta(x,N), Canad. Math. Bull. 41 (1998), 335-347](https://doi.org/10.4153/CMB-1998-046-3) — Theorem 1(i); Theorem 3(i) for the mean square (read from the paper)
 
+## Related nodes
+
+Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
+
+- [`JacobsthalTightness`](JacobsthalTightness.md) — Jacobsthal's problem decides which lonely-runner speed sets are tight
+
 ## Planned
 
 **Will rest on:** [`Sawtooth`](Sawtooth.md), [`UniformSubdivision`](UniformSubdivision.md)
