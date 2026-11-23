@@ -40,7 +40,7 @@ theorem near_of_small (n M : ℕ) (z : ℤ) (hn : 2 ≤ n) (hM : 0 < M)
   have hn' : (2 : ℤ) ≤ n := by exact_mod_cast hn
   have hM' : (0 : ℤ) < M := by exact_mod_cast hM
   unfold near
-  rcases le_or_lt 0 z with hz | hz
+  rcases le_or_gt 0 z with hz | hz
   · left
     have hzM : z < M := by nlinarith
     rw [Int.emod_eq_of_lt hz hzM]
@@ -200,7 +200,7 @@ theorem one_step_replacement_holds : one_step_replacement := by
       exact Int.add_mul_emod_self_left _ _ _
     rw [near_congr n M _ _ hcong]
     have hz : (n : ℤ) * e = (p : ℤ) * ((n : ℤ) * e') := by rw [hee]; ring
-    rcases le_or_lt 0 ((n : ℤ) * e') with hpos | hneg
+    rcases le_or_gt 0 ((n : ℤ) * e') with hpos | hneg
     · apply near_of_small n M _ hn hM
       · nlinarith
       · linarith
@@ -213,8 +213,11 @@ theorem one_step_replacement_holds : one_step_replacement := by
     rcases lt_trichotomy e 0 with hneg | hzero | hpos
     · -- e < 0: the speed b with a * b leaving remainder 1
       have hmne : (n : ℤ) * (m * e) < -(M : ℤ) := by
+        have hme : m * e < 0 := mul_neg_of_pos_of_neg (by omega) hneg
+        have hnme : (n : ℤ) * (m * e) ≤ 0 :=
+          mul_nonpos_of_nonneg_of_nonpos (by positivity) hme.le
         rcases hbig with h | h
-        · exfalso; nlinarith
+        · exfalso; linarith
         · exact h
       obtain ⟨b, hbmem, hb2, hb1, c, hc⟩ := hq u ⟨a, v, by linarith⟩
       have hab : a * b = 1 + r * (a * c - v) := by linear_combination a * hc + huv
@@ -247,9 +250,11 @@ theorem one_step_replacement_holds : one_step_replacement := by
       rcases hbig with h | h <;> linarith
     · -- e > 0: the speed b with a * b leaving remainder -1
       have hmne : (M : ℤ) < (n : ℤ) * (m * e) := by
+        have hme : 0 < m * e := mul_pos (by omega) hpos
+        have hnme : 0 ≤ (n : ℤ) * (m * e) := mul_nonneg (by positivity) hme.le
         rcases hbig with h | h
         · exact h
-        · exfalso; nlinarith
+        · exfalso; linarith
       obtain ⟨b, hbmem, hb2, hb1, c, hc⟩ := hq (-u) ⟨-a, v, by linarith⟩
       have hab : a * b = -1 + r * (a * c + v) := by linear_combination a * hc - huv
       have hb0 : 0 ≤ b := by nlinarith
