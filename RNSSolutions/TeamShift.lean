@@ -154,9 +154,21 @@ theorem team_shift_holds : team_shift := by
     have hr1 : (v * k0) % (m0 : ℤ) < m0 := Int.emod_lt_of_pos _ hm0'
     obtain ⟨hA, hB⟩ := hold
     have hr2 : (0 : ℤ) ≤ (m0 : ℤ) - (v * k0) % (m0 : ℤ) := by linarith
+    set r : ℤ := (v * k0) % (m0 : ℤ) with hr
     constructor
-    · nlinarith [mul_le_mul_of_nonneg_left hA hQ.le, mul_nonneg hQ.le hr0]
-    · nlinarith [mul_le_mul_of_nonneg_left hB hQ.le, mul_nonneg hQ.le hr2]
+    · have h1 := mul_le_mul_of_nonneg_left hA hQ.le
+      have h2 := mul_nonneg hQ.le hr0
+      have e : ((T.card : ℤ) + 2) * (|q| * r) = |q| * (((T.card : ℤ) + 1) * r) + |q| * r := by
+        ring
+      rw [e]
+      linarith
+    · have h1 := mul_le_mul_of_nonneg_left hB hQ.le
+      have h2 := mul_nonneg hQ.le hr2
+      have e : ((T.card : ℤ) + 2) * (|q| * (m0 : ℤ) - |q| * r) =
+          |q| * (((T.card : ℤ) + 1) * ((m0 : ℤ) - r)) + |q| * ((m0 : ℤ) - r) := by
+        ring
+      rw [e]
+      linarith
 
 theorem team_shift_step_holds_from (h : team_shift) : team_shift_step := by
   intro c hc T u q h0 hcard hcardc hu hq hqu

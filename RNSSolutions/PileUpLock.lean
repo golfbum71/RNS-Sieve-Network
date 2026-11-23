@@ -62,7 +62,7 @@ theorem pile_up_frees_iff_holds : pile_up_frees_iff := by
         exact dvd_zero _
       · have hc : ((u.natAbs * u.natAbs * 2 : ℕ) : ℤ) = u * u * 2 := by
           push_cast
-          rw [Int.natAbs_mul_self']
+          rw [abs_mul_abs_self]
         have huu : 0 < u * u := mul_self_pos.mpr hu
         have hmod : (u * u) % (u * u * 2) = u * u :=
           Int.emod_eq_of_lt (le_of_lt huu) (by linarith)
