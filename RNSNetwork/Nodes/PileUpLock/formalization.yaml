@@ -23,7 +23,12 @@ node:
     Settled limit, recorded so it is not re-argued: locked targets are the usual case (about 70 percent
     of small sets with three runners, about 99 percent with six, and every runner of the consecutive-speed
     sets from four runners on), so this node frees only some runners and is not a route to the whole conjecture
-    by itself.'
+    by itself. Times are fractions; the usual statement with real times is equivalent (a classical fact,
+    not proved here). This node also holds the shared vocabulary of the Lonely Runner family (far, lonely_at,
+    has_lonely_time, and lonely_runner_upto as a named hypothesis). As proved, differs from the plan:
+    the count of the target''s spots (target_spots_count) is not stated, and freed_third_lap is part of
+    pile_up_frees_iff; the pack is any finite family of speeds, so the same claims cover the empty pack
+    and packs with repeated speeds.'
 conclusions:
 - id: pack_together_iff
   declaration: RNS.PileUpLock.pack_together_iff
@@ -33,10 +38,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/PileUpLock.lean
     declaration: RNS.PileUpLock.pack_together_iff_holds
-    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23).
+      Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: locked_never_separated
   declaration: RNS.PileUpLock.locked_never_separated
@@ -46,10 +52,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/PileUpLock.lean
     declaration: RNS.PileUpLock.locked_never_separated_holds
-    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23).
+      Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: pile_up_frees_iff
   declaration: RNS.PileUpLock.pile_up_frees_iff
@@ -59,10 +66,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/PileUpLock.lean
     declaration: RNS.PileUpLock.pile_up_frees_iff_holds
-    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23).
+      Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: shared_point_pile_up
   declaration: RNS.PileUpLock.shared_point_pile_up
@@ -74,10 +82,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/PileUpLock.lean
     declaration: RNS.PileUpLock.shared_point_pile_up_step
-    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23), from its
+      imports taken as named hypotheses. Recorded as noncompliant only because no Comparator receipt exists
+      yet.
   designated: lean-proof
 sources:
 - title: Google DeepMind formal-conjectures, LonelyRunnerConjecture (Lean statement of the conjecture)

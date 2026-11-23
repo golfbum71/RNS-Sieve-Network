@@ -117,9 +117,9 @@
 | 115 | [`DenseDivisibility`](DenseDivisibility.md) | a cycle built from small wheels splits into two factors of any size | planned: proved in source file |
 | 116 | [`LevelOfDistribution`](LevelOfDistribution.md) | level of distribution: Bombieri-Vinogradov and the Elliott-Halberstam conjecture | planned: cited from a paper |
 | 117 | [`SmoothLevel`](SmoothLevel.md) | past the square root for cycles built from small wheels | planned: cited from a paper |
-| 118 | [`PileUpLock`](PileUpLock.md) | the pile-up: when one runner can be freed while the rest are together | planned: new, not yet proved |
-| 119 | [`SmallDivisorPulse`](SmallDivisorPulse.md) | every small number divides a speed of any counterexample | planned: proved in source file |
-| 120 | [`TeamShift`](TeamShift.md) | a team sharing a factor: shift the clock, the team stays put, the last runner moves | planned: conditional |
+| 118 | [`PileUpLock`](PileUpLock.md) | the pile-up: when one runner can be freed while the rest are together | proved in Lean |
+| 119 | [`SmallDivisorPulse`](SmallDivisorPulse.md) | every small number divides a speed of any counterexample | proved in Lean |
+| 120 | [`TeamShift`](TeamShift.md) | a team sharing a factor: shift the clock, the team stays put, the last runner moves | proved in Lean; rests on open conjectures as hypotheses |
 | 121 | [`ResidueReduction`](ResidueReduction.md) | only the remainders matter: a residue sieve for the lonely runner | planned: conditional |
 | 122 | [`LonelyRecords`](LonelyRecords.md) | the Lonely Runner Conjecture and its proved cases, up to fifteen runners (cited) | planned: cited from a paper |
 

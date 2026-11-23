@@ -16,7 +16,12 @@ node:
     every team runner returns to the same place, and the last runner moves among evenly spaced spots,
     one of which is good. So the set is lonely. Rosenfeld 2025, Lemma 5. The working form of Geo''s team
     (co-dependent) idea: the team need not be at the start, only already well spread. Conditional: the
-    conjecture for one runner fewer is a named hypothesis.'
+    conjecture for one runner fewer is a named hypothesis. As proved, differs from the plan: stronger
+    than Rosenfeld''s Lemma 5, since the team''s factor need only fail to divide the extra speed (the
+    PileUpLock condition), not all speeds sharing no factor; the team must have at least two runners (Rosenfeld
+    uses the lemma for at least three moving runners). The good spot is at least a quarter of a lap away,
+    enough for the enlarged field of at least four runners. Uses only the vocabulary of PileUpLock (no
+    claim of it).'
 conclusions:
 - id: team_shift
   declaration: RNS.TeamShift.team_shift
@@ -26,10 +31,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/TeamShift.lean
     declaration: RNS.TeamShift.team_shift_holds
-    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23).
+      Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: team_shift_step
   declaration: RNS.TeamShift.team_shift_step
@@ -42,10 +48,12 @@ conclusions:
   - lonely_runner_upto
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/TeamShift.lean
     declaration: RNS.TeamShift.team_shift_step_holds_from
-    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23), from its
+      imports taken as named hypotheses. Recorded as noncompliant only because no Comparator receipt exists
+      yet.
   designated: lean-proof
 sources:
 - title: M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243,

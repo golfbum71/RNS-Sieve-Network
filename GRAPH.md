@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 97 of 118 nodes are built, holding 308 claims: 301 proved in Lean and 7 cited from a published paper. They are joined by 182 arrows, each a Lean-checked step. Of the other 21 nodes, drawn dashed or purple, 2 are proved in the original source files but not yet restated here; 2 are planned steps that will assume open conjectures; 4 are planned citations of published results; 10 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 100 of 118 nodes are built, holding 316 claims: 309 proved in Lean and 7 cited from a published paper. They are joined by 185 arrows, each a Lean-checked step. Of the other 18 nodes, drawn dashed or purple, 1 is proved in the original source files but not yet restated here; 1 is a planned step that will assume an open conjecture; 4 are planned citations of published results; 9 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -53,7 +53,7 @@ graph LR
   g7["<b>One wheel at a time: squares, characters and the number 24</b><br/>5 built, 0 planned or outside"]
   g8["<b>Sieve methods: Brun, Hooley, Selberg</b><br/>18 built, 6 planned or outside"]
   g9["<b>Primes in the columns of large cycles: level of distribution and Elliott-Halberstam</b><br/>0 built, 4 planned or outside"]
-  g10["<b>The Lonely Runner: pile-ups, shifts and residue sieves</b><br/>0 built, 5 planned or outside"]
+  g10["<b>The Lonely Runner: pile-ups, shifts and residue sieves</b><br/>3 built, 2 planned or outside"]
   g1 ==> g2
   g1 ==> g4
   g1 ==> g5
@@ -1730,20 +1730,30 @@ Nodes: [`PileUpLock`](docs/nodes/PileUpLock.md), [`SmallDivisorPulse`](docs/node
 ```mermaid
 graph LR
   subgraph s1["<b>118. PileUpLock — the pile-up: when one runner can be freed while the rest are together</b>"]
-    p1["<i>planned: new, not yet proved</i>"]
+    c1["pack_together_iff"]
+    c2["locked_never_separated"]
+    c3["pile_up_frees_iff"]
+    c4["shared_point_pile_up"]
   end
   subgraph s2["<b>119. SmallDivisorPulse — every small number divides a speed of any counterexample</b>"]
-    p2["<i>planned: proved in source file</i>"]
+    c5["small_divisor_time_works"]
+    c6["counterexample_lcm_dvd_product"]
   end
   subgraph s3["<b>120. TeamShift — a team sharing a factor: shift the clock, the team stays put, the last runner moves</b>"]
-    p3["<i>planned: conditional</i>"]
+    c7["team_shift"]
+    c8["team_shift_step"]
   end
   subgraph s4["<b>121. ResidueReduction — only the remainders matter: a residue sieve for the lonely runner</b>"]
-    p4["<i>planned: conditional</i>"]
+    p1["<i>planned: conditional</i>"]
   end
   subgraph s5["<b>122. LonelyRecords — the Lonely Runner Conjecture and its proved cases, up to fifteen runners (cited)</b>"]
-    p5["<i>planned: cited from a paper</i>"]
+    p2["<i>planned: cited from a paper</i>"]
   end
+  o1{{"<i>open conjecture</i><br/>lonely_runner_upto"}}
+  c3 ==> c4
+  c5 ==> c6
+  c7 ==> c8
+  o1 -.-> c8
   s3 -.-> s4
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
@@ -1756,15 +1766,21 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class p2 planned;
-  class p3,p4 conditional;
-  class p5 cited;
-  class p1 new;
-  click p1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PileUpLock.md" _blank
-  click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmallDivisorPulse.md" _blank
-  click p3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TeamShift.md" _blank
-  click p4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ResidueReduction.md" _blank
-  click p5 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LonelyRecords.md" _blank
+  class c1,c2,c3,c4,c5,c6,c7 verified;
+  class c8 conditional_built;
+  class p1 conditional;
+  class p2 cited;
+  class o1 openconj;
+  click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PileUpLock.md#pack_together_iff" _blank
+  click c2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PileUpLock.md#locked_never_separated" _blank
+  click c3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PileUpLock.md#pile_up_frees_iff" _blank
+  click c4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PileUpLock.md#shared_point_pile_up" _blank
+  click c5 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmallDivisorPulse.md#small_divisor_time_works" _blank
+  click c6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmallDivisorPulse.md#counterexample_lcm_dvd_product" _blank
+  click c7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TeamShift.md#team_shift" _blank
+  click c8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TeamShift.md#team_shift_step" _blank
+  click p1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ResidueReduction.md" _blank
+  click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LonelyRecords.md" _blank
 ```
 
 
@@ -2230,6 +2246,15 @@ The results nothing else builds on, each with everything beneath it.
 - [`BirchTateRational.w2_times_zeta`](docs/nodes/BirchTateRational.md#w2_times_zeta) — proved in Lean
   - [`UnitSquares24.units_square_one_iff`](docs/nodes/UnitSquares24.md#units_square_one_iff) — proved in Lean
   - [`BirchTateRational.zeta_neg_one`](docs/nodes/BirchTateRational.md#zeta_neg_one) — proved in Lean
+- [`PileUpLock.pack_together_iff`](docs/nodes/PileUpLock.md#pack_together_iff) — proved in Lean
+- [`PileUpLock.locked_never_separated`](docs/nodes/PileUpLock.md#locked_never_separated) — proved in Lean
+- [`PileUpLock.shared_point_pile_up`](docs/nodes/PileUpLock.md#shared_point_pile_up) — proved in Lean
+  - [`PileUpLock.pile_up_frees_iff`](docs/nodes/PileUpLock.md#pile_up_frees_iff) — proved in Lean
+- [`SmallDivisorPulse.counterexample_lcm_dvd_product`](docs/nodes/SmallDivisorPulse.md#counterexample_lcm_dvd_product) — proved in Lean
+  - [`SmallDivisorPulse.small_divisor_time_works`](docs/nodes/SmallDivisorPulse.md#small_divisor_time_works) — proved in Lean
+- [`TeamShift.team_shift_step`](docs/nodes/TeamShift.md#team_shift_step) — proved in Lean, assuming open conjecture(s)
+  - `lonely_runner_upto` — open conjecture, taken as a hypothesis
+  - [`TeamShift.team_shift`](docs/nodes/TeamShift.md#team_shift) — proved in Lean
 
 ## What the network takes on trust
 
@@ -2252,6 +2277,7 @@ exactly the following, each recorded as such rather than claimed:
 - `bateman_horn_sq_add_one` — assumed by [`PolynomialPatterns.landau_of_bateman_horn`](docs/nodes/PolynomialPatterns.md#landau_of_bateman_horn)
 - `bateman_horn_conjecture` — assumed by 
 - `riemann_hypothesis` — assumed by [`VonKochBound.von_koch_bound`](docs/nodes/VonKochBound.md#von_koch_bound)
+- `lonely_runner_upto` — assumed by [`TeamShift.team_shift_step`](docs/nodes/TeamShift.md#team_shift_step)
 
 **Published results, cited rather than proved in Lean:**
 
@@ -2269,7 +2295,7 @@ exactly the following, each recorded as such rather than claimed:
 - [`RoughInPrimeGaps`](docs/nodes/RoughInPrimeGaps.md) — [plby/lean-proofs](https://github.com/plby/lean-proofs/blob/8822f7ddef30fadbd92e1c6ab4ed897af356af5e/src/latest/ErdosProblems/Erdos682.lean#L5018)
 - [`LongGaps`](docs/nodes/LongGaps.md) — [openai/LongGapsBetweenPrimes](https://github.com/openai/LongGapsBetweenPrimes/blob/main/LongGapsBetweenPrimes.lean)
 
-**Planned nodes will add:** `elliott_halberstam`, `lonely_runner_one_fewer`, `lonely_runner_one_fewer`, `lonely_runner_conjecture`
+**Planned nodes will add:** `elliott_halberstam`, `lonely_runner_one_fewer`, `lonely_runner_conjecture`
 
 ## Published sources
 
@@ -2762,8 +2788,8 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 115 | [`DenseDivisibility`](docs/nodes/DenseDivisibility.md) | a cycle built from small wheels splits into two factors of any size | planned: proved in source file |
 | 116 | [`LevelOfDistribution`](docs/nodes/LevelOfDistribution.md) | level of distribution: Bombieri-Vinogradov and the Elliott-Halberstam conjecture | planned: cited from a paper |
 | 117 | [`SmoothLevel`](docs/nodes/SmoothLevel.md) | past the square root for cycles built from small wheels | planned: cited from a paper |
-| 118 | [`PileUpLock`](docs/nodes/PileUpLock.md) | the pile-up: when one runner can be freed while the rest are together | planned: new, not yet proved |
-| 119 | [`SmallDivisorPulse`](docs/nodes/SmallDivisorPulse.md) | every small number divides a speed of any counterexample | planned: proved in source file |
-| 120 | [`TeamShift`](docs/nodes/TeamShift.md) | a team sharing a factor: shift the clock, the team stays put, the last runner moves | planned: conditional |
+| 118 | [`PileUpLock`](docs/nodes/PileUpLock.md) | the pile-up: when one runner can be freed while the rest are together | proved in Lean |
+| 119 | [`SmallDivisorPulse`](docs/nodes/SmallDivisorPulse.md) | every small number divides a speed of any counterexample | proved in Lean |
+| 120 | [`TeamShift`](docs/nodes/TeamShift.md) | a team sharing a factor: shift the clock, the team stays put, the last runner moves | proved in Lean; rests on open conjectures as hypotheses |
 | 121 | [`ResidueReduction`](docs/nodes/ResidueReduction.md) | only the remainders matter: a residue sieve for the lonely runner | planned: conditional |
 | 122 | [`LonelyRecords`](docs/nodes/LonelyRecords.md) | the Lonely Runner Conjecture and its proved cases, up to fifteen runners (cited) | planned: cited from a paper |

@@ -10,7 +10,8 @@ import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
 /-!
 # Proofs for SmallDivisorPulse
 
-Draft (2026-11-23).
+Built clean by `lake build RNSSolutions` on 2026-11-23; `#print axioms` shows only
+`propext`, `Classical.choice`, `Quot.sound`.
 
 At the time `1 / j`, a speed not divisible by `j` leaves a remainder from 1 to
 `j - 1`, so the runner is at least one `j`-th of a lap from the start both ways,

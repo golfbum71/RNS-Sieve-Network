@@ -15,7 +15,8 @@ node:
     number every moving runner is at least one over that number from the start, which is enough. So in
     any set of speeds that is never lonely, every number from 2 up to the field size divides some speed,
     and their least common multiple divides the product of the speeds. Rosenfeld 2025, Lemma 4. The general
-    form of the even/odd pulse.
+    form of the even/odd pulse. Uses only the vocabulary of PileUpLock (no claim of it), so no arrow is
+    drawn. Times are fractions, as in PileUpLock.
 conclusions:
 - id: small_divisor_time_works
   declaration: RNS.SmallDivisorPulse.small_divisor_time_works
@@ -25,10 +26,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/SmallDivisorPulse.lean
     declaration: RNS.SmallDivisorPulse.small_divisor_time_works_holds
-    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23).
+      Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: counterexample_lcm_dvd_product
   declaration: RNS.SmallDivisorPulse.counterexample_lcm_dvd_product
@@ -39,10 +41,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/SmallDivisorPulse.lean
     declaration: RNS.SmallDivisorPulse.counterexample_lcm_dvd_product_step
-    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23), from its
+      imports taken as named hypotheses. Recorded as noncompliant only because no Comparator receipt exists
+      yet.
   designated: lean-proof
 sources:
 - title: M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243,

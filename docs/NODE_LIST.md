@@ -1487,23 +1487,25 @@ Planned nodes scoped in a discussion of whether the RNS helps with the Lonely Ru
 ### 118. `PileUpLock` — the pile-up: when one runner can be freed while the rest are together
 The pack is together at the start exactly at multiples of its combined cycle of lap times; the target is freed if and only if its lap time does not divide that cycle, and then sits at least a third of a lap away; a locked target is never separated by a pile-up. Shared-point form with the pack's speed differences. Original to this project (Geo's pile-up idea). Frees only some runners (about 70 percent of small three-runner cases, about 2 percent of six-runner cases, none of the consecutive-speed sets from four runners on).
 - Sources: [formal-conjectures LonelyRunnerConjecture](https://google-deepmind.github.io/formal-conjectures/doc/FormalConjectures/Wikipedia/LonelyRunnerConjecture.html) (statement matched); [Rosenfeld, arXiv 2509.14111](https://arxiv.org/abs/2509.14111) (related Lemmas 4 and 5)
-- Lean (planned): `pack_together_iff`, `target_spots_count`, `pile_up_frees_iff`, `freed_third_lap`, `locked_never_separated`, `shared_point_pile_up`
+As proved, differs from the plan: times are fractions (equivalent to real times, a classical fact not proved here); the count of the target's spots is not stated, and the third-of-a-lap bound is part of `pile_up_frees_iff`. The node also holds the family's shared vocabulary (`far`, `lonely_at`, `has_lonely_time`, and `lonely_runner_upto` as a named hypothesis).
+- Lean: `pack_together_iff`, `locked_never_separated`, `pile_up_frees_iff`, `shared_point_pile_up`
 - Rests on: nothing (related: `CRT`, `SmallDivisorPulse`, `TeamShift`)
-- Status: Planned (new, Tier 1, suggested first)
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-23).
 
 ### 119. `SmallDivisorPulse` — every small number divides a speed of any counterexample
 If no speed is divisible by a number from 2 up to the field size, the time one over that number works; so the least common multiple of 2 up to the field size divides the product of a counterexample's speeds. Rosenfeld 2025, Lemma 4; the general form of the even/odd pulse.
 - Sources: [Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), arXiv 2509.14111](https://arxiv.org/abs/2509.14111)
-- Lean (planned): `small_divisor_time_works`, `counterexample_lcm_dvd_product`
+- Lean: `small_divisor_time_works`, `counterexample_lcm_dvd_product` (vocabulary from `PileUpLock`)
 - Rests on: nothing (related: `PileUpLock`)
-- Status: Planned (Tier 1)
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-23).
 
 ### 120. `TeamShift` — a team sharing a factor: shift the clock, the team stays put, the last runner moves
 All moving runners but one share a factor: take a good time for the team and step by one over the shared factor; the team returns to place and the last runner reaches a good spot. Rosenfeld 2025, Lemma 5; the working form of the team idea. Conditional on the conjecture for one runner fewer (named hypothesis).
 - Sources: [Rosenfeld, arXiv 2509.14111](https://arxiv.org/abs/2509.14111); [formal-conjectures LonelyRunnerConjecture](https://google-deepmind.github.io/formal-conjectures/doc/FormalConjectures/Wikipedia/LonelyRunnerConjecture.html)
-- Lean (planned): `team_shift_step` (hypothesis `lonely_runner_one_fewer`)
+As proved, differs from the plan: stronger than Rosenfeld's lemma, since the team's factor need only fail to divide the extra speed (the PileUpLock condition) rather than all speeds sharing no factor; the team must have at least two runners. `team_shift` is unconditional given the team's lonely moment; `team_shift_step` takes the conjecture for one runner fewer (`lonely_runner_upto`) as a named hypothesis.
+- Lean: `team_shift`, `team_shift_step` (hypothesis `lonely_runner_upto`)
 - Rests on: nothing (related: `PileUpLock`)
-- Status: Planned (conditional)
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-23). `team_shift_step` is conditional on the conjecture for one runner fewer.
 
 ### 121. `ResidueReduction` — only the remainders matter: a residue sieve for the lonely runner
 At times that are fractions of the field size times a wheel, only the speeds' remainders matter; if every admissible list of remainders has a good time, every counterexample has a speed divisible by that wheel. Rosenfeld 2025, Lemma 6, with the Corollary 3 size bound (via Malikiosis-Santos-Schymura, as cited there) cited. Planned also: fully checked four- and five-runner cases by split kernel checks.

@@ -9,7 +9,8 @@ import Mathlib.Tactic
 /-!
 # Proofs for TeamShift
 
-Draft (2026-11-23).
+Built clean by `lake build RNSSolutions` on 2026-11-23; `#print axioms` shows only
+`propext`, `Classical.choice`, `Quot.sound`.
 
 Take the team's lonely time `k₀ / m₀` and the new denominator `|q| * m₀`. The
 numerator `k₀ * |q| + j * m₀` keeps every team runner at `|q|` times its old

@@ -9,7 +9,8 @@ import Mathlib.Tactic
 /-!
 # Proofs for PileUpLock
 
-Draft (2026-11-23).
+Built clean by `lake build RNSSolutions` on 2026-11-23; `#print axioms` shows only
+`propext`, `Classical.choice`, `Quot.sound`.
 
 * Pack together: each pack speed times `k` is a multiple of `m` exactly when the
   greatest common factor of those products is; that factor is the greatest
