@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-23, Lonely Runner family): scoped, no Lean yet. See docs/NODE_LIST.md.
+# Lonely Runner family, built 2026-11-23. See docs/NODE_LIST.md.
 
 node:
   id: ResidueReduction.v1
@@ -7,32 +7,62 @@ node:
   version: v1
   order: 121
   kind: paper
-  status: planned
+  status: active
   group: lonely
-  title: "only the remainders matter: a residue sieve for the lonely runner"
-  description: "Pick a wheel and a modulus equal to the field size times that wheel. At times that are fractions of that modulus, a speed and that speed plus the modulus look the same, so only the speeds' remainders matter. If every list of remainders avoiding multiples of the wheel (and meeting the gcd condition from TeamShift) has a good time, then every set of speeds that is never lonely has a speed divisible by that wheel. Rosenfeld 2025, Lemma 6, the main lemma of the record proofs; with Lemma 4 and enough wheels the product of a counterexample's speeds is forced past Rosenfeld's Corollary 3 size bound (via the Malikiosis-Santos-Schymura theorem, as cited there). This is a pure RNS step. Planned: the reduction itself, and fully checked small cases (four and five runners) by finite kernel checks split into many theorems."
-conclusions: []
-planned:
-  source_status: Conditional
-  rests_on:
-  - TeamShift
-  claims:
-  - residues_decide
-  - residue_check_forces_divisor
-  - small_field_checks
+  title: 'only the remainders matter: a residue sieve for the lonely runner'
+  description: 'Pick a wheel and a modulus equal to the number of runners times that wheel. At times that
+    are fractions of that modulus, a speed and that speed plus the modulus look the same, so only the
+    speeds'' remainders matter (far_mod). The residue check: every list of remainders, as many as the
+    moving runners, none a multiple of the wheel, and with every list-but-one sharing no factor with the
+    modulus, has a lonely time with that denominator. If the check passes, every set of speeds with no
+    common factor that is never lonely has a speed divisible by the wheel (residue_check_forces_divisor).
+    Lists failing the sharing condition are handled by TeamShift, given the conjecture for one runner
+    fewer, which is a named hypothesis inside the claim. Rosenfeld 2025, Lemma 6, the main lemma of the
+    record proofs. Checked numerically (not in Lean): for four runners the check passes for the wheels
+    2, 3, 7, 11 and 13 and fails for 5; for five runners it passes for 5. As proved, differs from the
+    plan: the fully checked four- and five-runner cases (small_field_checks) and Rosenfeld''s Corollary
+    3 size bound are not done and stay planned; times are fractions, as in PileUpLock.'
+conclusions:
+- id: far_mod
+  declaration: RNS.ResidueReduction.far_mod
+  summary: Being at least one n-th of a lap from the start depends only on the remainder of the position
+    for the denominator.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/ResidueReduction.lean
+    declaration: RNS.ResidueReduction.far_mod_holds
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
+- id: residue_check_forces_divisor
+  declaration: RNS.ResidueReduction.residue_check_forces_divisor
+  summary: For at least three moving runners, if the conjecture holds for one runner fewer and the residue
+    check for a wheel passes, every never-lonely set of speeds with no common factor has a speed divisible
+    by that wheel.
+  imports:
+  - TeamShift.v1.team_shift
+  imports_status: identified
   open_inputs:
-  - lonely_runner_one_fewer
-  tier: "Tier 2: the reduction is elementary given TeamShift; the small-case checks are finite but large (use decide +kernel split by wheel, never one giant check)."
-  plan: "Prove that loneliness at a time that is a fraction of the modulus depends only on the speeds' remainders; prove Lemma 6 from TeamShift's step; then, for four and five runners, run the residue checks for the wheels Rosenfeld lists and state the size bound of Corollary 3 as a cited claim to close those cases."
+  - lonely_runner_upto
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/ResidueReduction.lean
+    declaration: RNS.ResidueReduction.residue_check_forces_divisor_step
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
 sources:
-- title: "M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243, arXiv 2509.14111"
+- title: M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243,
+    arXiv 2509.14111
   url: https://arxiv.org/abs/2509.14111
-  relationship: "Lemma 6 is the statement this node proves; Corollary 3 is cited"
-- title: "M. Rosenfeld, The lonely runner conjecture holds for nine runners, arXiv 2512.01912"
+  relationship: Lemma 6 is the statement this node proves; Corollary 3 is cited
+- title: M. Rosenfeld, The lonely runner conjecture holds for nine runners, arXiv 2512.01912
   url: https://arxiv.org/abs/2512.01912
-  relationship: "refinements of the same residue method"
+  relationship: refinements of the same residue method
 related:
 - node: SmallDivisorPulse
-  note: "Lemma 4 supplies the small divisors the residue checks add to"
+  note: Lemma 4 supplies the small divisors the residue checks add to
 - node: CRT
-  note: "remainders modulo the field size times a wheel, the RNS picture"
+  note: remainders modulo the field size times a wheel, the RNS picture

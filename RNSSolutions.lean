@@ -94,3 +94,4 @@ import RNSSolutions.KanoldBound
 import RNSSolutions.PileUpLock
 import RNSSolutions.SmallDivisorPulse
 import RNSSolutions.TeamShift
+import RNSSolutions.ResidueReduction

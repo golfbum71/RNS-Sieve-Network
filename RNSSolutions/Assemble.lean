@@ -69,6 +69,8 @@ import RNSSolutions.BrocardWindowLength
 import RNSSolutions.HasseCurve
 import RNSSolutions.QuadraticCharSum
 import RNSSolutions.BirchTateRational
+import RNSSolutions.TeamShift
+import RNSSolutions.ResidueReduction
 
 /-!
 # Assembling the network
@@ -723,3 +725,11 @@ theorem RNS.HasseCurve.hasse_bound_holds : RNS.HasseCurve.hasse_bound :=
 #print axioms RNS.HasseCurve.jacobsthal_second_moment_holds
 #print axioms RNS.HasseCurve.hasse_bound_holds
 
+/-- `TeamShift` → `ResidueReduction`: a passing residue check forces the wheel into every
+counterexample. Conditional only through the hypotheses inside the claim (the conjecture for
+one runner fewer, and the residue check itself). -/
+theorem RNS.ResidueReduction.residue_check_forces_divisor_holds :
+    RNS.ResidueReduction.residue_check_forces_divisor :=
+  RNS.ResidueReduction.residue_check_forces_divisor_step RNS.TeamShift.team_shift_holds
+
+#print axioms RNS.ResidueReduction.residue_check_forces_divisor_holds
