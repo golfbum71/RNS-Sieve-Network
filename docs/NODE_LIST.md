@@ -1445,3 +1445,37 @@ Found in a news and literature search on 2026-11-18. Nothing here is started, pl
 - **Almost primes between consecutive squares.** P. Campbell, [arXiv 2603.10356](https://arxiv.org/abs/2603.10356) (March 2026): every interval between consecutive squares holds a number with at most three prime factors, by computation up to 10^31 and an explicit linear sieve above. Related to `AlmostPrimeWindow` (60), `GapConjectures` (17) and `BrocardPrediction` (104).
 - **Weakening Legendre.** M. Chamberland and A. Straub, [arXiv 2602.22502](https://arxiv.org/abs/2602.22502) (February 2026): on the Riemann hypothesis, primes lie between consecutive values of x to the power 2.25 and beyond. Conditional; would enter `GapConjectures` (17) only as a named hypothesis.
 - **Jacobsthal's function: no new upper bound found.** A 2026 audit for Erdős Problem 970 found nothing improving Iwaniec's general upper bound ([report](https://erdosproblemaday.com/report/970)). Recheck before starting any Jacobsthal upper-bound work.
+
+---
+
+## Elliott-Halberstam family: primes in the columns of large cycles (added 2026-11-22)
+
+Planned nodes scoped in a discussion of the Elliott-Halberstam conjecture in RNS terms. Each is on [`GRAPH.md`](../GRAPH.md) and the wheel as a dashed node in the new family "Primes in the columns of large cycles". Not yet in Lean. The analytic core (Bombieri-Vinogradov and everything past one half) rests on the large sieve, Kloosterman sums and Deligne's bounds, so it enters only as cited claims; the wheel-native pieces are `DenseDivisibility` and the definitions and `level_mono` in `LevelOfDistribution`.
+
+### 114. `ProgressionPNT` — every width shares its primes equally among its survivor columns (cited)
+For any fixed width, each survivor column's share of the primes tends to one over the number of survivor columns: the prime number theorem for arithmetic progressions (de la Vallée Poussin, 1896). Mathlib has only the infinitely-many form (`DirichletColumns`); PrimeNumberTheoremAnd is finishing the equal-share form. Check its status before citing and copy its statement word for word.
+- Sources: [Prime number theorem for arithmetic progressions (Wikipedia)](https://en.wikipedia.org/wiki/Prime_number_theorem#Prime_number_theorem_for_arithmetic_progressions); [PrimeNumberTheoremAnd](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd); [Zulip, PNT in AP (January 2026)](https://leanprover-community.github.io/archive/stream/423402-PrimeNumberTheorem+/topic/Prime.20number.20theorem.20in.20AP.html)
+- Lean (planned): `progression_pnt`
+- Rests on: nothing (related: `DirichletColumns`, `ColumnStructure`, `PrimeNumberTheorem`)
+- Status: Planned (cited)
+
+### 115. `DenseDivisibility` — a cycle built from small wheels splits into two factors of any size
+A product of distinct wheels below a bound has a factor in every range from a target divided by the bound up to the target. Polymath's dense divisibility; the property that lets smooth widths pass the square-root level in Zhang's method. Elementary: multiply in the wheels one at a time.
+- Sources: [Polymath, arXiv 1402.0811](https://arxiv.org/abs/1402.0811); [Zhang, Ann. of Math. 179 (2014)](https://doi.org/10.4007/annals.2014.179.3.7)
+- Lean (planned): `smooth_densely_divisible`, `densely_divisible_factor`
+- Rests on: nothing (related: `SmoothNumbers`, `CRT`)
+- Status: Planned (Tier 1, suggested first)
+
+### 116. `LevelOfDistribution` — Bombieri-Vinogradov and the Elliott-Halberstam conjecture
+Defines the worst column miss of one width and the level of distribution in RNS vocabulary; proves that a higher level gives every lower one. Cited: Bombieri-Vinogradov (level one half), Friedlander-Granville (the full width fails), the fixed-column record with weighted widths (Bombieri-Friedlander-Iwaniec 4/7, Maynard 3/5, Lichtman 66/107, Pascadi 5/8), Maynard's gaps of at most 12 on Elliott-Halberstam, Polymath8b's 6 on the generalized form, and Bombieri's asymptotic sieve (the full conjecture does not get past parity). Elliott-Halberstam itself is an open hypothesis, never claimed.
+- Sources: [Elliott-Halberstam conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Elliott%E2%80%93Halberstam_conjecture); [Bombieri-Vinogradov theorem (Wikipedia)](https://en.wikipedia.org/wiki/Bombieri%E2%80%93Vinogradov_theorem); [Friedlander and Granville, Ann. of Math. 129 (1989)](https://annals.math.princeton.edu/1989/129-2/p04); [Bombieri, Friedlander and Iwaniec, Acta Math. 156 (1986)](https://doi.org/10.1007/BF02399204); [Maynard, arXiv 2006.07088](https://arxiv.org/abs/2006.07088); [Lichtman, arXiv 2309.08522](https://arxiv.org/abs/2309.08522); [Pascadi, arXiv 2505.00653](https://arxiv.org/abs/2505.00653); [Goldston, Pintz and Yıldırım, arXiv math/0508185](https://arxiv.org/abs/math/0508185); [Maynard, arXiv 1311.4600](https://arxiv.org/abs/1311.4600); [Polymath, arXiv 1407.4897](https://arxiv.org/abs/1407.4897); [Ford, On Bombieri's asymptotic sieve](https://ford126.web.illinois.edu/wwwpapers/asymsieve.pdf)
+- Lean (planned): `column_miss`, `level_of_distribution`, `level_mono`, `bombieri_vinogradov`, `elliott_halberstam` (open hypothesis), `friedlander_granville`, `fixed_column_level`, `eh_bounded_gaps`, `geh_bounded_gaps`, `bombieri_asymptotic_sieve`
+- Rests on: nothing (related: `ProgressionPNT`, `PrimeGapsBridge`, `ParityBarrier`, `MaierMatrix`)
+- Status: Planned (cited, with one open hypothesis)
+
+### 117. `SmoothLevel` — past the square root for cycles built from small wheels (cited)
+With the widths restricted to cycles built from small wheels (divisors of the primorial modulus), the level is known past one half: Zhang one half plus 1/584, Polymath one half plus 7/300, Stadlmann one half plus 1/40 and then 0.5253; and any such level past one half gives bounded prime gaps (Motohashi-Pintz-Zhang). Cited; the proofs use Kloosterman sums and Deligne's bounds.
+- Sources: [Zhang, Ann. of Math. 179 (2014)](https://doi.org/10.4007/annals.2014.179.3.7); [Polymath, arXiv 1402.0811](https://arxiv.org/abs/1402.0811); [Stadlmann, arXiv 2309.00425](https://arxiv.org/abs/2309.00425); [Li, arXiv 2505.09629](https://arxiv.org/abs/2505.09629) (records the 0.5253 value; find Stadlmann's own source before citing)
+- Lean (planned): `zhang_smooth_level`, `polymath_smooth_level`, `stadlmann_smooth_level`, `smooth_level_bounded_gaps`
+- Rests on: `LevelOfDistribution`, `DenseDivisibility` (related: `SmoothNumbers`, `PrimeGapsBridge`)
+- Status: Planned (cited)

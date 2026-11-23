@@ -1,0 +1,38 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-22, Elliott-Halberstam family): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: ProgressionPNT.v1
+  family: ProgressionPNT
+  version: v1
+  order: 114
+  kind: paper
+  status: planned
+  group: distribution
+  title: "every width shares its primes equally among its survivor columns"
+  description: "Lay the numbers out in rows of any fixed width. Only the survivor columns (offsets sharing no factor with the width) hold more than one prime, and as the rows go on each survivor column's share of the primes tends to one over the number of survivor columns. This is the prime number theorem for arithmetic progressions (de la Vallée Poussin, 1896); the two columns 6n-1 and 6n+1 are the width-6 case. It says nothing about how far down the rows one must go, which is what the Elliott-Halberstam family below is about. Mathlib has only the infinitely-many form (DirichletColumns); the equal-share form is being finished in PrimeNumberTheoremAnd, so this enters as an outside claim once that proof exists."
+conclusions: []
+planned:
+  source_status: Cited
+  rests_on: []
+  claims:
+  - progression_pnt
+  tier: "Tier 1 as a cited outside claim; check PrimeNumberTheoremAnd for a finished Lean statement first and copy it word for word, as for PrimeNumberTheorem."
+  plan: "State the equal share for every width and every survivor column as a named claim, matched to the PNT+ statement if it is finished; otherwise cite the classical theorem."
+sources:
+- title: "Prime number theorem, section on arithmetic progressions (Wikipedia)"
+  url: https://en.wikipedia.org/wiki/Prime_number_theorem#Prime_number_theorem_for_arithmetic_progressions
+  relationship: "states the theorem (de la Vallée Poussin, 1896)"
+- title: "PrimeNumberTheoremAnd (Kontorovich, Tao et al.)"
+  url: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd
+  relationship: "Lean project whose stated goals include the prime number theorem in arithmetic progressions; the outside source to cite once finished"
+- title: "Zulip, PrimeNumberTheorem+ stream, topic 'Prime number theorem in AP' (January 2026)"
+  url: https://leanprover-community.github.io/archive/stream/423402-PrimeNumberTheorem+/topic/Prime.20number.20theorem.20in.20AP.html
+  relationship: "progress on the Lean proof via the Wiener-Ikehara method; check its status before citing"
+related:
+- node: DirichletColumns
+  note: "the infinitely-many form for the two columns, from Mathlib; this node is the equal-share form for every width"
+- node: ColumnStructure
+  note: "the width-6 columns themselves"
+- node: PrimeNumberTheorem
+  note: "the one-column case (width 1), cited from PNT+ in the same way"

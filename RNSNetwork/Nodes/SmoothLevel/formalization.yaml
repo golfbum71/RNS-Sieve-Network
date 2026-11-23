@@ -1,0 +1,44 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-22, Elliott-Halberstam family): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: SmoothLevel.v1
+  family: SmoothLevel
+  version: v1
+  order: 117
+  kind: paper
+  status: planned
+  group: distribution
+  title: "past the square root for cycles built from small wheels"
+  description: "Restrict the widths in LevelOfDistribution to cycles built only from wheels below a small power of the largest number (the RNS cycles, divisors of the primorial modulus). For these the level is known past one half: Zhang reached one half plus 1/584, Polymath one half plus 7/300, and Stadlmann one half plus 1/40, then 0.5253. These are Zhang-type estimates; they need the cycles to split into factors of chosen sizes (DenseDivisibility) and are the input to Zhang's bounded gaps. Cited, not proved: the proofs rest on Kloosterman sums and Deligne's bounds, which are outside the RNS."
+conclusions: []
+planned:
+  source_status: Cited
+  rests_on:
+  - LevelOfDistribution
+  - DenseDivisibility
+  claims:
+  - zhang_smooth_level
+  - polymath_smooth_level
+  - stadlmann_smooth_level
+  - smooth_level_bounded_gaps
+  tier: "Tier 1 as statements; the proofs are cited. The statements use the column miss of LevelOfDistribution, with widths that divide the primorial modulus and are densely divisible."
+  plan: "State each level as a cited claim in the vocabulary of LevelOfDistribution, with the widths restricted to densely divisible divisors of the primorial modulus; state the Motohashi-Pintz-Zhang step (any smooth level past one half gives bounded prime gaps) as a cited claim."
+sources:
+- title: "Y. Zhang, Bounded gaps between primes, Ann. of Math. 179 (2014), 1121-1174"
+  url: https://doi.org/10.4007/annals.2014.179.3.7
+  relationship: "level one half plus 1/584 for smooth widths, and bounded gaps from it; cited as zhang_smooth_level and smooth_level_bounded_gaps"
+- title: "D. H. J. Polymath, New equidistribution estimates of Zhang type, Algebra & Number Theory 8 (2014), arXiv 1402.0811"
+  url: https://arxiv.org/abs/1402.0811
+  relationship: "level one half plus 7/300 for densely divisible smooth widths; cited as polymath_smooth_level"
+- title: "J. Stadlmann, On primes in arithmetic progressions and bounded gaps between many primes, arXiv 2309.00425"
+  url: https://arxiv.org/abs/2309.00425
+  relationship: "level one half plus 1/40 for smooth widths"
+- title: "R. Li, Primes in arithmetic progressions to smooth moduli: a minorant version, arXiv 2505.09629"
+  url: https://arxiv.org/abs/2505.09629
+  relationship: "records Stadlmann's further improvement to 0.5253 as the current best in this direction; the value cited as stadlmann_smooth_level (find Stadlmann's own source before citing)"
+related:
+- node: SmoothNumbers
+  note: "the same cycles, numbers built only from the wheels"
+- node: PrimeGapsBridge
+  note: "bounded gaps from a level past one half; PrimeGapsLib covers the Maynard-Tao route"

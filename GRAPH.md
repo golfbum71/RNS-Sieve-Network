@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 97 of 109 nodes are built, holding 308 claims: 301 proved in Lean and 7 cited from a published paper. They are joined by 182 arrows, each a Lean-checked step. Of the other 12 nodes, drawn dashed or purple, 9 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 97 of 113 nodes are built, holding 308 claims: 301 proved in Lean and 7 cited from a published paper. They are joined by 182 arrows, each a Lean-checked step. Of the other 16 nodes, drawn dashed or purple, 1 is proved in the original source files but not yet restated here; 3 are planned citations of published results; 9 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -52,6 +52,7 @@ graph LR
   g6["<b>Survivor shares and analytic inputs</b><br/>11 built, 0 planned or outside"]
   g7["<b>One wheel at a time: squares, characters and the number 24</b><br/>5 built, 0 planned or outside"]
   g8["<b>Sieve methods: Brun, Hooley, Selberg</b><br/>18 built, 6 planned or outside"]
+  g9["<b>Primes in the columns of large cycles: level of distribution and Elliott-Halberstam</b><br/>0 built, 4 planned or outside"]
   g1 ==> g2
   g1 ==> g4
   g1 ==> g5
@@ -77,6 +78,7 @@ graph LR
   click g6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/GRAPH.md#survivor-shares-and-analytic-inputs" _self
   click g7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/GRAPH.md#one-wheel-at-a-time-squares-characters-and-the-number-24" _self
   click g8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/GRAPH.md#sieve-methods-brun-hooley-selberg" _self
+  click g9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/GRAPH.md#primes-in-the-columns-of-large-cycles-level-of-distribution-and-elliott-halberstam" _self
 ```
 
 ### Foundations: wheels, cycles and columns
@@ -1680,6 +1682,45 @@ graph LR
   click c50 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ChenWeights.md#chen_weight_le" _blank
 ```
 
+### Primes in the columns of large cycles: level of distribution and Elliott-Halberstam
+
+Nodes: [`ProgressionPNT`](docs/nodes/ProgressionPNT.md), [`DenseDivisibility`](docs/nodes/DenseDivisibility.md), [`LevelOfDistribution`](docs/nodes/LevelOfDistribution.md), [`SmoothLevel`](docs/nodes/SmoothLevel.md).
+
+```mermaid
+graph LR
+  subgraph s1["<b>114. ProgressionPNT — every width shares its primes equally among its survivor columns</b>"]
+    p1["<i>planned: cited from a paper</i>"]
+  end
+  subgraph s2["<b>115. DenseDivisibility — a cycle built from small wheels splits into two factors of any size</b>"]
+    p2["<i>planned: proved in source file</i>"]
+  end
+  subgraph s3["<b>116. LevelOfDistribution — level of distribution: Bombieri-Vinogradov and the Elliott-Halberstam conjecture</b>"]
+    p3["<i>planned: cited from a paper</i>"]
+  end
+  subgraph s4["<b>117. SmoothLevel — past the square root for cycles built from small wheels</b>"]
+    p4["<i>planned: cited from a paper</i>"]
+  end
+  s3 -.-> s4
+  s2 -.-> s4
+  classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
+  classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
+  classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
+  classDef planned fill:#ffffff,stroke:#1a7f37,color:#57606a,stroke-dasharray: 5 4;
+  classDef conditional fill:#ffffff,stroke:#9a6700,color:#57606a,stroke-dasharray: 5 4;
+  classDef cited fill:#ffffff,stroke:#0969da,color:#57606a,stroke-dasharray: 5 4;
+  classDef new fill:#ffffff,stroke:#57606a,color:#57606a,stroke-dasharray: 5 4;
+  classDef draft fill:#ffffff,stroke:#1a7f37,color:#1f2328,stroke-width:2px,stroke-dasharray: 2 2;
+  classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
+  classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
+  classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
+  class p2 planned;
+  class p1,p3,p4 cited;
+  click p1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ProgressionPNT.md" _blank
+  click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/DenseDivisibility.md" _blank
+  click p3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LevelOfDistribution.md" _blank
+  click p4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmoothLevel.md" _blank
+```
+
 
 ## What each result rests on
 
@@ -2182,6 +2223,8 @@ exactly the following, each recorded as such rather than claimed:
 - [`RoughInPrimeGaps`](docs/nodes/RoughInPrimeGaps.md) — [plby/lean-proofs](https://github.com/plby/lean-proofs/blob/8822f7ddef30fadbd92e1c6ab4ed897af356af5e/src/latest/ErdosProblems/Erdos682.lean#L5018)
 - [`LongGaps`](docs/nodes/LongGaps.md) — [openai/LongGapsBetweenPrimes](https://github.com/openai/LongGapsBetweenPrimes/blob/main/LongGapsBetweenPrimes.lean)
 
+**Planned nodes will add:** `elliott_halberstam`
+
 ## Published sources
 
 Nodes that apply the RNS to published work: proven results, cited theorems, or stated conjectures, with links to the papers and pages. Each node's page lists the same sources at the top.
@@ -2510,6 +2553,30 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 - [`BirchTateRational`](docs/nodes/BirchTateRational.md)
   - [J. Hurrelbrink, Birch–Tate conjecture, Encyclopedia of Mathematics](https://encyclopediaofmath.org/wiki/Birch–Tate_conjecture) — states the formula and its numerical example for the rationals: w₂ = 24, ζ(−1) = −1/12, K₂ of the integers of order 2
   - [P. Deligne and K. Ribet, Values of abelian L-functions at negative integers over totally real fields, Invent. Math. 59 (1980), 227-286](https://doi.org/10.1007/BF01453237) — the integrality of w₂ times ζ(−1) for totally real fields, of which this is the rational case in numbers
+- [`ProgressionPNT`](docs/nodes/ProgressionPNT.md)
+  - [Prime number theorem, section on arithmetic progressions (Wikipedia)](https://en.wikipedia.org/wiki/Prime_number_theorem#Prime_number_theorem_for_arithmetic_progressions) — states the theorem (de la Vallée Poussin, 1896)
+  - [PrimeNumberTheoremAnd (Kontorovich, Tao et al.)](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd) — Lean project whose stated goals include the prime number theorem in arithmetic progressions; the outside source to cite once finished
+  - [Zulip, PrimeNumberTheorem+ stream, topic 'Prime number theorem in AP' (January 2026)](https://leanprover-community.github.io/archive/stream/423402-PrimeNumberTheorem+/topic/Prime.20number.20theorem.20in.20AP.html) — progress on the Lean proof via the Wiener-Ikehara method; check its status before citing
+- [`DenseDivisibility`](docs/nodes/DenseDivisibility.md)
+  - [D. H. J. Polymath, New equidistribution estimates of Zhang type, Algebra & Number Theory 8 (2014), arXiv 1402.0811](https://arxiv.org/abs/1402.0811) — defines dense divisibility and proves that smooth squarefree cycles have it; the statement this node proves
+  - [Y. Zhang, Bounded gaps between primes, Ann. of Math. 179 (2014), 1121-1174](https://doi.org/10.4007/annals.2014.179.3.7) — the original use of smooth widths and their factorisations to pass the square-root level
+- [`LevelOfDistribution`](docs/nodes/LevelOfDistribution.md)
+  - [Elliott-Halberstam conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Elliott%E2%80%93Halberstam_conjecture) — states the conjecture (P. D. T. A. Elliott and H. Halberstam, Symposia Mathematica 4, 1970) and summarises what is known
+  - [Bombieri-Vinogradov theorem (Wikipedia)](https://en.wikipedia.org/wiki/Bombieri%E2%80%93Vinogradov_theorem) — states the level one half (E. Bombieri, On the large sieve, Mathematika 12 (1965); A. I. Vinogradov, 1965)
+  - [J. Friedlander and A. Granville, Limitations to the equi-distribution of primes I, Ann. of Math. 129 (1989), 363-382](https://annals.math.princeton.edu/1989/129-2/p04) — shows the conjecture fails at the full width; cited as friedlander_granville
+  - [E. Bombieri, J. Friedlander and H. Iwaniec, Primes in arithmetic progressions to large moduli, Acta Math. 156 (1986), 203-251](https://doi.org/10.1007/BF02399204) — first fixed-column level past one half (4/7, well-factorable weights)
+  - [J. Maynard, Primes in arithmetic progressions to large moduli II: well-factorable estimates, arXiv 2006.07088](https://arxiv.org/abs/2006.07088) — fixed-column level 3/5
+  - [J. D. Lichtman, Primes in arithmetic progressions to large moduli, and Goldbach beyond the square-root barrier, arXiv 2309.08522](https://arxiv.org/abs/2309.08522) — fixed-column level 66/107, triply well-factorable weights
+  - [A. Pascadi, On the exponents of distribution of primes and smooth numbers, arXiv 2505.00653](https://arxiv.org/abs/2505.00653) — fixed-column level 5/8, triply well-factorable weights, unconditionally; the current record cited as fixed_column_level
+  - [D. A. Goldston, J. Pintz and C. Y. Yıldırım, Primes in tuples I, Ann. of Math. 170 (2009), arXiv math/0508185](https://arxiv.org/abs/math/0508185) — any level past one half gives bounded prime gaps
+  - [J. Maynard, Small gaps between primes, Ann. of Math. 181 (2015), arXiv 1311.4600](https://arxiv.org/abs/1311.4600) — on Elliott-Halberstam, gaps of at most 12 infinitely often; cited as eh_bounded_gaps
+  - [D. H. J. Polymath, Variants of the Selberg sieve, and bounded intervals containing many primes, arXiv 1407.4897](https://arxiv.org/abs/1407.4897) — on the generalized Elliott-Halberstam conjecture, gaps of at most 6; cited as geh_bounded_gaps
+  - [K. Ford, On Bombieri's asymptotic sieve, Trans. Amer. Math. Soc. 357 (2005), 1663-1674](https://ford126.web.illinois.edu/wwwpapers/asymsieve.pdf) — explains Bombieri's asymptotic sieve (1976): even the full conjecture does not let a sieve separate primes from products of two primes; cited as bombieri_asymptotic_sieve
+- [`SmoothLevel`](docs/nodes/SmoothLevel.md)
+  - [Y. Zhang, Bounded gaps between primes, Ann. of Math. 179 (2014), 1121-1174](https://doi.org/10.4007/annals.2014.179.3.7) — level one half plus 1/584 for smooth widths, and bounded gaps from it; cited as zhang_smooth_level and smooth_level_bounded_gaps
+  - [D. H. J. Polymath, New equidistribution estimates of Zhang type, Algebra & Number Theory 8 (2014), arXiv 1402.0811](https://arxiv.org/abs/1402.0811) — level one half plus 7/300 for densely divisible smooth widths; cited as polymath_smooth_level
+  - [J. Stadlmann, On primes in arithmetic progressions and bounded gaps between many primes, arXiv 2309.00425](https://arxiv.org/abs/2309.00425) — level one half plus 1/40 for smooth widths
+  - [R. Li, Primes in arithmetic progressions to smooth moduli: a minorant version, arXiv 2505.09629](https://arxiv.org/abs/2505.09629) — records Stadlmann's further improvement to 0.5253 as the current best in this direction; the value cited as stadlmann_smooth_level (find Stadlmann's own source before citing)
 
 ## Node index
 
@@ -2624,3 +2691,7 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 111 | [`StepanovWeil`](docs/nodes/StepanovWeil.md) | the square-root bound for the residue character of any pattern | cited from a published paper; not proved in Lean |
 | 112 | [`VonKochBound`](docs/nodes/VonKochBound.md) | the Riemann hypothesis as an error term, against the Brocard window | cited from a published paper; not proved in Lean |
 | 113 | [`BirchTateRational`](docs/nodes/BirchTateRational.md) | 24 times ζ(−1) is −2 | proved in Lean |
+| 114 | [`ProgressionPNT`](docs/nodes/ProgressionPNT.md) | every width shares its primes equally among its survivor columns | planned: cited from a paper |
+| 115 | [`DenseDivisibility`](docs/nodes/DenseDivisibility.md) | a cycle built from small wheels splits into two factors of any size | planned: proved in source file |
+| 116 | [`LevelOfDistribution`](docs/nodes/LevelOfDistribution.md) | level of distribution: Bombieri-Vinogradov and the Elliott-Halberstam conjecture | planned: cited from a paper |
+| 117 | [`SmoothLevel`](docs/nodes/SmoothLevel.md) | past the square root for cycles built from small wheels | planned: cited from a paper |

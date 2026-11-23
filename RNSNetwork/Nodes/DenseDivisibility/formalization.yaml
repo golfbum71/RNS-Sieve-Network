@@ -1,0 +1,33 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-22, Elliott-Halberstam family): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: DenseDivisibility.v1
+  family: DenseDivisibility
+  version: v1
+  order: 115
+  kind: paper
+  status: planned
+  group: distribution
+  title: "a cycle built from small wheels splits into two factors of any size"
+  description: "Take a cycle that is a product of distinct wheels, all below a small bound. For any target size, the cycle has a factor between the target divided by the bound and the target itself, so it can be split into two factors of almost any sizes wanted. Polymath named this property dense divisibility; it is why cycles built only from small wheels (smooth widths) get past the square-root level of distribution in Zhang's method when general widths do not. Proof: multiply in the wheels one at a time; each step grows the product by less than the bound, so some partial product lands in every such range. Pure wheel arithmetic, no analytic input."
+conclusions: []
+planned:
+  rests_on: []
+  claims:
+  - smooth_densely_divisible
+  - densely_divisible_factor
+  tier: "Tier 1: elementary; a greedy product over the wheels in increasing order."
+  plan: "Define a cycle as densely divisible at a bound when every range from a target over the bound up to the target, with the target at most the cycle, contains a factor of the cycle. Prove that a product of distinct wheels below the bound is densely divisible at that bound, then the splitting corollary: such a cycle is a product of two factors with the first in any prescribed range."
+sources:
+- title: "D. H. J. Polymath, New equidistribution estimates of Zhang type, Algebra & Number Theory 8 (2014), arXiv 1402.0811"
+  url: https://arxiv.org/abs/1402.0811
+  relationship: "defines dense divisibility and proves that smooth squarefree cycles have it; the statement this node proves"
+- title: "Y. Zhang, Bounded gaps between primes, Ann. of Math. 179 (2014), 1121-1174"
+  url: https://doi.org/10.4007/annals.2014.179.3.7
+  relationship: "the original use of smooth widths and their factorisations to pass the square-root level"
+related:
+- node: SmoothNumbers
+  note: "numbers built only from the wheels; this node is about how a squarefree one factors"
+- node: CRT
+  note: "a factorisation of the cycle is a splitting of the wheels, and the Chinese Remainder Theorem splits each column the same way"

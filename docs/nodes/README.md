@@ -113,5 +113,9 @@
 | 111 | [`StepanovWeil`](StepanovWeil.md) | the square-root bound for the residue character of any pattern | cited from a published paper; not proved in Lean |
 | 112 | [`VonKochBound`](VonKochBound.md) | the Riemann hypothesis as an error term, against the Brocard window | cited from a published paper; not proved in Lean |
 | 113 | [`BirchTateRational`](BirchTateRational.md) | 24 times ζ(−1) is −2 | proved in Lean |
+| 114 | [`ProgressionPNT`](ProgressionPNT.md) | every width shares its primes equally among its survivor columns | planned: cited from a paper |
+| 115 | [`DenseDivisibility`](DenseDivisibility.md) | a cycle built from small wheels splits into two factors of any size | planned: proved in source file |
+| 116 | [`LevelOfDistribution`](LevelOfDistribution.md) | level of distribution: Bombieri-Vinogradov and the Elliott-Halberstam conjecture | planned: cited from a paper |
+| 117 | [`SmoothLevel`](SmoothLevel.md) | past the square root for cycles built from small wheels | planned: cited from a paper |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.
