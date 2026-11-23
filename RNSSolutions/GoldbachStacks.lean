@@ -136,7 +136,7 @@ end RNS.GoldbachStacks
 #print axioms RNS.GoldbachStacks.frontier_ahead_iff_no_gap_holds
 #print axioms RNS.GoldbachStacks.frontier_ahead_iff_goldbach_holds
 
-/-! ## The wheels never force a gap (added 2026-11-23, draft) -/
+/-! ## The wheels never force a gap (added 2026-11-23, built clean, standard axioms) -/
 
 namespace RNS.GoldbachStacks
 
@@ -156,8 +156,8 @@ theorem wheel_no_gap_holds : wheel_no_gap := by
     revert r
     decide
   · classical
-    haveI : Fact q.Prime := ⟨hq⟩
-    haveI : NeZero q := ⟨hq.ne_zero⟩
+    have : Fact q.Prime := ⟨hq⟩
+    have : NeZero q := ⟨hq.ne_zero⟩
     have h3 : 3 ≤ q := by
       have := hq.two_le
       omega

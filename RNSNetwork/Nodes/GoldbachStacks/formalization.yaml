@@ -18,7 +18,10 @@ node:
     exactly when Goldbach's conjecture holds, and so does the frontier form (as
     the stacks arrive in order, every target up to a new stack's height is
     already built from the stacks before it). These are equivalences only;
-    Goldbach's conjecture itself stays open.
+    Goldbach's conjecture itself stays open. Also proved: at the wheel of size 3
+    every stack above height 1 leaves remainder 0 or 2, never 1, and at any
+    single wheel the surviving stacks, taken in pairs, reach every remainder,
+    so no one wheel can force a gap.
 
 conclusions:
   - id: goldbach_iff_odd_goldbach
@@ -67,6 +70,30 @@ conclusions:
         kind: lean-noncompliant
         solution: RNSSolutions/GoldbachStacks.lean
         declaration: RNS.GoldbachStacks.frontier_ahead_iff_goldbach_holds
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23). Recorded as noncompliant only because no Comparator receipt exists yet."
+    designated: lean-proof
+  - id: stack_mod_three
+    declaration: RNS.GoldbachStacks.stack_mod_three
+    summary: "Every prime stack taller than 1 has a height leaving remainder 0 or 2 on division by 3, never 1."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/GoldbachStacks.lean
+        declaration: RNS.GoldbachStacks.stack_mod_three_holds
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23). Recorded as noncompliant only because no Comparator receipt exists yet."
+    designated: lean-proof
+  - id: wheel_no_gap
+    declaration: RNS.GoldbachStacks.wheel_no_gap
+    summary: "At any single wheel, the heights whose stacks survive it, taken in pairs, reach every remainder, so no wheel on its own leaves a target unbuilt."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-noncompliant
+        solution: RNSSolutions/GoldbachStacks.lean
+        declaration: RNS.GoldbachStacks.wheel_no_gap_holds
         note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 

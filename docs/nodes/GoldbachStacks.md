@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean · **Diagram:** [Gaps between survivors and between primes](../../GRAPH.md#gaps-between-survivors-and-between-primes)
 
-Original to this project. Each odd prime is a stack two wide with one point sticking up (3 is height 1, 5 height 2, 7 height 3, 11 height 5). Two stacks put together make twice their total height plus 2, so building every pair of stacks reaches the target heights. Proved here: the stacks never leave a gap exactly when Goldbach's conjecture holds, and so does the frontier form (as the stacks arrive in order, every target up to a new stack's height is already built from the stacks before it). These are equivalences only; Goldbach's conjecture itself stays open.
+Original to this project. Each odd prime is a stack two wide with one point sticking up (3 is height 1, 5 height 2, 7 height 3, 11 height 5). Two stacks put together make twice their total height plus 2, so building every pair of stacks reaches the target heights. Proved here: the stacks never leave a gap exactly when Goldbach's conjecture holds, and so does the frontier form (as the stacks arrive in order, every target up to a new stack's height is already built from the stacks before it). These are equivalences only; Goldbach's conjecture itself stays open. Also proved: at the wheel of size 3 every stack above height 1 leaves remainder 0 or 2, never 1, and at any single wheel the surviving stacks, taken in pairs, reach every remainder, so no one wheel can force a gap.
 
 ## Published sources
 
@@ -82,6 +82,42 @@ def frontier_ahead_iff_goldbach : Prop := frontier_ahead ↔ goldbach
 **Rests on:** no other node (Mathlib and the Vocabulary only)
 
 **Proof:** `RNS.GoldbachStacks.frontier_ahead_iff_goldbach_holds` in [`RNSSolutions/GoldbachStacks.lean`](../../RNSSolutions/GoldbachStacks.lean)
+
+<a id="stack_mod_three"></a>
+### `stack_mod_three`
+
+Every prime stack taller than 1 has a height leaving remainder 0 or 2 on division by 3, never 1.
+
+```lean
+/-- **The wheel of size 3.** Every stack taller than 1 has a height leaving
+remainder 0 or 2 on division by 3, never 1 (remainder 1 would make its prime a
+multiple of 3). -/
+def stack_mod_three : Prop :=
+  ∀ h : ℕ, is_stack h → 2 ≤ h → h % 3 ≠ 1
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.GoldbachStacks.stack_mod_three_holds` in [`RNSSolutions/GoldbachStacks.lean`](../../RNSSolutions/GoldbachStacks.lean)
+
+<a id="wheel_no_gap"></a>
+### `wheel_no_gap`
+
+At any single wheel, the heights whose stacks survive it, taken in pairs, reach every remainder, so no wheel on its own leaves a target unbuilt.
+
+```lean
+/-- **No single wheel forces a gap.** For every prime `q` and every remainder
+`r` modulo `q`, there are two heights `a` and `b` modulo `q` whose stacks
+survive the wheel of size `q` (twice the height plus 1 is not a multiple of
+`q`) and whose sum leaves remainder `r`. -/
+def wheel_no_gap : Prop :=
+  ∀ q : ℕ, q.Prime → ∀ r : ZMod q,
+    ∃ a b : ZMod q, 2 * a + 1 ≠ 0 ∧ 2 * b + 1 ≠ 0 ∧ a + b = r
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.GoldbachStacks.wheel_no_gap_holds` in [`RNSSolutions/GoldbachStacks.lean`](../../RNSSolutions/GoldbachStacks.lean)
 
 ## Files
 
