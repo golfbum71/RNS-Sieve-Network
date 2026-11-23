@@ -1,0 +1,99 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Lonely Runner family, added 2026-11-23. See docs/NODE_LIST.md.
+
+node:
+  id: TightFromBlockedRun.v1
+  family: TightFromBlockedRun
+  version: v1
+  order: 127
+  kind: paper
+  status: active
+  group: lonely
+  title: a run of blocked numbers makes a tight lonely runner
+  description: 'The consecutive speeds 1 up to one less than the number of runners are tight: the time
+    one over the number of runners gives every runner one part of a lap of room, and no time gives more
+    (Dirichlet''s pigeonhole). Speed up the runner of speed r to m times its speed. If every number from
+    the number of runners minus r up to m times that, minus one, shares a factor with r (a run of positions
+    blocked by the wheels of r), the new set is still tight. The proof replaces one runner at a time (Goddyn
+    and Wong''s Lemma 3.2): at a time when only the sped-up runner could have been close, either a smaller
+    wheel of r takes its place, or an unchanged runner whose speed is the inverse remainder for r does,
+    and the blocked run is exactly what keeps that runner unchanged. A blocked run is shorter than the
+    speed that blocks it, which keeps the sped-up runner off the fence post at the time one over the number
+    of runners. This is the wheel-native part of the link between tight lonely runners and Jacobsthal''s
+    problem (JacobsthalTightness): the longer the blocked runs of a wheel cycle, the more a runner can
+    be sped up. Goddyn and Wong 2006, Theorem 2.1 (sufficiency direction) and Lemma 3.2, at times that
+    are fractions; never strictly lonely means every fractional time has a runner at most one part from
+    the start. Not proved: the necessity direction, the several-runner Theorem 3.1, and real times.'
+conclusions:
+- id: consecutive_covered
+  declaration: RNS.TightFromBlockedRun.consecutive_covered
+  summary: 'The consecutive speeds are never strictly lonely: at every fractional time one of them is
+    at most one part of a lap from the start (Dirichlet).'
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/TightFromBlockedRun.lean
+    declaration: RNS.TightFromBlockedRun.consecutive_covered_holds
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
+- id: one_step_replacement
+  declaration: RNS.TightFromBlockedRun.one_step_replacement
+  summary: Replacing one speed r by m times it keeps a set never strictly lonely, if the wheels of r and
+    the inverse remainders for r are covered by unchanged speeds in the right range (Goddyn and Wong,
+    Lemma 3.2).
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/TightFromBlockedRun.lean
+    declaration: RNS.TightFromBlockedRun.one_step_replacement_holds
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
+- id: blocked_run_short
+  declaration: RNS.TightFromBlockedRun.blocked_run_short
+  summary: A run of numbers all sharing a factor with r is shorter than r.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/TightFromBlockedRun.lean
+    declaration: RNS.TightFromBlockedRun.blocked_run_short_holds
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
+- id: single_acceleration_tight
+  declaration: RNS.TightFromBlockedRun.single_acceleration_tight
+  summary: 'If the numbers from (number of runners minus r) to m times that, minus one, are all blocked
+    by the wheels of r, the consecutive speeds with r sped up to m times r are tight: lonely at one over
+    the number of runners and never strictly lonely.'
+  imports:
+  - TightFromBlockedRun.v1.consecutive_covered
+  - TightFromBlockedRun.v1.one_step_replacement
+  - TightFromBlockedRun.v1.blocked_run_short
+  - FieldSizeTimes.v1.field_size_far_iff
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/TightFromBlockedRun.lean
+    declaration: RNS.TightFromBlockedRun.single_acceleration_tight_step
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
+sources:
+- title: L. Goddyn and E. B. Wong, Tight instances of the lonely runner, Integers 6 (2006) A38
+  url: https://www.sfu.ca/~goddyn/Papers/063tight_lonely_runner.tex.txt
+  relationship: Theorem 2.1 (sufficiency) and Lemma 3.2, proved here at fractional times
+- title: Tight instances of the Lonely Runner Conjecture, one-entry modifications and the growth of speeds,
+    arXiv 2608.13599
+  url: https://arxiv.org/abs/2608.13599
+  relationship: restates the one-entry theorem with the blocked-run condition (Theorem 1.1)
+related:
+- node: JacobsthalTightness
+  note: the cited picture this node starts to prove
+- node: BlockingRuns
+  note: the blocked run here is a run of positions blocked by the wheels of r
+- node: FieldSizeTimes
+  note: the lonely time one over the number of runners

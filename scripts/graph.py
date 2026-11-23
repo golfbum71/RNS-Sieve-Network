@@ -218,7 +218,8 @@ GROUPS = [
         "ProgressionPNT", "DenseDivisibility", "LevelOfDistribution", "SmoothLevel"]),
     ("lonely", "The Lonely Runner: pile-ups, shifts and residue sieves", [
         "PileUpLock", "SmallDivisorPulse", "TeamShift", "ResidueReduction", "LonelyRecords",
-        "ModulusLift", "FieldSizeTimes", "LonelyConnections", "JacobsthalTightness"]),
+        "ModulusLift", "FieldSizeTimes", "LonelyConnections", "JacobsthalTightness",
+        "TightFromBlockedRun"]),
 ]
 GROUP_TITLE = {key: title for key, title, _ in GROUPS}
 GROUP_TITLE["other"] = "Other"

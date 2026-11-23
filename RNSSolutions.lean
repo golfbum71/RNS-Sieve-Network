@@ -97,3 +97,4 @@ import RNSSolutions.TeamShift
 import RNSSolutions.ResidueReduction
 import RNSSolutions.ModulusLift
 import RNSSolutions.FieldSizeTimes
+import RNSSolutions.TightFromBlockedRun

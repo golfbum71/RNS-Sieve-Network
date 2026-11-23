@@ -71,6 +71,8 @@ import RNSSolutions.QuadraticCharSum
 import RNSSolutions.BirchTateRational
 import RNSSolutions.TeamShift
 import RNSSolutions.ResidueReduction
+import RNSSolutions.FieldSizeTimes
+import RNSSolutions.TightFromBlockedRun
 
 /-!
 # Assembling the network
@@ -733,3 +735,11 @@ theorem RNS.ResidueReduction.residue_check_forces_divisor_holds :
   RNS.ResidueReduction.residue_check_forces_divisor_step RNS.TeamShift.team_shift_holds
 
 #print axioms RNS.ResidueReduction.residue_check_forces_divisor_holds
+
+/-- `FieldSizeTimes` → `TightFromBlockedRun`: a run of numbers blocked by the wheels of `r` makes
+the consecutive speeds with `r` sped up a tight lonely-runner set. -/
+theorem RNS.TightFromBlockedRun.single_acceleration_tight_holds :
+    RNS.TightFromBlockedRun.single_acceleration_tight :=
+  RNS.TightFromBlockedRun.single_acceleration_tight_step RNS.FieldSizeTimes.field_size_far_iff_holds
+
+#print axioms RNS.TightFromBlockedRun.single_acceleration_tight_holds
