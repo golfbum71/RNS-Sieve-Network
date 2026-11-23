@@ -370,7 +370,10 @@ theorem single_acceleration_tight_step (hF : RNS.FieldSizeTimes.field_size_far_i
       refine ⟨b, Finset.mem_insert_of_mem (Finset.mem_erase.mpr ⟨hbr, Finset.mem_Icc.mpr
         ⟨by linarith, by linarith⟩⟩), hbig, by linarith, ⟨-((q - ((n : ℤ) - r)) / r), hbq⟩⟩
 
-/-! ## Several sped-up runners -/
+/-! ## Several sped-up runners
+
+Built clean by `lake build RNSSolutions` on 2026-11-23 (standard axioms only). Runners are sped
+up one at a time in increasing order (`stage_value`); each step is `one_step_replacement`. -/
 
 theorem never_strictly_lonely_mono (n : ℕ) {X Y : Finset ℤ} (h : X ⊆ Y)
     (hX : never_strictly_lonely n X) : never_strictly_lonely n Y := by

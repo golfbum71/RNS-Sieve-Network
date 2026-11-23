@@ -4,7 +4,7 @@
 
 **Status:** proved in Lean · **Diagram:** [The Lonely Runner: pile-ups, shifts and residue sieves](../../GRAPH.md#the-lonely-runner-pile-ups-shifts-and-residue-sieves)
 
-The consecutive speeds 1 up to one less than the number of runners are tight: the time one over the number of runners gives every runner one part of a lap of room, and no time gives more (Dirichlet's pigeonhole). Speed up the runner of speed r to m times its speed. If every number from the number of runners minus r up to m times that, minus one, shares a factor with r (a run of positions blocked by the wheels of r), the new set is still tight. The proof replaces one runner at a time (Goddyn and Wong's Lemma 3.2): at a time when only the sped-up runner could have been close, either a smaller wheel of r takes its place, or an unchanged runner whose speed is the inverse remainder for r does, and the blocked run is exactly what keeps that runner unchanged. A blocked run is shorter than the speed that blocks it, which keeps the sped-up runner off the fence post at the time one over the number of runners. This is the wheel-native part of the link between tight lonely runners and Jacobsthal's problem (JacobsthalTightness): the longer the blocked runs of a wheel cycle, the more a runner can be sped up. Goddyn and Wong 2006, Theorem 2.1 (sufficiency direction) and Lemma 3.2, at times that are fractions; never strictly lonely means every fractional time has a runner at most one part from the start. Not proved: the necessity direction, the several-runner Theorem 3.1, and real times.
+The consecutive speeds 1 up to one less than the number of runners are tight: the time one over the number of runners gives every runner one part of a lap of room, and no time gives more (Dirichlet's pigeonhole). Speed up the runner of speed r to m times its speed. If every number from the number of runners minus r up to m times that, minus one, shares a factor with r (a run of positions blocked by the wheels of r), the new set is still tight. The proof replaces one runner at a time (Goddyn and Wong's Lemma 3.2): at a time when only the sped-up runner could have been close, either a smaller wheel of r takes its place, or an unchanged runner whose speed is the inverse remainder for r does, and the blocked run is exactly what keeps that runner unchanged. A blocked run is shorter than the speed that blocks it, which keeps the sped-up runner off the fence post at the time one over the number of runners. This is the wheel-native part of the link between tight lonely runners and Jacobsthal's problem (JacobsthalTightness): the longer the blocked runs of a wheel cycle, the more a runner can be sped up. Goddyn and Wong 2006, Theorem 2.1 (sufficiency direction) and Lemma 3.2, at times that are fractions; never strictly lonely means every fractional time has a runner at most one part from the start. Several runners at once (Theorem 3.1): speed them up one at a time in increasing order; each sped-up speed is even (its blocked run contains a power of 2) and more than half the field (a blocked run is shorter than its speed), so no unchanged runner the replacement needs has been sped up, and the sped-up speeds never collide. Goddyn and Wong use Bertrand's postulate for a sharper run bound; it is not needed here. Not proved: the necessity direction, and real times.
 
 ## Published sources
 
@@ -98,6 +98,65 @@ def single_acceleration_tight : Prop :=
 **Rests on:** [`TightFromBlockedRun.consecutive_covered`](TightFromBlockedRun.md#consecutive_covered), [`TightFromBlockedRun.one_step_replacement`](TightFromBlockedRun.md#one_step_replacement), [`TightFromBlockedRun.blocked_run_short`](TightFromBlockedRun.md#blocked_run_short), [`FieldSizeTimes.field_size_far_iff`](FieldSizeTimes.md#field_size_far_iff)
 
 **Proof:** `RNS.TightFromBlockedRun.single_acceleration_tight_step` in [`RNSSolutions/TightFromBlockedRun.lean`](../../RNSSolutions/TightFromBlockedRun.lean)
+
+<a id="accelerated_large"></a>
+### `accelerated_large`
+
+A sped-up runner is more than half the field: twice its speed is at least the number of runners plus one, and m times (number of runners minus r) is at most the number of runners minus one.
+
+```lean
+/-- **A sped-up runner is more than half the field.** If the numbers from
+`n - r` to `m * (n - r) - 1` are blocked by the wheels of `r` (with `m` at least
+2 and `r` at most `n`), then `2 * r` is at least `n + 1` and `m * (n - r)` is at
+most `n - 1`. -/
+def accelerated_large : Prop :=
+  ∀ (n : ℕ) (r m : ℤ), 1 ≤ r → r ≤ (n : ℤ) → 2 ≤ m →
+    blocked_run r ((n : ℤ) - r) (m * ((n : ℤ) - r) - 1) →
+    (n : ℤ) + 1 ≤ 2 * r ∧ m * ((n : ℤ) - r) ≤ (n : ℤ) - 1
+```
+
+**Rests on:** [`TightFromBlockedRun.blocked_run_short`](TightFromBlockedRun.md#blocked_run_short)
+
+**Proof:** `RNS.TightFromBlockedRun.accelerated_large_step` in [`RNSSolutions/TightFromBlockedRun.lean`](../../RNSSolutions/TightFromBlockedRun.lean)
+
+<a id="accelerated_even"></a>
+### `accelerated_even`
+
+A sped-up runner has even speed: its blocked run contains a power of 2.
+
+```lean
+/-- **A sped-up runner has even speed**: its blocked run contains a power of 2. -/
+def accelerated_even : Prop :=
+  ∀ (n : ℕ) (r m : ℤ), 1 ≤ r → r ≤ (n : ℤ) - 1 → 2 ≤ m →
+    blocked_run r ((n : ℤ) - r) (m * ((n : ℤ) - r) - 1) → 2 ∣ r
+```
+
+**Rests on:** no other node (Mathlib and the Vocabulary only)
+
+**Proof:** `RNS.TightFromBlockedRun.accelerated_even_holds` in [`RNSSolutions/TightFromBlockedRun.lean`](../../RNSSolutions/TightFromBlockedRun.lean)
+
+<a id="several_acceleration_tight"></a>
+### `several_acceleration_tight`
+
+If every sped-up speed r has the numbers from (number of runners minus r) to (its multiplier times that) minus one blocked by its wheels, the speeds are distinct, lonely at one over the number of runners and never strictly lonely (Goddyn and Wong, Theorem 3.1).
+
+```lean
+/-- **Several runners sped up from blocked runs give a tight set** (Goddyn and
+Wong, Theorem 3.1). If every speed `r` that is sped up (`mult r` at least 2) has
+the numbers from `n - r` to `mult r * (n - r) - 1` blocked by its wheels, then
+the speeds `mult j * j` are `n - 1` distinct speeds, lonely at the time `1 / n`,
+and never strictly lonely. -/
+def several_acceleration_tight : Prop :=
+  ∀ (n : ℕ) (mult : ℤ → ℤ), 2 ≤ n → (∀ j, 1 ≤ mult j) →
+    (∀ r, 1 ≤ r → r ≤ (n : ℤ) - 1 → 2 ≤ mult r →
+      blocked_run r ((n : ℤ) - r) (mult r * ((n : ℤ) - r) - 1)) →
+    (multi_accelerated n mult).card = n - 1 ∧ lonely_at (multi_accelerated n mult) n 1 ∧
+      never_strictly_lonely n (multi_accelerated n mult)
+```
+
+**Rests on:** [`TightFromBlockedRun.consecutive_covered`](TightFromBlockedRun.md#consecutive_covered), [`TightFromBlockedRun.one_step_replacement`](TightFromBlockedRun.md#one_step_replacement), [`TightFromBlockedRun.accelerated_large`](TightFromBlockedRun.md#accelerated_large), [`TightFromBlockedRun.accelerated_even`](TightFromBlockedRun.md#accelerated_even), [`FieldSizeTimes.field_size_far_iff`](FieldSizeTimes.md#field_size_far_iff)
+
+**Proof:** `RNS.TightFromBlockedRun.several_acceleration_tight_step` in [`RNSSolutions/TightFromBlockedRun.lean`](../../RNSSolutions/TightFromBlockedRun.lean)
 
 ## Used by
 

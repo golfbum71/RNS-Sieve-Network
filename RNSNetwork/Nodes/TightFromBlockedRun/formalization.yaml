@@ -23,7 +23,11 @@ node:
     problem (JacobsthalTightness): the longer the blocked runs of a wheel cycle, the more a runner can
     be sped up. Goddyn and Wong 2006, Theorem 2.1 (sufficiency direction) and Lemma 3.2, at times that
     are fractions; never strictly lonely means every fractional time has a runner at most one part from
-    the start. Not proved: the necessity direction, the several-runner Theorem 3.1, and real times.'
+    the start. Several runners at once (Theorem 3.1): speed them up one at a time in increasing order;
+    each sped-up speed is even (its blocked run contains a power of 2) and more than half the field (a
+    blocked run is shorter than its speed), so no unchanged runner the replacement needs has been sped
+    up, and the sped-up speeds never collide. Goddyn and Wong use Bertrand''s postulate for a sharper
+    run bound; it is not needed here. Not proved: the necessity direction, and real times.'
 conclusions:
 - id: consecutive_covered
   declaration: RNS.TightFromBlockedRun.consecutive_covered
@@ -83,6 +87,56 @@ conclusions:
     kind: lean-noncompliant
     solution: RNSSolutions/TightFromBlockedRun.lean
     declaration: RNS.TightFromBlockedRun.single_acceleration_tight_step
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23), from its
+      imports taken as named hypotheses. Recorded as noncompliant only because no Comparator receipt exists
+      yet.
+  designated: lean-proof
+- id: accelerated_large
+  declaration: RNS.TightFromBlockedRun.accelerated_large
+  summary: 'A sped-up runner is more than half the field: twice its speed is at least the number of runners
+    plus one, and m times (number of runners minus r) is at most the number of runners minus one.'
+  imports:
+  - TightFromBlockedRun.v1.blocked_run_short
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/TightFromBlockedRun.lean
+    declaration: RNS.TightFromBlockedRun.accelerated_large_step
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23), from its
+      imports taken as named hypotheses. Recorded as noncompliant only because no Comparator receipt exists
+      yet.
+  designated: lean-proof
+- id: accelerated_even
+  declaration: RNS.TightFromBlockedRun.accelerated_even
+  summary: 'A sped-up runner has even speed: its blocked run contains a power of 2.'
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/TightFromBlockedRun.lean
+    declaration: RNS.TightFromBlockedRun.accelerated_even_holds
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23).
+      Recorded as noncompliant only because no Comparator receipt exists yet.
+  designated: lean-proof
+- id: several_acceleration_tight
+  declaration: RNS.TightFromBlockedRun.several_acceleration_tight
+  summary: If every sped-up speed r has the numbers from (number of runners minus r) to (its multiplier
+    times that) minus one blocked by its wheels, the speeds are distinct, lonely at one over the number
+    of runners and never strictly lonely (Goddyn and Wong, Theorem 3.1).
+  imports:
+  - TightFromBlockedRun.v1.consecutive_covered
+  - TightFromBlockedRun.v1.one_step_replacement
+  - TightFromBlockedRun.v1.accelerated_large
+  - TightFromBlockedRun.v1.accelerated_even
+  - FieldSizeTimes.v1.field_size_far_iff
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-noncompliant
+    solution: RNSSolutions/TightFromBlockedRun.lean
+    declaration: RNS.TightFromBlockedRun.several_acceleration_tight_step
     note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23), from its
       imports taken as named hypotheses. Recorded as noncompliant only because no Comparator receipt exists
       yet.

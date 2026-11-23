@@ -4,7 +4,7 @@
 
 **Status:** planned: cited from a paper · **Diagram:** [The Lonely Runner: pile-ups, shifts and residue sieves](../../GRAPH.md#the-lonely-runner-pile-ups-shifts-and-residue-sieves)
 
-A speed set is tight when the best loneliness is exactly one over the number of runners, as for the consecutive speeds. Speeding up some of the consecutive runners can give new tight sets when every number in a stretch shares a factor with a given number; that is Jacobsthal's problem, the longest run of blocked positions in one wheel cycle (BlockingRuns, LargestGap, KanoldBound, JacobsthalQuadratic). Erdős' long blocked runs give tight sets with the fastest speed about twice the field size minus a logarithm; Pomerance showed sets with the fastest speed below twice the field size minus a constant times the square of a logarithm are not tight. The survey states that closing this gap, and pushing the proved range of speeds toward Tao's question (fastest speed at most twice the field size), would need better bounds for Jacobsthal's problem. The one-runner construction (Goddyn and Wong's Theorem 2.1, sufficiency) is now proved in TightFromBlockedRun at fractional times; the rest stays cited.
+A speed set is tight when the best loneliness is exactly one over the number of runners, as for the consecutive speeds. Speeding up some of the consecutive runners can give new tight sets when every number in a stretch shares a factor with a given number; that is Jacobsthal's problem, the longest run of blocked positions in one wheel cycle (BlockingRuns, LargestGap, KanoldBound, JacobsthalQuadratic). Erdős' long blocked runs give tight sets with the fastest speed about twice the field size minus a logarithm; Pomerance showed sets with the fastest speed below twice the field size minus a constant times the square of a logarithm are not tight. The survey states that closing this gap, and pushing the proved range of speeds toward Tao's question (fastest speed at most twice the field size), would need better bounds for Jacobsthal's problem. The constructions (Goddyn and Wong's Theorems 2.1 and 3.1, sufficiency) are now proved in TightFromBlockedRun at fractional times; the rest stays cited.
 
 ## Published sources
 
@@ -18,7 +18,7 @@ Published work this node rests on or relates to; each entry says how.
 
 Connected in content but not by an arrow (no claim here takes theirs as a hypothesis); each entry says how.
 
-- [`TightFromBlockedRun`](TightFromBlockedRun.md) — proves the one-runner construction from a blocked run
+- [`TightFromBlockedRun`](TightFromBlockedRun.md) — proves the one- and several-runner constructions from blocked runs
 - [`BlockingRuns`](BlockingRuns.md) — Jacobsthal's problem: the longest run of blocked positions in a wheel cycle
 - [`LargestGap`](LargestGap.md) — the largest survivor gap of a cycle
 - [`KanoldBound`](KanoldBound.md) — an explicit bound for Jacobsthal's function
@@ -29,9 +29,9 @@ Connected in content but not by an arrow (no claim here takes theirs as a hypoth
 
 **Will rest on:** no other node
 
-**Planned claims:** `pomerance_not_tight`, `bohman_peng_small_speeds`, `several_runner_acceleration`
+**Planned claims:** `pomerance_not_tight`, `bohman_peng_small_speeds`
 
-**Plan:** Cite Pomerance's non-tightness range and Bohman and Peng's result; the several-runner version (Goddyn and Wong's Theorem 3.1) follows the same one-step replacement and is the next wheel-native step.
+**Plan:** Cite Pomerance's non-tightness range and Bohman and Peng's result.
 
-**Scope:** Cited; the one-runner construction is proved in TightFromBlockedRun.
+**Scope:** Cited; the one- and several-runner constructions are proved in TightFromBlockedRun.
 

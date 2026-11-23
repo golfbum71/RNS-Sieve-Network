@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 104 of 123 nodes are built, holding 330 claims: 323 proved in Lean and 7 cited from a published paper. They are joined by 195 arrows, each a Lean-checked step. Of the other 19 nodes, drawn dashed or purple, 1 is proved in the original source files but not yet restated here; 6 are planned citations of published results; 9 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 104 of 123 nodes are built, holding 333 claims: 326 proved in Lean and 7 cited from a published paper. They are joined by 201 arrows, each a Lean-checked step. Of the other 19 nodes, drawn dashed or purple, 1 is proved in the original source files but not yet restated here; 6 are planned citations of published results; 9 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -1773,6 +1773,9 @@ graph LR
     c20["one_step_replacement"]
     c21["blocked_run_short"]
     c22["single_acceleration_tight"]
+    c23["accelerated_large"]
+    c24["accelerated_even"]
+    c25["several_acceleration_tight"]
   end
   o1{{"<i>open conjecture</i><br/>lonely_runner_upto"}}
   c3 ==> c4
@@ -1790,6 +1793,12 @@ graph LR
   c20 ==> c22
   c21 ==> c22
   c16 ==> c22
+  c21 ==> c23
+  c19 ==> c25
+  c20 ==> c25
+  c23 ==> c25
+  c24 ==> c25
+  c16 ==> c25
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
   classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
@@ -1801,7 +1810,7 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c9,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22 verified;
+  class c1,c2,c3,c4,c5,c6,c7,c9,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25 verified;
   class c8,c10 conditional_built;
   class p1,p2,p3 cited;
   class o1 openconj;
@@ -1830,6 +1839,9 @@ graph LR
   click c20 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TightFromBlockedRun.md#one_step_replacement" _blank
   click c21 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TightFromBlockedRun.md#blocked_run_short" _blank
   click c22 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TightFromBlockedRun.md#single_acceleration_tight" _blank
+  click c23 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TightFromBlockedRun.md#accelerated_large" _blank
+  click c24 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TightFromBlockedRun.md#accelerated_even" _blank
+  click c25 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TightFromBlockedRun.md#several_acceleration_tight" _blank
 ```
 
 
@@ -2320,6 +2332,13 @@ The results nothing else builds on, each with everything beneath it.
   - [`TightFromBlockedRun.consecutive_covered`](docs/nodes/TightFromBlockedRun.md#consecutive_covered) — proved in Lean
   - [`TightFromBlockedRun.one_step_replacement`](docs/nodes/TightFromBlockedRun.md#one_step_replacement) — proved in Lean
   - [`TightFromBlockedRun.blocked_run_short`](docs/nodes/TightFromBlockedRun.md#blocked_run_short) — proved in Lean
+  - [`FieldSizeTimes.field_size_far_iff`](docs/nodes/FieldSizeTimes.md#field_size_far_iff) — proved in Lean
+- [`TightFromBlockedRun.several_acceleration_tight`](docs/nodes/TightFromBlockedRun.md#several_acceleration_tight) — proved in Lean
+  - [`TightFromBlockedRun.consecutive_covered`](docs/nodes/TightFromBlockedRun.md#consecutive_covered) — proved in Lean
+  - [`TightFromBlockedRun.one_step_replacement`](docs/nodes/TightFromBlockedRun.md#one_step_replacement) — proved in Lean
+  - [`TightFromBlockedRun.accelerated_large`](docs/nodes/TightFromBlockedRun.md#accelerated_large) — proved in Lean
+    - [`TightFromBlockedRun.blocked_run_short`](docs/nodes/TightFromBlockedRun.md#blocked_run_short) — proved in Lean
+  - [`TightFromBlockedRun.accelerated_even`](docs/nodes/TightFromBlockedRun.md#accelerated_even) — proved in Lean
   - [`FieldSizeTimes.field_size_far_iff`](docs/nodes/FieldSizeTimes.md#field_size_far_iff) — proved in Lean
 
 ## What the network takes on trust
