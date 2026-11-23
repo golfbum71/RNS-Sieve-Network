@@ -73,6 +73,7 @@ import RNSSolutions.TeamShift
 import RNSSolutions.ResidueReduction
 import RNSSolutions.FieldSizeTimes
 import RNSSolutions.TightFromBlockedRun
+import RNSSolutions.GoldbachStacks
 
 /-!
 # Assembling the network

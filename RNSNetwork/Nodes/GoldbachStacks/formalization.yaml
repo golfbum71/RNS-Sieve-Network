@@ -1,0 +1,82 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Added 2026-11-23 from Geo's stack picture of Goldbach's conjecture. See docs/NODE_LIST.md.
+
+node:
+  id: GoldbachStacks.v1
+  family: GoldbachStacks
+  group: gaps
+  version: v1
+  order: 128
+  kind: paper
+  status: active
+  title: Goldbach's conjecture as a building problem with prime stacks
+  description: >-
+    Original to this project. Each odd prime is a stack two wide with one point
+    sticking up (3 is height 1, 5 height 2, 7 height 3, 11 height 5). Two stacks
+    put together make twice their total height plus 2, so building every pair of
+    stacks reaches the target heights. Proved here: the stacks never leave a gap
+    exactly when Goldbach's conjecture holds, and so does the frontier form (as
+    the stacks arrive in order, every target up to a new stack's height is
+    already built from the stacks before it). These are equivalences only;
+    Goldbach's conjecture itself stays open.
+
+conclusions:
+  - id: goldbach_iff_odd_goldbach
+    declaration: RNS.GoldbachStacks.goldbach_iff_odd_goldbach
+    summary: "Every even number above 2 is a sum of two primes exactly when every even number from 6 on is a sum of two odd primes."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/GoldbachStacks.lean
+        declaration: RNS.GoldbachStacks.goldbach_iff_odd_goldbach_holds
+        note: "Draft, first build pending (2026-11-23)."
+    designated: lean-proof
+  - id: no_gap_iff_odd_goldbach
+    declaration: RNS.GoldbachStacks.no_gap_iff_odd_goldbach
+    summary: "Every target height from 2 on is built from two prime stacks exactly when every even number from 6 on is a sum of two odd primes."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/GoldbachStacks.lean
+        declaration: RNS.GoldbachStacks.no_gap_iff_odd_goldbach_holds
+        note: "Draft, first build pending (2026-11-23)."
+    designated: lean-proof
+  - id: frontier_ahead_iff_no_gap
+    declaration: RNS.GoldbachStacks.frontier_ahead_iff_no_gap
+    summary: "The frontier stays ahead of every new stack exactly when the stacks never leave a gap."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/GoldbachStacks.lean
+        declaration: RNS.GoldbachStacks.frontier_ahead_iff_no_gap_holds
+        note: "Draft, first build pending (2026-11-23)."
+    designated: lean-proof
+  - id: frontier_ahead_iff_goldbach
+    declaration: RNS.GoldbachStacks.frontier_ahead_iff_goldbach
+    summary: "The frontier stays ahead of every new stack exactly when every even number above 2 is a sum of two primes."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/GoldbachStacks.lean
+        declaration: RNS.GoldbachStacks.frontier_ahead_iff_goldbach_holds
+        note: "Draft, first build pending (2026-11-23)."
+    designated: lean-proof
+
+sources:
+  - title: Goldbach's conjecture (Wikipedia)
+    url: https://en.wikipedia.org/wiki/Goldbach%27s_conjecture
+    relationship: states the conjecture whose equivalent forms this node proves; the stack and frontier forms are original
+
+related:
+  - node: Schnirelmann
+    note: proves every number is a sum of boundedly many primes; this node restates the two-prime case as stacks
+  - node: SelbergTwinRails
+    note: bounds the Goldbach pairs of one number from above; here they are the pairs of stacks building one target
