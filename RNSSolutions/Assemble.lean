@@ -743,3 +743,11 @@ theorem RNS.TightFromBlockedRun.single_acceleration_tight_holds :
   RNS.TightFromBlockedRun.single_acceleration_tight_step RNS.FieldSizeTimes.field_size_far_iff_holds
 
 #print axioms RNS.TightFromBlockedRun.single_acceleration_tight_holds
+
+/-- `FieldSizeTimes` → `TightFromBlockedRun`: several runners sped up from blocked runs give a
+tight lonely-runner set (Goddyn and Wong, Theorem 3.1). -/
+theorem RNS.TightFromBlockedRun.several_acceleration_tight_holds :
+    RNS.TightFromBlockedRun.several_acceleration_tight :=
+  RNS.TightFromBlockedRun.several_acceleration_tight_step RNS.FieldSizeTimes.field_size_far_iff_holds
+
+#print axioms RNS.TightFromBlockedRun.several_acceleration_tight_holds

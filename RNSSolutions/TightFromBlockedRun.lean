@@ -370,7 +370,293 @@ theorem single_acceleration_tight_step (hF : RNS.FieldSizeTimes.field_size_far_i
       refine ⟨b, Finset.mem_insert_of_mem (Finset.mem_erase.mpr ⟨hbr, Finset.mem_Icc.mpr
         ⟨by linarith, by linarith⟩⟩), hbig, by linarith, ⟨-((q - ((n : ℤ) - r)) / r), hbq⟩⟩
 
+/-! ## Several sped-up runners -/
+
+theorem never_strictly_lonely_mono (n : ℕ) {X Y : Finset ℤ} (h : X ⊆ Y)
+    (hX : never_strictly_lonely n X) : never_strictly_lonely n Y := by
+  intro M hM k
+  obtain ⟨v, hv, hnear⟩ := hX M hM k
+  exact ⟨v, h hv, hnear⟩
+
+theorem nat_le_two_pow (S : ℕ) : S ≤ 2 ^ S := by
+  induction S with
+  | zero => simp
+  | succ S ih =>
+    rw [pow_succ]
+    have := Nat.one_le_two_pow (n := S)
+    omega
+
+theorem accelerated_large_step (hshort : blocked_run_short) : accelerated_large := by
+  intro n r m hr1 hrn hm hrun
+  have h := hshort r _ _ hr1 hrun
+  have h1 : (n : ℤ) - r ≤ (m - 1) * ((n : ℤ) - r) :=
+    le_mul_of_one_le_left (by linarith) (by linarith)
+  constructor <;> linarith
+
+theorem accelerated_large_holds : accelerated_large :=
+  accelerated_large_step blocked_run_short_holds
+
+theorem accelerated_even_holds : accelerated_even := by
+  intro n r m hr1 hrn hm hrun
+  by_contra hodd
+  set s : ℤ := (n : ℤ) - r with hs
+  have hs1 : 1 ≤ s := by omega
+  have hex : ∃ k : ℕ, s ≤ 2 ^ k := by
+    refine ⟨s.toNat, ?_⟩
+    have h := nat_le_two_pow s.toNat
+    have h2 : ((s.toNat : ℕ) : ℤ) ≤ ((2 ^ s.toNat : ℕ) : ℤ) := by exact_mod_cast h
+    have hc : ((s.toNat : ℕ) : ℤ) = s := Int.toNat_of_nonneg (by omega)
+    push_cast at h2
+    linarith
+  classical
+  obtain ⟨k, hk, hmin⟩ : ∃ k : ℕ, s ≤ 2 ^ k ∧ ∀ j : ℕ, j < k → ¬ s ≤ 2 ^ j :=
+    ⟨Nat.find hex, Nat.find_spec hex, fun j h => Nat.find_min hex h⟩
+  have hk2 : (2 : ℤ) ^ k ≤ 2 * s - 1 := by
+    cases k with
+    | zero =>
+      rw [pow_zero] at hk ⊢
+      omega
+    | succ k' =>
+      have h := not_le.mp (hmin k' (Nat.lt_succ_self k'))
+      rw [pow_succ]
+      linarith
+  have hrange : 2 * s - 1 ≤ m * s - 1 := by nlinarith
+  apply hrun (2 ^ k) hk (by linarith)
+  rw [← Int.isCoprime_iff_gcd_eq_one]
+  apply IsCoprime.pow_right
+  have h2 : r % 2 = 1 := by omega
+  refine ⟨1, -(r / 2), ?_⟩
+  omega
+
+/-- The speed of runner `j` once the runners up to `t` have been sped up. -/
+def stage_value (mult : ℤ → ℤ) (t : ℕ) (j : ℤ) : ℤ := if j ≤ (t : ℤ) then mult j * j else j
+
+theorem several_acceleration_tight_step (hF : RNS.FieldSizeTimes.field_size_far_iff) :
+    several_acceleration_tight := by
+  intro n mult hn hmult hrun
+  have hn' : (2 : ℤ) ≤ n := by exact_mod_cast hn
+  have hlarge : ∀ r, 1 ≤ r → r ≤ (n : ℤ) - 1 → 2 ≤ mult r →
+      (n : ℤ) + 1 ≤ 2 * r ∧ mult r * ((n : ℤ) - r) ≤ (n : ℤ) - 1 :=
+    fun r h1 h2 hm => accelerated_large_holds n r (mult r) h1 (by linarith) hm (hrun r h1 h2 hm)
+  have heven : ∀ r, 1 ≤ r → r ≤ (n : ℤ) - 1 → 2 ≤ mult r → 2 ∣ r :=
+    fun r h1 h2 hm => accelerated_even_holds n r (mult r) h1 h2 hm (hrun r h1 h2 hm)
+  have hcases : ∀ j, mult j = 1 ∨ 2 ≤ mult j := fun j => by have := hmult j; omega
+  -- what a sped-up speed looks like
+  have hbig : ∀ j, 1 ≤ j → j ≤ (n : ℤ) - 1 → 2 ≤ mult j →
+      (n : ℤ) + 1 ≤ mult j * j ∧ 0 < mult j * ((n : ℤ) - j) ∧
+        mult j * ((n : ℤ) - j) ≤ (n : ℤ) - 1 := by
+    intro j h1 h2 hm
+    obtain ⟨_, hl2⟩ := hlarge j h1 h2 hm
+    have h2n : 2 * (n : ℤ) ≤ mult j * n :=
+      mul_le_mul_of_nonneg_right hm (by linarith)
+    refine ⟨by linarith, mul_pos (by omega) (by omega), hl2⟩
+  -- the number of distinct speeds
+  have hinj : Set.InjOn (fun j => mult j * j) (Finset.Icc (1 : ℤ) ((n : ℤ) - 1) : Set ℤ) := by
+    intro a ha b hb hab
+    rw [Finset.coe_Icc, Set.mem_Icc] at ha hb
+    simp only at hab
+    rcases hcases a with ha1 | ha1 <;> rcases hcases b with hb1 | hb1
+    · rw [ha1, hb1, one_mul, one_mul] at hab
+      exact hab
+    · rw [ha1, one_mul] at hab
+      have := (hbig b hb.1 hb.2 hb1).1
+      linarith
+    · rw [hb1, one_mul] at hab
+      have := (hbig a ha.1 ha.2 ha1).1
+      linarith
+    · obtain ⟨_, ha2, ha3⟩ := hbig a ha.1 ha.2 ha1
+      obtain ⟨_, hb2, hb3⟩ := hbig b hb.1 hb.2 hb1
+      have hkey : (mult a - mult b) * (n : ℤ) =
+          mult a * ((n : ℤ) - a) - mult b * ((n : ℤ) - b) := by linear_combination hab
+      have hm : mult a = mult b := by
+        by_contra hne
+        rcases lt_or_gt_of_ne hne with h | h
+        · have h' : (mult a - mult b) * (n : ℤ) ≤ -1 * (n : ℤ) :=
+            mul_le_mul_of_nonneg_right (by linarith) (by linarith)
+          linarith
+        · have h' : 1 * (n : ℤ) ≤ (mult a - mult b) * (n : ℤ) :=
+            mul_le_mul_of_nonneg_right (by linarith) (by linarith)
+          linarith
+      rw [hm] at hab
+      exact mul_left_cancel₀ (by have := hmult b; omega) hab
+  have hcardI : (Finset.Icc (1 : ℤ) ((n : ℤ) - 1)).card = n - 1 := by
+    rw [Int.card_Icc]
+    have h := Int.toNat_of_nonneg (show (0 : ℤ) ≤ (n : ℤ) - 1 + 1 - 1 by omega)
+    omega
+  have hcard : (multi_accelerated n mult).card = n - 1 := by
+    unfold multi_accelerated
+    rw [Finset.card_image_of_injOn hinj, hcardI]
+  refine ⟨hcard, ⟨by omega, fun v hv => ?_⟩, ?_⟩
+  · -- lonely at the time 1 / n
+    rw [hcard, Nat.sub_add_cancel (by omega), hF n (v * 1) (by omega), mul_one]
+    intro hdiv
+    unfold multi_accelerated at hv
+    obtain ⟨j, hj, rfl⟩ := Finset.mem_image.mp hv
+    rw [Finset.mem_Icc] at hj
+    rcases hcases j with hj1 | hj1
+    · rw [hj1, one_mul] at hdiv
+      have := Int.le_of_dvd (by linarith) hdiv
+      linarith
+    · obtain ⟨_, hj2, hj3⟩ := hbig j hj.1 hj.2 hj1
+      have h2 : (n : ℤ) ∣ mult j * ((n : ℤ) - j) := by
+        have : mult j * ((n : ℤ) - j) = (n : ℤ) * mult j - mult j * j := by ring
+        rw [this]
+        exact dvd_sub (dvd_mul_right _ _) hdiv
+      have := Int.le_of_dvd hj2 h2
+      linarith
+  · -- never strictly lonely: speed the runners up one at a time
+    have hstage : ∀ t : ℕ, t ≤ n - 1 →
+        never_strictly_lonely n ((Finset.Icc (1 : ℤ) ((n : ℤ) - 1)).image (stage_value mult t)) := by
+      intro t
+      induction t with
+      | zero =>
+        intro _
+        apply never_strictly_lonely_mono n _ (consecutive_covered_holds n hn)
+        intro j hj
+        refine Finset.mem_image.mpr ⟨j, hj, ?_⟩
+        have := (Finset.mem_Icc.mp hj).1
+        unfold stage_value
+        split_ifs with h
+        · push_cast at h; omega
+        · rfl
+      | succ t ih =>
+        intro ht
+        have ih' := ih (by omega)
+        set r : ℤ := (t : ℤ) + 1 with hr
+        have hr1 : 1 ≤ r := by omega
+        have hrn : r ≤ (n : ℤ) - 1 := by omega
+        have hrI : r ∈ Finset.Icc (1 : ℤ) ((n : ℤ) - 1) := Finset.mem_Icc.mpr ⟨hr1, hrn⟩
+        have hgj : ∀ j, j ≠ r → stage_value mult (t + 1) j = stage_value mult t j := by
+          intro j hj
+          unfold stage_value
+          push_cast
+          split_ifs with h1 h2 h2
+          · rfl
+          · exfalso; omega
+          · exfalso; omega
+          · rfl
+        have hgr : stage_value mult t r = r := by
+          unfold stage_value
+          split_ifs with h
+          · exfalso; omega
+          · rfl
+        have hgr' : stage_value mult (t + 1) r = mult r * r := by
+          unfold stage_value
+          split_ifs with h
+          · rfl
+          · exfalso; push_cast at h; omega
+        rcases hcases r with h1 | h2
+        · -- runner r is not sped up: nothing changes
+          apply never_strictly_lonely_mono n _ ih'
+          intro y hy
+          obtain ⟨j, hj, rfl⟩ := Finset.mem_image.mp hy
+          refine Finset.mem_image.mpr ⟨j, hj, ?_⟩
+          by_cases hjr : j = r
+          · rw [hjr, hgr, hgr', h1, one_mul]
+          · exact hgj j hjr
+        · -- runner r is sped up: one replacement
+          have hstep := one_step_replacement_holds n
+            ((Finset.Icc (1 : ℤ) ((n : ℤ) - 1)).image (stage_value mult t)) r (mult r) hn hr1
+            (by linarith) h2 ih' ?c1 ?c2
+          · apply never_strictly_lonely_mono n _ hstep
+            intro y hy
+            rcases Finset.mem_insert.mp hy with h | h
+            · rw [h]
+              exact Finset.mem_image.mpr ⟨r, hrI, hgr'⟩
+            · obtain ⟨hyr, hyX⟩ := Finset.mem_erase.mp h
+              obtain ⟨j, hj, rfl⟩ := Finset.mem_image.mp hyX
+              have hjr : j ≠ r := by
+                rintro rfl
+                exact hyr hgr
+              exact Finset.mem_image.mpr ⟨j, hj, hgj j hjr⟩
+          · -- the runner r / p is an unchanged speed
+            intro p hp hpr
+            obtain ⟨w, hw⟩ := hpr
+            have hp2 : (2 : ℤ) ≤ p := by exact_mod_cast hp.two_le
+            have hrw : r / (p : ℤ) = w := by
+              rw [hw]
+              exact Int.mul_ediv_cancel_left w (by omega)
+            rw [hrw]
+            have hw1 : 1 ≤ w := by
+              by_contra h
+              have h' := not_le.mp h
+              nlinarith
+            have hw2 : 2 * w ≤ r := by nlinarith
+            have hwm : mult w = 1 := by
+              rcases hcases w with h | h
+              · exact h
+              · exfalso
+                have := (hlarge w hw1 (by linarith) h).1
+                linarith
+            apply Finset.mem_insert_of_mem
+            refine Finset.mem_erase.mpr ⟨by linarith, Finset.mem_image.mpr
+              ⟨w, Finset.mem_Icc.mpr ⟨hw1, by linarith⟩, ?_⟩⟩
+            unfold stage_value
+            split_ifs
+            · rw [hwm, one_mul]
+            · rfl
+          · -- each coprime remainder has an unchanged speed from n - r to n - 1
+            intro q hq
+            have hr0 : (0 : ℤ) < r := by omega
+            set b : ℤ := ((n : ℤ) - r) + (q - ((n : ℤ) - r)) % r with hb
+            have h0 : 0 ≤ (q - ((n : ℤ) - r)) % r := Int.emod_nonneg _ (ne_of_gt hr0)
+            have h1' : (q - ((n : ℤ) - r)) % r < r := Int.emod_lt_of_pos _ hr0
+            have hdecomp := Int.emod_add_ediv_mul (q - ((n : ℤ) - r)) r
+            have hbq : b - q = r * (-((q - ((n : ℤ) - r)) / r)) := by rw [hb]; linarith
+            have hcop : IsCoprime b r := by
+              obtain ⟨s, t', hst⟩ := hq
+              refine ⟨s, t' + s * ((q - ((n : ℤ) - r)) / r), ?_⟩
+              have : b = q + r * (-((q - ((n : ℤ) - r)) / r)) := by linarith
+              rw [this]
+              linear_combination hst
+            have hrunr := hrun r hr1 hrn h2
+            have hbbig : mult r * ((n : ℤ) - r) ≤ b := by
+              by_contra hlt
+              have hlt' := not_le.mp hlt
+              exact hrunr b (by linarith) (by linarith) (Int.isCoprime_iff_gcd_eq_one.mp hcop.symm)
+            have hbr : b ≠ r := by
+              intro h
+              rw [h] at hcop
+              have h2r := heven r hr1 hrn h2
+              rcases Int.isUnit_iff.mp (isCoprime_self.mp hcop) with h1 | h1 <;> omega
+            have hb1 : 1 ≤ b := by linarith
+            have hbn : b ≤ (n : ℤ) - 1 := by linarith
+            have hgb : stage_value mult t b = b := by
+              unfold stage_value
+              split_ifs with hbt
+              · rcases hcases b with hmb | hmb
+                · rw [hmb, one_mul]
+                · exfalso
+                  obtain ⟨b2, hb2⟩ := heven b hb1 hbn hmb
+                  obtain ⟨r2, hr2⟩ := heven r hr1 hrn h2
+                  obtain ⟨s, t', hst⟩ := hcop
+                  have h2one : (2 : ℤ) ∣ 1 := by
+                    rw [← hst, hb2, hr2]
+                    exact ⟨s * b2 + t' * r2, by ring⟩
+                  omega
+              · rfl
+            refine ⟨b, Finset.mem_insert_of_mem (Finset.mem_erase.mpr ⟨hbr, Finset.mem_image.mpr
+              ⟨b, Finset.mem_Icc.mpr ⟨hb1, hbn⟩, hgb⟩⟩), hbbig, by linarith,
+              ⟨-((q - ((n : ℤ) - r)) / r), hbq⟩⟩
+    -- the last stage is the whole set
+    apply never_strictly_lonely_mono n _ (hstage (n - 1) le_rfl)
+    intro y hy
+    obtain ⟨j, hj, rfl⟩ := Finset.mem_image.mp hy
+    unfold multi_accelerated
+    refine Finset.mem_image.mpr ⟨j, hj, ?_⟩
+    have hj2 := (Finset.mem_Icc.mp hj).2
+    unfold stage_value
+    split_ifs with h
+    · rfl
+    · exfalso
+      push_cast [Nat.cast_sub (show 1 ≤ n by omega)] at h
+      omega
+
 end RNS.TightFromBlockedRun
+
+#print axioms RNS.TightFromBlockedRun.accelerated_large_holds
+#print axioms RNS.TightFromBlockedRun.accelerated_even_holds
+#print axioms RNS.TightFromBlockedRun.several_acceleration_tight_step
 
 #print axioms RNS.TightFromBlockedRun.consecutive_covered_holds
 #print axioms RNS.TightFromBlockedRun.blocked_run_short_holds

@@ -86,4 +86,36 @@ def single_acceleration_tight : Prop :=
     (accelerated n r m).card = n - 1 ∧ lonely_at (accelerated n r m) n 1 ∧
       never_strictly_lonely n (accelerated n r m)
 
+/-! ## Several sped-up runners (Goddyn and Wong, Theorem 3.1) -/
+
+/-- The consecutive speeds `1, …, n - 1` with each speed `j` multiplied by `mult j`. -/
+def multi_accelerated (n : ℕ) (mult : ℤ → ℤ) : Finset ℤ :=
+  (Finset.Icc (1 : ℤ) ((n : ℤ) - 1)).image (fun j => mult j * j)
+
+/-- **A sped-up runner is more than half the field.** If the numbers from
+`n - r` to `m * (n - r) - 1` are blocked by the wheels of `r` (with `m` at least
+2 and `r` at most `n`), then `2 * r` is at least `n + 1` and `m * (n - r)` is at
+most `n - 1`. -/
+def accelerated_large : Prop :=
+  ∀ (n : ℕ) (r m : ℤ), 1 ≤ r → r ≤ (n : ℤ) → 2 ≤ m →
+    blocked_run r ((n : ℤ) - r) (m * ((n : ℤ) - r) - 1) →
+    (n : ℤ) + 1 ≤ 2 * r ∧ m * ((n : ℤ) - r) ≤ (n : ℤ) - 1
+
+/-- **A sped-up runner has even speed**: its blocked run contains a power of 2. -/
+def accelerated_even : Prop :=
+  ∀ (n : ℕ) (r m : ℤ), 1 ≤ r → r ≤ (n : ℤ) - 1 → 2 ≤ m →
+    blocked_run r ((n : ℤ) - r) (m * ((n : ℤ) - r) - 1) → 2 ∣ r
+
+/-- **Several runners sped up from blocked runs give a tight set** (Goddyn and
+Wong, Theorem 3.1). If every speed `r` that is sped up (`mult r` at least 2) has
+the numbers from `n - r` to `mult r * (n - r) - 1` blocked by its wheels, then
+the speeds `mult j * j` are `n - 1` distinct speeds, lonely at the time `1 / n`,
+and never strictly lonely. -/
+def several_acceleration_tight : Prop :=
+  ∀ (n : ℕ) (mult : ℤ → ℤ), 2 ≤ n → (∀ j, 1 ≤ mult j) →
+    (∀ r, 1 ≤ r → r ≤ (n : ℤ) - 1 → 2 ≤ mult r →
+      blocked_run r ((n : ℤ) - r) (mult r * ((n : ℤ) - r) - 1)) →
+    (multi_accelerated n mult).card = n - 1 ∧ lonely_at (multi_accelerated n mult) n 1 ∧
+      never_strictly_lonely n (multi_accelerated n mult)
+
 end RNS.TightFromBlockedRun
