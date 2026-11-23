@@ -1,0 +1,38 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-23, Lonely Runner family): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: ResidueReduction.v1
+  family: ResidueReduction
+  version: v1
+  order: 121
+  kind: paper
+  status: planned
+  group: lonely
+  title: "only the remainders matter: a residue sieve for the lonely runner"
+  description: "Pick a wheel and a modulus equal to the field size times that wheel. At times that are fractions of that modulus, a speed and that speed plus the modulus look the same, so only the speeds' remainders matter. If every list of remainders avoiding multiples of the wheel (and meeting the gcd condition from TeamShift) has a good time, then every set of speeds that is never lonely has a speed divisible by that wheel. Rosenfeld 2025, Lemma 6, the main lemma of the record proofs; with Lemma 4 and enough wheels the product of a counterexample's speeds is forced past Rosenfeld's Corollary 3 size bound (via the Malikiosis-Santos-Schymura theorem, as cited there). This is a pure RNS step. Planned: the reduction itself, and fully checked small cases (four and five runners) by finite kernel checks split into many theorems."
+conclusions: []
+planned:
+  source_status: Conditional
+  rests_on:
+  - TeamShift
+  claims:
+  - residues_decide
+  - residue_check_forces_divisor
+  - small_field_checks
+  open_inputs:
+  - lonely_runner_one_fewer
+  tier: "Tier 2: the reduction is elementary given TeamShift; the small-case checks are finite but large (use decide +kernel split by wheel, never one giant check)."
+  plan: "Prove that loneliness at a time that is a fraction of the modulus depends only on the speeds' remainders; prove Lemma 6 from TeamShift's step; then, for four and five runners, run the residue checks for the wheels Rosenfeld lists and state the size bound of Corollary 3 as a cited claim to close those cases."
+sources:
+- title: "M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243, arXiv 2509.14111"
+  url: https://arxiv.org/abs/2509.14111
+  relationship: "Lemma 6 is the statement this node proves; Corollary 3 is cited"
+- title: "M. Rosenfeld, The lonely runner conjecture holds for nine runners, arXiv 2512.01912"
+  url: https://arxiv.org/abs/2512.01912
+  relationship: "refinements of the same residue method"
+related:
+- node: SmallDivisorPulse
+  note: "Lemma 4 supplies the small divisors the residue checks add to"
+- node: CRT
+  note: "remainders modulo the field size times a wheel, the RNS picture"

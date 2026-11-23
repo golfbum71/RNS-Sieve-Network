@@ -1,0 +1,62 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-23, Lonely Runner family): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: LonelyRecords.v1
+  family: LonelyRecords
+  version: v1
+  order: 122
+  kind: paper
+  status: planned
+  group: lonely
+  title: "the Lonely Runner Conjecture and its proved cases, up to fifteen runners (cited)"
+  description: "The conjecture (Wills 1967, Cusick 1973): runners with distinct constant speeds start together on a track of length one, and each is at some time at least one over the number of runners from every other. Stated as an open hypothesis, never claimed, in the form of formal-conjectures. Cited as proved cases: up to seven runners (Barajas and Serra 2008, with earlier cases including five by Cusick and Pomerance 1984), eight (Rosenfeld 2025), nine and ten (Trakulthongchai 2026; nine also Rosenfeld), eleven to thirteen (Sungkawichai and Trakulthongchai 2026), fourteen and fifteen (Allikvere 2026, unrefereed preprint; states the computation is not formally verified). Background: Tao's reduction of each case to a finite check (speeds bounded by a power of the field size). None of these proofs is in Lean, which is the opening for ResidueReduction."
+conclusions: []
+planned:
+  source_status: Cited
+  rests_on: []
+  claims:
+  - lonely_runner_conjecture
+  - lonely_up_to_seven
+  - lonely_eight
+  - lonely_nine_ten
+  - lonely_eleven_to_thirteen
+  - lonely_fourteen_fifteen
+  - tao_finite_check
+  open_inputs:
+  - lonely_runner_conjecture
+  tier: "Cited claims and one open hypothesis."
+  plan: "Copy formal-conjectures' LonelyRunnerConjecture statement word for word as the open hypothesis; state each proved case as a cited claim for that field size."
+sources:
+- title: "Google DeepMind formal-conjectures, LonelyRunnerConjecture (Lean statement of the conjecture)"
+  url: https://google-deepmind.github.io/formal-conjectures/doc/FormalConjectures/Wikipedia/LonelyRunnerConjecture.html
+  relationship: "the Lean statement of the conjecture, copied as the open hypothesis"
+- title: "Lonely runner conjecture (Wikipedia)"
+  url: https://en.wikipedia.org/wiki/Lonely_runner_conjecture
+  relationship: "history (J. M. Wills 1967; T. W. Cusick 1973, view-obstruction; five runners by T. W. Cusick and C. Pomerance, View-obstruction problems III, J. Number Theory 19 (1984)) and summary of known cases"
+- title: "J. Barajas and O. Serra, The lonely runner with seven runners, Electron. J. Combin. 15(1) (2008) R48, arXiv 0710.4495"
+  url: https://arxiv.org/abs/0710.4495
+  relationship: "seven runners; cited as lonely_up_to_seven"
+- title: "M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243, arXiv 2509.14111"
+  url: https://arxiv.org/abs/2509.14111
+  relationship: "eight runners; cited as lonely_eight"
+- title: "M. Rosenfeld, The lonely runner conjecture holds for nine runners, arXiv 2512.01912"
+  url: https://arxiv.org/abs/2512.01912
+  relationship: "nine runners, independently"
+- title: "T. Trakulthongchai, Nine and ten lonely runners, Electron. J. Combin. 33(2) (2026) P2.46, doi 10.37236/14972, arXiv 2511.22427"
+  url: https://arxiv.org/abs/2511.22427
+  relationship: "nine and ten runners; cited as lonely_nine_ten"
+- title: "T. Sungkawichai and T. Trakulthongchai, Eleven, twelve, and thirteen lonely runners, arXiv 2604.23906"
+  url: https://arxiv.org/abs/2604.23906
+  relationship: "eleven to thirteen runners; cited as lonely_eleven_to_thirteen"
+- title: "J. Allikvere, Fourteen and fifteen lonely runners, arXiv 2609.02604 (preprint)"
+  url: https://arxiv.org/abs/2609.02604
+  relationship: "fourteen and fifteen runners, unrefereed; cited as lonely_fourteen_fifteen"
+- title: "T. Tao, Some remarks on the lonely runner conjecture, arXiv 1701.02048"
+  url: https://arxiv.org/abs/1701.02048
+  relationship: "each case reduces to a finite check; cited as tao_finite_check"
+related:
+- node: ResidueReduction
+  note: "the residue method behind every record from eight runners on"
+- node: PileUpLock
+  note: "frees some runners directly; the conjecture is about all of them"

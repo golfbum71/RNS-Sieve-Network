@@ -216,6 +216,8 @@ GROUPS = [
         "SieveDataLimits", "LargerSieve", "ArithmeticLargeSieve", "ChenWeights"]),
     ("distribution", "Primes in the columns of large cycles: level of distribution and Elliott-Halberstam", [
         "ProgressionPNT", "DenseDivisibility", "LevelOfDistribution", "SmoothLevel"]),
+    ("lonely", "The Lonely Runner: pile-ups, shifts and residue sieves", [
+        "PileUpLock", "SmallDivisorPulse", "TeamShift", "ResidueReduction", "LonelyRecords"]),
 ]
 GROUP_TITLE = {key: title for key, title, _ in GROUPS}
 GROUP_TITLE["other"] = "Other"

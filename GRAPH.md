@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 97 of 113 nodes are built, holding 308 claims: 301 proved in Lean and 7 cited from a published paper. They are joined by 182 arrows, each a Lean-checked step. Of the other 16 nodes, drawn dashed or purple, 1 is proved in the original source files but not yet restated here; 3 are planned citations of published results; 9 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 97 of 118 nodes are built, holding 308 claims: 301 proved in Lean and 7 cited from a published paper. They are joined by 182 arrows, each a Lean-checked step. Of the other 21 nodes, drawn dashed or purple, 2 are proved in the original source files but not yet restated here; 2 are planned steps that will assume open conjectures; 4 are planned citations of published results; 10 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -53,6 +53,7 @@ graph LR
   g7["<b>One wheel at a time: squares, characters and the number 24</b><br/>5 built, 0 planned or outside"]
   g8["<b>Sieve methods: Brun, Hooley, Selberg</b><br/>18 built, 6 planned or outside"]
   g9["<b>Primes in the columns of large cycles: level of distribution and Elliott-Halberstam</b><br/>0 built, 4 planned or outside"]
+  g10["<b>The Lonely Runner: pile-ups, shifts and residue sieves</b><br/>0 built, 5 planned or outside"]
   g1 ==> g2
   g1 ==> g4
   g1 ==> g5
@@ -79,6 +80,7 @@ graph LR
   click g7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/GRAPH.md#one-wheel-at-a-time-squares-characters-and-the-number-24" _self
   click g8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/GRAPH.md#sieve-methods-brun-hooley-selberg" _self
   click g9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/GRAPH.md#primes-in-the-columns-of-large-cycles-level-of-distribution-and-elliott-halberstam" _self
+  click g10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/GRAPH.md#the-lonely-runner-pile-ups-shifts-and-residue-sieves" _self
 ```
 
 ### Foundations: wheels, cycles and columns
@@ -1721,6 +1723,50 @@ graph LR
   click p4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmoothLevel.md" _blank
 ```
 
+### The Lonely Runner: pile-ups, shifts and residue sieves
+
+Nodes: [`PileUpLock`](docs/nodes/PileUpLock.md), [`SmallDivisorPulse`](docs/nodes/SmallDivisorPulse.md), [`TeamShift`](docs/nodes/TeamShift.md), [`ResidueReduction`](docs/nodes/ResidueReduction.md), [`LonelyRecords`](docs/nodes/LonelyRecords.md).
+
+```mermaid
+graph LR
+  subgraph s1["<b>118. PileUpLock — the pile-up: when one runner can be freed while the rest are together</b>"]
+    p1["<i>planned: new, not yet proved</i>"]
+  end
+  subgraph s2["<b>119. SmallDivisorPulse — every small number divides a speed of any counterexample</b>"]
+    p2["<i>planned: proved in source file</i>"]
+  end
+  subgraph s3["<b>120. TeamShift — a team sharing a factor: shift the clock, the team stays put, the last runner moves</b>"]
+    p3["<i>planned: conditional</i>"]
+  end
+  subgraph s4["<b>121. ResidueReduction — only the remainders matter: a residue sieve for the lonely runner</b>"]
+    p4["<i>planned: conditional</i>"]
+  end
+  subgraph s5["<b>122. LonelyRecords — the Lonely Runner Conjecture and its proved cases, up to fifteen runners (cited)</b>"]
+    p5["<i>planned: cited from a paper</i>"]
+  end
+  s3 -.-> s4
+  classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
+  classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
+  classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
+  classDef planned fill:#ffffff,stroke:#1a7f37,color:#57606a,stroke-dasharray: 5 4;
+  classDef conditional fill:#ffffff,stroke:#9a6700,color:#57606a,stroke-dasharray: 5 4;
+  classDef cited fill:#ffffff,stroke:#0969da,color:#57606a,stroke-dasharray: 5 4;
+  classDef new fill:#ffffff,stroke:#57606a,color:#57606a,stroke-dasharray: 5 4;
+  classDef draft fill:#ffffff,stroke:#1a7f37,color:#1f2328,stroke-width:2px,stroke-dasharray: 2 2;
+  classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
+  classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
+  classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
+  class p2 planned;
+  class p3,p4 conditional;
+  class p5 cited;
+  class p1 new;
+  click p1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PileUpLock.md" _blank
+  click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmallDivisorPulse.md" _blank
+  click p3 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TeamShift.md" _blank
+  click p4 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ResidueReduction.md" _blank
+  click p5 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LonelyRecords.md" _blank
+```
+
 
 ## What each result rests on
 
@@ -2223,7 +2269,7 @@ exactly the following, each recorded as such rather than claimed:
 - [`RoughInPrimeGaps`](docs/nodes/RoughInPrimeGaps.md) — [plby/lean-proofs](https://github.com/plby/lean-proofs/blob/8822f7ddef30fadbd92e1c6ab4ed897af356af5e/src/latest/ErdosProblems/Erdos682.lean#L5018)
 - [`LongGaps`](docs/nodes/LongGaps.md) — [openai/LongGapsBetweenPrimes](https://github.com/openai/LongGapsBetweenPrimes/blob/main/LongGapsBetweenPrimes.lean)
 
-**Planned nodes will add:** `elliott_halberstam`
+**Planned nodes will add:** `elliott_halberstam`, `lonely_runner_one_fewer`, `lonely_runner_one_fewer`, `lonely_runner_conjecture`
 
 ## Published sources
 
@@ -2577,6 +2623,27 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
   - [D. H. J. Polymath, New equidistribution estimates of Zhang type, Algebra & Number Theory 8 (2014), arXiv 1402.0811](https://arxiv.org/abs/1402.0811) — level one half plus 7/300 for densely divisible smooth widths; cited as polymath_smooth_level
   - [J. Stadlmann, On primes in arithmetic progressions and bounded gaps between many primes, arXiv 2309.00425](https://arxiv.org/abs/2309.00425) — level one half plus 1/40 for smooth widths
   - [R. Li, Primes in arithmetic progressions to smooth moduli: a minorant version, arXiv 2505.09629](https://arxiv.org/abs/2505.09629) — records Stadlmann's further improvement to 0.5253 as the current best in this direction; the value cited as stadlmann_smooth_level (find Stadlmann's own source before citing)
+- [`PileUpLock`](docs/nodes/PileUpLock.md)
+  - [Google DeepMind formal-conjectures, LonelyRunnerConjecture (Lean statement of the conjecture)](https://google-deepmind.github.io/formal-conjectures/doc/FormalConjectures/Wikipedia/LonelyRunnerConjecture.html) — the Lean statement of loneliness this node's conclusion is matched to
+  - [M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243, arXiv 2509.14111](https://arxiv.org/abs/2509.14111) — its Lemmas 4 and 5 are close relatives (see SmallDivisorPulse and TeamShift); this node's exact freed/locked dividing line is stated here as original work
+- [`SmallDivisorPulse`](docs/nodes/SmallDivisorPulse.md)
+  - [M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243, arXiv 2509.14111](https://arxiv.org/abs/2509.14111) — Lemma 4 is the statement this node proves
+- [`TeamShift`](docs/nodes/TeamShift.md)
+  - [M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243, arXiv 2509.14111](https://arxiv.org/abs/2509.14111) — Lemma 5 is the statement this node proves
+  - [Google DeepMind formal-conjectures, LonelyRunnerConjecture (Lean statement of the conjecture)](https://google-deepmind.github.io/formal-conjectures/doc/FormalConjectures/Wikipedia/LonelyRunnerConjecture.html) — the statement used for the hypothesis
+- [`ResidueReduction`](docs/nodes/ResidueReduction.md)
+  - [M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243, arXiv 2509.14111](https://arxiv.org/abs/2509.14111) — Lemma 6 is the statement this node proves; Corollary 3 is cited
+  - [M. Rosenfeld, The lonely runner conjecture holds for nine runners, arXiv 2512.01912](https://arxiv.org/abs/2512.01912) — refinements of the same residue method
+- [`LonelyRecords`](docs/nodes/LonelyRecords.md)
+  - [Google DeepMind formal-conjectures, LonelyRunnerConjecture (Lean statement of the conjecture)](https://google-deepmind.github.io/formal-conjectures/doc/FormalConjectures/Wikipedia/LonelyRunnerConjecture.html) — the Lean statement of the conjecture, copied as the open hypothesis
+  - [Lonely runner conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Lonely_runner_conjecture) — history (J. M. Wills 1967; T. W. Cusick 1973, view-obstruction; five runners by T. W. Cusick and C. Pomerance, View-obstruction problems III, J. Number Theory 19 (1984)) and summary of known cases
+  - [J. Barajas and O. Serra, The lonely runner with seven runners, Electron. J. Combin. 15(1) (2008) R48, arXiv 0710.4495](https://arxiv.org/abs/0710.4495) — seven runners; cited as lonely_up_to_seven
+  - [M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243, arXiv 2509.14111](https://arxiv.org/abs/2509.14111) — eight runners; cited as lonely_eight
+  - [M. Rosenfeld, The lonely runner conjecture holds for nine runners, arXiv 2512.01912](https://arxiv.org/abs/2512.01912) — nine runners, independently
+  - [T. Trakulthongchai, Nine and ten lonely runners, Electron. J. Combin. 33(2) (2026) P2.46, doi 10.37236/14972, arXiv 2511.22427](https://arxiv.org/abs/2511.22427) — nine and ten runners; cited as lonely_nine_ten
+  - [T. Sungkawichai and T. Trakulthongchai, Eleven, twelve, and thirteen lonely runners, arXiv 2604.23906](https://arxiv.org/abs/2604.23906) — eleven to thirteen runners; cited as lonely_eleven_to_thirteen
+  - [J. Allikvere, Fourteen and fifteen lonely runners, arXiv 2609.02604 (preprint)](https://arxiv.org/abs/2609.02604) — fourteen and fifteen runners, unrefereed; cited as lonely_fourteen_fifteen
+  - [T. Tao, Some remarks on the lonely runner conjecture, arXiv 1701.02048](https://arxiv.org/abs/1701.02048) — each case reduces to a finite check; cited as tao_finite_check
 
 ## Node index
 
@@ -2695,3 +2762,8 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 115 | [`DenseDivisibility`](docs/nodes/DenseDivisibility.md) | a cycle built from small wheels splits into two factors of any size | planned: proved in source file |
 | 116 | [`LevelOfDistribution`](docs/nodes/LevelOfDistribution.md) | level of distribution: Bombieri-Vinogradov and the Elliott-Halberstam conjecture | planned: cited from a paper |
 | 117 | [`SmoothLevel`](docs/nodes/SmoothLevel.md) | past the square root for cycles built from small wheels | planned: cited from a paper |
+| 118 | [`PileUpLock`](docs/nodes/PileUpLock.md) | the pile-up: when one runner can be freed while the rest are together | planned: new, not yet proved |
+| 119 | [`SmallDivisorPulse`](docs/nodes/SmallDivisorPulse.md) | every small number divides a speed of any counterexample | planned: proved in source file |
+| 120 | [`TeamShift`](docs/nodes/TeamShift.md) | a team sharing a factor: shift the clock, the team stays put, the last runner moves | planned: conditional |
+| 121 | [`ResidueReduction`](docs/nodes/ResidueReduction.md) | only the remainders matter: a residue sieve for the lonely runner | planned: conditional |
+| 122 | [`LonelyRecords`](docs/nodes/LonelyRecords.md) | the Lonely Runner Conjecture and its proved cases, up to fifteen runners (cited) | planned: cited from a paper |

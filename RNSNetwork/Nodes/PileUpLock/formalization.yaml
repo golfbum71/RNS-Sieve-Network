@@ -1,0 +1,40 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Planned node (2026-11-23, Lonely Runner family): scoped, no Lean yet. See docs/NODE_LIST.md.
+
+node:
+  id: PileUpLock.v1
+  family: PileUpLock
+  version: v1
+  order: 118
+  kind: paper
+  status: planned
+  group: lonely
+  title: "the pile-up: when one runner can be freed while the rest are together"
+  description: "Runners go round a track of length one, each with its own lap time. Pick one runner as the target and call the rest the pack. The pack is together at the start exactly at the multiples of its combined cycle (the least common multiple of the pack's lap times), the same way the wheels' combined cycle works. At those moments the target stands only on a set of evenly spaced spots, as many as the target's lap time divided by its greatest common factor with the combined cycle. The target is freed by the pile-up if and only if its lap time does not divide the combined cycle; then it stands at least a third of a lap from the pack, enough for any field of three or more runners. When the lap time does divide the cycle (the target is locked), no moment with the whole pack at the start separates it. The same holds with the pack together at any shared point, using the greatest common factor of the pack's speed differences. Original to this project (Geo's pile-up idea, 2026). Settled limit, recorded so it is not re-argued: locked targets are the usual case (about 70 percent of small sets with three runners, about 99 percent with six, and every runner of the consecutive-speed sets from four runners on), so this node frees only some runners and is not a route to the whole conjecture by itself."
+conclusions: []
+planned:
+  source_status: New
+  rests_on: []
+  claims:
+  - pack_together_iff
+  - target_spots_count
+  - pile_up_frees_iff
+  - freed_third_lap
+  - locked_never_separated
+  - shared_point_pile_up
+  tier: "Tier 1: least common multiples, greatest common factors and evenly spaced fractions; no analytic input."
+  plan: "Work with whole-number speeds and times that are fractions. Prove that the pack is together exactly at multiples of one over the greatest common factor of the pack's speeds (equivalently, multiples of the combined cycle of lap times); count the target's spots; prove the freed and locked cases as an if-and-only-if; prove that two or more evenly spaced spots include one at least a third of a lap from the start. Then the shared-point form with speed differences. State the result in the form of formal-conjectures' LonelyRunnerConjecture so freed runners are lonely in their sense."
+sources:
+- title: "Google DeepMind formal-conjectures, LonelyRunnerConjecture (Lean statement of the conjecture)"
+  url: https://google-deepmind.github.io/formal-conjectures/doc/FormalConjectures/Wikipedia/LonelyRunnerConjecture.html
+  relationship: "the Lean statement of loneliness this node's conclusion is matched to"
+- title: "M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243, arXiv 2509.14111"
+  url: https://arxiv.org/abs/2509.14111
+  relationship: "its Lemmas 4 and 5 are close relatives (see SmallDivisorPulse and TeamShift); this node's exact freed/locked dividing line is stated here as original work"
+related:
+- node: CRT
+  note: "the pack's combined cycle is a least common multiple of lap times, like the wheels' combined cycle"
+- node: SmallDivisorPulse
+  note: "the even/odd pulse in general form: times one over a small number"
+- node: TeamShift
+  note: "the working form of the team idea: shift by steps of one over a shared factor"

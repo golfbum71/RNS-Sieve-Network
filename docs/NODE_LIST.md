@@ -1479,3 +1479,42 @@ With the widths restricted to cycles built from small wheels (divisors of the pr
 - Lean (planned): `zhang_smooth_level`, `polymath_smooth_level`, `stadlmann_smooth_level`, `smooth_level_bounded_gaps`
 - Rests on: `LevelOfDistribution`, `DenseDivisibility` (related: `SmoothNumbers`, `PrimeGapsBridge`)
 - Status: Planned (cited)
+
+## Lonely Runner family: pile-ups, shifts and residue sieves (added 2026-11-23)
+
+Planned nodes scoped in a discussion of whether the RNS helps with the Lonely Runner Conjecture. Each is on [`GRAPH.md`](../GRAPH.md) and the wheel as a dashed node in the new family "The Lonely Runner". Not yet in Lean. The record proofs (8 to 15 runners) all run on a residue sieve over remainders of the speeds, which is RNS ground; none of them is formalized anywhere. Settled limit, recorded so it is not re-argued: a pile-up of the whole pack cannot free a locked runner, locked runners are the usual case, and the prime-power shift, the product grid and three-gap arguments do not break locks.
+
+### 118. `PileUpLock` — the pile-up: when one runner can be freed while the rest are together
+The pack is together at the start exactly at multiples of its combined cycle of lap times; the target is freed if and only if its lap time does not divide that cycle, and then sits at least a third of a lap away; a locked target is never separated by a pile-up. Shared-point form with the pack's speed differences. Original to this project (Geo's pile-up idea). Frees only some runners (about 70 percent of small three-runner cases, about 2 percent of six-runner cases, none of the consecutive-speed sets from four runners on).
+- Sources: [formal-conjectures LonelyRunnerConjecture](https://google-deepmind.github.io/formal-conjectures/doc/FormalConjectures/Wikipedia/LonelyRunnerConjecture.html) (statement matched); [Rosenfeld, arXiv 2509.14111](https://arxiv.org/abs/2509.14111) (related Lemmas 4 and 5)
+- Lean (planned): `pack_together_iff`, `target_spots_count`, `pile_up_frees_iff`, `freed_third_lap`, `locked_never_separated`, `shared_point_pile_up`
+- Rests on: nothing (related: `CRT`, `SmallDivisorPulse`, `TeamShift`)
+- Status: Planned (new, Tier 1, suggested first)
+
+### 119. `SmallDivisorPulse` — every small number divides a speed of any counterexample
+If no speed is divisible by a number from 2 up to the field size, the time one over that number works; so the least common multiple of 2 up to the field size divides the product of a counterexample's speeds. Rosenfeld 2025, Lemma 4; the general form of the even/odd pulse.
+- Sources: [Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), arXiv 2509.14111](https://arxiv.org/abs/2509.14111)
+- Lean (planned): `small_divisor_time_works`, `counterexample_lcm_dvd_product`
+- Rests on: nothing (related: `PileUpLock`)
+- Status: Planned (Tier 1)
+
+### 120. `TeamShift` — a team sharing a factor: shift the clock, the team stays put, the last runner moves
+All moving runners but one share a factor: take a good time for the team and step by one over the shared factor; the team returns to place and the last runner reaches a good spot. Rosenfeld 2025, Lemma 5; the working form of the team idea. Conditional on the conjecture for one runner fewer (named hypothesis).
+- Sources: [Rosenfeld, arXiv 2509.14111](https://arxiv.org/abs/2509.14111); [formal-conjectures LonelyRunnerConjecture](https://google-deepmind.github.io/formal-conjectures/doc/FormalConjectures/Wikipedia/LonelyRunnerConjecture.html)
+- Lean (planned): `team_shift_step` (hypothesis `lonely_runner_one_fewer`)
+- Rests on: nothing (related: `PileUpLock`)
+- Status: Planned (conditional)
+
+### 121. `ResidueReduction` — only the remainders matter: a residue sieve for the lonely runner
+At times that are fractions of the field size times a wheel, only the speeds' remainders matter; if every admissible list of remainders has a good time, every counterexample has a speed divisible by that wheel. Rosenfeld 2025, Lemma 6, with the Corollary 3 size bound (via Malikiosis-Santos-Schymura, as cited there) cited. Planned also: fully checked four- and five-runner cases by split kernel checks.
+- Sources: [Rosenfeld, arXiv 2509.14111](https://arxiv.org/abs/2509.14111); [Rosenfeld, nine runners, arXiv 2512.01912](https://arxiv.org/abs/2512.01912)
+- Lean (planned): `residues_decide`, `residue_check_forces_divisor`, `small_field_checks`
+- Rests on: `TeamShift` (related: `SmallDivisorPulse`, `CRT`)
+- Status: Planned (conditional, Tier 2)
+
+### 122. `LonelyRecords` — the Lonely Runner Conjecture and its proved cases, up to fifteen runners (cited)
+The conjecture (Wills 1967, Cusick 1973) as an open hypothesis in formal-conjectures' form; cited proved cases: up to seven (Barajas-Serra 2008; five by Cusick-Pomerance 1984), eight (Rosenfeld 2025), nine and ten (Trakulthongchai 2026; nine also Rosenfeld), eleven to thirteen (Sungkawichai-Trakulthongchai 2026), fourteen and fifteen (Allikvere 2026, unrefereed, computation not formally verified); Tao's finite-check reduction.
+- Sources: [formal-conjectures LonelyRunnerConjecture](https://google-deepmind.github.io/formal-conjectures/doc/FormalConjectures/Wikipedia/LonelyRunnerConjecture.html); [Wikipedia](https://en.wikipedia.org/wiki/Lonely_runner_conjecture); [Barajas-Serra, arXiv 0710.4495](https://arxiv.org/abs/0710.4495); [Rosenfeld, arXiv 2509.14111](https://arxiv.org/abs/2509.14111); [Rosenfeld, arXiv 2512.01912](https://arxiv.org/abs/2512.01912); [Trakulthongchai, Electron. J. Combin. 33(2) P2.46, arXiv 2511.22427](https://arxiv.org/abs/2511.22427); [Sungkawichai-Trakulthongchai, arXiv 2604.23906](https://arxiv.org/abs/2604.23906); [Allikvere, arXiv 2609.02604](https://arxiv.org/abs/2609.02604); [Tao, arXiv 1701.02048](https://arxiv.org/abs/1701.02048)
+- Lean (planned): `lonely_runner_conjecture` (open hypothesis), `lonely_up_to_seven`, `lonely_eight`, `lonely_nine_ten`, `lonely_eleven_to_thirteen`, `lonely_fourteen_fifteen`, `tao_finite_check`
+- Rests on: nothing (related: `ResidueReduction`, `PileUpLock`)
+- Status: Planned (cited, with one open hypothesis)
