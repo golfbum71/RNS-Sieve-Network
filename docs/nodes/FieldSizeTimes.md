@@ -78,6 +78,7 @@ def consecutive_prime_field : Prop :=
 ## Used by
 
 - [`FieldSizeTimes`](FieldSizeTimes.md)
+- [`TightFromBlockedRun`](TightFromBlockedRun.md)
 
 ## Files
 

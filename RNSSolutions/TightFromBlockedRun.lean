@@ -11,7 +11,8 @@ import Mathlib.Data.Int.Interval
 /-!
 # Proofs for TightFromBlockedRun
 
-Draft (2026-11-23).
+Built clean by `lake build RNSSolutions` on 2026-11-23; `#print axioms` shows only
+`propext`, `Classical.choice`, `Quot.sound`.
 
 * `near_of_small`: a signed distance of at most one part is near.
 * Dirichlet: the remainders of `j * k` for `j = 0, …, n - 1`, sorted into `n`

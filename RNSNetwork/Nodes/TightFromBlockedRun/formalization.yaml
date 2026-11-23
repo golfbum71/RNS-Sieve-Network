@@ -33,10 +33,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/TightFromBlockedRun.lean
     declaration: RNS.TightFromBlockedRun.consecutive_covered_holds
-    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23).
+      Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: one_step_replacement
   declaration: RNS.TightFromBlockedRun.one_step_replacement
@@ -47,10 +48,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/TightFromBlockedRun.lean
     declaration: RNS.TightFromBlockedRun.one_step_replacement_holds
-    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23).
+      Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: blocked_run_short
   declaration: RNS.TightFromBlockedRun.blocked_run_short
@@ -59,10 +61,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/TightFromBlockedRun.lean
     declaration: RNS.TightFromBlockedRun.blocked_run_short_holds
-    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23).
+      Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: single_acceleration_tight
   declaration: RNS.TightFromBlockedRun.single_acceleration_tight
@@ -77,10 +80,12 @@ conclusions:
   imports_status: identified
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/TightFromBlockedRun.lean
     declaration: RNS.TightFromBlockedRun.single_acceleration_tight_step
-    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23), from its
+      imports taken as named hypotheses. Recorded as noncompliant only because no Comparator receipt exists
+      yet.
   designated: lean-proof
 sources:
 - title: L. Goddyn and E. B. Wong, Tight instances of the lonely runner, Integers 6 (2006) A38

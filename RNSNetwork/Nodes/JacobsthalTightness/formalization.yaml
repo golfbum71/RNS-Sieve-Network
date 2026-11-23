@@ -18,20 +18,20 @@ node:
     logarithm; Pomerance showed sets with the fastest speed below twice the field size minus a constant
     times the square of a logarithm are not tight. The survey states that closing this gap, and pushing
     the proved range of speeds toward Tao's question (fastest speed at most twice the field size), would
-    need better bounds for Jacobsthal's problem. Cited; the bridge from the network's Jacobsthal nodes
-    is the RNS-native part to build.
+    need better bounds for Jacobsthal's problem. The one-runner construction (Goddyn and Wong's Theorem
+    2.1, sufficiency) is now proved in TightFromBlockedRun at fractional times; the rest stays cited.
 conclusions: []
 planned:
   source_status: Cited
   rests_on: []
   claims:
-  - tight_from_blocking_runs
   - pomerance_not_tight
   - bohman_peng_small_speeds
-  tier: Cited; the construction of tight sets from a blocked run is the candidate for a wheel-native proof.
-  plan: State the tight-set construction from a run of blocked positions (survey Section 4, Theorem 12)
-    and prove it from BlockingRuns' vocabulary if the statement allows; cite Pomerance's non-tightness
-    range and Bohman and Peng's result.
+  - several_runner_acceleration
+  tier: Cited; the one-runner construction is proved in TightFromBlockedRun.
+  plan: Cite Pomerance's non-tightness range and Bohman and Peng's result; the several-runner version
+    (Goddyn and Wong's Theorem 3.1) follows the same one-step replacement and is the next wheel-native
+    step.
 sources:
 - title: G. Perarnau and O. Serra, The Lonely Runner Conjecture turns 60, arXiv 2409.20160 (survey)
   url: https://arxiv.org/abs/2409.20160
@@ -40,10 +40,14 @@ sources:
 - title: L. Goddyn and E. B. Wong, Tight instances of the lonely runner, Integers 6 (2006) A38
   url: https://www.sfu.ca/~goddyn/Papers/063tight_lonely_runner.tex.txt
   relationship: constructions of tight instances by speeding up runners
-- title: Tight instances of the Lonely Runner Conjecture, one-entry modifications and the growth of speeds, arXiv 2608.13599
+- title: Tight instances of the Lonely Runner Conjecture, one-entry modifications and the growth of speeds,
+    arXiv 2608.13599
   url: https://arxiv.org/abs/2608.13599
-  relationship: restates Goddyn and Wong's theorem (accelerated runners give tight sets under a shared-factor condition) and studies the growth of speeds
+  relationship: restates Goddyn and Wong's theorem (accelerated runners give tight sets under a shared-factor
+    condition) and studies the growth of speeds
 related:
+- node: TightFromBlockedRun
+  note: proves the one-runner construction from a blocked run
 - node: BlockingRuns
   note: 'Jacobsthal''s problem: the longest run of blocked positions in a wheel cycle'
 - node: LargestGap

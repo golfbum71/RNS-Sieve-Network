@@ -1546,7 +1546,14 @@ Equivalent forms: Wills' Diophantine approximation (with Kronecker's reduction f
 ### 126. `JacobsthalTightness` — tight lonely runners wait on Jacobsthal's problem (cited)
 Tight speed sets (best loneliness exactly one over the number of runners) can be built by speeding up consecutive runners when every number in a stretch shares a factor with a given number: Jacobsthal's problem, the longest run of blocked positions in one wheel cycle. Erdős' long blocked runs give tight sets; Pomerance showed a range of speeds gives no tight set; the survey says closing the gap, and Tao's question about speeds up to twice the field size, need better Jacobsthal bounds. Links the Lonely Runner family to `BlockingRuns`, `LargestGap`, `KanoldBound` and `JacobsthalQuadratic`.
 - Sources: [Perarnau and Serra, survey, Sections 4 and 8.2, arXiv 2409.20160](https://arxiv.org/abs/2409.20160); [Goddyn and Wong 2006](https://www.sfu.ca/~goddyn/Papers/063tight_lonely_runner.tex.txt); [arXiv 2608.13599](https://arxiv.org/abs/2608.13599)
-- Lean (planned): `tight_from_blocking_runs`, `pomerance_not_tight`, `bohman_peng_small_speeds`
+- Lean (planned): `pomerance_not_tight`, `bohman_peng_small_speeds`, `several_runner_acceleration`; the one-runner construction is proved in `TightFromBlockedRun` (127)
 - Rests on: nothing (related: `BlockingRuns`, `LargestGap`, `KanoldBound`, `JacobsthalQuadratic`, `FieldSizeTimes`)
-- Status: Planned (cited); the tight-set construction from a blocked run is the candidate for a wheel-native proof
+- Status: Planned (cited); the one-runner tight-set construction is proved in `TightFromBlockedRun`
+
+### 127. `TightFromBlockedRun` — a run of blocked numbers makes a tight lonely runner
+The consecutive speeds are tight (Dirichlet's pigeonhole: every fractional time has one of them within one part of the start). Speed up the runner of speed r to m times its speed: if every number from (number of runners − r) up to m times that, minus one, shares a factor with r — a run of positions blocked by the wheels of r — the set stays tight. Proof by Goddyn and Wong's one-step replacement: at a time when only the sped-up runner could have been close, either a smaller wheel of r is close instead, or an unchanged runner whose speed is the inverse remainder for r is, and the blocked run keeps that runner unchanged. A blocked run is shorter than the speed blocking it, which keeps the sped-up runner off the fence post at one over the number of runners. As proved, differs from the source: times are fractions ("never strictly lonely" means every fractional time has a runner within one part); only the sufficiency direction and only one sped-up runner. Not proved: the necessity direction, the several-runner Theorem 3.1, real times.
+- Sources: [Goddyn and Wong, Tight instances of the lonely runner, Integers 6 (2006) A38](https://www.sfu.ca/~goddyn/Papers/063tight_lonely_runner.tex.txt) (Theorem 2.1, Lemma 3.2); [arXiv 2608.13599](https://arxiv.org/abs/2608.13599) (Theorem 1.1)
+- Lean: `consecutive_covered`, `one_step_replacement`, `blocked_run_short`, `single_acceleration_tight` (with `near`, `never_strictly_lonely`, `blocked_run`, `accelerated`)
+- Rests on: `FieldSizeTimes` (related: `JacobsthalTightness`, `BlockingRuns`)
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-23).
 
