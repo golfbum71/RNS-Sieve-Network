@@ -31,10 +31,11 @@ conclusions:
   imports_status: none
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/ResidueReduction.lean
     declaration: RNS.ResidueReduction.far_mod_holds
-    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+    note: Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23).
+      Recorded as noncompliant only because no Comparator receipt exists yet.
   designated: lean-proof
 - id: residue_check_forces_divisor
   declaration: RNS.ResidueReduction.residue_check_forces_divisor
@@ -48,10 +49,12 @@ conclusions:
   - lonely_runner_upto
   justifications:
   - id: lean-proof
-    kind: lean-draft
+    kind: lean-noncompliant
     solution: RNSSolutions/ResidueReduction.lean
     declaration: RNS.ResidueReduction.residue_check_forces_divisor_step
-    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+    note: Lean step checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23), from its
+      imports taken as named hypotheses. Recorded as noncompliant only because no Comparator receipt exists
+      yet.
   designated: lean-proof
 sources:
 - title: M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243,

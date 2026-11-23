@@ -120,7 +120,7 @@
 | 118 | [`PileUpLock`](PileUpLock.md) | the pile-up: when one runner can be freed while the rest are together | proved in Lean |
 | 119 | [`SmallDivisorPulse`](SmallDivisorPulse.md) | every small number divides a speed of any counterexample | proved in Lean |
 | 120 | [`TeamShift`](TeamShift.md) | a team sharing a factor: shift the clock, the team stays put, the last runner moves | proved in Lean; rests on open conjectures as hypotheses |
-| 121 | [`ResidueReduction`](ResidueReduction.md) | only the remainders matter: a residue sieve for the lonely runner | planned: conditional |
+| 121 | [`ResidueReduction`](ResidueReduction.md) | only the remainders matter: a residue sieve for the lonely runner | proved in Lean; rests on open conjectures as hypotheses |
 | 122 | [`LonelyRecords`](LonelyRecords.md) | the Lonely Runner Conjecture and its proved cases, up to fifteen runners (cited) | planned: cited from a paper |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

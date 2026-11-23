@@ -9,7 +9,8 @@ import Mathlib.Tactic
 /-!
 # Proofs for ResidueReduction
 
-Draft (2026-11-23).
+Built clean by `lake build RNSSolutions` on 2026-11-23; `#print axioms` shows only
+`propext`, `Classical.choice`, `Quot.sound`.
 
 Suppose a counterexample has no speed divisible by the wheel. Its remainders
 for the modulus are none of them multiples of the wheel (the wheel divides the

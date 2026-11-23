@@ -1510,9 +1510,10 @@ As proved, differs from the plan: stronger than Rosenfeld's lemma, since the tea
 ### 121. `ResidueReduction` — only the remainders matter: a residue sieve for the lonely runner
 At times that are fractions of the field size times a wheel, only the speeds' remainders matter; if every admissible list of remainders has a good time, every counterexample has a speed divisible by that wheel. Rosenfeld 2025, Lemma 6, with the Corollary 3 size bound (via Malikiosis-Santos-Schymura, as cited there) cited. Planned also: fully checked four- and five-runner cases by split kernel checks.
 - Sources: [Rosenfeld, arXiv 2509.14111](https://arxiv.org/abs/2509.14111); [Rosenfeld, nine runners, arXiv 2512.01912](https://arxiv.org/abs/2512.01912)
-- Lean (planned): `residues_decide`, `residue_check_forces_divisor`, `small_field_checks`
+As proved, differs from the plan: `residues_decide` is stated as `far_mod` (being far from the start depends only on the remainder); the residue check is stated over multisets of remainders, with Rosenfeld's sharing condition as "leaving out any one remainder, the rest share no factor with the modulus"; the speeds of the counterexample must share no common factor (Rosenfeld's normalization). Still planned: the fully checked four- and five-runner cases (`small_field_checks`) and Rosenfeld's Corollary 3 size bound. Checked numerically, not in Lean: for four runners the residue check passes for the wheels 2, 3, 7, 11 and 13 and fails for 5; for five runners it passes for 5.
+- Lean: `far_mod`, `residue_check_forces_divisor` (with `residue_check`); still planned: `small_field_checks`
 - Rests on: `TeamShift` (related: `SmallDivisorPulse`, `CRT`)
-- Status: Planned (conditional, Tier 2)
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-23). `residue_check_forces_divisor` takes the conjecture for one runner fewer and the residue check as hypotheses. The small-field checks still planned.
 
 ### 122. `LonelyRecords` — the Lonely Runner Conjecture and its proved cases, up to fifteen runners (cited)
 The conjecture (Wills 1967, Cusick 1973) as an open hypothesis in formal-conjectures' form; cited proved cases: up to seven (Barajas-Serra 2008; five by Cusick-Pomerance 1984), eight (Rosenfeld 2025), nine and ten (Trakulthongchai 2026; nine also Rosenfeld), eleven to thirteen (Sungkawichai-Trakulthongchai 2026), fourteen and fifteen (Allikvere 2026, unrefereed, computation not formally verified); Tao's finite-check reduction.

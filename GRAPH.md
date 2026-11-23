@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 100 of 118 nodes are built, holding 316 claims: 309 proved in Lean and 7 cited from a published paper. They are joined by 185 arrows, each a Lean-checked step. Of the other 18 nodes, drawn dashed or purple, 1 is proved in the original source files but not yet restated here; 1 is a planned step that will assume an open conjecture; 4 are planned citations of published results; 9 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 101 of 118 nodes are built, holding 318 claims: 311 proved in Lean and 7 cited from a published paper. They are joined by 186 arrows, each a Lean-checked step. Of the other 17 nodes, drawn dashed or purple, 1 is proved in the original source files but not yet restated here; 4 are planned citations of published results; 9 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -53,7 +53,7 @@ graph LR
   g7["<b>One wheel at a time: squares, characters and the number 24</b><br/>5 built, 0 planned or outside"]
   g8["<b>Sieve methods: Brun, Hooley, Selberg</b><br/>18 built, 6 planned or outside"]
   g9["<b>Primes in the columns of large cycles: level of distribution and Elliott-Halberstam</b><br/>0 built, 4 planned or outside"]
-  g10["<b>The Lonely Runner: pile-ups, shifts and residue sieves</b><br/>3 built, 2 planned or outside"]
+  g10["<b>The Lonely Runner: pile-ups, shifts and residue sieves</b><br/>4 built, 1 planned or outside"]
   g1 ==> g2
   g1 ==> g4
   g1 ==> g5
@@ -1744,17 +1744,19 @@ graph LR
     c8["team_shift_step"]
   end
   subgraph s4["<b>121. ResidueReduction — only the remainders matter: a residue sieve for the lonely runner</b>"]
-    p1["<i>planned: conditional</i>"]
+    c9["far_mod"]
+    c10["residue_check_forces_divisor"]
   end
   subgraph s5["<b>122. LonelyRecords — the Lonely Runner Conjecture and its proved cases, up to fifteen runners (cited)</b>"]
-    p2["<i>planned: cited from a paper</i>"]
+    p1["<i>planned: cited from a paper</i>"]
   end
   o1{{"<i>open conjecture</i><br/>lonely_runner_upto"}}
   c3 ==> c4
   c5 ==> c6
   c7 ==> c8
   o1 -.-> c8
-  s3 -.-> s4
+  c7 ==> c10
+  o1 -.-> c10
   classDef verified fill:#dafbe1,stroke:#1a7f37,color:#1f2328;
   classDef conditional_built fill:#dafbe1,stroke:#9a6700,color:#1f2328,stroke-width:2px;
   classDef cited_built fill:#ddf4ff,stroke:#0969da,color:#1f2328;
@@ -1766,10 +1768,9 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7 verified;
-  class c8 conditional_built;
-  class p1 conditional;
-  class p2 cited;
+  class c1,c2,c3,c4,c5,c6,c7,c9 verified;
+  class c8,c10 conditional_built;
+  class p1 cited;
   class o1 openconj;
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PileUpLock.md#pack_together_iff" _blank
   click c2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/PileUpLock.md#locked_never_separated" _blank
@@ -1779,8 +1780,9 @@ graph LR
   click c6 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/SmallDivisorPulse.md#counterexample_lcm_dvd_product" _blank
   click c7 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TeamShift.md#team_shift" _blank
   click c8 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/TeamShift.md#team_shift_step" _blank
-  click p1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ResidueReduction.md" _blank
-  click p2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LonelyRecords.md" _blank
+  click c9 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ResidueReduction.md#far_mod" _blank
+  click c10 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/ResidueReduction.md#residue_check_forces_divisor" _blank
+  click p1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/LonelyRecords.md" _blank
 ```
 
 
@@ -2255,6 +2257,10 @@ The results nothing else builds on, each with everything beneath it.
 - [`TeamShift.team_shift_step`](docs/nodes/TeamShift.md#team_shift_step) — proved in Lean, assuming open conjecture(s)
   - `lonely_runner_upto` — open conjecture, taken as a hypothesis
   - [`TeamShift.team_shift`](docs/nodes/TeamShift.md#team_shift) — proved in Lean
+- [`ResidueReduction.far_mod`](docs/nodes/ResidueReduction.md#far_mod) — proved in Lean
+- [`ResidueReduction.residue_check_forces_divisor`](docs/nodes/ResidueReduction.md#residue_check_forces_divisor) — proved in Lean, assuming open conjecture(s)
+  - `lonely_runner_upto` — open conjecture, taken as a hypothesis
+  - [`TeamShift.team_shift`](docs/nodes/TeamShift.md#team_shift) — proved in Lean
 
 ## What the network takes on trust
 
@@ -2277,7 +2283,7 @@ exactly the following, each recorded as such rather than claimed:
 - `bateman_horn_sq_add_one` — assumed by [`PolynomialPatterns.landau_of_bateman_horn`](docs/nodes/PolynomialPatterns.md#landau_of_bateman_horn)
 - `bateman_horn_conjecture` — assumed by 
 - `riemann_hypothesis` — assumed by [`VonKochBound.von_koch_bound`](docs/nodes/VonKochBound.md#von_koch_bound)
-- `lonely_runner_upto` — assumed by [`TeamShift.team_shift_step`](docs/nodes/TeamShift.md#team_shift_step)
+- `lonely_runner_upto` — assumed by [`TeamShift.team_shift_step`](docs/nodes/TeamShift.md#team_shift_step), [`ResidueReduction.residue_check_forces_divisor`](docs/nodes/ResidueReduction.md#residue_check_forces_divisor)
 
 **Published results, cited rather than proved in Lean:**
 
@@ -2295,7 +2301,7 @@ exactly the following, each recorded as such rather than claimed:
 - [`RoughInPrimeGaps`](docs/nodes/RoughInPrimeGaps.md) — [plby/lean-proofs](https://github.com/plby/lean-proofs/blob/8822f7ddef30fadbd92e1c6ab4ed897af356af5e/src/latest/ErdosProblems/Erdos682.lean#L5018)
 - [`LongGaps`](docs/nodes/LongGaps.md) — [openai/LongGapsBetweenPrimes](https://github.com/openai/LongGapsBetweenPrimes/blob/main/LongGapsBetweenPrimes.lean)
 
-**Planned nodes will add:** `elliott_halberstam`, `lonely_runner_one_fewer`, `lonely_runner_conjecture`
+**Planned nodes will add:** `elliott_halberstam`, `lonely_runner_conjecture`
 
 ## Published sources
 
@@ -2791,5 +2797,5 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 118 | [`PileUpLock`](docs/nodes/PileUpLock.md) | the pile-up: when one runner can be freed while the rest are together | proved in Lean |
 | 119 | [`SmallDivisorPulse`](docs/nodes/SmallDivisorPulse.md) | every small number divides a speed of any counterexample | proved in Lean |
 | 120 | [`TeamShift`](docs/nodes/TeamShift.md) | a team sharing a factor: shift the clock, the team stays put, the last runner moves | proved in Lean; rests on open conjectures as hypotheses |
-| 121 | [`ResidueReduction`](docs/nodes/ResidueReduction.md) | only the remainders matter: a residue sieve for the lonely runner | planned: conditional |
+| 121 | [`ResidueReduction`](docs/nodes/ResidueReduction.md) | only the remainders matter: a residue sieve for the lonely runner | proved in Lean; rests on open conjectures as hypotheses |
 | 122 | [`LonelyRecords`](docs/nodes/LonelyRecords.md) | the Lonely Runner Conjecture and its proved cases, up to fifteen runners (cited) | planned: cited from a paper |

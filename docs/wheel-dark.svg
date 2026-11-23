@@ -145,7 +145,7 @@
 <path d="M64.8,-339.9 C73.8,-387.0 -360.8,158.3 -404.8,177.6" fill="none" stroke="#6e7681" stroke-width="1.3" opacity="0.55"/>
 <path d="M64.8,-339.9 C73.8,-387.0 301.4,-253.8 338.1,-284.7" fill="none" stroke="#6e7681" stroke-width="1.3" opacity="0.55"/>
 <path d="M64.8,-339.9 C73.8,-387.0 320.0,-229.9 359.0,-257.9" fill="none" stroke="#6e7681" stroke-width="1.3" opacity="0.55"/>
-<path d="M-40.4,-246.7 C-48.1,-294.1 -48.1,-294.1 -55.9,-341.5" fill="none" stroke="#6e7681" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
+<path d="M-40.4,-246.7 C-48.1,-294.1 -48.1,-294.1 -55.9,-341.5" fill="none" stroke="#6e7681" stroke-width="1.3" opacity="0.55"/>
 <path d="M423.3,-332.1 C461.1,-361.7 523.3,-263.8 566.2,-285.4" fill="none" stroke="#6e7681" stroke-width="1.3" opacity="0.55"/>
 <path d="M423.3,-332.1 C461.1,-361.7 454.7,-369.7 491.9,-399.9" fill="none" stroke="#6e7681" stroke-width="1.3" opacity="0.55"/>
 <path d="M423.3,-332.1 C461.1,-361.7 -578.7,-92.3 -626.1,-99.8" fill="none" stroke="#6e7681" stroke-width="1.3" opacity="0.45" stroke-dasharray="4 4"/>
@@ -276,7 +276,7 @@
 <g transform="translate(-76.7,-237.9)"><circle r="8" fill="#123d24" stroke="#3fb950" stroke-width="2"/><text transform="rotate(432.1)" font-size="13" fill="#e6edf3" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="0">PileUpLock</tspan></text></g>
 <g transform="translate(-58.7,-243.0)"><circle r="8" fill="#123d24" stroke="#3fb950" stroke-width="2"/><text transform="rotate(436.4)" font-size="13" fill="#e6edf3" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="-0.55em">Small</tspan><tspan x="-15" dy="1.1em">DivisorPulse</tspan></text></g>
 <g transform="translate(-40.4,-246.7)"><circle r="8" fill="#123d24" stroke="#d29922" stroke-width="3"/><text transform="rotate(440.7)" font-size="13" fill="#e6edf3" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="0">TeamShift</tspan></text></g>
-<g transform="translate(-55.9,-341.5)"><circle r="8" fill="#0d1117" stroke="#d29922" stroke-width="2" stroke-dasharray="3 2"/><text transform="rotate(440.7)" font-size="13" fill="#9198a1" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="-0.55em">Residue</tspan><tspan x="-15" dy="1.1em">Reduction</tspan></text></g>
+<g transform="translate(-55.9,-341.5)"><circle r="8" fill="#123d24" stroke="#d29922" stroke-width="3"/><text transform="rotate(440.7)" font-size="13" fill="#e6edf3" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="-0.55em">Residue</tspan><tspan x="-15" dy="1.1em">Reduction</tspan></text></g>
 <g transform="translate(-21.8,-249.0)"><circle r="8" fill="#0d1117" stroke="#4493f8" stroke-width="2" stroke-dasharray="3 2"/><text transform="rotate(445.0)" font-size="13" fill="#9198a1" dominant-baseline="central" text-anchor="end"><tspan x="-15" dy="0">LonelyRecords</tspan></text></g>
 <circle r="125" fill="#2a2720" stroke="#8b8577" stroke-width="1.5"/>
 <text y="-26" font-size="22" font-weight="650" fill="#e6edf3" text-anchor="middle">The RNS wheel</text>
