@@ -91,3 +91,6 @@ import RNSSolutions.HasseCurve
 import RNSSolutions.VonKochBound
 import RNSSolutions.BirchTateRational
 import RNSSolutions.KanoldBound
+import RNSSolutions.PileUpLock
+import RNSSolutions.SmallDivisorPulse
+import RNSSolutions.TeamShift

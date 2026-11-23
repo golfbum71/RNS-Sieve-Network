@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-23, Lonely Runner family): scoped, no Lean yet. See docs/NODE_LIST.md.
+# Lonely Runner family, built 2026-11-23. See docs/NODE_LIST.md.
 
 node:
   id: TeamShift.v1
@@ -7,27 +7,54 @@ node:
   version: v1
   order: 120
   kind: paper
-  status: planned
+  status: active
   group: lonely
-  title: "a team sharing a factor: shift the clock, the team stays put, the last runner moves"
-  description: "Normalize so the runner to be lonely stands still. Suppose all moving runners but one share a common factor, while all speeds together share none. Take a good time for the team (from the conjecture for one runner fewer) and step the clock forward by multiples of one over the shared factor: every team runner returns to the same place, and the last runner moves among evenly spaced spots, one of which is good. So the set is lonely. Rosenfeld 2025, Lemma 5. The working form of Geo's team (co-dependent) idea: the team need not be at the start, only already well spread. Conditional: the conjecture for one runner fewer is a named hypothesis."
-conclusions: []
-planned:
-  source_status: Conditional
-  rests_on: []
-  claims:
-  - team_shift_step
+  title: 'a team sharing a factor: shift the clock, the team stays put, the last runner moves'
+  description: 'Normalize so the runner to be lonely stands still. Suppose all moving runners but one
+    share a common factor, while all speeds together share none. Take a good time for the team (from the
+    conjecture for one runner fewer) and step the clock forward by multiples of one over the shared factor:
+    every team runner returns to the same place, and the last runner moves among evenly spaced spots,
+    one of which is good. So the set is lonely. Rosenfeld 2025, Lemma 5. The working form of Geo''s team
+    (co-dependent) idea: the team need not be at the start, only already well spread. Conditional: the
+    conjecture for one runner fewer is a named hypothesis.'
+conclusions:
+- id: team_shift
+  declaration: RNS.TeamShift.team_shift
+  summary: A lonely team of at least two runners whose speeds share a factor that does not divide one
+    more speed stays lonely with that runner added.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/TeamShift.lean
+    declaration: RNS.TeamShift.team_shift_holds
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
+- id: team_shift_step
+  declaration: RNS.TeamShift.team_shift_step
+  summary: If the Lonely Runner Conjecture holds for one runner fewer, a team of nonzero speeds sharing
+    a factor, plus a speed that factor does not divide, has a lonely moment.
+  imports:
+  - TeamShift.v1.team_shift
+  imports_status: identified
   open_inputs:
-  - lonely_runner_one_fewer
-  tier: "Tier 1 given the hypothesis: fractions and greatest common factors."
-  plan: "State the conjecture for a given field size as a Prop in the form of formal-conjectures' LonelyRunnerConjecture; prove the step from the conjecture for one runner fewer to the shared-factor case for one more."
+  - lonely_runner_upto
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/TeamShift.lean
+    declaration: RNS.TeamShift.team_shift_step_holds_from
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
 sources:
-- title: "M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243, arXiv 2509.14111"
+- title: M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243,
+    arXiv 2509.14111
   url: https://arxiv.org/abs/2509.14111
-  relationship: "Lemma 5 is the statement this node proves"
-- title: "Google DeepMind formal-conjectures, LonelyRunnerConjecture (Lean statement of the conjecture)"
+  relationship: Lemma 5 is the statement this node proves
+- title: Google DeepMind formal-conjectures, LonelyRunnerConjecture (Lean statement of the conjecture)
   url: https://google-deepmind.github.io/formal-conjectures/doc/FormalConjectures/Wikipedia/LonelyRunnerConjecture.html
-  relationship: "the statement used for the hypothesis"
+  relationship: the statement used for the hypothesis
 related:
 - node: PileUpLock
-  note: "the pile-up holds the pack at one point; this shift only needs the team at a good spread"
+  note: the pile-up holds the pack at one point; this shift only needs the team at a good spread

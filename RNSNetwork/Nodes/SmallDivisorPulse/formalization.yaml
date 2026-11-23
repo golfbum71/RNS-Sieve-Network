@@ -1,5 +1,5 @@
 # Node metadata, following the shape of IEANTN's formalization.yaml.
-# Planned node (2026-11-23, Lonely Runner family): scoped, no Lean yet. See docs/NODE_LIST.md.
+# Lonely Runner family, built 2026-11-23. See docs/NODE_LIST.md.
 
 node:
   id: SmallDivisorPulse.v1
@@ -7,22 +7,48 @@ node:
   version: v1
   order: 119
   kind: paper
-  status: planned
+  status: active
   group: lonely
-  title: "every small number divides a speed of any counterexample"
-  description: "Normalize so the runner to be lonely stands still and the others have whole-number speeds. If no speed is divisible by some number from 2 up to the field size, then at the time one over that number every moving runner is at least one over that number from the start, which is enough. So in any set of speeds that is never lonely, every number from 2 up to the field size divides some speed, and their least common multiple divides the product of the speeds. Rosenfeld 2025, Lemma 4. The general form of the even/odd pulse."
-conclusions: []
-planned:
-  rests_on: []
-  claims:
-  - small_divisor_time_works
-  - counterexample_lcm_dvd_product
-  tier: "Tier 1: elementary; one time per small number."
-  plan: "Prove that a whole number not divisible by a given number sits at least one over that number from the nearest whole number after division; conclude the time one over that number works when it divides no speed; then the divisibility of the product by the least common multiple of 2 up to the field size."
+  title: every small number divides a speed of any counterexample
+  description: Normalize so the runner to be lonely stands still and the others have whole-number speeds.
+    If no speed is divisible by some number from 2 up to the field size, then at the time one over that
+    number every moving runner is at least one over that number from the start, which is enough. So in
+    any set of speeds that is never lonely, every number from 2 up to the field size divides some speed,
+    and their least common multiple divides the product of the speeds. Rosenfeld 2025, Lemma 4. The general
+    form of the even/odd pulse.
+conclusions:
+- id: small_divisor_time_works
+  declaration: RNS.SmallDivisorPulse.small_divisor_time_works
+  summary: If a number from 2 up to the number of runners divides none of the speeds, the time one over
+    that number is lonely for the runner standing still.
+  imports: []
+  imports_status: none
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/SmallDivisorPulse.lean
+    declaration: RNS.SmallDivisorPulse.small_divisor_time_works_holds
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
+- id: counterexample_lcm_dvd_product
+  declaration: RNS.SmallDivisorPulse.counterexample_lcm_dvd_product
+  summary: If the runner standing still is never lonely, the least common multiple of 2 up to the number
+    of runners divides the product of the speeds.
+  imports:
+  - SmallDivisorPulse.v1.small_divisor_time_works
+  imports_status: identified
+  justifications:
+  - id: lean-proof
+    kind: lean-draft
+    solution: RNSSolutions/SmallDivisorPulse.lean
+    declaration: RNS.SmallDivisorPulse.counterexample_lcm_dvd_product_step
+    note: Draft Lean proof, awaiting `lake build RNSSolutions` on GitHub.
+  designated: lean-proof
 sources:
-- title: "M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243, arXiv 2509.14111"
+- title: M. Rosenfeld, The lonely runner conjecture holds for eight runners, Math. Comp. (2026), doi 10.1090/mcom/4243,
+    arXiv 2509.14111
   url: https://arxiv.org/abs/2509.14111
-  relationship: "Lemma 4 is the statement this node proves"
+  relationship: Lemma 4 is the statement this node proves
 related:
 - node: PileUpLock
-  note: "the same pulse idea, with the target moving and the pack held at the start"
+  note: the same pulse idea, with the target moving and the pack held at the start
