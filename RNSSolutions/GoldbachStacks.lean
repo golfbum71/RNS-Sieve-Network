@@ -7,6 +7,8 @@ import Mathlib.Data.Nat.Prime.Basic      -- `Nat.Prime.even_iff`, `Nat.Prime.odd
 import Mathlib.Data.Nat.Prime.Infinite   -- `Nat.exists_infinite_primes`
 import Mathlib.Data.Nat.Find             -- `Nat.findGreatest`
 import Mathlib.Tactic.NormNum.Prime      -- `norm_num` proving small numbers prime
+import Mathlib.Algebra.Field.ZMod        -- remainders modulo a prime form a field
+import Mathlib.Data.Finset.Card          -- `Finset.exists_mem_notMem_of_card_lt_card`
 import RNSNetwork.Nodes.GoldbachStacks.Conclusions
 
 /-!
@@ -133,3 +135,60 @@ end RNS.GoldbachStacks
 #print axioms RNS.GoldbachStacks.no_gap_iff_odd_goldbach_holds
 #print axioms RNS.GoldbachStacks.frontier_ahead_iff_no_gap_holds
 #print axioms RNS.GoldbachStacks.frontier_ahead_iff_goldbach_holds
+
+/-! ## The wheels never force a gap (added 2026-11-23, draft) -/
+
+namespace RNS.GoldbachStacks
+
+theorem stack_mod_three_holds : stack_mod_three := by
+  unfold stack_mod_three is_stack
+  intro h ⟨_, hp⟩ h2 h1
+  have h3 : 3 ∣ 2 * h + 1 := by omega
+  rcases hp.eq_one_or_self_of_dvd 3 h3 with h' | h'
+  · omega
+  · omega
+
+theorem wheel_no_gap_holds : wheel_no_gap := by
+  unfold wheel_no_gap
+  intro q hq r
+  by_cases hq2 : q = 2
+  · subst hq2
+    revert r
+    decide
+  · classical
+    haveI : Fact q.Prime := ⟨hq⟩
+    haveI : NeZero q := ⟨hq.ne_zero⟩
+    have h3 : 3 ≤ q := by
+      have := hq.two_le
+      omega
+    have h2 : (2 : ZMod q) ≠ 0 := by
+      intro h
+      have h' : ((2 : ℕ) : ZMod q) = 0 := by exact_mod_cast h
+      rw [ZMod.natCast_eq_zero_iff] at h'
+      exact hq2 ((Nat.prime_dvd_prime_iff_eq hq Nat.prime_two).1 h')
+    -- the one height whose stack the wheel of size `q` removes
+    set c : ZMod q := -(2 : ZMod q)⁻¹ with hc
+    have hbad : ∀ x : ZMod q, 2 * x + 1 = 0 → x = c := by
+      intro x hx
+      calc x = (2 : ZMod q)⁻¹ * (2 * x) := by
+              rw [← mul_assoc, inv_mul_cancel₀ h2, one_mul]
+        _ = (2 : ZMod q)⁻¹ * (2 * x + 1) - (2 : ZMod q)⁻¹ := by ring
+        _ = c := by rw [hx, hc]; ring
+    -- at most two heights are bad for the pair, and the wheel has at least three
+    have hcard : ({c, r - c} : Finset (ZMod q)).card < (Finset.univ : Finset (ZMod q)).card := by
+      rw [Finset.card_univ, ZMod.card]
+      have := Finset.card_insert_le c ({r - c} : Finset (ZMod q))
+      rw [Finset.card_singleton] at this
+      omega
+    obtain ⟨a, -, ha⟩ := Finset.exists_mem_notMem_of_card_lt_card hcard
+    refine ⟨a, r - a, ?_, ?_, by ring⟩
+    · intro h
+      exact ha (by rw [hbad a h]; simp)
+    · intro h
+      have hra := hbad (r - a) h
+      exact ha (by rw [show a = r - c by rw [← hra]; ring]; simp)
+
+end RNS.GoldbachStacks
+
+#print axioms RNS.GoldbachStacks.stack_mod_three_holds
+#print axioms RNS.GoldbachStacks.wheel_no_gap_holds

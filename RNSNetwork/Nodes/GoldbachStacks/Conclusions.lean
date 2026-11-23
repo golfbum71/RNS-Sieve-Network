@@ -82,3 +82,29 @@ sum of two primes. -/
 def frontier_ahead_iff_goldbach : Prop := frontier_ahead ↔ goldbach
 
 end RNS.GoldbachStacks
+
+/-! ## The wheels never force a gap (added 2026-11-23)
+
+A stack survives the wheel of size `q` when `q` does not divide its prime
+`2h + 1`. At the wheel of size 3 the stacks above height 1 have heights that
+leave remainder 0 or 2, never 1. At any single wheel, the surviving heights,
+taken in pairs, reach every remainder: no wheel on its own can leave a target
+unbuilt. -/
+
+namespace RNS.GoldbachStacks
+
+/-- **The wheel of size 3.** Every stack taller than 1 has a height leaving
+remainder 0 or 2 on division by 3, never 1 (remainder 1 would make its prime a
+multiple of 3). -/
+def stack_mod_three : Prop :=
+  ∀ h : ℕ, is_stack h → 2 ≤ h → h % 3 ≠ 1
+
+/-- **No single wheel forces a gap.** For every prime `q` and every remainder
+`r` modulo `q`, there are two heights `a` and `b` modulo `q` whose stacks
+survive the wheel of size `q` (twice the height plus 1 is not a multiple of
+`q`) and whose sum leaves remainder `r`. -/
+def wheel_no_gap : Prop :=
+  ∀ q : ℕ, q.Prime → ∀ r : ZMod q,
+    ∃ a b : ZMod q, 2 * a + 1 ≠ 0 ∧ 2 * b + 1 ≠ 0 ∧ a + b = r
+
+end RNS.GoldbachStacks
