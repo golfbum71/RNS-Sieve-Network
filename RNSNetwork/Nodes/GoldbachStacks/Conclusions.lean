@@ -131,3 +131,34 @@ def wheels_no_gap : Prop :=
       a + b = r
 
 end RNS.GoldbachStacks
+
+/-! ## The open part, stated exactly (added 2026-11-23)
+
+A stack is an actual prime exactly when it survives every wheel up to the
+square root of its prime. So a target `T` is built when some pair of heights
+adding to `T` survives every wheel whose square is at most `2T + 1`. The
+heights range only from 1 to `T − 1`, while the combined cycle of those wheels
+(their primorial) is far longer, so the combined-cycle result above does not
+reach it: this window is the open part. -/
+
+namespace RNS.GoldbachStacks
+
+/-- **The window statement (open, never claimed; it is Goldbach's
+conjecture).** Every target `T` from 2 on is the sum of two heights `a` and
+`b`, each at least 1, whose stacks survive every wheel no larger than the
+square root of `2T + 1`: a wheel of size `p` with `p · p ≤ 2T + 1` divides
+twice the height plus 1 only when it is that prime itself. -/
+def window_no_gap : Prop :=
+  ∀ T : ℕ, 2 ≤ T → ∃ a b : ℕ, 1 ≤ a ∧ 1 ≤ b ∧ a + b = T ∧
+    ∀ p : ℕ, p.Prime → p * p ≤ 2 * T + 1 →
+      (p ∣ 2 * a + 1 → p = 2 * a + 1) ∧ (p ∣ 2 * b + 1 → p = 2 * b + 1)
+
+/-- **The window is exactly the stack picture.** The window statement holds
+exactly when the stacks never leave a gap. -/
+def window_no_gap_iff_no_gap : Prop := window_no_gap ↔ no_gap
+
+/-- **The window is exactly Goldbach's conjecture.** The window statement
+holds exactly when every even number above 2 is a sum of two primes. -/
+def window_no_gap_iff_goldbach : Prop := window_no_gap ↔ goldbach
+
+end RNS.GoldbachStacks

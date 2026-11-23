@@ -229,3 +229,58 @@ theorem wheels_no_gap_step (hcrt : RNS.CRT.crt_map_bijective) : wheels_no_gap :=
 end RNS.GoldbachStacks
 
 #print axioms RNS.GoldbachStacks.wheels_no_gap_step
+
+/-! ## The open part, stated exactly (added 2026-11-23, draft)
+
+Only the equivalences are proved; `window_no_gap` itself is open. -/
+
+namespace RNS.GoldbachStacks
+
+theorem window_no_gap_iff_no_gap_holds : window_no_gap_iff_no_gap := by
+  unfold window_no_gap_iff_no_gap window_no_gap no_gap built is_stack
+  constructor
+  · intro hw T hT
+    obtain ⟨a, b, ha, hb, hab, hp⟩ := hw T hT
+    -- surviving every wheel up to the square root makes the stack a prime
+    have key : ∀ x, 1 ≤ x → x ≤ T →
+        (∀ p, p.Prime → p * p ≤ 2 * T + 1 → p ∣ 2 * x + 1 → p = 2 * x + 1) →
+        (2 * x + 1).Prime := by
+      intro x hx hxT hx'
+      by_contra hnp
+      have hsq := Nat.minFac_sq_le_self (by omega : 0 < 2 * x + 1) hnp
+      have hmp := Nat.minFac_prime (by omega : 2 * x + 1 ≠ 1)
+      have hle : Nat.minFac (2 * x + 1) * Nat.minFac (2 * x + 1) ≤ 2 * T + 1 :=
+        calc Nat.minFac (2 * x + 1) * Nat.minFac (2 * x + 1)
+            = Nat.minFac (2 * x + 1) ^ 2 := (pow_two _).symm
+          _ ≤ 2 * x + 1 := hsq
+          _ ≤ 2 * T + 1 := by omega
+      have heq := hx' _ hmp hle (Nat.minFac_dvd _)
+      rw [heq] at hmp
+      exact hnp hmp
+    exact ⟨a, b,
+      ⟨ha, key a ha (by omega) fun p hp1 hp2 hd => (hp p hp1 hp2).1 hd⟩,
+      ⟨hb, key b hb (by omega) fun p hp1 hp2 hd => (hp p hp1 hp2).2 hd⟩, hab⟩
+  · intro hn T hT
+    obtain ⟨a, b, ⟨ha, hpa⟩, ⟨hb, hpb⟩, hab⟩ := hn T hT
+    refine ⟨a, b, ha, hb, hab, fun p hp _ => ⟨fun hd => ?_, fun hd => ?_⟩⟩
+    · rcases hpa.eq_one_or_self_of_dvd p hd with h | h
+      · exact absurd h hp.one_lt.ne'
+      · exact h
+    · rcases hpb.eq_one_or_self_of_dvd p hd with h | h
+      · exact absurd h hp.one_lt.ne'
+      · exact h
+
+theorem window_no_gap_iff_goldbach_holds : window_no_gap_iff_goldbach := by
+  have h1 := window_no_gap_iff_no_gap_holds
+  have h2 := no_gap_iff_odd_goldbach_holds
+  have h3 := goldbach_iff_odd_goldbach_holds
+  unfold window_no_gap_iff_no_gap at h1
+  unfold no_gap_iff_odd_goldbach at h2
+  unfold goldbach_iff_odd_goldbach at h3
+  unfold window_no_gap_iff_goldbach
+  exact h1.trans (h2.trans h3.symm)
+
+end RNS.GoldbachStacks
+
+#print axioms RNS.GoldbachStacks.window_no_gap_iff_no_gap_holds
+#print axioms RNS.GoldbachStacks.window_no_gap_iff_goldbach_holds
