@@ -28,10 +28,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/GoldbachStacks.lean
         declaration: RNS.GoldbachStacks.goldbach_iff_odd_goldbach_holds
-        note: "Draft, first build pending (2026-11-23)."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: no_gap_iff_odd_goldbach
     declaration: RNS.GoldbachStacks.no_gap_iff_odd_goldbach
@@ -40,10 +40,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/GoldbachStacks.lean
         declaration: RNS.GoldbachStacks.no_gap_iff_odd_goldbach_holds
-        note: "Draft, first build pending (2026-11-23)."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: frontier_ahead_iff_no_gap
     declaration: RNS.GoldbachStacks.frontier_ahead_iff_no_gap
@@ -52,10 +52,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/GoldbachStacks.lean
         declaration: RNS.GoldbachStacks.frontier_ahead_iff_no_gap_holds
-        note: "Draft, first build pending (2026-11-23)."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: frontier_ahead_iff_goldbach
     declaration: RNS.GoldbachStacks.frontier_ahead_iff_goldbach
@@ -64,10 +64,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/GoldbachStacks.lean
         declaration: RNS.GoldbachStacks.frontier_ahead_iff_goldbach_holds
-        note: "Draft, first build pending (2026-11-23)."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
 sources:

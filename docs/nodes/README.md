@@ -127,5 +127,6 @@
 | 125 | [`LonelyConnections`](LonelyConnections.md) | the Lonely Runner under other names (cited) | planned: cited from a paper |
 | 126 | [`JacobsthalTightness`](JacobsthalTightness.md) | tight lonely runners wait on Jacobsthal's problem (cited) | planned: cited from a paper |
 | 127 | [`TightFromBlockedRun`](TightFromBlockedRun.md) | a run of blocked numbers makes a tight lonely runner | proved in Lean |
+| 128 | [`GoldbachStacks`](GoldbachStacks.md) | Goldbach's conjecture as a building problem with prime stacks | proved in Lean |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

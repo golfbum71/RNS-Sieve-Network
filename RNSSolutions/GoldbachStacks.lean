@@ -12,7 +12,7 @@ import RNSNetwork.Nodes.GoldbachStacks.Conclusions
 /-!
 # Proofs for GoldbachStacks
 
-Status: draft (written 2026-11-23, first build pending).
+Status: built clean on GitHub, standard axioms only (2026-11-23).
 
 Proves the four equivalences of `RNS.GoldbachStacks`. None rests on another
 node. The frontier form uses the infinitude of primes (a stack at least as
