@@ -222,6 +222,22 @@ GROUPS = [
 GROUP_TITLE = {key: title for key, title, _ in GROUPS}
 GROUP_TITLE["other"] = "Other"
 
+# Short family names for the wedge labels on the wheel. Each must fit along the
+# arc of its own wedge (22px bold); the long titles above stay as the GRAPH.md
+# headings and in the wheel's node panel. A family missing here uses its long title.
+WHEEL_TITLE = {
+    "foundations": "Foundations: wheels and columns",
+    "patterns": "Patterns and Hardy-Littlewood",
+    "spread": "How survivors spread",
+    "gaps": "Survivor and prime gaps",
+    "germain": "Sophie Germain",
+    "shares": "Shares and analytic inputs",
+    "onewheel": "One wheel",
+    "sieves": "Sieves: Brun, Hooley, Selberg",
+    "distribution": "Distribution",
+    "lonely": "Lonely Runner",
+}
+
 
 def group_of(n):
     if n.get("group"):

@@ -92,7 +92,7 @@ def gh(data, path, line=None):
 
 def write_page(n, data, nodes):
     name = n["name"]
-    fam = {f["key"]: f["title"] for f in data["families"]}
+    fam = {f["key"]: f.get("full", f["title"]) for f in data["families"]}
     body = (f'<h1>{esc(n["label"])}</h1><div class="title">{esc(n["title"])}</div>'
             f'{chip(n["kind"])}<span class="chip">ring {n["depth"]}</span>'
             f'<span class="chip">{esc(fam.get(n["family"], n["family"]))}</span>'

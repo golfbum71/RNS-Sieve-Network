@@ -161,7 +161,7 @@ const NS = "http://www.w3.org/2000/svg";
 const svg = document.getElementById("wheel");
 const G = DATA.geometry;
 const byName = Object.fromEntries(DATA.nodes.map(n => [n.name, n]));
-const famTitle = Object.fromEntries(DATA.families.map(f => [f.key, f.title]));
+const famTitle = Object.fromEntries(DATA.families.map(f => [f.key, f.full || f.title]));
 const ringR = k => G.first + G.step * (k - 1);
 const OUTER = ringR(DATA.rings) + 95;
 const pt = (r, a) => [r * Math.sin(a), -r * Math.cos(a)];

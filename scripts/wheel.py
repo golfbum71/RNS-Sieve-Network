@@ -308,7 +308,8 @@ def write_wheel(nodes, edges):
         "rings": max(depth.values()),
         "arrows": sum(len(v) for v in edges.values()),
         "geometry": {"hub": R_HUB, "first": R_FIRST, "step": R_STEP},
-        "families": [{"key": f, "title": g.GROUP_TITLE[f], "start": wedges[f][0], "end": wedges[f][1]}
+        "families": [{"key": f, "title": g.WHEEL_TITLE.get(f, g.GROUP_TITLE[f]),
+                      "full": g.GROUP_TITLE[f], "start": wedges[f][0], "end": wedges[f][1]}
                      for f in fam_order],
         "nodes": [node_data(nodes[nm], nodes, edges, par, depth, angle,
                             uses_vocabulary(nm, vocab) if depth[nm] == 1 else [])

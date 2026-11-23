@@ -4,34 +4,34 @@
 <defs><path id="fam-light-foundations" d="M-78.9,-561.5 A567,567 0 0 1 464.6,-325.0"/><path id="fam-light-patterns" d="M478.0,-589.6 A759,759 0 0 1 742.3,158.6"/><path id="fam-light-spread" d="M258.8,393.5 A471,471 0 0 0 468.1,-52.1"/><path id="fam-light-gaps" d="M-302.3,901.7 A951,951 0 0 0 666.5,678.4"/><path id="fam-light-germain" d="M-871.1,580.8 A1047,1047 0 0 0 122.5,1039.8"/><path id="fam-light-shares" d="M-656.6,92.2 A663,663 0 0 0 -215.6,627.0"/><path id="fam-light-onewheel" d="M-443.4,-158.8 A471,471 0 0 0 -342.7,323.1"/><path id="fam-light-sieves" d="M-940.9,138.3 A951,951 0 0 1 -550.1,-775.8"/><path id="fam-light-distribution" d="M-421.2,-210.8 A471,471 0 0 1 -3.2,-471.0"/><path id="fam-light-lonely" d="M-320.9,-344.7 A471,471 0 0 1 161.7,-442.4"/></defs>
 <path d="M0.0,-537.0 A537,537 0 0 1 392.9,-366.0 L91.5,-85.2 A125,125 0 0 0 0.0,-125.0 Z" fill="#f2f4f7"/>
 <line x1="0.0" y1="-125.0" x2="0.0" y2="-537.0" stroke="#d0d7de"/>
-<text font-size="22" font-weight="600" fill="#57606a" dy="0"><textPath href="#fam-light-foundations" startOffset="50%" text-anchor="middle">Foundations: wheels, cycles and columns</textPath></text>
+<text font-size="22" font-weight="600" fill="#57606a" dy="0"><textPath href="#fam-light-foundations" startOffset="50%" text-anchor="middle">Foundations: wheels and columns</textPath></text>
 <path d="M533.4,-496.9 A729,729 0 0 1 727.2,51.6 L124.7,8.9 A125,125 0 0 0 91.5,-85.2 Z" fill="#f8f9fb"/>
 <line x1="91.5" y1="-85.2" x2="533.4" y2="-496.9" stroke="#d0d7de"/>
-<text font-size="22" font-weight="600" fill="#57606a" dy="0"><textPath href="#fam-light-patterns" startOffset="50%" text-anchor="middle">Patterns, admissibility and the Hardy-Littlewood constants</textPath></text>
+<text font-size="22" font-weight="600" fill="#57606a" dy="0"><textPath href="#fam-light-patterns" startOffset="50%" text-anchor="middle">Patterns and Hardy-Littlewood</textPath></text>
 <path d="M439.9,31.2 A441,441 0 0 1 304.9,318.6 L86.4,90.3 A125,125 0 0 0 124.7,8.9 Z" fill="#f2f4f7"/>
 <line x1="124.7" y1="8.9" x2="727.2" y2="51.6" stroke="#d0d7de"/>
-<text font-size="22" font-weight="600" fill="#57606a" dy="18"><textPath href="#fam-light-spread" startOffset="50%" text-anchor="middle">How survivors spread across the cycle</textPath></text>
+<text font-size="22" font-weight="600" fill="#57606a" dy="18"><textPath href="#fam-light-spread" startOffset="50%" text-anchor="middle">How survivors spread</textPath></text>
 <path d="M636.8,665.4 A921,921 0 0 1 -281.3,877.0 L-38.2,119.0 A125,125 0 0 0 86.4,90.3 Z" fill="#f8f9fb"/>
 <line x1="86.4" y1="90.3" x2="636.8" y2="665.4" stroke="#d0d7de"/>
-<text font-size="22" font-weight="600" fill="#57606a" dy="18"><textPath href="#fam-light-gaps" startOffset="50%" text-anchor="middle">Gaps between survivors and between primes</textPath></text>
+<text font-size="22" font-weight="600" fill="#57606a" dy="18"><textPath href="#fam-light-gaps" startOffset="50%" text-anchor="middle">Survivor and prime gaps</textPath></text>
 <path d="M-310.6,968.4 A1017,1017 0 0 1 -536.0,864.3 L-65.9,106.2 A125,125 0 0 0 -38.2,119.0 Z" fill="#f2f4f7"/>
 <line x1="-38.2" y1="119.0" x2="-310.6" y2="968.4" stroke="#d0d7de"/>
-<text font-size="22" font-weight="600" fill="#57606a" dy="18"><textPath href="#fam-light-germain" startOffset="50%" text-anchor="middle">Sophie Germain primes</textPath></text>
+<text font-size="22" font-weight="600" fill="#57606a" dy="18"><textPath href="#fam-light-germain" startOffset="50%" text-anchor="middle">Sophie Germain</textPath></text>
 <path d="M-333.6,537.9 A633,633 0 0 1 -591.6,225.1 L-116.8,44.4 A125,125 0 0 0 -65.9,106.2 Z" fill="#f8f9fb"/>
 <line x1="-65.9" y1="106.2" x2="-536.0" y2="864.3" stroke="#d0d7de"/>
-<text font-size="22" font-weight="600" fill="#57606a" dy="18"><textPath href="#fam-light-shares" startOffset="50%" text-anchor="middle">Survivor shares and analytic inputs</textPath></text>
+<text font-size="22" font-weight="600" fill="#57606a" dy="18"><textPath href="#fam-light-shares" startOffset="50%" text-anchor="middle">Shares and analytic inputs</textPath></text>
 <path d="M-412.2,156.8 A441,441 0 0 1 -440.5,21.4 L-124.9,6.1 A125,125 0 0 0 -116.8,44.4 Z" fill="#f2f4f7"/>
 <line x1="-116.8" y1="44.4" x2="-591.6" y2="225.1" stroke="#d0d7de"/>
-<text font-size="22" font-weight="600" fill="#57606a" dy="18"><textPath href="#fam-light-onewheel" startOffset="50%" text-anchor="middle">One wheel at a time: squares, characters and the number 24</textPath></text>
+<text font-size="22" font-weight="600" fill="#57606a" dy="18"><textPath href="#fam-light-onewheel" startOffset="50%" text-anchor="middle">One wheel</textPath></text>
 <path d="M-919.9,44.7 A921,921 0 0 1 -603.3,-695.9 L-81.9,-94.5 A125,125 0 0 0 -124.9,6.1 Z" fill="#f8f9fb"/>
 <line x1="-124.9" y1="6.1" x2="-919.9" y2="44.7" stroke="#d0d7de"/>
-<text font-size="22" font-weight="600" fill="#57606a" dy="0"><textPath href="#fam-light-sieves" startOffset="50%" text-anchor="middle">Sieve methods: Brun, Hooley, Selberg</textPath></text>
+<text font-size="22" font-weight="600" fill="#57606a" dy="0"><textPath href="#fam-light-sieves" startOffset="50%" text-anchor="middle">Sieves: Brun, Hooley, Selberg</textPath></text>
 <path d="M-288.9,-333.2 A441,441 0 0 1 -171.4,-406.3 L-48.6,-115.2 A125,125 0 0 0 -81.9,-94.5 Z" fill="#f2f4f7"/>
 <line x1="-81.9" y1="-94.5" x2="-603.3" y2="-695.9" stroke="#d0d7de"/>
-<text font-size="22" font-weight="600" fill="#57606a" dy="0"><textPath href="#fam-light-distribution" startOffset="50%" text-anchor="middle">Primes in the columns of large cycles: level of distribution and Elliott-Halberstam</textPath></text>
+<text font-size="22" font-weight="600" fill="#57606a" dy="0"><textPath href="#fam-light-distribution" startOffset="50%" text-anchor="middle">Distribution</textPath></text>
 <path d="M-171.4,-406.3 A441,441 0 0 1 -0.0,-441.0 L-0.0,-125.0 A125,125 0 0 0 -48.6,-115.2 Z" fill="#f8f9fb"/>
 <line x1="-48.6" y1="-115.2" x2="-171.4" y2="-406.3" stroke="#d0d7de"/>
-<text font-size="22" font-weight="600" fill="#57606a" dy="0"><textPath href="#fam-light-lonely" startOffset="50%" text-anchor="middle">The Lonely Runner: pile-ups, shifts and residue sieves</textPath></text>
+<text font-size="22" font-weight="600" fill="#57606a" dy="0"><textPath href="#fam-light-lonely" startOffset="50%" text-anchor="middle">Lonely Runner</textPath></text>
 <circle r="250" fill="none" stroke="#eaeef2" stroke-dasharray="2 4"/>
 <circle r="346" fill="none" stroke="#eaeef2" stroke-dasharray="2 4"/>
 <circle r="442" fill="none" stroke="#eaeef2" stroke-dasharray="2 4"/>
