@@ -185,3 +185,40 @@ def count_zero_at_ceiling : Prop :=
   ∀ B v : Nat, B ≤ v → (ancBelow B v).card = 0
 
 end RNS.CollatzHub
+
+/-! ## The unrolled ladder sum
+
+Walking the counting formula up the ladder: a mountain's size is a sum over
+the ladder rungs below the ceiling, each rung counting itself plus its run
+entry's tree or its branch entry's tree. -/
+
+namespace RNS.CollatzHub
+
+/-- Rung `i` of the ladder above `v`: `v`, then `4v - 1`, then `4(4v - 1) - 1`,
+and so on. -/
+def rung : Nat → Nat → Nat
+  | v, 0 => v
+  | v, i + 1 => rung (4 * v - 1) i
+
+/-- What one ladder rung `r` adds to the count below the ceiling `B`: the rung
+itself, plus the tree of its run entry `2r/3` if `r` is divisible by 3, plus
+the tree of its branch entry `(4r - 1)/3` if `r` leaves remainder 1 on division
+by 3. -/
+noncomputable def rungCount (B r : Nat) : Nat :=
+  1 + (if r % 3 = 0 then (ancBelow B (2 * r / 3)).card else 0)
+    + (if r % 3 = 1 then (ancBelow B ((4 * r - 1) / 3)).card else 0)
+
+/-- **The ladder is powers of 4 in hub values.** For an index `v` at least 1,
+the hub value of rung `i` is `4^i` times the hub value of `v`. -/
+def rung_hub_value : Prop :=
+  ∀ v i : Nat, 1 ≤ v → 6 * rung v i - 2 = 4 ^ i * (6 * v - 2)
+
+/-- **The ladder sum.** For an index `v` not on a cycle whose first `L` ladder
+rungs lie below the ceiling `B` and whose rung `L` does not, the size of its
+tree below `B` is the sum, over those `L` rungs, of what each rung adds. -/
+def ladder_sum : Prop :=
+  ∀ B v L : Nat, (∀ i < L, rung v i < B) → B ≤ rung v L →
+    (∀ k, hubIter (k + 1) v ≠ v) →
+    (ancBelow B v).card = (Finset.range L).sum (fun i => rungCount B (rung v i))
+
+end RNS.CollatzHub

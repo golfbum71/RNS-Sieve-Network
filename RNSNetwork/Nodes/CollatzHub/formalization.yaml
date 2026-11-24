@@ -31,8 +31,9 @@ node:
     mountains: the tree of a value below a ceiling (every index reaching it
     without reaching the ceiling) is the value itself plus the trees of its
     ladder rung, run entry and branch entry, for any value not on a cycle, and
-    is empty at or above the ceiling; unrolled along the ladder this is the
-    ladder sum. The Collatz conjecture itself is stated in hub form and never
+    is empty at or above the ceiling; unrolled along the ladder (whose rungs
+    are 4, 16, 64, ... times the hub value) this gives the ladder sum, also
+    proved. The Collatz conjecture itself is stated in hub form and never
     claimed.
   improves: >-
     Restates the Collatz map exactly in the network's 6n±1 columns and proves
@@ -196,6 +197,31 @@ conclusions:
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.count_zero_at_ceiling_holds
         note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
+    designated: lean-proof
+
+  - id: rung_hub_value
+    declaration: RNS.CollatzHub.rung_hub_value
+    summary: "The hub value of ladder rung i above an index v is 4^i times the hub value of v."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.rung_hub_value_holds
+        note: "Draft, waiting for its first GitHub build."
+    designated: lean-proof
+  - id: ladder_sum
+    declaration: RNS.CollatzHub.ladder_sum
+    summary: "For an index not on a cycle, its tree below the ceiling is the sum over its ladder rungs below the ceiling of each rung plus its run entry's or branch entry's tree."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.ladder_sum_holds
+        note: "Draft, waiting for its first GitHub build."
     designated: lean-proof
 
 open_statements:

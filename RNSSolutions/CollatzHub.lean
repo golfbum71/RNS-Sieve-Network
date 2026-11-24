@@ -9,8 +9,8 @@ import Mathlib.Tactic.Ring
 /-!
 # Proofs for CollatzHub
 
-Status: all thirteen claims built clean on GitHub, 2026-11-24; `#print axioms`
-shows only the standard axioms.
+Status: the first thirteen claims built clean on GitHub, 2026-11-24; the
+ladder sum (appended last) is a draft waiting for its build.
 
 Most claims are remainder bookkeeping: unfold the two maps, split on each
 `if`, and let `omega` check the linear arithmetic in every case. The run
@@ -344,6 +344,70 @@ theorem count_zero_at_ceiling_holds : count_zero_at_ceiling := by
 
 end RNS.CollatzHub
 
+/-! ## The unrolled ladder sum -/
+
+namespace RNS.CollatzHub
+
+theorem rung_zero (v : Nat) : rung v 0 = v := rfl
+
+theorem rung_succ (v i : Nat) : rung v (i + 1) = rung (4 * v - 1) i := rfl
+
+theorem rung_hub_value_holds : rung_hub_value := by
+  unfold rung_hub_value
+  intro v i
+  induction i generalizing v with
+  | zero => intro hv; rw [rung_zero, Nat.pow_zero, Nat.one_mul]
+  | succ i ih =>
+    intro hv
+    rw [rung_succ, ih (4 * v - 1) (by omega), show 6 * (4 * v - 1) - 2 = 4 * (6 * v - 2) by omega]
+    generalize 6 * v - 2 = w
+    ring
+
+/-- A value on the ladder above `v` that cycles would bring `v` round too. -/
+theorem no_cycle_ladder {v : Nat} (hv1 : 1 ≤ v) (nc : ∀ k, hubIter (k + 1) v ≠ v) :
+    ∀ k, hubIter (k + 1) (4 * v - 1) ≠ 4 * v - 1 := by
+  intro k hk
+  have hL : hubStep (4 * v - 1) = v := by
+    unfold hubStep
+    split_ifs <;> omega
+  apply nc k
+  calc hubIter (k + 1) v = hubIter (k + 1) (hubIter 1 (4 * v - 1)) := by rw [hubIter_one, hL]
+    _ = hubIter (1 + (k + 1)) (4 * v - 1) := (hubIter_add 1 (k + 1) _).symm
+    _ = hubIter ((k + 1) + 1) (4 * v - 1) := by rw [Nat.add_comm 1 (k + 1)]
+    _ = hubIter 1 (hubIter (k + 1) (4 * v - 1)) := hubIter_add (k + 1) 1 _
+    _ = v := by rw [hk, hubIter_one, hL]
+
+theorem ladder_sum_holds : ladder_sum := by
+  unfold ladder_sum
+  intro B v L
+  induction L generalizing v with
+  | zero =>
+    intro _ hB _
+    rw [rung_zero] at hB
+    rw [Finset.range_zero, Finset.sum_empty]
+    have hz := count_zero_at_ceiling_holds
+    unfold count_zero_at_ceiling at hz
+    exact hz B v hB
+  | succ L ih =>
+    intro hlt hB nc
+    have hv : v < B := by
+      have h0 := hlt 0 (Nat.succ_pos L)
+      rwa [rung_zero] at h0
+    have hv1 : 1 ≤ v := by
+      by_contra hcon
+      have h0 : v = 0 := by omega
+      subst h0
+      exact nc 0 (by decide)
+    have hstep := counting_step_holds
+    unfold counting_step at hstep
+    have ih' := ih (4 * v - 1) (fun i hi => by rw [← rung_succ]; exact hlt (i + 1) (by omega))
+      (by rw [← rung_succ]; exact hB) (no_cycle_ladder hv1 nc)
+    rw [Finset.sum_range_succ', hstep B v hv nc, ih']
+    simp only [rung_succ, rung_zero, rungCount]
+    ring
+
+end RNS.CollatzHub
+
 #print axioms RNS.CollatzHub.hub_step_tracks_collatz_holds
 #print axioms RNS.CollatzHub.run_formula_holds
 #print axioms RNS.CollatzHub.exit_pairing_holds
@@ -357,3 +421,5 @@ end RNS.CollatzHub
 #print axioms RNS.CollatzHub.fair_block_holds
 #print axioms RNS.CollatzHub.counting_step_holds
 #print axioms RNS.CollatzHub.count_zero_at_ceiling_holds
+#print axioms RNS.CollatzHub.rung_hub_value_holds
+#print axioms RNS.CollatzHub.ladder_sum_holds
