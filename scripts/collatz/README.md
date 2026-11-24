@@ -30,6 +30,9 @@ on division by 4, (n + 1)/4 when it leaves remainder 3.
 | `dip_law.py` | How far trees dip below their root: about 4 times rarer per bit | 9 | about 20 s |
 | `climb_bound.py` | The fair game: climb shares against the 2^−d bound, worst peak exponents | 10 | a few minutes |
 | `counting_formula_check.py` | The ladder-sum counting formula against brute force | 11 | seconds |
+| `rising_tide.py` | The rising tide: already wet, dry, and mountain pioneers | 14 | about 1 min |
+| `lyapunov_search.py` | Lyapunov scores with credits for factors of 2 and 3 | 15 | a few minutes |
+| `sub_peaks.py` | Smaller peaks inside mountains: one per 4.5 members, and how they nest | 16 | about 1 min |
 
 Times are on a single core; random samples use fixed seeds, so reruns print
 the same numbers.

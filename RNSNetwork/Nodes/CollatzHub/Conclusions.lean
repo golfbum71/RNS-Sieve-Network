@@ -222,3 +222,18 @@ def ladder_sum : Prop :=
     (ancBelow B v).card = (Finset.range L).sum (fun i => rungCount B (rung v i))
 
 end RNS.CollatzHub
+
+/-! ## Smaller peaks inside a mountain -/
+
+namespace RNS.CollatzHub
+
+/-- **The smaller peaks of a mountain.** Take the tree of any `v` below a
+ceiling `B` (a mountain when `v` is two thirds of its peak). A member `q` ends a
+run inside it (it is odd and some even member steps onto it by a bad loop)
+exactly when `q` leaves remainder 3 on division by 6. So the smaller peaks of a
+mountain are counted by its members leaving remainder 3 on division by 6. -/
+def sub_peak_rule : Prop :=
+  ∀ B v q : Nat, q ∈ ancBelow B v →
+    (q % 6 = 3 ↔ (q % 2 = 1 ∧ ∃ u ∈ ancBelow B v, u % 2 = 0 ∧ hubStep u = q))
+
+end RNS.CollatzHub

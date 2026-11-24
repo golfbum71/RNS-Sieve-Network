@@ -33,7 +33,8 @@ node:
     ladder rung, run entry and branch entry, for any value not on a cycle, and
     is empty at or above the ceiling; unrolled along the ladder (whose rungs
     are 4, 16, 64, ... times the hub value) this gives the ladder sum, also
-    proved. The Collatz conjecture itself is stated in hub form and never
+    proved. Also proved: the smaller peaks inside a mountain (members ending a
+    run) are exactly its members leaving remainder 3 on division by 6. The Collatz conjecture itself is stated in hub form and never
     claimed.
   improves: >-
     Restates the Collatz map exactly in the network's 6n±1 columns and proves
@@ -222,6 +223,19 @@ conclusions:
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.ladder_sum_holds
         note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
+    designated: lean-proof
+
+  - id: sub_peak_rule
+    declaration: RNS.CollatzHub.sub_peak_rule
+    summary: "A member of a mountain ends a run inside it (odd, stepped onto by an even member's bad loop) exactly when it leaves remainder 3 on division by 6."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.sub_peak_rule_holds
+        note: "Draft, waiting for its first GitHub build."
     designated: lean-proof
 
 open_statements:

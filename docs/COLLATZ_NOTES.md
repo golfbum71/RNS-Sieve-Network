@@ -308,3 +308,101 @@ page's terms, any one of these would be enough to rule out a runaway number:
 All three are open. The averages (sections 7 to 10) say the answer is yes with
 room to spare; turning that into a statement about every number is the
 Collatz problem itself.
+
+## 14. The rising tide (added later the same day)
+
+Geo's picture: go up the numbers in order and treat everything already settled
+as under water. `rising_tide.py` makes the flood exact: it is every value on
+the path of any smaller index, so it reaches far above the tide line. When the
+tide reaches an index, follow it only until its path touches the flood.
+
+**Measured** for every hub index up to 2^20:
+
+| When the tide arrives, the index is… | Share |
+|---|---|
+| already wet (a smaller index's path ran through it) | 48.3% |
+| dry, but drops straight into the flood without climbing | 25.8% |
+| dry, climbs, and meets the flood below its own peak | 0.8% |
+| dry, and must climb all the way to its peak first | 25.05% |
+
+On average an index reaches the flood in 1.6 loops (3.5 loops to drop below
+its own start). The flood holds 1.7 million values.
+
+What formulas fill with no climbing at all (**Proved**): every odd index
+above 1 drops below itself in one loop (`up_only_on_bad_loop`), and every
+multiple of 3 is entered from two thirds of itself, a smaller number
+(`run_entry`). Together that is two thirds of the number line.
+
+**The pioneers.** The hardest dry indices are the smallest members of giant
+mountains: 79,744 must climb 35,953 times its size, 135,136 must climb 30,399
+times (the bottoms of the mountains of peaks 2,867,062,959 and 4,108,012,983).
+This is forced: if any smaller number had touched the smallest member's climb,
+that smaller number would follow the same climb to the same peak and be the
+smallest member instead. So a mountain's smallest member, its **pioneer**, can
+never meet the flood before the peak, and every other member then joins the
+pioneer's trunk below the peak. The rising tide therefore comes down to one
+question per mountain: how far below its peak its pioneer sits, which is the
+funnel-depth question of sections 6 and 9.
+
+In optimization terms the rising tide is a sublevel-set filtration, the
+picture of basins joining as the level rises is a merge tree (a
+disconnectivity graph for energy landscapes), and the pioneers are where new
+branches of the merge tree start.
+
+## 15. Searching for a Lyapunov score (added later the same day)
+
+Convergence proofs in optimization use a Lyapunov (potential) score that goes
+down every step even when the raw value goes up. `lyapunov_search.py` tried
+the family: size in bits, plus a credit for each factor of 2 (pre-paying a
+run), plus a credit for each factor of 3 (crediting run entries), over every
+hub index up to 2^18, block by block (one run plus the drop that ends it).
+
+**Measured:** the credits raise the share of indices whose score drops in one
+block from 71.9% to 81.2%, but the worst case never moves: every one of the 35
+scores tried still needs 44 or 45 blocks for the hardest indices (135,136 and
+180,181, mountain pioneers).
+
+**Why this family cannot work (measured fact, simple reason):** after any drop
+the next run's length is fresh, with share exactly one half, a quarter, an
+eighth, ... for runs of 0, 1, 2, ..., whatever came before. A score built from
+size plus finitely many counts or low digits can be beaten by the next block;
+during a run longer than the digits it reads, the size grows by half each loop
+while the score's correction cannot keep up. A working score would have to
+read an unlimited amount of a number's digits in a way that anticipates the
+whole climb, which is the open problem again, stated as a requirement on any
+proof.
+
+## 16. Smaller peaks inside a mountain (added later the same day)
+
+A smaller peak inside a mountain is a member where a run ends. Its run entry
+(two thirds of it) is smaller and steps straight onto it, so it is always a
+member too, and each smaller peak's own sub-mountain lies inside the big one:
+mountains nest.
+
+- **Proved** (`sub_peak_rule`): a member ends a run inside the mountain exactly
+  when it leaves remainder 3 on division by 6.
+- **Measured** (`sub_peaks.py`): in every giant mountain, members split by
+  remainder on division by 6 as 1/9 for each even remainder and 2/9 for each
+  odd one. So smaller peaks are 2/9 of a mountain, one per 4.5 members:
+
+  | Peak | Size | Smaller peaks | Members per smaller peak |
+  |---|---|---|---|
+  | 4,108,012,983 | 116,128 | 25,845 | 4.49 |
+  | 2,867,062,959 | 52,361 | 11,598 | 4.51 |
+  | 413,685,225 | 34,497 | 7,677 | 4.49 |
+  | 261,804,123 | 15,513 | 3,435 | 4.52 |
+  | 20,168,811 | 7,019 | 1,535 | 4.57 |
+  | 1,358,937 | 1,373 | 299 | 4.59 |
+
+  300 random small mountains near 2^30 give 4.7 to 5.0, closing in on 4.5 as
+  they grow.
+- **Measured: how they nest.** Most smaller peaks have only 1 to 3 members
+  below them. For sub-mountains of 4 to 64 members, each sixteen times larger
+  size is about 80 to 100 times rarer. At the top, nearly every giant mountain
+  has one or two foothills holding about a third of it (45,573 of 116,128;
+  12,054 of 34,497; 5,089 of 15,513; 2,694 of 7,019), each with its own
+  foothills inside; the mountain of peak 2,867,062,959 is the exception (its
+  largest foothill is 8%).
+
+The 2/9 rule fixes how many peaks a mountain has; how their sizes nest is what
+decides how deep its pioneer can sit, and that part is not proved.

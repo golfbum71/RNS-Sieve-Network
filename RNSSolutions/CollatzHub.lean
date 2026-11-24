@@ -9,8 +9,8 @@ import Mathlib.Tactic.Ring
 /-!
 # Proofs for CollatzHub
 
-Status: all fifteen claims built clean on GitHub, 2026-11-24; `#print axioms`
-shows only the standard axioms.
+Status: the first fifteen claims built clean on GitHub, 2026-11-24; the
+smaller-peak rule (appended last) is a draft waiting for its build.
 
 Most claims are remainder bookkeeping: unfold the two maps, split on each
 `if`, and let `omega` check the linear arithmetic in every case. The run
@@ -408,6 +408,44 @@ theorem ladder_sum_holds : ladder_sum := by
 
 end RNS.CollatzHub
 
+/-! ## Smaller peaks inside a mountain -/
+
+namespace RNS.CollatzHub
+
+theorem reach_back {B u q v : Nat} (hs : hubStep u = q) (hu : u < B) (h : reachesBelow B q v) :
+    reachesBelow B u v := by
+  obtain ⟨k, hk, hb⟩ := h
+  refine ⟨k + 1, by rw [hubIter_succ, hs, hk], fun j hj => ?_⟩
+  rcases j with _ | j
+  · rw [hubIter_zero]
+    exact hu
+  · rw [hubIter_succ, hs]
+    exact hb j (by omega)
+
+theorem sub_peak_rule_holds : sub_peak_rule := by
+  unfold sub_peak_rule
+  intro B v q hq
+  have hqB : q < B := by
+    rw [mem_ancBelow] at hq
+    obtain ⟨k, -, hb⟩ := hq
+    have h0 := hb 0 (Nat.zero_le _)
+    rwa [hubIter_zero] at h0
+  constructor
+  · intro h6
+    have hstep : hubStep (2 * q / 3) = q := by
+      rw [show 2 * q / 3 = 2 * (q / 3) by omega, hubStep_double]
+      omega
+    have hmem : 2 * q / 3 ∈ ancBelow B v := by
+      rw [mem_ancBelow] at hq ⊢
+      exact reach_back hstep (by omega) hq
+    exact ⟨by omega, 2 * q / 3, hmem, by omega, hstep⟩
+  · rintro ⟨hodd, u, -, heven, hs⟩
+    unfold hubStep at hs
+    rw [if_pos heven] at hs
+    omega
+
+end RNS.CollatzHub
+
 #print axioms RNS.CollatzHub.hub_step_tracks_collatz_holds
 #print axioms RNS.CollatzHub.run_formula_holds
 #print axioms RNS.CollatzHub.exit_pairing_holds
@@ -423,3 +461,4 @@ end RNS.CollatzHub
 #print axioms RNS.CollatzHub.count_zero_at_ceiling_holds
 #print axioms RNS.CollatzHub.rung_hub_value_holds
 #print axioms RNS.CollatzHub.ladder_sum_holds
+#print axioms RNS.CollatzHub.sub_peak_rule_holds
