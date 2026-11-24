@@ -9,8 +9,8 @@ import Mathlib.Tactic.Ring
 /-!
 # Proofs for CollatzHub
 
-Status: the first sixteen claims built clean on GitHub, 2026-11-24; the
-free-step rule (appended last) is a draft waiting for its build.
+Status: all seventeen claims built clean on GitHub, 2026-11-24; `#print axioms`
+shows only the standard axioms.
 
 Most claims are remainder bookkeeping: unfold the two maps, split on each
 `if`, and let `omega` check the linear arithmetic in every case. The run
