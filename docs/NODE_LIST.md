@@ -1571,4 +1571,4 @@ Original to this project (Geo's hub picture). Every odd step of the Collatz 3x+1
 - Sources: [Collatz conjecture](https://en.wikipedia.org/wiki/Collatz_conjecture); [Lagarias, The 3x+1 problem: an overview (2021)](https://arxiv.org/abs/2111.02635); [Lagarias and Weiss (1992)](https://doi.org/10.1214/aoap/1177005779)
 - Lean: `hub_step_tracks_collatz`, `run_formula`, `exit_pairing`, `predecessors_complete`, `ladder_entry`, `ladder_cycle`, `run_entry`, `pairing_is_ladder`, `up_only_on_bad_loop`, `funnel_trunk`, `fair_block`, `counting_step`, `count_zero_at_ceiling`, `rung_hub_value`, `ladder_sum` (with `collatz_hub_form` (open, stated only), `col`, `hubStep`, `hubIter`, `reachesBelow`, `ancBelow`, `rung`, `rungCount`)
 - Rests on: nothing (related: `Wheel6`)
-- Status: First thirteen claims clean (GitHub Actions build, 2026-11-24); ladder sum in draft, waiting for its build.
+- Status: Clean. Proved; `#print axioms` shows only the standard three (GitHub Actions build, 2026-11-24).

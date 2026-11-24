@@ -206,10 +206,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.rung_hub_value_holds
-        note: "Draft, waiting for its first GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: ladder_sum
     declaration: RNS.CollatzHub.ladder_sum
@@ -218,10 +218,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.ladder_sum_holds
-        note: "Draft, waiting for its first GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
 open_statements:
