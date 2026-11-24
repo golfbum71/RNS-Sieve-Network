@@ -15,6 +15,7 @@ Published work this node rests on or relates to; each entry says how.
 - [Collatz conjecture (Wikipedia)](https://en.wikipedia.org/wiki/Collatz_conjecture) — states the conjecture this node restates in hub form; the hub picture, the three loops and exit pairing are original
 - [Lagarias, The 3x+1 problem: an overview (2021)](https://arxiv.org/abs/2111.02635) — survey of the standard tools this node's structure matches (accelerated maps, residue classes, inverse trees); the fair-block identity is the exact form of the average-ratio-one fact used there
 - [Lagarias and Weiss, The 3x+1 problem: two stochastic models (Ann. Appl. Probab. 1992)](https://doi.org/10.1214/aoap/1177005779) — models the backward tree modulo powers of 3; the ladder cycle and pairing_is_ladder are exact facts about that tree
+- [The Collatz map from the 6n-2 hub, session notes (docs/COLLATZ_NOTES.md)](https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/COLLATZ_NOTES.md) — project notes recording everything the session found, each item marked proved (a claim of this node), measured (with the script in scripts/collatz/ that reproduces it) or heuristic, and where each idea meets the literature
 
 ## Related nodes
 

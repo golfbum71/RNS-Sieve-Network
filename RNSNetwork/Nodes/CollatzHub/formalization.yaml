@@ -242,6 +242,14 @@ sources:
     url: https://doi.org/10.1214/aoap/1177005779
     relationship: models the backward tree modulo powers of 3; the ladder cycle and pairing_is_ladder are exact facts about that tree
 
+  - title: "The Collatz map from the 6n-2 hub, session notes (docs/COLLATZ_NOTES.md)"
+    url: "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/COLLATZ_NOTES.md"
+    relationship: >-
+      project notes recording everything the session found, each item marked
+      proved (a claim of this node), measured (with the script in
+      scripts/collatz/ that reproduces it) or heuristic, and where each idea
+      meets the literature
+
 related:
   - node: Wheel6
     note: the hub and its three loops live in the 6n-1 and 6n+1 columns this node defines; no claim of Wheel6 is used

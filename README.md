@@ -44,6 +44,8 @@ scripts/graph.py                  regenerates GRAPH.md, docs/nodes/ and docs/ind
 docs/NODE_LIST.md                 the plain-language list of all planned nodes
 docs/NODE_STANDARDS.md            what every node must show: arrows, a plain note, sources
 docs/BROCARD_NOTES.md             Brocard's conjecture in wheel terms, and the known method behind each idea
+docs/COLLATZ_NOTES.md             the Collatz map from the 6n-2 hub: what is proved, measured and heuristic
+scripts/collatz/                  the Python scripts that reproduce the Collatz measurements
 ```
 
 **Every arrow is its own theorem.** A proof file imports other nodes' claims,
