@@ -143,6 +143,10 @@ conclusions:
         note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-23). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
+open_statements:
+  - id: window_no_gap
+    summary: "The window statement, which is Goldbach's conjecture: every target from 2 on is two heights, from 1 up to one less than the target, whose stacks survive every wheel up to the square root of twice the target plus 1."
+
 sources:
   - title: "Hardy and Littlewood, Some problems of Partitio Numerorum III (Acta Math. 44, 1923)"
     url: https://doi.org/10.1007/BF02403921

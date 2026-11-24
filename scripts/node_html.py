@@ -155,6 +155,18 @@ def write_page(n, data, nodes):
             if c["cite"]:
                 body += f'<div class="row muted">Cited: {esc(c["cite"])}. Not proved in Lean.</div>'
             body += "</div>"
+        if n.get("open_statements"):
+            body += ('<h2>Open statements (stated, never claimed)</h2><p class="muted">Written out '
+                     'exactly in Conclusions.lean so the claims above can refer to them; nothing '
+                     'here is proved.</p>')
+            for o in n["open_statements"]:
+                body += (f'<div class="claim" id="{esc(o["id"].lower())}"><div class="cid">'
+                         f'{esc(o["id"])}</div><div class="cst">open</div><div>{esc(o["summary"])}</div>')
+                if o["statement"]:
+                    body += f'<pre><code>{esc(o["statement"])}</code></pre>'
+                stmt_path = f"RNSNetwork/Nodes/{name}/Conclusions.lean"
+                body += (f'<div class="row"><a href="{gh(data, stmt_path, o["line"])}">'
+                         f'Statement in Conclusions.lean ↗</a></div></div>')
     elif n["planned"]:
         p = n["planned"]
         if p["external"]:

@@ -295,6 +295,12 @@ def node_data(n, nodes, edges, par, depth, angle, vocab_used):
         "order": n["order"],
         "related": [{"node": r.get("node", ""), "note": " ".join(str(r.get("note", "")).split())}
                     for r in n["related"]],
+        "open_statements": [{
+            "id": o["id"],
+            "summary": " ".join(str(o.get("summary", "")).split()),
+            "statement": n["statements"].get(o["id"], ""),
+            "line": line_of(f"RNSNetwork/Nodes/{n['name']}/Conclusions.lean", o["id"], ["def"]),
+        } for o in n.get("open_statements") or []] if n["built"] else [],
     }
 
 

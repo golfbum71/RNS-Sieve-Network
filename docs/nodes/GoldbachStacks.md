@@ -173,6 +173,27 @@ def window_no_gap_iff_goldbach : Prop := window_no_gap ↔ goldbach
 
 **Proof:** `RNS.GoldbachStacks.window_no_gap_iff_goldbach_holds` in [`RNSSolutions/GoldbachStacks.lean`](../../RNSSolutions/GoldbachStacks.lean)
 
+## Open statements (stated, never claimed)
+
+Written out exactly in `Conclusions.lean` so the claims above can refer to them; nothing here is proved.
+
+<a id="window_no_gap"></a>
+### `window_no_gap` (open)
+
+The window statement, which is Goldbach's conjecture: every target from 2 on is two heights, from 1 up to one less than the target, whose stacks survive every wheel up to the square root of twice the target plus 1.
+
+```lean
+/-- **The window statement (open, never claimed; it is Goldbach's
+conjecture).** Every target `T` from 2 on is the sum of two heights `a` and
+`b`, each at least 1, whose stacks survive every wheel no larger than the
+square root of `2T + 1`: a wheel of size `p` with `p · p ≤ 2T + 1` divides
+twice the height plus 1 only when it is that prime itself. -/
+def window_no_gap : Prop :=
+  ∀ T : ℕ, 2 ≤ T → ∃ a b : ℕ, 1 ≤ a ∧ 1 ≤ b ∧ a + b = T ∧
+    ∀ p : ℕ, p.Prime → p * p ≤ 2 * T + 1 →
+      (p ∣ 2 * a + 1 → p = 2 * a + 1) ∧ (p ∣ 2 * b + 1 → p = 2 * b + 1)
+```
+
 ## Files
 
 - Claims: [`Conclusions.lean`](../../RNSNetwork/Nodes/GoldbachStacks/Conclusions.lean)

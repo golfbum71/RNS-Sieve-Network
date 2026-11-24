@@ -42,6 +42,13 @@ below is met by filling in the metadata, never by editing a generated page.
   bound, a general case of a special one, a new direction (backward runs, the
   other column), a certificate where there was only a statement. Skip this
   only when the description already makes it obvious.
+- An open statement a node writes out exactly (a `def … : Prop` in
+  `Conclusions.lean` that is never claimed, such as a conjecture its claims
+  are proved equivalent to) is listed under `open_statements:` in
+  `formalization.yaml`, each entry with an `id:` (the `def` name) and a
+  one-sentence `summary:`. The node page then prints it, Lean included, under
+  "Open statements (stated, never claimed)". An open conjecture a claim
+  assumes as a hypothesis still goes under that claim's `open_inputs:`.
 - If a claim is a disproof or settles only part of a conjecture, the summary
   says exactly which part (for example `GapCertificate` refutes Erdős's guess
   for the wheels up to 13, not his "large enough cycles" form).

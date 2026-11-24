@@ -53,6 +53,9 @@ def load_nodes():
             "improves": " ".join(str(meta.get("improves", "") or "").split()),
             # Nodes it is related to without resting on them: [{node, note}] (optional).
             "related": data.get("related") or [],
+            # Open statements written out in Conclusions.lean but never claimed:
+            # [{id, summary}] (optional).
+            "open_statements": data.get("open_statements") or [],
             # Family diagram on GRAPH.md (optional; otherwise GROUPS below).
             "group": meta.get("group"),
         }
@@ -725,6 +728,22 @@ def related_section(n, nodes):
     return md + "\n"
 
 
+def open_statements_section(n):
+    """Open statements the node writes out exactly but never claims."""
+    if not n["open_statements"]:
+        return ""
+    md = ("## Open statements (stated, never claimed)\n\n"
+          "Written out exactly in `Conclusions.lean` so the claims above can refer "
+          "to them; nothing here is proved.\n\n")
+    for o in n["open_statements"]:
+        md += (f'<a id="{o["id"].lower()}"></a>\n### `{o["id"]}` (open)\n\n'
+               f'{" ".join(str(o.get("summary", "")).split())}\n\n')
+        stmt = n["statements"].get(o["id"])
+        if stmt:
+            md += "```lean\n" + stmt + "\n```\n\n"
+    return md
+
+
 def write_node_page(n, nodes, edges):
     name = n["name"]
     md = f"# {name} — {n['title']}\n\n{GENERATED}\n\n"
@@ -762,6 +781,7 @@ def write_node_page(n, nodes, edges):
                     md += ("; joined to its inputs in "
                            "[`RNSSolutions/Assemble.lean`](../../RNSSolutions/Assemble.lean)")
                 md += "\n\n"
+        md += open_statements_section(n)
         users = sorted({dst for (src, dst) in edges if src == name},
                        key=lambda u: nodes[u]["order"])
         users += [m["name"] for m in nodes.values()
