@@ -42,10 +42,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.hub_step_tracks_collatz_holds
-        note: "Draft, waiting for its first GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: run_formula
     declaration: RNS.CollatzHub.run_formula
@@ -54,10 +54,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.run_formula_holds
-        note: "Draft, waiting for its first GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: exit_pairing
     declaration: RNS.CollatzHub.exit_pairing
@@ -66,10 +66,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.exit_pairing_holds
-        note: "Draft, waiting for its first GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: predecessors_complete
     declaration: RNS.CollatzHub.predecessors_complete
@@ -78,10 +78,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.predecessors_complete_holds
-        note: "Draft, waiting for its first GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: ladder_entry
     declaration: RNS.CollatzHub.ladder_entry
@@ -90,10 +90,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.ladder_entry_holds
-        note: "Draft, waiting for its first GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: ladder_cycle
     declaration: RNS.CollatzHub.ladder_cycle
@@ -102,10 +102,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.ladder_cycle_holds
-        note: "Draft, waiting for its first GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: run_entry
     declaration: RNS.CollatzHub.run_entry
@@ -114,10 +114,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.run_entry_holds
-        note: "Draft, waiting for its first GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: pairing_is_ladder
     declaration: RNS.CollatzHub.pairing_is_ladder
@@ -126,10 +126,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.pairing_is_ladder_holds
-        note: "Draft, waiting for its first GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: up_only_on_bad_loop
     declaration: RNS.CollatzHub.up_only_on_bad_loop
@@ -138,10 +138,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.up_only_on_bad_loop_holds
-        note: "Draft, waiting for its first GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: funnel_trunk
     declaration: RNS.CollatzHub.funnel_trunk
@@ -150,10 +150,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.funnel_trunk_holds
-        note: "Draft, waiting for its first GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
   - id: fair_block
     declaration: RNS.CollatzHub.fair_block
@@ -162,10 +162,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.fair_block_holds
-        note: "Draft, waiting for its first GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
 open_statements:
