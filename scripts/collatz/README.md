@@ -33,6 +33,18 @@ on division by 4, (n + 1)/4 when it leaves remainder 3.
 | `rising_tide.py` | The rising tide: already wet, dry, and mountain pioneers | 14 | about 1 min |
 | `lyapunov_search.py` | Lyapunov scores with credits for factors of 2 and 3 | 15 | a few minutes |
 | `sub_peaks.py` | Smaller peaks inside mountains: one per 4.5 members, and how they nest | 16 | about 1 min |
+| `interval_owners.py` | Where the numbers between a run start and its peak belong | 17 | a few minutes |
+| `pioneer_staircase.py` | The pioneer's staircase of new highs, and foothill sizes by depth | 17 | about 1 min |
+| `mountain_favors.py` | How many later numbers link into each path, by the owner's climb | 17 | about 1 min |
+| `pioneer_density.py` | Pioneers per doubling block, and how big pioneers thin out | 18 | a few minutes |
+| `escape_cover.py` | Forced escape routes landing on 1's tree, by sieve depth | 20 | 20–60 s (`python3 escape_cover.py 26 20`) |
+| `cover_height.py` | How high 1's tree must reach to cover every forced route | 20 | about 1 min |
+| `tree_floor.py` | The worst-case floor on backward trees from the exact links | 21 | a few minutes |
+| `engineered_vs_records.py` | Climb from a number's own digits against climb after they run out | 22 | seconds |
+| `climber_digits.py` | Digit features of the top climbers against everyone | 22 | about 1 min |
+| `dense_ones.py` | Engineered numbers with dense binary ones | 22 | about 1 min |
+| `climb_loops.py` | How record climbs use the three loops | 23 | about 1 min |
+| `staircase_steps.py` | Record peaks that are beaten again against final peaks, by ending | 24 | about 1 min |
 
 Times are on a single core; random samples use fixed seeds, so reruns print
 the same numbers.

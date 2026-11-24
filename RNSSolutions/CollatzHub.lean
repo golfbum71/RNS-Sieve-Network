@@ -9,8 +9,8 @@ import Mathlib.Tactic.Ring
 /-!
 # Proofs for CollatzHub
 
-Status: all sixteen claims built clean on GitHub, 2026-11-24; `#print axioms`
-shows only the standard axioms.
+Status: the first sixteen claims built clean on GitHub, 2026-11-24; the
+free-step rule (appended last) is a draft waiting for its build.
 
 Most claims are remainder bookkeeping: unfold the two maps, split on each
 `if`, and let `omega` check the linear arithmetic in every case. The run
@@ -446,6 +446,25 @@ theorem sub_peak_rule_holds : sub_peak_rule := by
 
 end RNS.CollatzHub
 
+/-! ## Free steps of the staircase -/
+
+namespace RNS.CollatzHub
+
+theorem free_step_holds : free_step := by
+  unfold free_step
+  intro j
+  refine ⟨?_, ?_⟩
+  · show hubIter 0 (hubStep (hubStep (hubStep (16 * j + 5)))) = 27 * j + 9
+    rw [hubIter_zero]
+    unfold hubStep
+    split_ifs <;> omega
+  · show hubIter 0 (hubStep (hubStep (16 * j + 13))) = 18 * j + 15
+    rw [hubIter_zero]
+    unfold hubStep
+    split_ifs <;> omega
+
+end RNS.CollatzHub
+
 #print axioms RNS.CollatzHub.hub_step_tracks_collatz_holds
 #print axioms RNS.CollatzHub.run_formula_holds
 #print axioms RNS.CollatzHub.exit_pairing_holds
@@ -462,3 +481,4 @@ end RNS.CollatzHub
 #print axioms RNS.CollatzHub.rung_hub_value_holds
 #print axioms RNS.CollatzHub.ladder_sum_holds
 #print axioms RNS.CollatzHub.sub_peak_rule_holds
+#print axioms RNS.CollatzHub.free_step_holds

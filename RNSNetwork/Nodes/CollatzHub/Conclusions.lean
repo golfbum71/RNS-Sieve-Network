@@ -237,3 +237,18 @@ def sub_peak_rule : Prop :=
     (q % 6 = 3 ↔ (q % 2 = 1 ∧ ∃ u ∈ ancBelow B v, u % 2 = 0 ∧ hubStep u = q))
 
 end RNS.CollatzHub
+
+/-! ## Free steps of the staircase -/
+
+namespace RNS.CollatzHub
+
+/-- **Free steps.** A record peak (the end of a run, an odd index) leaving
+remainder 5 on division by 16 is beaten three loops later (a three-quarter drop,
+then two bad loops: `16j + 5` reaches `27j + 9`), and one leaving remainder 13
+is beaten two loops later (a three-quarter drop, then one bad loop: `16j + 13`
+reaches `18j + 15`). So a peak ending in 5 or 13 on division by 16 is never a
+final peak. -/
+def free_step : Prop :=
+  ∀ j : Nat, hubIter 3 (16 * j + 5) = 27 * j + 9 ∧ hubIter 2 (16 * j + 13) = 18 * j + 15
+
+end RNS.CollatzHub

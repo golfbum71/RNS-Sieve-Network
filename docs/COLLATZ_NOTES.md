@@ -406,3 +406,163 @@ mountains nest.
 
 The 2/9 rule fixes how many peaks a mountain has; how their sizes nest is what
 decides how deep its pioneer can sit, and that part is not proved.
+
+## 17. Pioneers and their staircase (added later the same day)
+
+- **Where the numbers between a run start and its peak belong — Measured**
+  (`interval_owners.py`). Every number has exactly one highest point, so the
+  number line splits into mountains with no overlaps; a number with no home
+  would be a runaway. Between a trunk run's start and its peak, only 0.08% to
+  0.3% of the numbers climb to that peak (942 of 1,090,506 for peak 1,358,937);
+  about half go on to higher peaks, about half top out lower, and 28.7% are
+  their own peak (they never rise above themselves). A mountain also reaches
+  below its run start: 431 of that mountain's 1,373 climbers start below it.
+- **The pioneer keeps its title up its staircase — Measured, with a simple
+  reason** (`pioneer_staircase.py`). The pioneer of a giant mountain is the
+  pioneer of exactly those smaller peaks on its climb that set a new high (13
+  of the 22 peaks on the climb of 135,136; 8 of 11 for 56,692; all 8 for
+  15,956): it is in each such sub-mountain and nothing in it is lower. Peaks on
+  its climb that are not new highs, and every foothill off the staircase, have
+  their own pioneers, and those only climb to where they join the trunk.
+- **No interception below the peak.** Every value on a pioneer's climb reaches
+  1 only through the rest of the pioneer's own path, over its peak, and nothing
+  smaller touches the climb before the peak (otherwise that smaller number
+  would be the pioneer). So a pioneer's cost is exactly its peak; hand-offs
+  happen only sideways and after the peak.
+- **Exact:** every ladder rung above the start is odd and the rungs cycle
+  through the remainders on division by 3 (`ladder_cycle`), so every third rung
+  is a smaller peak; which rung starts the pattern is set by the start's
+  remainder on division by 3.
+- **Measured** (`pioneer_staircase.py`): about 2% of the smaller peaks in each
+  one-bit band below a giant peak have 16 or more members, at every depth; the
+  largest foothills sit 1 to 2 bits below the summit.
+- **Favors — Measured** (`mountain_favors.py`): crediting each number to the
+  earlier path it first links into, owners whose own climb went over a
+  thousandfold link about 9 later numbers each, owners with climbs under
+  twofold about 1; small climbs still do 83% of all linking up to 2^20.
+
+## 18. How pioneers thin out (added later the same day)
+
+**Measured** (`pioneer_density.py`, hub indices up to 2^22): pioneers are
+exactly a quarter of every doubling block (0.250 to 0.253), mostly trivial.
+Pioneers whose peak reaches the c-th power of their start grow per doubling
+block by about 2^(2−c): 1.65 times per block for c = 1.25 (predicted 1.68),
+1.40 for c = 1.5 (predicted 1.41), barely at all for c = 1.75. So pioneers
+reaching the square come at a steady rate, and those reaching beyond it thin
+out so fast that their total is finite on average (**Heuristic**). Like the
+density of primes, this says nothing about a single exceptional number.
+
+## 19. Assuming a runaway (added later the same day)
+
+- **Proved by contradiction (simple):** either there are infinitely many
+  pioneers or some pioneer runs away. (The peaks 3, 9, 27, ... each have a
+  mountain with a pioneer; finitely many pioneers would force one to pass
+  through infinitely many ever-higher powers of 3.)
+- **A smallest runaway R** would be even, not a multiple of 3, in an open sieve
+  class at every depth, dry forever; bad loops at least 41.5% of its loops (and,
+  if they keep their usual half share, the double-divide drop under about 5.4%
+  instead of 25%); the pioneer of an endless staircase of record peaks. So
+  **if every mountain's pioneer is at least a fixed power of its peak (any
+  power, even 0.01), no runaway exists.**
+- **Why "all numbers become runaways past some point" is impossible:** a
+  number has one path, so 1's tree and a runaway's tree never share a number,
+  and 1's own ladder (1, 3, 11, 43, 171, ...) and the ladders of all numbers
+  verified below 2^71 reach above every point.
+- **Correction recorded.** During the session it was claimed that the density
+  results (Terras, Tao) make the runaway set a vanishing share. That is wrong:
+  a number can dip below its start and still run away later, so those results
+  do not reach the numbers with unbounded paths (see
+  [arXiv 2208.11801](https://arxiv.org/abs/2208.11801), section 4).
+- **What a runaway's mountains would look like — Heuristic, from measured
+  sizes.** Real mountains hold about 1.5 to 4 times peak ÷ pioneer members, so
+  a runaway's mountains would keep a fixed share, about 2.5 ÷ R, of all numbers
+  below each new peak (about 2/9 of them foothill peaks), while every ordinary
+  pioneer's share fades. Two statements together would exclude it: every
+  backward tree keeps a fixed share of the numbers below its ceiling, and 1's
+  tree holds a share going to 100%. Neither is proved.
+
+## 20. Covering the escape routes (added later the same day)
+
+- **Measured** (`escape_cover.py`): following only the loops each problem-area
+  member's digits force (sieve depth 8 to 20, members up to 2^20), the forced
+  stretch lands on 1's tree grown to 16 times the range for 76.5% to 87.4% of
+  members, and grown to 64 times for 92.3% to 97.0%; every miss is a member
+  whose connecting branch rises above the cap.
+- **Measured** (`cover_height.py`, members up to 2^24): the height 1's tree must
+  reach, as a power of the member, has median 1.12 to 1.15 and 99th percentile
+  1.39 to 1.46 (creeping up slowly with depth); the hardest member of each size
+  from 1,024 up needs 1.76 to 1.99 (3,315,838 needs 1.994). 1's tree is
+  infinite; the power is how high the branch connecting a member to 1 climbs.
+
+## 21. A floor for every backward tree (added later the same day)
+
+`tree_floor.py`: on every ladder, whatever its digits, a branch entry rung is
+followed by a run entry rung once every three rungs (**Proved** facts:
+`ladder_cycle`, `pairing_is_ladder`). Letting an adversary choose the worst
+remainders everywhere gives a tree no real tree can fall below; it grows like
+the room to the power **0.437** (**Computed**, a proof in principle; the
+adversary calculation is not formalized). This lands on the first classic
+bound, Krasikov's x^(3/7) of 1989; Wirsching reached x^0.48, Applegate and
+Lagarias x^0.81, Krasikov and Lagarias x^0.84 by making more remainder digits
+exact. One more exact digit (division by 9) raises the floor slightly here
+(0.44 to 0.46 over a short range). Even x^(1−ε) is a vanishing share, so this
+route does not by itself give the fixed share section 19 needs.
+
+## 22. What digits make a climber (added later the same day)
+
+- **Engineered climbs — Proved in essence:** a bad loop uses one binary digit
+  and multiplies by exactly 1.5; a drop uses two and never raises the index. So
+  from its own digits an index climbs at most by 1.5 per digit: the best is a
+  single pure run from 2^b to 3^b, about the 1.585 power.
+- **Record climbs go beyond their own digits — Measured**
+  (`engineered_vs_records.py`): 79,744 climbs n^0.38 while reading its own
+  digits and n^0.55 after they ran out; 3,315,838 climbs n^0.23 then n^0.76.
+- **The binary code — Measured** (`climber_digits.py`, top 0.1% of climbers
+  among Collatz numbers 2.1 to 4.2 million): at least 80% binary ones ×8.9,
+  six or more trailing ones ×8.4, a block of eight or more ones anywhere ×5.0;
+  remainders on division by 3, 9, 27, 5, 7 and base-3 digits show nothing.
+- **Reproducible — Measured** (`dense_ones.py`, 48-bit numbers ending in binary
+  01): with 95% ones, 27.7% reach the 1.3 power of their start (0.02% for
+  random digits) and 11.8% the 1.5 power. Blocks of ones are stored runs: each
+  launches a run when it reaches the bottom of the number. That climb is
+  entirely paid for by the number's own digits (9.2 bits while reading them,
+  0.16 after).
+
+## 23. How record climbs use the loops (added later the same day)
+
+**Measured** (`climb_loops.py`, top 200 climbers among hub indices 2^20 to
+2^21): bad loops 74% to 77% (52% on ordinary paths), the double-divide drop 5%
+to 8% (24% ordinary), runs of 6 or more 13% to 17% of runs (1% ordinary), and
+after a run the gentle drop 72% to 77% (50% ordinary). The part after a
+climber's own digits run out has the same signature as the part read from
+them. Two of the three loops multiply by 3 and so write new digits; only the
+double-divide drop writes nothing, and record climbs avoid it.
+
+## 24. The steps of the staircase (added later the same day)
+
+**Measured** (`staircase_steps.py`, every hub index from 2^18 to 2^19, 137,175
+records later beaten and 186,690 final peaks): whether a record peak is beaten
+again is decided by its remainder on division by 16, not by the run that
+reached it or its extra factors of 3:
+
+| Peak mod 16 | Share of beaten records | Share of final peaks |
+|---|---|---|
+| 5 | 29.6% | 0.0% |
+| 13 | 29.3% | 0.0% |
+| 1 | 13.2% | 11.9% |
+| 15 | 12.9% | 12.5% |
+| 3, 7, 9 | 4.4% to 4.7% each | about 18% each |
+| 11 | 1.6% | 20.6% |
+
+- **Proved** (`free_step`): a peak leaving remainder 5 on division by 16 reaches
+  27/16 of itself three loops later (a three-quarter drop, then two bad loops),
+  and one leaving remainder 13 reaches 18/16 of itself two loops later. So
+  these are never final peaks: the free steps of the staircase.
+- 70% of final peaks are followed directly by the double-divide drop. Valleys
+  that recover are mostly shallow (68% within 1 bit) and usually restart with
+  a run of 1 (61%).
+- **Link to the climb before:** a peak is 3^k·m, so its remainder on division
+  by 16 is fixed by the run length k (through 3^k, which repeats every 4) and
+  the four binary digits of m just above the run in the run's starting number.
+  What lets a climb reach the next level is coded in those four digits, read
+  through 3^k; about a quarter of run exits land on a free step.
