@@ -9,8 +9,8 @@ import Mathlib.Tactic.Ring
 /-!
 # Proofs for CollatzHub
 
-Status: the first eleven claims built clean on GitHub, 2026-11-24; the
-counting formula (appended below) is a draft waiting for its build.
+Status: all thirteen claims built clean on GitHub, 2026-11-24; `#print axioms`
+shows only the standard axioms.
 
 Most claims are remainder bookkeeping: unfold the two maps, split on each
 `if`, and let `omega` check the linear arithmetic in every case. The run
