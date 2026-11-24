@@ -143,3 +143,45 @@ def collatz_hub_form : Prop :=
   ∀ n : Nat, 1 ≤ n → ∃ k : Nat, hubIter k n = 1
 
 end RNS.CollatzHub
+
+/-! ## The counting formula
+
+A mountain is counted by walking up a value's ladder: each rung counts once,
+plus everything entering it by a run entry (rung divisible by 3) or a branch
+entry (rung leaving remainder 1 on division by 3). The two claims below are
+that recursion: one link of it (`counting_step`) and where it stops
+(`count_zero_at_ceiling`). Unrolled along the ladder (whose rungs grow by a
+factor of 4), they give the ladder sum. -/
+
+namespace RNS.CollatzHub
+
+/-- `u` reaches `v` under the hub map with every index along the way, `v`
+included, below the ceiling `B`. -/
+abbrev reachesBelow (B u v : Nat) : Prop :=
+  ∃ k, hubIter k u = v ∧ ∀ j ≤ k, hubIter j u < B
+
+open Classical in
+/-- The tree of `v` below the ceiling `B`: every index that reaches `v`
+without ever reaching `B`. -/
+noncomputable def ancBelow (B v : Nat) : Finset Nat :=
+  (Finset.range B).filter (fun u => reachesBelow B u v)
+
+/-- **The counting formula, one link.** For an index `v` below the ceiling
+`B` that is not on a cycle (the hub map never brings it back to itself), the
+size of its tree below `B` is 1 (itself), plus the tree of its ladder rung
+`4v - 1`, plus the tree of its run entry `2v/3` if `v` is divisible by 3, plus
+the tree of its branch entry `(4v - 1)/3` if `v` leaves remainder 1 on
+division by 3. -/
+def counting_step : Prop :=
+  ∀ B v : Nat, v < B → (∀ k, hubIter (k + 1) v ≠ v) →
+    (ancBelow B v).card =
+      1 + (ancBelow B (4 * v - 1)).card
+        + (if v % 3 = 0 then (ancBelow B (2 * v / 3)).card else 0)
+        + (if v % 3 = 1 then (ancBelow B ((4 * v - 1) / 3)).card else 0)
+
+/-- **Where the count stops.** At or above the ceiling a value's tree below
+the ceiling is empty, so the ladder sum ends at the last rung below `B`. -/
+def count_zero_at_ceiling : Prop :=
+  ∀ B v : Nat, B ≤ v → (ancBelow B v).card = 0
+
+end RNS.CollatzHub

@@ -27,8 +27,13 @@ node:
     raises the index, so every peak ends a run, and every climb to a peak
     divisible by 3 passes through two thirds of it; and in every block of four
     consecutive indices the next indices add up to exactly one less (the exact
-    fair-game average). The Collatz conjecture itself is stated in hub form and
-    never claimed.
+    fair-game average). Added the same day, the counting formula for
+    mountains: the tree of a value below a ceiling (every index reaching it
+    without reaching the ceiling) is the value itself plus the trees of its
+    ladder rung, run entry and branch entry, for any value not on a cycle, and
+    is empty at or above the ceiling; unrolled along the ladder this is the
+    ladder sum. The Collatz conjecture itself is stated in hub form and never
+    claimed.
   improves: >-
     Restates the Collatz map exactly in the network's 6n±1 columns and proves
     the structure (runs, exits, ladders, funnels) that the numerical studies of
@@ -166,6 +171,31 @@ conclusions:
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.fair_block_holds
         note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
+    designated: lean-proof
+
+  - id: counting_step
+    declaration: RNS.CollatzHub.counting_step
+    summary: "For a value below the ceiling and not on a cycle, its tree below the ceiling has 1 plus the trees of its ladder rung, its run entry (if divisible by 3) and its branch entry (if remainder 1 on division by 3)."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.counting_step_holds
+        note: "Draft, waiting for its first GitHub build."
+    designated: lean-proof
+  - id: count_zero_at_ceiling
+    declaration: RNS.CollatzHub.count_zero_at_ceiling
+    summary: "At or above the ceiling a value's tree below the ceiling is empty, so the ladder sum stops at the last rung below it."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.count_zero_at_ceiling_holds
+        note: "Draft, waiting for its first GitHub build."
     designated: lean-proof
 
 open_statements:
