@@ -1,0 +1,191 @@
+# Node metadata, following the shape of IEANTN's formalization.yaml.
+# Added 2026-11-24 from Geo's hub picture of the Collatz map. See docs/NODE_LIST.md.
+
+node:
+  id: CollatzHub.v1
+  family: CollatzHub
+  group: foundations
+  version: v1
+  order: 129
+  kind: paper
+  status: active
+  title: the Collatz map seen from the 6n-2 hub
+  description: >-
+    Original to this project (Geo's hub picture of the Collatz 3x+1 map on the
+    6n±1 columns). Every odd Collatz step lands on a number 6n-2, the hub; from
+    the hub the map takes one of three loops back to the hub, chosen by the
+    index n (the bad loop through the 6n-1 column when n is even, the loop
+    through 6n+2 and 6n+1 when n leaves remainder 1 on division by 4, the loop
+    through 6n+2 straight back when it leaves remainder 3), so the Collatz map
+    becomes a map on the index. Proved here, for every index: the three loops
+    are the Collatz map; a run of bad loops from 2^k·m ends at 3^k·m; exit
+    pairing (the runs from 2^(k+1)·m and 2^k·m meet one loop after they end
+    whenever 3^k·m leaves remainder 1 on division by 4); the three backward
+    links (ladder, run entry, branch entry) are the only ways into a value, the
+    ladder is times 4 in hub values and cycles through the remainders on
+    division by 3, and the exit pair is built into the ladder; only the bad loop
+    raises the index, so every peak ends a run, and every climb to a peak
+    divisible by 3 passes through two thirds of it; and in every block of four
+    consecutive indices the next indices add up to exactly one less (the exact
+    fair-game average). The Collatz conjecture itself is stated in hub form and
+    never claimed.
+  improves: >-
+    Restates the Collatz map exactly in the network's 6n±1 columns and proves
+    the structure (runs, exits, ladders, funnels) that the numerical studies of
+    this project rest on; no new case of the conjecture is settled.
+
+conclusions:
+  - id: hub_step_tracks_collatz
+    declaration: RNS.CollatzHub.hub_step_tracks_collatz
+    summary: "From the hub value 6n-2, two or three Collatz steps (by n's remainder on division by 4) reach the hub value of the next index."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.hub_step_tracks_collatz_holds
+        note: "Draft, waiting for its first GitHub build."
+    designated: lean-proof
+  - id: run_formula
+    declaration: RNS.CollatzHub.run_formula
+    summary: "Starting from 2^k·m, k steps of the hub map end at 3^k·m."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.run_formula_holds
+        note: "Draft, waiting for its first GitHub build."
+    designated: lean-proof
+  - id: exit_pairing
+    declaration: RNS.CollatzHub.exit_pairing
+    summary: "When 3^k·m leaves remainder 1 on division by 4, the runs from 2^(k+1)·m and 2^k·m land on the same index one loop after they end."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.exit_pairing_holds
+        note: "Draft, waiting for its first GitHub build."
+    designated: lean-proof
+  - id: predecessors_complete
+    declaration: RNS.CollatzHub.predecessors_complete
+    summary: "Every index stepping onto a value is its ladder rung, its run entry (two thirds of a multiple of 3) or its branch entry."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.predecessors_complete_holds
+        note: "Draft, waiting for its first GitHub build."
+    designated: lean-proof
+  - id: ladder_entry
+    declaration: RNS.CollatzHub.ladder_entry
+    summary: "The ladder rung 4v-1 drops into v in one loop, and its hub value is 4 times the hub value of v."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.ladder_entry_holds
+        note: "Draft, waiting for its first GitHub build."
+    designated: lean-proof
+  - id: ladder_cycle
+    declaration: RNS.CollatzHub.ladder_cycle
+    summary: "Each ladder rung leaves remainder one less on division by 3 than the rung below it."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.ladder_cycle_holds
+        note: "Draft, waiting for its first GitHub build."
+    designated: lean-proof
+  - id: run_entry
+    declaration: RNS.CollatzHub.run_entry
+    summary: "The even index 2j takes the bad loop to 3j, so every multiple of 3 is entered from two thirds of itself."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.run_entry_holds
+        note: "Draft, waiting for its first GitHub build."
+    designated: lean-proof
+  - id: pairing_is_ladder
+    declaration: RNS.CollatzHub.pairing_is_ladder
+    summary: "The branch entry 4j+1 and its double 8j+2 both reach 3j+1, the second by a bad loop to the next ladder rung and down it."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.pairing_is_ladder_holds
+        note: "Draft, waiting for its first GitHub build."
+    designated: lean-proof
+  - id: up_only_on_bad_loop
+    declaration: RNS.CollatzHub.up_only_on_bad_loop
+    summary: "Only an even index can grow in one step, so every peak is the end of a run of bad loops."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.up_only_on_bad_loop_holds
+        note: "Draft, waiting for its first GitHub build."
+    designated: lean-proof
+  - id: funnel_trunk
+    declaration: RNS.CollatzHub.funnel_trunk
+    summary: "The only smaller index stepping onto a peak divisible by 3 is two thirds of it, so every climb to that peak passes through it."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.funnel_trunk_holds
+        note: "Draft, waiting for its first GitHub build."
+    designated: lean-proof
+  - id: fair_block
+    declaration: RNS.CollatzHub.fair_block
+    summary: "The hub map sends any four consecutive indices from a multiple of 4 to four indices adding up to exactly one less."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.fair_block_holds
+        note: "Draft, waiting for its first GitHub build."
+    designated: lean-proof
+
+open_statements:
+  - id: collatz_hub_form
+    summary: "The Collatz conjecture in hub form: every index at least 1 reaches the fixed point 1 under the hub map."
+
+sources:
+  - title: Collatz conjecture (Wikipedia)
+    url: https://en.wikipedia.org/wiki/Collatz_conjecture
+    relationship: states the conjecture this node restates in hub form; the hub picture, the three loops and exit pairing are original
+  - title: "Lagarias, The 3x+1 problem: an overview (2021)"
+    url: https://arxiv.org/abs/2111.02635
+    relationship: >-
+      survey of the standard tools this node's structure matches (accelerated
+      maps, residue classes, inverse trees); the fair-block identity is the
+      exact form of the average-ratio-one fact used there
+  - title: "Lagarias and Weiss, The 3x+1 problem: two stochastic models (Ann. Appl. Probab. 1992)"
+    url: https://doi.org/10.1214/aoap/1177005779
+    relationship: models the backward tree modulo powers of 3; the ladder cycle and pairing_is_ladder are exact facts about that tree
+
+related:
+  - node: Wheel6
+    note: the hub and its three loops live in the 6n-1 and 6n+1 columns this node defines; no claim of Wheel6 is used

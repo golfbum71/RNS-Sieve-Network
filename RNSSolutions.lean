@@ -99,3 +99,4 @@ import RNSSolutions.ModulusLift
 import RNSSolutions.FieldSizeTimes
 import RNSSolutions.TightFromBlockedRun
 import RNSSolutions.GoldbachStacks
+import RNSSolutions.CollatzHub
