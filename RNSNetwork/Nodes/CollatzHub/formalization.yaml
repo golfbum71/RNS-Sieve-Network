@@ -260,10 +260,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.block_handoff_holds
-        note: "Draft Lean proof, waiting for the GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-26). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
   - id: block_chain
@@ -273,10 +273,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.block_chain_holds
-        note: "Draft Lean proof, waiting for the GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-26). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
   - id: block_of_ones_drops
@@ -286,10 +286,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.block_of_ones_drops_holds
-        note: "Draft Lean proof, waiting for the GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-26). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
 open_statements:
