@@ -465,6 +465,87 @@ theorem free_step_holds : free_step := by
 
 end RNS.CollatzHub
 
+
+/-! ## Blocks of ones in the row number -/
+
+namespace RNS.CollatzHub
+
+private theorem handoff (A : Nat) (hA : 0 < A) : col^[5] (48 * A - 5) = 54 * A - 5 := by
+  have h1 : col (48 * A - 5) = 144 * A - 14 := by unfold col; split_ifs <;> omega
+  have h2 : col (144 * A - 14) = 72 * A - 7 := by unfold col; split_ifs <;> omega
+  have h3 : col (72 * A - 7) = 216 * A - 20 := by unfold col; split_ifs <;> omega
+  have h4 : col (216 * A - 20) = 108 * A - 10 := by unfold col; split_ifs <;> omega
+  have h5 : col (108 * A - 10) = 54 * A - 5 := by unfold col; split_ifs <;> omega
+  show col (col (col (col (col (48 * A - 5))))) = 54 * A - 5
+  rw [h1, h2, h3, h4, h5]
+
+theorem block_handoff_holds : block_handoff := by
+  unfold block_handoff
+  exact handoff
+
+private theorem chain (t : Nat) : ∀ L m : Nat, 0 < m →
+    col^[5 * t] (6 * (2 ^ (3 * t + L) * m) - 5) = 6 * (9 ^ t * (2 ^ L * m)) - 5 := by
+  induction t with
+  | zero =>
+    intro L m _
+    simp only [Nat.mul_zero, Nat.zero_add, pow_zero, one_mul, Function.iterate_zero_apply]
+  | succ t ih =>
+    intro L m hm
+    have hA : 0 < 2 ^ (3 * t + L) * m := Nat.mul_pos (pow_pos (by norm_num) _) hm
+    have e1 : 6 * (2 ^ (3 * (t + 1) + L) * m) = 48 * (2 ^ (3 * t + L) * m) := by
+      rw [show 3 * (t + 1) + L = (3 * t + L) + 3 by ring, pow_add]
+      ring
+    have e2 : 54 * (2 ^ (3 * t + L) * m) = 6 * (2 ^ (3 * t + L) * (9 * m)) := by ring
+    rw [show 5 * (t + 1) = 5 * t + 5 by ring, Function.iterate_add_apply, e1, handoff _ hA, e2,
+      ih L (9 * m) (by omega)]
+    congr 1
+    ring
+
+theorem block_chain_holds : block_chain := by
+  unfold block_chain
+  intro t
+  exact chain t
+
+private theorem tail_two (M : Nat) (hM : M % 2 = 1) :
+    col^[6] (24 * M - 5) = (27 * M - 5) / 2 := by
+  have h1 : col (24 * M - 5) = 72 * M - 14 := by unfold col; split_ifs <;> omega
+  have h2 : col (72 * M - 14) = 36 * M - 7 := by unfold col; split_ifs <;> omega
+  have h3 : col (36 * M - 7) = 108 * M - 20 := by unfold col; split_ifs <;> omega
+  have h4 : col (108 * M - 20) = 54 * M - 10 := by unfold col; split_ifs <;> omega
+  have h5 : col (54 * M - 10) = 27 * M - 5 := by unfold col; split_ifs <;> omega
+  have h6 : col (27 * M - 5) = (27 * M - 5) / 2 := by unfold col; split_ifs <;> omega
+  show col (col (col (col (col (col (24 * M - 5)))))) = (27 * M - 5) / 2
+  rw [h1, h2, h3, h4, h5, h6]
+
+private theorem tail_zero (M : Nat) (hM : M % 2 = 1) :
+    col^[3] (6 * M - 5) = (9 * M - 7) / 2 := by
+  have h1 : col (6 * M - 5) = 18 * M - 14 := by unfold col; split_ifs <;> omega
+  have h2 : col (18 * M - 14) = 9 * M - 7 := by unfold col; split_ifs <;> omega
+  have h3 : col (9 * M - 7) = (9 * M - 7) / 2 := by unfold col; split_ifs <;> omega
+  show col (col (col (6 * M - 5))) = (9 * M - 7) / 2
+  rw [h1, h2, h3]
+
+theorem block_of_ones_drops_holds : block_of_ones_drops := by
+  unfold block_of_ones_drops
+  intro t m hm
+  have h9 : 9 ^ t % 2 = 1 := by
+    rw [Nat.pow_mod]
+    norm_num
+  have hM : (9 ^ t * m) % 2 = 1 := by
+    rw [Nat.mul_mod, h9, hm]
+  constructor
+  · intro ht
+    rw [show 5 * t + 6 = 6 + 5 * t by ring, Function.iterate_add_apply, chain t 2 m (by omega),
+      show 6 * (9 ^ t * (2 ^ 2 * m)) = 24 * (9 ^ t * m) by ring, tail_two _ hM]
+    interval_cases t <;> simp only [Nat.reducePow, Nat.reduceMul, Nat.reduceAdd] <;> omega
+  · intro h1 h2
+    have hc := chain t 0 m (by omega)
+    simp only [Nat.add_zero, pow_zero, one_mul] at hc
+    rw [show 5 * t + 3 = 3 + 5 * t by ring, Function.iterate_add_apply, hc, tail_zero _ hM]
+    interval_cases t <;> simp only [Nat.reducePow, Nat.reduceMul, Nat.reduceAdd] <;> omega
+
+end RNS.CollatzHub
+
 #print axioms RNS.CollatzHub.hub_step_tracks_collatz_holds
 #print axioms RNS.CollatzHub.run_formula_holds
 #print axioms RNS.CollatzHub.exit_pairing_holds
@@ -482,3 +563,6 @@ end RNS.CollatzHub
 #print axioms RNS.CollatzHub.ladder_sum_holds
 #print axioms RNS.CollatzHub.sub_peak_rule_holds
 #print axioms RNS.CollatzHub.free_step_holds
+#print axioms RNS.CollatzHub.block_handoff_holds
+#print axioms RNS.CollatzHub.block_chain_holds
+#print axioms RNS.CollatzHub.block_of_ones_drops_holds

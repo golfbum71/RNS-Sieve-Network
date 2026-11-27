@@ -48,3 +48,4 @@ on division by 4, (n + 1)/4 when it leaves remainder 3.
 
 Times are on a single core; random samples use fixed seeds, so reruns print
 the same numbers.
+| `block_of_ones.py` | Blocks of ones in the row number: the 9/8 hand-off and which block lengths settle their row (notes section 25) | 25 | about 10 s |

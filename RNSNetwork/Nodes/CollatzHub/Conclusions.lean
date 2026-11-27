@@ -252,3 +252,33 @@ def free_step : Prop :=
   ∀ j : Nat, hubIter 3 (16 * j + 5) = 27 * j + 9 ∧ hubIter 2 (16 * j + 13) = 18 * j + 15
 
 end RNS.CollatzHub
+
+/-! ## Blocks of ones in the row number -/
+
+namespace RNS.CollatzHub
+
+/-- **The block hand-off.** Write a `6n+1` number whose row `n` ends in a block
+of at least three binary ones as `48A − 5` (here `n + 1 = 8A`). Up, halve, up,
+halve, halve (five steps) take it to `54A − 5`, the `6n+1` number of the row
+whose `n + 1` is `9A`: nine eighths as big, with three fewer ones at the end. -/
+def block_handoff : Prop :=
+  ∀ A : Nat, 0 < A → col^[5] (48 * A - 5) = 54 * A - 5
+
+/-- **The block chain.** If the row's `n + 1` is `2^(3t + L) · m`, then `t`
+hand-offs (`5t` steps) take its `6n+1` number to the `6n+1` number of the row
+whose `n + 1` is `9^t · 2^L · m`. -/
+def block_chain : Prop :=
+  ∀ t L m : Nat, 0 < m →
+    col^[5 * t] (6 * (2 ^ (3 * t + L) * m) - 5) = 6 * (9 ^ t * (2 ^ L * m)) - 5
+
+/-- **Blocks of ones that settle their row.** Take a row whose `n` ends in a 0
+followed by a block of ones (`n + 1` is a power of 2 times an odd `m`). With
+2, 5, 8, 11 or 14 ones (`3t + 2`, `t` at most 4) its `6n+1` number is below
+itself after `5t + 6` steps, and with 3 or 6 ones (`3t`, `t` = 1 or 2) after
+`5t + 3` steps, whatever the higher digits are. -/
+def block_of_ones_drops : Prop :=
+  ∀ t m : Nat, m % 2 = 1 →
+    (t ≤ 4 → col^[5 * t + 6] (6 * (2 ^ (3 * t + 2) * m) - 5) < 6 * (2 ^ (3 * t + 2) * m) - 5) ∧
+    (1 ≤ t → t ≤ 2 → col^[5 * t + 3] (6 * (2 ^ (3 * t) * m) - 5) < 6 * (2 ^ (3 * t) * m) - 5)
+
+end RNS.CollatzHub

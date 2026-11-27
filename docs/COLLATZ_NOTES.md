@@ -566,3 +566,15 @@ reached it or its extra factors of 3:
   the four binary digits of m just above the run in the run's starting number.
   What lets a climb reach the next level is coded in those four digits, read
   through 3^k; about a quarter of run exits land on a free step.
+
+## 25. Blocks of ones in the row number (Nov 26)
+
+Label: **proved** (Lean: `block_handoff`, `block_chain`, `block_of_ones_drops`), checked against real paths.
+
+Look at a 6n+1 number in a row where n ends in a 0 followed by a block of binary ones, so n + 1 is a power of 2 times an odd number. When the block has at least three ones, five steps (up, halve, up, halve, halve) land on the 6n+1 number of another row. That row's n + 1 is exactly nine eighths of the old one, so its block is three ones shorter. Repeating this, a block is handed down three ones at a time, growing by 9/8 per hand-off. It is a second, slower climbing mode: about 1.125 per three digits, against 1.5 per digit for the 6n−1 bad loop.
+
+Once fewer than three ones are left there is a fixed finish. With two ones left it drops to (27M − 5)/2, where M is 9 to the number of hand-offs times the odd part. With none left it drops to (9M − 7)/2. That finish is below the starting number for every row whose block has 2, 3, 5, 6, 8, 11 or 14 ones, whatever the higher digits are. From 17 ones on (and 9, 12, … in the no-ones-left case) the 9/8 growth outlasts the finish, so the block alone does not settle the row.
+
+Correction: before this was checked, I said that every block of 3t + 2 ones drops right after its runs of 2. That holds only up to 14 ones.
+
+Checked: every number below 3 million that the rule settles (106,583 of them) reaches the predicted value and is below its start. The ledger page marks these rows with the Block of ones rule and shows the hand-off chain in the run readout.

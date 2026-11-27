@@ -253,6 +253,45 @@ conclusions:
         note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-24). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
+  - id: block_handoff
+    declaration: RNS.CollatzHub.block_handoff
+    summary: "When a row number ends in a block of at least three binary ones, five steps take its 6n+1 number to the 6n+1 number of the row whose n + 1 is nine eighths as big, three ones shorter."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.block_handoff_holds
+        note: "Draft Lean proof, waiting for the GitHub build."
+    designated: lean-proof
+
+  - id: block_chain
+    declaration: RNS.CollatzHub.block_chain
+    summary: "A block of 3t + L ones is handed down t times in 5t steps, multiplying n + 1 by 9 each time it removes three factors of 2."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.block_chain_holds
+        note: "Draft Lean proof, waiting for the GitHub build."
+    designated: lean-proof
+
+  - id: block_of_ones_drops
+    declaration: RNS.CollatzHub.block_of_ones_drops
+    summary: "A 6n+1 number whose row ends in a 0 then 2, 3, 5, 6, 8, 11 or 14 ones drops below itself, whatever the higher digits are."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.block_of_ones_drops_holds
+        note: "Draft Lean proof, waiting for the GitHub build."
+    designated: lean-proof
+
 open_statements:
   - id: collatz_hub_form
     summary: "The Collatz conjecture in hub form: every index at least 1 reaches the fixed point 1 under the hub map."
