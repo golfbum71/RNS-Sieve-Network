@@ -537,12 +537,16 @@ theorem block_of_ones_drops_holds : block_of_ones_drops := by
   · intro ht
     rw [show 5 * t + 6 = 6 + 5 * t by ring, Function.iterate_add_apply, chain t 2 m (by omega),
       show 6 * (9 ^ t * (2 ^ 2 * m)) = 24 * (9 ^ t * m) by ring, tail_two _ hM]
-    interval_cases t <;> simp only [Nat.reducePow, Nat.reduceMul, Nat.reduceAdd] <;> omega
+    obtain rfl | rfl | rfl | rfl | rfl : t = 0 ∨ t = 1 ∨ t = 2 ∨ t = 3 ∨ t = 4 := by omega
+    all_goals simp only [Nat.reducePow, Nat.reduceMul, Nat.reduceAdd]
+    all_goals omega
   · intro h1 h2
     have hc := chain t 0 m (by omega)
     simp only [Nat.add_zero, pow_zero, one_mul] at hc
     rw [show 5 * t + 3 = 3 + 5 * t by ring, Function.iterate_add_apply, hc, tail_zero _ hM]
-    interval_cases t <;> simp only [Nat.reducePow, Nat.reduceMul, Nat.reduceAdd] <;> omega
+    obtain rfl | rfl : t = 1 ∨ t = 2 := by omega
+    all_goals simp only [Nat.reducePow, Nat.reduceMul, Nat.reduceAdd]
+    all_goals omega
 
 end RNS.CollatzHub
 
