@@ -612,3 +612,19 @@ The endings form a repeating pattern, not a list to be searched: the 2-adic digi
 Examples. j = 1 is the rule for remainder 1 on division by 4. j = 2 (m ending in 01) is the family x ≡ 3 mod 16 with tide (9x + 5)/16 from section 26. j = 3 (m ending in 11) gives x ≡ 23 mod 32 with tide (27x + 19)/32 after 8 steps.
 
 What this gives the tide program: every climb length has its own exact one-drop class, a fixed share 2^(−h) of the numbers with that many trailing ones, read from the number with no looking ahead, for climbs of any length. Two-drop mountains are the same construction one level up: after the first drop the number reached has its own trailing ones and its own class.
+
+## 28. Mountain types and the bases that fit them (Nov 27)
+
+Script: `scripts/collatz/mountain_types.py` (every odd number below 2^22).
+
+**Which base.** Powers of 2 decide what a number does next (each halving reads one binary digit). Powers of 3 record what it has done (each odd step multiplies by 3). Base 6 fixes only the last digit: every peak ends in 5 in base 6, because every peak is a 6n−1 number. Base 16 decides the first two moves after a top (the exit table). No fixed base is enough: a trip with u odd steps reads about 2.6 u binary digits. The language in which the patterns repeat is binary digits of fractions whose denominators are powers of 3.
+
+**Mountain types.** Write a trip to the tide as blocks "climb j, drop d" (j odd steps with single halvings between, then d halvings). Each type of trip is exactly one ending of binary digits, and that ending is the 2-adic digits of a fraction whose denominator is 3 to the number of odd steps, so it repeats (Terras 1976; the one-drop types are section 27). With 3 to 5 odd steps:
+
+- 3: climb 3 drop 3 (ending 10111); climb 2 drop 2, climb 1 drop 2 (01011)
+- 4: climb 4 drop 4 (0001111); climb 3 drop 2, climb 1 drop 3 (0000111); climb 2 drop 2, climb 2 drop 3 (0111011)
+- 5: climb 5 drop 4 (01011111); climb 4 drop 3, climb 1 drop 2 (01001111); climb 4 drop 2, climb 1 drop 3 (10101111); climb 3 drop 2, climb 2 drop 3 (00100111); climb 3 drop 2, climb 1 drop 2, climb 1 drop 2 (11000111); climb 2 drop 2, climb 3 drop 3 (11011011); climb 2 drop 2, climb 2 drop 2, climb 1 drop 2 (01111011)
+
+The number of types for 1, 2, 3, … odd steps is 1, 1, 2, 3, 7, 12, 30, 85, 173, 476: OEIS A100982. Mike Winkler (arXiv 1504.00212, 1709.03385) gives a recursive tree that generates them. So this level is known; our block language and the one-drop family (section 27, in Lean) are a slice of it in Geo's terms.
+
+**Time to the tide is quantized.** Every odd number below 2^22 meets the tide after exactly u + ⌊u · log2 3⌋ + 1 steps, where u is its number of odd steps: 3, 6, 8, 11, 13, 16, 19, 21, 24, 26, … (OEIS A020914). The tide cannot come sooner (proved, section 26); that it never comes later is Terras's coefficient stopping time conjecture, open.

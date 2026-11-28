@@ -51,3 +51,4 @@ the same numbers.
 | `block_of_ones.py` | Blocks of ones in the row number: the 9/8 hand-off and which block lengths settle their row (notes section 25) | 25 | about 10 s |
 | `pioneer_markers.py` | Pioneer, peak and tide: the peak's ternary signature, second climbs by exit index on division by 16, and the tide's balance (notes section 26) | 26 | about 10 s |
 | `one_drop.py` | One-drop mountains: for each climb length, the digits that make the first drop reach the tide, and their repeating period (notes section 27) | 27 | about 2 min |
+| `mountain_types.py` | Mountain types: each trip to the tide as climb-and-drop blocks, its binary ending, and the quantized steps to the tide (notes section 28) | 28 | about 3 min |
