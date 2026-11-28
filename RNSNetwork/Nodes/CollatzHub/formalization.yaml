@@ -383,6 +383,45 @@ conclusions:
         note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-27). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
+  - id: shape_landing
+    declaration: RNS.CollatzHub.shape_landing
+    summary: "After any run of steps with U odd steps and K halvings, 2^K times the number reached is 3^U times the start plus a constant c fixed by the order of the steps."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.shape_landing_holds
+        note: "Draft Lean proof, waiting for the GitHub build."
+    designated: lean-proof
+
+  - id: cycle_equation
+    declaration: RNS.CollatzHub.cycle_equation
+    summary: "If a run of steps returns a number to itself, then (2^K minus 3^U) times the number equals c: a cycle's start is the fraction c over 2^K minus 3^U."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.cycle_equation_holds
+        note: "Draft Lean proof, waiting for the GitHub build."
+    designated: lean-proof
+
+  - id: cycle_shape_tests
+    declaration: RNS.CollatzHub.cycle_shape_tests
+    summary: "The loop 1, 4, 2 gone round twice has c = 7 over 2^4 minus 3^2 = 7, start 1; the shape climb 2, drop 3 has c = 5, and 5/7 is not whole, so it is no cycle."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.cycle_shape_tests_holds
+        note: "Draft Lean proof, waiting for the GitHub build."
+    designated: lean-proof
+
 open_statements:
   - id: collatz_hub_form
     summary: "The Collatz conjecture in hub form: every index at least 1 reaches the fixed point 1 under the hub map."

@@ -346,3 +346,58 @@ def two_blocks : Prop :=
     col^[(2 * j₂ + d₂) + (2 * j + d)] (2 ^ j * m - 1) = c
 
 end RNS.CollatzHub
+
+/-! ## The cycle equation -/
+
+namespace RNS.CollatzHub
+
+/-- The shape of the first `n` steps from `x`: `true` for an odd step (up), `false`
+for a halving. -/
+def parityWord (x : Nat) : Nat → List Bool
+  | 0 => []
+  | n + 1 => (x % 2 == 1) :: parityWord (col x) n
+
+/-- Number of odd steps in a shape. -/
+def oddCount : List Bool → Nat
+  | [] => 0
+  | true :: w => oddCount w + 1
+  | false :: w => oddCount w
+
+/-- Number of halvings in a shape. -/
+def halvingCount : List Bool → Nat
+  | [] => 0
+  | true :: w => halvingCount w
+  | false :: w => halvingCount w + 1
+
+/-- The constant `c` of a shape, built from the order of its steps alone. -/
+def shapeConst : List Bool → Nat
+  | [] => 0
+  | true :: w => 3 ^ oddCount w + shapeConst w
+  | false :: w => 2 * shapeConst w
+
+/-- **Where a shape lands.** After any `n` steps, with `U` odd steps and `K`
+halvings in its shape, `2^K` times the number reached is `3^U · x + c`, where `c`
+depends only on the order of the steps. -/
+def shape_landing : Prop :=
+  ∀ n x : Nat, 2 ^ halvingCount (parityWord x n) * col^[n] x =
+    3 ^ oddCount (parityWord x n) * x + shapeConst (parityWord x n)
+
+/-- **The cycle equation.** If `n` steps bring `x` back to itself, then
+`(2^K − 3^U) · x = c` for its shape: the start of a cycle is the fraction
+`c / (2^K − 3^U)`, so a cycle of a given shape exists only if that fraction is a
+whole number. -/
+def cycle_equation : Prop :=
+  ∀ n x : Nat, col^[n] x = x →
+    (2 ^ halvingCount (parityWord x n) - 3 ^ oddCount (parityWord x n)) * x =
+      shapeConst (parityWord x n)
+
+/-- **Testing a shape.** The known loop 1 → 4 → 2 → 1, gone round twice, has shape
+up, halve, halve, up, halve, halve, with `c = 7` and `2^4 − 3^2 = 7`: start 1.
+The shape climb 2, drop 3 (up, halve, up, halve, halve, halve) has `c = 5`, and
+`5/7` is not whole, so no number has that shape as a cycle. -/
+def cycle_shape_tests : Prop :=
+  shapeConst [true, false, false, true, false, false] = 7 ∧
+  shapeConst [true, false, true, false, false, false] = 5 ∧
+  ∀ x : Nat, parityWord x 6 = [true, false, true, false, false, false] → col^[6] x ≠ x
+
+end RNS.CollatzHub

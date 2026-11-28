@@ -693,6 +693,68 @@ theorem two_blocks_holds : two_blocks := by
 
 end RNS.CollatzHub
 
+
+/-! ## The cycle equation -/
+
+namespace RNS.CollatzHub
+
+private theorem landing_shape (n : Nat) : ∀ x : Nat,
+    2 ^ halvingCount (parityWord x n) * col^[n] x =
+      3 ^ oddCount (parityWord x n) * x + shapeConst (parityWord x n) := by
+  induction n with
+  | zero => intro x; simp [parityWord, halvingCount, oddCount, shapeConst]
+  | succ n ih =>
+    intro x
+    have ih' := ih (col x)
+    rw [Function.iterate_add_apply, Function.iterate_one]
+    rcases Nat.mod_two_eq_zero_or_one x with h | h
+    · have hc : col x = x / 2 := by unfold col; simp [h]
+      obtain ⟨y, rfl⟩ : ∃ y, x = 2 * y := ⟨x / 2, by omega⟩
+      have hy : 2 * y / 2 = y := by omega
+      simp only [parityWord, h, show ((0 : Nat) == 1) = false from rfl, halvingCount,
+        oddCount, shapeConst]
+      rw [hc, hy] at ih' ⊢
+      rw [pow_succ]
+      calc 2 ^ halvingCount (parityWord y n) * 2 * col^[n] y
+          = 2 * (2 ^ halvingCount (parityWord y n) * col^[n] y) := by ring
+        _ = 2 * (3 ^ oddCount (parityWord y n) * y + shapeConst (parityWord y n)) := by
+            rw [ih']
+        _ = 3 ^ oddCount (parityWord y n) * (2 * y) + 2 * shapeConst (parityWord y n) := by
+            ring
+    · have hc : col x = 3 * x + 1 := by unfold col; simp [h]
+      simp only [parityWord, h, show ((1 : Nat) == 1) = true from rfl, halvingCount,
+        oddCount, shapeConst]
+      rw [hc] at ih' ⊢
+      rw [ih']
+      ring
+
+theorem shape_landing_holds : shape_landing := by
+  unfold shape_landing
+  intro n x
+  exact landing_shape n x
+
+theorem cycle_equation_holds : cycle_equation := by
+  unfold cycle_equation
+  intro n x hx
+  have h := landing_shape n x
+  rw [hx] at h
+  rw [Nat.sub_mul]
+  generalize 2 ^ halvingCount (parityWord x n) * x = P at h ⊢
+  generalize 3 ^ oddCount (parityWord x n) * x = Q at h ⊢
+  omega
+
+theorem cycle_shape_tests_holds : cycle_shape_tests := by
+  unfold cycle_shape_tests
+  refine ⟨by decide, by decide, ?_⟩
+  intro x hw hx
+  have h := landing_shape 6 x
+  rw [hx, hw] at h
+  simp only [halvingCount, oddCount, shapeConst, Nat.reducePow, Nat.reduceMul,
+    Nat.reduceAdd] at h
+  omega
+
+end RNS.CollatzHub
+
 #print axioms RNS.CollatzHub.hub_step_tracks_collatz_holds
 #print axioms RNS.CollatzHub.run_formula_holds
 #print axioms RNS.CollatzHub.exit_pairing_holds
@@ -720,3 +782,6 @@ end RNS.CollatzHub
 #print axioms RNS.CollatzHub.block_landing_holds
 #print axioms RNS.CollatzHub.block_ending_lift_holds
 #print axioms RNS.CollatzHub.two_blocks_holds
+#print axioms RNS.CollatzHub.shape_landing_holds
+#print axioms RNS.CollatzHub.cycle_equation_holds
+#print axioms RNS.CollatzHub.cycle_shape_tests_holds

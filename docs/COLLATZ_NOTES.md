@@ -641,3 +641,15 @@ A mountain is a chain of blocks, each "climb j, drop d". Four facts make the cha
 4. **Blocks compose.** The steps add, and the second block starts where the first lands.
 
 Together: every mountain type, however many blocks, has exactly one binary ending, of length the total halvings, assembled block by block. Section 28's table is what this produces for 3 to 5 odd steps; the counts are OEIS A100982 (Winkler's tree builds the same classes). The question left open is whether a chain of blocks that never reaches the tide can exist: by fact 3 it would be a whole number whose binary digits match an endless chain of block endings, and ruling that out for every whole number is the conjecture itself.
+
+## 30. The cycle equation (Nov 27)
+
+Label: **proved** (Lean: `shape_landing`, `cycle_equation`, `cycle_shape_tests`).
+
+Write the shape of any run of steps as its order of odd steps and halvings. Then:
+
+- **Where a shape lands.** If the shape has U odd steps and K halvings, 2^K times the number reached is 3^U times the start, plus a constant c that depends only on the order of the steps, not on the start. (The block-landing rule of section 29 is the one-block case.)
+- **The cycle equation.** If the run comes back to its start, then (2^K − 3^U) × start = c. So a cycle of a given shape exists only if c ÷ (2^K − 3^U) is a whole number, and then that whole number is its start.
+- **Tests.** Up, halve, halve, up, halve, halve: c = 7, 2^4 − 3^2 = 7, start 1 (the loop 1, 4, 2 gone round twice). Climb 2, drop 3 (up, halve, up, halve, halve, halve): c = 5, and 5 ÷ 7 is not whole, so no number has that shape as a cycle.
+
+This puts the "no cycle" half of the problem in block language as one exact equation per shape. Ruling out every shape is still open; Hercher (2023) shows a cycle would need at least 92 climb-and-drop passages.
