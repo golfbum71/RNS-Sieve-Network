@@ -813,6 +813,58 @@ theorem neg17_chain_holds : neg17_chain := by
 
 end RNS.CollatzHub
 
+
+/-! ## The digit carry law -/
+
+namespace RNS.CollatzHub
+
+private theorem carry (n : Nat) : ∀ r q : Nat,
+    col^[n] (r + 2 ^ (halvingCount (parityWord r n) + 1) * q) =
+      col^[n] r + 2 * 3 ^ oddCount (parityWord r n) * q := by
+  induction n with
+  | zero => intro r q; simp [parityWord, halvingCount, oddCount]
+  | succ n ih =>
+    intro r q
+    rcases Nat.mod_two_eq_zero_or_one r with h | h
+    · have hcr : col r = r / 2 := by unfold col; simp [h]
+      have hw : parityWord r (n + 1) = false :: parityWord (r / 2) n := by
+        simp [parityWord, h, hcr]
+      rw [hw]
+      simp only [halvingCount, oddCount]
+      have hcx : col (r + 2 ^ (halvingCount (parityWord (r / 2) n) + 1 + 1) * q) =
+          r / 2 + 2 ^ (halvingCount (parityWord (r / 2) n) + 1) * q := by
+        rw [show 2 ^ (halvingCount (parityWord (r / 2) n) + 1 + 1) * q =
+          2 * (2 ^ (halvingCount (parityWord (r / 2) n) + 1) * q) by ring]
+        generalize 2 ^ (halvingCount (parityWord (r / 2) n) + 1) * q = Q
+        unfold col
+        split_ifs <;> omega
+      simp only [Function.iterate_add_apply, Function.iterate_one]
+      rw [hcx, hcr, ih (r / 2) q]
+    · have hcr : col r = 3 * r + 1 := by unfold col; simp [h]
+      have hw : parityWord r (n + 1) = true :: parityWord (3 * r + 1) n := by
+        simp [parityWord, h, hcr]
+      rw [hw]
+      simp only [halvingCount, oddCount]
+      have hcx : col (r + 2 ^ (halvingCount (parityWord (3 * r + 1) n) + 1) * q) =
+          3 * r + 1 + 2 ^ (halvingCount (parityWord (3 * r + 1) n) + 1) * (3 * q) := by
+        rw [show 2 ^ (halvingCount (parityWord (3 * r + 1) n) + 1) * q =
+            2 * (2 ^ halvingCount (parityWord (3 * r + 1) n) * q) by ring,
+          show 2 ^ (halvingCount (parityWord (3 * r + 1) n) + 1) * (3 * q) =
+            2 * (3 * (2 ^ halvingCount (parityWord (3 * r + 1) n) * q)) by ring]
+        generalize 2 ^ halvingCount (parityWord (3 * r + 1) n) * q = Q
+        unfold col
+        split_ifs <;> omega
+      simp only [Function.iterate_add_apply, Function.iterate_one]
+      rw [hcx, hcr, ih (3 * r + 1) (3 * q)]
+      ring
+
+theorem digit_carry_holds : digit_carry := by
+  unfold digit_carry
+  intro n r q
+  exact carry n r q
+
+end RNS.CollatzHub
+
 #print axioms RNS.CollatzHub.hub_step_tracks_collatz_holds
 #print axioms RNS.CollatzHub.run_formula_holds
 #print axioms RNS.CollatzHub.exit_pairing_holds
@@ -845,3 +897,4 @@ end RNS.CollatzHub
 #print axioms RNS.CollatzHub.cycle_shape_tests_holds
 #print axioms RNS.CollatzHub.neg17_handoff_holds
 #print axioms RNS.CollatzHub.neg17_chain_holds
+#print axioms RNS.CollatzHub.digit_carry_holds

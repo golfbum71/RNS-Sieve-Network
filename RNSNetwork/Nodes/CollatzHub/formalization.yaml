@@ -448,6 +448,19 @@ conclusions:
         note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-27). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
+  - id: digit_carry
+    declaration: RNS.CollatzHub.digit_carry
+    summary: "A number agreeing with r in its last K + 1 binary digits (K the halvings of r's run) makes the same run and lands on the same place plus 2 times 3^U times its unread digits."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.digit_carry_holds
+        note: "Draft Lean proof, waiting for the GitHub build."
+    designated: lean-proof
+
 open_statements:
   - id: collatz_hub_form
     summary: "The Collatz conjecture in hub form: every index at least 1 reaches the fixed point 1 under the hub map."

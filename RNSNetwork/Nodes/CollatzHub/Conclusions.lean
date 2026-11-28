@@ -421,3 +421,20 @@ def neg17_chain : Prop :=
   ∀ t y : Nat, 0 < y → col^[18 * t] (2048 ^ t * y - 17) = 2187 ^ t * y - 17
 
 end RNS.CollatzHub
+
+/-! ## The digit carry law -/
+
+namespace RNS.CollatzHub
+
+/-- **The digit carry law.** Run `n` steps from `r`; say its shape has `U` odd
+steps and `K` halvings. Any number that agrees with `r` in its last `K + 1` binary
+digits, `r + 2^(K+1) · q`, makes the same `n` steps, and lands on the same place
+plus `2 · 3^U · q`. So the digits not yet read (`q`) ride along untouched: they
+are multiplied by 3 at each odd step and moved down one place at each halving.
+When a shadow of a negative cycle breaks off, this says where the number lands:
+the cycle's point plus the unread digits times a power of 3. -/
+def digit_carry : Prop :=
+  ∀ n r q : Nat, col^[n] (r + 2 ^ (halvingCount (parityWord r n) + 1) * q) =
+    col^[n] r + 2 * 3 ^ oddCount (parityWord r n) * q
+
+end RNS.CollatzHub
