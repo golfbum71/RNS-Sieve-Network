@@ -755,6 +755,56 @@ theorem cycle_shape_tests_holds : cycle_shape_tests := by
 
 end RNS.CollatzHub
 
+
+/-! ## Shadows of the negative cycles -/
+
+namespace RNS.CollatzHub
+
+private theorem neg17_once (y : Nat) (hy : 0 < y) : col^[18] (2048 * y - 17) = 2187 * y - 17 := by
+  have h1 : col (2048 * y - 17) = 6144 * y - 50 := by unfold col; split_ifs <;> omega
+  have h2 : col (6144 * y - 50) = 3072 * y - 25 := by unfold col; split_ifs <;> omega
+  have h3 : col (3072 * y - 25) = 9216 * y - 74 := by unfold col; split_ifs <;> omega
+  have h4 : col (9216 * y - 74) = 4608 * y - 37 := by unfold col; split_ifs <;> omega
+  have h5 : col (4608 * y - 37) = 13824 * y - 110 := by unfold col; split_ifs <;> omega
+  have h6 : col (13824 * y - 110) = 6912 * y - 55 := by unfold col; split_ifs <;> omega
+  have h7 : col (6912 * y - 55) = 20736 * y - 164 := by unfold col; split_ifs <;> omega
+  have h8 : col (20736 * y - 164) = 10368 * y - 82 := by unfold col; split_ifs <;> omega
+  have h9 : col (10368 * y - 82) = 5184 * y - 41 := by unfold col; split_ifs <;> omega
+  have h10 : col (5184 * y - 41) = 15552 * y - 122 := by unfold col; split_ifs <;> omega
+  have h11 : col (15552 * y - 122) = 7776 * y - 61 := by unfold col; split_ifs <;> omega
+  have h12 : col (7776 * y - 61) = 23328 * y - 182 := by unfold col; split_ifs <;> omega
+  have h13 : col (23328 * y - 182) = 11664 * y - 91 := by unfold col; split_ifs <;> omega
+  have h14 : col (11664 * y - 91) = 34992 * y - 272 := by unfold col; split_ifs <;> omega
+  have h15 : col (34992 * y - 272) = 17496 * y - 136 := by unfold col; split_ifs <;> omega
+  have h16 : col (17496 * y - 136) = 8748 * y - 68 := by unfold col; split_ifs <;> omega
+  have h17 : col (8748 * y - 68) = 4374 * y - 34 := by unfold col; split_ifs <;> omega
+  have h18 : col (4374 * y - 34) = 2187 * y - 17 := by unfold col; split_ifs <;> omega
+  show col (col (col (col (col (col (col (col (col (col (col (col (col (col (col (col (col (col (2048 * y - 17)))))))))))))))))) = 2187 * y - 17
+  rw [h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13, h14, h15, h16, h17, h18]
+
+theorem neg17_handoff_holds : neg17_handoff := by
+  unfold neg17_handoff
+  exact neg17_once
+
+private theorem neg17_iter (t : Nat) : ∀ y : Nat, 0 < y →
+    col^[18 * t] (2048 ^ t * y - 17) = 2187 ^ t * y - 17 := by
+  induction t with
+  | zero => intro y _; simp
+  | succ t ih =>
+    intro y hy
+    have hA : 0 < 2048 ^ t * y := Nat.mul_pos (pow_pos (by norm_num) _) hy
+    rw [show 18 * (t + 1) = 18 * t + 18 by ring, Function.iterate_add_apply,
+      show 2048 ^ (t + 1) * y = 2048 * (2048 ^ t * y) by ring, neg17_once _ hA,
+      show 2187 * (2048 ^ t * y) = 2048 ^ t * (2187 * y) by ring, ih (2187 * y) (by omega)]
+    congr 1
+    ring
+
+theorem neg17_chain_holds : neg17_chain := by
+  unfold neg17_chain
+  exact neg17_iter
+
+end RNS.CollatzHub
+
 #print axioms RNS.CollatzHub.hub_step_tracks_collatz_holds
 #print axioms RNS.CollatzHub.run_formula_holds
 #print axioms RNS.CollatzHub.exit_pairing_holds
@@ -785,3 +835,5 @@ end RNS.CollatzHub
 #print axioms RNS.CollatzHub.shape_landing_holds
 #print axioms RNS.CollatzHub.cycle_equation_holds
 #print axioms RNS.CollatzHub.cycle_shape_tests_holds
+#print axioms RNS.CollatzHub.neg17_handoff_holds
+#print axioms RNS.CollatzHub.neg17_chain_holds

@@ -401,3 +401,23 @@ def cycle_shape_tests : Prop :=
   ∀ x : Nat, parityWord x 6 = [true, false, true, false, false, false] → col^[6] x ≠ x
 
 end RNS.CollatzHub
+
+/-! ## Shadows of the negative cycles -/
+
+namespace RNS.CollatzHub
+
+/-- **The −17 hand-off.** On the negative numbers the map has the cycle
+−17 → −50 → −25 → … → −17 (7 odd steps, 11 halvings). A positive number that
+agrees with −17 in its last 11 binary digits, `2048 y − 17`, follows that cycle's
+18 steps once and lands on `2187 y − 17`: it grows by 2187/2048 and keeps agreeing
+with −17 in 11 fewer digits. (The climb formula is the same thing for −1, ×3/2 per
+digit, and the block hand-off for −5, ×9/8 per three digits.) -/
+def neg17_handoff : Prop :=
+  ∀ y : Nat, 0 < y → col^[18] (2048 * y - 17) = 2187 * y - 17
+
+/-- **The −17 chain.** `t` hand-offs: `2048^t · y − 17` reaches `2187^t · y − 17`
+after `18 t` steps. -/
+def neg17_chain : Prop :=
+  ∀ t y : Nat, 0 < y → col^[18 * t] (2048 ^ t * y - 17) = 2187 ^ t * y - 17
+
+end RNS.CollatzHub

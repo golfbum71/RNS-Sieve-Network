@@ -422,6 +422,32 @@ conclusions:
         note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-27). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
+  - id: neg17_handoff
+    declaration: RNS.CollatzHub.neg17_handoff
+    summary: "A positive number agreeing with -17 in its last 11 binary digits follows the -17 cycle once (18 steps) and grows by 2187/2048, still agreeing with -17 in 11 fewer digits."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.neg17_handoff_holds
+        note: "Draft Lean proof, waiting for the GitHub build."
+    designated: lean-proof
+
+  - id: neg17_chain
+    declaration: RNS.CollatzHub.neg17_chain
+    summary: "t hand-offs take 2048^t times y, less 17, to 2187^t times y, less 17, in 18t steps."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.neg17_chain_holds
+        note: "Draft Lean proof, waiting for the GitHub build."
+    designated: lean-proof
+
 open_statements:
   - id: collatz_hub_form
     summary: "The Collatz conjecture in hub form: every index at least 1 reaches the fixed point 1 under the hub map."

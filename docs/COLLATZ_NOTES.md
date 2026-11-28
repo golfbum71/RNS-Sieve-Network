@@ -653,3 +653,21 @@ Write the shape of any run of steps as its order of odd steps and halvings. Then
 - **Tests.** Up, halve, halve, up, halve, halve: c = 7, 2^4 − 3^2 = 7, start 1 (the loop 1, 4, 2 gone round twice). Climb 2, drop 3 (up, halve, up, halve, halve, halve): c = 5, and 5 ÷ 7 is not whole, so no number has that shape as a cycle.
 
 This puts the "no cycle" half of the problem in block language as one exact equation per shape. Ruling out every shape is still open; Hercher (2023) shows a cycle would need at least 92 climb-and-drop passages.
+
+## 31. Shadows of the negative cycles (Nov 27)
+
+Label: **proved** (Lean: `climb_formula`, `block_handoff`, `neg17_handoff`, `neg17_chain`); script `scripts/collatz/shadows.py`.
+
+The map x → x/2, 3x + 1 on all whole numbers, negative included, has four cycles besides 0: the positive 1 → 4 → 2 → 1, and on the negatives −1 → −2 → −1, −5 → −14 → −7 → −20 → −10 → −5, and the 18-step cycle of −17 (−17, −50, −25, −74, −37, −110, −55, −164, −82, −41, −122, −61, −182, −91, −272, −136, −68, −34). Each cycle has u odd steps and k halvings.
+
+**The shadow rule.** A positive number that agrees with a cycle member a in its last k (or more) binary digits, x = a + 2^k · y, follows the cycle's steps once and lands on a + 3^u · y: it is scaled by 3^u/2^k about the cycle and agrees with a in k fewer digits. Repeating, it follows the cycle as long as the agreement lasts.
+
+- Shadow of −1 (u = 1, k = 1, ×3/2 per digit): the climb. Trailing binary ones are agreement with −1 = …1111. This is the run formula.
+- Shadow of −5 (u = 2, k = 3, ×9/8 per three digits): the block of ones (section 25). Its hand-off is `block_handoff`.
+- Shadow of −17 (u = 7, k = 11, ×2187/2048 per 11 digits): new, `neg17_handoff` and `neg17_chain`.
+- Shadow of 0 (halving) and of the positive cycle 1 → 4 → 2 → 1 (×3/4): these shrink, and they are the rules for even numbers and for remainder 1 on division by 4.
+
+**What it explains.**
+1. Every slow way to stay high is a shadow of a negative cycle, because those are the cycles whose factor 3^u/2^k is above 1.
+2. The sliver's endings are these shadows. On division by 32 the sliver uses exactly the endings …00111, …01111, …11011, …11111, which are the endings of −25, −17, −5 and −1 (members of the −17, −5 and −1 cycles). Every sliver number below 3 million agrees with some negative-cycle member in at least its last 5 binary digits.
+3. Why no rule that reads only a finite ending can close the sliver: −5 and −17 never drop, and at every depth their endings are shared by positive numbers, which therefore cannot be settled by their ending alone. A rule that closes the sliver has to use what makes a positive number different from −5 or −17: its binary digits eventually turn into all 0s on the left, where theirs are all 1s. So every shadow a positive number follows must break off within its own digits.
