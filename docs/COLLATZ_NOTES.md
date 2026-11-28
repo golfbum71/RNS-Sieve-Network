@@ -578,3 +578,20 @@ Once fewer than three ones are left there is a fixed finish. With two ones left 
 Correction: before this was checked, I said that every block of 3t + 2 ones drops right after its runs of 2. That holds only up to 14 ones.
 
 Checked: every number below 3 million that the rule settles (106,583 of them) reaches the predicted value and is below its start. The ledger page marks these rows with the Block of ones rule and shows the hand-off chain in the run readout.
+
+## 26. Pioneer, peak and tide (Nov 27)
+
+For each pioneer (odd, the smallest number whose path tops out at a given highest odd value, with that value above it) three markers: the pioneer, the peak, and the tide, the first value below the pioneer. From there on the path is among numbers already settled. Table: the "Collatz Pioneers" Sheet (all 10,880 below 100,000) and `scripts/collatz/pioneer_markers.py` (all 108,880 below 1,000,000).
+
+**Peak signature (proved).** Write the pioneer as 2^j · m − 1 (j trailing binary ones, m odd). The top of its first climb is 2 · 3^(j−1) · m − 1, so in ternary it ends in at least j − 1 twos. It ends in exactly j − 1 when m is not a multiple of 3, and m always isn't for a pioneer: otherwise the pioneer leaves remainder 2 on division by 3, and such a number is entered from the smaller number two thirds of its double, less a third. Checked: all 78,440 pioneers whose peak is the first climb's top. The binary ones at the start become ternary twos at the top.
+
+**Second climbs (5 and 13 proved; the rest measured).** The exit index 3^(j−1) · m on division by 16 sorts the pioneers. 5 or 13: always climbs above the first peak (the free-step rule, Lean `free_step`), 27,941 pioneers. 3, 7, 11 or 15: never climbs above it in the data (54,642 pioneers), but this is not proved. 1 or 9: either; with more digits, more are settled (on division by 1024 about two thirds are decided). 151 of the 158 pioneers whose peak is above the pioneer to the power 1.5 climb again after the first climb.
+
+**The tide.** Count u odd steps and k halvings from the pioneer. The value is above 3^u / 2^k times the pioneer, so:
+- (proved) the tide never comes while 3^u is at least 2^k;
+- (proved) the tide comes right after a halving, since an odd step only makes the number larger;
+- (measured, every pioneer below 1,000,000) it comes with the balance k − 1.585 u between 0 and 1 bit, and tide ÷ pioneer is within 0.002 of 2 to the minus balance. That the tide always comes at the first moment 3^u falls below 2^k is Terras's coefficient stopping time conjecture (1976), open.
+
+**Debt from the top.** At the peak the path owes a debt in bits: 1.585 × (odd steps up) − (halvings up), about log2(peak ÷ pioneer). On the way down each odd step adds 1.585 to the debt and each halving pays off 1, and the tide comes when the debt is first paid. So steps down and odd steps down are tied to the debt at the peak, not separate facts. Examples from a first-climb peak: with two trailing ones the debt is about 0.585 bits. A steep exit (three halvings after the odd step, paying 1.415) reaches the tide at once: every pioneer leaving remainder 3 on division by 16 meets the tide at (9x + 5)/16 four steps after its peak. A gentle exit (two halvings, paying 0.415) needs a second drop: remainder 11 on division by 32 meets it at (27x + 23)/32. Every halving count on the way down is read from the binary digits of the number reached, so the whole trip to the tide is fixed by the pioneer's last digits (the row-pattern rule, seen from the top).
+
+**Not a digit rule: being a pioneer.** No ending of up to 14 binary digits makes a number always a pioneer, and a growing number of endings never are. Being a pioneer depends on every smaller number. A pioneer's last ternary digit is never 2.
