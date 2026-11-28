@@ -299,10 +299,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.climb_formula_holds
-        note: "Draft Lean proof, waiting for the GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-27). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
   - id: halving_formula
@@ -312,10 +312,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.halving_formula_holds
-        note: "Draft Lean proof, waiting for the GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-27). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
   - id: one_drop_tide
@@ -325,10 +325,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.one_drop_tide_holds
-        note: "Draft Lean proof, waiting for the GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-27). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
 open_statements:
