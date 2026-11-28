@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Geoffrey Fischer
 -/
 import RNSNetwork.Vocabulary
+import Mathlib.Data.Nat.ModEq
 
 /-!
 # CollatzHub — the Collatz map seen from the 6n-2 hub
@@ -306,5 +307,42 @@ are those of the 2-adic number `1/3^j`, a repeating pattern. -/
 def one_drop_tide : Prop :=
   ∀ j h m c : Nat, 3 ^ j * m = 2 ^ h * c + 1 → 3 ^ j * m + 2 ^ h ≤ 2 ^ (j + h) * m →
     col^[2 * j + h] (2 ^ j * m - 1) = c ∧ c < 2 ^ j * m - 1
+
+end RNS.CollatzHub
+
+/-! ## Building a mountain block by block -/
+
+namespace RNS.CollatzHub
+
+/-- **One block.** A number `2^j · m − 1` climbs `j` times and drops `d` halvings,
+landing on `c`, whenever its top `3^j · m − 1` is `2^d · c`: `2j + d` steps. -/
+def block_step : Prop :=
+  ∀ j d m c : Nat, 3 ^ j * m = 2 ^ d * c + 1 → col^[2 * j + d] (2 ^ j * m - 1) = c
+
+/-- **Where a block lands.** If `3^j · m + 2^d = 2^(d + j₂) · m₂ + 1`, the block
+(climb `j`, drop `d`) lands on `2^(j₂) · m₂ − 1`: the start of the next block, a
+number with `j₂` trailing binary ones (when `m₂` is odd). -/
+def block_landing : Prop :=
+  ∀ j d j₂ m m₂ : Nat, 0 < m₂ → 3 ^ j * m + 2 ^ d = 2 ^ (d + j₂) * m₂ + 1 →
+    col^[2 * j + d] (2 ^ j * m - 1) = 2 ^ j₂ * m₂ - 1
+
+/-- **A new block's ending is built from the previous one.** Two starts `m` and
+`m'` that satisfy the same block equation `3^j · m + E = 2^D · m₂` (with
+`E = 2^d − 1`, `D = d + j₂` for a block landing as above) agree in their last
+`D + t` binary digits exactly when their landing points `m₂` and `m₂'` agree in
+their last `t`. So the ending that makes the whole mountain is the ending for the
+first block, `D` digits, followed by the next block's ending carried back through
+the block: no digit is lost or left free, because 3 is odd. -/
+def block_ending_lift : Prop :=
+  ∀ j D E t m m' m₂ m₂' : Nat, 3 ^ j * m + E = 2 ^ D * m₂ → 3 ^ j * m' + E = 2 ^ D * m₂' →
+    (m ≡ m' [MOD 2 ^ (D + t)] ↔ m₂ ≡ m₂' [MOD 2 ^ t])
+
+/-- **Two blocks in a row.** A climb `j`, drop `d` landing on `2^(j₂) · m₂ − 1`,
+followed by a climb `j₂`, drop `d₂` landing on `c`, takes `(2j + d) + (2j₂ + d₂)`
+steps from `2^j · m − 1` to `c`. -/
+def two_blocks : Prop :=
+  ∀ j d j₂ d₂ m m₂ c : Nat, 0 < m₂ → 3 ^ j * m + 2 ^ d = 2 ^ (d + j₂) * m₂ + 1 →
+    3 ^ j₂ * m₂ = 2 ^ d₂ * c + 1 →
+    col^[(2 * j₂ + d₂) + (2 * j + d)] (2 ^ j * m - 1) = c
 
 end RNS.CollatzHub

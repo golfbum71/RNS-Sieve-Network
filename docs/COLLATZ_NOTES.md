@@ -628,3 +628,16 @@ Script: `scripts/collatz/mountain_types.py` (every odd number below 2^22).
 The number of types for 1, 2, 3, … odd steps is 1, 1, 2, 3, 7, 12, 30, 85, 173, 476: OEIS A100982. Mike Winkler (arXiv 1504.00212, 1709.03385) gives a recursive tree that generates them. So this level is known; our block language and the one-drop family (section 27, in Lean) are a slice of it in Geo's terms.
 
 **Time to the tide is quantized.** Every odd number below 2^22 meets the tide after exactly u + ⌊u · log2 3⌋ + 1 steps, where u is its number of odd steps: 3, 6, 8, 11, 13, 16, 19, 21, 24, 26, … (OEIS A020914). The tide cannot come sooner (proved, section 26); that it never comes later is Terras's coefficient stopping time conjecture, open.
+
+## 29. Building a mountain block by block (Nov 27)
+
+Label: **proved** (Lean: `block_step`, `block_landing`, `block_ending_lift`, `two_blocks`).
+
+A mountain is a chain of blocks, each "climb j, drop d". Four facts make the chain exact:
+
+1. **One block.** From 2^j · m − 1 the climb is forced to 3^j · m − 1; if that top is 2^d times a number c, the drop of d halvings lands on c. Steps: 2j + d.
+2. **Where it lands.** The landing point is the start of the next block, a number 2^(j₂) · m₂ − 1 with j₂ trailing ones, exactly when 3^j · m + 2^d = 2^(d + j₂) · m₂ + 1.
+3. **The ending is built from the previous one.** Two starts satisfying the same block equation agree in their last D + t binary digits (D = d + j₂) exactly when their landing points agree in their last t. So the binary ending of a whole mountain type is: the first block's D digits (fixed by the block), then the next block's ending carried back through the block, digit for digit. Nothing is lost and nothing is left free, because multiplying by 3 can be undone on binary digits (3 is odd).
+4. **Blocks compose.** The steps add, and the second block starts where the first lands.
+
+Together: every mountain type, however many blocks, has exactly one binary ending, of length the total halvings, assembled block by block. Section 28's table is what this produces for 3 to 5 odd steps; the counts are OEIS A100982 (Winkler's tree builds the same classes). The question left open is whether a chain of blocks that never reaches the tide can exist: by fact 3 it would need an infinite ending, a 2-adic number that is a whole number, and showing no whole number has such an ending is the conjecture itself.

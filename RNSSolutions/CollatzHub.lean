@@ -5,6 +5,7 @@ Authors: Geoffrey Fischer
 -/
 import RNSNetwork.Nodes.CollatzHub.Conclusions
 import Mathlib.Tactic.Ring
+import Mathlib.Data.Nat.Prime.Basic
 
 /-!
 # Proofs for CollatzHub
@@ -624,6 +625,74 @@ theorem one_drop_tide_holds : one_drop_tide := by
 
 end RNS.CollatzHub
 
+
+/-! ## Building a mountain block by block -/
+
+namespace RNS.CollatzHub
+
+private theorem block (j d m c : Nat) (h : 3 ^ j * m = 2 ^ d * c + 1) :
+    col^[2 * j + d] (2 ^ j * m - 1) = c := by
+  have hc : 3 ^ j * m - 1 = 2 ^ d * c := by
+    generalize 3 ^ j * m = X at h ⊢
+    generalize 2 ^ d * c = A at h ⊢
+    omega
+  rw [show 2 * j + d = d + 2 * j by ring, Function.iterate_add_apply, climb, hc, halve]
+
+theorem block_step_holds : block_step := by
+  unfold block_step
+  intro j d m c h
+  exact block j d m c h
+
+private theorem landing (j d j₂ m m₂ : Nat) (hm : 0 < m₂)
+    (h : 3 ^ j * m + 2 ^ d = 2 ^ (d + j₂) * m₂ + 1) :
+    col^[2 * j + d] (2 ^ j * m - 1) = 2 ^ j₂ * m₂ - 1 := by
+  apply block
+  have hQ : 0 < 2 ^ j₂ * m₂ := Nat.mul_pos (pow_pos (by norm_num) _) hm
+  obtain ⟨q, hq⟩ : ∃ q, 2 ^ j₂ * m₂ = q + 1 :=
+    ⟨2 ^ j₂ * m₂ - 1, by generalize 2 ^ j₂ * m₂ = Q at hQ ⊢; omega⟩
+  have e : 2 ^ (d + j₂) * m₂ = 2 ^ d * q + 2 ^ d := by
+    rw [pow_add, mul_assoc, hq]
+    ring
+  rw [hq, show q + 1 - 1 = q by omega]
+  rw [e] at h
+  generalize 3 ^ j * m = X at h ⊢
+  generalize 2 ^ d * q = A at h ⊢
+  generalize 2 ^ d = P at h ⊢
+  omega
+
+theorem block_landing_holds : block_landing := by
+  unfold block_landing
+  intro j d j₂ m m₂ hm h
+  exact landing j d j₂ m m₂ hm h
+
+theorem block_ending_lift_holds : block_ending_lift := by
+  unfold block_ending_lift
+  intro j D E t m m' m₂ m₂' h h'
+  have hcop : Nat.gcd (2 ^ (D + t)) (3 ^ j) = 1 :=
+    Nat.coprime_pow_primes (D + t) j Nat.prime_two Nat.prime_three (by norm_num)
+  have hD : (2 : Nat) ^ D ≠ 0 := pow_ne_zero _ (by norm_num)
+  rw [pow_add]
+  constructor
+  · intro hm
+    have h1 : 3 ^ j * m + E ≡ 3 ^ j * m' + E [MOD 2 ^ D * 2 ^ t] :=
+      (hm.mul_left (3 ^ j)).add_right E
+    rw [h, h'] at h1
+    exact Nat.ModEq.mul_left_cancel' hD h1
+  · intro hm
+    have h1 : 2 ^ D * m₂ ≡ 2 ^ D * m₂' [MOD 2 ^ D * 2 ^ t] := hm.mul_left' (2 ^ D)
+    rw [← h, ← h'] at h1
+    have h2 : 3 ^ j * m ≡ 3 ^ j * m' [MOD 2 ^ D * 2 ^ t] := Nat.ModEq.add_right_cancel' E h1
+    rw [← pow_add] at h2 ⊢
+    exact Nat.ModEq.cancel_left_of_coprime hcop h2
+
+theorem two_blocks_holds : two_blocks := by
+  unfold two_blocks
+  intro j d j₂ d₂ m m₂ c hm h1 h2
+  rw [Function.iterate_add_apply, landing j d j₂ m m₂ hm h1]
+  exact block j₂ d₂ m₂ c h2
+
+end RNS.CollatzHub
+
 #print axioms RNS.CollatzHub.hub_step_tracks_collatz_holds
 #print axioms RNS.CollatzHub.run_formula_holds
 #print axioms RNS.CollatzHub.exit_pairing_holds
@@ -647,3 +716,7 @@ end RNS.CollatzHub
 #print axioms RNS.CollatzHub.climb_formula_holds
 #print axioms RNS.CollatzHub.halving_formula_holds
 #print axioms RNS.CollatzHub.one_drop_tide_holds
+#print axioms RNS.CollatzHub.block_step_holds
+#print axioms RNS.CollatzHub.block_landing_holds
+#print axioms RNS.CollatzHub.block_ending_lift_holds
+#print axioms RNS.CollatzHub.two_blocks_holds

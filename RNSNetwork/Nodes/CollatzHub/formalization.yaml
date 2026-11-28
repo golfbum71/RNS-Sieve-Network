@@ -331,6 +331,58 @@ conclusions:
         note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-27). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
+  - id: block_step
+    declaration: RNS.CollatzHub.block_step
+    summary: "One block: a climb of j and a drop of d halvings take 2^j times m, less one, to c whenever the top 3^j times m, less one, is 2^d times c."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.block_step_holds
+        note: "Draft Lean proof, waiting for the GitHub build."
+    designated: lean-proof
+
+  - id: block_landing
+    declaration: RNS.CollatzHub.block_landing
+    summary: "A block lands on the start of the next block, 2^j2 times m2 less one, exactly when 3^j times m plus 2^d equals 2^(d+j2) times m2 plus one."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.block_landing_holds
+        note: "Draft Lean proof, waiting for the GitHub build."
+    designated: lean-proof
+
+  - id: block_ending_lift
+    declaration: RNS.CollatzHub.block_ending_lift
+    summary: "Two starts agree in their last D + t binary digits exactly when their landing points agree in their last t, so a mountain's ending is the first block's ending followed by the next block's ending carried back."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.block_ending_lift_holds
+        note: "Draft Lean proof, waiting for the GitHub build."
+    designated: lean-proof
+
+  - id: two_blocks
+    declaration: RNS.CollatzHub.two_blocks
+    summary: "Two blocks in a row compose: the steps add and the second block starts where the first lands."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.two_blocks_holds
+        note: "Draft Lean proof, waiting for the GitHub build."
+    designated: lean-proof
+
 open_statements:
   - id: collatz_hub_form
     summary: "The Collatz conjecture in hub form: every index at least 1 reaches the fixed point 1 under the hub map."
