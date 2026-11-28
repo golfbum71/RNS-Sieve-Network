@@ -779,8 +779,17 @@ private theorem neg17_once (y : Nat) (hy : 0 < y) : col^[18] (2048 * y - 17) = 2
   have h16 : col (17496 * y - 136) = 8748 * y - 68 := by unfold col; split_ifs <;> omega
   have h17 : col (8748 * y - 68) = 4374 * y - 34 := by unfold col; split_ifs <;> omega
   have h18 : col (4374 * y - 34) = 2187 * y - 17 := by unfold col; split_ifs <;> omega
-  show col (col (col (col (col (col (col (col (col (col (col (col (col (col (col (col (col (col (2048 * y - 17)))))))))))))))))) = 2187 * y - 17
-  rw [h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13, h14, h15, h16, h17, h18]
+  have A : col^[6] (2048 * y - 17) = 6912 * y - 55 := by
+    show col (col (col (col (col (col (2048 * y - 17)))))) = 6912 * y - 55
+    rw [h1, h2, h3, h4, h5, h6]
+  have Bv : col^[6] (6912 * y - 55) = 11664 * y - 91 := by
+    show col (col (col (col (col (col (6912 * y - 55)))))) = 11664 * y - 91
+    rw [h7, h8, h9, h10, h11, h12]
+  have C : col^[6] (11664 * y - 91) = 2187 * y - 17 := by
+    show col (col (col (col (col (col (11664 * y - 91)))))) = 2187 * y - 17
+    rw [h13, h14, h15, h16, h17, h18]
+  rw [show (18 : Nat) = 6 + (6 + 6) from rfl, Function.iterate_add_apply,
+    Function.iterate_add_apply, A, Bv, C]
 
 theorem neg17_handoff_holds : neg17_handoff := by
   unfold neg17_handoff
