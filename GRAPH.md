@@ -8,7 +8,7 @@ For each claim the network records what it says, what other claims it rests
 on, and how it is justified. You can read off what any result depends on
 without opening a single proof.
 
-**Where things stand:** 106 of 125 nodes are built, holding 375 claims: 367 proved in Lean, 1 with a proof drafted but not yet built and 7 cited from a published paper. They are joined by 202 arrows, each a Lean-checked step. Of the other 19 nodes, drawn dashed or purple, 1 is proved in the original source files but not yet restated here; 6 are planned citations of published results; 9 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
+**Where things stand:** 106 of 125 nodes are built, holding 375 claims: 368 proved in Lean and 7 cited from a published paper. They are joined by 202 arrows, each a Lean-checked step. Of the other 19 nodes, drawn dashed or purple, 1 is proved in the original source files but not yet restated here; 6 are planned citations of published results; 9 are new work, stated or scoped but not yet proved; 3 are outside sources, proved in Lean in other projects and cited here.
 
 ## How to read the graph
 
@@ -302,8 +302,7 @@ graph LR
   classDef external fill:#fbefff,stroke:#8250df,color:#1f2328;
   classDef openconj fill:#fff8c5,stroke:#9a6700,color:#1f2328;
   classDef stub fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
-  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c44,c45,c46,c47,c48,c49,c50,c51,c52,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c63,c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78,c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c93,c94,c95,c96,c97,c98,c99,c100,c101,c102,c103,c104,c105,c106,c107,c108,c109 verified;
-  class c92 draft;
+  class c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33,c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c44,c45,c46,c47,c48,c49,c50,c51,c52,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c63,c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78,c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c92,c93,c94,c95,c96,c97,c98,c99,c100,c101,c102,c103,c104,c105,c106,c107,c108,c109 verified;
   class p1 stub;
   click c1 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/Wheel6.md#prime_gt_three_is_candidate" _blank
   click c2 href "https://github.com/golfbum71/RNS-Sieve-Network/blob/main/docs/nodes/CRT.md#crt_map_bijective" _blank
@@ -2477,7 +2476,7 @@ The results nothing else builds on, each with everything beneath it.
 - [`CollatzHub.cycle_shape_tests`](docs/nodes/CollatzHub.md#cycle_shape_tests) — proved in Lean
 - [`CollatzHub.neg17_handoff`](docs/nodes/CollatzHub.md#neg17_handoff) — proved in Lean
 - [`CollatzHub.neg17_chain`](docs/nodes/CollatzHub.md#neg17_chain) — proved in Lean
-- [`CollatzHub.digit_carry`](docs/nodes/CollatzHub.md#digit_carry) — proof drafted, not yet built
+- [`CollatzHub.digit_carry`](docs/nodes/CollatzHub.md#digit_carry) — proved in Lean
 
 ## What the network takes on trust
 
@@ -3049,4 +3048,4 @@ Nodes that apply the RNS to published work: proven results, cited theorems, or s
 | 126 | [`JacobsthalTightness`](docs/nodes/JacobsthalTightness.md) | tight lonely runners wait on Jacobsthal's problem (cited) | planned: cited from a paper |
 | 127 | [`TightFromBlockedRun`](docs/nodes/TightFromBlockedRun.md) | a run of blocked numbers makes a tight lonely runner | proved in Lean |
 | 128 | [`GoldbachStacks`](docs/nodes/GoldbachStacks.md) | Goldbach's conjecture as a building problem with prime stacks | proved in Lean |
-| 129 | [`CollatzHub`](docs/nodes/CollatzHub.md) | the Collatz map seen from the 6n-2 hub | proof drafted, not yet built |
+| 129 | [`CollatzHub`](docs/nodes/CollatzHub.md) | the Collatz map seen from the 6n-2 hub | proved in Lean |

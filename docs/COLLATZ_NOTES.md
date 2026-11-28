@@ -671,3 +671,15 @@ The map x → x/2, 3x + 1 on all whole numbers, negative included, has four cycl
 1. Every slow way to stay high is a shadow of a negative cycle, because those are the cycles whose factor 3^u/2^k is above 1.
 2. The sliver's endings are these shadows. On division by 32 the sliver uses exactly the endings …00111, …01111, …11011, …11111, which are the endings of −25, −17, −5 and −1 (members of the −17, −5 and −1 cycles). Every sliver number below 3 million agrees with some negative-cycle member in at least its last 5 binary digits.
 3. Why no rule that reads only a finite ending can close the sliver: −5 and −17 never drop, and at every depth their endings are shared by positive numbers, which therefore cannot be settled by their ending alone. A rule that closes the sliver has to use what makes a positive number different from −5 or −17: its binary digits eventually turn into all 0s on the left, where theirs are all 1s. So every shadow a positive number follows must break off within its own digits.
+
+## 32. The digit carry law, and where a shadow breaks off (Nov 28)
+
+Label: **proved** (Lean: `digit_carry`), the rest as marked.
+
+**The digit carry law (proved).** Run some steps from r, with U odd steps and K halvings. Any number that agrees with r in its last K + 1 binary digits, r + 2^(K+1) · q, makes the same steps and lands on the same place plus 2 · 3^U · q. The unread digits q ride along: multiplied by 3 at each odd step, moved down one place at each halving. (This is the classical fact, Terras 1976 and Everett 1977, that a number's last digits fix its first steps, written for the plain 3x + 1 map with the carried part made exact.)
+
+**Where a shadow breaks off (proved, from the carry law and section 31).** A positive x that agrees with a negative-cycle member a in exactly K binary digits follows the cycle while the agreement lasts, then lands on a point of the cycle plus 3^U times its unread digits. The digit where the agreement ends is where its path first leaves the cycle's pattern: the cycle wanted an odd step and it gets a halving, or the other way round.
+
+**How long a shadow can last (proved, simple).** A positive x agreeing with a negative a in its last K digits has x − a = 2^K · y with y at least 1, so 2^K ≤ x + |a|: a shadow lasts at most about as many digits as x has. So one shadow lifts a number at most to about x^1.585 (shadow of −1, the climb; this is the climb bound found earlier), x^1.057 (−5) or x^1.009 (−17).
+
+**Why that does not finish the argument.** The hope was that a positive number, having only so many digits, runs out of shadows. It does not run out, because climbing makes new digits: each odd step multiplies by 3 and adds about 1.585 digits, while each halving removes one. After a shadow breaks, the number's next ending comes from 3^U times its unread digits, digits the climb has just manufactured. So "positive numbers have finitely many digits" by itself only returns the balance between 1.585 digits made per odd step and 1 used per halving, the same balance as the debt of section 26. A closing rule has to say something about the digits that multiplying by 3 produces, not just count them.
