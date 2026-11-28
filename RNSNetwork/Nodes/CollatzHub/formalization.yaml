@@ -292,6 +292,45 @@ conclusions:
         note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-26). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
+  - id: climb_formula
+    declaration: RNS.CollatzHub.climb_formula
+    summary: "A number 2^j times a, less one, climbs j times in 2j steps to 3^j times a, less one."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.climb_formula_holds
+        note: "Draft Lean proof, waiting for the GitHub build."
+    designated: lean-proof
+
+  - id: halving_formula
+    declaration: RNS.CollatzHub.halving_formula
+    summary: "h halvings take 2^h times c to c."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.halving_formula_holds
+        note: "Draft Lean proof, waiting for the GitHub build."
+    designated: lean-proof
+
+  - id: one_drop_tide
+    declaration: RNS.CollatzHub.one_drop_tide
+    summary: "A climb from 2^j times m, less one, meets the tide in a single drop of h halvings exactly when the last h binary digits of m are those of the 2-adic number 1/3^j and the halvings outweigh the climb."
+    imports: []
+    imports_status: none
+    justifications:
+      - id: lean-proof
+        kind: lean-draft
+        solution: RNSSolutions/CollatzHub.lean
+        declaration: RNS.CollatzHub.one_drop_tide_holds
+        note: "Draft Lean proof, waiting for the GitHub build."
+    designated: lean-proof
+
 open_statements:
   - id: collatz_hub_form
     summary: "The Collatz conjecture in hub form: every index at least 1 reaches the fixed point 1 under the hub map."

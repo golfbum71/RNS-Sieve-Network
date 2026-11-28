@@ -595,3 +595,20 @@ For each pioneer (odd, the smallest number whose path tops out at a given highes
 **Debt from the top.** At the peak the path owes a debt in bits: 1.585 × (odd steps up) − (halvings up), about log2(peak ÷ pioneer). On the way down each odd step adds 1.585 to the debt and each halving pays off 1, and the tide comes when the debt is first paid. So steps down and odd steps down are tied to the debt at the peak, not separate facts. Examples from a first-climb peak: with two trailing ones the debt is about 0.585 bits. A steep exit (three halvings after the odd step, paying 1.415) reaches the tide at once: every pioneer leaving remainder 3 on division by 16 meets the tide at (9x + 5)/16 four steps after its peak. A gentle exit (two halvings, paying 0.415) needs a second drop: remainder 11 on division by 32 meets it at (27x + 23)/32. Every halving count on the way down is read from the binary digits of the number reached, so the whole trip to the tide is fixed by the pioneer's last digits (the row-pattern rule, seen from the top).
 
 **Not a digit rule: being a pioneer.** No ending of up to 14 binary digits makes a number always a pioneer, and a growing number of endings never are. Being a pioneer depends on every smaller number. A pioneer's last ternary digit is never 2.
+
+## 27. One-drop mountains (Nov 27)
+
+Label: **proved** (Lean: `climb_formula`, `halving_formula`, `one_drop_tide`), checked both ways by `scripts/collatz/one_drop.py`.
+
+Take an odd number with j trailing binary ones, written 2^j · m − 1. Its climb is forced: j climbs (up, halve) in 2j steps reach 3^j · m − 1, with no choices along the way. What happens next is one drop of some number of halvings. Let h be the fewest halvings that outweigh the climb (the smallest h with 3^j below 2^(j+h)): 1, 2, 2, 3, 3, 4, 5, 5, 6, 6, 7, 8, … for j = 1, 2, 3, …
+
+- If the last h binary digits of m are the last h digits of the 2-adic number 1/3^j, the top 3^j · m − 1 is divisible by 2^h, so the drop has at least h halvings, and after exactly 2j + h steps the number is (3^j · m − 1)/2^h, below its start. The mountain meets the tide in a single drop.
+- If they are not, the drop has fewer than h halvings and lands above the start (the climb outweighs it), so it does not meet the tide in one drop.
+
+(For a handful of the smallest m the halvings do not quite outweigh the "−1"s; the Lean statement carries the exact condition 3^j · m + 2^h ≤ 2^(j+h) · m.)
+
+The endings form a repeating pattern, not a list to be searched: the 2-adic digits of 1/3^j repeat, after the first, every 2 · 3^(j−1) digits. For j = 1 they are …10101011: the same alternating 1, 0 that sets the first run in the row patterns of the 6n+1 column. The digits m must end in for j = 1 to 8: 1, 01, 11, 001, 011, 1001, 00011, 00001.
+
+Examples. j = 1 is the rule for remainder 1 on division by 4. j = 2 (m ending in 01) is the family x ≡ 3 mod 16 with tide (9x + 5)/16 from section 26. j = 3 (m ending in 11) gives x ≡ 23 mod 32 with tide (27x + 19)/32 after 8 steps.
+
+What this gives the tide program: every climb length has its own exact one-drop class, a fixed share 2^(−h) of the numbers with that many trailing ones, read from the number with no looking ahead, for climbs of any length. Two-drop mountains are the same construction one level up: after the first drop the number reached has its own trailing ones and its own class.

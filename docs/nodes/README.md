@@ -128,6 +128,6 @@
 | 126 | [`JacobsthalTightness`](JacobsthalTightness.md) | tight lonely runners wait on Jacobsthal's problem (cited) | planned: cited from a paper |
 | 127 | [`TightFromBlockedRun`](TightFromBlockedRun.md) | a run of blocked numbers makes a tight lonely runner | proved in Lean |
 | 128 | [`GoldbachStacks`](GoldbachStacks.md) | Goldbach's conjecture as a building problem with prime stacks | proved in Lean |
-| 129 | [`CollatzHub`](CollatzHub.md) | the Collatz map seen from the 6n-2 hub | proved in Lean |
+| 129 | [`CollatzHub`](CollatzHub.md) | the Collatz map seen from the 6n-2 hub | proof drafted, not yet built |
 
 See [`GRAPH.md`](../../GRAPH.md) for the diagrams.

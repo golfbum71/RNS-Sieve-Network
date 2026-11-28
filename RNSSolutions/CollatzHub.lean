@@ -550,6 +550,80 @@ theorem block_of_ones_drops_holds : block_of_ones_drops := by
 
 end RNS.CollatzHub
 
+
+/-! ## One-drop mountains -/
+
+namespace RNS.CollatzHub
+
+private theorem two_steps (B : Nat) : col (col (2 * B - 1)) = 3 * B - 1 := by
+  have h1 : col (2 * B - 1) = 6 * B - 2 := by unfold col; split_ifs <;> omega
+  rw [h1]
+  unfold col
+  split_ifs <;> omega
+
+private theorem climb (j : Nat) : ∀ a : Nat, col^[2 * j] (2 ^ j * a - 1) = 3 ^ j * a - 1 := by
+  induction j with
+  | zero => intro a; simp
+  | succ j ih =>
+    intro a
+    have e : col^[2] (2 ^ (j + 1) * a - 1) = 2 ^ j * (3 * a) - 1 := by
+      show col (col (2 ^ (j + 1) * a - 1)) = 2 ^ j * (3 * a) - 1
+      rw [show 2 ^ (j + 1) * a = 2 * (2 ^ j * a) by ring, two_steps]
+      congr 1
+      ring
+    rw [show 2 * (j + 1) = 2 * j + 2 by ring, Function.iterate_add_apply, e, ih (3 * a)]
+    congr 1
+    ring
+
+theorem climb_formula_holds : climb_formula := by
+  unfold climb_formula
+  intro j a
+  exact climb j a
+
+private theorem halve (h : Nat) : ∀ c : Nat, col^[h] (2 ^ h * c) = c := by
+  induction h with
+  | zero => intro c; simp
+  | succ h ih =>
+    intro c
+    have e : col (2 * (2 ^ h * c)) = 2 ^ h * c := by
+      generalize 2 ^ h * c = D
+      unfold col
+      split_ifs <;> omega
+    rw [Function.iterate_add_apply, Function.iterate_one,
+      show 2 ^ (h + 1) * c = 2 * (2 ^ h * c) by ring, e, ih c]
+
+theorem halving_formula_holds : halving_formula := by
+  unfold halving_formula
+  intro h c
+  exact halve h c
+
+theorem one_drop_tide_holds : one_drop_tide := by
+  unfold one_drop_tide
+  intro j h m c heq hsize
+  have hc : 3 ^ j * m - 1 = 2 ^ h * c := by
+    generalize 3 ^ j * m = X at heq ⊢
+    generalize 2 ^ h * c = A at heq ⊢
+    omega
+  constructor
+  · rw [show 2 * j + h = h + 2 * j by ring, Function.iterate_add_apply, climb, hc, halve]
+  · have e1 : 2 ^ (j + h) * m = 2 ^ h * (2 ^ j * m) := by
+      rw [pow_add]
+      ring
+    have e2 : 2 ^ h * (c + 1) = 2 ^ h * c + 2 ^ h := by ring
+    have key : 2 ^ h * (c + 1) < 2 ^ h * (2 ^ j * m) := by
+      rw [e1] at hsize
+      rw [e2]
+      generalize 2 ^ h * (2 ^ j * m) = Bv at hsize ⊢
+      generalize 2 ^ h * c = A at heq ⊢
+      generalize 3 ^ j * m = X at heq hsize
+      generalize 2 ^ h = P at hsize ⊢
+      omega
+    have hlt : c + 1 < 2 ^ j * m := lt_of_mul_lt_mul_left key (Nat.zero_le _)
+    generalize 2 ^ j * m = Q at hlt ⊢
+    omega
+
+end RNS.CollatzHub
+
 #print axioms RNS.CollatzHub.hub_step_tracks_collatz_holds
 #print axioms RNS.CollatzHub.run_formula_holds
 #print axioms RNS.CollatzHub.exit_pairing_holds
@@ -570,3 +644,6 @@ end RNS.CollatzHub
 #print axioms RNS.CollatzHub.block_handoff_holds
 #print axioms RNS.CollatzHub.block_chain_holds
 #print axioms RNS.CollatzHub.block_of_ones_drops_holds
+#print axioms RNS.CollatzHub.climb_formula_holds
+#print axioms RNS.CollatzHub.halving_formula_holds
+#print axioms RNS.CollatzHub.one_drop_tide_holds

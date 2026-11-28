@@ -282,3 +282,29 @@ def block_of_ones_drops : Prop :=
     (1 ≤ t → t ≤ 2 → col^[5 * t + 3] (6 * (2 ^ (3 * t) * m) - 5) < 6 * (2 ^ (3 * t) * m) - 5)
 
 end RNS.CollatzHub
+
+/-! ## One-drop mountains -/
+
+namespace RNS.CollatzHub
+
+/-- **The climb formula, step by step.** From `2^j · a − 1`, `j` climbs (up, then
+halve, `2j` steps) end at `3^j · a − 1`: each climb turns one factor of 2 into a
+factor of 3. -/
+def climb_formula : Prop :=
+  ∀ j a : Nat, col^[2 * j] (2 ^ j * a - 1) = 3 ^ j * a - 1
+
+/-- **Halving down.** `h` halvings take `2^h · c` to `c`. -/
+def halving_formula : Prop :=
+  ∀ h c : Nat, col^[h] (2 ^ h * c) = c
+
+/-- **One-drop mountains.** A number `2^j · m − 1` climbs to `3^j · m − 1`. If that
+top is `2^h · c` (that is, `3^j · m = 2^h · c + 1`), the next `h` steps halve it to
+`c`; and when `3^j · m + 2^h ≤ 2^(j+h) · m` (the halvings outweigh the
+climb), `c` is below the start: the mountain meets the tide in a single drop.
+The condition `3^j · m = 2^h · c + 1` says that the last `h` binary digits of `m`
+are those of the 2-adic number `1/3^j`, a repeating pattern. -/
+def one_drop_tide : Prop :=
+  ∀ j h m c : Nat, 3 ^ j * m = 2 ^ h * c + 1 → 3 ^ j * m + 2 ^ h ≤ 2 ^ (j + h) * m →
+    col^[2 * j + h] (2 ^ j * m - 1) = c ∧ c < 2 ^ j * m - 1
+
+end RNS.CollatzHub
