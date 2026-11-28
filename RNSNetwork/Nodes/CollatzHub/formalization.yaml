@@ -338,10 +338,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.block_step_holds
-        note: "Draft Lean proof, waiting for the GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-27). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
   - id: block_landing
@@ -351,10 +351,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.block_landing_holds
-        note: "Draft Lean proof, waiting for the GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-27). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
   - id: block_ending_lift
@@ -364,10 +364,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.block_ending_lift_holds
-        note: "Draft Lean proof, waiting for the GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-27). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
   - id: two_blocks
@@ -377,10 +377,10 @@ conclusions:
     imports_status: none
     justifications:
       - id: lean-proof
-        kind: lean-draft
+        kind: lean-noncompliant
         solution: RNSSolutions/CollatzHub.lean
         declaration: RNS.CollatzHub.two_blocks_holds
-        note: "Draft Lean proof, waiting for the GitHub build."
+        note: "Complete Lean proof checked by `lake build RNSSolutions` (standard axioms only, 2026-11-27). Recorded as noncompliant only because no Comparator receipt exists yet."
     designated: lean-proof
 
 open_statements:
