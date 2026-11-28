@@ -760,6 +760,8 @@ end RNS.CollatzHub
 
 namespace RNS.CollatzHub
 
+private theorem iter6 (f : Nat → Nat) (x : Nat) : f^[6] x = f (f (f (f (f (f x))))) := rfl
+
 private theorem neg17_once (y : Nat) (hy : 0 < y) : col^[18] (2048 * y - 17) = 2187 * y - 17 := by
   have h1 : col (2048 * y - 17) = 6144 * y - 50 := by unfold col; split_ifs <;> omega
   have h2 : col (6144 * y - 50) = 3072 * y - 25 := by unfold col; split_ifs <;> omega
@@ -780,14 +782,11 @@ private theorem neg17_once (y : Nat) (hy : 0 < y) : col^[18] (2048 * y - 17) = 2
   have h17 : col (8748 * y - 68) = 4374 * y - 34 := by unfold col; split_ifs <;> omega
   have h18 : col (4374 * y - 34) = 2187 * y - 17 := by unfold col; split_ifs <;> omega
   have A : col^[6] (2048 * y - 17) = 6912 * y - 55 := by
-    show col (col (col (col (col (col (2048 * y - 17)))))) = 6912 * y - 55
-    rw [h1, h2, h3, h4, h5, h6]
+    rw [iter6, h1, h2, h3, h4, h5, h6]
   have Bv : col^[6] (6912 * y - 55) = 23328 * y - 182 := by
-    show col (col (col (col (col (col (6912 * y - 55)))))) = 23328 * y - 182
-    rw [h7, h8, h9, h10, h11, h12]
+    rw [iter6, h7, h8, h9, h10, h11, h12]
   have C : col^[6] (23328 * y - 182) = 2187 * y - 17 := by
-    show col (col (col (col (col (col (23328 * y - 182)))))) = 2187 * y - 17
-    rw [h13, h14, h15, h16, h17, h18]
+    rw [iter6, h13, h14, h15, h16, h17, h18]
   rw [show (18 : Nat) = 6 + (6 + 6) from rfl, Function.iterate_add_apply,
     Function.iterate_add_apply, A, Bv, C]
 
